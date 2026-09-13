@@ -627,7 +627,6 @@ print(r.json())</code></pre></div>
                 <li><strong>API key generation</strong> — 10 credits (one-time)</li>
                 <li><strong>Philadelphia / Bobby Chat</strong> — 3 credits</li>
                 <li><strong>Vision Analysis</strong> — 3 credits</li>
-                <li><strong>Background Removal</strong> – 4 credits</li>
                 <li><strong>Image Generation (V1)</strong> — 12 credits</li>
                 <li><strong>Image Generation (V2, ×n)</strong> — 18 credits/image</li>
                 <li><strong>Seraphina Voice</strong> — 30 credits</li>
@@ -785,18 +784,7 @@ print(r.json())  # {"analysis": "...", "thinking": "...", "credits_charged": 3}<
     </div>
 </section>
 
-  <!-- ============ REMOVE BG ============ -->
-<section id="remove-bg" class="api-section">
-    <div class="section-header"><h2 class="section-title">Remove Background</h2><p class="section-description">Extract transparent-background assets.</p></div>
-    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/remove-background</span><span class="cost-badge">4 credits</span></div></div>
-    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><span class="param-name">file</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Returns a base64 PNG.</td></tr></tbody></table></table>
-    <div class="live-test-zone">
-        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
-        <form onsubmit="testDevRemoveBg(event)"><div class="form-field"><label class="form-label">Image</label><input type="file" id="test-removebg-file" class="form-input" required></div><button type="submit" class="cosmic-button">Remove BG</button></form>
-        <div class="response-display" id="test-removebg-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-removebg-resp"></pre><img id="test-removebg-preview" class="response-media-preview" alt=""></div>
-    </div>
-</section>
-
+  
 <!-- ============ IMAGE GEN ============ -->
 <section id="image-gen" class="api-section">
     <div class="section-header"><h2 class="section-title">Image Generation</h2><p class="section-description">Philadelphia Image V1 for stylized art across dozens of styles, V2 for photoreal detail and batching. Version 1's (v6) style is extremely good for text in images alongside Version 2. </p></div>
