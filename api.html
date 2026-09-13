@@ -456,7 +456,6 @@ select.csel-native { display: none !important; }
         <div class="nav-section">
             <div class="nav-section-title">Media & Generation</div>
             <a href="#image-gen" class="nav-link">Image Generation</a>
-            <a href="#remove-bg" class="nav-link">Remove Background</a>
             <a href="#seraphina-voice" class="nav-link">Seraphina Voice Gen</a>
         </div>
         <div class="nav-section">
@@ -630,7 +629,6 @@ print(r.json())</code></pre></div>
                 <li><strong>Vision Analysis</strong> — 3 credits</li>
                 <li><strong>Image Generation (V1)</strong> — 12 credits</li>
                 <li><strong>Image Generation (V2, ×n)</strong> — 18 credits/image</li>
-                <li><strong>Background Removal</strong> — 4 credits</li>
                 <li><strong>Seraphina Voice</strong> — 30 credits</li>
                 <li><strong>Legacy Video</strong> — 32 credits/sec</li>
             </ul>
@@ -854,36 +852,6 @@ print(len(images), "image(s) returned")</code></pre></div>
     </div>
 </section>
 
-<!-- ============ REMOVE BG ============ -->
-<section id="remove-bg" class="api-section">
-    <div class="section-header"><h2 class="section-title">Remove Background</h2><p class="section-description">Extract transparent-background assets.</p></div>
-    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/remove-background</span><span class="cost-badge">4 credits</span></div></div>
-    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><span class="param-name">file</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Returns a base64 PNG.</td></tr></tbody></table></table>
-    <div class="code-showcase">
-        <div class="code-tabs"><button class="code-tab active" data-lang="bg-curl">cURL</button><button class="code-tab" data-lang="bg-py">Python</button></div>
-        <div class="code-content"><button class="copy-code-btn" onclick="copyCode(this)">Copy</button>
-            <div class="code-block active" data-lang="bg-curl"><pre><code class="language-bash">curl -X POST "https://web-production-9a18.up.railway.app/api/developer/remove-background" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -F "file=@product.png"</code></pre></div>
-            <div class="code-block" data-lang="bg-py"><pre><code class="language-python">import requests, base64
-
-with open("product.png", "rb") as f:
-    r = requests.post(
-        "https://web-production-9a18.up.railway.app/api/developer/remove-background",
-        headers={"Authorization": "Bearer YOUR_API_KEY"},
-        files={"file": f}
-    )
-data = r.json()  # {"image_b64": "...", "credits_charged": 4}
-with open("no_bg.png", "wb") as out:
-    out.write(base64.b64decode(data["image_b64"]))</code></pre></div>
-        </div>
-    </div>
-    <div class="live-test-zone">
-        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
-        <form onsubmit="testDevRemoveBg(event)"><div class="form-field"><label class="form-label">Image</label><input type="file" id="test-removebg-file" class="form-input" required></div><button type="submit" class="cosmic-button">Remove BG</button></form>
-        <div class="response-display" id="test-removebg-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-removebg-resp"></pre><img id="test-removebg-preview" class="response-media-preview" alt=""></div>
-    </div>
-</section>
 
 <!-- ============ SERAPHINA ============ -->
 <section id="seraphina-voice" class="api-section">
