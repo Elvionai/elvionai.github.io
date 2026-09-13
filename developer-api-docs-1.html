@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Elvion AI Developer API</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+    --font-brand: 'Playfair Display', 'Times New Roman', serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-code: 'Fira Code', 'Courier New', monospace;
+    --bg-deep: #050505; --bg-space: #0a0a08; --bg-card: #0f0f0c; --bg-elevated: #141410;
+    --text-primary: #efefef; --text-secondary: #b5b0a3; --text-muted: #6b665c;
+    --accent: #c9a96e; --accent-glow: rgba(201, 169, 110, 0.4); --accent-soft: #e8d5b0;
+    --accent-green: #5fb87a; --danger: #e05a5a;
+    --border-subtle: rgba(201, 169, 110, 0.12); --border-glow: rgba(201, 169, 110, 0.35);
+    --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15), 0 0 60px rgba(175, 143, 80, 0.08);
+    --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
+    --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
+    --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
+    --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.12) 0%, transparent 60%), radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-space); -webkit-tap-highlight-color: transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: var(--bg-space); }
+*::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; border: 2px solid var(--bg-space); }
+html { scroll-behavior: smooth; height: 100%; }
+body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; min-height: 100vh; position: relative; }
+body.nav-locked { overflow: hidden; }
+body::before { content: ''; position: fixed; inset: 0; background: var(--gradient-deep); pointer-events: none; z-index: 0; }
+#snow-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.8; }
+
+#elvion-nav { position: fixed; top: 0; left: 0; width: 310px; height: 100dvh; height: 100vh; background: rgba(10, 10, 8, 0.97); border-right: 1px solid var(--border-subtle); backdrop-filter: blur(16px); z-index: 1000; overflow-y: auto; -webkit-overflow-scrolling: touch; box-shadow: var(--shadow-intense); transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.nav-brand { padding: 2.2rem 1.8rem 1.5rem; border-bottom: 1px solid var(--border-subtle); }
+.nav-brand h1 { font-family: var(--font-brand); font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: var(--glow-gold); }
+.nav-brand .subtitle { margin-top: 0.4rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--text-muted); }
+.nav-brand .version-badge { margin-top: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.9rem; border-radius: 999px; background: rgba(201, 169, 110, 0.1); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 700; box-shadow: 0 0 12px rgba(201, 169, 110, 0.2); }
+.nav-menu { padding: 1.2rem 0 2rem; }
+.nav-section { margin-bottom: 1.6rem; }
+.nav-section-title { padding: 0.5rem 1.8rem; font-size: 0.7rem; color: var(--accent-soft); text-transform: uppercase; letter-spacing: 0.2em; display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.nav-section-title::before { content: ''; width: 5px; height: 5px; border-radius: 999px; background: var(--accent); box-shadow: var(--glow-gold); }
+.nav-link { display: flex; align-items: center; padding: 0.62rem 1.8rem 0.62rem 2.1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; border-left: 3px solid transparent; transition: all 0.25s ease; position: relative; }
+.nav-link:hover { color: #fff; transform: translateX(6px); border-left-color: var(--accent); }
+.nav-link.active { color: #fff; border-left-color: var(--accent); background: linear-gradient(90deg, rgba(201, 169, 110, 0.12), transparent); box-shadow: inset 4px 0 18px rgba(201, 169, 110, 0.2); }
+.nav-link.active::after { content: '→'; margin-left: auto; color: var(--accent); animation: slide-arrow 1s infinite; }
+@keyframes slide-arrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+
+.mobile-menu-btn { position: fixed; top: max(1rem, env(safe-area-inset-top)); left: 1rem; z-index: 1500; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--border-glow); background: rgba(10, 10, 8, 0.97); color: #fff; cursor: pointer; display: none; box-shadow: var(--shadow-intense); align-items: center; justify-content: center; width: 44px; height: 44px; }
+.mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 999; opacity: 0; transition: opacity 0.3s ease; }
+.mobile-backdrop.open { display: block; opacity: 1; }
+
+#elvion-content { margin-left: 310px; min-height: 100vh; position: relative; z-index: 1; }
+.content-wrapper { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+
+.hero-header { text-align: center; padding: 2.5rem 0 2rem; position: relative; }
+.hero-title { font-family: var(--font-brand); font-size: 3rem; line-height: 1.2; font-weight: 900; letter-spacing: -0.04em; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: var(--glow-gold); margin-bottom: 1rem; }
+.hero-subtitle { font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; margin: 0.5rem auto 1.8rem; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.65rem 1.3rem; border-radius: 999px; border: 1px solid var(--border-glow); background: rgba(10, 10, 8, 0.85); color: var(--text-secondary); font-size: 0.85rem; box-shadow: var(--shadow-cosmic); }
+.hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 12px var(--accent-green); animation: pulse-dot 1.8s infinite; }
+@keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.3); opacity: 1; } }
+
+/* Battery-style health widget */
+.battery-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; margin: 1.5rem 0 2.2rem; }
+.battery-label-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); font-weight: 700; }
+.battery-body { position: relative; width: min(360px, 92%); height: 62px; border: 3px solid rgba(95, 184, 122, 0.55); border-radius: 12px; background: #050505; overflow: hidden; box-shadow: 0 0 24px rgba(95, 184, 122, 0.18); }
+.battery-nub { position: absolute; right: -13px; top: 50%; transform: translateY(-50%); width: 9px; height: 26px; background: rgba(95, 184, 122, 0.55); border-radius: 0 4px 4px 0; }
+.battery-fill { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(99% - 8px); border-radius: 8px; background: linear-gradient(90deg, #2f8f4c, #5fb87a, #94edb0); animation: battery-glow 2.6s ease-in-out infinite; }
+@keyframes battery-glow { 0%, 100% { box-shadow: 0 0 14px rgba(95, 184, 122, 0.55), inset 0 0 10px rgba(255, 255, 255, 0.14); } 50% { box-shadow: 0 0 30px rgba(95, 184, 122, 0.9), inset 0 0 18px rgba(255, 255, 255, 0.22); } }
+.battery-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: var(--font-brand); font-weight: 800; font-size: 1.35rem; color: #04160b; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.35); }
+.battery-pct i { font-size: 1rem; }
+.health-chip-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; width: 100%; margin-top: 0.4rem; }
+.health-chip { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 0.9rem; text-align: center; }
+.health-chip .h-num { font-family: var(--font-brand); font-size: 1.3rem; font-weight: 800; color: var(--accent-green); }
+.health-chip .h-lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 0.25rem; font-weight: 700; }
+.stat-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 0.6rem; }
+
+.global-key-box { background: rgba(201, 169, 110, 0.04); border: 1px solid var(--border-glow); border-radius: 14px; padding: 1.5rem; margin-bottom: 3rem; box-shadow: var(--shadow-cosmic); }
+.global-key-title { font-family: var(--font-brand); font-size: 1.1rem; color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+
+.api-section { background: rgba(15, 15, 12, 0.98); border-radius: 18px; border: 1px solid var(--border-subtle); padding: 2.2rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-intense); position: relative; overflow: hidden; scroll-margin-top: 1.5rem; }
+.api-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-gold); }
+.section-header { margin-bottom: 1.8rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); }
+.section-title { font-family: var(--font-brand); font-size: 1.9rem; font-weight: 800; margin-bottom: 0.5rem; color: #fff; letter-spacing: -0.02em; }
+.section-description { font-size: 0.95rem; color: var(--text-secondary); }
+.section-badge-row { display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap; }
+.tier-badge { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 999px; }
+.tier-badge.pro { background: rgba(201, 169, 110, 0.14); color: var(--accent-soft); border: 1px solid var(--border-glow); }
+.tier-badge.fast { background: rgba(95, 184, 122, 0.12); color: var(--accent-green); border: 1px solid rgba(95, 184, 122, 0.3); }
+.tier-badge.legacy { background: rgba(180, 180, 180, 0.08); color: var(--text-secondary); border: 1px solid rgba(180,180,180,0.2); }
+
+.subsection { margin: 1.8rem 0 1.2rem; }
+.subsection-title { font-size: 1.15rem; color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+.subsection-title::before { content: ''; width: 3px; height: 18px; border-radius: 999px; background: var(--gradient-gold); }
+
+.content-text { font-size: 0.94rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
+.content-text strong { color: var(--text-primary); }
+.content-text a { color: var(--accent); text-decoration: underline; }
+.content-text code { background: rgba(201, 169, 110, 0.1); border-radius: 4px; padding: 0.15em 0.45em; font-family: var(--font-code); font-size: 0.85em; border: 1px solid rgba(201, 169, 110, 0.25); color: var(--accent-soft); }
+
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 0.5rem; }
+.feature-card { background: var(--bg-elevated); border-radius: 14px; border: 1px solid var(--border-subtle); padding: 1.4rem; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.feature-card:hover { transform: translateY(-4px); border-color: var(--border-glow); box-shadow: var(--shadow-cosmic); }
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; }
+.feature-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+.feature-description { font-size: 0.88rem; color: var(--text-secondary); }
+
+.endpoint-card { background: var(--bg-elevated); border-radius: 12px; border: 1px solid var(--border-subtle); padding: 1.4rem; margin: 1.4rem 0; }
+.endpoint-header { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+.http-method { padding: 0.45rem 1.2rem; border-radius: 999px; font-size: 0.72rem; letter-spacing: 0.12em; font-weight: 800; color: #050505; text-transform: uppercase; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45); }
+.http-method.post { background: var(--gradient-gold); }
+.http-method.get { background: var(--text-primary); }
+.http-method.delete { background: var(--danger); color: #fff; }
+.endpoint-path { flex: 1; min-width: 240px; font-family: var(--font-code); font-size: 0.88rem; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border-subtle); background: #050505; color: var(--accent-soft); word-break: break-all; }
+.cost-badge { padding: 0.45rem 1.2rem; border-radius: 999px; background: rgba(201, 169, 110, 0.1); border: 1px solid var(--accent); color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; white-space: nowrap; }
+
+.param-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--bg-elevated); border-radius: 12px; overflow: hidden; margin-top: 0.8rem; font-size: 0.86rem; box-shadow: var(--shadow-cosmic); border: 1px solid var(--border-subtle); display: block; overflow-x: auto; }
+.param-table thead th { background: rgba(201, 169, 110, 0.08); padding: 0.9rem; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; border-bottom: 1px solid var(--border-subtle); text-align: left; white-space: nowrap; }
+.param-table tbody td { padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+.param-table tbody tr:last-child td { border-bottom: none; }
+.param-table tbody tr:hover { background: rgba(201, 169, 110, 0.04); }
+.param-table table { width: 100%; border-collapse: collapse; }
+.param-name { font-family: var(--font-code); color: var(--accent); font-weight: 600; }
+.param-type { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 999px; border: 1px solid var(--border-subtle); color: var(--accent-soft); font-size: 0.7rem; font-family: var(--font-code); }
+.param-required, .param-optional { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; margin-left: 0.3rem; }
+.param-required { background: rgba(224, 90, 90, 0.15); color: #ffbcbc; }
+.param-optional { background: rgba(201, 169, 110, 0.15); color: var(--accent-soft); }
+
+.code-showcase { margin: 1.5rem 0; background: #030303; border-radius: 12px; border: 1px solid var(--border-subtle); overflow: hidden; box-shadow: var(--shadow-intense); }
+.code-tabs { display: flex; background: #090907; border-bottom: 1px solid var(--border-subtle); overflow-x: auto; }
+.code-tab { padding: 0.7rem 1.3rem; border: none; background: transparent; color: var(--text-muted); font-family: var(--font-code); font-size: 0.8rem; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s ease; }
+.code-tab:hover { color: var(--text-primary); background: rgba(201, 169, 110, 0.04); }
+.code-tab.active { color: #fff; border-bottom-color: var(--accent); background: rgba(201, 169, 110, 0.08); }
+.code-content { position: relative; }
+.code-block { display: none; max-height: 420px; overflow: auto; }
+.code-block.active { display: block; }
+.code-block pre { margin: 0; padding: 1.3rem; font-size: 0.79rem; font-family: var(--font-code); color: #d4d4d4; white-space: pre-wrap; word-break: break-word; }
+.copy-code-btn { position: absolute; top: 0.8rem; right: 0.8rem; padding: 0.4rem 1.05rem; border-radius: 999px; border: 1px solid var(--border-glow); background: rgba(10, 10, 8, 0.95); color: var(--text-secondary); font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+.copy-code-btn:hover { background: var(--accent); color: #000; box-shadow: var(--shadow-cosmic); }
+.copy-code-btn.copied { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
+
+.alert-box { margin: 1.2rem 0; padding: 1rem 1.2rem; border-radius: 10px; border: 1px solid; font-size: 0.88rem; position: relative; }
+.alert-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 999px; }
+.alert-box.info { background: rgba(201, 169, 110, 0.03); border-color: rgba(201, 169, 110, 0.3); color: var(--text-secondary); }
+.alert-box.info::before { background: var(--accent); }
+.alert-box.warning { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.3); color: #ffbcbc; }
+.alert-box.warning::before { background: var(--danger); }
+.alert-box.success { background: rgba(95, 184, 122, 0.05); border-color: rgba(95, 184, 122, 0.3); color: #bdf2cb; }
+.alert-box.success::before { background: var(--accent-green); }
+
+.live-test-zone { margin: 2rem 0 1rem; padding: 1.6rem; border-radius: 14px; border: 1px solid var(--border-glow); background: radial-gradient(circle at top left, rgba(201, 169, 110, 0.08), transparent 60%), #0c0c09; box-shadow: var(--shadow-cosmic); }
+.live-test-title { font-family: var(--font-brand); font-size: 1.2rem; font-weight: 800; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 8px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+.form-field { margin-bottom: 0.9rem; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--accent-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+.form-input, .form-textarea, .form-select { width: 100%; padding: 0.7rem 0.9rem; border-radius: 8px; border: 1px solid var(--border-subtle); background: #030303; color: #fff; font-size: 0.88rem; font-family: inherit; transition: all 0.2s ease; }
+.form-textarea { resize: vertical; min-height: 80px; font-family: var(--font-code); }
+.form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2); }
+.cosmic-button { margin-top: 0.5rem; padding: 0.7rem 1.8rem; border-radius: 999px; border: none; background: var(--gradient-gold); color: #050505; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; box-shadow: var(--shadow-cosmic); transition: all 0.25s ease; }
+.cosmic-button:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(201, 169, 110, 0.7); }
+.cosmic-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.cosmic-button.secondary { background: rgba(201,169,110,0.1); color: var(--accent-soft); border: 1px solid var(--border-glow); box-shadow: none; }
+
+.response-display { margin-top: 1.4rem; border-top: 1px solid var(--border-subtle); padding-top: 1.2rem; }
+.response-title { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.response-output { max-height: 280px; border-radius: 8px; border: 1px solid var(--border-subtle); background: #030303; padding: 1rem; font-family: var(--font-code); font-size: 0.78rem; color: #d4d4d4; overflow: auto; white-space: pre-wrap; }
+.response-media-preview { max-width: 100%; max-height: 400px; margin-top: 0.9rem; border-radius: 10px; border: 1px solid var(--border-glow); box-shadow: var(--shadow-intense); display: none; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 0.8rem; }
+.pricing-card { background: var(--bg-elevated); border-radius: 16px; border: 1px solid var(--border-subtle); padding: 1.8rem; text-align: center; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.pricing-card:hover { border-color: var(--border-glow); box-shadow: var(--shadow-cosmic); }
+.pricing-card.featured { border-color: var(--accent); box-shadow: var(--shadow-cosmic); }
+.price-tag { font-size: 2.4rem; font-weight: 900; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0.4rem 0; font-family: var(--font-brand); }
+.price-unit { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+.pricing-features { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+.pricing-features li { padding: 0.45rem 0; font-size: 0.85rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); }
+.pricing-features li:last-child { border-bottom: none; }
+
+.code-examples-list { list-style: none; margin-top: 0.3rem; }
+.example-item { position: relative; padding-left: 1.4rem; margin-bottom: 0.6rem; font-size: 0.9rem; color: var(--text-secondary); }
+.example-item::before { content: '✦'; position: absolute; left: 0; color: var(--accent); }
+
+/* Bonus credits banner */
+.bonus-banner { background: linear-gradient(135deg, rgba(201, 169, 110, 0.14), rgba(95, 184, 122, 0.08)); border: 1px solid var(--border-glow); border-radius: 16px; padding: 1.6rem; margin-bottom: 1.8rem; box-shadow: var(--shadow-cosmic); }
+.bonus-banner h3 { font-family: var(--font-brand); font-size: 1.3rem; color: var(--accent-soft); margin-bottom: 0.5rem; }
+.bonus-banner p { font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 0.9rem; }
+.bonus-banner .btn-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.bonus-banner .btn-row a { text-decoration: none; }
+
+/* Comparison table */
+.compare-table td, .compare-table th { text-align: left; }
+.compare-yes { color: var(--accent-green); font-weight: 700; }
+.compare-mid { color: var(--text-muted); }
+
+/* FAQ accordion */
+.faq-item { border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; background: var(--bg-elevated); }
+.faq-question { width: 100%; text-align: left; padding: 1rem 1.2rem; background: transparent; border: none; color: #fff; font-size: 0.92rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: inherit; }
+.faq-question .faq-icon { transition: transform 0.25s ease; color: var(--accent); flex-shrink: 0; font-size: 0.8rem; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 1.2rem; }
+.faq-item.open .faq-answer { padding: 0 1.2rem 1.1rem; }
+.faq-answer p { font-size: 0.87rem; color: var(--text-secondary); }
+.faq-answer a { color: var(--accent); }
+
+/* Inline custom select — matches Video Studio's dropdown UI */
+.csel { position: relative; }
+.csel-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #030303; border: 1px solid var(--border-subtle); color: #fff; padding: 0.7rem 0.9rem; border-radius: 8px; font-family: inherit; font-size: 0.88rem; cursor: pointer; transition: 0.2s; text-align: left; }
+.csel-btn:hover { border-color: var(--border-glow); }
+.csel.open .csel-btn { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2); }
+.csel-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.csel-arrow { font-size: 0.65rem; color: var(--text-muted); transition: 0.22s; flex-shrink: 0; }
+.csel.open .csel-arrow { transform: rotate(180deg); color: var(--accent); }
+.csel-menu { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--bg-elevated); border: 1px solid var(--border-glow); border-radius: 10px; box-shadow: var(--shadow-intense); z-index: 200; max-height: 240px; overflow-y: auto; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: 0.16s; }
+.csel.open .csel-menu { opacity: 1; pointer-events: all; transform: none; }
+.csel-opt { padding: 0.65rem 0.9rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; transition: 0.14s; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.csel-opt:last-child { border-bottom: none; }
+.csel-opt:hover { background: rgba(201, 169, 110, 0.08); color: #fff; }
+.csel-opt.on { color: var(--accent); background: rgba(201, 169, 110, 0.1); font-weight: 600; }
+select.csel-native { display: none !important; }
+
+@media (max-width: 1024px) { #elvion-nav { width: 270px; } #elvion-content { margin-left: 270px; } .content-wrapper { padding: 2rem 1.5rem 3rem; } }
+@media (max-width: 768px) {
+    #elvion-nav { left: -320px; }
+    #elvion-nav.mobile-open { left: 0; }
+    #elvion-content { margin-left: 0; }
+    .mobile-menu-btn { display: flex; }
+    .content-wrapper { padding: 4.2rem 1.1rem 3rem; }
+    .hero-title { font-size: 2.1rem; }
+    .api-section { padding: 1.4rem 1rem 1.7rem; }
+    .endpoint-path { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="snow-canvas"></canvas>
+<div class="mobile-backdrop" id="mobile-backdrop"></div>
+<button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+
+<nav id="elvion-nav">
+    <div class="nav-brand">
+        <h1>Elvion AI</h1>
+        <p class="subtitle">Developer API</p>
+        <span class="version-badge"><i class="fa-solid fa-bolt"></i> v2.1 · LIVE</span>
+    </div>
+    <div class="nav-menu">
+        <div class="nav-section">
+            <div class="nav-section-title">Getting started</div>
+            <a href="#introduction" class="nav-link active">Introduction</a>
+            <a href="#platform-status" class="nav-link">Platform Health</a>
+            <a href="#why-elvion" class="nav-link">Why Build Here</a>
+            <a href="#quick-start" class="nav-link">Quick Start</a>
+            <a href="#authentication" class="nav-link">Authentication</a>
+            <a href="#pricing" class="nav-link">Pricing & Bonus Credits</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Core Chat & Vision</div>
+            <a href="#philadelphia-chat" class="nav-link">Philadelphia Chat</a>
+            <a href="#bobby-chat" class="nav-link">Bobby Chat</a>
+            <a href="#vision-analysis" class="nav-link">Vision Analysis</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Media & Generation</div>
+            <a href="#image-gen" class="nav-link">Image Generation</a>
+            <a href="#remove-bg" class="nav-link">Remove Background</a>
+            <a href="#seraphina-voice" class="nav-link">Seraphina Voice Gen</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Video — Philadelphia Pro</div>
+            <a href="#pro-t2v" class="nav-link">Text to Video</a>
+            <a href="#pro-i2v" class="nav-link">Image to Video</a>
+            <a href="#pro-r2v" class="nav-link">Reference to Video</a>
+            <a href="#pro-regen" class="nav-link">Upscale to 2K</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Video — Philadelphia Fast</div>
+            <a href="#fast-t2v" class="nav-link">Text to Video</a>
+            <a href="#fast-i2v" class="nav-link">Image to Video</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Video — Legacy Engine</div>
+            <a href="#legacy-t2v" class="nav-link">Text to Video</a>
+            <a href="#legacy-i2v" class="nav-link">Image to Video</a>
+            <a href="#legacy-frames" class="nav-link">Frame Interpolation</a>
+            <a href="#legacy-subject" class="nav-link">Subject Consistency</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Status & Cost Tools</div>
+            <a href="#pro-status" class="nav-link">Pro/Fast Status Poller</a>
+            <a href="#legacy-status" class="nav-link">Legacy Status Poller</a>
+            <a href="#cost-estimator" class="nav-link">Video Cost Estimator</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Integration help</div>
+            <a href="#error-handling" class="nav-link">Errors & Rate Limits</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Developer Portal</div>
+            <a href="https://elvionai.com.ng" target="_blank" class="nav-link">Main Hub</a>
+            <a href="https://elvionai.com.ng/developer-dashboard.html" target="_blank" class="nav-link">Developer Dashboard</a>
+        </div>
+    </div>
+</nav>
+
+<main id="elvion-content">
+<div class="content-wrapper">
+
+<header class="hero-header" id="top">
+    <h1 class="hero-title">Elvion Developer API</h1>
+    <p class="hero-subtitle">One key. Reasoning chat, multimodal vision, cinematic video, studio voice, and image generation — every engine on this page runs on Elvion AI's own infrastructure.</p>
+    <div class="hero-badge"><span class="hero-dot"></span><span>All services running smoothly</span></div>
+</header>
+
+<section id="platform-status" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Platform Health</h2>
+        <p class="section-description">A quick read on how Elvion is running right now.</p>
+    </div>
+    <div class="battery-wrap">
+        <div class="battery-label-row"><span class="hero-dot"></span> System charge — healthy</div>
+        <div class="battery-body">
+            <div class="battery-fill"></div>
+            <div class="battery-pct"><i class="fa-solid fa-bolt"></i> 99.9%</div>
+            <div class="battery-nub"></div>
+        </div>
+        <div class="health-chip-row">
+            <div class="health-chip"><div class="h-num">99.9%</div><div class="h-lbl">Uptime (90d)</div></div>
+            <div class="health-chip"><div class="h-num">99.7%</div><div class="h-lbl">Success Rate</div></div>
+            <div class="health-chip"><div class="h-num">&lt;400ms</div><div class="h-lbl">Chat First Token</div></div>
+            <div class="health-chip"><div class="h-num">0.3%</div><div class="h-lbl">Error Rate</div></div>
+        </div>
+    </div>
+    <p class="stat-note">Figures are indicative service targets, not a live-wired dashboard. For real-time incident status, contact support.</p>
+</section>
+
+<div class="global-key-box">
+    <h3 class="global-key-title"><i class="fa-solid fa-key"></i> Developer Key Sync</h3>
+    <p class="content-text" style="font-size: 0.85rem; margin-bottom: 0.8rem;">Paste your developer API key here. It synchronizes automatically across every playground on this page.</p>
+    <input id="global-api-key" class="form-input" type="text" placeholder="elv_sec_..." style="font-family: var(--font-code);" oninput="syncGlobalKey(this.value)">
+</div>
+
+<section id="introduction" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Introduction</h2>
+        <p class="section-description">Welcome to Elvion AI's programmatic Developer API.</p>
+    </div>
+    <p class="content-text">This documentation contains complete specifications and interactive testing consoles for every developer endpoint. All endpoints share a single base URL, and every engine — chat, vision, image, video, voice — is built, hosted, and billed entirely through Elvion AI. No juggling separate vendor accounts or keys.</p>
+    <div class="endpoint-card"><div class="endpoint-path">https://web-production-9a18.up.railway.app</div></div>
+    <div class="feature-grid">
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-brain"></i></div><h3 class="feature-title">Agentic Reasoning</h3><p class="feature-description">Philadelphia handles multi-turn agentic thinking natively — strategy, logic, planning, live web search, and a context window big enough for entire codebases.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-clapperboard"></i></div><h3 class="feature-title">Three Video Engines</h3><p class="feature-description">Philadelphia Pro (native audio, up to 2K, reference fusion), Philadelphia Fast (quicker & cheaper), and the Legacy engine.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-microphone"></i></div><h3 class="feature-title">Seraphina Voice Studio</h3><p class="feature-description">Generate realistic, expressive voice recordings in dozens of tones and characters straight from text.</p></div>
+    </div>
+</section>
+
+<section id="why-elvion" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Why Build on Elvion</h2>
+        <p class="section-description">A single AI stack instead of five separate vendor bills.</p>
+    </div>
+    <p class="content-text">Most teams stitch together a chat model, an image model, a video model, and a voice model from different providers — different keys, different pricing pages, different SLAs. Elvion collapses that into one account, one credit balance, and one predictable NGN-based price list.</p>
+    <table class="param-table compare-table">
+        <table>
+        <thead><tr><th>Capability</th><th>Elvion AI</th><th>Typical multi-vendor stack</th></tr></thead>
+        <tbody>
+            <tr><td>Chat + video + image + voice</td><td class="compare-yes">One account, one key</td><td class="compare-mid">Separate accounts per capability</td></tr>
+            <tr><td>Agent context window</td><td class="compare-yes">Up to 1,000,000 tokens</td><td class="compare-mid">Often capped much lower</td></tr>
+            <tr><td>Video with native audio</td><td class="compare-yes">Generated in the same call</td><td class="compare-mid">Usually a separate audio pass</td></tr>
+            <tr><td>Style + motion + voice fusion</td><td class="compare-yes">One Reference-to-Video request</td><td class="compare-mid">Multiple disconnected tools</td></tr>
+            <tr><td>Failed generation</td><td class="compare-yes">Credits auto-refunded</td><td class="compare-mid">Varies, often manual</td></tr>
+            <tr><td>Billing</td><td class="compare-yes">Pay-as-you-go, no subscription</td><td class="compare-mid">Often monthly seat-based plans</td></tr>
+        </tbody>
+        </table>
+    </table>
+    <div class="subsection">
+        <h3 class="subsection-title">Philadelphia Chat — built for agents and real engineering</h3>
+        <p class="content-text">Philadelphia doesn't just answer questions — it thinks step-by-step, calls tools mid-conversation, reads long documents or an entire repository of code in one shot thanks to its huge context window, and writes clean, working code across virtually any language or framework. It's genuinely strong at debugging, refactoring, and multi-file reasoning. Vibe-coding a full feature end to end is honestly the easy part of what it can do.</p>
+    </div>
+    <div class="subsection">
+        <h3 class="subsection-title">Philadelphia Pro Video — one of the most complete video engines you can call</h3>
+        <p class="content-text">Native synchronized audio, resolution up to 2K, first/last-frame control, and Reference-to-Video generation that blends a character's look, a clip's motion, and a voice's performance into a single request — capabilities most platforms only offer as separate, disconnected tools you'd have to stitch together yourself.</p>
+    </div>
+</section>
+
+<section id="quick-start" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Quick Start</h2>
+        <p class="section-description">Your first API call in under 60 seconds.</p>
+    </div>
+    <div class="subsection">
+        <h3 class="subsection-title">1. Generate Your Credentials</h3>
+        <p class="content-text">Log into the <a href="https://elvionai.com.ng/developer-dashboard.html" target="_blank">Developer Dashboard</a>, go to <b>API Management</b>, and generate an API key for <b>10 credits</b>.</p>
+    </div>
+    <div class="subsection">
+        <h3 class="subsection-title">2. Call Philadelphia Chat</h3>
+        <div class="code-showcase">
+            <div class="code-tabs">
+                <button class="code-tab active" data-lang="quick-curl">cURL</button>
+                <button class="code-tab" data-lang="quick-py">Python</button>
+            </div>
+            <div class="code-content">
+                <button class="copy-code-btn" onclick="copyCode(this)">Copy</button>
+                <div class="code-block active" data-lang="quick-curl"><pre>curl -X POST "https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Give me a 3-step plan to launch a coffee brand in Lagos."}'</pre></div>
+                <div class="code-block" data-lang="quick-py"><pre>import requests
+
+url = "https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat"
+headers = {"Authorization": "Bearer YOUR_API_KEY"}
+data = {"message": "Give me a 3-step plan to launch a coffee brand in Lagos."}
+
+r = requests.post(url, headers=headers, json=data)
+print(r.json())</pre></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="authentication" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Authentication</h2>
+        <p class="section-description">Every request must authenticate using your project API key.</p>
+    </div>
+    <p class="content-text">Include it in the <code>Authorization</code> header of every request:</p>
+    <div class="code-showcase"><div class="code-tabs"><button class="code-tab active">Header Format</button></div><div class="code-content"><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><div class="code-block active"><pre>Authorization: Bearer elv_sec_yourPrivateKeyHere</pre></div></div></div>
+    <div class="alert-box warning"><strong>Security Rule:</strong> Never run these calls from client-side code (your frontend HTML, mobile apps, etc.). Always route through a secure backend proxy so your key stays hidden.</div>
+</section>
+
+<section id="pricing" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Pricing & Bonus Credits</h2>
+        <p class="section-description">Predictable pay-as-you-go credit billing — plus free credits to get started.</p>
+    </div>
+
+    <div class="bonus-banner">
+        <h3><i class="fa-solid fa-gift"></i> Free bonus credits, always</h3>
+        <p>Bonus credits are a constant at Elvion AI — every new account starts with free credits already loaded, no promo code needed. Load your first wallet top-up, become an Elvion partner, and see every engine on this page for yourself before you build anything serious on it.</p>
+        <div class="btn-row">
+            <a href="https://elvionai.com.ng/developer-dashboard.html" target="_blank"><button type="button" class="cosmic-button">Fund Your Wallet</button></a>
+            <a href="mailto:elvionailabs@gmail.com"><button type="button" class="cosmic-button secondary">Ask About Test Credits</button></a>
+        </div>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3 class="feature-title">Scale Price</h3>
+            <div class="price-tag">$0.005</div>
+            <div class="price-unit">per credit (₦5 = 1 credit)</div>
+            <ul class="pricing-features"><li>₦1,000 top-up minimum</li><li>Automatic billing</li><li>Safe payment routing</li></ul>
+        </div>
+        <div class="pricing-card featured">
+            <h3 class="feature-title">Core Costs</h3>
+            <ul class="pricing-features">
+                <li><strong>API key generation</strong> — 10 credits (one-time)</li>
+                <li><strong>Philadelphia / Bobby Chat</strong> — 3 credits</li>
+                <li><strong>Vision Analysis</strong> — 3 credits</li>
+                <li><strong>Image (V1)</strong> — 12 credits</li>
+                <li><strong>Image (V2, ×n)</strong> — 18 credits/image</li>
+                <li><strong>Background Removal</strong> — 4 credits</li>
+                <li><strong>Seraphina Voice</strong> — 30 credits</li>
+                <li><strong>Legacy Video</strong> — 32 credits/sec</li>
+            </ul>
+        </div>
+        <div class="pricing-card">
+            <h3 class="feature-title">Free credits</h3>
+            <ul class="pricing-features"><li>Free bonus credits included on signup</li><li>Email: <a href="mailto:elvionailabs@gmail.com" style="color:var(--accent)">elvionailabs@gmail.com</a></li><li>WhatsApp: <a href="https://wa.me/+2348159983206" target="_blank" style="color:var(--accent)">API GIFT</a></li></ul>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3 class="subsection-title">Philadelphia Pro Video — pay per second</h3>
+        <p class="content-text">Cost = duration × per-second rate, converted to credits at the Developer markup. Reference images beyond the first 5 add ~26 credits each; reference video material is billed at the output per-second rate; reference audio is always free.</p>
+        <table class="param-table"><table>
+            <thead><tr><th>Resolution</th><th>Rate</th><th>5s</th><th>10s</th><th>15s</th></tr></thead>
+            <tbody>
+                <tr><td>768P</td><td>~52 credits/s</td><td>260 credits</td><td>519 credits</td><td>779 credits</td></tr>
+                <tr><td>2K</td><td>~85 credits/s</td><td>422 credits</td><td>843 credits</td><td>1,265 credits</td></tr>
+            </tbody>
+        </table></table>
+    </div>
+    <div class="subsection">
+        <h3 class="subsection-title">Philadelphia Fast Video — pay per second</h3>
+        <p class="content-text">Cheaper and quicker than Pro. No reference-to-video mode. All images are free (never billed).</p>
+        <table class="param-table"><table>
+            <thead><tr><th>Resolution</th><th>Rate</th><th>5s</th><th>10s</th><th>15s</th></tr></thead>
+            <tbody>
+                <tr><td>480P</td><td>~32 credits/s</td><td>162 credits</td><td>324 credits</td><td>486 credits</td></tr>
+                <tr><td>768P</td><td>~52 credits/s</td><td>260 credits</td><td>519 credits</td><td>779 credits</td></tr>
+            </tbody>
+        </table></table>
+    </div>
+</section>
+
+<!-- ============ PHILADELPHIA CHAT ============ -->
+<section id="philadelphia-chat" class="api-section">
+    <div class="section-header">
+        <h2 class="section-title">Philadelphia Chat</h2>
+        <p class="section-description">Elite reasoning engine. Writes code, searches the live web, stays current with events, and holds huge amounts of context in one conversation.</p>
+    </div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia/chat</span><span class="cost-badge">3 credits + overage</span></div></div>
+    <table class="param-table"><table>
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td><span class="param-name">message</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Latest user prompt.</td></tr>
+            <tr><td><span class="param-name">history</span><span class="param-optional">Optional</span></td><td><span class="param-type">array</span></td><td>Prior turns: <code>[{role, content}]</code>.</td></tr>
+            <tr><td><span class="param-name">system_prompt</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Custom persona instruction.</td></tr>
+        </tbody>
+    </table></table>
+    <div class="alert-box info"><strong>Context & length:</strong> Philadelphia can hold up to <strong>1,000,000 tokens</strong> of context in a single conversation — long documents, whole codebases, extended chat history all fit. Responses can run up to <strong>500,000 tokens</strong> for very large generation tasks, though most replies are far shorter. The flat 3-credit fee covers typical messages; unusually large prompts or long histories may add a small overage charge, itemized in your usage log.</div>
+    <div class="alert-box success"><strong>Good for agents:</strong> Philadelphia reasons step-by-step, calls tools mid-conversation (it has live web search built in), and reads real code — it's a strong pick for coding assistants, support agents, and anything that needs to "think" before it answers.</div>
+    <div class="code-showcase">
+        <div class="code-tabs"><button class="code-tab active" data-lang="phil-curl">cURL</button><button class="code-tab" data-lang="phil-py">Python</button></div>
+        <div class="code-content"><button class="copy-code-btn" onclick="copyCode(this)">Copy</button>
+            <div class="code-block active" data-lang="phil-curl"><pre>curl -X POST "https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat" \
+  -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" \
+  -d '{"message": "Write a 3-step plan to launch a coffee brand in Lagos.", "system_prompt": "You are a business advisor."}'</pre></div>
+            <div class="code-block" data-lang="phil-py"><pre>import requests
+r = requests.post("https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    json={"message": "Write a 3-step plan to launch a coffee brand in Lagos."})
+print(r.json())</pre></div>
+        </div>
+    </div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevPhilly(event)">
+            <div class="form-field"><label class="form-label">Prompt</label><textarea id="test-philly-msg" class="form-textarea" required placeholder="What are the main tech hubs in Africa?"></textarea></div>
+            <button type="submit" class="cosmic-button">Trigger Request</button>
+        </form>
+        <div class="response-display" id="test-philly-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-philly-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ BOBBY CHAT ============ -->
+<section id="bobby-chat" class="api-section">
+    <div class="section-header"><h2 class="section-title">Bobby Chat</h2><p class="section-description">Fast, friendly companion for ideation, coding, and brainstorming — lighter and quicker than Philadelphia for everyday chat.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/bobby/chat</span><span class="cost-badge">3 credits</span></div></div>
+    <table class="param-table"><table>
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Instructions or question.</td></tr>
+            <tr><td><span class="param-name">systemPrompt</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Behavioral override.</td></tr>
+            <tr><td><span class="param-name">model</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>fast</code> for quick, lightweight replies, or <code>thinking</code> for a slower, more deliberate pass. Defaults to <code>thinking</code> on this endpoint.</td></tr>
+        </tbody>
+    </table></table>
+    <div class="code-showcase"><div class="code-tabs"><button class="code-tab active" data-lang="bobby-curl">cURL</button></div><div class="code-content"><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><div class="code-block active" data-lang="bobby-curl"><pre>curl -X POST "https://web-production-9a18.up.railway.app/api/developer/bobby/chat" \
+  -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" \
+  -d '{"prompt": "Write a short sci-fi story about an offline robot."}'</pre></div></div></div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevBobby(event)"><div class="form-field"><label class="form-label">Prompt</label><textarea id="test-bobby-prompt" class="form-textarea" required></textarea></div><button type="submit" class="cosmic-button">Trigger Request</button></form>
+        <div class="response-display" id="test-bobby-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-bobby-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section id="vision-analysis" class="api-section">
+    <div class="section-header"><h2 class="section-title">Vision Analysis</h2><p class="section-description">Native image/video inspection — no separate upload step.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/vision/analyze</span><span class="cost-badge">3 credits</span></div></div>
+    <table class="param-table"><table>
+        <thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td><span class="param-name">file</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Image or video file. Any <code>image/*</code> or <code>video/*</code> mime type. Practical limits: images up to ~10MB, video up to ~50MB per request.</td></tr>
+            <tr><td><span class="param-name">prompt</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Defaults to "Analyze this media in detail."</td></tr>
+        </tbody>
+    </table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevVision(event)">
+            <div class="form-field"><label class="form-label">File</label><input type="file" id="test-vision-file" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Prompt</label><input type="text" id="test-vision-prompt" class="form-input" value="Describe this in full detail."></div>
+            <button type="submit" class="cosmic-button">Trigger Request</button>
+        </form>
+        <div class="response-display" id="test-vision-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-vision-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ IMAGE GEN ============ -->
+<section id="image-gen" class="api-section">
+    <div class="section-header"><h2 class="section-title">Image Generation</h2><p class="section-description">Philadelphia Image V1 for stylized art across dozens of styles, V2 for photoreal detail and batching.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/generate-image</span><span class="cost-badge">12 or 18×n credits</span></div></div>
+    <table class="param-table"><table>
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Image description.</td></tr>
+            <tr><td><span class="param-name">use_minimax</span><span class="param-optional">Optional</span></td><td><span class="param-type">boolean</span></td><td><code>true</code> = V2 (18 credits/image), <code>false</code> = V1 (12 credits flat).</td></tr>
+            <tr><td><span class="param-name">model</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><b>V1 only.</b> One of <code>v6</code>, <code>photoreal</code>, <code>movie</code>, <code>anime</code>, <code>anime_core</code>, <code>illustration</code>, <code>realistic</code>, <code>max</code>, <code>v7</code>, <code>portrait</code>, <code>photoreal2</code>, <code>animereal</code>, <code>radiant</code>, <code>animecinematic</code>, <code>noir</code>, <code>nyx</code>, <code>pixel</code>, <code>rewave</code>, <code>analog</code>, <code>pastel</code>, <code>toonish</code>, <code>apex</code>. Ignored on V2.</td></tr>
+            <tr><td><span class="param-name">aspect_ratio</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><b>V2 only.</b> One of <code>1:1</code>, <code>16:9</code>, <code>4:3</code>, <code>3:2</code>, <code>2:3</code>, <code>3:4</code>, <code>9:16</code>, <code>21:9</code>. Takes priority over width/height.</td></tr>
+            <tr><td><span class="param-name">width</span> / <span class="param-name">height</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td><b>V2 only.</b> 512–2048px, must be divisible by 8. Ignored if <code>aspect_ratio</code> is set.</td></tr>
+            <tr><td><span class="param-name">n</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td><b>V2 only.</b> Batch count 1–9. Cost scales as 18 × n. V1 always returns exactly 1 image.</td></tr>
+            <tr><td><span class="param-name">seed</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td><b>V2 only.</b> Fix for reproducible output.</td></tr>
+            <tr><td><span class="param-name">prompt_optimizer</span><span class="param-optional">Optional</span></td><td><span class="param-type">boolean</span></td><td><b>V2 only.</b> Lets the engine expand/refine your prompt before generating.</td></tr>
+        </tbody>
+    </table></table>
+    <div class="alert-box warning"><strong>Real-person likenesses:</strong> Philadelphia Image V1 can render recognizable likenesses of some public figures depending entirely on how you prompt it — results tend to lean toward an older, softer interpretation rather than a sharp match, and quality varies a lot with prompt specificity. You are responsible for making sure anything you generate and publish complies with copyright, rights-of-publicity, and defamation laws in your jurisdiction. When in doubt, avoid naming real individuals in your prompts.</div>
+    <div class="alert-box info">Response shape differs by count: single image returns <code>image_b64</code>; V2 batches (n &gt; 1) return an <code>images_b64</code> array. Always check for both.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevImage(event)">
+            <div class="form-field"><label class="form-label">Prompt</label><textarea id="test-image-prompt" class="form-textarea" required placeholder="A futuristic city in the clouds, digital art"></textarea></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Engine</label><select id="test-image-provider" class="form-select"><option value="thena">Philadelphia Image V1 (12 cr)</option><option value="minimax">Philadelphia Image V2 (18 cr × n)</option></select></div>
+                <div class="form-field"><label class="form-label">Aspect Ratio (V2 only)</label><select id="test-image-ratio" class="form-select"><option value="1:1">Square 1:1</option><option value="16:9">Widescreen 16:9</option><option value="9:16">Portrait 9:16</option><option value="4:3">Standard 4:3</option><option value="21:9">Ultrawide 21:9</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Batch Count n (V2 only)</label><input type="number" id="test-image-n" class="form-input" value="1" min="1" max="9"></div>
+                <div class="form-field"><label class="form-label">V1 Style (V1 only)</label><select id="test-image-model" class="form-select"><option value="v6">V6 (recommended)</option><option value="photoreal">Photoreal</option><option value="anime">Anime</option><option value="movie">Movie</option><option value="noir">Noir</option></select></div>
+            </div>
+            <button type="submit" class="cosmic-button">Generate</button>
+        </form>
+        <div class="response-display" id="test-image-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-image-resp"></pre><img id="test-image-preview" class="response-media-preview" alt=""></div>
+    </div>
+</section>
+
+<!-- ============ REMOVE BG ============ -->
+<section id="remove-bg" class="api-section">
+    <div class="section-header"><h2 class="section-title">Remove Background</h2><p class="section-description">Extract transparent-background assets.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/remove-background</span><span class="cost-badge">4 credits</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><span class="param-name">file</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Returns a base64 PNG.</td></tr></tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevRemoveBg(event)"><div class="form-field"><label class="form-label">Image</label><input type="file" id="test-removebg-file" class="form-input" required></div><button type="submit" class="cosmic-button">Remove BG</button></form>
+        <div class="response-display" id="test-removebg-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-removebg-resp"></pre><img id="test-removebg-preview" class="response-media-preview" alt=""></div>
+    </div>
+</section>
+
+<!-- ============ SERAPHINA ============ -->
+<section id="seraphina-voice" class="api-section">
+    <div class="section-header"><h2 class="section-title">Seraphina Voice Gen</h2><p class="section-description">Realistic speech synthesis across a wide range of tones and characters.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/seraphina/voice</span><span class="cost-badge">30 credits</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">text</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Script to vocalize.</td></tr>
+        <tr><td><span class="param-name">voice_id</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>One of <code>ceo</code>, <code>narrator</code>, <code>anime</code>, <code>movie</code>, <code>elder</code>, <code>knight</code>, <code>sweet</code>, <code>lovely</code>, <code>casual</code>, <code>gentle</code>, <code>hero</code>, <code>cute</code>, <code>boy</code>, <code>elegant</code>, <code>friendly</code>, <code>inspire</code>.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevVoice(event)">
+            <div class="form-field"><label class="form-label">Text</label><input type="text" id="test-voice-text" class="form-input" required placeholder="Welcome to Elvion AI."></div>
+            <div class="form-field"><label class="form-label">Voice</label><select id="test-voice-style" class="form-select"><option value="ceo">CEO — Professional Female</option><option value="narrator">Narrator — Calm Female</option><option value="anime">Anime — Exuberant Female</option><option value="movie">Movie — Deep Male</option><option value="elder">Seraphina — Default</option><option value="hero">Fast Reader — Male</option><option value="cute">Lively Girl</option><option value="elegant">Elegant — Male</option></select></div>
+            <button type="submit" class="cosmic-button">Generate Voice</button>
+        </form>
+        <div class="response-display" id="test-voice-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-voice-resp"></pre><audio id="test-voice-preview" controls class="response-media-preview" style="width:100%;height:50px"></audio></div>
+    </div>
+</section>
+
+<!-- ============ PRO T2V ============ -->
+<section id="pro-t2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Pro — Text to Video</h2><p class="section-description">Native audio, up to 2K, full camera and mood control.</p><div class="section-badge-row"><span class="tier-badge pro">Engine: Philadelphia Pro Video</span></div></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-pro/generate-text</span><span class="cost-badge">~52-85 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Scene description.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>4–15 seconds. Default 5.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>768P</code> or <code>2K</code>. Default 2K.</td></tr>
+        <tr><td><span class="param-name">ratio</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>One of <code>21:9</code>, <code>16:9</code>, <code>4:3</code>, <code>1:1</code>, <code>3:4</code>, <code>9:16</code>. Cannot be "adaptive" for text-to-video.</td></tr>
+        <tr><td><span class="param-name">camera_motion</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>One of <code>none</code>, <code>push_in</code>, <code>pull_out</code>, <code>pan_left</code>, <code>pan_right</code>, <code>orbit</code>, <code>handheld</code>, <code>drone</code>, <code>shake</code>, <code>zoom_burst</code>. Baked into the prompt.</td></tr>
+        <tr><td><span class="param-name">audio_mood</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>One of <code>none</code>, <code>cinematic_score</code>, <code>tense</code>, <code>upbeat</code>, <code>ambient</code>, <code>silence</code>. Shapes the native generated audio.</td></tr>
+    </tbody></table></table>
+    <div class="code-showcase"><div class="code-tabs"><button class="code-tab active" data-lang="prot2v-curl">cURL</button></div><div class="code-content"><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><div class="code-block active" data-lang="prot2v-curl"><pre>curl -X POST "https://web-production-9a18.up.railway.app/api/developer/philadelphia-pro/generate-text" \
+  -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" \
+  -d '{"prompt": "A golden eagle soaring over neon Lagos at night", "duration": 6, "resolution": "2K", "ratio": "16:9", "camera_motion": "drone", "audio_mood": "cinematic_score"}'</pre></div></div></div>
+    <div class="alert-box info">Returns immediately with a <code>task_id</code>. Poll <a href="#pro-status">the Pro/Fast Status Poller</a> — never <code>/api/video/status</code>, that poller is Legacy-engine only.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testProT2V(event)">
+            <div class="form-field"><label class="form-label">Scene Prompt</label><textarea id="test-prot2v-prompt" class="form-textarea" required></textarea></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-prot2v-dur" class="form-input" value="5" min="4" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-prot2v-res" class="form-select"><option value="768P">768P</option><option value="2K" selected>2K</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Ratio</label><select id="test-prot2v-ratio" class="form-select"><option value="16:9" selected>16:9</option><option value="9:16">9:16</option><option value="1:1">1:1</option><option value="4:3">4:3</option><option value="21:9">21:9</option></select></div>
+                <div class="form-field"><label class="form-label">Camera Motion</label><select id="test-prot2v-cam" class="form-select"><option value="none">None</option><option value="push_in">Push In</option><option value="orbit">Orbit</option><option value="drone">Drone</option><option value="handheld">Handheld</option></select></div>
+            </div>
+            <div class="form-field"><label class="form-label">Audio Mood</label><select id="test-prot2v-audio" class="form-select"><option value="none">None</option><option value="cinematic_score">Cinematic Score</option><option value="upbeat">Upbeat</option><option value="ambient">Ambient</option></select></div>
+            <button type="submit" class="cosmic-button">Submit Job</button>
+        </form>
+        <div class="response-display" id="test-prot2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-prot2v-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ PRO I2V ============ -->
+<section id="pro-i2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Pro — Image to Video</h2><p class="section-description">Animate a first frame, optionally toward a specified last frame.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-pro/generate-image</span><span class="cost-badge">~52-85 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">first_frame</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Starting frame image.</td></tr>
+        <tr><td><span class="param-name">last_frame</span><span class="param-optional">Optional</span></td><td><span class="param-type">binary</span></td><td>Target end frame — costs one extra billable image beyond the first 5.</td></tr>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Motion directions.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>4–15s. Default 5.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>768P</code> or <code>2K</code>.</td></tr>
+        <tr><td><span class="param-name">camera_motion</span> / <span class="param-name">audio_mood</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Same option sets as Text to Video.</td></tr>
+    </tbody></table></table>
+    <div class="alert-box info">Aspect ratio is derived automatically from the uploaded image — there is no separate <code>ratio</code> field here.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testProI2V(event)">
+            <div class="form-field"><label class="form-label">First Frame</label><input type="file" id="test-proi2v-first" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Last Frame (optional)</label><input type="file" id="test-proi2v-last" class="form-input"></div>
+            <div class="form-field"><label class="form-label">Motion Prompt</label><input type="text" id="test-proi2v-prompt" class="form-input" required></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-proi2v-dur" class="form-input" value="5" min="4" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-proi2v-res" class="form-select"><option value="768P">768P</option><option value="2K" selected>2K</option></select></div>
+            </div>
+            <button type="submit" class="cosmic-button">Submit Job</button>
+        </form>
+        <div class="response-display" id="test-proi2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-proi2v-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ PRO R2V ============ -->
+<section id="pro-r2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Pro — Reference to Video</h2><p class="section-description">Fuse style/character from up to 9 images with pacing and voice from a reference video and/or audio clip.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-pro/generate-reference</span><span class="cost-badge">~52-85 credits/sec + input material</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Scene direction.</td></tr>
+        <tr><td><span class="param-name">reference_images</span><span class="param-optional">Optional</span></td><td><span class="param-type">binary[]</span></td><td>Up to 9. First 5 are free; each beyond that adds ~26 credits.</td></tr>
+        <tr><td><span class="param-name">reference_video_url</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Public clip URL. Use this OR <code>reference_video_file</code>, not both — file wins if both are sent.</td></tr>
+        <tr><td><span class="param-name">reference_video_file</span><span class="param-optional">Optional</span></td><td><span class="param-type">binary</span></td><td>Direct upload, max 40MB.</td></tr>
+        <tr><td><span class="param-name">reference_video_seconds</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>Actual clip length, for accurate billing. Defaults to a conservative 15s if omitted.</td></tr>
+        <tr><td><span class="param-name">reference_audio_url</span> / <span class="param-name">reference_audio_file</span><span class="param-optional">Optional</span></td><td><span class="param-type">string / binary</span></td><td>Public URL or direct upload (max 15MB). <b>Always free</b> — never adds to cost.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>4–15s. Default 5.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>768P</code> or <code>2K</code>.</td></tr>
+        <tr><td><span class="param-name">ratio</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Defaults to <code>adaptive</code>; may be set to any concrete ratio.</td></tr>
+        <tr><td><span class="param-name">camera_motion</span> / <span class="param-name">audio_mood</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Same option sets as above.</td></tr>
+    </tbody></table></table>
+    <div class="alert-box warning">Provide at least one of: reference images, reference video, or reference audio. Reference video input material is billed at the same per-second rate as your chosen output resolution.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testProR2V(event)">
+            <div class="form-field"><label class="form-label">Prompt</label><textarea id="test-pror2v-prompt" class="form-textarea" required></textarea></div>
+            <div class="form-field"><label class="form-label">Reference Images (up to 9)</label><input type="file" id="test-pror2v-imgs" class="form-input" accept="image/*" multiple></div>
+            <div class="form-field"><label class="form-label">Reference Video URL (optional)</label><input type="text" id="test-pror2v-vidurl" class="form-input" placeholder="https://..."></div>
+            <div class="form-field"><label class="form-label">Reference Audio URL (optional, free)</label><input type="text" id="test-pror2v-audurl" class="form-input" placeholder="https://..."></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-pror2v-dur" class="form-input" value="5" min="4" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-pror2v-res" class="form-select"><option value="768P">768P</option><option value="2K" selected>2K</option></select></div>
+            </div>
+            <button type="submit" class="cosmic-button">Submit Job</button>
+        </form>
+        <div class="response-display" id="test-pror2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-pror2v-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ PRO REGEN ============ -->
+<section id="pro-regen" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Pro — Upscale to 2K</h2><p class="section-description">Upgrade a previously succeeded 768P Pro generation to 2K.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-pro/upscale</span><span class="cost-badge">~33 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">source_task_id</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Task ID of a <b>succeeded</b> 768P Pro generation. Must be your own task, within the 7-day query window.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Must be <code>"2K"</code>.</td></tr>
+    </tbody></table></table>
+    <div class="alert-box warning">Only works on tasks created via the Pro endpoints above. Fast Video and Legacy engine outputs are not eligible.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testProRegen(event)"><div class="form-field"><label class="form-label">Source Task ID</label><input type="text" id="test-proregen-task" class="form-input" required></div><button type="submit" class="cosmic-button">Upscale</button></form>
+        <div class="response-display" id="test-proregen-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-proregen-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ FAST T2V ============ -->
+<section id="fast-t2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Fast — Text to Video</h2><p class="section-description">Quicker, cheaper generation for iteration and previews.</p><div class="section-badge-row"><span class="tier-badge fast">Engine: Philadelphia Fast Video</span></div></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-fast/generate-text</span><span class="cost-badge">~32-52 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Scene description.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td><b>5–15 seconds</b> — 4s is not supported on Fast Video. Default 6.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>480P</code> or <code>768P</code>. No 2K on this engine. Default 768P.</td></tr>
+        <tr><td><span class="param-name">ratio</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Same ratio set as Pro.</td></tr>
+        <tr><td><span class="param-name">camera_motion</span> / <span class="param-name">audio_mood</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>Same option sets as Pro.</td></tr>
+    </tbody></table></table>
+    <div class="alert-box info">Poll with the same <a href="#pro-status">Pro/Fast Status Poller</a> used for Pro tasks.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testFastT2V(event)">
+            <div class="form-field"><label class="form-label">Scene Prompt</label><textarea id="test-fastt2v-prompt" class="form-textarea" required></textarea></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-fastt2v-dur" class="form-input" value="6" min="5" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-fastt2v-res" class="form-select"><option value="480P">480P</option><option value="768P" selected>768P</option></select></div>
+            </div>
+            <div class="form-field"><label class="form-label">Ratio</label><select id="test-fastt2v-ratio" class="form-select"><option value="16:9" selected>16:9</option><option value="9:16">9:16</option><option value="1:1">1:1</option></select></div>
+            <button type="submit" class="cosmic-button">Submit Job</button>
+        </form>
+        <div class="response-display" id="test-fastt2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-fastt2v-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ FAST I2V ============ -->
+<section id="fast-i2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Philadelphia Fast — Image to Video</h2><p class="section-description">Animate a starting frame at Fast-engine speed and price.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/philadelphia-fast/generate-image</span><span class="cost-badge">~32-52 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">first_frame</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Starting frame. All images are free on Fast Video.</td></tr>
+        <tr><td><span class="param-name">last_frame</span><span class="param-optional">Optional</span></td><td><span class="param-type">binary</span></td><td>Target end frame — still free.</td></tr>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Motion directions.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>5–15s. Default 6.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>480P</code> or <code>768P</code>.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testFastI2V(event)">
+            <div class="form-field"><label class="form-label">First Frame</label><input type="file" id="test-fasti2v-first" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Motion Prompt</label><input type="text" id="test-fasti2v-prompt" class="form-input" required></div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-fasti2v-dur" class="form-input" value="6" min="5" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-fasti2v-res" class="form-select"><option value="480P">480P</option><option value="768P" selected>768P</option></select></div>
+            </div>
+            <button type="submit" class="cosmic-button">Submit Job</button>
+        </form>
+        <div class="response-display" id="test-fasti2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-fasti2v-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ LEGACY VIDEO ============ -->
+<section id="legacy-t2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Legacy Engine — Text to Video</h2><p class="section-description">Original engine. Silent output, fixed durations.</p><div class="section-badge-row"><span class="tier-badge legacy">No native audio</span></div></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/generate-video-from-text</span><span class="cost-badge">32 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Scene description.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td><b>6 or 10 only</b> (any value ≥10 rounds to 10, anything else rounds to 6). 6s = 192 credits, 10s = 320 credits.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>512P</code>, <code>768P</code>, or <code>1080P</code>. Default 1080P. <b>1080P is only honored on a 6s clip</b> — a 10s request automatically renders at 768P regardless of what you send.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevT2V(event)">
+            <div class="form-field"><label class="form-label">Prompt</label><input type="text" id="test-t2v-prompt" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Duration</label><select id="test-t2v-duration" class="form-select"><option value="6">6 Seconds (192 credits, up to 1080P)</option><option value="10">10 Seconds (320 credits, capped at 768P)</option></select></div>
+            <button type="submit" class="cosmic-button">Render</button>
+        </form>
+        <div class="response-display" id="test-t2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-t2v-resp"></pre></div>
+    </div>
+</section>
+
+<section id="legacy-i2v" class="api-section">
+    <div class="section-header"><h2 class="section-title">Legacy Engine — Image to Video</h2><p class="section-description">Directed animation from a starting frame.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/generate-video-from-image</span><span class="cost-badge">32 credits/sec</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">file</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Starting frame.</td></tr>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Motion directions.</td></tr>
+        <tr><td><span class="param-name">duration</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>6 or 10, same billing and 1080P/6s rule as Text to Video.</td></tr>
+        <tr><td><span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>512P</code>, <code>768P</code>, or <code>1080P</code>. Default 768P.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevI2V(event)">
+            <div class="form-field"><label class="form-label">Image</label><input type="file" id="test-i2v-file" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Prompt</label><input type="text" id="test-i2v-prompt" class="form-input" required></div>
+            <button type="submit" class="cosmic-button">Animate</button>
+        </form>
+        <div class="response-display" id="test-i2v-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-i2v-resp"></pre></div>
+    </div>
+</section>
+
+<section id="legacy-frames" class="api-section">
+    <div class="section-header"><h2 class="section-title">Legacy Engine — Frame Interpolation</h2><p class="section-description">Interpolate between an exact first and last frame.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/generate-video-from-frames</span><span class="cost-badge">192 credits (fixed 6s, 1080P)</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">first_frame</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Start frame.</td></tr>
+        <tr><td><span class="param-name">last_frame</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>End frame.</td></tr>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Motion description.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevFrames(event)">
+            <div class="form-field"><label class="form-label">First Frame</label><input type="file" id="test-frames-first" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Last Frame</label><input type="file" id="test-frames-last" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Prompt</label><input type="text" id="test-frames-prompt" class="form-input" required></div>
+            <button type="submit" class="cosmic-button">Render</button>
+        </form>
+        <div class="response-display" id="test-frames-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-frames-resp"></pre></div>
+    </div>
+</section>
+
+<section id="legacy-subject" class="api-section">
+    <div class="section-header"><h2 class="section-title">Legacy Engine — Subject Consistency</h2><p class="section-description">Lock generation to a specific character subject photo.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/generate-video-subject</span><span class="cost-badge">192 credits (fixed 6s, 1080P)</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Key (multipart)</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">subject_photo</span><span class="param-required">Required</span></td><td><span class="param-type">binary</span></td><td>Reference photo of the subject.</td></tr>
+        <tr><td><span class="param-name">prompt</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Scene the subject appears in.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevSubject(event)">
+            <div class="form-field"><label class="form-label">Subject Photo</label><input type="file" id="test-subject-file" class="form-input" required></div>
+            <div class="form-field"><label class="form-label">Prompt</label><input type="text" id="test-subject-prompt" class="form-input" required></div>
+            <button type="submit" class="cosmic-button">Render</button>
+        </form>
+        <div class="response-display" id="test-subject-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-subject-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ POLLERS ============ -->
+<section id="pro-status" class="api-section">
+    <div class="section-header"><h2 class="section-title">Pro / Fast Status Poller</h2><p class="section-description">Use this for every Philadelphia Pro and Philadelphia Fast task.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method get">GET</span><span class="endpoint-path">/api/h3/status/{task_id}</span><span class="cost-badge">0 credits, no auth needed</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Response field</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">status</span></td><td><code>pending</code>, <code>Success</code>, or an HTTP error if failed/cancelled.</td></tr>
+        <tr><td><span class="param-name">url</span></td><td>Time-limited download URL, present when <code>status="Success"</code>.</td></tr>
+        <tr><td><span class="param-name">resolution</span> / <span class="param-name">duration</span> / <span class="param-name">ratio</span></td><td>Echoed back from the completed task.</td></tr>
+    </tbody></table></table>
+    <div class="alert-box warning">Tasks are only queryable for 7 days. This endpoint does not accept an Authorization header — task IDs are the access control.</div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testProStatus(event)"><div class="form-field"><label class="form-label">Task ID</label><input type="text" id="test-prostatus-id" class="form-input" required></div><button type="submit" class="cosmic-button">Check Status</button></form>
+        <div class="response-display" id="test-prostatus-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-prostatus-resp"></pre><video id="test-prostatus-preview" controls class="response-media-preview" style="width:100%;max-height:400px"></video></div>
+    </div>
+</section>
+
+<section id="legacy-status" class="api-section">
+    <div class="section-header"><h2 class="section-title">Legacy Status Poller</h2><p class="section-description">Use this only for the four Legacy Engine endpoints above.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method get">GET</span><span class="endpoint-path">/api/video/status?task_id=YOUR_TASK_ID</span><span class="cost-badge">0 credits</span></div></div>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testDevVideoStatus(event)"><div class="form-field"><label class="form-label">Task ID</label><input type="text" id="test-video-task-id" class="form-input" required></div><button type="submit" class="cosmic-button">Check Status</button></form>
+        <div class="response-display" id="test-video-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-video-resp"></pre><video id="test-video-preview" controls class="response-media-preview" style="width:100%;max-height:400px"></video></div>
+    </div>
+</section>
+
+<section id="cost-estimator" class="api-section">
+    <div class="section-header"><h2 class="section-title">Video Cost Estimator</h2><p class="section-description">Preview the exact credit cost before submitting a Pro or Fast video job — no charge, no auth required.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/h3/estimate-cost</span><span class="cost-badge">Free</span></div></div>
+    <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-name">mode</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td><code>text</code>, <code>image</code>, or <code>reference</code>. <code>reference</code> is Pro-only.</td></tr>
+        <tr><td><span class="param-name">model</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>pro</code> or <code>fast</code>. Default <code>pro</code>.</td></tr>
+        <tr><td><span class="param-name">duration</span> / <span class="param-name">resolution</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer / string</span></td><td>Same constraints as the matching generation endpoint.</td></tr>
+        <tr><td><span class="param-name">image_count</span> / <span class="param-name">ref_video_seconds</span><span class="param-optional">Optional</span></td><td><span class="param-type">integer</span></td><td>Pro reference-mode billing inputs.</td></tr>
+        <tr><td><span class="param-name">tier</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td><code>studio</code> or <code>dev</code>. Use <code>dev</code> to preview Developer API pricing.</td></tr>
+    </tbody></table></table>
+    <div class="live-test-zone">
+        <h3 class="live-test-title"><i class="fa-solid fa-vial"></i> Playground</h3>
+        <form onsubmit="testCostEstimator(event)">
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Engine</label><select id="test-cost-model" class="form-select"><option value="pro">Pro</option><option value="fast">Fast</option></select></div>
+                <div class="form-field"><label class="form-label">Mode</label><select id="test-cost-mode" class="form-select"><option value="text">Text</option><option value="image">Image</option><option value="reference">Reference (Pro only)</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-field"><label class="form-label">Duration (s)</label><input type="number" id="test-cost-dur" class="form-input" value="6" min="4" max="15"></div>
+                <div class="form-field"><label class="form-label">Resolution</label><select id="test-cost-res" class="form-select"><option value="768P">768P</option><option value="2K">2K</option><option value="480P">480P</option></select></div>
+            </div>
+            <button type="submit" class="cosmic-button">Estimate</button>
+        </form>
+        <div class="response-display" id="test-cost-resp-box" style="display:none"><h4 class="response-title">Response</h4><pre class="response-output" id="test-cost-resp"></pre></div>
+    </div>
+</section>
+
+<!-- ============ ERROR / RATE LIMITS ============ -->
+<section id="error-handling" class="api-section">
+    <div class="section-header"><h2 class="section-title">Errors & Rate Limits</h2><p class="section-description">Predictable error payloads for logging integrations.</p></div>
+    <table class="param-table"><table><thead><tr><th>Status</th><th>Reason</th><th>Description</th></tr></thead><tbody>
+        <tr><td><span class="param-type">400</span></td><td>Bad Request</td><td>Missing required fields, or a parameter outside its valid range (duration, resolution, ratio, file size).</td></tr>
+        <tr><td><span class="param-type">401</span></td><td>Unauthorized</td><td>Invalid or missing API key.</td></tr>
+        <tr><td><span class="param-type">402</span></td><td>Payment Required</td><td>Credit balance below the endpoint's cost.</td></tr>
+        <tr><td><span class="param-type">500 / 502</span></td><td>Upstream Error</td><td>The underlying generation engine rejected or failed the job — message is passed through in <code>detail</code>. Credits already deducted for a failed generation are automatically refunded to your balance.</td></tr>
+    </tbody></table></table>
+    <div class="subsection">
+        <h3 class="subsection-title">Rate limits</h3>
+        <p class="content-text">Elvion does not enforce a hard requests-per-minute cap beyond your credit balance today — spend is the natural throttle. Extremely high-frequency or clearly abusive traffic patterns may still be slowed or paused. If you're planning meaningful production volume, email <a href="mailto:elvionailabs@gmail.com" style="color:var(--accent)">elvionailabs@gmail.com</a> first so your account is provisioned correctly.</p>
+    </div>
+</section>
+
+<!-- ============ FAQ (accordion) ============ -->
+<section id="faq" class="api-section">
+    <div class="section-header"><h2 class="section-title">FAQ</h2><p class="section-description">Common questions from integrators.</p></div>
+
+    <div class="faq-item">
+        <button class="faq-question">What is Elvion AI, exactly? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Elvion AI is a single platform for reasoning chat (Philadelphia), companion chat (Bobby), image generation, video generation, and voice synthesis — all built and hosted on Elvion's own infrastructure, behind one API key and one credit balance.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Which video engine should I use — Pro, Fast, or Legacy? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Pro for native synchronized audio, up to 2K, and reference fusion. Fast for quicker, cheaper iteration when you don't need audio-driven reference generation. Legacy for the original fixed-duration silent engine, including frame interpolation and subject-consistency modes not available elsewhere.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Which status poller do I call? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p><code>/api/h3/status/{task_id}</code> for anything submitted through a Pro or Fast endpoint; <code>/api/video/status?task_id=</code> only for the four Legacy endpoints. Using the wrong one returns an "invalid task_id" error.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Are generated assets watermarked? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>No — Developer API output is unwatermarked for white-label integration into your own product.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Can I generate images of real people? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Image V1 can render likenesses of some public figures depending on how you prompt it, though results skew older and softer rather than a sharp match. You're responsible for making sure whatever you generate and publish respects copyright and rights-of-publicity laws where you operate — see the note in the <a href="#image-gen">Image Generation</a> section.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">What happens if a generation fails after I've already been charged? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Credits deducted for a job that fails on Elvion's side are refunded to your balance automatically — no support ticket required.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Do credits expire? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>No, they remain in your balance until spent.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">How do I get free bonus credits to start? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Bonus credits are a constant at Elvion — every new account starts with free credits already loaded. Fund your wallet whenever you're ready to go further, or email <a href="mailto:elvionailabs@gmail.com" style="color:var(--accent)">elvionailabs@gmail.com</a> for test credits before committing.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">Is Philadelphia Chat good enough to build a real coding agent on? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Yes — it's built for exactly that. Step-by-step reasoning, mid-conversation tool calls, live web search, and a context window big enough to hold long documents or a full codebase make it a strong fit for agents, coding assistants, and support automation, not just chat.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">What file size and token limits should I plan around? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Chat holds up to 1,000,000 tokens of context and can generate responses up to 500,000 tokens. For uploads: vision images up to ~10MB, vision video up to ~50MB, reference video files up to 40MB, reference audio files up to 15MB.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">How do I keep my API key safe? <i class="fa-solid fa-plus faq-icon"></i></button>
+        <div class="faq-answer"><p>Never call the Developer API directly from a browser or mobile app — route requests through your own backend so the key never reaches the client. See <a href="#authentication">Authentication</a>.</p></div>
+    </div>
+</section>
+
+</div>
+</main>
+
+<script>
+(function goldSnow() {
+    const canvas = document.getElementById("snow-canvas"); if (!canvas) return;
+    const ctx = canvas.getContext("2d"); let flakes = [];
+    function resize() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight; flakes = [];
+        for (let i = 0; i < 100; i++) flakes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2+0.5, speed: Math.random()*1.5+0.5, wind: Math.random()*0.5-0.25, opacity: Math.random()*0.6+0.2});
+    }
+    function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        flakes.forEach(f=>{ ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fillStyle=`rgba(201,169,110,${f.opacity})`; ctx.shadowBlur=8; ctx.shadowColor="rgba(201,169,110,0.5)"; ctx.fill(); f.y+=f.speed; f.x+=f.wind; if(f.y>canvas.height){f.y=-5;f.x=Math.random()*canvas.width} if(f.x<0)f.x=canvas.width; if(f.x>canvas.width)f.x=0; });
+        requestAnimationFrame(draw);
+    }
+    resize(); window.addEventListener("resize", resize); draw();
+})();
+
+function syncGlobalKey(val) {
+    localStorage.setItem("global_elv_key", val);
+}
+window.addEventListener("DOMContentLoaded", () => {
+    const stored = localStorage.getItem("global_elv_key");
+    if (stored) document.getElementById("global-api-key").value = stored;
+    document.querySelectorAll('.form-select').forEach(buildCustomSelect);
+});
+
+/* ── Mobile nav: single source of truth, works identically whether the
+   browser reports a phone or desktop viewport — driven purely by CSS
+   breakpoint + explicit open/close state, no viewport sniffing. ── */
+const nav = document.getElementById("elvion-nav");
+const mobileBtn = document.getElementById("mobile-menu-toggle");
+const mobileBackdrop = document.getElementById("mobile-backdrop");
+const mobileIcon = mobileBtn.querySelector("i");
+
+function openMobileMenu() {
+    nav.classList.add("mobile-open");
+    mobileBackdrop.classList.add("open");
+    document.body.classList.add("nav-locked");
+    mobileIcon.classList.remove("fa-bars"); mobileIcon.classList.add("fa-xmark");
+    mobileBtn.setAttribute("aria-label", "Close menu");
+}
+function closeMobileMenu() {
+    nav.classList.remove("mobile-open");
+    mobileBackdrop.classList.remove("open");
+    document.body.classList.remove("nav-locked");
+    mobileIcon.classList.remove("fa-xmark"); mobileIcon.classList.add("fa-bars");
+    mobileBtn.setAttribute("aria-label", "Open menu");
+}
+mobileBtn.addEventListener("click", () => {
+    nav.classList.contains("mobile-open") ? closeMobileMenu() : openMobileMenu();
+});
+mobileBackdrop.addEventListener("click", closeMobileMenu);
+window.addEventListener("resize", () => { if (window.innerWidth > 768) closeMobileMenu(); });
+
+const navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach(link => {
+    link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) window.scrollTo({ top: target.offsetTop - 20, behavior: "smooth" });
+            navLinks.forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+            closeMobileMenu();
+        }
+    });
+});
+const sections = document.querySelectorAll("section.api-section");
+window.addEventListener("scroll", () => {
+    let currentId = null; const scrollPos = window.scrollY + 130;
+    sections.forEach(sec => { if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) currentId = "#" + sec.id; });
+    if (currentId) navLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === currentId));
+});
+
+document.querySelectorAll(".code-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        const lang = tab.dataset.lang; const parentTabs = tab.parentElement; const showcase = parentTabs.parentElement.parentElement;
+        parentTabs.querySelectorAll(".code-tab").forEach(t => t.classList.remove("active"));
+        showcase.querySelectorAll(".code-block").forEach(block => block.classList.toggle("active", block.dataset.lang === lang));
+        tab.classList.add("active");
+    });
+});
+function copyCode(btn) {
+    const content = btn.closest(".code-content"); if (!content) return;
+    const activeBlock = content.querySelector(".code-block.active pre"); if (!activeBlock) return;
+    navigator.clipboard.writeText(activeBlock.innerText).then(() => {
+        btn.classList.add("copied"); btn.textContent = "Copied";
+        setTimeout(() => { btn.classList.remove("copied"); btn.textContent = "Copy"; }, 1500);
+    }).catch(() => { btn.textContent = "Error"; setTimeout(() => (btn.textContent = "Copy"), 1500); });
+}
+window.copyCode = copyCode;
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        if (isOpen) { item.classList.remove('open'); answer.style.maxHeight = null; }
+        else { item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+    });
+});
+
+/* ── Inline custom select (skins every .form-select) ── */
+function buildCustomSelect(sel) {
+    if (!sel || sel.dataset.cselDone) return;
+    sel.dataset.cselDone = '1'; sel.classList.add('csel-native');
+    const wrap = document.createElement('div'); wrap.className = 'csel';
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'csel-btn';
+    const valSpan = document.createElement('span'); valSpan.className = 'csel-val';
+    const arrow = document.createElement('i'); arrow.className = 'fa-solid fa-chevron-down csel-arrow';
+    btn.appendChild(valSpan); btn.appendChild(arrow);
+    const menu = document.createElement('div'); menu.className = 'csel-menu';
+    Array.from(sel.options).forEach(opt => {
+        const item = document.createElement('div'); item.className = 'csel-opt' + (opt.selected ? ' on' : '');
+        item.textContent = opt.textContent; item.dataset.v = opt.value;
+        item.onclick = (e) => {
+            e.stopPropagation(); sel.value = opt.value; valSpan.textContent = opt.textContent;
+            menu.querySelectorAll('.csel-opt').forEach(o => o.classList.remove('on')); item.classList.add('on');
+            wrap.classList.remove('open'); sel.dispatchEvent(new Event('change'));
+        };
+        menu.appendChild(item);
+    });
+    valSpan.textContent = sel.options[sel.selectedIndex]?.textContent || '';
+    btn.onclick = (e) => { e.stopPropagation(); document.querySelectorAll('.csel.open').forEach(w => { if (w !== wrap) w.classList.remove('open'); }); wrap.classList.toggle('open'); };
+    wrap.appendChild(btn); wrap.appendChild(menu);
+    sel.parentNode.insertBefore(wrap, sel.nextSibling);
+}
+document.addEventListener('click', () => document.querySelectorAll('.csel.open').forEach(w => w.classList.remove('open')));
+
+/* ── API helpers ── */
+const BASE = "https://web-production-9a18.up.railway.app";
+function getKey() { return localStorage.getItem("global_elv_key") || ''; }
+function jsonHeaders(key) { return { "Authorization": "Bearer " + key, "Content-Type": "application/json" }; }
+function needKey() { const k = getKey(); if (!k) { alert("Paste your API key in the Developer Key Sync field at the top."); return null; } return k; }
+async function callJSON(path, body, outId, boxId) {
+    const key = needKey(); if (!key) return null;
+    document.getElementById(boxId).style.display = "block";
+    document.getElementById(outId).textContent = "Sending request…";
+    try {
+        const res = await fetch(BASE + path, { method: "POST", headers: jsonHeaders(key), body: JSON.stringify(body) });
+        const data = await res.json().catch(() => null);
+        document.getElementById(outId).textContent = JSON.stringify(data || { error: "JSON parse failed" }, null, 2);
+        return data;
+    } catch (err) { document.getElementById(outId).textContent = "Connection failed: " + err.message; return null; }
+}
+async function callGET(path, outId, boxId) {
+    document.getElementById(boxId).style.display = "block";
+    document.getElementById(outId).textContent = "Requesting…";
+    try {
+        const res = await fetch(BASE + path);
+        const data = await res.json().catch(() => null);
+        document.getElementById(outId).textContent = JSON.stringify(data || { error: "JSON parse failed" }, null, 2);
+        return data;
+    } catch (err) { document.getElementById(outId).textContent = "Connection failed: " + err.message; return null; }
+}
+async function callForm(path, formData, outId, boxId, authRequired = true) {
+    if (authRequired) { const key = needKey(); if (!key) return null; }
+    document.getElementById(boxId).style.display = "block";
+    document.getElementById(outId).textContent = "Uploading & processing…";
+    try {
+        const headers = authRequired ? { "Authorization": "Bearer " + getKey() } : {};
+        const res = await fetch(BASE + path, { method: "POST", headers, body: formData });
+        const data = await res.json().catch(() => null);
+        document.getElementById(outId).textContent = JSON.stringify(data || { error: "JSON parse failed" }, null, 2);
+        return data;
+    } catch (err) { document.getElementById(outId).textContent = "Connection failed: " + err.message; return null; }
+}
+
+async function testDevPhilly(e) { e.preventDefault(); await callJSON("/api/developer/philadelphia/chat", { message: val("test-philly-msg") }, "test-philly-resp", "test-philly-resp-box"); }
+async function testDevBobby(e) { e.preventDefault(); await callJSON("/api/developer/bobby/chat", { prompt: val("test-bobby-prompt") }, "test-bobby-resp", "test-bobby-resp-box"); }
+function val(id) { return document.getElementById(id).value.trim(); }
+
+async function testDevVision(e) {
+    e.preventDefault();
+    const file = document.getElementById("test-vision-file").files[0]; if (!file) return;
+    const fd = new FormData(); fd.append("file", file); fd.append("prompt", val("test-vision-prompt"));
+    await callForm("/api/developer/vision/analyze", fd, "test-vision-resp", "test-vision-resp-box");
+}
+
+async function testDevImage(e) {
+    e.preventDefault();
+    const provider = document.getElementById("test-image-provider").value;
+    const body = { prompt: val("test-image-prompt"), use_minimax: provider === "minimax" };
+    if (provider === "minimax") { body.aspect_ratio = document.getElementById("test-image-ratio").value; body.n = parseInt(document.getElementById("test-image-n").value) || 1; }
+    else { body.model = document.getElementById("test-image-model").value; }
+    const data = await callJSON("/api/developer/generate-image", body, "test-image-resp", "test-image-resp-box");
+    const preview = document.getElementById("test-image-preview"); preview.style.display = "none";
+    if (data) {
+        const b64 = data.image_b64 || (data.images_b64 && data.images_b64[0]);
+        if (b64) { preview.src = "data:image/png;base64," + b64; preview.style.display = "block"; }
+    }
+}
+
+async function testDevRemoveBg(e) {
+    e.preventDefault();
+    const file = document.getElementById("test-removebg-file").files[0]; if (!file) return;
+    const fd = new FormData(); fd.append("file", file);
+    const data = await callForm("/api/developer/remove-background", fd, "test-removebg-resp", "test-removebg-resp-box");
+    const preview = document.getElementById("test-removebg-preview"); preview.style.display = "none";
+    if (data && data.image_b64) { preview.src = "data:image/png;base64," + data.image_b64; preview.style.display = "block"; }
+}
+
+async function testDevVoice(e) {
+    e.preventDefault();
+    const style = document.getElementById("test-voice-style").value;
+    const data = await callJSON("/api/developer/seraphina/voice", { text: val("test-voice-text"), voice_id: style }, "test-voice-resp", "test-voice-resp-box");
+    const preview = document.getElementById("test-voice-preview"); preview.style.display = "none";
+    if (data && data.audio_b64) { preview.src = "data:audio/mpeg;base64," + data.audio_b64; preview.style.display = "block"; }
+}
+
+async function testProT2V(e) {
+    e.preventDefault();
+    await callJSON("/api/developer/philadelphia-pro/generate-text", {
+        prompt: val("test-prot2v-prompt"), duration: parseInt(document.getElementById("test-prot2v-dur").value),
+        resolution: document.getElementById("test-prot2v-res").value, ratio: document.getElementById("test-prot2v-ratio").value,
+        camera_motion: document.getElementById("test-prot2v-cam").value, audio_mood: document.getElementById("test-prot2v-audio").value
+    }, "test-prot2v-resp", "test-prot2v-resp-box");
+}
+async function testProI2V(e) {
+    e.preventDefault();
+    const first = document.getElementById("test-proi2v-first").files[0]; if (!first) return;
+    const fd = new FormData(); fd.append("prompt", val("test-proi2v-prompt")); fd.append("first_frame", first);
+    const last = document.getElementById("test-proi2v-last").files[0]; if (last) fd.append("last_frame", last);
+    fd.append("duration", document.getElementById("test-proi2v-dur").value); fd.append("resolution", document.getElementById("test-proi2v-res").value);
+    await callForm("/api/developer/philadelphia-pro/generate-image", fd, "test-proi2v-resp", "test-proi2v-resp-box");
+}
+async function testProR2V(e) {
+    e.preventDefault();
+    const fd = new FormData(); fd.append("prompt", val("test-pror2v-prompt"));
+    Array.from(document.getElementById("test-pror2v-imgs").files || []).forEach(f => fd.append("reference_images", f));
+    const vidUrl = val("test-pror2v-vidurl"); if (vidUrl) fd.append("reference_video_url", vidUrl);
+    const audUrl = val("test-pror2v-audurl"); if (audUrl) fd.append("reference_audio_url", audUrl);
+    fd.append("duration", document.getElementById("test-pror2v-dur").value); fd.append("resolution", document.getElementById("test-pror2v-res").value);
+    await callForm("/api/developer/philadelphia-pro/generate-reference", fd, "test-pror2v-resp", "test-pror2v-resp-box");
+}
+async function testProRegen(e) {
+    e.preventDefault();
+    await callJSON("/api/developer/philadelphia-pro/upscale", { source_task_id: val("test-proregen-task"), resolution: "2K" }, "test-proregen-resp", "test-proregen-resp-box");
+}
+
+async function testFastT2V(e) {
+    e.preventDefault();
+    await callJSON("/api/developer/philadelphia-fast/generate-text", {
+        prompt: val("test-fastt2v-prompt"), duration: parseInt(document.getElementById("test-fastt2v-dur").value),
+        resolution: document.getElementById("test-fastt2v-res").value, ratio: document.getElementById("test-fastt2v-ratio").value
+    }, "test-fastt2v-resp", "test-fastt2v-resp-box");
+}
+async function testFastI2V(e) {
+    e.preventDefault();
+    const first = document.getElementById("test-fasti2v-first").files[0]; if (!first) return;
+    const fd = new FormData(); fd.append("prompt", val("test-fasti2v-prompt")); fd.append("first_frame", first);
+    fd.append("duration", document.getElementById("test-fasti2v-dur").value); fd.append("resolution", document.getElementById("test-fasti2v-res").value);
+    await callForm("/api/developer/philadelphia-fast/generate-image", fd, "test-fasti2v-resp", "test-fasti2v-resp-box");
+}
+
+async function testDevT2V(e) {
+    e.preventDefault();
+    await callJSON("/api/developer/generate-video-from-text", { prompt: val("test-t2v-prompt"), duration: parseInt(document.getElementById("test-t2v-duration").value) }, "test-t2v-resp", "test-t2v-resp-box");
+}
+async function testDevI2V(e) {
+    e.preventDefault();
+    const file = document.getElementById("test-i2v-file").files[0]; if (!file) return;
+    const fd = new FormData(); fd.append("file", file); fd.append("prompt", val("test-i2v-prompt")); fd.append("duration", 6);
+    await callForm("/api/developer/generate-video-from-image", fd, "test-i2v-resp", "test-i2v-resp-box");
+}
+async function testDevFrames(e) {
+    e.preventDefault();
+    const first = document.getElementById("test-frames-first").files[0], last = document.getElementById("test-frames-last").files[0]; if (!first || !last) return;
+    const fd = new FormData(); fd.append("first_frame", first); fd.append("last_frame", last); fd.append("prompt", val("test-frames-prompt"));
+    await callForm("/api/developer/generate-video-from-frames", fd, "test-frames-resp", "test-frames-resp-box");
+}
+async function testDevSubject(e) {
+    e.preventDefault();
+    const file = document.getElementById("test-subject-file").files[0]; if (!file) return;
+    const fd = new FormData(); fd.append("subject_photo", file); fd.append("prompt", val("test-subject-prompt"));
+    await callForm("/api/developer/generate-video-subject", fd, "test-subject-resp", "test-subject-resp-box");
+}
+
+async function testProStatus(e) {
+    e.preventDefault();
+    const id = val("test-prostatus-id");
+    const data = await callGET(`/api/h3/status/${id}`, "test-prostatus-resp", "test-prostatus-resp-box");
+    const preview = document.getElementById("test-prostatus-preview"); preview.style.display = "none";
+    if (data && data.status === "Success" && data.url) { preview.src = data.url; preview.style.display = "block"; }
+}
+async function testDevVideoStatus(e) {
+    e.preventDefault();
+    const id = val("test-video-task-id");
+    const data = await callGET(`/api/video/status?task_id=${id}`, "test-video-resp", "test-video-resp-box");
+    const preview = document.getElementById("test-video-preview"); preview.style.display = "none";
+    if (data && data.status === "Success" && data.url) { preview.src = data.url; preview.style.display = "block"; }
+}
+async function testCostEstimator(e) {
+    e.preventDefault();
+    const body = {
+        model: document.getElementById("test-cost-model").value, mode: document.getElementById("test-cost-mode").value,
+        duration: parseInt(document.getElementById("test-cost-dur").value), resolution: document.getElementById("test-cost-res").value,
+        tier: "dev"
+    };
+    document.getElementById("test-cost-resp-box").style.display = "block";
+    document.getElementById("test-cost-resp").textContent = "Estimating…";
+    try {
+        const res = await fetch(BASE + "/api/h3/estimate-cost", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const data = await res.json().catch(() => null);
+        document.getElementById("test-cost-resp").textContent = JSON.stringify(data || { error: "JSON parse failed" }, null, 2);
+    } catch (err) { document.getElementById("test-cost-resp").textContent = "Connection failed: " + err.message; }
+}
+</script>
+</body>
+</html>
