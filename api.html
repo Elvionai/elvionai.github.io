@@ -869,8 +869,13 @@ print(len(images), "image(s) returned")</code></pre></div>
 
 <!-- ============ SERAPHINA ============ -->
 <section id="seraphina-voice" class="api-section">
-    <div class="section-header"><h2 class="section-title">Seraphina Voice Gen</h2><p class="section-description">Realistic speech synthesis across a wide range of tones and characters. Supports over 30 languages. Type in the preferred language and it speaks. English, general.</p></div>
-    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/seraphina/voice</span><span class="cost-badge">30 credits</span></div></div>
+    <div class="section-header"><h2 class="section-title">Seraphina Voice Gen</h2><p class="section-description">Realistic speech synthesis across 40 languages and a wide range of tones and characters. Type in the language you want and it speaks that language natively.</p></div>
+    <div class="endpoint-card"><div class="endpoint-header"><span class="http-method post">POST</span><span class="endpoint-path">/api/developer/seraphina/voice</span><span class="cost-badge">30 credits, or per-character beyond ~460 chars</span></div></div>
+    <div class="alert-box info"><strong>Pricing:</strong> Charged at 30 credits flat for typical requests (up to ~460 characters, about 75–90 words). Beyond that, cost scales per character at the same effective rate rather than staying flat regardless of length. The response's <code>credits_charged</code> field always reflects the exact amount deducted — check it, don't hardcode 30.</div>
+    <div class="subsection">
+        <h3 class="subsection-title">Supported languages (40)</h3>
+        <p class="content-text">Chinese, Cantonese, English, Spanish, French, Russian, German, Portuguese, Arabic, Italian, Japanese, Korean, Indonesian, Vietnamese, Turkish, Dutch, Ukrainian, Thai, Polish, Romanian, Greek, Czech, Finnish, Hindi, Bulgarian, Danish, Hebrew, Malay, Persian, Slovak, Swedish, Croatian, Filipino, Hungarian, Norwegian, Slovenian, Catalan, Nynorsk, Tamil, Afrikaans.</p>
+    </div>
     <table class="param-table"><table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
         <tr><td><span class="param-name">text</span><span class="param-required">Required</span></td><td><span class="param-type">string</span></td><td>Script to vocalize.</td></tr>
         <tr><td><span class="param-name">voice_id</span><span class="param-optional">Optional</span></td><td><span class="param-type">string</span></td><td>One of <code>ceo</code>, <code>narrator</code>, <code>anime</code>, <code>movie</code>, <code>elder</code>, <code>knight</code>, <code>abbess</code>, <code>sweet</code>, <code>lovely</code>, <code>casual</code>, <code>gentle</code>, <code>hero</code>, <code>cute</code>, <code>boy</code>, <code>elegant</code>, <code>friendly</code>, <code>inspire</code>.</td></tr>
