@@ -629,7 +629,7 @@ print(r.json())</code></pre></div>
                 <li><strong>Vision Analysis</strong> — 3 credits</li>
                 <li><strong>Image Generation (V1)</strong> — 12 credits</li>
                 <li><strong>Image Generation (V2, ×n)</strong> — 18 credits/image</li>
-                <li><strong>Seraphina Voice</strong> — 30 credits</li>
+                <li><strong>Seraphina Voice</strong> — 30 credits flat (≤~460 chars), then per-character beyond that</li>
                 <li><strong>Legacy Video</strong> — 32 credits/sec</li>
             </ul>
         </div>
@@ -657,7 +657,20 @@ print(r.json())</code></pre></div>
         </table></table>
     </div>
 </section>
-
+<div class="subsection">
+    <h3 class="subsection-title">Seraphina Voice, character-based pricing beyond the flat fee</h3>
+    <p class="content-text">The 30-credit flat fee covers short requests. Past roughly 460 characters, cost scales per character at the same effective rate, so a full script or article costs proportionally more than a one-line greeting instead of being billed the same flat 30 credits either way.</p>
+    <table class="param-table"><table>
+        <thead><tr><th>Text length</th><th>Approx. words</th><th>Credits charged</th></tr></thead>
+        <tbody>
+            <tr><td>Up to ~460 characters</td><td>~75–90 words</td><td>30 (flat)</td></tr>
+            <tr><td>5,000 characters</td><td>~800 words</td><td>~324</td></tr>
+            <tr><td>20,000 characters</td><td>~3,200 words</td><td>~1,296</td></tr>
+        </tbody>
+    </table></table>
+    <div class="alert-box info">1,000,000 characters ≈ 165,000 words ≈ 18 hours of narration, for context on scale.</div>
+</div>
+</section>
 <!-- ============ PHILADELPHIA CHAT ============ -->
 <section id="philadelphia-chat" class="api-section">
     <div class="section-header">
