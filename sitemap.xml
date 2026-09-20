@@ -321,7 +321,14 @@
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
-
+      
+<url>
+        <loc>https://elvionai.com.ng/blog/business-tips/your-business-account-is-not-your-salary.html</loc>
+        <lastmod>2026-09-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+      
   <!-- BLOG: CREATE & TUTORIALS -->
   <url>
     <loc>https://elvionai.com.ng/blog/create/building-your-first-website.html</loc>
