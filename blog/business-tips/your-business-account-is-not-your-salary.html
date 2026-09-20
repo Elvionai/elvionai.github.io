@@ -1,0 +1,1714 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2563254473675494"
+     crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Business Account is Not Your Salary | Elvion AI Blog</title>
+    <meta name="description" content="Stop confusing gross revenue with personal income. Learn the Three-Account System and how to manage cash flow like a real CEO in 2026.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- DEFAULT LIGHT THEME (White/Blue) --- */
+        :root {
+            --bg-color: #f7f7f7; 
+            --text-color: #333333;
+            --heading-color: #111111;
+            --accent: #0056b3;
+            --accent-soft: #003d80;
+            --border-color: #e0e0e0;
+            --card-bg: #ffffff; 
+            --button-bg: #0056b3;
+            --button-text-color: #ffffff;
+            --button-hover-bg: #003d80;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #eeeeee;
+            --highlight-color: #ffeb3b; 
+            --comment-bg: #ffffff;
+            --shadow-glow: none;
+            --headline-color: #111111; 
+            --verified-color: #1DA1F2;
+            --admin-color: #CCAA00; 
+            --admin-glow: none;
+            --audio-widget-bg: rgba(255, 255, 255, 0.95);
+            --modal-bg: #ffffff;
+            --modal-border: var(--accent);
+        }
+
+        /* --- TOGGLED DARK THEME (Elvion Gold/Space) --- */
+        body.dark-theme {
+            --bg-color: #050505;
+            --text-color: #efefef;
+            --heading-color: #ffffff;
+            --accent: #c9a96e;
+            --accent-soft: #e8d5b0;
+            --border-color: rgba(201, 169, 110, 0.15);
+            --card-bg: #11110f;
+            --button-bg: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
+            --button-text-color: #050505;
+            --button-hover-bg: linear-gradient(135deg, #e8d5b0, #c9a96e);
+            --navbar-bg: rgba(10, 10, 8, 0.95);
+            --footer-bg: #0a0a08;
+            --highlight-color: rgba(201, 169, 110, 0.25);
+            --comment-bg: #11110f;
+            --shadow-glow: 0 0 10px rgba(201, 169, 110, 0.25);
+            --headline-color: var(--accent);
+            --verified-color: var(--accent-soft); 
+            --admin-color: #c9a96e; 
+            --admin-glow: rgba(201, 169, 110, 0.4);
+            --audio-widget-bg: rgba(17, 17, 15, 0.95);
+            --modal-bg: #11110f;
+            --modal-border: var(--accent);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding-top: 60px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        /* Ambient Gold Rain/Snow Canvas (Hidden in Light Mode) */
+        #snow-canvas {
+            display: none; 
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        body.dark-theme #snow-canvas {
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--heading-color);
+            margin-top: 0;
+            line-height: 1.3;
+            text-shadow: var(--shadow-glow);
+        }
+
+        p, ul, ol, blockquote {
+            font-family: 'Times New Roman', serif; 
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-soft);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .post-container {
+             max-width: 800px;
+             margin: 0 auto;
+             padding: 0 1rem;
+             position: relative;
+             z-index: 2;
+        }
+
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background: var(--navbar-bg);
+            padding: 1rem 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+        body.dark-theme .navbar { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .navbar-brand { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-shadow: var(--shadow-glow); }
+        .nav-links { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a {
+            color: var(--text-color); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 0.5px; padding: 0.5rem 0; position: relative;
+        }
+        .nav-links .active-link { color: var(--accent); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--accent); transition: width 0.3s ease-in-out;
+        }
+        .nav-links a:hover::after, .nav-links .active-link::after { width: 100%; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 0.5rem; background: transparent; border: none; }
+        .hamburger .bar {
+            width: 25px; height: 3px; background-color: var(--heading-color); margin: 4px 0; transition: 0.4s; box-shadow: none;
+        }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        #theme-toggle {
+            background: transparent;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-left: 1rem;
+            font-size: 1.1rem;
+        }
+        #theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 5px var(--accent);
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer {
+            background: var(--footer-bg); color: var(--text-color); padding: 4rem 0 2rem; font-size: 0.9rem;
+            border-top: 1px solid var(--border-color); text-align: center; position: relative; margin-top: 4rem;
+            z-index: 2;
+        }
+        .footer .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: left;
+            max-width: 900px;
+        }
+        .footer .col h4 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .footer ul { list-style: none; padding: 0; }
+        .footer li { margin-bottom: 0.5rem; }
+        .footer a { color: var(--text-color); font-size: 0.9rem; }
+        .footer a:hover { color: var(--accent); text-decoration: none; }
+        .footer .brand-info { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+        .footer .legal-info { grid-column: 1 / -1; text-align: center; margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: #777; }
+
+        .post-main { padding-top: 3rem; padding-bottom: 3rem; position: relative; z-index: 2; }
+        .post-header { border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        .post-header .post-tag {
+            display: inline-block; padding: 0.4rem 1rem; background: var(--button-bg);
+            color: var(--button-text-color); font-weight: 700; font-size: 0.85rem;
+            border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .post-meta {
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            color: #666; font-size: 0.95rem; margin-top: 1rem;
+        }
+        body.dark-theme .post-meta { color: rgba(224, 224, 224, 0.7); }
+        .post-meta span { display: flex; align-items: center; gap: 0.5rem; }
+        .post-meta i { color: var(--accent); }
+
+        /* FIXED HERO IMAGE */
+        .post-thumbnail-container {
+            width: 100%;
+            max-height: 450px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-glow);
+            background: var(--card-bg);
+        }
+        .post-thumbnail-container img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--accent);
+            color: var(--text-color);
+            background: var(--card-bg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .article-content h2 {
+            font-size: 2rem; margin-top: 3rem; margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;
+            color: var(--headline-color);
+        }
+        .article-content h3 { color: var(--headline-color); font-size: 1.4rem; margin-top: 2rem; }
+        .article-content ul, .article-content ol { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+        .article-content li { margin-bottom: 0.8rem; }
+        .article-content b { color: var(--accent); font-weight: 700; }
+        body.dark-theme .article-content b { color: var(--accent-soft); }
+
+        .btn-primary {
+            background: var(--button-bg); color: var(--button-text-color); border: none;
+            padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 700;
+            font-family: 'Orbitron', sans-serif; font-size: 1rem; transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn-primary:hover {
+            background: var(--button-hover-bg);
+            box-shadow: var(--shadow-glow);
+        }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* ADVANCED AUDIO WIDGET STYLES */
+        #audio-widget-container {
+            position: fixed;
+            bottom: -150px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(90%, 500px);
+            padding: 1.2rem;
+            background: var(--audio-widget-bg);
+            border: 2px solid var(--accent);
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            transition: bottom 0.5s ease-out;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        #audio-widget-container.active { bottom: 0; }
+        body.dark-theme #audio-widget-container {
+            box-shadow: 0 0 20px rgba(201, 169, 110, 0.4);
+        }
+
+        .widget-controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .media-buttons { display: flex; align-items: center; gap: 0.8rem; }
+
+        .media-btn {
+            background: transparent; border: none; color: var(--text-color); font-size: 1.2rem;
+            cursor: pointer; transition: color 0.2s, transform 0.1s;
+        }
+        .media-btn:hover { color: var(--accent); }
+        .media-btn:active { transform: scale(0.9); }
+
+        #widget-play-pause-btn {
+            width: 45px; height: 45px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 1.1rem; background: var(--button-bg); color: var(--button-text-color); box-shadow: 0 0 10px var(--accent);
+        }
+        #widget-play-pause-btn i.fa-spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .widget-progress-info { flex-grow: 1; }
+        .widget-progress-container { width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; cursor: pointer; position: relative; }
+        #widget-audio-progress-bar { height: 100%; width: 0%; background: var(--button-bg); border-radius: 4px; }
+        .widget-time-info { display: flex; justify-content: space-between; font-size: 0.85rem; color: #666; margin-top: 0.2rem; font-family: 'Inter', sans-serif; }
+        body.dark-theme .widget-time-info { color: #aaa; }
+
+        #widget-voice-display { font-size: 0.85rem; color: var(--accent); font-weight: 600; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+        body.dark-theme #widget-voice-display { color: var(--accent-soft); }
+
+        #initial-listen-cta { text-align: center; margin-bottom: 2rem; padding: 2rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; }
+        #initial-listen-cta h3 { margin-top: 0; font-size: 1.5rem; }
+        #initial-listen-cta select, #initial-listen-cta button { margin-top: 1rem; }
+
+        .form-input {
+            background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-color);
+            display: block; width: 100%; padding: 0.8rem; margin-bottom: 1rem; border-radius: 4px; box-sizing: border-box;
+            font-family: 'Times New Roman', serif; font-size: 1rem;
+        }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.3); outline: none; }
+        body.light-theme .form-input:focus { box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.3); }
+        textarea.form-input { min-height: 100px; resize: vertical; }
+
+        /* --- NEWSLETTER SECTION STYLING --- */
+        .newsletter-section {
+            margin: 4rem 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        body.dark-theme .newsletter-card {
+            border-color: rgba(201, 169, 110, 0.3);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .newsletter-card:hover {
+            border-color: var(--accent);
+        }
+
+        .newsletter-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--highlight-color);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-card h3 {
+            font-size: 1.8rem;
+            color: var(--heading-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .newsletter-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+            opacity: 0.85;
+            max-width: 520px;
+            margin: 0 auto 1.8rem auto;
+            line-height: 1.6;
+        }
+
+        .form-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form .input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.85rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+        }
+
+        body.dark-theme .newsletter-input:focus {
+            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
+        }
+
+        .newsletter-btn {
+            border-radius: 30px;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-subtext {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .newsletter-card {
+                padding: 2rem 1.2rem;
+            }
+            .newsletter-form .input-group {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* --- COMMENTS SECTION --- */
+        .comments-wrapper { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); position: relative; z-index: 2; }
+        .comments-wrapper h2 { font-size: 1.8rem; margin-bottom: 2rem; border-bottom: none; }
+        .auth-prompt { background: var(--card-bg); border: 1px solid var(--accent); padding: 2rem; border-radius: 8px; margin-bottom: 3rem; text-align: center; }
+        .auth-prompt h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .auth-prompt .guest-comment-link { display: block; margin-top: 1rem; font-size: 0.9rem; }
+        .comment-form-container { background: var(--card-bg); border: 1px solid var(--border-color); padding: 2rem; border-radius: 8px; margin-bottom: 3rem; }
+        .comment-form-container h3 { margin-bottom: 1.5rem; font-size: 1.4rem; }
+
+        .comment-editor-toolbar { display: flex; gap: 5px; margin-bottom: 0.5rem; padding: 5px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; flex-wrap: wrap; }
+        .comment-editor-toolbar button { background: none; border: none; color: var(--text-color); padding: 0.4rem 0.6rem; cursor: pointer; border-radius: 4px; transition: background 0.2s, color 0.2s; line-height: 1; }
+        .comment-editor-toolbar button:hover { background: var(--card-bg); color: var(--accent); }
+
+        .comment { background: var(--comment-bg); border: 1px solid var(--border-color); display: flex; gap: 1rem; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); position: relative; }
+        .comment.reply { margin-left: 50px; border-left: 4px solid var(--link-hover-color); margin-top: -0.5rem; margin-bottom: 1rem; }
+        .reply-form-container { margin-top: 1rem; padding: 1rem; border-top: 1px dashed var(--border-color); background: var(--bg-color); border-radius: 4px; }
+        .comment-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--button-text-color); font-weight: 700; flex-shrink: 0; }
+        
+        .comment-user { font-weight: 600; color: var(--accent); font-size: 1rem; display: inline-block; margin-bottom: 0.3rem; }
+        body.dark-theme .comment-user { color: var(--accent-soft); }
+
+        .verified-badge { background: var(--verified-color); color: white; margin-left: 5px; font-size: 0.65rem; vertical-align: middle; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; line-height: 1; transform: translateY(-2px); }
+        .admin-verified-badge { background: var(--button-bg); color: var(--button-text-color); margin-left: 5px; font-size: 0.75rem; vertical-align: middle; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; line-height: 1; transform: translateY(-2px); box-shadow: 0 0 5px var(--admin-glow), 0 0 10px var(--accent); }
+        body.light-theme .admin-verified-badge { box-shadow: none; background: var(--accent); color: var(--button-text-color); }
+        .guest-badge { color: #999; margin-left: 5px; font-size: 0.8rem; vertical-align: middle; }
+        .comment-meta { font-size: 0.85rem; color: #888; margin-top: 0.5rem; }
+        .comment-actions { font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; color: #777; }
+        .comment-actions button { background: none; border: none; color: #777; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; }
+        .comment-actions button:hover { color: var(--accent); }
+        .like-btn.liked { color: #E91E63; }
+        .no-comments { text-align: center; padding: 3rem; color: #777; }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; background: var(--navbar-bg); position: absolute; top: 100%; left: 0; padding: 1rem 0; border-top: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 0.5rem 2rem; }
+            .hamburger { display: flex; }
+            .footer .container { grid-template-columns: repeat(2, 1fr); }
+            #audio-widget-container { width: 100%; border-radius: 12px 12px 0 0; }
+        }
+        @media (max-width: 500px) { .footer .container { grid-template-columns: 1fr; text-align: center; } }
+    </style>
+</head>
+<body class="light-theme">
+
+    <!-- Falling Gold Particles Canvas -->
+    <canvas id="snow-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
+
+            <div class="nav-controls">
+                <nav class="nav-links">
+                    <li><a href="https://elvionai.com.ng/university.html">Digital University</a></li>
+                    <li><a href="https://elvionai.com.ng/blog.html" class="active-link">Back to Blog</a></li>
+                    <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
+                </nav>
+                <button id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="post-main">
+        <div class="post-container">
+
+            <header class="post-header">
+                <span class="post-tag">Smart Business</span>
+                <h1>Your Business Account is Not Your Salary: The Cash Flow Mistake Killing Hustles</h1>
+                <div class="post-meta">
+                    <span><i class="fas fa-user-edit"></i> Kolade Philip Ogunlana
+                        <span class="admin-verified-badge" title="Verified Admin"><i class="fas fa-crown"></i></span>
+                    </span>
+                    <span><i class="fas fa-calendar-alt"></i> Sep 20, 2026</span>
+                    <span id="estimated-time"><i class="fas fa-clock"></i> Calculating read time...</span>
+                </div>
+            </header>
+
+            <div class="post-thumbnail-container">
+                <img src="https://i.postimg.cc/zGVjdhyT/1789902817166.png" alt="Your Business Account is Not Your Salary">
+            </div>
+
+            <section id="initial-listen-cta">
+                <h3>🔊 Listen to this Article</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; max-width: 400px; margin: 0 auto;">
+                    <select id="voice-select" class="form-input" style="margin-bottom: 0;">
+                        <option value="" disabled selected>Select AI Voice...</option>
+                        <option value="https://elvionai.com.ng/audios/df9566d8-797a-4d86-9835-d08b56c2.MP3">Philadelphia (Female)</option>
+                        <option value="https://elvionai.com.ng/audios/013b39c8-6016-4a00-9e6f-932a7819.MP3">Funny Daddy (Male)</option>
+                    </select>
+                    <select id="speed-select" class="form-input" style="margin-bottom: 0;">
+                        <option value="1.0">Normal</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                    </select>
+                </div>
+            </section>
+
+            <article class="article-content" id="article-content">
+                <p>Let us talk about a very specific feeling that every solo entrepreneur knows.</p>
+
+                <p>It is Friday afternoon and your phone vibrates in your pocket. You check the screen, and you see a massive bank alert. A client just paid $200 for an order, or a company just settled an invoice for your freelance services.</p>
+
+                <p>Instantly, a warm rush of dopamine hits your brain. You feel rich, like a successful business mogul.</p>
+
+                <p>So, what do you do?</p>
+
+                <p>You open your banking app and transfer forty thousand Naira to your personal account. You buy expensive food, order drinks for the weekend, and buy a nice outfit you saw on Instagram. After all, you worked hard for this money, so you deserve to enjoy the fruits of your labor.</p>
+
+                <p>Then, Monday morning arrives.</p>
+
+                <p>Suddenly, your supplier calls to tell you that raw material prices have gone up. Your dispatch rider demands payment for weekend deliveries. Your Instagram ad budget runs out and your campaigns stop running.</p>
+
+                <p>You open your business account to pay these expenses, and you realize you only have $15 left. You cannot fulfill new orders, or run ads to get new customers.</p>
+
+                <p>You end the month completely broke, stressed, and borrowing money from family members just to keep your business alive, despite generating over one million Naira in sales that month.</p>
+
+                <p>Welcome to the most dangerous trap in small business: confusing gross revenue with personal income.</p>
+
+                <p>If you treat your business bank account like your personal ATM card, your business will die before its second anniversary. It is time to stop playing rich and start managing cash flow like a real CEO.</p>
+
+                <h2>The Illusion of the Big Credit Alert</h2>
+
+                <p>The number one reason small businesses fail in their first two years is not lack of sales. It is poor cash flow management.</p>
+
+                <p>Many entrepreneurs believe that if they make five hundred thousand Naira in sales this week, they have five hundred thousand Naira to spend, this is a fatal mistake.</p>
+
+                <p><b>Gross revenue is vanity, net profit is sanity. Cash flow is reality.</b></p>
+
+                <p>When a customer pays you $200 for a product, that money does not belong to you.</p>
+
+                <ul>
+                    <li>A portion of that money belongs to the supplier who sold you the raw materials.</li>
+                    <li>Another portion belongs to the logistics company handling delivery.</li>
+                    <li>Another belongs to your internet service provider, your electricity bill, and your advertising budget.</li>
+                </ul>
+
+                <p>What is left after paying every single business expense is your actual net profit. If you spend the money before paying the expenses, you are literally eating your business seed capital. You are eating the future of your company.</p>
+
+                <h2>The Crime of Commingled Funds</h2>
+
+                <p>If you want to build a serious business, you must eliminate the habit of commingling funds immediately.</p>
+
+                <p>Commingling means using one personal bank account to receive customer payments, pay suppliers, buy groceries, and pay for personal Netflix subscriptions.</p>
+
+                <p>When your personal money and business money live in the exact same account, financial visibility becomes impossible. You will never know if your business is actually making a profit or if you are quietly running at a loss. You will constantly make emotional spending decisions based on an inflated bank balance.</p>
+
+                <p>To fix this today, you need to implement the Three Account System.</p>
+
+                <p>You do not need to register a massive corporate entity to do this. You can simply open three separate digital bank accounts:</p>
+
+                <h3>Account 1: The Operating Account (Inflow)</h3>
+                <p>Every single customer payment, client deposit, and sale must enter this account first. All direct business expenses, like inventory, shipping, software tools, and marketing ads, are paid strictly from this account. You never touch this account for personal food, transport, or family emergencies.</p>
+
+                <h3>Account 2: The Tax &amp; Reserve Account (Buffer)</h3>
+                <p>Every time money enters your Operating Account, automatically move ten to fifteen percent of the net profit into this account. This money is your business emergency shield. It sits there quietly to handle sudden inflation spikes, equipment repairs, and slow sales months.</p>
+
+                <h3>Account 3: The Personal Salary Account (Outflow)</h3>
+                <p>This is your personal bank account. This is the only account connected to your personal debit card. The only money that should ever enter this account is your fixed, pre-calculated salary.</p>
+
+                <h2>How to Pay Yourself a Real Salary</h2>
+
+                <p>One of the hardest questions for solo entrepreneurs is: "How much should I pay myself?"</p>
+
+                <p>Amateurs pay themselves whatever is left over at the end of the week. Sometimes they take fifty thousand, sometimes they take two hundred thousand. This inconsistency creates chaotic personal finances and ruins business planning.</p>
+
+                <p>Professionals set a fixed salary based on real baseline living costs.</p>
+
+                <p>Calculate the minimum amount of money you need to survive every month: your rent contribution, basic food, transport, and essential personal bills. Let us say that number is eighty thousand Naira.</p>
+
+                <p>That eighty thousand Naira is your official monthly salary.</p>
+
+                <p>On a specific date every month (for example, the 28th), your business transfers eighty thousand Naira from the Operating Account to your Personal Account. That is all you get.</p>
+
+                <p>If your business has a massive month and makes five million Naira, your salary remains eighty thousand Naira. The extra profit stays inside the business account to buy better equipment, hire staff, or build a cash reserve.</p>
+
+                <p>You must separate your lifestyle from your business revenue spikes. If your personal lifestyle expands every single time your business has a good week, you will never build real wealth.</p>
+
+                <h2>Building the 3-Month Runway</h2>
+
+                <p>The economic terrain is unpredictable. Exchange rates fluctuate, fuel prices spike, and social media algorithms change without warning.</p>
+
+                <p>If your business operates from hand to mouth, one bad month can completely destroy everything you built.</p>
+
+                <p>Your number one financial goal as a founder is to build a 3-Month Runway.</p>
+
+                <p>A runway is the amount of cash your business needs to survive for three months if zero customers buy anything from you. Calculate your monthly operating expenses (ads, software, essential bills). Multiply that number by three.</p>
+
+                <p>Keep that cash safely inside your Reserve Account.</p>
+
+                <p>When you have a three-month buffer, you stop making desperate business decisions. You stop accepting toxic, low-paying clients because your rent is due tomorrow, and stop panicking during slow sales seasons. You gain the peace of mind to think strategically and focus on long-term growth.</p>
+
+                <h2>Discipline Creates Freedom</h2>
+
+                <p>Running a business is not about looking wealthy on social media. It is about building an independent, resilient asset that generates sustainable profit.</p>
+
+                <p>Stop treating your business like an emergency loan app. Stop flexing with gross sales numbers when your net profit is zero.</p>
+
+                <p>Separate your accounts today. Put yourself on a fixed salary. Protect your cash flow with an iron fist, and watch how quickly your business transforms from a stressful hustle into a scalable institution.</p>
+            </article>
+
+            <!-- NEWSLETTER SIGNUP SECTION -->
+            <section class="newsletter-section">
+                <div class="newsletter-card">
+                    <span class="newsletter-badge"><i class="fas fa-chart-line"></i> Cash Flow &amp; Scale</span>
+                    <h3>Build a Resilient, Profitable Business</h3>
+                    <p>Get actionable cash flow strategies, founder playbooks, and no-BS growth systems delivered straight to your inbox.</p>
+                    
+                    <div class="form-wrapper">
+                        <form action="https://formspree.io/f/mldrbpwo" method="POST" class="newsletter-form">
+                            <!-- HIDDEN TRACKING FOR TOPIC & POST -->
+                            <input type="hidden" name="Category" value="Smart Business">
+                            <input type="hidden" name="Article_Source" value="Your Business Account is Not Your Salary">
+                            <input type="hidden" name="_subject" value="New Subscriber via Smart Business [Elvion Blog]">
+
+                            <div class="input-group">
+                                <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+                                <button type="submit" class="btn-primary newsletter-btn">
+                                    <span>Subscribe</span> <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <span class="newsletter-subtext"><i class="fas fa-lock"></i> No spam. Unsubscribe anytime with one click.</span>
+                </div>
+            </section>
+
+            <div style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <a href="https://elvionai.com.ng/blog.html" class="btn-primary" role="button">
+                    <i class="fas fa-arrow-left"></i> Back to Blog Posts
+                </a>
+            </div>
+
+            <section class="comments-wrapper" id="comments">
+                <h2>💬 Join the Conversation (<span id="comment-count">0</span> Comments)</h2>
+
+                <div id="auth-prompt" class="auth-prompt">
+                    <h3>Join the discussion!</h3>
+                    <p>Sign in to post, like, and reply with a verified profile, or comment as a guest.</p>
+                    <button id="google-sign-in-btn" class="btn-primary" style="background: #DB4437; background-image: none;">
+                        <i class="fab fa-google"></i> Sign in with Google
+                    </button>
+                    <a href="#" id="guest-comment-link" class="guest-comment-link">Or, comment as a Guest User (No likes/replies)</a>
+                    <p id="auth-status" style="margin-top: 1rem; font-size: 0.9rem;"></p>
+                </div>
+
+                <div class="comment-form-container" id="comment-form-container" style="display: none;">
+                    <h3>Leave a Comment As <span id="current-user-name" style="color: var(--accent);"></span></h3>
+                    <form id="comment-form">
+                        <div id="guest-name-input" style="display: none; margin-bottom: 1rem;">
+                            <label for="guest-name-field" class="form-label">Your Name <span style="color: red;">*</span></label>
+                            <input type="text" id="guest-name-field" class="form-input" placeholder="Enter a name to display">
+                        </div>
+
+                        <div class="comment-editor-toolbar">
+                            <button type="button" data-format="bold" aria-label="Bold"><i class="fas fa-bold"></i></button>
+                            <button type="button" data-format="italic" aria-label="Italic"><i class="fas fa-italic"></i></button>
+                            <button type="button" data-format="link" aria-label="Insert Link"><i class="fas fa-link"></i></button>
+                            <button type="button" data-format="blockquote" aria-label="Insert Blockquote"><i class="fas fa-quote-left"></i></button>
+                        </div>
+
+                        <div>
+                            <label for="comment-input-text" class="form-label">Share your thoughts <span style="color: red;">*</span></label>
+                            <textarea id="comment-input-text" class="form-input" placeholder="Are you currently commingling your business and personal funds? Share your thoughts below!" required></textarea>
+                        </div>
+                        <button type="submit" id="comment-button" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </form>
+                </div>
+
+                <div id="comment-list-container">
+                    <div id="comment-list">
+                        <p class="loading-message" style="text-align: center; color: #777;">Loading comments...</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ADVANCED PODCAST-STYLE AUDIO WIDGET -->
+    <div id="audio-widget-container">
+        <div id="widget-voice-display">Ready to play.</div>
+        <div class="widget-controls">
+            <div class="media-buttons">
+                <button id="widget-skip-back-btn" class="media-btn" aria-label="Skip backward 10 seconds">
+                    <i class="fas fa-rotate-left"></i>
+                </button>
+                <button id="widget-play-pause-btn" aria-label="Play audio">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="widget-skip-forward-btn" class="media-btn" aria-label="Skip forward 10 seconds">
+                    <i class="fas fa-rotate-right"></i>
+                </button>
+            </div>
+            
+            <div class="widget-progress-info">
+                <div class="widget-progress-container" id="widget-progress-container">
+                    <div id="widget-audio-progress-bar"></div>
+                </div>
+                <div class="widget-time-info">
+                    <span id="widget-current-time">0:00</span>
+                    <span id="widget-duration">0:00</span>
+                </div>
+            </div>
+            
+            <button id="widget-close-btn" class="media-btn" onclick="resetPlayer(); document.getElementById('audio-widget-container').classList.remove('active');" aria-label="Close audio player">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="col">
+                <span class="brand-info">Elvion AI</span>
+                <p>Where Assistance Meets Excellence.</p>
+            </div>
+            <div class="col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="https://elvionai.com.ng/index.html">Home</a></li>
+                    <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
+                    <li><a href="https://elvionai.com.ng/university.html">University</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
+                    <li><a href="mailto:elvionailabs@gmail.com">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
+                    <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="legal-info">
+                &copy; <span id="current-year-footer"></span> Elvion AI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js"></script>
+
+    <!-- CORE SCRIPTS & GOLD RAIN CANVAS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const toggleButton = document.getElementById('theme-toggle');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Default theme is light theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-theme');
+                    toggleButton.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    body.classList.remove('dark-theme');
+                    toggleButton.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            applyTheme(savedTheme);
+
+            toggleButton.addEventListener('click', () => {
+                const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme(newTheme);
+            });
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 992) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+            document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+        });
+
+        // Falling Gold Rain Canvas Script (Only visible when toggled to dark theme)
+        (function goldSnow() {
+            const canvas = document.getElementById("snow-canvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            let flakes = [];
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                flakes = [];
+                for (let i = 0; i < 80; i++) {
+                    flakes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 2 + 0.5,
+                        speed: Math.random() * 1.5 + 0.5,
+                        wind: Math.random() * 0.5 - 0.25,
+                        opacity: Math.random() * 0.6 + 0.2
+                    });
+                }
+            }
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                flakes.forEach(f => {
+                    ctx.beginPath();
+                    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = "rgba(201, 169, 110, 0.5)";
+                    ctx.fill();
+                    f.y += f.speed;
+                    f.x += f.wind;
+                    if (f.y > canvas.height) {
+                        f.y = -5;
+                        f.x = Math.random() * canvas.width;
+                    }
+                    if (f.x < 0) f.x = canvas.width;
+                    if (f.x > canvas.width) f.x = 0;
+                });
+                requestAnimationFrame(draw);
+            }
+            resize();
+            window.addEventListener("resize", resize);
+            draw();
+        })();
+    </script>
+
+    <!-- ADVANCED TTS AUDIO READER LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const voiceSelect = document.getElementById('voice-select');
+            const speedSelect = document.getElementById('speed-select');
+            const estimatedTimeEl = document.getElementById('estimated-time');
+            const articleContent = document.getElementById('article-content');
+
+            const widgetContainer = document.getElementById('audio-widget-container');
+            const widgetPlayPauseBtn = document.getElementById('widget-play-pause-btn');
+            const widgetSkipBackBtn = document.getElementById('widget-skip-back-btn');
+            const widgetSkipForwardBtn = document.getElementById('widget-skip-forward-btn');
+            const widgetProgressContainer = document.getElementById('widget-progress-container');
+            const widgetProgressBar = document.getElementById('widget-audio-progress-bar');
+            const widgetCurrentTimeEl = document.getElementById('widget-current-time');
+            const widgetDurationEl = document.getElementById('widget-duration');
+            const widgetVoiceDisplay = document.getElementById('widget-voice-display');
+
+            const WPM = 200;
+            let TOTAL_WORD_COUNT = 0;
+            let audio = new Audio();
+            let isPlaying = false;
+            let isLoading = false;
+
+            function calculateWordCount(element) {
+                const text = element.textContent || element.innerText || "";
+                const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+                return words.length;
+            }
+
+            function formatTime(seconds) {
+                const min = Math.floor(seconds / 60);
+                const sec = Math.floor(seconds % 60);
+                return `${min}:${sec.toString().padStart(2, '0')}`;
+            }
+
+            function calculateReadTime() {
+                const readTimeMinutes = Math.ceil(TOTAL_WORD_COUNT / WPM);
+                estimatedTimeEl.innerHTML = `<i class="fas fa-clock"></i> ${readTimeMinutes} min read`;
+            }
+
+            function updateWidgetDisplay() {
+                 widgetContainer.classList.add('active');
+                 const selectedOption = voiceSelect.options[voiceSelect.selectedIndex];
+                 widgetVoiceDisplay.textContent = `NOW PLAYING: ${selectedOption.text}`;
+            }
+
+            function setButtonState(state) {
+                if (state === 'loading') {
+                    isLoading = true;
+                    widgetPlayPauseBtn.innerHTML = '<i class="fas fa-spinner"></i>';
+                    widgetPlayPauseBtn.style.pointerEvents = 'none';
+                } else if (state === 'playing') {
+                    isLoading = false;
+                    widgetPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    widgetPlayPauseBtn.style.pointerEvents = 'auto';
+                } else {
+                    isLoading = false;
+                    widgetPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    widgetPlayPauseBtn.style.pointerEvents = 'auto';
+                }
+            }
+
+            function resetPlayer() {
+                isPlaying = false;
+                setButtonState('paused');
+                audio.pause();
+                audio.currentTime = 0;
+                widgetProgressBar.style.width = '0%';
+                widgetCurrentTimeEl.textContent = '0:00';
+            }
+
+            window.resetPlayer = resetPlayer;
+
+            function seekAudio(event) {
+                if (!audio.src || isNaN(audio.duration) || audio.duration === 0) return;
+                const rect = widgetProgressContainer.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const width = rect.width;
+                const seekTime = (clickX / width) * audio.duration;
+                audio.currentTime = seekTime;
+            }
+
+            function updateProgress() {
+                if (isNaN(audio.duration) || audio.duration === 0) return;
+                const progress = (audio.currentTime / audio.duration) * 100;
+                widgetProgressBar.style.width = `${progress}%`;
+                widgetCurrentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+
+            // --- LISTENERS ---
+
+            voiceSelect.addEventListener('change', () => {
+                resetPlayer();
+                const selectedOption = voiceSelect.options[voiceSelect.selectedIndex];
+                const audioSrc = selectedOption.value;
+
+                if (audioSrc) {
+                    setButtonState('loading');
+                    audio.src = audioSrc;
+                    audio.load(); 
+                    updateWidgetDisplay();
+                    audio.playbackRate = parseFloat(speedSelect.value);
+                } else {
+                    widgetContainer.classList.remove('active');
+                }
+            });
+
+            speedSelect.addEventListener('change', () => {
+                audio.playbackRate = parseFloat(speedSelect.value);
+            });
+
+            audio.addEventListener('canplaythrough', () => {
+                if (isLoading) {
+                    setButtonState('paused');
+                }
+            });
+
+            audio.addEventListener('waiting', () => {
+                setButtonState('loading');
+            });
+
+            audio.addEventListener('playing', () => {
+                setButtonState('playing');
+            });
+
+            widgetPlayPauseBtn.addEventListener('click', () => {
+                if (!audio.src) {
+                    widgetVoiceDisplay.textContent = "Please select a voice first!";
+                    return;
+                }
+
+                if (!isPlaying) {
+                    isPlaying = true;
+                    audio.play().catch(e => {
+                        console.error("Audio play failed:", e);
+                        isPlaying = false;
+                        setButtonState('paused');
+                    });
+                } else {
+                    isPlaying = false;
+                    audio.pause();
+                    setButtonState('paused');
+                }
+            });
+
+            widgetSkipBackBtn.addEventListener('click', () => {
+                if (!audio.src || isNaN(audio.duration)) return;
+                audio.currentTime = Math.max(0, audio.currentTime - 10);
+            });
+
+            widgetSkipForwardBtn.addEventListener('click', () => {
+                if (!audio.src || isNaN(audio.duration)) return;
+                audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                widgetDurationEl.textContent = formatTime(audio.duration);
+            });
+
+            audio.addEventListener('timeupdate', updateProgress);
+
+            audio.onended = () => {
+                resetPlayer();
+                widgetVoiceDisplay.textContent = "Finished reading.";
+            };
+
+            widgetProgressContainer.addEventListener('click', seekAudio);
+
+            TOTAL_WORD_COUNT = calculateWordCount(articleContent);
+            calculateReadTime();
+        });
+    </script>
+
+    <!-- FIREBASE COMMENTS SYSTEM -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+        import {
+            getFirestore, collection, addDoc, query, where,
+            onSnapshot, doc, arrayUnion, arrayRemove, runTransaction, serverTimestamp,
+            deleteDoc, getDoc
+        } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
+            authDomain: "elvionai.firebaseapp.com",
+            projectId: "elvionai",
+            storageBucket: "elvionai.firebasestorage.app",
+            messagingSenderId: "161078300830",
+            appId: "1:161078300830:web:f460df8591704eb0e96b8f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // UNIQUE ARTICLE ID FOR COMMENTS
+        const ARTICLE_ID = 'business-account-not-salary-2026'; 
+        const ADMIN_EMAIL = 'koladhinog@gmail.com';
+
+        const commentForm = document.getElementById('comment-form');
+        const commentTextInput = document.getElementById('comment-input-text');
+        const commentList = document.getElementById('comment-list');
+        const commentCountEl = document.getElementById('comment-count');
+        const submitBtn = document.getElementById('comment-button');
+        const authPrompt = document.getElementById('auth-prompt');
+        const commentFormContainer = document.getElementById('comment-form-container');
+        const googleSignInBtn = document.getElementById('google-sign-in-btn');
+        const currentUserNameEl = document.getElementById('current-user-name');
+        const guestCommentLink = document.getElementById('guest-comment-link');
+        const guestNameInputDiv = document.getElementById('guest-name-input');
+        const guestNameField = document.getElementById('guest-name-field');
+
+        let currentUser = null;
+        let isGuestMode = false;
+        let currentReplyToId = null;
+
+        function setAuthState(user) {
+            currentUser = user;
+
+            document.querySelectorAll('.reply-form-container').forEach(el => el.remove());
+            currentReplyToId = null;
+
+            if (user) {
+                isGuestMode = false;
+                authPrompt.style.display = 'none';
+                commentFormContainer.style.display = 'block';
+                currentUserNameEl.textContent = user.displayName || user.email;
+                guestNameInputDiv.style.display = 'none';
+                guestNameField.removeAttribute('required');
+                guestNameField.value = '';
+            } else {
+                if (!isGuestMode) {
+                    authPrompt.style.display = 'block';
+                    commentFormContainer.style.display = 'none';
+                    currentUserNameEl.textContent = 'Guest';
+                    guestNameInputDiv.style.display = 'none';
+                } else {
+                    authPrompt.style.display = 'none';
+                    commentFormContainer.style.display = 'block';
+                    currentUserNameEl.textContent = 'Guest User';
+                    guestNameInputDiv.style.display = 'block';
+                    guestNameField.setAttribute('required', 'required');
+                }
+            }
+            loadComments();
+        }
+
+        guestCommentLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isGuestMode = true;
+            setAuthState(null);
+            guestNameField.focus();
+        });
+
+        googleSignInBtn.addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                console.error("Google Sign-In Error:", error);
+            }
+        });
+
+        onAuthStateChanged(auth, user => {
+            setAuthState(user);
+        });
+
+        function createCommentElement(comment) {
+            const div = document.createElement('div');
+            div.className = 'comment';
+
+            if (comment.parentId) {
+                div.classList.add('reply');
+            }
+
+            const userName = escapeHtml(comment.userName) || 'Anonymous';
+            const initial = userName.charAt(0).toUpperCase();
+
+            let timestampString;
+            if (comment.timestamp && typeof comment.timestamp.toDate === 'function') {
+                timestampString = new Date(comment.timestamp.toDate()).toLocaleString();
+            } else if (comment.timestamp) {
+                const date = comment.timestamp || new Date();
+                timestampString = date instanceof Date ? date.toLocaleString() : 'Just now';
+            } else {
+                timestampString = 'Pending...';
+            }
+
+            let badge = '';
+            const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+            const isCommentOwner = currentUser && comment.userId === currentUser.uid;
+
+            if (comment.userEmail === ADMIN_EMAIL) {
+                 badge = '<span class="admin-verified-badge" title="Verified Admin"><i class="fas fa-crown"></i></span>';
+            } else if (comment.userId && comment.userId !== 'guest') {
+                badge = '<span class="verified-badge" title="Verified User"><i class="fas fa-check"></i></span>';
+            } else {
+                badge = '<span class="guest-badge" title="Guest User"><i class="fas fa-user-tag"></i> Guest</span>';
+            }
+
+            const isLiked = currentUser && !isGuestMode && comment.likes && comment.likes.includes(currentUser.uid);
+            const likeCount = comment.likes ? comment.likes.length : 0;
+
+            const canPerformAction = currentUser && !isGuestMode;
+            const actionDisabled = !canPerformAction;
+
+            const canEdit = isCommentOwner;
+            const canDelete = isCommentOwner || isAdmin;
+
+            const processedText = formatCommentText(comment.text);
+
+            div.innerHTML = `
+                <div class="comment-avatar">${initial}</div>
+                <div class="comment-content" style="flex-grow: 1;" data-comment-id="${comment.id}">
+                    <span class="comment-user">${userName}</span>${badge}
+                    ${comment.editedAt ? '<span class="guest-badge" style="margin-left: 5px;">(edited)</span>' : ''}
+                    <div class="comment-text-wrapper">
+                        <p class="comment-text">${processedText}</p>
+                        <div class="comment-meta">🕐 ${timestampString}</div>
+                        <div class="comment-actions">
+                            <button class="like-btn ${isLiked ? 'liked' : ''}" data-comment-id="${comment.id}" ${actionDisabled ? 'disabled' : ''}>
+                                <i class="${isLiked ? 'fas' : 'far'} fa-heart"></i>
+                                <span>Like</span> (<span class="like-count">${likeCount}</span>)
+                            </button>
+                            <button class="reply-btn" data-comment-id="${comment.id}" ${actionDisabled ? 'disabled' : ''}>
+                                <i class="fas fa-reply"></i> Reply
+                            </button>
+                            ${canEdit ? `<button class="edit-btn" data-comment-id="${comment.id}"><i class="fas fa-edit"></i> Edit</button>` : ''}
+                            ${canDelete ? `<button class="delete-btn" data-comment-id="${comment.id}" style="color: #dc3545;"><i class="fas fa-trash-alt"></i> Delete</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const likeBtn = div.querySelector('.like-btn');
+            if (likeBtn && !actionDisabled) {
+                likeBtn.addEventListener('click', () => toggleLike(comment.id, likeBtn));
+            }
+
+            const editBtn = div.querySelector('.edit-btn');
+            if (editBtn) {
+                editBtn.addEventListener('click', () => handleEditButtonClick(comment.id, comment.text));
+            }
+
+            const deleteBtn = div.querySelector('.delete-btn');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', () => deleteComment(comment.id));
+            }
+
+            return div;
+        }
+
+        function renderComments(comments) {
+            commentList.innerHTML = '';
+
+            const topLevelComments = comments.filter(c => !c.parentId);
+            const repliesByParentId = comments
+                .filter(c => c.parentId)
+                .reduce((acc, reply) => {
+                    acc[reply.parentId] = acc[reply.parentId] || [];
+                    acc[reply.parentId].push(reply);
+                    return acc;
+                }, {});
+
+            topLevelComments.forEach(comment => {
+                const topEl = createCommentElement(comment);
+                commentList.appendChild(topEl);
+
+                const replyBtn = topEl.querySelector('.reply-btn');
+                if (replyBtn) {
+                     replyBtn.addEventListener('click', (e) => handleReplyButtonClick(e));
+                }
+
+                const replies = repliesByParentId[comment.id] || [];
+                replies.forEach(reply => {
+                    const replyEl = createCommentElement(reply);
+                    commentList.appendChild(replyEl);
+
+                    const nestedReplyBtn = replyEl.querySelector('.reply-btn');
+                    if (nestedReplyBtn) {
+                        nestedReplyBtn.addEventListener('click', (e) => handleReplyButtonClick(e));
+                    }
+                });
+            });
+
+            if (comments.length === 0) {
+                commentList.innerHTML = `
+                    <div class="no-comments">
+                        <i class="fas fa-comments" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem; display: block;"></i>
+                        <p>No comments yet. Are you currently commingling your business and personal funds? Share your thoughts below! 🌟</p>
+                    </div>
+                `;
+            }
+        }
+
+        function loadComments() {
+             const q = query(collection(db, 'comments'),
+                             where('articleId', '==', ARTICLE_ID));
+
+             commentList.innerHTML = `<p class="loading-message" style="text-align: center; color: #777;">Loading comments...</p>`;
+
+             onSnapshot(q, (snapshot) => {
+                    commentList.innerHTML = '';
+
+                    if (snapshot.empty) {
+                        commentList.innerHTML = `
+                            <div class="no-comments">
+                                <i class="fas fa-comments" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem; display: block;"></i>
+                                <p>No comments yet. Are you currently commingling your business and personal funds? Share your thoughts below! 🌟</p>
+                            </div>
+                        `;
+                        commentCountEl.textContent = '0';
+                        return;
+                    }
+
+                    commentCountEl.textContent = snapshot.size;
+
+                    const sortedDocs = snapshot.docs.sort((a, b) => {
+                        const timeA = a.data().timestamp;
+                        const timeB = b.data().timestamp;
+
+                        const dateA = timeA && timeA.toDate ? timeA.toDate() : new Date(0);
+                        const dateB = timeB && timeB.toDate ? timeB.toDate() : new Date(0);
+
+                        return dateB - dateA;
+                    });
+
+                    const comments = sortedDocs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    renderComments(comments);
+
+                }, error => {
+                    console.error("Error loading comments:", error);
+                    commentList.innerHTML = `<p class="loading-message" style="color: red;">Failed to load comments.</p>`;
+                });
+        }
+
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!currentUser && !isGuestMode) {
+                return;
+            }
+
+            const commentText = commentTextInput.value.trim();
+
+            if (!commentText) {
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+
+            let commentData = {};
+
+            if (isGuestMode) {
+                const guestName = guestNameField.value.trim();
+                if (!guestName) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Comment';
+                    return;
+                }
+                commentData = {
+                    articleId: ARTICLE_ID,
+                    userId: 'guest',
+                    userName: guestName,
+                    userEmail: '',
+                    text: commentText,
+                    timestamp: serverTimestamp(),
+                    likes: []
+                };
+            } else {
+                commentData = {
+                    articleId: ARTICLE_ID,
+                    userId: currentUser.uid,
+                    userName: currentUser.displayName || currentUser.email.split('@')[0],
+                    userEmail: currentUser.email,
+                    text: commentText,
+                    timestamp: serverTimestamp(),
+                    likes: []
+                };
+            }
+
+            try {
+                await addDoc(collection(db, 'comments'), commentData);
+                commentTextInput.value = '';
+                guestNameField.value = '';
+
+                if (isGuestMode) {
+                    isGuestMode = false;
+                    setAuthState(auth.currentUser);
+                }
+            } catch (error) {
+                console.error('Error posting comment:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Comment';
+            }
+        });
+
+        async function toggleLike(commentId, button) {
+             if (!currentUser || isGuestMode) return;
+
+             const commentRef = doc(db, 'comments', commentId);
+             const userId = currentUser.uid;
+
+             try {
+                 await runTransaction(db, async (transaction) => {
+                     const docSnapshot = await transaction.get(commentRef);
+                     if (!docSnapshot.exists()) {
+                         throw "Comment does not exist!";
+                     }
+
+                     const data = docSnapshot.data();
+                     const likes = data.likes || [];
+                     const isCurrentlyLiked = likes.includes(userId);
+
+                     if (isCurrentlyLiked) {
+                         transaction.update(commentRef, {
+                             likes: arrayRemove(userId)
+                         });
+                     } else {
+                         transaction.update(commentRef, {
+                             likes: arrayUnion(userId)
+                         });
+                     }
+                 });
+             } catch (error) {
+                 console.error("Transaction failed:", error);
+             }
+        }
+
+        async function handleReplySubmit(e) {
+            e.preventDefault();
+            if (!currentUser || isGuestMode) return;
+
+            const form = e.target;
+            const parentId = form.dataset.parentId;
+            const textarea = form.querySelector('textarea');
+            const replyText = textarea.value.trim();
+            const submitButton = form.querySelector('.btn-primary');
+
+            if (!replyText) return;
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+
+            const replyData = {
+                articleId: ARTICLE_ID,
+                userId: currentUser.uid,
+                userName: currentUser.displayName || currentUser.email.split('@')[0],
+                userEmail: currentUser.email,
+                text: replyText,
+                timestamp: serverTimestamp(),
+                likes: [],
+                parentId: parentId
+            };
+
+            try {
+                await addDoc(collection(db, 'comments'), replyData);
+            } catch (error) {
+                console.error('Error posting reply:', error);
+            } finally {
+                form.closest('.reply-form-container').remove();
+                currentReplyToId = null;
+            }
+        }
+
+        function createReplyFormHtml(parentId) {
+            const formContainer = document.createElement('div');
+            formContainer.className = 'reply-form-container';
+            formContainer.innerHTML = `
+                <h4 style="font-size: 1.2rem; margin-top: 0; margin-bottom: 0.5rem; color: var(--heading-color);">
+                    Replying to a comment as <span style="color: var(--accent);">${currentUser.displayName || currentUser.email.split('@')[0]}</span>
+                </h4>
+                <form class="reply-form" data-parent-id="${parentId}">
+                    <textarea class="form-input" placeholder="Your reply..." required></textarea>
+                    <button type="submit" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="fas fa-paper-plane"></i> Post Reply
+                    </button>
+                    <button type="button" class="btn-cancel-reply btn-primary" style="background: #555; background-image: none; margin-left: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        Cancel
+                    </button>
+                </form>
+            `;
+
+            const form = formContainer.querySelector('.reply-form');
+            const cancelBtn = formContainer.querySelector('.btn-cancel-reply');
+
+            form.addEventListener('submit', handleReplySubmit);
+            cancelBtn.addEventListener('click', () => {
+                formContainer.remove();
+                currentReplyToId = null;
+            });
+
+            return formContainer;
+        }
+
+        function handleReplyButtonClick(e) {
+            e.preventDefault();
+            if (!currentUser || isGuestMode) return;
+
+            const replyBtn = e.currentTarget;
+            const parentId = replyBtn.dataset.commentId;
+
+            document.querySelectorAll('.reply-form-container').forEach(el => el.remove());
+
+            if (currentReplyToId === parentId) {
+                currentReplyToId = null;
+                return;
+            }
+
+            const formEl = createReplyFormHtml(parentId);
+            const commentContentDiv = replyBtn.closest('.comment-content');
+
+            if (commentContentDiv) {
+                commentContentDiv.appendChild(formEl);
+                formEl.querySelector('textarea').focus();
+                currentReplyToId = parentId;
+            }
+        }
+
+        function handleEditButtonClick(commentId, originalText) {
+            document.querySelectorAll('.reply-form-container').forEach(el => el.remove());
+            currentReplyToId = null;
+
+            const commentEl = document.querySelector(`.comment-content[data-comment-id="${commentId}"]`);
+            if (!commentEl) return;
+
+            const textWrapper = commentEl.querySelector('.comment-text-wrapper');
+            if (textWrapper) textWrapper.style.display = 'none';
+
+            const editContainer = document.createElement('div');
+            editContainer.className = 'reply-form-container edit-mode-container';
+            editContainer.innerHTML = `
+                <h4 style="font-size: 1.2rem; margin-top: 0; margin-bottom: 0.5rem; color: var(--heading-color);">
+                    Editing Comment
+                </h4>
+                <div class="comment-editor-toolbar">
+                    <button type="button" data-format="bold" aria-label="Bold"><i class="fas fa-bold"></i></button>
+                    <button type="button" data-format="italic" aria-label="Italic"><i class="fas fa-italic"></i></button>
+                    <button type="button" data-format="link" aria-label="Insert Link"><i class="fas fa-link"></i></button>
+                    <button type="button" data-format="blockquote" aria-label="Insert Blockquote"><i class="fas fa-quote-left"></i></button>
+                </div>
+                <form class="edit-form" data-comment-id="${commentId}">
+                    <textarea class="form-input" required>${originalText}</textarea>
+                    <button type="submit" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                    <button type="button" class="btn-cancel-reply btn-primary" style="background: #555; background-image: none; margin-left: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        Cancel
+                    </button>
+                </form>
+            `;
+
+            commentEl.appendChild(editContainer);
+            const textarea = editContainer.querySelector('textarea');
+            textarea.focus();
+
+            editContainer.querySelector('.edit-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newText = textarea.value.trim();
+                const submitButton = e.target.querySelector('.btn-primary');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                
+                try {
+                    const commentRef = doc(db, 'comments', commentId);
+                    await runTransaction(db, async (transaction) => {
+                        transaction.update(commentRef, {
+                            text: newText,
+                            editedAt: serverTimestamp()
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error updating comment:', error);
+                } finally {
+                    editContainer.remove();
+                    if (textWrapper) textWrapper.style.display = 'block';
+                }
+            });
+
+            editContainer.querySelector('.btn-cancel-reply').addEventListener('click', () => {
+                editContainer.remove();
+                if (textWrapper) textWrapper.style.display = 'block';
+            });
+
+            editContainer.querySelectorAll('.comment-editor-toolbar button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const fmt = btn.dataset.format;
+                    const s = textarea.selectionStart, end = textarea.selectionEnd;
+                    const sel = textarea.value.substring(s, end);
+                    let rep = '';
+                    if (fmt === 'bold') rep = `**${sel || 'bold text'}**`;
+                    else if (fmt === 'italic') rep = `_${sel || 'italic text'}_`;
+                    else if (fmt === 'link') { const u = prompt('Enter URL:'); if (u) rep = `[${sel || 'link text'}](${u})`; }
+                    else if (fmt === 'blockquote') rep = `> ${sel || 'quoted text'}`;
+                    if (rep) { textarea.value = textarea.value.substring(0, s) + rep + textarea.value.substring(end); textarea.focus(); }
+                });
+            });
+        }
+
+        async function deleteComment(commentId) {
+            if (!currentUser) {
+                 return;
+            }
+
+            const commentRef = doc(db, 'comments', commentId);
+
+            try {
+                const docSnapshot = await getDoc(commentRef);
+                if (!docSnapshot.exists()) {
+                    return;
+                }
+                const commentData = docSnapshot.data();
+                const isCommentOwner = currentUser.uid === commentData.userId;
+                const isAdmin = currentUser.email === ADMIN_EMAIL;
+
+                if (!isCommentOwner && !isAdmin) {
+                    return;
+                }
+            } catch (error) {
+                 return;
+            }
+
+            if (!confirm("Are you sure you want to delete this comment? This action cannot be undone.")) return;
+
+            try {
+                await deleteDoc(commentRef);
+            } catch (error) {
+                console.error("Error deleting comment:", error);
+            }
+        }
+
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatCommentText(text) {
+            let safeText = escapeHtml(text);
+
+            safeText = safeText.replace(/(^|\n)(>\s*[^\n]*)+/g, (match) => {
+                const lines = match.trim().split('\n').map(line => {
+                    return line.replace(/^[>\s]+/, '');
+                });
+                return `<blockquote>${lines.join('<br>')}</blockquote>`;
+            });
+
+            safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            safeText = safeText.replace(/_(.*?)_/g, '<i>$1</i>');
+            safeText = safeText.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+            
+            safeText = safeText.replace(/\n/g, '<br>');
+
+            return safeText;
+        }
+        
+        document.querySelectorAll('.comment-editor-toolbar button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const fmt = btn.dataset.format;
+                const ta = commentTextInput;
+                const s = ta.selectionStart, end = ta.selectionEnd;
+                const sel = ta.value.substring(s, end);
+                let rep = '';
+                if (fmt === 'bold') rep = `**${sel || 'bold text'}**`;
+                else if (fmt === 'italic') rep = `_${sel || 'italic text'}_`;
+                else if (fmt === 'link') { const u = prompt('Enter URL:'); if (u) rep = `[${sel || 'link text'}](${u})`; }
+                else if (fmt === 'blockquote') rep = `> ${sel || 'quoted text'}`;
+                if (rep) { ta.value = ta.value.substring(0, s) + rep + ta.value.substring(end); ta.focus(); }
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); 
+  gtag('config', 'G-J1YTKP10ZX');
+                                                       </script>
