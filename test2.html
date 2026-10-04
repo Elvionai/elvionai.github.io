@@ -1,1037 +1,907 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IELTS Listening Practice Test — Philadelphia Voice Edition</title>
 <style>
- :root {
--bg: #0a0e1a;
--bg-2: #111827;
--surface: #1a2030;
--surface-2: #232b3d;
--border: #2a3447;
--text: #e5e9f0;
--text-dim: #8a94a8;
--accent: #c9a961;
--accent-2: #d4b574;
--success: #4ade80;
--danger: #ef4444;
--warning: #f59e0b;
--info: #60a5fa;
- }
- * { margin: 0; padding: 0; box-sizing: border-box; }
- html, body {
- background: var(--bg);
- color: var(--text);
- font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
- min-height: 100vh;
- overflow-x: hidden;
- }
- body { background: radial-gradient(ellipse at top, #1a2035 0%, #0a0e1a 70%); }
- ::selection { background: var(--accent); color: #000; }
+:root {
+-ink: #0a0e1a;
+-ink-2: #111827;
+-paper: #f4f1ea;
+-paper-2: #e8e3d6;
+-gold: #b8985a;
+-gold-2: #8a6f3a;
+-crimson: #8b1e1e;
+-crimson-2: #6a1414;
+-slate: #2c3340;
+-slate-2: #1a1f2b;
+-muted: #6b7280;
+-line: #c8c1ad;
+-ok: #2d5d3a;
+-err: #8b1e1e;
+-shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+-shadow-2: 0 10px 30px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.08);
+-shadow-3: 0 25px 60px rgba(0,0,0,0.30), 0 10px 20px rgba(0,0,0,0.15);
+-radius: 4px;
+-serif: 'Georgia', 'Times New Roman', serif;
+-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+ height: 100%; background: var(--paper); color: var(--ink);
+ font-family: var(--serif); font-size: 16px; line-height: 1.6;
+ overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+body.exam-active { overflow: hidden; user-select: none; -webkit-user-select: none; }
+svg { display: block; }
+.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; fill: currentColor; }
 
-/* Disable text selection in exam mode */
-.exam-mode { user-select: none; -webkit-user-select: none; }
-.exam-mode input, .exam-mode textarea { user-select: text; -webkit-user-select: text; }
+/* ============================================================
+ PHASE: WELCOME
+============================================================ */
+#phase-welcome {
+ min-height: 100vh; display: flex; align-items: center; justify-content: center;
+ background: linear-gradient(135deg, #f4f1ea 0%, #e8e3d6 100%);
+ padding: 40px 20px; position: relative;
+}
+.welcome-card {
+ max-width: 720px; width: 100%; background: #fff;
+ border: 1px solid var(--line); border-radius: var(--radius);
+ box-shadow: var(--shadow-3); padding: 60px 50px; position: relative;
+}
+.welcome-card::before {
+ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+ background: linear-gradient(90deg, var(--gold), var(--crimson), var(--gold));
+}
+.exam-badge {
+ display: inline-flex; align-items: center; gap: 10px;
+ border: 1px solid var(--gold); padding: 6px 14px; border-radius: 2px;
+ font-family: var(--sans); font-size: 11px; font-weight: 600;
+ letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
+ margin-bottom: 24px;
+}
+.exam-badge .icon { width: 14px; height: 14px; }
+h1.title {
+ font-size: 42px; font-weight: 400; letter-spacing: -0.5px;
+ color: var(--ink); margin-bottom: 8px; line-height: 1.1;
+}
+.subtitle {
+ font-family: var(--sans); font-size: 14px; color: var(--muted);
+ letter-spacing: 1px; margin-bottom: 32px; text-transform: uppercase;
+ font-weight: 500;
+}
+.divider {
+ height: 1px; background: var(--line); margin: 28px 0;
+}
+.instructions-list {
+ list-style: none; counter-reset: inst;
+}
+.instructions-list li {
+ counter-increment: inst; position: relative; padding-left: 36px;
+ margin-bottom: 14px; font-size: 15px; line-height: 1.65;
+}
+.instructions-list li::before {
+ content: counter(inst, decimal-leading-zero);
+ position: absolute; left: 0; top: 0;
+ font-family: var(--sans); font-size: 12px; font-weight: 700;
+ color: var(--gold); letter-spacing: 1px;
+}
+.warning-box {
+ background: #fdf6e3; border-left: 3px solid var(--crimson);
+ padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+ display: flex; gap: 14px; align-items: flex-start;
+}
+.warning-box .icon { color: var(--crimson); width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; }
+.warning-box p { font-size: 14px; color: var(--ink); font-family: var(--sans); line-height: 1.5; }
+.warning-box strong { color: var(--crimson); }
+.action-row { display: flex; gap: 12px; margin-top: 32px; }
+.btn {
+ font-family: var(--sans); font-size: 13px; font-weight: 600;
+ letter-spacing: 2px; text-transform: uppercase;
+ padding: 16px 28px; border: 1px solid transparent; cursor: pointer;
+ transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px;
+ border-radius: var(--radius); text-decoration: none;
+}
+.btn-primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn-primary:hover { background: #000; transform: translateY(-1px); box-shadow: var(--shadow-2); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-danger { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+.btn-danger:hover { background: var(--crimson-2); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+.btn .icon { width: 14px; height: 14px; }
 
-/* ========== HEADER ========== */
-.topbar {
- position: fixed; top: 0; left: 0; right: 0; height: 64px;
- background: rgba(10, 14, 26, 0.95);
- backdrop-filter: blur(12px);
- border-bottom: 1px solid var(--border);
- display: flex; align-items: center; justify-content: space-between;
- padding: 0 32px; z-index: 100;
- }
- .brand { display: flex; align-items: center; gap: 14px; }
- .brand-logo {
- width: 38px; height: 38px;
- background: linear-gradient(135deg, var(--accent), #8b7340);
- border-radius: 8px;
- display: flex; align-items: center; justify-content: center;
- box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
- }
- .brand-text { line-height: 1.2; }
- .brand-text .title { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); }
- .brand-text .subtitle { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
-
- .topbar-meta { display: flex; align-items: center; gap: 24px; }
- .timer {
- display: flex; align-items: center; gap: 10px;
- background: var(--surface);
- border: 1px solid var(--border);
- padding: 10px 18px; border-radius: 8px;
- font-variant-numeric: tabular-nums;
- }
- .timer.warn { border-color: var(--warning); color: var(--warning); }
- .timer.danger { border-color: var(--danger); color: var(--danger); animation: pulse 1s infinite; }
- .timer svg { width: 18px; height: 18px; }
- .timer .time { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
-
- .progress-info {
- background: var(--surface);
- border: 1px solid var(--border);
- padding: 10px 18px; border-radius: 8px;
- font-size: 13px; color: var(--text-dim);
- display: flex; align-items: center; gap: 10px;
- }
- .progress-info strong { color: var(--text); font-weight: 700; }
-
- .lock-badge {
- display: flex; align-items: center; gap: 8px;
- background: rgba(239, 68, 68, 0.1);
- border: 1px solid rgba(239, 68, 68, 0.3);
- padding: 8px 14px; border-radius: 8px;
- color: var(--danger); font-size: 12px; letter-spacing: 1px;
- }
- .lock-badge svg { width: 14px; height: 14px; }
-
+/* ============================================================
+ PHASE: LISTENING
+============================================================ */
+#phase-listening {
+ min-height: 100vh; display: none; flex-direction: column;
+ background: var(--ink); color: var(--paper);
+}
+.exam-header {
+ display: flex; justify-content: space-between; align-items: center;
+ padding: 18px 40px; background: var(--ink-2); border-bottom: 1px solid #1f2937;
+}
+.exam-header .brand {
+ display: flex; align-items: center; gap: 12px;
+ font-family: var(--sans); font-size: 13px; font-weight: 600;
+ letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
+}
+.exam-header .brand .icon { width: 18px; height: 18px; }
+.exam-header .meta {
+ display: flex; gap: 28px; font-family: var(--sans); font-size: 12px;
+ color: #9ca3af; letter-spacing: 1.5px; text-transform: uppercase;
+ align-items: center;
+}
+.exam-header .meta span { display: inline-flex; align-items: center; gap: 6px; }
+.exam-header .meta .icon { width: 13px; height: 13px; }
+.exam-header .timer {
+ font-family: var(--sans); font-size: 18px; font-weight: 700;
+ color: var(--paper); letter-spacing: 1px;
+ padding: 8px 16px; background: #1f2937; border-radius: var(--radius);
+ border: 1px solid #374151;
+}
+.exam-header .timer.warning { color: #fbbf24; border-color: #fbbf24; }
+.exam-header .timer.danger { color: #f87171; border-color: #f87171; animation: pulse 1s infinite; }
 @keyframes pulse {
  0%, 100% { opacity: 1; }
  50% { opacity: 0.6; }
 }
 
-/* ========== PHASE CONTAINERS ========== */
-.phase {
- min-height: 100vh;
- padding: 96px 32px 64px;
- display: none;
- animation: phaseIn 0.5s ease;
- }
- .phase.active { display: block; }
-@keyframes phaseIn {
- from { opacity: 0; transform: translateY(20px); }
- to { opacity: 1; transform: translateY(0); }
+.listening-stage {
+ flex: 1; display: grid; grid-template-columns: 1fr 380px; gap: 0;
+ background: var(--ink);
+}
+.player-section {
+ display: flex; flex-direction: column; align-items: center; justify-content: center;
+ padding: 60px 40px; position: relative;
+}
+.player-section::after {
+ content: ''; position: absolute; inset: 0;
+ background: radial-gradient(circle at center, rgba(184,152,90,0.08), transparent 70%);
+ pointer-events: none;
+}
+.player-card {
+ background: linear-gradient(145deg, #1a1f2b, #111827);
+ border: 1px solid #2c3340; border-radius: 8px;
+ padding: 48px 56px; box-shadow: var(--shadow-3);
+ max-width: 560px; width: 100%; position: relative; z-index: 1;
+}
+.voice-indicator {
+ display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+ padding-bottom: 20px; border-bottom: 1px solid #2c3340;
+}
+.voice-avatar {
+ width: 48px; height: 48px; border-radius: 50%;
+ background: linear-gradient(135deg, var(--gold), var(--gold-2));
+ display: flex; align-items: center; justify-content: center;
+ box-shadow: 0 0 20px rgba(184,152,90,0.4);
+}
+.voice-avatar .icon { width: 22px; height: 22px; color: var(--ink); }
+.voice-info { flex: 1; }
+.voice-info .name {
+ font-family: var(--sans); font-size: 14px; font-weight: 600;
+ letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+}
+.voice-info .status {
+ font-family: var(--sans); font-size: 11px; color: #6b7280;
+ letter-spacing: 1.5px; text-transform: uppercase;
+ display: flex; align-items: center; gap: 6px;
+}
+.live-dot {
+ width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+ box-shadow: 0 0 8px #4ade80; animation: livePulse 1.4s infinite;
+}
+@keyframes livePulse {
+ 0%, 100% { opacity: 1; transform: scale(1); }
+ 50% { opacity: 0.5; transform: scale(1.3); }
 }
 
-/* ========== WELCOME PHASE ========== */
-.welcome {
- max-width: 920px; margin: 0 auto;
- padding-top: 40px;
- }
- .welcome-header { text-align: center; margin-bottom: 56px; }
- .welcome-eyebrow {
- display: inline-block;
- border: 1px solid var(--accent);
- color: var(--accent);
- padding: 6px 18px;
- border-radius: 20px;
- font-size: 11px;
- letter-spacing: 3px;
- margin-bottom: 24px;
- }
- .welcome-title {
- font-size: 56px;
- font-weight: 800;
- letter-spacing: -1px;
- line-height: 1.1;
- margin-bottom: 20px;
- background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
-webkit-background-clip: text;
-webkit-text-fill-color: transparent;
- background-clip: text;
- }
- .welcome-tagline {
- font-size: 18px;
- color: var(--text-dim);
- max-width: 600px; margin: 0 auto;
- line-height: 1.6;
- }
-
- .info-grid {
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 20px;
- margin-bottom: 48px;
- }
- .info-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 24px;
- display: flex; align-items: flex-start; gap: 16px;
- }
- .info-icon {
- width: 44px; height: 44px;
- background: rgba(201, 169, 97, 0.1);
- border-radius: 10px;
- display: flex; align-items: center; justify-content: center;
- color: var(--accent); flex-shrink: 0;
- }
- .info-icon svg { width: 22px; height: 22px; }
- .info-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.5px; }
- .info-card p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
-
- .rules {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 16px;
- padding: 32px;
- margin-bottom: 40px;
- }
- .rules h2 {
- font-size: 18px; font-weight: 700;
- margin-bottom: 20px;
- display: flex; align-items: center; gap: 12px;
- letter-spacing: 1px;
- }
- .rules h2 svg { width: 22px; height: 22px; color: var(--accent); }
- .rules ul { list-style: none; }
- .rules li {
- display: flex; align-items: flex-start; gap: 14px;
- padding: 12px 0;
- border-bottom: 1px solid var(--border);
- font-size: 14px;
- line-height: 1.6;
- color: var(--text-dim);
- }
- .rules li:last-child { border-bottom: none; }
- .rules li svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
- .rules li strong { color: var(--text); font-weight: 600; }
-
- .start-btn {
- display: block; width: 100%; max-width: 480px; margin: 0 auto;
- background: linear-gradient(135deg, var(--accent), #8b7340);
- color: #0a0e1a;
- border: none;
- padding: 20px 40px;
- font-size: 16px;
- font-weight: 700;
- letter-spacing: 2px;
- border-radius: 12px;
- cursor: pointer;
- transition: all 0.3s;
- display: flex; align-items: center; justify-content: center; gap: 12px;
- }
- .start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201, 169, 97, 0.3); }
- .start-btn svg { width: 20px; height: 20px; }
-
-/* ========== LISTENING PHASE ========== */
-.listening {
- max-width: 1000px; margin: 0 auto;
- }
- .listening-hero {
- text-align: center;
- margin-bottom: 48px;
- }
- .listening-eyebrow {
- display: inline-flex; align-items: center; gap: 10px;
- color: var(--accent);
- font-size: 12px;
- letter-spacing: 3px;
- margin-bottom: 16px;
- }
- .rec-dot {
- width: 10px; height: 10px; border-radius: 50%;
- background: var(--danger);
- animation: recBlink 1.4s infinite;
- }
- @keyframes recBlink {
- 0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--danger); }
- 50% { opacity: 0.3; box-shadow: none; }
- }
- .listening-title {
- font-size: 36px;
- font-weight: 700;
- margin-bottom: 8px;
- }
- .listening-subtitle { color: var(--text-dim); font-size: 15px; }
-
- .player-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 16px;
- padding: 32px;
- margin-bottom: 32px;
- }
- .player-main {
- display: flex; align-items: center; gap: 24px;
- margin-bottom: 20px;
- }
- .play-btn {
- width: 72px; height: 72px;
- border-radius: 50%;
- background: linear-gradient(135deg, var(--accent), #8b7340);
- border: none;
- display: flex; align-items: center; justify-content: center;
- cursor: pointer;
- color: #0a0e1a;
- flex-shrink: 0;
- transition: all 0.2s;
- box-shadow: 0 0 24px rgba(201, 169, 97, 0.3);
- }
- .play-btn:hover { transform: scale(1.05); }
- .play-btn svg { width: 32px; height: 32px; }
-
- .player-info { flex: 1; }
- .player-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
- .player-author { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; }
-
- .progress-bar {
- height: 6px;
- background: var(--surface-2);
- border-radius: 3px;
- overflow: hidden;
- position: relative;
- }
- .progress-fill {
- height: 100%;
- background: linear-gradient(90deg, var(--accent), var(--accent-2));
- width: 0%;
- transition: width 0.1s linear;
- border-radius: 3px;
- }
-
- .time-row {
- display: flex; justify-content: space-between;
- margin-top: 8px;
- font-size: 12px;
- color: var(--text-dim);
- font-variant-numeric: tabular-nums;
- }
-
- .keywords-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 16px;
- padding: 28px;
- margin-bottom: 32px;
- }
- .keywords-header {
- display: flex; align-items: center; justify-content: space-between;
- margin-bottom: 20px;
- }
- .keywords-title {
- font-size: 14px;
- font-weight: 700;
- letter-spacing: 2px;
- color: var(--text-dim);
- display: flex; align-items: center; gap: 10px;
- }
- .keywords-title svg { width: 18px; height: 18px; color: var(--accent); }
- .keywords-hint { font-size: 12px; color: var(--text-dim); }
-
- .keywords-stream {
- display: flex; flex-wrap: wrap;
- gap: 10px;
- min-height: 100px;
- align-content: flex-start;
- }
- .keyword {
- padding: 10px 18px;
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 24px;
- font-size: 13px;
- letter-spacing: 0.3px;
- color: var(--text-dim);
+.audio-wave {
+ display: flex; align-items: center; gap: 3px; height: 60px;
+ margin: 24px 0; justify-content: center;
+}
+.audio-wave .bar {
+ width: 4px; background: linear-gradient(to top, var(--gold), var(--crimson));
+ border-radius: 2px; transition: height 0.15s ease, opacity 0.3s ease;
  opacity: 0.3;
- transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
- transform: scale(0.9);
- }
- .keyword.active {
- opacity: 1;
- color: var(--accent);
- background: rgba(201, 169, 97, 0.12);
- border-color: var(--accent);
- transform: scale(1.05);
- box-shadow: 0 0 16px rgba(201, 169, 97, 0.25);
- animation: keywordPop 0.6s ease;
- }
-@keyframes keywordPop {
- 0% { transform: scale(0.5); opacity: 0; }
- 50% { transform: scale(1.15); }
- 100% { transform: scale(1.05); opacity: 1; }
- }
+}
+.audio-wave.playing .bar { opacity: 1; animation: wave 1s ease-in-out infinite; }
+@keyframes wave {
+ 0%, 100% { transform: scaleY(0.4); }
+ 50% { transform: scaleY(1); }
+}
+.audio-wave .bar:nth-child(1) { height: 25%; animation-delay: 0.0s; }
+.audio-wave .bar:nth-child(2) { height: 50%; animation-delay: 0.1s; }
+.audio-wave .bar:nth-child(3) { height: 75%; animation-delay: 0.2s; }
+.audio-wave .bar:nth-child(4) { height: 100%; animation-delay: 0.3s; }
+.audio-wave .bar:nth-child(5) { height: 90%; animation-delay: 0.4s; }
+.audio-wave .bar:nth-child(6) { height: 70%; animation-delay: 0.5s; }
+.audio-wave .bar:nth-child(7) { height: 80%; animation-delay: 0.6s; }
+.audio-wave .bar:nth-child(8) { height: 60%; animation-delay: 0.7s; }
+.audio-wave .bar:nth-child(9) { height: 45%; animation-delay: 0.8s; }
+.audio-wave .bar:nth-child(10) { height: 35%; animation-delay: 0.9s; }
+.audio-wave .bar:nth-child(11) { height: 50%; animation-delay: 1.0s; }
+.audio-wave .bar:nth-child(12) { height: 70%; animation-delay: 1.1s; }
+.audio-wave .bar:nth-child(13) { height: 85%; animation-delay: 1.2s; }
+.audio-wave .bar:nth-child(14) { height: 95%; animation-delay: 1.3s; }
+.audio-wave .bar:nth-child(15) { height: 100%; animation-delay: 1.4s; }
+.audio-wave .bar:nth-child(16) { height: 90%; animation-delay: 1.5s; }
+.audio-wave .bar:nth-child(17) { height: 70%; animation-delay: 1.6s; }
+.audio-wave .bar:nth-child(18) { height: 55%; animation-delay: 1.7s; }
+.audio-wave .bar:nth-child(19) { height: 40%; animation-delay: 1.8s; }
+.audio-wave .bar:nth-child(20) { height: 30%; animation-delay: 1.9s; }
 
- .listening-actions {
- display: flex; gap: 16px; justify-content: center;
- }
- .btn-secondary, .btn-primary {
- padding: 16px 32px;
- border-radius: 10px;
- font-size: 14px;
- font-weight: 700;
+.audio-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 16px; }
+.ctrl-btn {
+ width: 48px; height: 48px; border-radius: 50%; border: 1px solid #374151;
+ background: transparent; color: var(--paper); cursor: pointer;
+ display: flex; align-items: center; justify-content: center;
+ transition: all 0.2s ease;
+}
+.ctrl-btn:hover { border-color: var(--gold); color: var(--gold); }
+.ctrl-btn.play {
+ width: 64px; height: 64px; background: var(--gold); border-color: var(--gold); color: var(--ink);
+}
+.ctrl-btn.play:hover { background: #d4b06a; transform: scale(1.05); }
+.ctrl-btn .icon { width: 20px; height: 20px; }
+.ctrl-btn.play .icon { width: 26px; height: 26px; }
+
+.progress-container { margin-top: 24px; }
+.progress-meta {
+ display: flex; justify-content: space-between;
+ font-family: var(--sans); font-size: 11px; color: #6b7280;
+ letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+}
+.progress-track {
+ height: 4px; background: #1f2937; border-radius: 2px; overflow: hidden; position: relative;
+}
+.progress-fill {
+ height: 100%; background: linear-gradient(90deg, var(--gold), var(--crimson));
+ width: 0%; transition: width 0.3s linear;
+}
+
+.keywords-panel {
+ background: var(--ink-2); border-left: 1px solid #1f2937;
+ padding: 32px 28px; overflow-y: auto;
+}
+.panel-title {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase;
+ margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #2c3340;
+ display: flex; align-items: center; gap: 10px;
+}
+.panel-title .icon { width: 14px; height: 14px; }
+.panel-hint {
+ font-size: 13px; color: #9ca3af; margin-bottom: 24px; line-height: 1.6;
+ font-style: italic;
+}
+.keywords-stream {
+ display: flex; flex-direction: column; gap: 10px;
+}
+.keyword {
+ padding: 12px 16px; background: #1a1f2b; border-left: 3px solid #2c3340;
+ border-radius: 0 4px 4px 0; font-family: var(--sans);
+ font-size: 14px; color: #6b7280; transition: all 0.5s ease;
+ position: relative; opacity: 0.5;
+}
+.keyword.active {
+ opacity: 1; color: var(--paper); background: linear-gradient(90deg, rgba(184,152,90,0.15), transparent);
+ border-left-color: var(--gold); transform: translateX(4px);
+ box-shadow: -4px 0 12px rgba(184,152,90,0.3);
+}
+.keyword.passed { opacity: 0.7; color: #9ca3af; border-left-color: var(--gold-2); }
+.keyword .label {
+ font-size: 10px; letter-spacing: 1.5px; color: #6b7280;
+ text-transform: uppercase; margin-bottom: 4px;
+ display: flex; align-items: center; gap: 6px;
+}
+.keyword.active .label { color: var(--gold); }
+.keyword .label .icon { width: 10px; height: 10px; }
+
+.listening-footer {
+ padding: 20px 40px; background: var(--ink-2); border-top: 1px solid #1f2937;
+ display: flex; justify-content: space-between; align-items: center;
+}
+.replay-info {
+ font-family: var(--sans); font-size: 12px; color: #6b7280;
+ letter-spacing: 1.5px; text-transform: uppercase;
+ display: flex; align-items: center; gap: 8px;
+}
+.replay-info .icon { width: 14px; height: 14px; }
+.btn-light {
+ background: var(--paper); color: var(--ink); border-color: var(--paper);
+}
+.btn-light:hover { background: #fff; transform: translateY(-1px); box-shadow: var(--shadow-2); }
+
+/* ============================================================
+ PHASE: QUESTIONS
+============================================================ */
+#phase-questions {
+ min-height: 100vh; display: none; flex-direction: column;
+ background: var(--paper);
+}
+.exam-toolbar {
+ background: #fff; border-bottom: 1px solid var(--line);
+ padding: 16px 40px; display: flex; justify-content: space-between;
+ align-items: center; position: sticky; top: 0; z-index: 50;
+ box-shadow: var(--shadow-1);
+}
+.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 24px; }
+.toolbar-section {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
+}
+.progress-bar-thin {
+ flex: 1; max-width: 240px; height: 3px; background: var(--paper-2);
+ border-radius: 2px; overflow: hidden; margin: 0 24px;
+}
+.progress-bar-thin .fill {
+ height: 100%; background: var(--gold); width: 0%; transition: width 0.3s;
+}
+.answered-count {
+ font-family: var(--sans); font-size: 12px; color: var(--ink);
+ font-weight: 600; letter-spacing: 0.5px;
+}
+.answered-count strong { color: var(--gold-2); font-size: 14px; }
+
+.questions-container {
+ max-width: 880px; margin: 0 auto; padding: 48px 40px 120px; width: 100%;
+}
+.section-header {
+ background: var(--ink); color: var(--paper); padding: 24px 32px;
+ margin: 32px 0 24px; border-radius: var(--radius);
+ display: flex; justify-content: space-between; align-items: center;
+ box-shadow: var(--shadow-1);
+}
+.section-header .num {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase;
+}
+.section-header h2 {
+ font-size: 22px; font-weight: 400; font-style: italic;
+ letter-spacing: 0.5px;
+}
+.section-header .count {
+ font-family: var(--sans); font-size: 12px; color: #9ca3af;
  letter-spacing: 1.5px;
- cursor: pointer;
- transition: all 0.2s;
- display: flex; align-items: center; gap: 10px;
- border: 1px solid var(--border);
- background: var(--surface);
- color: var(--text);
- }
- .btn-primary {
- background: linear-gradient(135deg, var(--accent), #8b7340);
- color: #0a0e1a;
- border: none;
- }
- .btn-secondary:hover { background: var(--surface-2); }
- .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201, 169, 97, 0.3); }
- .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
- .btn-secondary svg, .btn-primary svg { width: 18px; height: 18px; }
+}
+.section-instructions {
+ background: #fff; border-left: 3px solid var(--gold); padding: 14px 20px;
+ margin-bottom: 20px; font-family: var(--sans); font-size: 14px;
+ color: var(--ink); line-height: 1.55; border-radius: 0 4px 4px 0;
+}
+.section-instructions strong { color: var(--gold-2); font-weight: 700; }
 
-/* ========== QUESTIONS PHASE ========== */
-.questions-wrap { max-width: 960px; margin: 0 auto; }
-.phase-banner {
- background: var(--surface);
- border: 1px solid var(--border);
- border-left: 3px solid var(--accent);
- padding: 18px 24px;
- border-radius: 8px;
- margin-bottom: 32px;
- display: flex; align-items: center; gap: 16px;
- }
- .phase-banner svg { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
- .phase-banner-text { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
- .phase-banner-text strong { color: var(--text); }
+.question-card {
+ background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+ padding: 28px 32px; margin-bottom: 16px; transition: all 0.2s ease;
+ box-shadow: var(--shadow-1);
+}
+.question-card:hover { border-color: var(--gold); }
+.question-card.answered { border-left: 3px solid var(--ok); }
+.q-header {
+ display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+.q-number {
+ width: 32px; height: 32px; border-radius: 50%; background: var(--ink);
+ color: var(--gold); display: flex; align-items: center; justify-content: center;
+ font-family: var(--sans); font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.q-text { font-size: 16px; color: var(--ink); line-height: 1.55; font-weight: 500; }
 
- .section-header {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 24px;
- margin: 32px 024px;
- display: flex; align-items: center; gap: 16px;
- }
- .section-num {
- width: 48px; height: 48px;
- background: linear-gradient(135deg, var(--accent), #8b7340);
- border-radius: 12px;
- display: flex; align-items: center; justify-content: center;
- color: #0a0e1a;
- font-size: 20px;
- font-weight: 800;
- flex-shrink: 0;
- }
- .section-info h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
- .section-info p { font-size: 13px; color: var(--text-dim); }
-
- .question-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 24px;
- margin-bottom: 16px;
- transition: border-color 0.2s;
- }
- .question-card.answered { border-color: rgba(201, 169, 97, 0.4); }
- .question-head {
- display: flex; align-items: center; gap: 12px;
- margin-bottom: 16px;
- }
- .q-num {
- width: 32px; height: 32px;
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 8px;
- display: flex; align-items: center; justify-content: center;
- font-size: 13px; font-weight: 700;
- color: var(--accent);
- flex-shrink: 0;
- }
- .question-card.answered .q-num {
- background: var(--accent);
- color: #0a0e1a;
- }
- .q-text { font-size: 15px; line-height: 1.6; color: var(--text); }
- .q-text strong { color: var(--accent); }
-
- .options { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
- .option {
- display: flex; align-items: center; gap: 14px;
- padding: 14px 18px;
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 8px;
- cursor: pointer;
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+ display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+ border: 1px solid var(--line); border-radius: var(--radius);
+ cursor: pointer; transition: all 0.15s; background: #fff;
+ font-family: var(--sans); font-size: 14px; line-height: 1.5;
+}
+.option:hover { border-color: var(--gold); background: #faf8f2; }
+.option input { display: none; }
+.option .bullet {
+ width: 18px; height: 18px; border: 2px solid var(--line); border-radius: 50%;
+ flex-shrink: 0; display: flex; align-items: center; justify-content: center;
  transition: all 0.15s;
- font-size: 14px;
- line-height: 1.5;
- }
- .option:hover { border-color: rgba(201, 169, 97, 0.4); }
- .option input { display: none; }
- .option-marker {
- width: 22px; height: 22px;
- border: 2px solid var(--border);
- border-radius: 50%;
- flex-shrink: 0;
+}
+.option input:checked + .bullet { border-color: var(--gold); background: var(--gold); }
+.option input:checked + .bullet::after {
+ content: ''; width: 6px; height: 6px; background: var(--ink); border-radius: 50%;
+}
+.option.selected { border-color: var(--gold); background: #faf8f2; }
+
+.input-line {
+ background: transparent; border: none; border-bottom: 2px solid var(--line);
+ padding: 6px 4px; font-family: var(--serif); font-size: 16px;
+ color: var(--ink); width: 100%; outline: none; transition: border-color 0.2s;
+}
+.input-line:focus { border-bottom-color: var(--gold); }
+.input-line::placeholder { color: var(--muted); font-style: italic; }
+.inline-input {
+ background: transparent; border: none; border-bottom: 2px solid var(--gold);
+ padding: 4px 8px; font-family: var(--serif); font-size: 16px; color: var(--ink);
+ min-width: 140px; max-width: 220px; outline: none; text-align: center;
+}
+.inline-input:focus { border-bottom-width: 3px; }
+
+.match-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.match-table td { padding: 8px 12px; vertical-align: top; }
+.match-table td:first-child { width: 40px; font-family: var(--sans); font-weight: 700; color: var(--gold-2); }
+.match-table td:nth-child(2) { font-size: 14px; line-height: 1.55; }
+.match-table select {
+ font-family: var(--sans); font-size: 14px; padding: 8px 12px;
+ border: 1px solid var(--line); border-radius: var(--radius);
+ background: #fff; cursor: pointer; color: var(--ink);
+ width: 100%; max-width: 260px;
+}
+.match-table select:focus { outline: none; border-color: var(--gold); }
+
+.submit-bar {
+ position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink);
+ padding: 16px 40px; display: flex; justify-content: space-between;
+ align-items: center; z-index: 40; box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
+.submit-bar .warning {
+ font-family: var(--sans); font-size: 12px; color: #fbbf24;
+ letter-spacing: 1px; text-transform: uppercase;
+ display: flex; align-items: center; gap: 8px;
+}
+.submit-bar .warning .icon { width: 14px; height: 14px; }
+.submit-bar .warning.hidden { display: none; }
+
+/* ============================================================
+ PHASE: RESULTS
+============================================================ */
+#phase-results {
+ min-height: 100vh; display: none; flex-direction: column;
+ background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
+ padding: 40px 20px;
+}
+.results-wrapper { max-width: 960px; margin: 0 auto; width: 100%; }
+.results-header { text-align: center; margin-bottom: 40px; }
+.results-header .crest {
+ width: 64px; height: 64px; margin: 0 auto 20px;
+ background: var(--ink); border-radius: 50%;
  display: flex; align-items: center; justify-content: center;
- transition: all 0.15s;
- }
- .option input:checked + .option-marker { border-color: var(--accent); background: var(--accent); }
- .option input:checked + .option-marker::after {
- content: ''; width: 8px; height: 8px;
- background: #0a0e1a;
- border-radius: 50%;
- }
- .option.selected { border-color: var(--accent); background: rgba(201, 169, 97, 0.06); }
+ border: 3px solid var(--gold);
+}
+.results-header .crest .icon { width: 28px; height: 28px; color: var(--gold); }
+.results-header h1 {
+ font-size: 36px; font-weight: 400; letter-spacing: -0.5px; margin-bottom: 6px;
+}
+.results-header .sub {
+ font-family: var(--sans); font-size: 13px; color: var(--muted);
+ letter-spacing: 2px; text-transform: uppercase;
+}
 
- .fill-input {
- width: 100%;
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 8px;
- padding: 14px 18px;
- color: var(--text);
- font-size: 15px;
- font-family: inherit;
- margin-top: 8px;
- transition: all 0.15s;
- }
- .fill-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1); }
- .fill-hint { font-size: 12px; color: var(--text-dim); margin-top: 6px; letter-spacing: 0.5px; }
-
- .match-table {
- margin-top: 16px;
- display: grid;
- grid-template-columns: 1fr 1fr;
- gap: 16px;
- }
- .match-side {
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 8px;
- padding: 16px;
- }
- .match-side-label {
- font-size: 11px;
- letter-spacing: 2px;
- color: var(--text-dim);
+.score-card {
+ background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+ padding: 48px; box-shadow: var(--shadow-2); margin-bottom: 32px;
+ display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
+ align-items: center;
+}
+.score-block { text-align: center; border-right: 1px solid var(--line); padding-right: 24px; }
+.score-block:last-child { border-right: none; padding-right: 0; }
+.score-label {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
  margin-bottom: 12px;
- font-weight: 700;
- }
- .match-item {
- padding: 8px 0;
- border-bottom: 1px solid var(--border);
- font-size: 14px;
- line-height: 1.5;
- }
- .match-item:last-child { border-bottom: none; }
- .match-item .num {
- display: inline-block;
- width: 24px; height: 24px;
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 6px;
- text-align: center;
- line-height: 22px;
- font-size: 12px;
- font-weight: 700;
- color: var(--accent);
- margin-right: 10px;
- }
- .match-options {
- display: flex; flex-wrap: wrap;
- gap: 8px;
- }
- .match-pill {
- padding: 8px 14px;
- background: var(--surface-2);
- border: 1px solid var(--border);
- border-radius: 20px;
- font-size: 13px;
- cursor: pointer;
- transition: all 0.15s;
- }
- .match-pill:hover { border-color: rgba(201, 169, 97, 0.4); }
- .match-pill.selected { background: var(--accent); color: #0a0e1a; border-color: var(--accent); font-weight: 600; }
+}
+.score-value { font-size: 64px; font-weight: 700; line-height: 1; color: var(--ink); font-family: var(--serif); }
+.score-value.band { color: var(--gold-2); font-size: 80px; }
+.score-value.band.high { color: var(--ok); }
+.score-value.band.low { color: var(--crimson); }
+.score-meta {
+ font-family: var(--sans); font-size: 11px; color: var(--muted);
+ margin-top: 8px; letter-spacing: 1px; text-transform: uppercase;
+}
 
- .submit-bar {
- position: fixed; bottom: 0; left: 0; right: 0;
- background: rgba(10, 14, 26, 0.95);
- backdrop-filter: blur(12px);
- border-top: 1px solid var(--border);
- padding: 16px 32px;
- display: flex; align-items: center; justify-content: space-between;
- z-index: 50;
- }
- .submit-info { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text-dim); }
- .submit-info strong { color: var(--text); font-size: 15px; }
-
-/* ========== RESULTS PHASE ========== */
-.results { max-width: 960px; margin: 0 auto; }
- .score-hero {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 20px;
- padding: 48px;
- text-align: center;
- margin-bottom: 32px;
- position: relative;
- overflow: hidden;
- }
- .score-hero::before {
- content: '';
- position: absolute; top: 0; left: 0; right: 0;
- height: 4px;
- background: linear-gradient(90deg, var(--accent), var(--success), var(--accent));
- }
- .score-trophy {
- width: 80px; height: 80px;
- margin: 0 auto 20px;
- background: linear-gradient(135deg, var(--accent), #8b7340);
- border-radius: 50%;
- display: flex; align-items: center; justify-content: center;
- box-shadow: 0 0 32px rgba(201, 169, 97, 0.4);
- }
- .score-trophy svg { width: 40px; height: 40px; color: #0a0e1a; }
- .score-eyebrow {
- font-size: 12px;
- letter-spacing: 4px;
- color: var(--accent);
- margin-bottom: 12px;
- }
- .score-display {
- display: flex; align-items: baseline; justify-content: center; gap: 16px;
- margin-bottom: 16px;
- }
- .score-big {
- font-size: 96px;
- font-weight: 800;
- background: linear-gradient(135deg, #ffffff, var(--accent));
-webkit-background-clip: text;
-webkit-text-fill-color: transparent;
- background-clip: text;
- line-height: 1;
- }
- .score-fraction { font-size: 24px; color: var(--text-dim); }
- .band-display {
- display: inline-block;
- padding: 8px 24px;
- background: rgba(201, 169, 97, 0.1);
- border: 1px solid var(--accent);
- border-radius: 24px;
- font-size: 14px;
- letter-spacing: 2px;
- color: var(--accent);
- font-weight: 700;
- }
- .band-display strong { font-size: 18px; margin-left: 8px; }
-
- .stats-row {
- display: grid;
- grid-template-columns: repeat(4, 1fr);
- gap: 16px;
- margin-bottom: 32px;
- }
- .stat-box {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 20px;
- text-align: center;
- }
- .stat-icon {
- width: 40px; height: 40px;
- margin: 0 auto 12px;
- background: var(--surface-2);
- border-radius: 10px;
- display: flex; align-items: center; justify-content: center;
- }
- .stat-icon svg { width: 20px; height: 20px; }
- .stat-value { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
- .stat-label { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
- .stat-box.correct .stat-icon { color: var(--success); }
- .stat-box.wrong .stat-icon { color: var(--danger); }
- .stat-box.unanswered .stat-icon { color: var(--warning); }
- .stat-box.score-color .stat-icon { color: var(--accent); }
- .stat-box.correct .stat-value { color: var(--success); }
- .stat-box.wrong .stat-value { color: var(--danger); }
- .stat-box.unanswered .stat-value { color: var(--warning); }
- .stat-box.score-color .stat-value { color: var(--accent); }
-
- .breakdown-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 24px;
- margin-bottom: 24px;
- }
- .breakdown-card h3 {
- font-size: 16px;
- font-weight: 700;
- margin-bottom: 16px;
+.section-breakdown { margin-bottom: 32px; }
+.section-row {
+ background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+ padding: 18px 24px; margin-bottom: 8px; display: flex; justify-content: space-between;
+ align-items: center; box-shadow: var(--shadow-1);
+}
+.section-row .label {
+ font-family: var(--sans); font-size: 13px; font-weight: 600;
+ letter-spacing: 1px; text-transform: uppercase; color: var(--ink);
+}
+.section-row .stat {
+ font-family: var(--sans); font-size: 12px; color: var(--muted);
  letter-spacing: 1px;
+}
+.section-row .stat strong { color: var(--gold-2); font-size: 18px; }
+
+.review-title {
+ font-family: var(--sans); font-size: 12px; font-weight: 700;
+ letter-spacing: 2.5px; color: var(--gold-2); text-transform: uppercase;
+ margin: 32px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink);
  display: flex; align-items: center; gap: 10px;
- }
- .breakdown-card h3 svg { width: 18px; height: 18px; color: var(--accent); }
- .section-row {
- display: flex; align-items: center; justify-content: space-between;
- padding: 12px 0;
- border-bottom: 1px solid var(--border);
- }
- .section-row:last-child { border-bottom: none; }
- .section-row .label { font-size: 14px; }
- .section-row .score { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
- .bar-track {
- flex: 1;
- height: 6px;
- background: var(--surface-2);
- border-radius: 3px;
- margin: 0 16px;
- overflow: hidden;
- max-width: 200px;
- }
- .bar-fill {
- height: 100%;
- background: linear-gradient(90deg, var(--accent), var(--success));
- border-radius: 3px;
- transition: width 0.8s ease;
- }
+}
+.review-title .icon { width: 16px; height: 16px; }
 
- .answers-review h3 {
- font-size: 18px;
- margin-bottom: 20px;
- letter-spacing: 1px;
- display: flex; align-items: center; gap: 10px;
- }
- .answers-review h3 svg { width: 22px; height: 22px; color: var(--accent); }
-
- .review-card {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 12px;
- padding: 20px;
- margin-bottom: 12px;
- border-left: 3px solid var(--border);
- }
- .review-card.correct { border-left-color: var(--success); }
- .review-card.wrong { border-left-color: var(--danger); }
- .review-card.unanswered-r { border-left-color: var(--warning); }
-
- .review-head {
- display: flex; align-items: center; gap: 12px;
- margin-bottom: 12px;
- }
- .review-icon {
- width: 28px; height: 28px;
- border-radius: 8px;
- display: flex; align-items: center; justify-content: center;
+.review-list { display: flex; flex-direction: column; gap: 12px; }
+.review-item {
+ background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+ padding: 20px 24px; box-shadow: var(--shadow-1);
+ border-left: 4px solid var(--err);
+}
+.review-item.correct { border-left-color: var(--ok); opacity: 0.85; }
+.review-head {
+ display: flex; justify-content: space-between; align-items: flex-start;
+ margin-bottom: 12px; gap: 16px;
+}
+.review-head .q-tag {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
  flex-shrink: 0;
- }
- .review-icon svg { width: 16px; height: 16px; }
- .review-card.correct .review-icon { background: rgba(74, 222, 128, 0.15); color: var(--success); }
- .review-card.wrong .review-icon { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
- .review-card.unanswered-r .review-icon { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
- .review-q { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
- .review-q strong { color: var(--text); }
- .review-q .qn { color: var(--accent); font-weight: 700; margin-right: 8px; }
+}
+.review-head .verdict {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 1.5px; text-transform: uppercase;
+ padding: 4px 10px; border-radius: 2px;
+ display: inline-flex; align-items: center; gap: 6px;
+}
+.verdict.wrong { background: #fde8e8; color: var(--crimson); }
+.verdict.right { background: #e0f0e3; color: var(--ok); }
+.verdict .icon { width: 11px; height: 11px; }
+.review-q { font-size: 15px; color: var(--ink); margin-bottom: 14px; line-height: 1.55; }
+.answer-row {
+ display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+ padding: 12px 16px; background: #faf8f2; border-radius: var(--radius);
+ margin-bottom: 10px;
+}
+.answer-row .a-label {
+ font-family: var(--sans); font-size: 10px; font-weight: 700;
+ letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);
+ margin-bottom: 4px;
+}
+.answer-row .a-value { font-size: 15px; font-weight: 600; }
+.answer-row .your { border-right: 1px solid var(--line); padding-right: 16px; }
+.answer-row .your .a-value.wrong { color: var(--crimson); }
+.answer-row .correct .a-value.right { color: var(--ok); }
+.explanation {
+ padding: 12px 16px; background: #f4f1ea; border-radius: var(--radius);
+ font-size: 14px; line-height: 1.6; color: var(--ink);
+ border-left: 3px solid var(--gold);
+ font-style: italic;
+}
+.explanation strong { font-style: normal; color: var(--gold-2); font-weight: 700; }
 
- .review-body { padding-left: 40px; }
- .answer-row {
- display: flex; align-items: center; gap: 10px;
- margin: 6px 0;
- font-size: 13px;
- }
- .answer-row .lbl { color: var(--text-dim); min-width: 90px; }
- .answer-row .val { color: var(--text); font-weight: 600; }
- .answer-row .val.right { color: var(--success); }
- .answer-row .val.wrong-val { color: var(--danger); text-decoration: line-through; }
+.results-actions {
+ display: flex; justify-content: center; gap: 14px; margin-top: 32px;
+}
 
- .review-explanation {
- margin-top: 12px;
- padding: 14px;
- background: var(--surface-2);
- border-radius: 8px;
- font-size: 13px;
- line-height: 1.6;
- color: var(--text-dim);
- border-left: 2px solid var(--info);
- }
- .review-explanation strong { color: var(--info); }
-
- .action-row { display: flex; gap: 16px; justify-content: center; margin-top: 40px; }
-
-/* ========== MODAL ========== */
-.modal-bg {
- position: fixed; inset: 0;
- background: rgba(0, 0, 0, 0.8);
- backdrop-filter: blur(8px);
- z-index: 200;
- display: none;
- align-items: center; justify-content: center;
- }
- .modal-bg.active { display: flex; animation: phaseIn 0.3s; }
- .modal {
- background: var(--surface);
- border: 1px solid var(--border);
- border-radius: 16px;
- padding: 32px;
- max-width: 440px;
- text-align: center;
- }
- .modal-icon {
- width: 64px; height: 64px;
- background: rgba(239, 68, 68, 0.1);
- border-radius: 50%;
+/* ============================================================
+ MODAL: ANTI-CHEAT WARNING
+============================================================ */
+.modal-backdrop {
+ position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+ display: none; align-items: center; justify-content: center;
+ z-index: 200; padding: 20px;
+}
+.modal-backdrop.show { display: flex; animation: fadeIn 0.2s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-card {
+ background: #fff; max-width: 460px; width: 100%; padding: 40px;
+ border-radius: var(--radius); text-align: center;
+ border-top: 4px solid var(--crimson);
+ box-shadow: var(--shadow-3);
+}
+.modal-card .icon-wrap {
+ width: 56px; height: 56px; margin: 0 auto 20px;
+ background: #fde8e8; border-radius: 50%;
  display: flex; align-items: center; justify-content: center;
- margin: 0 auto 20px;
- color: var(--danger);
- }
- .modal-icon svg { width: 32px; height: 32px; }
- .modal h3 { font-size: 20px; margin-bottom: 12px; }
- .modal p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
- .modal-actions { display: flex; gap: 12px; justify-content: center; }
+}
+.modal-card .icon-wrap .icon { width: 28px; height: 28px; color: var(--crimson); }
+.modal-card h3 {
+ font-size: 22px; font-weight: 500; margin-bottom: 12px;
+}
+.modal-card p {
+ font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.55;
+ font-family: var(--sans);
+}
+.modal-card .btn { width: 100%; justify-content: center; }
 
-/* ========== RESPONSIVE ========== */
- @media (max-width: 768px) {
- .welcome-title { font-size: 36px; }
- .info-grid { grid-template-columns: 1fr; }
- .stats-row { grid-template-columns: repeat(2, 1fr); }
- .score-big { font-size: 64px; }
- .match-table { grid-template-columns: 1fr; }
- .topbar { padding: 0 16px; }
- .topbar-meta { gap: 12px; }
- .progress-info { display: none; }
- }
+@media (max-width: 900px) {
+ .listening-stage { grid-template-columns: 1fr; }
+ .keywords-panel { border-left: none; border-top: 1px solid #1f2937; max-height: 280px; }
+ .exam-header { padding: 14px 20px; flex-wrap: wrap; gap: 12px; }
+ .exam-header .meta { gap: 14px; font-size: 10px; }
+ .player-section { padding: 40px 20px; }
+ .player-card { padding: 32px 24px; }
+ .questions-container { padding: 32px 20px 120px; }
+ .toolbar-section { display: none; }
+ .score-card { grid-template-columns: 1fr; gap: 16px; }
+ .score-block { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 16px; }
+ .score-block:last-child { border-bottom: none; padding-bottom: 0; }
+ .answer-row { grid-template-columns: 1fr; }
+ .answer-row .your { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 12px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ========== SVG ICON LIBRARY ========== -->
-<svg style="position:absolute;width:0;height:0" aria-hidden="true">
- <defs>
- <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
- <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
- <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
- <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
- <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
- <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
- <symbol id="i-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
- <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
- <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M17 4h3v3a3 3 0 0 1-3 3"/><path d="M7 4H4v3a3 3 0 0 0 3 3"/></symbol>
- <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
- <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
- <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
- <symbol id="i-listening" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/><circle cx="12" cy="10" r="2" fill="currentColor"/></symbol>
- <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
- <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
- <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
- <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4"/><path d="M18 5l3 3"/><path d="M15 8l3 3"/></symbol>
- </defs>
+<!-- ============================================================
+ SVG ICON DEFINITIONS
+============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+ <symbol id="i-headphones" viewBox="0 0 24 24">
+ <path d="M12 3C7.03 3 3 7.03 3 12v6a2 2 0 002 2h3v-7H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-3v7h3a2 2 0 002-2v-6c0-4.97-4.03-9-9-9z"/>
+ </symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24">
+ <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+ </symbol>
+ <symbol id="i-play" viewBox="0 0 24 24">
+ <path d="M8 5v14l11-7z"/>
+ </symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24">
+ <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+ </symbol>
+ <symbol id="i-replay" viewBox="0 0 24 24">
+ <path d="M12 5V2L7 7l5 5V8c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+ </symbol>
+ <symbol id="i-check" viewBox="0 0 24 24">
+ <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+ </symbol>
+ <symbol id="i-x" viewBox="0 0 24 24">
+ <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+ </symbol>
+ <symbol id="i-warning" viewBox="0 0 24 24">
+ <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+ </symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24">
+ <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+ </symbol>
+ <symbol id="i-target" viewBox="0 0 24 24">
+ <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+ </symbol>
+ <symbol id="i-book" viewBox="0 0 24 24">
+ <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+ </symbol>
+ <symbol id="i-trophy" viewBox="0 0 24 24">
+ <path d="M19 5h-2V3H7v2H3v2c0 2.96 1.61 5.54 4 6.92V17H5v2h14v-2h-2v-3.08c2.39-1.38 4-3.96 4-6.92V5zm-2 2c0 1.65-.83 3.05-2.08 3.88L14 11.43V7h3zm-8 5.43l-.92-.55C7.83 10.05 7 8.65 7 7h3v5.43z"/>
+ </symbol>
+ <symbol id="i-arrow-right" viewBox="0 0 24 24">
+ <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+ </symbol>
+ <symbol id="i-volume" viewBox="0 0 24 24">
+ <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+ </symbol>
+ <symbol id="i-listening" viewBox="0 0 24 24">
+ <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.31 6-6.72h-1.7z"/>
+ </symbol>
+ <symbol id="i-document" viewBox="0 0 24 24">
+ <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+ </symbol>
+ <symbol id="i-pencil" viewBox="0 0 24 24">
+ <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+ </symbol>
+ <symbol id="i-lock" viewBox="0 0 24 24">
+ <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
+ </symbol>
 </svg>
 
-<!-- ========== TOP BAR ========== -->
-<header class="topbar">
- <div class="brand">
- <div class="brand-logo"><svg width="20" height="20" style="color:#0a0e1a"><use href="#i-headphones"/></svg></div>
- <div class="brand-text">
- <div class="title">IELTS LISTENING TEST</div>
- <div class="subtitle">Philadelphia Voice Edition</div>
+<!-- ============================================================
+ PHASE 1: WELCOME============================================================ -->
+<section id="phase-welcome">
+ <div class="welcome-card">
+ <div class="exam-badge">
+ <svg class="icon"><use href="#i-shield"/></svg>
+ Secure Examination Environment
  </div>
- </div>
- <div class="topbar-meta">
- <div class="progress-info" id="progressInfo" style="display:none">
- <svg width="16" height="16"><use href="#i-target"/></svg>
- <span><strong id="answeredCount">0</strong> / 30 Answered</span>
- </div>
- <div class="timer" id="timer">
- <svg><use href="#i-clock"/></svg>
- <span class="time" id="timeDisplay">40:00</span>
- </div>
- <div class="lock-badge" id="lockBadge" style="display:none">
- <svg><use href="#i-lock"/></svg>
- <span>SECURE</span>
- </div>
- </div>
-</header>
+ <h1 class="title">IELTS Listening Practice</h1>
+ <div class="subtitle">Philadelphia Voice Edition · Section 4 — Academic Monologue</div>
 
-<!-- ========== PHASE 1: WELCOME ========== -->
-<section class="phase active" id="phase-welcome">
- <div class="welcome">
- <div class="welcome-header">
- <div class="welcome-eyebrow">OFFICIAL PRACTICE EXAMINATION</div>
- <h1 class="welcome-title">IELTS Academic<br/>Listening Test</h1>
- <p class="welcome-tagline">A complete timed examination featuring 30 complex questions based on a Philadelphia-voiced listening passage. Read all instructions carefully before commencing.</p>
- </div>
+ <div class="divider"></div>
 
- <div class="info-grid">
- <div class="info-card">
- <div class="info-icon"><svg><use href="#i-listening"/></svg></div>
- <div>
- <h3>Listening Phase</h3>
- <p>Audio plays once. You may not pause after the first 30 seconds. Live keywords highlight as the voice progresses.</p>
- </div>
- </div>
- <div class="info-card">
- <div class="info-icon"><svg><use href="#i-target"/></svg></div>
- <div>
- <h3>30 Questions</h3>
- <p>Multiple choice, note completion, sentence completion, and matching questions distributed across four sections.</p>
- </div>
- </div>
- <div class="info-card">
- <div class="info-icon"><svg><use href="#i-clock"/></svg></div>
- <div>
- <h3>40 Minutes Total</h3>
- <p>Approximately 30 minutes for listening and answering, plus 10 minutes to review and submit your answers.</p>
- </div>
- </div>
- </div>
+ <ol class="instructions-list">
+ <li>This examination consists of <strong>30 questions</strong> based on a single audio recording read by the Philadelphia voice.</li>
+ <li>You will first enter a <strong>Listening Phase</strong> where the audio plays and live keywords stream on screen. You may replay the audio once.</li>
+ <li>After listening, you will move to the <strong>Question Phase</strong> where you have <strong>10 minutes</strong> to complete 30 questions across 4 sections.</li>
+ <li>Question types include multiple choice, note completion, sentence completion, and matching.</li>
+ <li>Once the test begins, <strong>navigation is locked</strong>. Closing the tab, refreshing, or switching away will trigger a violation alert and may invalidate your attempt.</li>
+ <li>Your final score includes a band score (0–9), per-section breakdown, and detailed explanations for every incorrect answer.</li>
+ </ol>
 
- <div class="rules">
- <h2><svg><use href="#i-shield"/></svg>Examination Regulations</h2>
- <ul>
- <li><svg><use href="#i-check"/></svg><span><strong>Full attention required.</strong> The audio plays once. Background noise and interruptions will compromise your performance.</span></li>
- <li><svg><use href="#i-check"/></svg><span><strong>No navigation permitted.</strong> Once the test begins, leaving or refreshing the page will be recorded as a violation.</span></li>
- <li><svg><use href="#i-check"/></svg><span><strong>Two-stage process.</strong> You must complete the listening phase before the question phase becomes accessible.</span></li>
- <li><svg><use href="#i-check"/></svg><span><strong>Live keyword assistance.</strong> Relevant phrases highlight automatically as the audio progresses to guide your attention.</span></li>
- <li><svg><use href="#i-check"/></svg><span><strong>Word limits apply.</strong> Several questions require answers of no more than three words. Concision is rewarded.</span></li>
- <li><svg><use href="#i-check"/></svg><span><strong>Results upon submission.</strong> Score, band equivalent, full breakdown, and explanations for every incorrect answer will be displayed.</span></li>
- </ul>
- </div>
-
- <button class="start-btn" id="startBtn" onclick="beginTest()">
- <svg><use href="#i-play"/></svg>
- COMMENCE EXAMINATION
- </button>
- </div>
-</section>
-
-<!-- ========== PHASE 2: LISTENING ========== -->
-<section class="phase" id="phase-listening">
- <div class="listening">
- <div class="listening-hero">
- <div class="listening-eyebrow">
- <span class="rec-dot"></span>
- AUDIO RECORDING IN PROGRESS
- </div>
- <h2 class="listening-title">Listening Passage</h2>
- <p class="listening-subtitle">A reading on audiobooks, neuroscience, and oral tradition — narrated in the Philadelphia voice.</p>
- </div>
-
- <div class="player-card">
- <div class="player-main">
- <button class="play-btn" id="playBtn" onclick="toggleAudio()">
- <svg id="playIcon"><use href="#i-play"/></svg>
- </button>
- <div class="player-info">
- <div class="player-title">Yes, Audiobooks Count as Reading</div>
- <div class="player-author">Narrated by Philadelphia · Elvion AI Voice</div>
- <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
- <div class="time-row">
- <span id="currentTime">0:00</span>
- <span id="durationTime">--:--</span>
- </div>
- </div>
- </div>
- </div>
-
- <div class="keywords-card">
- <div class="keywords-header">
- <div class="keywords-title">
- <svg><use href="#i-key"/></svg>
- LIVE KEYWORD TRACKER
- </div>
- <div class="keywords-hint">Phrases illuminate as they are mentioned</div>
- </div>
- <div class="keywords-stream" id="keywordsStream"></div>
- </div>
-
- <div class="listening-actions">
- <button class="btn-secondary" onclick="restartAudio()">
- <svg><use href="#i-arrow"/></svg>
- Restart Audio
- </button>
- <button class="btn-primary" id="proceedBtn" onclick="proceedToQuestions()" disabled>
- <svg><use href="#i-arrow"/></svg>
- Proceed to Questions
- </button>
- </div>
- </div>
-</section>
-
-<!-- ========== PHASE 3: QUESTIONS ========== -->
-<section class="phase" id="phase-questions">
- <div class="questions-wrap">
- <div class="phase-banner">
- <svg><use href="#i-target"/></svg>
- <div class="phase-banner-text">
- <strong>Question Phase Active.</strong> Answer all30 questions. You may review and revise your responses until time expires or you submit.
- </div>
- </div>
-
- <div id="questionsContainer"></div>
-
- <div class="submit-bar">
- <div class="submit-info">
- <svg width="18" height="18"><use href="#i-target"/></svg>
- <span><strong id="finalAnswered">0</strong> of 30 answered</span>
- </div>
- <button class="btn-primary" onclick="confirmSubmit()" style="padding:14px 28px">
- <svg><use href="#i-check"/></svg>
- Submit Final Answers
- </button>
- </div>
- </div>
-</section>
-
-<!-- ========== PHASE 4: RESULTS ========== -->
-<section class="phase" id="phase-results">
- <div class="results">
- <div class="score-hero">
- <div class="score-trophy"><svg><use href="#i-trophy"/></svg></div>
- <div class="score-eyebrow">EXAMINATION COMPLETE</div>
- <div class="score-display">
- <div class="score-big" id="scoreFinal">0</div>
- <div class="score-fraction">/ 30</div>
- </div>
- <div class="band-display">IELTS BAND EQUIVALENT<strong id="bandScore">5.0</strong></div>
- </div>
-
- <div class="stats-row">
- <div class="stat-box correct">
- <div class="stat-icon"><svg><use href="#i-check"/></svg></div>
- <div class="stat-value" id="correctCount">0</div>
- <div class="stat-label">Correct</div>
- </div>
- <div class="stat-box wrong">
- <div class="stat-icon"><svg><use href="#i-x"/></svg></div>
- <div class="stat-value" id="wrongCount">0</div>
- <div class="stat-label">Incorrect</div>
- </div>
- <div class="stat-box unanswered">
- <div class="stat-icon"><svg><use href="#i-warning"/></svg></div>
- <div class="stat-value" id="unansweredCount">0</div>
- <div class="stat-label">Unanswered</div>
- </div>
- <div class="stat-box score-color">
- <div class="stat-icon"><svg><use href="#i-chart"/></svg></div>
- <div class="stat-value" id="accuracyRate">0%</div>
- <div class="stat-label">Accuracy</div>
- </div>
- </div>
-
- <div class="breakdown-card">
- <h3><svg><use href="#i-flag"/></svg>Section Breakdown</h3>
- <div id="sectionBreakdown"></div>
- </div>
-
- <div class="answers-review">
- <h3><svg><use href="#i-book"/></svg>Detailed Answer Review</h3>
- <div id="reviewContainer"></div>
+ <div class="warning-box">
+ <svg class="icon"><use href="#i-warning"/></svg>
+ <p><strong>Anti-cheat notice.</strong> Tab switching, copy attempts, and page exits are monitored. By clicking <em>Begin Examination</em> you consent to fullscreen mode and accept these conditions.</p>
  </div>
 
  <div class="action-row">
- <button class="btn-secondary" onclick="location.reload()">
- <svg><use href="#i-arrow"/></svg>
- Retake Examination
+ <button class="btn btn-primary" id="startBtn">
+ Begin Examination
+ <svg class="icon"><use href="#i-arrow-right"/></svg>
+ </button>
+ <button class="btn btn-ghost" id="previewBtn">
+<svg class="icon"><use href="#i-volume"/></svg>
+ Preview Audio
  </button>
  </div>
  </div>
 </section>
 
-<!-- ========== CONFIRM SUBMIT MODAL ========== -->
-<div class="modal-bg" id="confirmModal">
- <div class="modal">
- <div class="modal-icon"><svg><use href="#i-warning"/></svg></div>
- <h3>Submit Final Answers?</h3>
- <p id="modalBody">You are about to submit your final answers. This action cannot be undone.</p>
- <div class="modal-actions">
- <button class="btn-secondary" onclick="closeModal()">Continue Review</button>
- <button class="btn-primary" onclick="submitTest()">Submit Now</button>
+<!-- ============================================================
+ PHASE 2: LISTENING
+============================================================ -->
+<section id="phase-listening">
+ <header class="exam-header">
+ <div class="brand">
+ <svg class="icon"><use href="#i-headphones"/></svg>
+ Philadelphia Voice · IELTS Listening
  </div>
+ <div class="meta">
+ <span><svg class="icon"><use href="#i-document"/></svg> Section 4</span>
+ <span><svg class="icon"><use href="#i-target"/></svg> 30 Questions</span>
+ <span class="timer" id="listeningTimer">
+ <svg class="icon"><use href="#i-clock"/></svg>
+ <span id="listeningTime">30:00</span>
+ </span>
+ </div>
+ </header>
+
+ <div class="listening-stage">
+ <div class="player-section">
+ <div class="player-card">
+ <div class="voice-indicator">
+ <div class="voice-avatar">
+ <svg class="icon"><use href="#i-listening"/></svg>
+ </div>
+ <div class="voice-info">
+ <div class="name">Philadelphia · Female Voice</div>
+ <div class="status"><span class="live-dot"></span> <span id="playbackStatus">Ready</span></div>
+ </div>
+ </div>
+
+ <div class="audio-wave" id="audioWave">
+ <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+ <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+ <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+ <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+ <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+ </div>
+
+ <div class="audio-controls">
+ <button class="ctrl-btn" id="replayBtn" title="Replay (once)">
+ <svg class="icon"><use href="#i-replay"/></svg>
+ </button>
+ <button class="ctrl-btn play" id="playBtn">
+ <svg class="icon" id="playIcon"><use href="#i-play"/></svg>
+ </button>
+ <button class="ctrl-btn" id="stopBtn" title="Stop">
+ <svg class="icon"><use href="#i-pause"/></svg>
+ </button>
+ </div>
+
+ <div class="progress-container">
+ <div class="progress-meta">
+ <span id="currentTime">0:00</span>
+ <span id="remainingTime">0:00</span>
+ </div>
+ <div class="progress-track">
+ <div class="progress-fill" id="progressFill"></div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <aside class="keywords-panel">
+ <div class="panel-title">
+ <svg class="icon"><use href="#i-listening"/></svg>
+ Live Keyword Stream
+ </div>
+ <p class="panel-hint">As Philadelphia reads, key concepts surface here. Use them as anchors for your answers.</p>
+ <div class="keywords-stream" id="keywordsStream"></div>
+ </aside>
+ </div>
+
+ <footer class="listening-footer">
+ <div class="replay-info">
+ <svg class="icon"><use href="#i-replay"/></svg>
+ <span>Replay used: <strong id="replayCount">0 / 1</strong></span>
+ </div>
+ <button class="btn btn-light" id="proceedBtn" disabled>
+ I Have Finished Listening
+ <svg class="icon"><use href="#i-arrow-right"/></svg>
+ </button>
+ </footer>
+</section>
+
+<!-- ============================================================
+ PHASE 3: QUESTIONS
+============================================================ -->
+<section id="phase-questions">
+ <div class="exam-toolbar">
+ <div class="toolbar-left">
+ <div class="toolbar-section">Section 4 · Academic Monologue</div>
+ <div class="answered-count">Answered: <strong id="answeredCount">0</strong>/30</div>
+ </div>
+ <div class="progress-bar-thin"><div class="fill" id="toolbarProgress"></div></div>
+ <div class="toolbar-right">
+ <div class="timer" id="questionsTimer">
+ <svg class="icon"><use href="#i-clock"/></svg>
+ <span id="questionsTime">10:00</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="questions-container" id="questionsContainer"></div>
+
+ <div class="submit-bar">
+ <div class="warning" id="submitWarning">
+ <svg class="icon"><use href="#i-warning"/></svg>
+ <span id="warningText">All questions must be answered</span>
+ </div>
+ <button class="btn btn-light" id="submitBtn">
+ Submit Examination
+ <svg class="icon"><use href="#i-check"/></svg>
+ </button>
+ </div>
+</section>
+
+<!-- ============================================================
+ PHASE 4: RESULTS
+============================================================ -->
+<section id="phase-results">
+ <div class="results-wrapper">
+ <div class="results-header">
+ <div class="crest"><svg class="icon"><use href="#i-trophy"/></svg></div>
+ <h1>Examination Complete</h1>
+ <div class="sub">IELTS Listening · Philadelphia Voice Edition</div>
+ </div>
+
+ <div class="score-card">
+ <div class="score-block">
+ <div class="score-label">Raw Score</div>
+ <div class="score-value" id="rawScore">0</div>
+ <div class="score-meta">out of 30</div>
+ </div>
+ <div class="score-block">
+ <div class="score-label">Percentage</div>
+ <div class="score-value" id="percentScore">0%</div>
+ <div class="score-meta">accuracy rate</div>
+ </div>
+ <div class="score-block">
+ <div class="score-label">IELTS Band</div>
+ <div class="score-value band" id="bandScore">0.0</div>
+ <div class="score-meta">estimated listening</div>
+ </div>
+ </div>
+
+ <div class="section-breakdown" id="sectionBreakdown"></div>
+
+ <div class="review-title">
+ <svg class="icon"><use href="#i-document"/></svg>
+ Detailed Answer Review
+ </div>
+ <div class="review-list" id="reviewList"></div>
+
+ <div class="results-actions">
+ <button class="btn btn-primary" onclick="location.reload()">
+ <svg class="icon"><use href="#i-replay"/></svg>
+ Retake Examination
+ </button>
+ <button class="btn btn-ghost" onclick="window.print()">
+ <svg class="icon"><use href="#i-document"/></svg>
+ Print Results
+ </button>
+ </div>
+ </div>
+</section>
+
+<!-- ============================================================
+ MODAL: VIOLATION WARNING
+============================================================ -->
+<div class="modal-backdrop" id="violationModal">
+ <div class="modal-card">
+ <div class="icon-wrap"><svg class="icon"><use href="#i-warning"/></svg></div>
+ <h3 id="violationTitle">Navigation Locked</h3>
+ <p id="violationText">You cannot leave this page during the examination. Tab switching has been logged.</p>
+ <button class="btn btn-danger" onclick="document.getElementById('violationModal').classList.remove('show')">
+ I Understand
+ </button>
  </div>
 </div>
 
@@ -1039,781 +909,569 @@ webkit-text-fill-color: transparent;
 
 <script>
 // ============================================================
-// IELTS LISTENING TEST — Philadelphia Voice Edition
-// ============================================================
-
-const AUDIO_URL = "https://elvionai.com.ng/audios/8875eb4b-41ce-4b87-a844-6aac2e8e.MP3";
-const TOTAL_TIME = 40 * 60; // 40 minutes in seconds
-const LISTENING_DURATION = 360; // ~6 min expected audio length
-
-// Keywords synced with audio timestamps (in seconds, relative to audio start)
-const KEYWORDS = [
- { text: "audiobook", t: 5 },
- { text: "literary snobbery", t: 18 },
- { text: "brain science", t: 48 },
- { text: "neuroscience", t: 65 },
- { text: "identical neural pathways", t: 85 },
- { text: "cognitive engine", t: 105 },
- { text: "oral storytelling", t: 130 },
- { text: "Johannes Gutenberg", t: 152 },
- { text: "African literature", t: 178 },
- { text: "griots of West Africa", t: 200 },
- { text: "democratize knowledge", t: 232 },
- { text: "voice actor", t: 268 },
- { text: "literary snobs", t: 308 },
- { text: "expand your mind", t: 338 }
-];
-
-// 30 IELTS-style questions with answers & explanations
-const QUESTIONS = [
- // SECTION 1 — Multiple Choice (Q1-Q8)
- {
- section: 1,
- type: "mcq",
- q: "The conversation the author describes with the 'aunt' takes place:",
- options: [
- { id: "A", text: "In a quiet library between strangers" },
- { id: "B", text: "Online, almost every single week" },
- { id: "C", text: "During a formal book review panel" },
- { id: "D", text: "On a university campus" }
- ],
- answer: "B",
- explanation: "The article explicitly states the same conversation happens online 'almost every single week' when the author mentions being 'tired of having the same conversation online almost every single week with some aunty who insists that audiobooks don't count as reading.'"
- },
- {
- section: 1,
- type: "mcq",
- q: "According to the author, what do 'book purists' typically assume about audiobook listening?",
- options: [
- { id: "A", text: "It requires more mental effort than reading" },
- { id: "B", text: "It is a form of cheating because it is passive" },
- { id: "C", text: "It is only suitable for fiction" },
- { id: "D", text: "It improves comprehension significantly" }
- ],
- answer: "B",
- explanation: "The author writes, 'Book purists assume that listening to a voice read words to you is somehow cheating, as if the brain is sitting idle while the audiobook plays.' This reveals the assumption that listening is a passive, cheat-like activity."
- },
- {
- section: 1,
- type: "mcq",
- q: "The author introduces neuroscience primarily to argue that:",
- options: [
- { id: "A", text: "Audiobooks are superior to physical books" },
- { id: "B", text: "Both reading and listening activate identical neural pathways" },
- { id: "C", text: "Listening harms brain development" },
- { id: "D", text: "Physical books should be replaced entirely" }
- ],
- answer: "B",
- explanation: "The article cites neuroscience findings to demonstrate that the brain activates the same regions whether reading printed text or listening to spoken words, using this to dismantle the 'passive listener' argument. The phrase 'identical neural pathways' appears directly in the text."
- },
- {
- section: 1,
- type: "mcq",
- q: "The metaphor comparing audiobooks to digital photographs argues that:",
- options: [
- { id: "A", text: "Digital media is always inferior to physical media" },
- { id: "B", text: "The delivery format does not determine the value of the content" },
- { id: "C", text: "Photography and literature share identical audiences" },
- { id: "D", text: "Photographs should only be printed on paper" }
- ],
- answer: "B",
- explanation: "The author draws a parallel: 'No one argues that a digital photograph is less of a photograph than a printed one. The container does not determine the content.' This metaphor reframes the debate around format rather than substance."
- },
- {
- section: 1,
- type: "mcq",
- q: "Johannes Gutenberg is mentioned because he:",
- options: [
- { id: "A", text: "Invented the audiobook player device" },
- { id: "B", text: "Represents the relatively recent invention of mass-printed books" },
- { id: "C", text: "Was a famous audiobook narrator" },
- { id: "D", text: "Openly opposed oral storytelling traditions" }
- ],
- answer: "B",
- explanation: "Gutenberg is cited to emphasize how recent the printed-book tradition actually is in human history: 'Gutenberg invented his press in the 1440s. The printed book, as we know it, is barely six centuries old.' This historical framing contextualizes audiobooks as part of a longer continuum of storytelling formats."
- },
- {
- section: 1,
- type: "mcq",
- q: "According to the author, the griots of West Africa were:",
- options: [
- { id: "A", text: "Early opponents of oral tradition" },
- { id: "B", text: "Living libraries who memorized and performed genealogical records" },
- { id: "C", text: "The first published novelists" },
- { id: "D", text: "Critics of audiobook culture" }
- ],
- answer: "B",
- explanation: "The article describes griots as 'living libraries' who 'memorized centuries of genealogical records, historical battles, cultural values, and entire epics, then performed them from memory with rhythm, cadence, and vocal mastery.' They are used to elevate the legitimacy of audio-based storytelling."
- },
- {
- section: 1,
- type: "mcq",
- q: "The author uses the description of daily life in Lagos primarily to illustrate:",
- options: [
- { id: "A", text: "The poor quality of public transportation" },
- { id: "B", text: "How audiobooks convert wasted time into productive learning" },
- { id: "C", text: "The importance of relocating abroad" },
- { id: "D", text: "Why physical books are impractical in cities" }
- ],
- answer: "B",
- explanation: "The Lagos routine is used as a concrete example of how 'audiobooks turn dead time into productive time.' The author describes morning commutes, gym sessions, and cooking hours — illustrating how busy professionals reclaim hours through listening."
- },
- {
- section: 1,
- type: "mcq",
- q: "What does the author claim audiobooks ultimately do for busy professionals?",
- options: [
- { id: "A", text: "Replace the need for sleep entirely" },
- { id: "B", text: "Democratize knowledge by reclaiming scattered hours" },
- { id: "C", text: "Eliminate all daily commute time" },
- { id: "D", text: "Make physical books completely obsolete" }
- ],
- answer: "B",
- explanation: "The author explicitly writes that audiobooks 'democratize knowledge.' They allow people with demanding schedules and chaotic commutes to access literature, transforming 'scattered' uncommitted hours into learning opportunities."
- },
-
- // SECTION 2 — Note Completion (Q9-Q16)
- {
- section: 2,
- type: "fill",
- q: "<strong>Cognitive science findings:</strong> Reading printed text and listening to spoken words activate the same9 __________.",
- answer: ["neural pathways"],
- explanation: "The phrase 'identical neural pathways' appears explicitly in the article's neuroscience section, identifying the brain regions shared between reading and listening."
- },
- {
- section: 2,
- type: "fill",
- q: "The brain constructs scenes, feels tension, and analyzes 10 __________ during both reading and listening.",
- answer: ["subtext"],
- explanation: "The article states the brain 'still constructs scenes, still feels tension, still analyzes subtext' regardless of whether input is visual or auditory. 'Subtext' is the precise term used."
- },
- {
- section: 2,
- type: "fill",
- q: "Both methods require identical cognitive work of comprehension, critical thinking, and 11 __________.",
- answer: ["empathy building"],
- explanation: "The article explicitly lists these three as identical cognitive demands: 'comprehension, critical thinking, and empathy building are required in equal measure.'"
- },
- {
- section: 2,
- type: "fill",
- q: "<strong>Historical context:</strong> Before the printing press, stories were preserved through the 12 __________.",
- answer: ["spoken word", "oral word", "oral tradition", "spoken tradition"],
- explanation: "The article states 'before Gutenberg, before paper, before ink, stories lived in the spoken word.' Multiple phrasings are accepted as they all reference the same concept from the passage."
- },
- {
- section: 2,
- type: "fill",
- q: "The 13 __________ of West Africa were living libraries who memorized centuries of records.",
- answer: ["griots"],
- explanation: "The article names them directly: 'the griots of West Africa were living libraries.' This is a proper noun referring to the West African oral historians mentioned throughout the passage."
- },
- {
- section: 2,
- type: "fill",
- q: "They delivered stories with rhythm, cadence, and 14 __________.",
- answer: ["vocal mastery"],
- explanation: "The article uses the exact phrase 'rhythm, cadence, and vocal mastery' to describe how griots performed. This three-part construction is quoted directly from the source."
- },
- {
- section: 2,
- type: "fill",
- q: "<strong>Modern practicality:</strong> Many professionals live in cities like 15 __________ with demanding schedules.",
- answer: ["lagos"],
- explanation: "The article references Lagos specifically as an example of a busy city where professionals juggle demanding schedules. The writer uses Lagos as a concrete case study of urban professional life."
- },
- {
- section: 2,
- type: "fill",
- q: "Audiobooks turn chaotic commutes into productive learning time through intelligent 16 __________.",
- answer: ["time management"],
- explanation: "The article concludes that audiobooks represent 'intelligent time management' — a phrase that frames audiobook listening as a deliberate productivity strategy rather than a passive indulgence."
- },
-
- // SECTION 3 — Sentence Completion (Q17-Q23)
- {
- section: 3,
- type: "fill",
- q: "The author argues that literary snobbery is the most exhausting form of 17 __________.",
- answer: ["gatekeeping in the modern world", "gatekeeping", "modern gatekeeping"],
- explanation: "The article directly states 'literary snobbery is the most exhausting form of gatekeeping in the modern world.' Any close paraphrase capturing 'gatekeeping' is accepted."
- },
- {
- section: 3,
- type: "fill",
- q: "When an author reads their own memoir, listeners gain access to the author's 18 __________.",
- answer: ["rhythmic pacing", "intended rhythm", "exact rhythmic pacing"],
- explanation: "The article states listeners 'gain access to the exact rhythmic pacing that the author intended' — emphasizing authorial intent that silent reading cannot reproduce."
- },
- {
- section: 3,
- type: "fill",
- q: "According to the article, the goal of literature was never to worship paper, ink, or 19 __________.",
- answer: ["glue"],
- explanation: "The author explicitly writes 'the goal of literature was never to worship paper, ink, or glue.' This memorable three-item list appears verbatim and tests close-listening precision."
- },
- {
- section: 3,
- type: "fill",
- q: "The author claims an audiobook often offers a deeper 20 __________ than reading silently.",
- answer: ["emotional experience"],
- explanation: "The article asserts audiobooks can deliver 'a deeper emotional experience than reading silently' because voice actors add tone, accent, and emotional texture that silent reading cannot replicate."
- },
- {
- section: 3,
- type: "fill",
- q: "Literary purists assume that listening to a voice is as passive as 21 __________.",
- answer: ["watching television"],
- explanation: "The article makes this exact comparison: 'listening to a voice is as passive as watching television' — a deliberate analogy that the author uses to dismiss the passive-listener assumption."
- },
- {
- section: 3,
- type: "fill",
- q: "African literature was historically built on the foundation of spoken 22 __________.",
- answer: ["genius", "storytelling", "word"],
- explanation: "The article states 'African literature was built on the foundation of spoken genius, not written tradition.' 'Spoken genius' is the precise phrase; 'storytelling' is accepted as a close synonym."
- },
- {
- section: 3,
- type: "fill",
- q: "Reading words silently in your head requires you to 23 __________ the tone.",
- answer: ["guess"],
- explanation: "The article directly contrasts reading silently (where you 'have to guess the tone') with audiobooks (where the voice provides the tone). 'Guess' is the specific verb used."
- },
-
- // SECTION 4 — Matching (Q24-Q30)
- {
- section: 4,
- type: "match",
- q: "24. The most exhausting form of gatekeeping in the modern world.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "H",
- explanation: "This phrase describes literary snobs — option H (Literary snobs). The article explicitly calls literary snobbery 'the most exhausting form of gatekeeping in the modern world.'"
- },
- {
- section: 4,
- type: "match",
- q: "25. Used as a metaphor to show that the delivery format does not determine content validity.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "E",
- explanation: "The digital photographs metaphor — option E — is used precisely to argue that format doesn't determine whether something counts as 'real.' Just as a digital photo is still a photograph, an audiobook is still reading."
- },
- {
- section: 4,
- type: "match",
- q: "26. The historical precedent for preserving stories before printed books existed.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "B",
- explanation: "Oral storytelling — option B — is the historical tradition referenced as the original method of preserving and transmitting stories before Gutenberg's press made printed books possible."
- },
- {
- section: 4,
- type: "match",
- q: "27. Their discoveries show identical brain activation regardless of input method.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "A",
- explanation: "Cognitive neuroscience — option A — is the field whose discoveries ('identical neural pathways') demonstrate that listening and reading activate the same brain regions, debunking the passive-listener myth."
- },
- {
- section: 4,
- type: "match",
- q: "28. Performers who add rhythm, sarcasm, and accents to spoken literature.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "F",
- explanation: "Voice performance — option F — refers to the artistic dimension added by voice actors. The article describes how they bring 'rhythm, sarcasm, and accents,' enriching the listening experience beyond what silent reading can offer."
- },
- {
- section: 4,
- type: "match",
- q: "29. Living libraries who memorized centuries of genealogical records.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "D",
- explanation: "West African griots — option D — are specifically described as 'living libraries' who 'memorized centuries of genealogical records, historical battles, cultural values, and entire epics.'"
- },
- {
- section: 4,
- type: "match",
- q: "30. Requires the reader to guess the tone that an audiobook provides directly.",
- options: ["A", "B", "C", "D", "E", "F", "G", "H"],
- answer: "G",
- explanation: "Reading silently — option G — is contrasted with audiobooks precisely because silent readers must 'guess the tone.' Audiobooks eliminate this guesswork by providing the tone directly through voice performance."
- }
-];
-
-const MATCH_OPTIONS = {
- A: "Cognitive neuroscience",
- B: "Oral storytelling",
- C: "Johannes Gutenberg",
- D: "West African griots",
- E: "Digital photographs metaphor",
- F: "Voice performance",
- G: "Reading silently",
- H: "Literary snobs"
-};
-
-const SECTION_INFO = {
- 1: { name: "Section 1", desc: "Multiple Choice — Choose the correct option (A, B, C, or D)" },
- 2: { name: "Section 2", desc: "Note Completion — Complete the notes with no more than three words" },
- 3: { name: "Section 3", desc: "Sentence Completion — Complete the sentences with no more than three words" },
- 4: { name: "Section 4", desc: "Matching — Match each item with the correct option (A–H)" }
-};
-
-// ============================================================
 // STATE
 // ============================================================
-let state = {
+const state = {
  phase: 'welcome',
- timeLeft: TOTAL_TIME,
+ timer: { listening: 30*60, questions: 10*60 },
+ intervals: {},
+ audioPlayed: false,
+ replayUsed: 0,
  answers: {},
- audioPlaying: false,
- audioCurrentTime: 0,
- audioDuration: 0,
- triggeredKeywords: new Set(),
- intervalId: null,
- testStarted: false
+ violationCount: 0,
+ startedAt: null,
 };
+
+const audio = document.getElementById('audio');
+
+// ============================================================
+// KEYWORD STREAM - synced with audio playback
+// Timestamps calibrated for the Philadelphia voice reading
+// of "Yes, Audiobooks Count as Reading"
+// ============================================================
+const KEYWORDS = [
+ { time: 5, text: 'audiobook', label: 'Introduction' },
+ { time: 22, text: 'literary snobbery', label: 'The Critique' },
+ { time: 55, text: 'brain science', label: 'Neuroscience' },
+ { time: 78, text: 'identical neural pathways', label: 'Cognitive Evidence' },
+ { time: 105, text: 'oral storytelling', label: 'Historical Roots' },
+ { time: 130, text: 'Johannes Gutenberg', label: 'The Printing Press' },
+ { time: 158, text: 'griots of West Africa', label: 'African Tradition' },
+ { time: 185, text: 'democratize knowledge', label: 'Modern Access' },
+ { time: 210, text: 'voice actor', label: 'Performance' },
+ { time: 240, text: 'rhythmic pacing', label: 'Artistic Dimension' },
+ { time: 268, text: 'literary snobs', label: 'The Gatekeepers' },
+ { time: 295, text: 'expand your mind', label: 'Closing Thought' },
+];
+
+let activeKeywordIndex = -1;
+
+// ============================================================
+// ANSWER KEY & EXPLANATIONS
+// ============================================================
+const ANSWERS = {
+1: { correct: 'B', explain: 'The article states the conversation happens "online every single week" between the author and someone questioning audiobook validity.' },
+ 2: { correct: 'C', explain: 'Book purists assume that "listening to a voice is as passive as watching television," considering it a form of cheating because the listener does not physically read.' },
+ 3: { correct: 'B', explain: 'The author cites neuroscience to demonstrate that "reading printed text and listening to spoken words activate the same neural pathways," proving both are cognitively equivalent.' },
+ 4: { correct: 'C', explain: 'The photograph metaphor argues that judging an audiobook by its delivery container is like judging digital photos as "not real" — the value lies in the content, not the format.' },
+ 5: { correct: 'B', explain: 'Gutenberg is referenced to show that mass-printed books are a relatively recent invention, meaning oral storytelling dominated human literary history for thousands of years.' },
+ 6: { correct: 'B', explain: 'The article describes griots as "living libraries" who memorized and performed centuries of genealogical records, poetry, and history.' },
+ 7: { correct: 'B', explain: 'The Lagos routine illustrates how audiobooks convert chaotic, stressful commutes into productive learning time for busy modern professionals.' },
+ 8: { correct: 'B', explain: 'The author argues audiobooks "democratize knowledge" by turning dead time — commutes, chores — into productive intellectual engagement.' },
+ 9: { correct: 'neural pathways', explain: 'The transcript confirms "reading printed text and listening to spoken words activate the same neural pathways."' },
+ 10: { correct: 'subtext', explain: 'The brain "constructs scenes, feels tension, and analyzes subtext" regardless of input method.' },
+ 11: { correct: 'empathy building', explain: 'Both methods require "comprehension, critical thinking, and empathy building."' },
+ 12: { correct: 'oral storytelling', explain: 'The article states "before the printing press, stories were preserved through oral storytelling."' },
+ 13: { correct: 'griots', explain: 'The author writes "the griots of West Africa were living libraries."' },
+ 14: { correct: 'vocal mastery', explain: 'Griots delivered stories with "rhythm, cadence, and vocal mastery."' },
+ 15: { correct: 'Lagos', explain: 'The article uses Lagos as the example of a city where professionals face demanding schedules.' },
+ 16: { correct: 'time management', explain: 'Audiobooks "turn chaotic commutes into productive learning time" through what the author frames as intelligent time management.' },
+ 17: { correct: 'gatekeeping', explain: 'The transcript: "literary snobbery is the most exhausting form of gatekeeping in the modern world."' },
+ 18: { correct: 'rhythmic pacing', explain: 'When an author narrates, listeners gain "the exact rhythmic pacing that the author intended."' },
+ 19: { correct: 'glue', explain: 'The article: "the goal of literature was never to worship paper, ink, or glue."' },
+ 20: { correct: 'emotional experience', explain: 'The author claims an audiobook often offers a "deeper emotional experience than reading silently" through vocal performance.' },
+ 21: { correct: 'watching television', explain: 'Purists assume listening is "as passive as watching television."' },
+ 22: { correct: 'genius', explain: 'African literature was "built on the foundation of spoken genius, not written tradition."' },
+ 23: { correct: 'guess', explain: '"Reading words in your head requires you to guess the tone."' },
+ 24: { correct: 'H', explain: 'Literary snobs are described as engaging in "the most exhausting form of gatekeeping in the modern world."' },
+ 25: { correct: 'E', explain: 'The digital photographs metaphor shows the value lies in the content, not the delivery container.' },
+ 26: { correct: 'B', explain: 'Oral storytelling is the historical precedent for preserving human stories before printed books existed.' },
+ 27: { correct: 'A', explain: 'Cognitive neuroscience proves identical brain activation occurs regardless of reading or listening input.' },
+ 28: { correct: 'F', explain: 'Voice performance adds rhythm, sarcasm, and accents — a new artistic dimension.' },
+ 29: { correct: 'D', explain: 'West African griots were living libraries who memorized centuries of genealogical records.' },
+ 30: { correct: 'G', explain: 'Reading silently requires you to guess the tone that an audiobook provides directly through performance.' },
+};
+
+// ============================================================
+// QUESTIONS DEFINITION (rendered dynamically)
+// ============================================================
+const QUESTIONS = [
+ // SECTION 1: MULTIPLE CHOICE (1-8)
+ { section: 'Section A', title: 'Multiple Choice', range: 'Questions 1 – 8',
+ instr: 'Choose the correct letter, <strong>A, B, C, or D</strong>.',
+ items: [
+ { id: 1, text: 'Where does the recurring conversation the author describes take place?',
+ opts: [['A','In a library between strangers'],['B','Online every single week'],['C','During a formal book review'],['D','At a university lecture hall']] },
+ { id: 2, text: 'According to the article, what do "book purists" typically assume about listening to audiobooks?',
+ opts: [['A','It enhances imagination more than reading'],['B','It is cheating because it requires no effort'],['C','It is as passive as watching television'],['D','It improves vocabulary faster']] },
+ { id: 3, text: 'The author introduces neuroscience findings primarily in order to:',
+ opts: [['A','Prove audiobooks are superior to physical books'],['B','Show reading and listening activate identical neural pathways'],['C','Argue against scientific research'],['D','Promote brain-training apps']] },
+ { id: 4, text: 'The metaphor comparing audiobooks to digital photographs argues that:',
+ opts: [['A','Digital media is always inferior'],['B','Photographs and literature share the same audience'],['C','The delivery container does not determine the value of content'],['D','Photos should always be printed']] },
+ { id: 5, text: 'Johannes Gutenberg is mentioned because he:',
+ opts: [['A','Invented the audiobook device'],['B','Invented the printing press, making mass-printed books recent'],['C','Was a famous audiobook narrator'],['D','Disagreed with oral storytelling']] },
+ { id: 6, text: 'According to the article, the griots of West Africa were:',
+ opts: [['A','Critics of audiobook culture'],['B','Living libraries who memorized genealogical records'],['C','The first published novelists'],['D','European traders']] },
+ { id: 7, text: 'The author describes the daily commute in Lagos primarily to illustrate that audiobooks:',
+ opts: [['A','Reduce the quality of public transit'],['B','Convert wasted time into productive learning time'],['C','Are only useful in wealthy cities'],['D','Make physical books obsolete']] },
+ { id: 8, text: 'What broader social function does the author claim audiobooks perform?',
+ opts: [['A','Replace the need for sleep'],['B','Democratize knowledge by turning dead time into productive time'],['C','Eliminate commuting entirely'],['D','Reduce literacy rates']] },
+ ]},
+
+ // SECTION 2: NOTE COMPLETION (9-16)
+ { section: 'Section B', title: 'Note Completion', range: 'Questions 9 – 16',
+ instr: 'Complete the notes below. Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.',
+ items: [
+ { id: 9, type: 'fill', text: 'Reading printed text and listening to spoken words activate the same',
+ label: '(9) _______________' },
+ { id: 10, type: 'fill', text: 'The brain constructs scenes, feels tension, and analyzes',
+ label: '(10) _______________' },
+ { id: 11, type: 'fill', text: 'Both methods require identical work of comprehension, critical thinking, and',
+ label: '(11) _______________' },
+ { id: 12, type: 'fill', text: 'Before the printing press, stories were preserved through',
+ label: '(12) _______________' },
+ { id: 13, type: 'fill', text: 'The',
+ label: '(13) _______________ of West Africa were living libraries.' },
+ { id: 14, type: 'fill', text: 'They delivered stories with rhythm, cadence, and',
+ label: '(14) _______________' },
+ { id: 15, type: 'fill', text: 'Many professionals live in cities like',
+ label: '(15) _______________ with demanding schedules.' },
+ { id: 16, type: 'fill', text: 'Audiobooks turn chaotic commutes into productive time through intelligent',
+ label: '(16) _______________' },
+ ], noteContext: 'The Author\'s Argument for Audiobooks' },
+
+ // SECTION 3: SENTENCE COMPLETION (17-23)
+ { section: 'Section C', title: 'Sentence Completion', range: 'Questions 17 – 23',
+ instr: 'Complete the sentences. Write <strong>NO MORE THAN THREE WORDS</strong>.',
+ items: [
+ { id: 17, text: 'The author argues that literary snobbery is the most exhausting form of _______.' },
+ { id: 18, text: 'When an author reads their own memoir, listeners gain access to the author\'s intended _______.' },
+ { id: 19, text: 'According to the article, the goal of literature was never to worship paper, ink, or _______.' },
+ { id: 20, text: 'The author claims that an audiobook often offers a deeper _______ than reading silently.' },
+ { id: 21, text: 'Literary purists assume that listening to a voice is as passive as _______.' },
+ { id: 22, text: 'African literature was historically built on the foundation of spoken _______.' },
+ { id: 23, text: 'Reading words silently in your head requires you to _______ the tone.' },
+ ]},
+
+ // SECTION 4: MATCHING (24-30)
+ { section: 'Section D', title: 'Matching', range: 'Questions 24 – 30',
+ instr: 'Match each statement with the correct option, <strong>A – H</strong>.',
+ items: [
+ { id: 24, text: 'Described as engaging in the most exhausting form of gatekeeping in the modern world.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 25, text: 'Used as a metaphor to argue that delivery format does not determine content validity.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 26, text: 'Historical precedent for preserving human stories long before the printing press.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 27, text: 'Discoveries that prove identical brain activation regardless of input method.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 28, text: 'Performers who add rhythm, sarcasm, and accents to spoken literature.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 29, text: 'Living libraries who memorized centuries of genealogical records.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ { id: 30, text: 'A method that requires the reader to guess the tone that an audiobook provides directly.',
+ opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
+ ]},
+];
+
+// ============================================================
+// ANTI-CHEAT & NAVIGATION LOCK
+// ============================================================
+function lockNavigation() {
+ document.body.classList.add('exam-active');
+
+ // Prevent refresh / shortcut keys
+ document.addEventListener('keydown', e => {
+ if ((e.ctrlKey || e.metaKey) && ['r','R','w','W','t','T','p','P'].includes(e.key)) {
+ e.preventDefault();
+ showViolation('Navigation Locked', 'Keyboard shortcuts for refresh and tab actions are disabled during the examination.');
+ }
+ if (e.key === 'F5') { e.preventDefault(); showViolation('Refresh Blocked', 'You cannot refresh the page during the examination.'); }
+ if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','I','j','J','c','C'].includes(e.key)) {
+ e.preventDefault();
+ }
+ });
+
+ // Before unload window.addEventListener('beforeunload', e => {
+ if (state.phase === 'listening' || state.phase === 'questions') {
+ e.preventDefault(); e.returnValue = '';
+ }
+ });
+
+ // Right-click disabled
+ document.addEventListener('contextmenu', e => {
+ if (state.phase !== 'welcome' && state.phase !== 'results') e.preventDefault();
+ });
+
+ // Copy/paste disabled
+ document.addEventListener('copy', e => { if (state.phase === 'questions') e.preventDefault(); });
+
+ // Visibility change
+ document.addEventListener('visibilitychange', () => {
+ if (document.hidden && (state.phase === 'listening' || state.phase === 'questions')) {
+ state.violationCount++;
+ showViolation('Tab Switch Detected', 'You have switched away from the examination. This incident has been logged. Violations: ' + state.violationCount);
+ }
+ });
+
+ // Fullscreen request
+ const el = document.documentElement;
+ if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+}
+
+function showViolation(title, text) {
+ document.getElementById('violationTitle').textContent = title;
+ document.getElementById('violationText').textContent = text;
+ document.getElementById('violationModal').classList.add('show');
+}
+
+// ============================================================
+// PHASE TRANSITIONS
+// ============================================================
+function showPhase(name) {
+ ['welcome','listening','questions','results'].forEach(p => {
+ document.getElementById('phase-' + p).style.display = 'none';
+ });
+ document.getElementById('phase-' + name).style.display = name === 'listening' || name === 'questions' ? 'flex' : 'block';
+ state.phase = name;
+}
+
+document.getElementById('startBtn').addEventListener('click', () => {
+ showPhase('listening');
+ lockNavigation();
+ startListeningTimer();
+ buildKeywordStream();
+});
+
+document.getElementById('previewBtn').addEventListener('click', () => {
+ showPhase('listening');
+ buildKeywordStream();
+ audio.muted = false;
+ audio.volume = 0.5;
+});
+
+document.getElementById('proceedBtn').addEventListener('click', () => {
+ clearInterval(state.intervals.listening);
+ showPhase('questions');
+ startQuestionsTimer();
+ renderQuestions();
+ audio.pause();
+ if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+});
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+ if (Object.keys(state.answers).length < 30) {
+ document.getElementById('submitWarning').classList.remove('hidden');
+ document.getElementById('warningText').textContent = (30 - Object.keys(state.answers).length) + ' question(s) unanswered';
+ return;
+ }
+ clearInterval(state.intervals.questions);
+ showPhase('results');
+ renderResults();
+});
+
+// ============================================================
+// AUDIO PLAYBACK
+// ============================================================
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const replayBtn = document.getElementById('replayBtn');
+const stopBtn = document.getElementById('stopBtn');
+const audioWave = document.getElementById('audioWave');
+
+playBtn.addEventListener('click', togglePlay);
+replayBtn.addEventListener('click', () => {
+ if (state.replayUsed >= 1 || audio.currentTime < 1) return;
+ audio.currentTime = 0;
+ state.replayUsed++;
+ document.getElementById('replayCount').textContent = state.replayUsed + ' / 1';
+ audio.play();
+});
+stopBtn.addEventListener('click', () => audio.pause());
+
+function togglePlay() {
+ if (audio.paused) {
+ audio.play();
+ } else {
+ audio.pause();
+ }
+}
+
+audio.addEventListener('play', () => {
+ playIcon.innerHTML = '<use href="#i-pause"/>';
+ audioWave.classList.add('playing');
+ document.getElementById('playbackStatus').textContent = 'Now Reading';
+});
+audio.addEventListener('pause', () => {
+ playIcon.innerHTML = '<use href="#i-play"/>';
+ audioWave.classList.remove('playing');
+ document.getElementById('playbackStatus').textContent = audio.ended ? 'Playback Complete' : 'Paused';
+});
+audio.addEventListener('ended', () => {
+ document.getElementById('playbackStatus').textContent = 'Playback Complete';
+ document.getElementById('proceedBtn').disabled = false;
+});
+audio.addEventListener('timeupdate', () => {
+ const cur = audio.currentTime;
+ const dur = audio.duration || 1;
+ document.getElementById('currentTime').textContent = fmtTime(cur);
+ document.getElementById('remainingTime').textContent = '-' + fmtTime(dur - cur);
+ document.getElementById('progressFill').style.width = (cur / dur * 100) + '%';
+ updateKeywordStream(cur);
+});
+
+function fmtTime(s) {
+ if (!isFinite(s)) return '0:00';
+ const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+ return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// ============================================================
+// KEYWORD STREAM
+// ============================================================
+function buildKeywordStream() {
+ const stream = document.getElementById('keywordsStream');
+ stream.innerHTML = '';
+ KEYWORDS.forEach((k, i) => {
+ const el = document.createElement('div');
+ el.className = 'keyword';
+ el.dataset.idx = i;
+ el.innerHTML = `<div class="label"><svg class="icon"><use href="#i-listening"/></svg>${k.label}</div>${k.text}`;
+ stream.appendChild(el);
+ });
+}
+
+function updateKeywordStream(time) {
+ let newActive = -1;
+ KEYWORDS.forEach((k, i) => {
+ if (time >= k.time) newActive = i;
+ });
+ if (newActive !== activeKeywordIndex && newActive >= 0) {
+ activeKeywordIndex = newActive;
+ document.querySelectorAll('.keyword').forEach((el, i) => {
+ el.classList.remove('active','passed');
+ if (i < activeKeywordIndex) el.classList.add('passed');
+ if (i === activeKeywordIndex) el.classList.add('active');
+ });
+ const activeEl = document.querySelector(`.keyword[data-idx="${activeKeywordIndex}"]`);
+ if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+ }
+}
+
+// ============================================================
+// TIMERS
+// ============================================================
+function startListeningTimer() {
+ const el = document.getElementById('listeningTime');
+ state.intervals.listening = setInterval(() => {
+ state.timer.listening--;
+ const t = formatTimer(state.timer.listening);
+ el.textContent = t;
+ const tm = document.getElementById('listeningTimer');
+ if (state.timer.listening < 60) tm.classList.add('danger');
+ else if (state.timer.listening < 5*60) tm.classList.add('warning');
+ if (state.timer.listening <= 0) {
+ clearInterval(state.intervals.listening);
+ document.getElementById('proceedBtn').disabled = false;
+ }
+ }, 1000);
+}
+
+function startQuestionsTimer() {
+ const el = document.getElementById('questionsTime');
+ state.intervals.questions = setInterval(() => {
+ state.timer.questions--;
+ const t = formatTimer(state.timer.questions);
+ el.textContent = t;
+ const tm = document.getElementById('questionsTimer');
+ if (state.timer.questions < 60) tm.classList.add('danger');
+ else if (state.timer.questions < 3*60) tm.classList.add('warning');
+ if (state.timer.questions <= 0) {
+ clearInterval(state.intervals.questions);
+ document.getElementById('warningText').textContent = 'Time expired — submitting';
+ document.getElementById('submitBtn').click();
+ }
+ }, 1000);
+}
+
+function formatTimer(secs) {
+ if (secs < 0) secs = 0;
+ const m = Math.floor(secs / 60), s = secs % 60;
+ return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
+function renderQuestions() {
+ const container = document.getElementById('questionsContainer');
+ container.innerHTML = '';
+ QUESTIONS.forEach((sec, sIdx) => {
+ const secEl = document.createElement('div');
+ secEl.innerHTML = `
+ <div class="section-header">
+ <div>
+ <div class="num">${sec.section}</div>
+ <h2>${sec.title}</h2>
+ </div>
+ <div class="count">${sec.range}</div>
+ </div>
+ <div class="section-instructions">${sec.instr}</div>
+ `;
+
+ sec.items.forEach((q, idx) => {
+ const card = document.createElement('div');
+ card.className = 'question-card';
+ card.dataset.id = q.id;
+ const header = `<div class="q-header"><div class="q-number">${q.id}</div><div class="q-text">${q.text || q.label}</div></div>`;
+
+ let body = '';
+ if (q.opts) {
+ body += '<div class="options">';
+ q.opts.forEach(o => {
+ const [letter, text] = o;
+ body += `<label class="option" data-q="${q.id}" data-val="${letter}">
+ <input type="radio" name="q${q.id}" value="${letter}">
+ <div class="bullet"></div>
+ <span><strong style="margin-right:8px;color:var(--gold-2);font-family:var(--sans);font-size:13px;letter-spacing:1px;">${letter}</strong>${text}</span>
+ </label>`;
+ });
+ body += '</div>';
+ } else if (q.type === 'fill') {
+ body += `<input type="text" class="input-line" data-q="${q.id}" placeholder="Type your answer">`;
+ } else {
+ body += `<input type="text" class="input-line" data-q="${q.id}" placeholder="Type your answer">`;
+ }
+
+ card.innerHTML = header + body;
+ secEl.appendChild(card);
+ });
+
+ container.appendChild(secEl);
+ });
+
+ // Listen for changes
+ container.addEventListener('change', updateAnswers);
+ container.addEventListener('input', updateAnswers);
+}
+
+function updateAnswers(e) {
+ const target = e.target;
+ const q = parseInt(target.dataset.q);
+ const val = target.value.trim();
+ if (val) {
+ state.answers[q] = val;
+ const card = document.querySelector(`.question-card[data-id="${q}"]`);
+ if (card) card.classList.add('answered');
+ }
+ // Update progress
+ const count = Object.keys(state.answers).length;
+ document.getElementById('answeredCount').textContent = count;
+ document.getElementById('toolbarProgress').style.width = (count / 30 * 100) + '%';
+ if (count === 30) document.getElementById('submitWarning').classList.add('hidden');
+}
+
+// Option click handler for radio
+document.addEventListener('click', e => {
+ const opt = e.target.closest('.option');
+ if (!opt) return;
+ const q = parseInt(opt.dataset.q);
+ const val = opt.dataset.val;
+ opt.querySelector('input').checked = true;
+ document.querySelectorAll(`.option[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
+ opt.classList.add('selected');
+ state.answers[q] = val;
+ const card = document.querySelector(`.question-card[data-id="${q}"]`);
+ if (card) card.classList.add('answered');
+ const count = Object.keys(state.answers).length;
+ document.getElementById('answeredCount').textContent = count;
+ document.getElementById('toolbarProgress').style.width = (count / 30 * 100) + '%';
+ if (count === 30) document.getElementById('submitWarning').classList.add('hidden');
+});
+
+// ============================================================
+// RESULTS & SCORING
+// ============================================================
+function renderResults() {
+ let correct = 0;
+ const wrong = [], all = [];
+
+ Object.keys(ANSWERS).forEach(q => {
+ const id = parseInt(q);
+ const ansKey = ANSWERS[q];
+ const userAns = state.answers[id];
+ const isCorrect = userAns && userAns.toLowerCase().trim() === ansKey.correct.toLowerCase().trim();
+ if (isCorrect) correct++;
+ else wrong.push({ id, userAns: userAns || '— (no answer)', correct: ansKey.correct, explain: ansKey.explain });
+ all.push({ id, userAns, correct: ansKey.correct, isCorrect, explain: ansKey.explain });
+ });
+
+ const pct = Math.round(correct / 30 * 100);
+ const band = calculateBand(correct);
+
+ document.getElementById('rawScore').textContent = correct + ' / 30';
+ document.getElementById('percentScore').textContent = pct + '%';
+ const bandEl = document.getElementById('bandScore');
+ bandEl.textContent = band.toFixed(1);
+ bandEl.classList.toggle('high', band >= 7);
+ bandEl.classList.toggle('low', band < 5);
+
+ // Section breakdown
+ const sections = [
+ { name: 'Section A — Multiple Choice', range: [1,8] },
+ { name: 'Section B — Note Completion', range: [9,16] },
+ { name: 'Section C — Sentence Completion', range: [17,23] },
+ { name: 'Section D — Matching', range: [24,30] },
+ ];
+ const bd = document.getElementById('sectionBreakdown');
+ sections.forEach(s => {
+ const secCorrect = all.filter(x => x.id >= s.range[0] && x.id <= s.range[1] && x.isCorrect).length;
+ const total = s.range[1] - s.range[0] + 1;
+ const row = document.createElement('div');
+ row.className = 'section-row';
+ row.innerHTML = `
+ <div class="label">${s.name}</div>
+ <div class="stat"><strong>${secCorrect}</strong> / ${total} correct</div>
+ `;
+ bd.appendChild(row);
+ });
+
+ // Review list
+ const rl = document.getElementById('reviewList');
+ all.sort((a,b) => a.id - b.id).forEach(item => {
+ const el = document.createElement('div');
+ el.className = 'review-item ' + (item.isCorrect ? 'correct' : '');
+ const q = QUESTIONS.flatMap(s => s.items).find(x => x.id === item.id);
+ el.innerHTML = `
+ <div class="review-head">
+ <div class="q-tag">Question ${item.id}</div>
+ <div class="verdict ${item.isCorrect ? 'right' : 'wrong'}">
+ <svg class="icon"><use href="#${item.isCorrect ? 'i-check' : 'i-x'}"/></svg>
+ ${item.isCorrect ? 'Correct' : 'Incorrect'}
+ </div>
+ </div>
+ <div class="review-q">${q ? q.text : ''}</div>
+ <div class="answer-row">
+ <div class="your">
+ <div class="a-label">Your Answer</div>
+ <div class="a-value ${item.isCorrect ? 'right' : 'wrong'}">${item.userAns || '— (no answer)'}</div>
+ </div>
+ <div class="correct">
+ <div class="a-label">Correct Answer</div>
+ <div class="a-value right">${item.correct}</div>
+ </div>
+ </div>
+ <div class="explanation"><strong>Why:</strong> ${item.explain}</div>
+ `;
+ rl.appendChild(el);
+ });
+}
+
+function calculateBand(score) {
+ // IELTS Listening conversion table (approximate, raw 30 → band 9)
+ const table = { 30:9, 29:8.5, 28:8.5, 27:8, 26:8, 25:7.5, 24:7.5, 23:7, 22:7, 21:6.5, 20:6.5,
+ 19:6, 18:6, 17:5.5, 16:5.5, 15:5, 14:5, 13:4.5, 12:4.5, 11:4, 10:4,
+ 9:3.5, 8:3.5, 7:3, 6:3, 5:2.5, 4:2.5, 3:2, 2:1.5, 1:1, 0:0 };
+ return table[score] !== undefined ? table[score] : 0;
+}
 
 // ============================================================
 // INIT
 // ============================================================
 window.addEventListener('load', () => {
- buildKeywords();
- renderQuestions();
- setupNavProtection();
-
- const audio = document.getElementById('audio');
- audio.addEventListener('loadedmetadata', () => {
- state.audioDuration = audio.duration;
- document.getElementById('durationTime').textContent = formatTime(audio.duration);
- });
-
- audio.addEventListener('timeupdate', () => {
- state.audioCurrentTime = audio.currentTime;
- updateProgress();
- checkKeywords();
- });
-
- audio.addEventListener('ended', () => {
- document.getElementById('playIcon').innerHTML = '<use href="#i-play"/>';
- document.getElementById('playBtn').disabled = false;
- state.audioPlaying = false;
- enableProceed();
- });
+ document.getElementById('listeningTime').textContent = formatTimer(state.timer.listening);
+ document.getElementById('questionsTime').textContent = formatTimer(state.timer.questions);
 });
-
-function formatTime(s) {
- if (!s || isNaN(s)) return '--:--';
- const m = Math.floor(s / 60);
- const sec = Math.floor(s % 60);
- return `${m}:${sec.toString().padStart(2, '0')}`;
-}
-
-// ============================================================
-// NAVIGATION PROTECTION
-// ============================================================
-function setupNavProtection() {
- window.addEventListener('beforeunload', (e) => {
- if (state.testStarted && state.phase !== 'results') {
- e.preventDefault();
- e.returnValue = '';
- return '';
- }
- });
-
- document.addEventListener('keydown', (e) => {
- if (!state.testStarted) return;
- if ((e.ctrlKey || e.metaKey) && ['r', 'R', 'w', 'W'].includes(e.key)) {
- e.preventDefault();
- showWarning('Keyboard shortcuts are disabled during the examination.');
- }
- if (e.key === 'F5') {
- e.preventDefault();
- showWarning('Page refresh is not permitted during the examination.');
- }
- if (e.key === 'Escape' && state.testStarted && state.phase !== 'results') {
- // Allow Escape to exit fullscreen but track as violation
- }
- });
-
- document.addEventListener('contextmenu', e => {
- if (state.testStarted && state.phase !== 'results') e.preventDefault();
- });
-
- document.addEventListener('copy', e => {
- if (state.testStarted && state.phase !== 'results') {
- e.preventDefault();
- showWarning('Copying is disabled during the examination.');
- }
- });
-}
-
-function showWarning(msg) {
- const m = document.getElementById('confirmModal');
- document.querySelector('#confirmModal h3').textContent = 'Examination Violation';
- document.querySelector('#confirmModal p').textContent = msg;
- document.querySelector('#confirmModal .modal-icon').innerHTML = '<svg><use href="#i-warning"/></svg>';
- m.classList.add('active');
- setTimeout(() => {
- if (state.testStarted && state.phase !== 'results') m.classList.remove('active');
- }, 2500);
-}
-
-// ============================================================
-// BEGIN TEST
-// ============================================================
-function beginTest() {
- state.testStarted = true;
- document.body.classList.add('exam-mode');
- document.getElementById('lockBadge').style.display = 'flex';
-
- goToPhase('listening');
-
- if (document.documentElement.requestFullscreen) {
- document.documentElement.requestFullscreen().catch(() => {});
- }
-
- startTimer();
-}
-
-function startTimer() {
- state.intervalId = setInterval(() => {
- state.timeLeft--;
- updateTimerDisplay();
- if (state.timeLeft <= 0) {
- clearInterval(state.intervalId);
- if (state.phase !== 'results') submitTest();
- }
- }, 1000);
-}
-
-function updateTimerDisplay() {
- const m = Math.floor(state.timeLeft / 60);
- const s = state.timeLeft % 60;
- document.getElementById('timeDisplay').textContent = `${m}:${s.toString().padStart(2, '0')}`;
- const t = document.getElementById('timer');
- t.classList.remove('warn', 'danger');
- if (state.timeLeft <= 60) t.classList.add('danger');
- else if (state.timeLeft <= 300) t.classList.add('warn');
-}
-
-// ============================================================
-// PHASE SWITCHING
-// ============================================================
-function goToPhase(phase) {
- state.phase = phase;
- document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
- document.getElementById(`phase-${phase}`).classList.add('active');
- window.scrollTo(0, 0);
-}
-
-// ============================================================
-// AUDIO PLAYER
-// ============================================================
-function toggleAudio() {
- const audio = document.getElementById('audio');
- const icon = document.getElementById('playIcon');
- if (audio.paused) {
- audio.play();
- icon.innerHTML = '<use href="#i-pause"/>';
- state.audioPlaying = true;
- } else {
- audio.pause();
- icon.innerHTML = '<use href="#i-play"/>';
- state.audioPlaying = false;
- }
-}
-
-function restartAudio() {
- const audio = document.getElementById('audio');
- audio.currentTime = 0;
- audio.play();
- document.getElementById('playIcon').innerHTML = '<use href="#i-pause"/>';
- state.audioPlaying = true;
- state.triggeredKeywords.clear();
- document.querySelectorAll('.keyword').forEach(k => k.classList.remove('active'));
-}
-
-function updateProgress() {
- const pct = state.audioDuration ? (state.audioCurrentTime / state.audioDuration) * 100 : 0;
- document.getElementById('progressFill').style.width = pct + '%';
- document.getElementById('currentTime').textContent = formatTime(state.audioCurrentTime);
-}
-
-function enableProceed() {
- document.getElementById('proceedBtn').disabled = false;
-}
-
-// ============================================================
-// KEYWORDS
-// ============================================================
-function buildKeywords() {
- const stream = document.getElementById('keywordsStream');
- KEYWORDS.forEach((k, i) => {
- const el = document.createElement('div');
- el.className = 'keyword';
- el.id = `kw-${i}`;
- el.textContent = k.text;
- el.style.animationDelay = `${i * 0.05}s`;
- stream.appendChild(el);
- });
-}
-
-function checkKeywords() {
- KEYWORDS.forEach((k, i) => {
- if (state.audioCurrentTime >= k.t && !state.triggeredKeywords.has(i)) {
- state.triggeredKeywords.add(i);
- const el = document.getElementById(`kw-${i}`);
- el.classList.add('active');
- }
- });
-}
-
-function proceedToQuestions() {
- const audio = document.getElementById('audio');
- audio.pause();
- goToPhase('questions');
- document.getElementById('progressInfo').style.display = 'flex';
-}
-
-// ============================================================
-// QUESTIONS RENDERING
-// ============================================================
-function renderQuestions() {
- const container = document.getElementById('questionsContainer');
- container.innerHTML = '';
-
- let lastSection = 0;
- QUESTIONS.forEach((q, idx) => {
- if (q.section !== lastSection) {
- lastSection = q.section;
- const header = document.createElement('div');
- header.className = 'section-header';
- header.innerHTML = `
- <div class="section-num">${q.section}</div>
- <div class="section-info">
- <h2>${SECTION_INFO[q.section].name}</h2>
- <p>${SECTION_INFO[q.section].desc}</p>
- </div>
- `;
- container.appendChild(header);
- }
-
- const card = document.createElement('div');
- card.className = 'question-card';
- card.id = `q-${idx + 1}`;
-
- let body = '';
- if (q.type === 'mcq') {
- body = `<div class="options">${q.options.map(o => `
- <label class="option" data-q="${idx + 1}" data-v="${o.id}">
- <input type="radio" name="q${idx + 1}" value="${o.id}">
- <span class="option-marker"></span>
-<span><strong>${o.id}.</strong> ${o.text}</span>
- </label>
- `).join('')}</div>`;
- } else if (q.type === 'fill') {
- body = `
- <input type="text" class="fill-input" id="input-${idx + 1}" data-q="${idx + 1}" placeholder="Type your answer here..." autocomplete="off" />
- <div class="fill-hint">No more than three words and/or a number</div>
- `;
- } else if (q.type === 'match') {
- const pills = ['A','B','C','D','E','F','G','H'].map(l => `
- <div class="match-pill" data-q="${idx + 1}" data-v="${l}">${l}</div>
- `).join('');
- body = `<div class="match-options">${pills}</div>`;
- }
-
- card.innerHTML = `
- <div class="question-head">
- <div class="q-num">${idx + 1}</div>
- <div class="q-text">${q.q}</div>
- </div>
- ${body}
- `;
- container.appendChild(card);
- });
-
- // Wire interactions
- container.querySelectorAll('.option').forEach(opt => {
- opt.addEventListener('click', () => {
- const qNum = opt.dataset.q;
- const val = opt.dataset.v;
- const card = document.getElementById(`q-${qNum}`);
- card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
- opt.classList.add('selected');
- state.answers[qNum] = val;
- card.classList.add('answered');
- updateAnsweredCount();
- });
- });
-
- container.querySelectorAll('.fill-input').forEach(input => {
- input.addEventListener('input', () => {
- const qNum = input.dataset.q;
- state.answers[qNum] = input.value.trim();
- const card = document.getElementById(`q-${qNum}`);
- if (input.value.trim()) card.classList.add('answered');
- else card.classList.remove('answered');
- updateAnsweredCount();
- });
- });
-
- container.querySelectorAll('.match-pill').forEach(pill => {
- pill.addEventListener('click', () => {
- const qNum = pill.dataset.q;
- const val = pill.dataset.v;
- const card = document.getElementById(`q-${qNum}`);
- card.querySelectorAll('.match-pill').forEach(p => p.classList.remove('selected'));
- pill.classList.add('selected');
- state.answers[qNum] = val;
- card.classList.add('answered');
- updateAnsweredCount();
- });
- });
-}
-
-function updateAnsweredCount() {
- const c = Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
- document.getElementById('answeredCount').textContent = c;
- document.getElementById('finalAnswered').textContent = c;
-}
-
-// ============================================================
-// SUBMISSION
-// ============================================================
-function confirmSubmit() {
- const unanswered = 30 - Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
- const m = document.getElementById('confirmModal');
- document.querySelector('#confirmModal h3').textContent = 'Submit Final Answers?';
- document.querySelector('#confirmModal p').textContent =
- unanswered > 0
- ? `You have ${unanswered} unanswered question${unanswered > 1 ? 's' : ''}. Once submitted, you cannot modify your responses.`
- : 'You have answered all questions. Submit to view your final results.';
- document.querySelector('#confirmModal .modal-icon').innerHTML = '<svg><use href="#i-check"/></svg>';
- m.classList.add('active');
-}
-
-function closeModal() {
- document.getElementById('confirmModal').classList.remove('active');
-}
-
-function submitTest() {
- closeModal();
- if (state.intervalId) clearInterval(state.intervalId);
-
- // Grade let correct = 0;
- const breakdown = {1: { c: 0, t: 0 }, 2: { c: 0, t: 0 }, 3: { c: 0, t: 0 }, 4: { c: 0, t: 0 } };
- const reviewItems = [];
-
- QUESTIONS.forEach((q, idx) => {
- const qNum = idx + 1;
- const userAnswer = (state.answers[qNum] || '').toString().toLowerCase().trim();
- const correctAnswer = q.answer.toLowerCase();
- breakdown[q.section].t++;
-
- let isCorrect = false;
- if (q.type === 'fill') {
- const accepted = q.answer.map(a => a.toLowerCase());
- isCorrect = accepted.includes(userAnswer);
- } else {
- isCorrect = userAnswer === correctAnswer;
- }
-
- if (isCorrect) {
- correct++;
- breakdown[q.section].c++;
- }
-
- reviewItems.push({
- num: qNum,
- section: q.section,
- question: q.q,
- userAnswer: state.answers[qNum] || '',
- correctAnswer: q.answer,
- correctAnswerText: q.type === 'match' ? `${q.answer} (${MATCH_OPTIONS[q.answer]})` : (q.type === 'fill' ? q.answer[0] : q.answer),
- userAnswerText: state.answers[qNum] ? (q.type === 'match' ? `${state.answers[qNum]} (${MATCH_OPTIONS[state.answers[qNum]] || ''})` : state.answers[qNum]) : '(No answer)',
- isCorrect,
- unanswered: !state.answers[qNum],
- explanation: q.explanation
- });
-
- const card = document.getElementById(`q-${qNum}`);
- if (card) {
- card.style.borderLeftWidth = '3px';
- }
- });
-
- const wrong = Object.values(state.answers).filter(v => v !== '' && v !== undefined).length - correct;
- const unanswered =30 - Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
- const accuracy = Math.round((correct / 30) * 100);
-
- // IELTS Band conversion (approximate for listening)
- let band = '5.0';
- if (correct >= 30) band = '9.0';
- else if (correct >= 27) band = '8.5';
- else if (correct >= 23) band = '8.0';
- else if (correct >= 20) band = '7.5';
- else if (correct >= 16) band = '7.0';
- else if (correct >= 13) band = '6.5';
- else if (correct >= 10) band = '6.0';
- else if (correct >= 7) band = '5.5';
- else if (correct >= 5) band = '5.0';
- else if (correct >= 3) band = '4.0';
- else band = '3.0';
-
- // Render results
- document.getElementById('scoreFinal').textContent = correct;
- document.getElementById('correctCount').textContent = correct;
- document.getElementById('wrongCount').textContent = wrong;
- document.getElementById('unansweredCount').textContent = unanswered;
- document.getElementById('accuracyRate').textContent = accuracy + '%';
- document.getElementById('bandScore').textContent = band;
-
- // Section breakdown
- const bd = document.getElementById('sectionBreakdown');
- bd.innerHTML = '';
- [1, 2, 3, 4].forEach(s => {
- const c = breakdown[s].c;
- const t = breakdown[s].t;
- const pct = Math.round((c / t) * 100);
- const row = document.createElement('div');
- row.className = 'section-row';
- row.innerHTML = `
- <span class="label">${SECTION_INFO[s].name} — ${c}/${t} correct</span>
- <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
- <span class="score">${pct}%</span>
- `;
- bd.appendChild(row);
- });
-
- // Review
- const review = document.getElementById('reviewContainer');
- review.innerHTML = '';
- reviewItems.forEach(r => {
- const div = document.createElement('div');
- div.className = `review-card ${r.isCorrect ? 'correct' : (r.unanswered ? 'unanswered-r' : 'wrong')}`;
- const iconHTML = r.isCorrect ? '<svg><use href="#i-check"/></svg>' : (r.unanswered ? '<svg><use href="#i-warning"/></svg>' : '<svg><use href="#i-x"/></svg>');
- div.innerHTML = `
- <div class="review-head">
- <div class="review-icon">${iconHTML}</div>
- <div class="review-q"><span class="qn">Q${r.num}</span><strong>${r.question.replace(/<\/?strong>/g, '')}</strong></div>
- </div>
- <div class="review-body">
- <div class="answer-row"><span class="lbl">Your answer:</span> <span class="val ${r.isCorrect ? 'right' : 'wrong-val'}">${r.userAnswerText}</span></div>
- ${!r.isCorrect ? `<div class="answer-row"><span class="lbl">Correct answer:</span> <span class="val right">${r.correctAnswerText}</span></div>` : ''}
- <div class="review-explanation"><strong>Explanation:</strong> ${r.explanation}</div>
- </div>
- `;
- review.appendChild(div);
- });
-
- // Exit fullscreen
- if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-
- document.getElementById('lockBadge').style.display = 'none';
- document.body.classList.remove('exam-mode');
- goToPhase('results');
-}
 </script>
 </body>
 </html>
