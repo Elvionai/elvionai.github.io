@@ -2,1476 +2,972 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IELTS Listening Practice Test — Philadelphia Voice Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Listening Practice Test | Elvion AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-:root {
--ink: #0a0e1a;
--ink-2: #111827;
--paper: #f4f1ea;
--paper-2: #e8e3d6;
--gold: #b8985a;
--gold-2: #8a6f3a;
--crimson: #8b1e1e;
--crimson-2: #6a1414;
--slate: #2c3340;
--slate-2: #1a1f2b;
--muted: #6b7280;
--line: #c8c1ad;
--ok: #2d5d3a;
--err: #8b1e1e;
--shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
--shadow-2: 0 10px 30px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.08);
--shadow-3: 0 25px 60px rgba(0,0,0,0.30), 0 10px 20px rgba(0,0,0,0.15);
--radius: 4px;
--serif: 'Georgia', 'Times New Roman', serif;
--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+:root{
+  --ink:#0c1a2b;
+  --ink-2:#14283f;
+  --ink-3:#1e3a5a;
+  --paper:#eef1f5;
+  --card:#ffffff;
+  --line:#d9dfe8;
+  --line-2:#c5cdda;
+  --text:#18263a;
+  --muted:#5f6c80;
+  --indigo:#2c3fa8;
+  --indigo-d:#22318a;
+  --indigo-l:#e6e9f8;
+  --lamp:#f2b84b;
+  --lamp-d:#c88d1a;
+  --ok:#12764f;
+  --ok-l:#e2f3ec;
+  --bad:#b42c3a;
+  --bad-l:#fbe9eb;
+  --warn:#b36b00;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --ease:cubic-bezier(.22,.8,.24,1);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body {
- height: 100%; background: var(--paper); color: var(--ink);
- font-family: var(--serif); font-size: 16px; line-height: 1.6;
- overflow-x: hidden; -webkit-font-smoothing: antialiased;
-}
-body.exam-active { overflow: hidden; user-select: none; -webkit-user-select: none; }
-svg { display: block; }
-.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; fill: currentColor; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.55;font-size:16px;min-height:100vh;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px;border-radius:6px}
+.ic{width:1.25em;height:1.25em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+body.locked .qtext,body.locked .rv-q{-webkit-user-select:none;user-select:none}
 
-/* ============================================================
- PHASE: WELCOME
-============================================================ */
-#phase-welcome {
- min-height: 100vh; display: flex; align-items: center; justify-content: center;
- background: linear-gradient(135deg, #f4f1ea 0%, #e8e3d6 100%);
- padding: 40px 20px; position: relative;
-}
-.welcome-card {
- max-width: 720px; width: 100%; background: #fff;
- border: 1px solid var(--line); border-radius: var(--radius);
- box-shadow: var(--shadow-3); padding: 60px 50px; position: relative;
-}
-.welcome-card::before {
- content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
- background: linear-gradient(90deg, var(--gold), var(--crimson), var(--gold));
-}
-.exam-badge {
- display: inline-flex; align-items: center; gap: 10px;
- border: 1px solid var(--gold); padding: 6px 14px; border-radius: 2px;
- font-family: var(--sans); font-size: 11px; font-weight: 600;
- letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
- margin-bottom: 24px;
-}
-.exam-badge .icon { width: 14px; height: 14px; }
-h1.title {
- font-size: 42px; font-weight: 400; letter-spacing: -0.5px;
- color: var(--ink); margin-bottom: 8px; line-height: 1.1;
-}
-.subtitle {
- font-family: var(--sans); font-size: 14px; color: var(--muted);
- letter-spacing: 1px; margin-bottom: 32px; text-transform: uppercase;
- font-weight: 500;
-}
-.divider {
- height: 1px; background: var(--line); margin: 28px 0;
-}
-.instructions-list {
- list-style: none; counter-reset: inst;
-}
-.instructions-list li {
- counter-increment: inst; position: relative; padding-left: 36px;
- margin-bottom: 14px; font-size: 15px; line-height: 1.65;
-}
-.instructions-list li::before {
- content: counter(inst, decimal-leading-zero);
- position: absolute; left: 0; top: 0;
- font-family: var(--sans); font-size: 12px; font-weight: 700;
- color: var(--gold); letter-spacing: 1px;
-}
-.warning-box {
- background: #fdf6e3; border-left: 3px solid var(--crimson);
- padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
- display: flex; gap: 14px; align-items: flex-start;
-}
-.warning-box .icon { color: var(--crimson); width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; }
-.warning-box p { font-size: 14px; color: var(--ink); font-family: var(--sans); line-height: 1.5; }
-.warning-box strong { color: var(--crimson); }
-.action-row { display: flex; gap: 12px; margin-top: 32px; }
-.btn {
- font-family: var(--sans); font-size: 13px; font-weight: 600;
- letter-spacing: 2px; text-transform: uppercase;
- padding: 16px 28px; border: 1px solid transparent; cursor: pointer;
- transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px;
- border-radius: var(--radius); text-decoration: none;
-}
-.btn-primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-.btn-primary:hover { background: #000; transform: translateY(-1px); box-shadow: var(--shadow-2); }
-.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-.btn-ghost:hover { border-color: var(--ink); }
-.btn-danger { background: var(--crimson); color: #fff; border-color: var(--crimson); }
-.btn-danger:hover { background: var(--crimson-2); }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
-.btn .icon { width: 14px; height: 14px; }
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:var(--ink);color:#e9eef6;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem clamp(1rem,3vw,2rem);border-bottom:1px solid rgba(255,255,255,.07)}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:600;letter-spacing:.01em}
+.brand svg.mark{width:30px;height:30px}
+.brand small{display:block;font-weight:400;color:#93a3ba;font-size:.78rem;margin-top:-2px}
+.session{display:flex;align-items:center;gap:.5rem;font-size:.85rem;padding:.4rem .8rem;border-radius:999px;background:rgba(255,255,255,.07);color:#b9c6d8;transition:all .4s var(--ease)}
+.session.on{background:rgba(242,184,75,.14);color:var(--lamp)}
+.session .dot{width:8px;height:8px;border-radius:50%;background:#6c7b91}
+.session.on .dot{background:var(--lamp);box-shadow:0 0 0 0 rgba(242,184,75,.6);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(242,184,75,0)}100%{box-shadow:0 0 0 0 rgba(242,184,75,0)}}
 
-/* ============================================================
- PHASE: LISTENING
-============================================================ */
-#phase-listening {
- min-height: 100vh; display: none; flex-direction: column;
- background: var(--ink); color: var(--paper);
-}
-.exam-header {
- display: flex; justify-content: space-between; align-items: center;
- padding: 18px 40px; background: var(--ink-2); border-bottom: 1px solid #1f2937;
-}
-.exam-header .brand {
- display: flex; align-items: center; gap: 12px;
- font-family: var(--sans); font-size: 13px; font-weight: 600;
- letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
-}
-.exam-header .brand .icon { width: 18px; height: 18px; }
-.exam-header .meta {
- display: flex; gap: 28px; font-family: var(--sans); font-size: 12px;
- color: #9ca3af; letter-spacing: 1.5px; text-transform: uppercase;
- align-items: center;
-}
-.exam-header .meta span { display: inline-flex; align-items: center; gap: 6px; }
-.exam-header .meta .icon { width: 13px; height: 13px; }
-.exam-header .timer {
- font-family: var(--sans); font-size: 18px; font-weight: 700;
- color: var(--paper); letter-spacing: 1px;
- padding: 8px 16px; background: #1f2937; border-radius: var(--radius);
- border: 1px solid #374151;
-}
-.exam-header .timer.warning { color: #fbbf24; border-color: #fbbf24; }
-.exam-header .timer.danger { color: #f87171; border-color: #f87171; animation: pulse 1s infinite; }
-@keyframes pulse {
- 0%, 100% { opacity: 1; }
- 50% { opacity: 0.6; }
-}
+.screen{display:none}
+.screen.active{display:block;animation:screenIn .55s var(--ease)}
+@keyframes screenIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,3vw,2rem)}
 
-.listening-stage {
- flex: 1; display: grid; grid-template-columns: 1fr 380px; gap: 0;
- background: var(--ink);
-}
-.player-section {
- display: flex; flex-direction: column; align-items: center; justify-content: center;
- padding: 60px 40px; position: relative;
-}
-.player-section::after {
- content: ''; position: absolute; inset: 0;
- background: radial-gradient(circle at center, rgba(184,152,90,0.08), transparent 70%);
- pointer-events: none;
-}
-.player-card {
- background: linear-gradient(145deg, #1a1f2b, #111827);
- border: 1px solid #2c3340; border-radius: 8px;
- padding: 48px 56px; box-shadow: var(--shadow-3);
- max-width: 560px; width: 100%; position: relative; z-index: 1;
-}
-.voice-indicator {
- display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
- padding-bottom: 20px; border-bottom: 1px solid #2c3340;
-}
-.voice-avatar {
- width: 48px; height: 48px; border-radius: 50%;
- background: linear-gradient(135deg, var(--gold), var(--gold-2));
- display: flex; align-items: center; justify-content: center;
- box-shadow: 0 0 20px rgba(184,152,90,0.4);
-}
-.voice-avatar .icon { width: 22px; height: 22px; color: var(--ink); }
-.voice-info { flex: 1; }
-.voice-info .name {
- font-family: var(--sans); font-size: 14px; font-weight: 600;
- letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
-}
-.voice-info .status {
- font-family: var(--sans); font-size: 11px; color: #6b7280;
- letter-spacing: 1.5px; text-transform: uppercase;
- display: flex; align-items: center; gap: 6px;
-}
-.live-dot {
- width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
- box-shadow: 0 0 8px #4ade80; animation: livePulse 1.4s infinite;
-}
-@keyframes livePulse {
- 0%, 100% { opacity: 1; transform: scale(1); }
- 50% { opacity: 0.5; transform: scale(1.3); }
-}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border:0;border-radius:10px;padding:.85rem 1.4rem;font-weight:600;font-size:1rem;transition:transform .2s var(--ease),background .2s,box-shadow .2s,opacity .2s}
+.btn-primary{background:var(--indigo);color:#fff;box-shadow:0 6px 18px -8px rgba(44,63,168,.7)}
+.btn-primary:hover:not(:disabled){background:var(--indigo-d);transform:translateY(-1px)}
+.btn-lamp{background:var(--lamp);color:#2a1d00;box-shadow:0 8px 24px -10px rgba(242,184,75,.8)}
+.btn-lamp:hover:not(:disabled){background:#f7c562;transform:translateY(-1px)}
+.btn-ghost{background:transparent;border:1px solid var(--line-2);color:var(--text)}
+.btn-ghost:hover:not(:disabled){background:#fff;border-color:var(--indigo)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:active:not(:disabled){transform:scale(.98)}
 
-.audio-wave {
- display: flex; align-items: center; gap: 3px; height: 60px;
- margin: 24px 0; justify-content: center;
-}
-.audio-wave .bar {
- width: 4px; background: linear-gradient(to top, var(--gold), var(--crimson));
- border-radius: 2px; transition: height 0.15s ease, opacity 0.3s ease;
- opacity: 0.3;
-}
-.audio-wave.playing .bar { opacity: 1; animation: wave 1s ease-in-out infinite; }
-@keyframes wave {
- 0%, 100% { transform: scaleY(0.4); }
- 50% { transform: scaleY(1); }
-}
-.audio-wave .bar:nth-child(1) { height: 25%; animation-delay: 0.0s; }
-.audio-wave .bar:nth-child(2) { height: 50%; animation-delay: 0.1s; }
-.audio-wave .bar:nth-child(3) { height: 75%; animation-delay: 0.2s; }
-.audio-wave .bar:nth-child(4) { height: 100%; animation-delay: 0.3s; }
-.audio-wave .bar:nth-child(5) { height: 90%; animation-delay: 0.4s; }
-.audio-wave .bar:nth-child(6) { height: 70%; animation-delay: 0.5s; }
-.audio-wave .bar:nth-child(7) { height: 80%; animation-delay: 0.6s; }
-.audio-wave .bar:nth-child(8) { height: 60%; animation-delay: 0.7s; }
-.audio-wave .bar:nth-child(9) { height: 45%; animation-delay: 0.8s; }
-.audio-wave .bar:nth-child(10) { height: 35%; animation-delay: 0.9s; }
-.audio-wave .bar:nth-child(11) { height: 50%; animation-delay: 1.0s; }
-.audio-wave .bar:nth-child(12) { height: 70%; animation-delay: 1.1s; }
-.audio-wave .bar:nth-child(13) { height: 85%; animation-delay: 1.2s; }
-.audio-wave .bar:nth-child(14) { height: 95%; animation-delay: 1.3s; }
-.audio-wave .bar:nth-child(15) { height: 100%; animation-delay: 1.4s; }
-.audio-wave .bar:nth-child(16) { height: 90%; animation-delay: 1.5s; }
-.audio-wave .bar:nth-child(17) { height: 70%; animation-delay: 1.6s; }
-.audio-wave .bar:nth-child(18) { height: 55%; animation-delay: 1.7s; }
-.audio-wave .bar:nth-child(19) { height: 40%; animation-delay: 1.8s; }
-.audio-wave .bar:nth-child(20) { height: 30%; animation-delay: 1.9s; }
+/* intro */
+.intro{padding:clamp(2rem,6vw,4.5rem) 0 4rem}
+.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.intro h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1rem;color:var(--ink)}
+.intro .lede{font-family:var(--serif);font-size:1.25rem;color:#33445c;max-width:34em;margin:0 0 2rem}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-2);border-radius:14px;background:var(--card);overflow:hidden;margin-bottom:2rem}
+.fact{padding:1rem 1.1rem;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact .ic{color:var(--indigo);margin-bottom:.35rem;width:1.4em;height:1.4em}
+.fact b{display:block;font-size:1.4rem;font-family:var(--serif);font-weight:600;line-height:1.1}
+.fact span{color:var(--muted);font-size:.88rem}
+.rules{display:grid;gap:1rem}
+.rule{display:grid;grid-template-columns:42px 1fr;gap:.9rem;align-items:start}
+.rule .badge{width:42px;height:42px;border-radius:12px;background:var(--indigo-l);color:var(--indigo);display:grid;place-items:center}
+.rule h3{margin:0;font-size:1rem;font-weight:600}
+.rule p{margin:.1rem 0 0;color:var(--muted);font-size:.95rem}
+.start-card{background:var(--ink);color:#e6edf7;border-radius:20px;padding:2rem;position:sticky;top:84px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(12,26,43,.7)}
+.start-card::before{content:"";position:absolute;inset:auto -40% -50% auto;width:360px;height:360px;background:radial-gradient(circle,rgba(242,184,75,.22),transparent 65%)}
+.start-card h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:0 0 .3rem;position:relative}
+.start-card p{color:#9fb0c7;margin:0 0 1.4rem;font-size:.95rem;position:relative}
+.start-card label.f{display:block;font-size:.88rem;color:#b9c6d8;margin-bottom:.4rem;position:relative}
+.start-card input[type=text]{width:100%;padding:.8rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;margin-bottom:1.2rem;position:relative}
+.start-card input[type=text]::placeholder{color:#7d8ea6}
+.start-card input[type=text]:focus{outline:none;border-color:var(--lamp);box-shadow:0 0 0 3px rgba(242,184,75,.2)}
+.check{display:flex;gap:.7rem;align-items:flex-start;font-size:.92rem;color:#c9d5e5;margin-bottom:1.4rem;cursor:pointer;position:relative}
+.check input{appearance:none;width:22px;height:22px;border-radius:6px;border:1.5px solid #6f829c;flex:none;margin-top:1px;display:grid;place-items:center;cursor:pointer;transition:all .2s}
+.check input:checked{background:var(--lamp);border-color:var(--lamp)}
+.check input:checked::after{content:"";width:10px;height:6px;border-left:2.5px solid #2a1d00;border-bottom:2.5px solid #2a1d00;transform:rotate(-45deg) translate(1px,-1px)}
+.start-card .btn{width:100%;position:relative}
 
-.audio-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 16px; }
-.ctrl-btn {
- width: 48px; height: 48px; border-radius: 50%; border: 1px solid #374151;
- background: transparent; color: var(--paper); cursor: pointer;
- display: flex; align-items: center; justify-content: center;
- transition: all 0.2s ease;
-}
-.ctrl-btn:hover { border-color: var(--gold); color: var(--gold); }
-.ctrl-btn.play {
- width: 64px; height: 64px; background: var(--gold); border-color: var(--gold); color: var(--ink);
-}
-.ctrl-btn.play:hover { background: #d4b06a; transform: scale(1.05); }
-.ctrl-btn .icon { width: 20px; height: 20px; }
-.ctrl-btn.play .icon { width: 26px; height: 26px; }
+/* listening stage */
+#s-listen{background:radial-gradient(1200px 600px at 80% -10%,#1d3b60 0%,transparent 60%),var(--ink);color:#e6edf7;min-height:calc(100vh - 56px)}
+.stage{padding:clamp(1.5rem,4vw,3rem) 0 3rem}
+.stage-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(1.2rem,3vw,2.5rem)}
+.panel{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:clamp(1.2rem,3vw,2rem);backdrop-filter:blur(6px)}
+.stage h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .3rem;letter-spacing:-.01em}
+.stage .sub{color:#9fb0c7;margin:0 0 1.6rem}
+.voice{display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem}
+.voice .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--lamp),#e08a2e);display:grid;place-items:center;color:#2a1d00}
+.voice b{display:block}
+.voice span{color:#9fb0c7;font-size:.9rem}
+#wave{width:100%;height:150px;display:block;margin:.4rem 0 1rem}
+.transport{display:flex;align-items:center;gap:1.2rem}
+.play{width:68px;height:68px;border-radius:50%;border:0;background:var(--lamp);color:#2a1d00;display:grid;place-items:center;position:relative;transition:transform .2s var(--ease)}
+.play:hover:not(:disabled){transform:scale(1.06)}
+.play .ic{width:28px;height:28px}
+.play.live::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid rgba(242,184,75,.5);animation:ring 1.8s infinite}
+@keyframes ring{from{transform:scale(.92);opacity:1}to{transform:scale(1.25);opacity:0}}
+.track{flex:1}
+.bar{height:6px;background:rgba(255,255,255,.14);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lamp),#ffd98a);border-radius:99px;transition:width .25s linear}
+.times{display:flex;justify-content:space-between;font-size:.85rem;color:#9fb0c7;margin-top:.45rem;font-variant-numeric:tabular-nums}
+.status{margin-top:1.2rem;display:flex;gap:.6rem;align-items:center;color:#b9c6d8;font-size:.95rem;min-height:1.6em}
+.status .ic{color:var(--lamp)}
+.gate{margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.gate p{margin:0;color:#9fb0c7;font-size:.92rem;max-width:26em}
+.gate .btn.unlocked{animation:unlock .8s var(--ease)}
+@keyframes unlock{0%{transform:scale(.94)}50%{transform:scale(1.05);box-shadow:0 0 0 14px rgba(242,184,75,.15)}100%{transform:scale(1)}}
 
-.progress-container { margin-top: 24px; }
-.progress-meta {
- display: flex; justify-content: space-between;
- font-family: var(--sans); font-size: 11px; color: #6b7280;
- letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
-}
-.progress-track {
- height: 4px; background: #1f2937; border-radius: 2px; overflow: hidden; position: relative;
-}
-.progress-fill {
- height: 100%; background: linear-gradient(90deg, var(--gold), var(--crimson));
- width: 0%; transition: width 0.3s linear;
-}
+.kw-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.kw-head h3{margin:0;font-size:1.05rem;font-weight:600;display:flex;gap:.5rem;align-items:center}
+.kw-head h3 .ic{color:var(--lamp)}
+.kw-count{font-size:.85rem;color:#9fb0c7;font-variant-numeric:tabular-nums}
+.spot{min-height:128px;border-radius:14px;padding:1.1rem 1.2rem;background:linear-gradient(180deg,rgba(242,184,75,.12),rgba(242,184,75,.03));border:1px solid rgba(242,184,75,.28);margin-bottom:1rem;position:relative;overflow:hidden}
+.spot .tag{font-size:.82rem;color:var(--lamp);font-weight:500}
+.spot .term{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.15;margin-top:.35rem;color:#fff;font-weight:500}
+.spot .term::after{content:"";display:block;height:2px;background:var(--lamp);margin-top:.6rem;width:0;animation:sweep .9s var(--ease) forwards}
+.spot.pop .tag,.spot.pop .term{animation:termIn .5s var(--ease)}
+@keyframes sweep{to{width:56%}}
+@keyframes termIn{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.spot .idle{color:#8396b0;font-size:.95rem}
+.trail{display:flex;flex-wrap:wrap;gap:.45rem;max-height:300px;overflow:auto;padding-right:.3rem;scrollbar-width:thin;scrollbar-color:#3b5578 transparent}
+.chip{font-size:.88rem;padding:.35rem .7rem;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#d7e1ee;animation:chipIn .5s var(--ease)}
+.chip:first-child{border-color:rgba(242,184,75,.55);color:var(--lamp)}
+@keyframes chipIn{from{opacity:0;transform:scale(.7) translateY(8px)}to{opacity:1;transform:none}}
 
-.keywords-panel {
- background: var(--ink-2); border-left: 1px solid #1f2937;
- padding: 32px 28px; overflow-y: auto;
-}
-.panel-title {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase;
- margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #2c3340;
- display: flex; align-items: center; gap: 10px;
-}
-.panel-title .icon { width: 14px; height: 14px; }
-.panel-hint {
- font-size: 13px; color: #9ca3af; margin-bottom: 24px; line-height: 1.6;
- font-style: italic;
-}
-.keywords-stream {
- display: flex; flex-direction: column; gap: 10px;
-}
-.keyword {
- padding: 12px 16px; background: #1a1f2b; border-left: 3px solid #2c3340;
- border-radius: 0 4px 4px 0; font-family: var(--sans);
- font-size: 14px; color: #6b7280; transition: all 0.5s ease;
- position: relative; opacity: 0.5;
-}
-.keyword.active {
- opacity: 1; color: var(--paper); background: linear-gradient(90deg, rgba(184,152,90,0.15), transparent);
- border-left-color: var(--gold); transform: translateX(4px);
- box-shadow: -4px 0 12px rgba(184,152,90,0.3);
-}
-.keyword.passed { opacity: 0.7; color: #9ca3af; border-left-color: var(--gold-2); }
-.keyword .label {
- font-size: 10px; letter-spacing: 1.5px; color: #6b7280;
- text-transform: uppercase; margin-bottom: 4px;
- display: flex; align-items: center; gap: 6px;
-}
-.keyword.active .label { color: var(--gold); }
-.keyword .label .icon { width: 10px; height: 10px; }
+/* test */
+.testbar{position:sticky;top:56px;z-index:40;background:rgba(238,241,245,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
+.testbar .wrap{display:flex;align-items:center;gap:1.2rem;padding-top:.7rem;padding-bottom:.7rem;flex-wrap:wrap}
+.timer{display:flex;align-items:center;gap:.6rem;font-size:1.5rem;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);min-width:7.2rem;transition:color .3s}
+.timer .ic{color:var(--indigo)}
+.timer.low{color:var(--warn)}
+.timer.crit{color:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.tprog{flex:1;min-width:160px}
+.tprog .lab{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:.3rem}
+.tprog .bar{background:var(--line);height:6px}
+.tprog .bar i{background:var(--indigo)}
+.timebar{position:absolute;left:0;bottom:-1px;height:2px;background:var(--indigo);width:100%;transform-origin:left;transition:transform .5s linear}
+.testbar{position:sticky}
+.tabs{display:flex;gap:.5rem;margin:1.6rem 0 1.2rem;overflow-x:auto;padding-bottom:.2rem}
+.tab{flex:1;min-width:150px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.75rem 1rem;transition:all .25s var(--ease)}
+.tab b{display:block;font-size:.98rem}
+.tab span{font-size:.84rem;color:var(--muted)}
+.tab:hover{border-color:var(--indigo)}
+.tab.on{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px);box-shadow:0 12px 22px -14px rgba(12,26,43,.8)}
+.tab.on span{color:#a9b9cf}
+.test-grid{display:grid;grid-template-columns:1fr 290px;gap:1.6rem;padding-bottom:4rem;align-items:start}
+.part{display:none}
+.part.on{display:block;animation:screenIn .45s var(--ease)}
+.group{margin-bottom:1.8rem}
+.instr{background:var(--indigo-l);border-left:4px solid var(--indigo);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.97rem}
+.instr b{display:block;margin-bottom:.15rem}
+.legend{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.8rem 1.1rem;margin-bottom:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.3rem 1.5rem;font-size:.95rem}
+.legend div{display:flex;gap:.6rem}
+.legend b{color:var(--indigo);min-width:1.2rem}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:.8rem;display:grid;grid-template-columns:40px 1fr auto;gap:.9rem;align-items:start;transition:border-color .25s,box-shadow .25s}
+.q:focus-within{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(44,63,168,.1)}
+.q.hl{animation:hl 1.4s var(--ease)}
+@keyframes hl{0%,60%{box-shadow:0 0 0 4px rgba(44,63,168,.3);border-color:var(--indigo)}}
+.qn{width:36px;height:36px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:600;font-size:.95rem;transition:background .3s}
+.q.done .qn{background:var(--indigo)}
+.qtext{font-family:var(--serif);font-size:1.18rem;line-height:1.5;margin:.1rem 0 .6rem}
+.blank{display:inline-block;width:11rem;max-width:100%;margin:0 .25rem;padding:.2rem .6rem;border:0;border-bottom:2px solid var(--line-2);background:var(--paper);border-radius:6px 6px 0 0;font-family:var(--sans);font-size:1rem;font-weight:500;color:var(--indigo-d);transition:border-color .2s,background .2s}
+.blank:focus{outline:none;border-color:var(--indigo);background:var(--indigo-l)}
+.opts{display:grid;gap:.5rem}
+.opt{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem .9rem;border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:all .2s var(--ease);background:#fff}
+.opt:hover{border-color:var(--indigo);background:#fafbff}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .l{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;font-size:.82rem;font-weight:600;flex:none;transition:all .2s}
+.opt.sel{border-color:var(--indigo);background:var(--indigo-l)}
+.opt.sel .l{background:var(--indigo);border-color:var(--indigo);color:#fff;transform:scale(1.08)}
+.opt:focus-within{outline:3px solid var(--indigo);outline-offset:1px}
+.seg{display:flex;gap:.5rem;flex-wrap:wrap}
+.seg .opt{padding:.55rem 1.1rem}
+select.pick{padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line-2);background:#fff;min-width:250px;max-width:100%}
+select.pick:focus{outline:3px solid var(--indigo);outline-offset:1px}
+.flag{background:none;border:1px solid var(--line);border-radius:8px;width:34px;height:34px;display:grid;place-items:center;color:var(--muted);transition:all .2s}
+.flag:hover{border-color:var(--warn);color:var(--warn)}
+.flag.on{background:#fff3dd;border-color:var(--warn);color:var(--warn)}
+.flag.on .ic{fill:currentColor}
+.pager{display:flex;justify-content:space-between;gap:1rem;margin-top:1.6rem;flex-wrap:wrap}
+.side{position:sticky;top:140px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+.side h3{margin:0 0 .8rem;font-size:1rem;display:flex;gap:.5rem;align-items:center}
+.pal{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem}
+.pal button{aspect-ratio:1;border-radius:9px;border:1px solid var(--line-2);background:#fff;font-weight:600;font-size:.88rem;position:relative;transition:all .2s var(--ease)}
+.pal button:hover{border-color:var(--indigo);transform:translateY(-2px)}
+.pal button.a{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.pal button.f::after{content:"";position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--lamp-d)}
+.key{display:grid;gap:.35rem;margin:1rem 0;font-size:.85rem;color:var(--muted)}
+.key span{display:flex;align-items:center;gap:.5rem}
+.key i{width:14px;height:14px;border-radius:4px;border:1px solid var(--line-2);display:inline-block;background:#fff}
+.key i.a{background:var(--indigo);border-color:var(--indigo)}
+.key i.f{position:relative}
+.key i.f::after{content:"";position:absolute;top:1px;right:1px;width:6px;height:6px;border-radius:50%;background:var(--lamp-d)}
+.side .btn{width:100%}
 
-.listening-footer {
- padding: 20px 40px; background: var(--ink-2); border-top: 1px solid #1f2937;
- display: flex; justify-content: space-between; align-items: center;
-}
-.replay-info {
- font-family: var(--sans); font-size: 12px; color: #6b7280;
- letter-spacing: 1.5px; text-transform: uppercase;
- display: flex; align-items: center; gap: 8px;
-}
-.replay-info .icon { width: 14px; height: 14px; }
-.btn-light {
- background: var(--paper); color: var(--ink); border-color: var(--paper);
-}
-.btn-light:hover { background: #fff; transform: translateY(-1px); box-shadow: var(--shadow-2); }
+/* results */
+.res-hero{background:var(--ink);color:#e6edf7;padding:clamp(2rem,5vw,3.5rem) 0;position:relative;overflow:hidden}
+.res-hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(242,184,75,.2),transparent 65%)}
+.res-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;position:relative;z-index:1}
+.ring{position:relative;width:200px;height:200px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+.ring .bg{stroke:rgba(255,255,255,.12)}
+.ring .fg{stroke:var(--lamp);stroke-dasharray:452.4;stroke-dashoffset:452.4;transition:stroke-dashoffset 1.6s var(--ease)}
+.ring .num{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .num b{font-family:var(--serif);font-size:3.4rem;font-weight:500;line-height:1}
+.ring .num span{color:#9fb0c7;font-size:.95rem}
+.res-hero h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0 0 .4rem}
+.res-hero p{color:#b4c2d6;margin:0 0 1.2rem;max-width:36em}
+.stats{display:flex;gap:1rem;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.7rem 1.1rem;min-width:130px}
+.stat b{display:block;font-family:var(--serif);font-size:1.6rem;font-weight:500}
+.stat span{font-size:.85rem;color:#9fb0c7}
+.res-body{padding:2.4rem 0 4rem}
+.breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.4rem}
+.bk{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+.bk b{font-size:.98rem}
+.bk .sc{font-family:var(--serif);font-size:1.8rem;font-weight:500;margin:.2rem 0 .5rem}
+.bk .bar{background:var(--line)}
+.bk .bar i{background:var(--indigo);width:0;transition:width 1.2s var(--ease)}
+.bk small{color:var(--muted)}
+.rv-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.rv-top h3{font-family:var(--serif);font-size:1.7rem;font-weight:500;margin:0}
+.filters{display:flex;gap:.4rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.25rem}
+.filters button{border:0;background:none;padding:.5rem .95rem;border-radius:9px;font-weight:500;color:var(--muted);transition:all .2s}
+.filters button.on{background:var(--ink);color:#fff}
+.rv{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line-2);border-radius:14px;padding:1.2rem 1.3rem;margin-bottom:.9rem;animation:screenIn .5s var(--ease) backwards}
+.rv.ok{border-left-color:var(--ok)}
+.rv.bad{border-left-color:var(--bad)}
+.rv-h{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
+.rv-h b{font-size:1.02rem}
+.pill{display:inline-flex;align-items:center;gap:.35rem;font-size:.84rem;font-weight:600;padding:.2rem .65rem;border-radius:99px}
+.pill.ok{background:var(--ok-l);color:var(--ok)}
+.pill.bad{background:var(--bad-l);color:var(--bad)}
+.rv-q{font-family:var(--serif);font-size:1.12rem;margin:.1rem 0 .8rem}
+.ans{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.6rem;margin-bottom:.8rem}
+.ans div{background:var(--paper);border-radius:10px;padding:.55rem .8rem;font-size:.95rem}
+.ans small{display:block;color:var(--muted);font-size:.8rem}
+.ans .yours.bad b{color:var(--bad)}
+.ans .yours.ok b{color:var(--ok)}
+.ans .right b{color:var(--ok)}
+.why{display:flex;gap:.7rem;background:var(--indigo-l);border-radius:10px;padding:.8rem 1rem;font-size:.95rem}
+.why .ic{color:var(--indigo);margin-top:.15rem}
+.actions{display:flex;gap:.8rem;margin-top:1.6rem;flex-wrap:wrap}
 
-/* ============================================================
- PHASE: QUESTIONS
-============================================================ */
-#phase-questions {
- min-height: 100vh; display: none; flex-direction: column;
- background: var(--paper);
-}
-.exam-toolbar {
- background: #fff; border-bottom: 1px solid var(--line);
- padding: 16px 40px; display: flex; justify-content: space-between;
- align-items: center; position: sticky; top: 0; z-index: 50;
- box-shadow: var(--shadow-1);
-}
-.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 24px; }
-.toolbar-section {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
-}
-.progress-bar-thin {
- flex: 1; max-width: 240px; height: 3px; background: var(--paper-2);
- border-radius: 2px; overflow: hidden; margin: 0 24px;
-}
-.progress-bar-thin .fill {
- height: 100%; background: var(--gold); width: 0%; transition: width 0.3s;
-}
-.answered-count {
- font-family: var(--sans); font-size: 12px; color: var(--ink);
- font-weight: 600; letter-spacing: 0.5px;
-}
-.answered-count strong { color: var(--gold-2); font-size: 14px; }
+/* modal + toast */
+.modal-bg{position:fixed;inset:0;background:rgba(7,14,24,.66);backdrop-filter:blur(5px);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.show{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal{background:#fff;border-radius:18px;padding:1.8rem;max-width:460px;width:100%;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);animation:mpop .4s var(--ease)}
+@keyframes mpop{from{opacity:0;transform:translateY(18px) scale(.96)}}
+.modal .mi{width:52px;height:52px;border-radius:14px;background:var(--indigo-l);color:var(--indigo);display:grid;place-items:center;margin-bottom:1rem}
+.modal .mi.warn{background:#fff3dd;color:var(--warn)}
+.modal h3{margin:0 0 .4rem;font-family:var(--serif);font-size:1.5rem;font-weight:500}
+.modal p{margin:0 0 1.4rem;color:var(--muted)}
+.modal .mact{display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:.7rem 1.2rem;border-radius:12px;opacity:0;pointer-events:none;transition:all .4s var(--ease);z-index:120;display:flex;gap:.6rem;align-items:center;font-size:.95rem}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast .ic{color:var(--lamp)}
 
-.questions-container {
- max-width: 880px; margin: 0 auto; padding: 48px 40px 120px; width: 100%;
+@media (max-width:960px){
+  .intro-grid,.stage-grid,.test-grid{grid-template-columns:1fr}
+  .start-card,.side{position:static}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(2){border-right:0}
+  .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .breakdown{grid-template-columns:repeat(2,1fr)}
+  .res-grid{grid-template-columns:1fr;justify-items:start}
+  .testbar{top:56px}
 }
-.section-header {
- background: var(--ink); color: var(--paper); padding: 24px 32px;
- margin: 32px 0 24px; border-radius: var(--radius);
- display: flex; justify-content: space-between; align-items: center;
- box-shadow: var(--shadow-1);
+@media (max-width:560px){
+  .q{grid-template-columns:34px 1fr;}
+  .q .flag{grid-column:2;justify-self:end;margin-top:-.4rem}
+  .blank{width:9rem}
+  .pal{grid-template-columns:repeat(6,1fr)}
+  .brand small{display:none}
 }
-.section-header .num {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase;
-}
-.section-header h2 {
- font-size: 22px; font-weight: 400; font-style: italic;
- letter-spacing: 0.5px;
-}
-.section-header .count {
- font-family: var(--sans); font-size: 12px; color: #9ca3af;
- letter-spacing: 1.5px;
-}
-.section-instructions {
- background: #fff; border-left: 3px solid var(--gold); padding: 14px 20px;
- margin-bottom: 20px; font-family: var(--sans); font-size: 14px;
- color: var(--ink); line-height: 1.55; border-radius: 0 4px 4px 0;
-}
-.section-instructions strong { color: var(--gold-2); font-weight: 700; }
-
-.question-card {
- background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
- padding: 28px 32px; margin-bottom: 16px; transition: all 0.2s ease;
- box-shadow: var(--shadow-1);
-}
-.question-card:hover { border-color: var(--gold); }
-.question-card.answered { border-left: 3px solid var(--ok); }
-.q-header {
- display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
-}
-.q-number {
- width: 32px; height: 32px; border-radius: 50%; background: var(--ink);
- color: var(--gold); display: flex; align-items: center; justify-content: center;
- font-family: var(--sans); font-size: 13px; font-weight: 700; flex-shrink: 0;
-}
-.q-text { font-size: 16px; color: var(--ink); line-height: 1.55; font-weight: 500; }
-
-.options { display: flex; flex-direction: column; gap: 10px; }
-.option {
- display: flex; align-items: center; gap: 12px; padding: 12px 16px;
- border: 1px solid var(--line); border-radius: var(--radius);
- cursor: pointer; transition: all 0.15s; background: #fff;
- font-family: var(--sans); font-size: 14px; line-height: 1.5;
-}
-.option:hover { border-color: var(--gold); background: #faf8f2; }
-.option input { display: none; }
-.option .bullet {
- width: 18px; height: 18px; border: 2px solid var(--line); border-radius: 50%;
- flex-shrink: 0; display: flex; align-items: center; justify-content: center;
- transition: all 0.15s;
-}
-.option input:checked + .bullet { border-color: var(--gold); background: var(--gold); }
-.option input:checked + .bullet::after {
- content: ''; width: 6px; height: 6px; background: var(--ink); border-radius: 50%;
-}
-.option.selected { border-color: var(--gold); background: #faf8f2; }
-
-.input-line {
- background: transparent; border: none; border-bottom: 2px solid var(--line);
- padding: 6px 4px; font-family: var(--serif); font-size: 16px;
- color: var(--ink); width: 100%; outline: none; transition: border-color 0.2s;
-}
-.input-line:focus { border-bottom-color: var(--gold); }
-.input-line::placeholder { color: var(--muted); font-style: italic; }
-.inline-input {
- background: transparent; border: none; border-bottom: 2px solid var(--gold);
- padding: 4px 8px; font-family: var(--serif); font-size: 16px; color: var(--ink);
- min-width: 140px; max-width: 220px; outline: none; text-align: center;
-}
-.inline-input:focus { border-bottom-width: 3px; }
-
-.match-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-.match-table td { padding: 8px 12px; vertical-align: top; }
-.match-table td:first-child { width: 40px; font-family: var(--sans); font-weight: 700; color: var(--gold-2); }
-.match-table td:nth-child(2) { font-size: 14px; line-height: 1.55; }
-.match-table select {
- font-family: var(--sans); font-size: 14px; padding: 8px 12px;
- border: 1px solid var(--line); border-radius: var(--radius);
- background: #fff; cursor: pointer; color: var(--ink);
- width: 100%; max-width: 260px;
-}
-.match-table select:focus { outline: none; border-color: var(--gold); }
-
-.submit-bar {
- position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink);
- padding: 16px 40px; display: flex; justify-content: space-between;
- align-items: center; z-index: 40; box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-}
-.submit-bar .warning {
- font-family: var(--sans); font-size: 12px; color: #fbbf24;
- letter-spacing: 1px; text-transform: uppercase;
- display: flex; align-items: center; gap: 8px;
-}
-.submit-bar .warning .icon { width: 14px; height: 14px; }
-.submit-bar .warning.hidden { display: none; }
-
-/* ============================================================
- PHASE: RESULTS
-============================================================ */
-#phase-results {
- min-height: 100vh; display: none; flex-direction: column;
- background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
- padding: 40px 20px;
-}
-.results-wrapper { max-width: 960px; margin: 0 auto; width: 100%; }
-.results-header { text-align: center; margin-bottom: 40px; }
-.results-header .crest {
- width: 64px; height: 64px; margin: 0 auto 20px;
- background: var(--ink); border-radius: 50%;
- display: flex; align-items: center; justify-content: center;
- border: 3px solid var(--gold);
-}
-.results-header .crest .icon { width: 28px; height: 28px; color: var(--gold); }
-.results-header h1 {
- font-size: 36px; font-weight: 400; letter-spacing: -0.5px; margin-bottom: 6px;
-}
-.results-header .sub {
- font-family: var(--sans); font-size: 13px; color: var(--muted);
- letter-spacing: 2px; text-transform: uppercase;
-}
-
-.score-card {
- background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
- padding: 48px; box-shadow: var(--shadow-2); margin-bottom: 32px;
- display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
- align-items: center;
-}
-.score-block { text-align: center; border-right: 1px solid var(--line); padding-right: 24px; }
-.score-block:last-child { border-right: none; padding-right: 0; }
-.score-label {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
- margin-bottom: 12px;
-}
-.score-value { font-size: 64px; font-weight: 700; line-height: 1; color: var(--ink); font-family: var(--serif); }
-.score-value.band { color: var(--gold-2); font-size: 80px; }
-.score-value.band.high { color: var(--ok); }
-.score-value.band.low { color: var(--crimson); }
-.score-meta {
- font-family: var(--sans); font-size: 11px; color: var(--muted);
- margin-top: 8px; letter-spacing: 1px; text-transform: uppercase;
-}
-
-.section-breakdown { margin-bottom: 32px; }
-.section-row {
- background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
- padding: 18px 24px; margin-bottom: 8px; display: flex; justify-content: space-between;
- align-items: center; box-shadow: var(--shadow-1);
-}
-.section-row .label {
- font-family: var(--sans); font-size: 13px; font-weight: 600;
- letter-spacing: 1px; text-transform: uppercase; color: var(--ink);
-}
-.section-row .stat {
- font-family: var(--sans); font-size: 12px; color: var(--muted);
- letter-spacing: 1px;
-}
-.section-row .stat strong { color: var(--gold-2); font-size: 18px; }
-
-.review-title {
- font-family: var(--sans); font-size: 12px; font-weight: 700;
- letter-spacing: 2.5px; color: var(--gold-2); text-transform: uppercase;
- margin: 32px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink);
- display: flex; align-items: center; gap: 10px;
-}
-.review-title .icon { width: 16px; height: 16px; }
-
-.review-list { display: flex; flex-direction: column; gap: 12px; }
-.review-item {
- background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
- padding: 20px 24px; box-shadow: var(--shadow-1);
- border-left: 4px solid var(--err);
-}
-.review-item.correct { border-left-color: var(--ok); opacity: 0.85; }
-.review-head {
- display: flex; justify-content: space-between; align-items: flex-start;
- margin-bottom: 12px; gap: 16px;
-}
-.review-head .q-tag {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 2px; color: var(--gold-2); text-transform: uppercase;
- flex-shrink: 0;
-}
-.review-head .verdict {
- font-family: var(--sans); font-size: 11px; font-weight: 700;
- letter-spacing: 1.5px; text-transform: uppercase;
- padding: 4px 10px; border-radius: 2px;
- display: inline-flex; align-items: center; gap: 6px;
-}
-.verdict.wrong { background: #fde8e8; color: var(--crimson); }
-.verdict.right { background: #e0f0e3; color: var(--ok); }
-.verdict .icon { width: 11px; height: 11px; }
-.review-q { font-size: 15px; color: var(--ink); margin-bottom: 14px; line-height: 1.55; }
-.answer-row {
- display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
- padding: 12px 16px; background: #faf8f2; border-radius: var(--radius);
- margin-bottom: 10px;
-}
-.answer-row .a-label {
- font-family: var(--sans); font-size: 10px; font-weight: 700;
- letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);
- margin-bottom: 4px;
-}
-.answer-row .a-value { font-size: 15px; font-weight: 600; }
-.answer-row .your { border-right: 1px solid var(--line); padding-right: 16px; }
-.answer-row .your .a-value.wrong { color: var(--crimson); }
-.answer-row .correct .a-value.right { color: var(--ok); }
-.explanation {
- padding: 12px 16px; background: #f4f1ea; border-radius: var(--radius);
- font-size: 14px; line-height: 1.6; color: var(--ink);
- border-left: 3px solid var(--gold);
- font-style: italic;
-}
-.explanation strong { font-style: normal; color: var(--gold-2); font-weight: 700; }
-
-.results-actions {
- display: flex; justify-content: center; gap: 14px; margin-top: 32px;
-}
-
-/* ============================================================
- MODAL: ANTI-CHEAT WARNING
-============================================================ */
-.modal-backdrop {
- position: fixed; inset: 0; background: rgba(0,0,0,0.85);
- display: none; align-items: center; justify-content: center;
- z-index: 200; padding: 20px;
-}
-.modal-backdrop.show { display: flex; animation: fadeIn 0.2s; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.modal-card {
- background: #fff; max-width: 460px; width: 100%; padding: 40px;
- border-radius: var(--radius); text-align: center;
- border-top: 4px solid var(--crimson);
- box-shadow: var(--shadow-3);
-}
-.modal-card .icon-wrap {
- width: 56px; height: 56px; margin: 0 auto 20px;
- background: #fde8e8; border-radius: 50%;
- display: flex; align-items: center; justify-content: center;
-}
-.modal-card .icon-wrap .icon { width: 28px; height: 28px; color: var(--crimson); }
-.modal-card h3 {
- font-size: 22px; font-weight: 500; margin-bottom: 12px;
-}
-.modal-card p {
- font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.55;
- font-family: var(--sans);
-}
-.modal-card .btn { width: 100%; justify-content: center; }
-
-@media (max-width: 900px) {
- .listening-stage { grid-template-columns: 1fr; }
- .keywords-panel { border-left: none; border-top: 1px solid #1f2937; max-height: 280px; }
- .exam-header { padding: 14px 20px; flex-wrap: wrap; gap: 12px; }
- .exam-header .meta { gap: 14px; font-size: 10px; }
- .player-section { padding: 40px 20px; }
- .player-card { padding: 32px 24px; }
- .questions-container { padding: 32px 20px 120px; }
- .toolbar-section { display: none; }
- .score-card { grid-template-columns: 1fr; gap: 16px; }
- .score-block { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 16px; }
- .score-block:last-child { border-bottom: none; padding-bottom: 0; }
- .answer-row { grid-template-columns: 1fr; }
- .answer-row .your { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 12px; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
- SVG ICON DEFINITIONS
-============================================================ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
- <symbol id="i-headphones" viewBox="0 0 24 24">
- <path d="M12 3C7.03 3 3 7.03 3 12v6a2 2 0 002 2h3v-7H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-3v7h3a2 2 0 002-2v-6c0-4.97-4.03-9-9-9z"/>
- </symbol>
- <symbol id="i-clock" viewBox="0 0 24 24">
- <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
- </symbol>
- <symbol id="i-play" viewBox="0 0 24 24">
- <path d="M8 5v14l11-7z"/>
- </symbol>
- <symbol id="i-pause" viewBox="0 0 24 24">
- <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
- </symbol>
- <symbol id="i-replay" viewBox="0 0 24 24">
- <path d="M12 5V2L7 7l5 5V8c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
- </symbol>
- <symbol id="i-check" viewBox="0 0 24 24">
- <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
- </symbol>
- <symbol id="i-x" viewBox="0 0 24 24">
- <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
- </symbol>
- <symbol id="i-warning" viewBox="0 0 24 24">
- <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
- </symbol>
- <symbol id="i-shield" viewBox="0 0 24 24">
- <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
- </symbol>
- <symbol id="i-target" viewBox="0 0 24 24">
- <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
- </symbol>
- <symbol id="i-book" viewBox="0 0 24 24">
- <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
- </symbol>
- <symbol id="i-trophy" viewBox="0 0 24 24">
- <path d="M19 5h-2V3H7v2H3v2c0 2.96 1.61 5.54 4 6.92V17H5v2h14v-2h-2v-3.08c2.39-1.38 4-3.96 4-6.92V5zm-2 2c0 1.65-.83 3.05-2.08 3.88L14 11.43V7h3zm-8 5.43l-.92-.55C7.83 10.05 7 8.65 7 7h3v5.43z"/>
- </symbol>
- <symbol id="i-arrow-right" viewBox="0 0 24 24">
- <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
- </symbol>
- <symbol id="i-volume" viewBox="0 0 24 24">
- <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
- </symbol>
- <symbol id="i-listening" viewBox="0 0 24 24">
- <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.31 6-6.72h-1.7z"/>
- </symbol>
- <symbol id="i-document" viewBox="0 0 24 24">
- <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
- </symbol>
- <symbol id="i-pencil" viewBox="0 0 24 24">
- <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
- </symbol>
- <symbol id="i-lock" viewBox="0 0 24 24">
- <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
- </symbol>
+<!-- Icon set -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4.5" height="7" rx="2"/><rect x="16.5" y="14" width="4.5" height="7" rx="2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14.5v2.5"/></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 7.6-1.7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6a.6.6 0 0 0 .9.5l11-6.8a.6.6 0 0 0 0-1L8.900 4.700a.6.6 0 0 0-.9.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.2" height="14" rx="1.2" fill="currentColor" stroke="none"/><rect x="13.800" y="5" width="4.2" height="14" rx="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.600 4.600L19 7.500"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.500 6.500l11 11M17.500 6.500l-11 11"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M4.500 12h15M13.500 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19.500 12h-15M10.500 6l-6 6 6 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="4.500" y="3" width="15" height="18" rx="2.500"/><path d="M8.500 8h7M8.500 12h7M8.500 16h4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.500l9.500 16.500h-19z"/><path d="M12 10v4.500M12 17.400v.1"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.200" fill="currentColor"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11.500A8 8 0 1 0 18 17"/><path d="M20.500 4.500v6.500H14"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.500 3.500h8l9 9a1.500 1.500 0 0 1 0 2.100l-5.900 5.900a1.500 1.500 0 0 1-2.100 0l-9-9z"/><circle cx="8" cy="8" r="1.300" fill="currentColor"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.500v5h3.500l5 4v-13l-5 4z"/><path d="M16 9a4.200 4.200 0 0 1 0 6M18.800 6.500a8 8 0 0 1 0 11"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5.500 21V4"/><path d="M5.500 4.500h11.500l-2.500 4 2.500 4H5.500"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.500M12 7.700v.1"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.500"/><path d="M8.500 13.500L7 21l5-2.800 5 2.800-1.500-7.500"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.500 2.800v5.500c0 4.600-3.100 8.200-7.500 9.700-4.400-1.500-7.500-5.100-7.500-9.700V5.800z"/><path d="M8.800 12.200l2.300 2.300 4.200-4.500"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.200L16.500 4.300a2 2 0 0 1 2.800 0l.4.4a2 2 0 0 1 0 2.800L8.200 19z"/><path d="M14.500 6.300l3.200 3.200"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.500l9 4.500-9 4.500L3 8z"/><path d="M3 12.200l9 4.500 9-4.500"/><path d="M3 16.200l9 4.500 9-4.500"/></symbol>
+  </defs>
 </svg>
 
-<!-- ============================================================
- PHASE 1: WELCOME============================================================ -->
-<section id="phase-welcome">
- <div class="welcome-card">
- <div class="exam-badge">
- <svg class="icon"><use href="#i-shield"/></svg>
- Secure Examination Environment
- </div>
- <h1 class="title">IELTS Listening Practice</h1>
- <div class="subtitle">Philadelphia Voice Edition · Section 4 — Academic Monologue</div>
+<header class="topbar">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <rect width="32" height="32" rx="9" fill="#f2b84b"/>
+      <g fill="#0c1a2b"><rect x="6" y="13" width="3" height="6" rx="1.500"/><rect x="11" y="9" width="3" height="14" rx="1.500"/><rect x="16" y="6" width="3" height="20" rx="1.500"/><rect x="21" y="10" width="3" height="12" rx="1.500"/><rect x="26" y="14" width="0" height="4"/></g>
+    </svg>
+    <div>Elvion AI<small>IELTS Listening Practice</small></div>
+  </div>
+  <div class="session" id="sessionChip"><span class="dot"></span><span id="sessionText">Session not started</span></div>
+</header>
 
- <div class="divider"></div>
+<main>
 
- <ol class="instructions-list">
- <li>This examination consists of <strong>30 questions</strong> based on a single audio recording read by the Philadelphia voice.</li>
- <li>You will first enter a <strong>Listening Phase</strong> where the audio plays and live keywords stream on screen. You may replay the audio once.</li>
- <li>After listening, you will move to the <strong>Question Phase</strong> where you have <strong>10 minutes</strong> to complete 30 questions across 4 sections.</li>
- <li>Question types include multiple choice, note completion, sentence completion, and matching.</li>
- <li>Once the test begins, <strong>navigation is locked</strong>. Closing the tab, refreshing, or switching away will trigger a violation alert and may invalidate your attempt.</li>
- <li>Your final score includes a band score (0–9), per-section breakdown, and detailed explanations for every incorrect answer.</li>
- </ol>
+<!-- INTRO -->
+<section id="s-intro" class="screen active">
+  <div class="wrap intro">
+    <div class="intro-grid">
+      <div>
+        <h1>IELTS Listening Test: The Audiobook Debate</h1>
+        <p class="lede">You will hear one recording about audiobooks, oral storytelling and the idea that listening is not &ldquo;real&rdquo; reading. Listen closely, then answer thirty questions under exam conditions.</p>
 
- <div class="warning-box">
- <svg class="icon"><use href="#i-warning"/></svg>
- <p><strong>Anti-cheat notice.</strong> Tab switching, copy attempts, and page exits are monitored. By clicking <em>Begin Examination</em> you consent to fullscreen mode and accept these conditions.</p>
- </div>
+        <div class="facts">
+          <div class="fact"><svg class="ic"><use href="#i-list"/></svg><b>30</b><span>Questions</span></div>
+          <div class="fact"><svg class="ic"><use href="#i-layers"/></svg><b>4</b><span>Parts</span></div>
+          <div class="fact"><svg class="ic"><use href="#i-clock"/></svg><b>30 min</b><span>Answer time</span></div>
+          <div class="fact"><svg class="ic"><use href="#i-headphones"/></svg><b>1 play</b><span>No repeats</span></div>
+        </div>
 
- <div class="action-row">
- <button class="btn btn-primary" id="startBtn">
- Begin Examination
- <svg class="icon"><use href="#i-arrow-right"/></svg>
- </button>
- <button class="btn btn-ghost" id="previewBtn">
-<svg class="icon"><use href="#i-volume"/></svg>
- Preview Audio
- </button>
- </div>
- </div>
+        <div class="rules">
+          <div class="rule"><div class="badge"><svg class="ic"><use href="#i-headphones"/></svg></div><div><h3>Listen first, answer second</h3><p>The recording plays before any question is visible. The question page unlocks only when the audio has finished. Key terms appear on screen as you hear them.</p></div></div>
+          <div class="rule"><div class="badge"><svg class="ic"><use href="#i-clock"/></svg></div><div><h3>Thirty minutes on the clock</h3><p>The timer starts when the questions open. When it reaches zero, your answers are submitted automatically.</p></div></div>
+          <div class="rule"><div class="badge"><svg class="ic"><use href="#i-shield"/></svg></div><div><h3>Locked session</h3><p>Refreshing, going back or switching tabs is blocked or recorded once you begin. Every focus loss is shown on your result.</p></div></div>
+          <div class="rule"><div class="badge"><svg class="ic"><use href="#i-target"/></svg></div><div><h3>Full review afterwards</h3><p>You get your raw score, an estimated band, a part-by-part breakdown, and the reason behind every answer you missed.</p></div></div>
+        </div>
+      </div>
+
+      <aside class="start-card">
+        <h2>Before you begin</h2>
+        <p>Use headphones in a quiet room. You cannot pause the clock once the questions open.</p>
+        <label class="f" for="cand">Candidate name (optional)</label>
+        <input type="text" id="cand" maxlength="40" placeholder="Enter your name" autocomplete="off">
+        <label class="check"><input type="checkbox" id="agree"><span>My audio works, and I will stay on this page until I submit.</span></label>
+        <button class="btn btn-lamp" id="beginBtn" disabled><svg class="ic"><use href="#i-headphones"/></svg>Start the recording</button>
+      </aside>
+    </div>
+  </div>
 </section>
 
-<!-- ============================================================
- PHASE 2: LISTENING
-============================================================ -->
-<section id="phase-listening">
- <header class="exam-header">
- <div class="brand">
- <svg class="icon"><use href="#i-headphones"/></svg>
- Philadelphia Voice · IELTS Listening
- </div>
- <div class="meta">
- <span><svg class="icon"><use href="#i-document"/></svg> Section 4</span>
- <span><svg class="icon"><use href="#i-target"/></svg> 30 Questions</span>
- <span class="timer" id="listeningTimer">
- <svg class="icon"><use href="#i-clock"/></svg>
- <span id="listeningTime">30:00</span>
- </span>
- </div>
- </header>
+<!-- LISTENING -->
+<section id="s-listen" class="screen">
+  <div class="wrap stage">
+    <div class="stage-grid">
+      <div class="panel">
+        <h2>Listening recording</h2>
+        <p class="sub">One speaker, played once. Questions are hidden until the recording ends.</p>
+        <div class="voice">
+          <div class="av"><svg class="ic"><use href="#i-volume"/></svg></div>
+          <div><b>Philadelphia</b><span>Female narrator</span></div>
+        </div>
+        <canvas id="wave"></canvas>
+        <div class="transport">
+          <button class="play" id="playBtn" aria-label="Play recording"><svg class="ic"><use href="#i-play"/></svg></button>
+          <div class="track">
+            <div class="bar"><i id="lbar"></i></div>
+            <div class="times"><span id="tcur">0:00</span><span id="tdur">0:00</span></div>
+          </div>
+        </div>
+        <div class="status" id="lstatus"><svg class="ic"><use href="#i-info"/></svg><span>Press play when you are ready. Seeking is disabled.</span></div>
+        <div class="gate">
+          <p id="gateText">The question page unlocks when the recording ends.</p>
+          <button class="btn btn-primary" id="toQ" disabled><svg class="ic" id="gateIcon"><use href="#i-lock"/></svg>Open the questions</button>
+        </div>
+      </div>
 
- <div class="listening-stage">
- <div class="player-section">
- <div class="player-card">
- <div class="voice-indicator">
- <div class="voice-avatar">
- <svg class="icon"><use href="#i-listening"/></svg>
- </div>
- <div class="voice-info">
- <div class="name">Philadelphia · Female Voice</div>
- <div class="status"><span class="live-dot"></span> <span id="playbackStatus">Ready</span></div>
- </div>
- </div>
-
- <div class="audio-wave" id="audioWave">
- <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
- <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
- <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
- <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
- <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
- </div>
-
- <div class="audio-controls">
- <button class="ctrl-btn" id="replayBtn" title="Replay (once)">
- <svg class="icon"><use href="#i-replay"/></svg>
- </button>
- <button class="ctrl-btn play" id="playBtn">
- <svg class="icon" id="playIcon"><use href="#i-play"/></svg>
- </button>
- <button class="ctrl-btn" id="stopBtn" title="Stop">
- <svg class="icon"><use href="#i-pause"/></svg>
- </button>
- </div>
-
- <div class="progress-container">
- <div class="progress-meta">
- <span id="currentTime">0:00</span>
- <span id="remainingTime">0:00</span>
- </div>
- <div class="progress-track">
- <div class="progress-fill" id="progressFill"></div>
- </div>
- </div>
- </div>
- </div>
-
- <aside class="keywords-panel">
- <div class="panel-title">
- <svg class="icon"><use href="#i-listening"/></svg>
- Live Keyword Stream
- </div>
- <p class="panel-hint">As Philadelphia reads, key concepts surface here. Use them as anchors for your answers.</p>
- <div class="keywords-stream" id="keywordsStream"></div>
- </aside>
- </div>
-
- <footer class="listening-footer">
- <div class="replay-info">
- <svg class="icon"><use href="#i-replay"/></svg>
- <span>Replay used: <strong id="replayCount">0 / 1</strong></span>
- </div>
- <button class="btn btn-light" id="proceedBtn" disabled>
- I Have Finished Listening
- <svg class="icon"><use href="#i-arrow-right"/></svg>
- </button>
- </footer>
+      <div class="panel">
+        <div class="kw-head">
+          <h3><svg class="ic"><use href="#i-tag"/></svg>Key terms</h3>
+          <span class="kw-count" id="kwCount">0 heard</span>
+        </div>
+        <div class="spot" id="spot"><div class="idle">Key terms from the recording will appear here as the speaker reaches them.</div></div>
+        <div class="trail" id="trail"></div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ============================================================
- PHASE 3: QUESTIONS
-============================================================ -->
-<section id="phase-questions">
- <div class="exam-toolbar">
- <div class="toolbar-left">
- <div class="toolbar-section">Section 4 · Academic Monologue</div>
- <div class="answered-count">Answered: <strong id="answeredCount">0</strong>/30</div>
- </div>
- <div class="progress-bar-thin"><div class="fill" id="toolbarProgress"></div></div>
- <div class="toolbar-right">
- <div class="timer" id="questionsTimer">
- <svg class="icon"><use href="#i-clock"/></svg>
- <span id="questionsTime">10:00</span>
- </div>
- </div>
- </div>
+<!-- TEST -->
+<section id="s-test" class="screen">
+  <div class="testbar">
+    <div class="wrap">
+      <div class="timer" id="timer"><svg class="ic"><use href="#i-clock"/></svg><span id="tleft">30:00</span></div>
+      <div class="tprog">
+        <div class="lab"><span>Answered</span><span id="ansCount">0 of 30</span></div>
+        <div class="bar"><i id="ansBar"></i></div>
+      </div>
+      <button class="btn btn-primary" id="submitTop" style="padding:.6rem 1.1rem"><svg class="ic"><use href="#i-check"/></svg>Submit test</button>
+    </div>
+    <div class="timebar" id="timebar"></div>
+  </div>
 
- <div class="questions-container" id="questionsContainer"></div>
-
- <div class="submit-bar">
- <div class="warning" id="submitWarning">
- <svg class="icon"><use href="#i-warning"/></svg>
- <span id="warningText">All questions must be answered</span>
- </div>
- <button class="btn btn-light" id="submitBtn">
- Submit Examination
- <svg class="icon"><use href="#i-check"/></svg>
- </button>
- </div>
+  <div class="wrap">
+    <div class="tabs" id="tabs"></div>
+    <div class="test-grid">
+      <div id="parts"></div>
+      <aside class="side">
+        <h3><svg class="ic"><use href="#i-list"/></svg>Question navigator</h3>
+        <div class="pal" id="pal"></div>
+        <div class="key"><span><i class="a"></i>Answered</span><span><i></i>Not answered</span><span><i class="f"></i>Flagged for review</span></div>
+        <button class="btn btn-ghost" id="submitSide"><svg class="ic"><use href="#i-check"/></svg>Finish and submit</button>
+      </aside>
+    </div>
+  </div>
 </section>
 
-<!-- ============================================================
- PHASE 4: RESULTS
-============================================================ -->
-<section id="phase-results">
- <div class="results-wrapper">
- <div class="results-header">
- <div class="crest"><svg class="icon"><use href="#i-trophy"/></svg></div>
- <h1>Examination Complete</h1>
- <div class="sub">IELTS Listening · Philadelphia Voice Edition</div>
- </div>
-
- <div class="score-card">
- <div class="score-block">
- <div class="score-label">Raw Score</div>
- <div class="score-value" id="rawScore">0</div>
- <div class="score-meta">out of 30</div>
- </div>
- <div class="score-block">
- <div class="score-label">Percentage</div>
- <div class="score-value" id="percentScore">0%</div>
- <div class="score-meta">accuracy rate</div>
- </div>
- <div class="score-block">
- <div class="score-label">IELTS Band</div>
- <div class="score-value band" id="bandScore">0.0</div>
- <div class="score-meta">estimated listening</div>
- </div>
- </div>
-
- <div class="section-breakdown" id="sectionBreakdown"></div>
-
- <div class="review-title">
- <svg class="icon"><use href="#i-document"/></svg>
- Detailed Answer Review
- </div>
- <div class="review-list" id="reviewList"></div>
-
- <div class="results-actions">
- <button class="btn btn-primary" onclick="location.reload()">
- <svg class="icon"><use href="#i-replay"/></svg>
- Retake Examination
- </button>
- <button class="btn btn-ghost" onclick="window.print()">
- <svg class="icon"><use href="#i-document"/></svg>
- Print Results
- </button>
- </div>
- </div>
+<!-- RESULTS -->
+<section id="s-result" class="screen">
+  <div class="res-hero">
+    <div class="wrap res-grid">
+      <div class="ring">
+        <svg viewBox="0 0 160 160"><circle class="bg" cx="80" cy="80" r="72"/><circle class="fg" id="ringFg" cx="80" cy="80" r="72"/></svg>
+        <div class="num"><b id="scoreNum">0</b><span>out of 30</span></div>
+      </div>
+      <div>
+        <h2 id="resTitle">Your result</h2>
+        <p id="resMsg"></p>
+        <div class="stats">
+          <div class="stat"><b id="bandNum">0.0</b><span>Estimated band</span></div>
+          <div class="stat"><b id="pctNum">0%</b><span>Accuracy</span></div>
+          <div class="stat"><b id="timeUsed">0:00</b><span>Time used</span></div>
+          <div class="stat"><b id="focusNum">0</b><span>Focus losses</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap res-body">
+    <div class="breakdown" id="breakdown"></div>
+    <div class="rv-top">
+      <h3>Answer review</h3>
+      <div class="filters" id="filters">
+        <button data-f="all" class="on">All 30</button>
+        <button data-f="bad">Incorrect</button>
+        <button data-f="ok">Correct</button>
+      </div>
+    </div>
+    <div id="review"></div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="location.reload()"><svg class="ic"><use href="#i-refresh"/></svg>Retake the test</button>
+      <a class="btn btn-ghost" href="https://elvionai.com.ng/blog.html" style="text-decoration:none"><svg class="ic"><use href="#i-arrow-l"/></svg>Back to the blog</a>
+    </div>
+  </div>
 </section>
 
-<!-- ============================================================
- MODAL: VIOLATION WARNING
-============================================================ -->
-<div class="modal-backdrop" id="violationModal">
- <div class="modal-card">
- <div class="icon-wrap"><svg class="icon"><use href="#i-warning"/></svg></div>
- <h3 id="violationTitle">Navigation Locked</h3>
- <p id="violationText">You cannot leave this page during the examination. Tab switching has been logged.</p>
- <button class="btn btn-danger" onclick="document.getElementById('violationModal').classList.remove('show')">
- I Understand
- </button>
- </div>
-</div>
+</main>
 
-<audio id="audio" preload="auto" src="https://elvionai.com.ng/audios/8875eb4b-41ce-4b87-a844-6aac2e8e.MP3"></audio>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"><svg class="ic"><use href="#i-alert"/></svg><span id="toastText"></span></div>
 
 <script>
-// ============================================================
-// STATE
-// ============================================================
-const state = {
- phase: 'welcome',
- timer: { listening: 30*60, questions: 10*60 },
- intervals: {},
- audioPlayed: false,
- replayUsed: 0,
- answers: {},
- violationCount: 0,
- startedAt: null,
-};
+(function(){
+'use strict';
 
-const audio = document.getElementById('audio');
+/* ---------- Config ---------- */
+const AUDIO_URL = 'https://elvionai.com.ng/audios/8875eb4b-41ce-4b87-a844-6aac2e8e.MP3';
+const TEST_SECONDS = 30*60;
 
-// ============================================================
-// KEYWORD STREAM - synced with audio playback
-// Timestamps calibrated for the Philadelphia voice reading
-// of "Yes, Audiobooks Count as Reading"
-// ============================================================
-const KEYWORDS = [
- { time: 5, text: 'audiobook', label: 'Introduction' },
- { time: 22, text: 'literary snobbery', label: 'The Critique' },
- { time: 55, text: 'brain science', label: 'Neuroscience' },
- { time: 78, text: 'identical neural pathways', label: 'Cognitive Evidence' },
- { time: 105, text: 'oral storytelling', label: 'Historical Roots' },
- { time: 130, text: 'Johannes Gutenberg', label: 'The Printing Press' },
- { time: 158, text: 'griots of West Africa', label: 'African Tradition' },
- { time: 185, text: 'democratize knowledge', label: 'Modern Access' },
- { time: 210, text: 'voice actor', label: 'Performance' },
- { time: 240, text: 'rhythmic pacing', label: 'Artistic Dimension' },
- { time: 268, text: 'literary snobs', label: 'The Gatekeepers' },
- { time: 295, text: 'expand your mind', label: 'Closing Thought' },
+/* Reference script, used only to place key terms along the recording's timeline */
+const SCRIPT = [
+`Yes, Audiobooks Count as Reading: Why We Need to Stop Literary Snobbery`,
+`Let us talk about a conversation that happens on the internet every single week.`,
+`You are having a casual discussion with a group of friends about books. Someone brings up a compelling new novel, a biography, or a historical account. You smile excitedly and say, Oh, I just finished that book last week. The character development in the final act was incredible.`,
+`Then, someone in the group asks, Did you read the physical book or did you listen to the audiobook?`,
+`You honestly reply, I listened to the audiobook during my daily commute.`,
+`Suddenly, the mood shifts. The self-proclaimed "book purist" in the room smirks condescendingly, adjusts their glasses, and says, Well, then you did not actually read it, you just listened to it. That is cheating.`,
+`You feel an immediate wave of irritation. After spending twelve hours immersed in that story, you understood the themes, fell in love with the characters, remembered every single plot twist. Yet, somehow, someone wants to invalidate your entire intellectual experience simply because the words entered your brain through your ears instead of your eyes.`,
+`Welcome to the most exhausting form of gatekeeping in the modern world, literary snobbery.`,
+`We need to retire this ridiculous debate for good. Audiobooks are not cheating, they are not a shortcut for lazy people.`,
+`What Brain Science Actually Says About Listening`,
+`Purists love to claim that your brain works harder when you look at ink on paper. They assume that listening to a voice is passive, like watching television.`,
+`Cognitive neuroscience completely disagrees with them.`,
+`When neuroscientists put readers into brain scanners to study how stories are processed, the results are always identical. Whether you are looking at printed letters or listening to spoken words, your brain activates the exact same neural pathways for semantic comprehension, emotional processing, and narrative imagination.`,
+`Your eyes do not understand stories. Your eyes are simply optical scanners that translate physical squiggles on a page into language symbols.`,
+`Once those symbols enter your brain, the cognitive engine takes over. Your brain constructs the scenes, feels the emotional tension, analyzes the subtext, and builds the mental movie.`,
+`Whether the input arrives through your retina or your eardrum, the final destination is identical. You are doing the exact same cognitive work of comprehension, critical thinking, and empathy building.`,
+`Claiming that listening to a book does not count as reading is like claiming that looking at a digital photograph on your phone does not count as seeing because it is not printed on glossy paper. It is an argument about the delivery container, not the content.`,
+`Oral Storytelling is the Original Literature`,
+`There is a massive historical irony that literary purists conveniently forget.`,
+`Printed paper books are a very recent invention in human history. For thousands of years before Johannes Gutenberg built the printing press in Europe, human beings preserved their history, philosophy, and deepest mythologies entirely through the spoken word.`,
+`African literature, in particular, was built on the foundation of spoken genius.`,
+`Long before colonial publishing houses existed, our ancestors sat around communal fires under the moonlight to share intricate folk tales, philosophical proverbs, and historical epics. The griots of West Africa were living libraries. They memorized centuries of genealogical records and delivered poetic stories with rhythm, cadence, and vocal mastery.`,
+`Nobody sat around the village fire and told the elders that listening to a story was "cheating" because it was not written down on parchment.`,
+`Literature has always been about language, melody, and human connection. Spoken storytelling is not an inferior alternative to the printed page; it is the original ancestor of all human literature.`,
+`Surviving Modern Life and the Reality of Time`,
+`Let us look at the practical reality of living in 2026.`,
+`If you are an ambitious professional, an entrepreneur, or a creator living in a city like Lagos, your daily routine is relentless. You wake up at 5 AM. Sit in grueling traffic on the bridge for two hours, work a demanding eight-hour shift. Sit in another two hours of traffic returning home. By the time you shower and eat dinner, your eyes are burning from staring at computer screens all day.`,
+`If your only option for consuming books is sitting in a quiet room with a 500-page physical paperback, you will read two books a year at best.`,
+`Audiobooks democratize knowledge. They turn dead time into productive, inspiring time.`,
+`Instead of getting frustrated by bad traffic or mindless household chores, you plug in your earphones. You turn a chaotic two-hour bus ride into a masterclass on psychology. You turn washing dishes into an exploration of ancient history.`,
+`Audiobooks allow busy, hardworking adults to maintain a special intellectual life without sacrificing their sanity or sleep. That is not laziness; its an intelligent time management.`,
+`The Art of Performance and Voice`,
+`In many cases, an audiobook actually offers a deeper emotional experience than reading silently on a page.`,
+`When a book is narrated by a world-class voice actor, or better yet, when an author reads their own memoir, the performance adds an entirely new layer of artistic creativity.`,
+`You hear the precise pauses. The cracking of the voice when a character is holding back tears. You hear the sarcasm, the regional accents, and the exact rhythmic pacing that the author intended when they wrote the sentences.`,
+`Reading words silently in your head requires you to guess the tone. Listening to a masterful vocal performance delivers the full musicality of the prose.`,
+`Stop Apologizing for How You Read`,
+`The goal of literature was never to worship paper, ink, or glue. The goal of literature has always been to expand your mind, challenge your assumptions, and make you more human.`,
+`If a story made you think deeply, if an idea changed how you view your career, and if a character made you feel less alone in the world, then the format does not matter.`,
+`You absorbed the art, did the thinking, and experienced the story.`,
+`Stop letting literary snobs make you feel guilty for using headphones. Read physical paperbacks on Sunday mornings. Read on your digital screen during lunch breaks, listen to audiobooks in traffic.`,
+`Celebrate your curiosity, feed your brain, and enjoy the story however it fits into your life.`
 ];
 
-let activeKeywordIndex = -1;
-
-// ============================================================
-// ANSWER KEY & EXPLANATIONS
-// ============================================================
-const ANSWERS = {
-1: { correct: 'B', explain: 'The article states the conversation happens "online every single week" between the author and someone questioning audiobook validity.' },
- 2: { correct: 'C', explain: 'Book purists assume that "listening to a voice is as passive as watching television," considering it a form of cheating because the listener does not physically read.' },
- 3: { correct: 'B', explain: 'The author cites neuroscience to demonstrate that "reading printed text and listening to spoken words activate the same neural pathways," proving both are cognitively equivalent.' },
- 4: { correct: 'C', explain: 'The photograph metaphor argues that judging an audiobook by its delivery container is like judging digital photos as "not real" — the value lies in the content, not the format.' },
- 5: { correct: 'B', explain: 'Gutenberg is referenced to show that mass-printed books are a relatively recent invention, meaning oral storytelling dominated human literary history for thousands of years.' },
- 6: { correct: 'B', explain: 'The article describes griots as "living libraries" who memorized and performed centuries of genealogical records, poetry, and history.' },
- 7: { correct: 'B', explain: 'The Lagos routine illustrates how audiobooks convert chaotic, stressful commutes into productive learning time for busy modern professionals.' },
- 8: { correct: 'B', explain: 'The author argues audiobooks "democratize knowledge" by turning dead time — commutes, chores — into productive intellectual engagement.' },
- 9: { correct: 'neural pathways', explain: 'The transcript confirms "reading printed text and listening to spoken words activate the same neural pathways."' },
- 10: { correct: 'subtext', explain: 'The brain "constructs scenes, feels tension, and analyzes subtext" regardless of input method.' },
- 11: { correct: 'empathy building', explain: 'Both methods require "comprehension, critical thinking, and empathy building."' },
- 12: { correct: 'oral storytelling', explain: 'The article states "before the printing press, stories were preserved through oral storytelling."' },
- 13: { correct: 'griots', explain: 'The author writes "the griots of West Africa were living libraries."' },
- 14: { correct: 'vocal mastery', explain: 'Griots delivered stories with "rhythm, cadence, and vocal mastery."' },
- 15: { correct: 'Lagos', explain: 'The article uses Lagos as the example of a city where professionals face demanding schedules.' },
- 16: { correct: 'time management', explain: 'Audiobooks "turn chaotic commutes into productive learning time" through what the author frames as intelligent time management.' },
- 17: { correct: 'gatekeeping', explain: 'The transcript: "literary snobbery is the most exhausting form of gatekeeping in the modern world."' },
- 18: { correct: 'rhythmic pacing', explain: 'When an author narrates, listeners gain "the exact rhythmic pacing that the author intended."' },
- 19: { correct: 'glue', explain: 'The article: "the goal of literature was never to worship paper, ink, or glue."' },
- 20: { correct: 'emotional experience', explain: 'The author claims an audiobook often offers a "deeper emotional experience than reading silently" through vocal performance.' },
- 21: { correct: 'watching television', explain: 'Purists assume listening is "as passive as watching television."' },
- 22: { correct: 'genius', explain: 'African literature was "built on the foundation of spoken genius, not written tradition."' },
- 23: { correct: 'guess', explain: '"Reading words in your head requires you to guess the tone."' },
- 24: { correct: 'H', explain: 'Literary snobs are described as engaging in "the most exhausting form of gatekeeping in the modern world."' },
- 25: { correct: 'E', explain: 'The digital photographs metaphor shows the value lies in the content, not the delivery container.' },
- 26: { correct: 'B', explain: 'Oral storytelling is the historical precedent for preserving human stories before printed books existed.' },
- 27: { correct: 'A', explain: 'Cognitive neuroscience proves identical brain activation occurs regardless of reading or listening input.' },
- 28: { correct: 'F', explain: 'Voice performance adds rhythm, sarcasm, and accents — a new artistic dimension.' },
- 29: { correct: 'D', explain: 'West African griots were living libraries who memorized centuries of genealogical records.' },
- 30: { correct: 'G', explain: 'Reading silently requires you to guess the tone that an audiobook provides directly through performance.' },
-};
-
-// ============================================================
-// QUESTIONS DEFINITION (rendered dynamically)
-// ============================================================
-const QUESTIONS = [
- // SECTION 1: MULTIPLE CHOICE (1-8)
- { section: 'Section A', title: 'Multiple Choice', range: 'Questions 1 – 8',
- instr: 'Choose the correct letter, <strong>A, B, C, or D</strong>.',
- items: [
- { id: 1, text: 'Where does the recurring conversation the author describes take place?',
- opts: [['A','In a library between strangers'],['B','Online every single week'],['C','During a formal book review'],['D','At a university lecture hall']] },
- { id: 2, text: 'According to the article, what do "book purists" typically assume about listening to audiobooks?',
- opts: [['A','It enhances imagination more than reading'],['B','It is cheating because it requires no effort'],['C','It is as passive as watching television'],['D','It improves vocabulary faster']] },
- { id: 3, text: 'The author introduces neuroscience findings primarily in order to:',
- opts: [['A','Prove audiobooks are superior to physical books'],['B','Show reading and listening activate identical neural pathways'],['C','Argue against scientific research'],['D','Promote brain-training apps']] },
- { id: 4, text: 'The metaphor comparing audiobooks to digital photographs argues that:',
- opts: [['A','Digital media is always inferior'],['B','Photographs and literature share the same audience'],['C','The delivery container does not determine the value of content'],['D','Photos should always be printed']] },
- { id: 5, text: 'Johannes Gutenberg is mentioned because he:',
- opts: [['A','Invented the audiobook device'],['B','Invented the printing press, making mass-printed books recent'],['C','Was a famous audiobook narrator'],['D','Disagreed with oral storytelling']] },
- { id: 6, text: 'According to the article, the griots of West Africa were:',
- opts: [['A','Critics of audiobook culture'],['B','Living libraries who memorized genealogical records'],['C','The first published novelists'],['D','European traders']] },
- { id: 7, text: 'The author describes the daily commute in Lagos primarily to illustrate that audiobooks:',
- opts: [['A','Reduce the quality of public transit'],['B','Convert wasted time into productive learning time'],['C','Are only useful in wealthy cities'],['D','Make physical books obsolete']] },
- { id: 8, text: 'What broader social function does the author claim audiobooks perform?',
- opts: [['A','Replace the need for sleep'],['B','Democratize knowledge by turning dead time into productive time'],['C','Eliminate commuting entirely'],['D','Reduce literacy rates']] },
- ]},
-
- // SECTION 2: NOTE COMPLETION (9-16)
- { section: 'Section B', title: 'Note Completion', range: 'Questions 9 – 16',
- instr: 'Complete the notes below. Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.',
- items: [
- { id: 9, type: 'fill', text: 'Reading printed text and listening to spoken words activate the same',
- label: '(9) _______________' },
- { id: 10, type: 'fill', text: 'The brain constructs scenes, feels tension, and analyzes',
- label: '(10) _______________' },
- { id: 11, type: 'fill', text: 'Both methods require identical work of comprehension, critical thinking, and',
- label: '(11) _______________' },
- { id: 12, type: 'fill', text: 'Before the printing press, stories were preserved through',
- label: '(12) _______________' },
- { id: 13, type: 'fill', text: 'The',
- label: '(13) _______________ of West Africa were living libraries.' },
- { id: 14, type: 'fill', text: 'They delivered stories with rhythm, cadence, and',
- label: '(14) _______________' },
- { id: 15, type: 'fill', text: 'Many professionals live in cities like',
- label: '(15) _______________ with demanding schedules.' },
- { id: 16, type: 'fill', text: 'Audiobooks turn chaotic commutes into productive time through intelligent',
- label: '(16) _______________' },
- ], noteContext: 'The Author\'s Argument for Audiobooks' },
-
- // SECTION 3: SENTENCE COMPLETION (17-23)
- { section: 'Section C', title: 'Sentence Completion', range: 'Questions 17 – 23',
- instr: 'Complete the sentences. Write <strong>NO MORE THAN THREE WORDS</strong>.',
- items: [
- { id: 17, text: 'The author argues that literary snobbery is the most exhausting form of _______.' },
- { id: 18, text: 'When an author reads their own memoir, listeners gain access to the author\'s intended _______.' },
- { id: 19, text: 'According to the article, the goal of literature was never to worship paper, ink, or _______.' },
- { id: 20, text: 'The author claims that an audiobook often offers a deeper _______ than reading silently.' },
- { id: 21, text: 'Literary purists assume that listening to a voice is as passive as _______.' },
- { id: 22, text: 'African literature was historically built on the foundation of spoken _______.' },
- { id: 23, text: 'Reading words silently in your head requires you to _______ the tone.' },
- ]},
-
- // SECTION 4: MATCHING (24-30)
- { section: 'Section D', title: 'Matching', range: 'Questions 24 – 30',
- instr: 'Match each statement with the correct option, <strong>A – H</strong>.',
- items: [
- { id: 24, text: 'Described as engaging in the most exhausting form of gatekeeping in the modern world.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 25, text: 'Used as a metaphor to argue that delivery format does not determine content validity.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 26, text: 'Historical precedent for preserving human stories long before the printing press.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 27, text: 'Discoveries that prove identical brain activation regardless of input method.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 28, text: 'Performers who add rhythm, sarcasm, and accents to spoken literature.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 29, text: 'Living libraries who memorized centuries of genealogical records.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- { id: 30, text: 'A method that requires the reader to guess the tone that an audiobook provides directly.',
- opts: [['A','Cognitive neuroscience'],['B','Oral storytelling'],['C','Johannes Gutenberg'],['D','West African griots'],['E','Digital photographs metaphor'],['F','Voice performance'],['G','Reading silently'],['H','Literary snobs']] },
- ]},
+/* Key terms in order of appearance */
+const KW_RAW = [
+ ['daily commute','The opening scene'],['book purist','The opening scene'],['cheating','The opening scene'],['twelve hours','The opening scene'],
+ ['gatekeeping','The opening scene'],['literary snobbery','The opening scene'],
+ ['passive','Brain science'],['television','Brain science'],['Cognitive neuroscience','Brain science'],['brain scanners','Brain science'],['always identical','Brain science'],
+ ['semantic comprehension','Brain science'],['narrative imagination','Brain science'],['optical scanners','Brain science'],['mental movie','Brain science'],['delivery container','Brain science'],
+ ['Johannes Gutenberg','Oral tradition'],['communal fires','Oral tradition'],['griots of West Africa','Oral tradition'],['genealogical records','Oral tradition'],['parchment','Oral tradition'],['original ancestor','Oral tradition'],
+ ['Lagos','Modern life'],['5 AM','Modern life'],['two hours','Modern life'],['500-page','Modern life'],['two books a year','Modern life'],['democratize knowledge','Modern life'],['dead time','Modern life'],['masterclass on psychology','Modern life'],['time management','Modern life'],
+ ['voice actor','Voice and performance'],['memoir','Voice and performance'],['cracking of the voice','Voice and performance'],['guess the tone','Voice and performance'],['musicality','Voice and performance'],
+ ['worship paper','The conclusion'],['less alone','The conclusion'],['Sunday mornings','The conclusion'],['lunch breaks','The conclusion']
 ];
 
-// ============================================================
-// ANTI-CHEAT & NAVIGATION LOCK
-// ============================================================
-function lockNavigation() {
- document.body.classList.add('exam-active');
+/* ---------- Questions ---------- */
+const PARTS = [
+ { title:'Part 1', theme:'The scene and the science', groups:[
+  { instr:['Questions 1 to 7','Complete the sentences. Write <b style="display:inline">NO MORE THAN TWO WORDS</b> for each answer.'], qs:[
+   {n:1,type:'fill',t:`The book purist insists that finishing a novel by listening to it amounts to ___.`,a:['cheating'],show:'cheating',exp:`The purist says "you did not actually read it... That is cheating." The speaker spends the rest of the talk rejecting that label.`},
+   {n:2,type:'fill',t:`The speaker calls the argument the most exhausting form of ___ in the modern world.`,a:['gatekeeping'],show:'gatekeeping',exp:`The speaker names "literary snobbery" as "the most exhausting form of gatekeeping". "Snobbery" is the name of the attitude, not the answer, because the sentence needs the activity of controlling who counts as a reader.`},
+   {n:3,type:'fill',t:`In the imagined conversation, the listener praised the character development in the ___ act.`,a:['final','final act','the final'],show:'final',exp:`The line is "The character development in the final act was incredible." Only the missing word is needed because "act" is already in the sentence.`},
+   {n:4,type:'fill',t:`The listener says they heard the audiobook during their daily ___.`,a:['commute'],show:'commute',exp:`The reply is "I listened to the audiobook during my daily commute."`},
+   {n:5,type:'fill',t:`Brain scans show the same pathways handle semantic comprehension, emotional processing and narrative ___.`,a:['imagination'],show:'imagination',exp:`The three shared functions are listed as semantic comprehension, emotional processing and narrative imagination.`},
+   {n:6,type:'fill',t:`The speaker compares the eyes to optical ___ that turn marks on a page into language symbols.`,a:['scanners','scanner'],show:'scanners',exp:`"Your eyes are simply optical scanners that translate physical squiggles on a page into language symbols." This is the speaker's way of saying the eyes only deliver the input.`},
+   {n:7,type:'fill',t:`Purists assume that listening is as passive as watching ___.`,a:['television','tv','a television'],show:'television',exp:`Purists "assume that listening to a voice is passive, like watching television."`}
+  ]}
+ ]},
+ { title:'Part 2', theme:'Mind, medium and memory', groups:[
+  { instr:['Questions 8 to 14','Choose the correct letter, <b style="display:inline">A, B, C or D</b>.'], qs:[
+   {n:8,type:'mcq',t:`Which statement best captures the speaker's objection to the claim that print makes the brain work harder?`,o:[`Eyes read faster than ears can process speech, so the comparison is unfair.`,`The eyes only supply symbols; the comprehension that follows is identical whichever sense delivers them.`,`Scanners cannot measure effort during reading.`,`Listeners concentrate harder because they cannot skip words.`],a:1,exp:`The speaker says the eyes are "optical scanners" and that once symbols enter the brain "the cognitive engine takes over". The difference lies only in the input route. Options A, C and D are never claimed.`},
+   {n:9,type:'mcq',t:`What is the purpose of the digital-photograph comparison?`,o:[`To show that screens are replacing paper.`,`To suggest images are processed faster than text.`,`To criticise glossy printing.`,`To show the objection concerns the container rather than the content.`],a:3,exp:`The speaker ends the analogy with "an argument about the delivery container, not the content." The photograph example is a parallel, not a comparison of speed or technology.`},
+   {n:10,type:'mcq',t:`What do brain-scanner studies show, according to the speaker?`,o:[`Listening engages emotional regions more strongly.`,`Reading engages comprehension regions more strongly.`,`The same neural pathways are used for both.`,`Results vary widely between individuals.`],a:2,exp:`The speaker says the results "are always identical" and that the brain activates "the exact same neural pathways". That rules out A, B and D.`},
+   {n:11,type:'mcq',t:`Why does the speaker mention Johannes Gutenberg?`,o:[`To show that printed books are a recent arrival in the long history of storytelling.`,`To credit him with introducing literacy to Africa.`,`To argue that the printing press destroyed oral culture.`,`To contrast European and African poetry.`],a:0,exp:`Gutenberg is a timeline marker: for "thousands of years before" the press, people preserved knowledge orally. The speaker never says print harmed oral culture or links him to Africa.`},
+   {n:12,type:'mcq',t:`The griots of West Africa are described as living libraries because they ...`,o:[`catalogued written manuscripts.`,`translated colonial documents.`,`carried centuries of genealogical records in memory.`,`taught villagers to write.`],a:2,exp:`They "memorized centuries of genealogical records". Their medium was memory and voice, not writing, which is why A, B and D fail.`},
+   {n:13,type:'mcq',t:`What is implied by the remark about the elders and parchment?`,o:[`Oral storytelling was never judged illegitimate for lacking a written form.`,`Elders distrusted written texts.`,`Parchment was unavailable in West Africa.`,`Elders preferred stories to be recorded.`],a:0,exp:`Nobody told the elders a story was "cheating" because it was not written down. The point is about the legitimacy of oral tradition, not hostility towards writing or the supply of materials.`},
+   {n:14,type:'mcq',t:`How does the speaker position spoken storytelling in relation to literature?`,o:[`As a weaker alternative to print.`,`As a modern supplement to books.`,`As a purely regional custom.`,`As the original ancestor of all human literature.`],a:3,exp:`The speaker states that spoken storytelling "is not an inferior alternative" but "the original ancestor of all human literature."`}
+  ]}
+ ]},
+ { title:'Part 3', theme:'Time, traffic and technique', groups:[
+  { instr:['Questions 15 to 20','Write <b style="display:inline">True</b> if the statement agrees with the speaker, <b style="display:inline">False</b> if it contradicts the speaker, or <b style="display:inline">Not given</b> if there is no information.'], qs:[
+   {n:15,type:'tfng',t:`The speaker's example professional begins the working day at 5 AM.`,a:'T',exp:`"You wake up at 5 AM." This is stated directly.`},
+   {n:16,type:'tfng',t:`The commuter in the speaker's example spends four hours a day in traffic.`,a:'T',exp:`Two hours going out and "another two hours of traffic returning home" make four. You have to add the figures yourself.`},
+   {n:17,type:'tfng',t:`Reading only physical paperbacks would give the busy professional roughly a dozen books a year.`,a:'F',exp:`The speaker says that person "will read two books a year at best", which contradicts a dozen.`},
+   {n:18,type:'tfng',t:`The speaker claims that audiobooks improve the listener's sleep.`,a:'NG',exp:`The speaker says audiobooks let people keep an intellectual life "without sacrificing their sanity or sleep". That means sleep is not lost, not that it improves, so the claim is not given.`},
+   {n:19,type:'tfng',t:`The speaker treats listening during household chores as evidence of laziness.`,a:'F',exp:`The speaker says the opposite: "That is not laziness; it's an intelligent time management."`},
+   {n:20,type:'tfng',t:`The speaker cites research showing that most Lagos commuters prefer audiobooks.`,a:'NG',exp:`Lagos is used only as an example of a demanding city. No survey or statistic is mentioned.`}
+  ]},
+  { instr:['Questions 21 to 24','Which benefit does the speaker link with each situation? Choose the correct letter, <b style="display:inline">A to F</b>.'],
+    legend:[['A','A masterclass on psychology'],['B','An exploration of ancient history'],['C','Productive, inspiring time'],['D','An added layer of artistic creativity'],['E','A communal fireside gathering'],['F','A cure for eye strain']],
+    qs:[
+   {n:21,type:'match',t:`Spending a two-hour bus ride listening to a book`,a:'A',exp:`"You turn a chaotic two-hour bus ride into a masterclass on psychology."`},
+   {n:22,type:'match',t:`Washing dishes while listening`,a:'B',exp:`"You turn washing dishes into an exploration of ancient history."`},
+   {n:23,type:'match',t:`Time that would otherwise be wasted`,a:'C',exp:`Audiobooks "turn dead time into productive, inspiring time." Dead time means time that would otherwise be wasted.`},
+   {n:24,type:'match',t:`A memoir read aloud by its own author`,a:'D',exp:`When an author reads their own memoir, "the performance adds an entirely new layer of artistic creativity." The fireside gathering belongs to oral tradition, and eye strain is mentioned only as a complaint, not a benefit.`}
+  ]}
+ ]},
+ { title:'Part 4', theme:'Voice and verdict', groups:[
+  { instr:['Questions 25 to 30','Answer each question as directed. For sentences with a blank, write <b style="display:inline">ONE WORD ONLY</b>. Otherwise choose the correct letter.'], qs:[
+   {n:25,type:'fill',t:`Reading silently, the speaker argues, forces the reader to ___ the tone.`,a:['guess'],show:'guess',exp:`"Reading words silently in your head requires you to guess the tone."`},
+   {n:26,type:'mcq',t:`What does the speaker say a skilled narration delivers that silent reading may not?`,o:[`Additional footnotes and context.`,`The full musicality of the prose.`,`Stronger vocabulary retention.`,`A faster pace of comprehension.`],a:1,exp:`"Listening to a masterful vocal performance delivers the full musicality of the prose." Retention, speed and footnotes are not discussed.`},
+   {n:27,type:'fill',t:`A cracking voice reveals a character who is holding back ___.`,a:['tears'],show:'tears',exp:`"The cracking of the voice when a character is holding back tears."`},
+   {n:28,type:'mcq',t:`According to the closing section, what has literature always aimed to do?`,o:[`Honour traditional printing methods.`,`Maximise the number of books consumed.`,`Expand the mind, challenge assumptions and make people more human.`,`Preserve regional accents.`],a:2,exp:`The speaker says the goal "has always been to expand your mind, challenge your assumptions, and make you more human", and adds that the goal was never to "worship paper, ink, or glue".`},
+   {n:29,type:'mcq',t:`Which routine does the speaker recommend?`,o:[`Paperbacks in traffic, screens on Sunday mornings, audiobooks at lunch.`,`Paperbacks on Sunday mornings, screens at lunch, audiobooks in traffic.`,`Audiobooks on Sunday mornings, paperbacks at lunch.`,`Screens only, with audiobooks reserved for chores.`],a:1,exp:`The closing advice is: "Read physical paperbacks on Sunday mornings. Read on your digital screen during lunch breaks, listen to audiobooks in traffic."`},
+   {n:30,type:'mcq',t:`What is the speaker's overall stance towards literary snobs?`,o:[`Dismissive of the snobbery, while encouraging people to read in whatever way suits them.`,`Sympathetic to their concerns about standards.`,`Hostile to everyone who reads printed books.`,`Neutral, presenting both sides equally.`],a:0,exp:`The speaker tells listeners to "stop letting literary snobs make you feel guilty" yet still recommends paperbacks, so the target is the snobbery, not print readers. The tone is clearly one-sided, so D fails.`}
+  ]}
+ ]}
+];
+const QS = []; PARTS.forEach((p,pi)=>p.groups.forEach(g=>g.qs.forEach(q=>{q.part=pi;q.group=g;QS.push(q);})));
+PARTS.forEach((p,i)=>{const ns=p.groups.flatMap(g=>g.qs.map(q=>q.n));p.from=Math.min(...ns);p.to=Math.max(...ns);});
 
- // Prevent refresh / shortcut keys
- document.addEventListener('keydown', e => {
- if ((e.ctrlKey || e.metaKey) && ['r','R','w','W','t','T','p','P'].includes(e.key)) {
- e.preventDefault();
- showViolation('Navigation Locked', 'Keyboard shortcuts for refresh and tab actions are disabled during the examination.');
- }
- if (e.key === 'F5') { e.preventDefault(); showViolation('Refresh Blocked', 'You cannot refresh the page during the examination.'); }
- if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','I','j','J','c','C'].includes(e.key)) {
- e.preventDefault();
- }
- });
+/* ---------- Helpers ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const ic=(n,c='')=>`<svg class="ic ${c}"><use href="#i-${n}"/></svg>`;
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const L=['A','B','C','D','E','F'];
+const TFL={T:'True',F:'False',NG:'Not given'};
 
- // Before unload window.addEventListener('beforeunload', e => {
- if (state.phase === 'listening' || state.phase === 'questions') {
- e.preventDefault(); e.returnValue = '';
- }
- });
+const state={phase:'intro',answers:{},flags:new Set(),part:0,focusLoss:0,endAt:0,startedAt:0,locked:false,played:false};
 
- // Right-click disabled
- document.addEventListener('contextmenu', e => {
- if (state.phase !== 'welcome' && state.phase !== 'results') e.preventDefault();
- });
-
- // Copy/paste disabled
- document.addEventListener('copy', e => { if (state.phase === 'questions') e.preventDefault(); });
-
- // Visibility change
- document.addEventListener('visibilitychange', () => {
- if (document.hidden && (state.phase === 'listening' || state.phase === 'questions')) {
- state.violationCount++;
- showViolation('Tab Switch Detected', 'You have switched away from the examination. This incident has been logged. Violations: ' + state.violationCount);
- }
- });
-
- // Fullscreen request
- const el = document.documentElement;
- if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+function show(id){
+  $$('.screen').forEach(s=>s.classList.remove('active'));
+  $('#'+id).classList.add('active');
+  window.scrollTo({top:0});
 }
-
-function showViolation(title, text) {
- document.getElementById('violationTitle').textContent = title;
- document.getElementById('violationText').textContent = text;
- document.getElementById('violationModal').classList.add('show');
+function setChip(on,text){
+  $('#sessionChip').classList.toggle('on',on);
+  $('#sessionText').textContent=text;
 }
-
-// ============================================================
-// PHASE TRANSITIONS
-// ============================================================
-function showPhase(name) {
- ['welcome','listening','questions','results'].forEach(p => {
- document.getElementById('phase-' + p).style.display = 'none';
- });
- document.getElementById('phase-' + name).style.display = name === 'listening' || name === 'questions' ? 'flex' : 'block';
- state.phase = name;
+let toastT;
+function toast(msg){
+  $('#toastText').textContent=msg;
+  const t=$('#toast');t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200);
 }
+function modal(o){
+  const m=$('#modal');
+  m.innerHTML=`<div class="mi ${o.warn?'warn':''}">${ic(o.icon||'info')}</div><h3>${o.title}</h3><p>${o.body}</p><div class="mact"></div>`;
+  const act=m.querySelector('.mact');
+  o.actions.forEach(a=>{
+    const b=document.createElement('button');
+    b.className='btn '+(a.primary?'btn-primary':'btn-ghost');
+    b.innerHTML=a.label;
+    b.onclick=()=>{closeModal();a.cb&&a.cb();};
+    act.appendChild(b);
+  });
+  $('#modalBg').classList.add('show');
+  act.lastChild.focus();
+}
+function closeModal(){$('#modalBg').classList.remove('show');}
 
-document.getElementById('startBtn').addEventListener('click', () => {
- showPhase('listening');
- lockNavigation();
- startListeningTimer();
- buildKeywordStream();
+/* ---------- Session lock ---------- */
+function lock(){
+  if(state.locked)return;
+  state.locked=true;document.body.classList.add('locked');
+  try{history.pushState({lock:1},'',location.href);}catch(e){}
+  setChip(true,'Secure session active');
+}
+function unlock(){
+  state.locked=false;document.body.classList.remove('locked');
+  setChip(false,'Session ended');
+}
+window.addEventListener('beforeunload',e=>{if(state.locked){e.preventDefault();e.returnValue='';return '';}});
+window.addEventListener('popstate',()=>{
+  if(state.locked){try{history.pushState({lock:1},'',location.href);}catch(e){}toast('Going back is disabled during the test.');}
+});
+document.addEventListener('contextmenu',e=>{if(state.locked)e.preventDefault();});
+['copy','cut'].forEach(ev=>document.addEventListener(ev,e=>{if(state.locked&&!(e.target.matches&&e.target.matches('input')))e.preventDefault();}));
+document.addEventListener('keydown',e=>{
+  if(!state.locked)return;
+  const k=e.key.toLowerCase();
+  if(e.key==='F5'||((e.ctrlKey||e.metaKey)&&['r','p','s','u','w','l'].includes(k))||e.key==='F12'){e.preventDefault();toast('That shortcut is disabled during the test.');}
+});
+let lastFocusFlag=0;
+function focusLost(){
+  if(!state.locked)return;
+  const now=Date.now();if(now-lastFocusFlag<1500)return;lastFocusFlag=now;
+  state.focusLoss++;
+  let resume=false;
+  if(state.phase==='listen'&&!audio.paused){audio.pause();resume=true;}
+  modal({icon:'alert',warn:true,title:'You left the test window',
+    body:`Leaving the page during an exam is recorded. This is focus loss number <b>${state.focusLoss}</b>. ${state.phase==='test'?'Your timer kept running.':'The recording was paused.'}`,
+    actions:[{label:'Return to the test',primary:true,cb:()=>{if(resume)audio.play().catch(()=>{});}}]});
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pendingHidden=true;else if(pendingHidden){pendingHidden=false;focusLost();}});
+let pendingHidden=false;
+window.addEventListener('blur',()=>{setTimeout(()=>{if(state.locked&&!document.hasFocus()&&!document.hidden)pendingBlur=true;},50);});
+let pendingBlur=false;
+window.addEventListener('focus',()=>{if(pendingBlur){pendingBlur=false;focusLost();}});
+
+/* ---------- Intro ---------- */
+$('#agree').addEventListener('change',e=>{$('#beginBtn').disabled=!e.target.checked;});
+$('#beginBtn').addEventListener('click',()=>{
+  state.name=$('#cand').value.trim();
+  state.phase='listen';lock();show('s-listen');
+  initWave();
 });
 
-document.getElementById('previewBtn').addEventListener('click', () => {
- showPhase('listening');
- buildKeywordStream();
- audio.muted = false;
- audio.volume = 0.5;
+/* ---------- Listening ---------- */
+const audio=new Audio();audio.preload='auto';audio.src=AUDIO_URL;
+let KW=[],shown=0,ended=false,audioFailed=false;
+(function buildKW(){
+  const text=SCRIPT.join(' ').toLowerCase();let cur=0;
+  KW=KW_RAW.map(([p,tag])=>{let i=text.indexOf(p.toLowerCase(),cur);if(i<0)i=cur;cur=i+1;return{p,tag,f:i/text.length};});
+})();
+
+const playBtn=$('#playBtn');
+function setPlayIcon(playing){
+  playBtn.innerHTML=ic(playing?'pause':'play');
+  playBtn.classList.toggle('live',playing);
+  playBtn.setAttribute('aria-label',playing?'Pause recording':'Play recording');
+}
+function setStatus(icon,text){$('#lstatus').innerHTML=ic(icon)+'<span>'+text+'</span>';}
+playBtn.addEventListener('click',()=>{
+  if(ended||audioFailed)return;
+  if(audio.paused){audio.play().catch(()=>{setStatus('alert','The recording could not start. Check your connection and try again.');});}
+  else audio.pause();
 });
-
-document.getElementById('proceedBtn').addEventListener('click', () => {
- clearInterval(state.intervals.listening);
- showPhase('questions');
- startQuestionsTimer();
- renderQuestions();
- audio.pause();
- if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+audio.addEventListener('loadedmetadata',()=>{$('#tdur').textContent=fmt(audio.duration);});
+audio.addEventListener('play',()=>{state.played=true;setPlayIcon(true);setStatus('volume','Recording in progress. It will not repeat.');});
+audio.addEventListener('pause',()=>{if(!ended){setPlayIcon(false);setStatus('info','Paused. Press play to continue.');}});
+audio.addEventListener('waiting',()=>setStatus('info','Buffering...'));
+audio.addEventListener('timeupdate',onTime);
+audio.addEventListener('seeking',()=>{if(state.lastT!==undefined&&Math.abs(audio.currentTime-state.lastT)>1.5&&!ended)audio.currentTime=state.lastT;});
+audio.addEventListener('error',()=>{
+  audioFailed=true;setPlayIcon(false);playBtn.disabled=true;
+  setStatus('alert','The recording failed to load. Check your connection, then reload this page.');
+  $('#gateText').textContent='Audio is unavailable. You can still continue to the questions.';
+  openGate();
 });
-
-document.getElementById('submitBtn').addEventListener('click', () => {
- if (Object.keys(state.answers).length < 30) {
- document.getElementById('submitWarning').classList.remove('hidden');
- document.getElementById('warningText').textContent = (30 - Object.keys(state.answers).length) + ' question(s) unanswered';
- return;
- }
- clearInterval(state.intervals.questions);
- showPhase('results');
- renderResults();
+audio.addEventListener('ended',()=>{
+  ended=true;setPlayIcon(false);playBtn.disabled=true;
+  $('#lbar').style.width='100%';$('#tcur').textContent=fmt(audio.duration);
+  while(shown<KW.length)revealKW();
+  setStatus('check','Recording complete. You may now open the questions.');
+  $('#gateText').textContent='The recording has ended. The timer starts when you open the questions.';
+  openGate();
 });
+function openGate(){
+  const b=$('#toQ');b.disabled=false;b.classList.add('unlocked');
+  $('#gateIcon').innerHTML='<use href="#i-unlock"/>';
+}
+function onTime(){
+  if(!audio.duration||isNaN(audio.duration))return;
+  state.lastT=audio.currentTime;
+  const p=audio.currentTime/audio.duration;
+  $('#lbar').style.width=(p*100)+'%';
+  $('#tcur').textContent=fmt(audio.currentTime);
+  while(shown<KW.length&&KW[shown].f-0.004<=p)revealKW();
+}
+function revealKW(){
+  const k=KW[shown++];
+  const spot=$('#spot');
+  spot.classList.remove('pop');void spot.offsetWidth;
+  spot.innerHTML=`<div class="tag">${esc(k.tag)}</div><div class="term">${esc(k.p)}</div>`;
+  spot.classList.add('pop');
+  const c=document.createElement('span');c.className='chip';c.textContent=k.p;
+  const tr=$('#trail');tr.insertBefore(c,tr.firstChild);
+  $('#kwCount').textContent=shown+' of '+KW.length+' heard';
+}
+$('#toQ').addEventListener('click',startTest);
 
-// ============================================================
-// AUDIO PLAYBACK
-// ============================================================
-const playBtn = document.getElementById('playBtn');
-const playIcon = document.getElementById('playIcon');
-const replayBtn = document.getElementById('replayBtn');
-const stopBtn = document.getElementById('stopBtn');
-const audioWave = document.getElementById('audioWave');
-
-playBtn.addEventListener('click', togglePlay);
-replayBtn.addEventListener('click', () => {
- if (state.replayUsed >= 1 || audio.currentTime < 1) return;
- audio.currentTime = 0;
- state.replayUsed++;
- document.getElementById('replayCount').textContent = state.replayUsed + ' / 1';
- audio.play();
-});
-stopBtn.addEventListener('click', () => audio.pause());
-
-function togglePlay() {
- if (audio.paused) {
- audio.play();
- } else {
- audio.pause();
- }
+/* waveform */
+let wctx,wbars=[],raf;
+function initWave(){
+  const cv=$('#wave');wctx=cv.getContext('2d');
+  const fit=()=>{const r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;wctx.setTransform(d,0,0,d,0,0);};
+  fit();window.addEventListener('resize',fit);
+  wbars=Array.from({length:72},()=>0.05);
+  const draw=t=>{
+    const cv=$('#wave'),r=cv.getBoundingClientRect(),w=r.width,h=r.height;
+    wctx.clearRect(0,0,w,h);
+    const n=wbars.length,gap=4,bw=(w-gap*(n-1))/n;
+    const playing=!audio.paused&&!ended;
+    const p=audio.duration?audio.currentTime/audio.duration:0;
+    for(let i=0;i<n;i++){
+      const tgt=playing?0.14+0.86*Math.abs(Math.sin(t/330+i*0.55)*Math.cos(t/710+i*0.21)+Math.sin(t/190+i*1.3)*0.35):0.05;
+      wbars[i]+=(Math.min(tgt,1)-wbars[i])*0.14;
+      const bh=Math.max(4,wbars[i]*h*0.92),x=i*(bw+gap),y=(h-bh)/2;
+      wctx.fillStyle=(i/n)<=p?'#f2b84b':'rgba(255,255,255,.2)';
+      wctx.beginPath();
+      if(wctx.roundRect)wctx.roundRect(x,y,bw,bh,bw/2);else wctx.rect(x,y,bw,bh);
+      wctx.fill();
+    }
+    raf=requestAnimationFrame(draw);
+  };
+  raf=requestAnimationFrame(draw);
 }
 
-audio.addEventListener('play', () => {
- playIcon.innerHTML = '<use href="#i-pause"/>';
- audioWave.classList.add('playing');
- document.getElementById('playbackStatus').textContent = 'Now Reading';
-});
-audio.addEventListener('pause', () => {
- playIcon.innerHTML = '<use href="#i-play"/>';
- audioWave.classList.remove('playing');
- document.getElementById('playbackStatus').textContent = audio.ended ? 'Playback Complete' : 'Paused';
-});
-audio.addEventListener('ended', () => {
- document.getElementById('playbackStatus').textContent = 'Playback Complete';
- document.getElementById('proceedBtn').disabled = false;
-});
-audio.addEventListener('timeupdate', () => {
- const cur = audio.currentTime;
- const dur = audio.duration || 1;
- document.getElementById('currentTime').textContent = fmtTime(cur);
- document.getElementById('remainingTime').textContent = '-' + fmtTime(dur - cur);
- document.getElementById('progressFill').style.width = (cur / dur * 100) + '%';
- updateKeywordStream(cur);
-});
+/* ---------- Test ---------- */
+let timerI;
+function buildTest(){
+  const tabs=$('#tabs'),parts=$('#parts');
+  tabs.innerHTML=PARTS.map((p,i)=>`<button class="tab" data-p="${i}"><b>${p.title}</b><span>Questions ${p.from} to ${p.to}: ${p.theme}</span></button>`).join('');
+  parts.innerHTML=PARTS.map((p,i)=>`<div class="part" data-p="${i}">${p.groups.map(g=>`
+    <div class="group">
+      <div class="instr"><b>${g.instr[0]}</b>${g.instr[1]}</div>
+      ${g.legend?`<div class="legend">${g.legend.map(l=>`<div><b>${l[0]}</b><span>${l[1]}</span></div>`).join('')}</div>`:''}
+      ${g.qs.map(qHTML).join('')}
+    </div>`).join('')}
+    <div class="pager">
+      ${i>0?`<button class="btn btn-ghost" data-go="${i-1}">${ic('arrow-l')}Back to ${PARTS[i-1].title}</button>`:'<span></span>'}
+      ${i<PARTS.length-1?`<button class="btn btn-primary" data-go="${i+1}">Continue to ${PARTS[i+1].title}${ic('arrow-r')}</button>`:`<button class="btn btn-lamp" data-submit>${ic('check')}Finish and submit</button>`}
+    </div></div>`).join('');
+  $('#pal').innerHTML=QS.map(q=>`<button data-n="${q.n}" aria-label="Go to question ${q.n}">${q.n}</button>`).join('');
 
-function fmtTime(s) {
- if (!isFinite(s)) return '0:00';
- const m = Math.floor(s / 60), sec = Math.floor(s % 60);
- return m + ':' + (sec < 10 ? '0' : '') + sec;
+  tabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)setPart(+b.dataset.p);});
+  parts.addEventListener('click',e=>{
+    const g=e.target.closest('[data-go]');if(g){setPart(+g.dataset.go);window.scrollTo({top:0,behavior:'smooth'});return;}
+    if(e.target.closest('[data-submit]')){askSubmit();return;}
+    const f=e.target.closest('.flag');if(f){toggleFlag(+f.dataset.n);return;}
+    const o=e.target.closest('.opt');
+    if(o){const inp=o.querySelector('input');setAns(+inp.name.slice(1),inp.value);}
+  });
+  parts.addEventListener('input',e=>{if(e.target.matches('.blank'))setAns(+e.target.dataset.n,e.target.value);});
+  parts.addEventListener('change',e=>{if(e.target.matches('select.pick'))setAns(+e.target.dataset.n,e.target.value);});
+  $('#pal').addEventListener('click',e=>{const b=e.target.closest('button');if(b)jumpTo(+b.dataset.n);});
+  $('#submitTop').onclick=$('#submitSide').onclick=askSubmit;
+  setPart(0);refreshUI();
+}
+function qHTML(q){
+  let body='';
+  if(q.type==='fill'){
+    const [a,b]=q.t.split('___');
+    return `<div class="q" id="q${q.n}"><div class="qn">${q.n}</div><div class="qtext" style="margin:0">${a}<input class="blank" data-n="${q.n}" type="text" maxlength="30" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer for question ${q.n}">${b}</div>${flagBtn(q.n)}</div>`;
+  }
+  if(q.type==='mcq') body=`<div class="opts">${q.o.map((t,i)=>`<label class="opt" data-v="${i}"><input type="radio" name="q${q.n}" value="${i}"><span class="l">${L[i]}</span><span>${t}</span></label>`).join('')}</div>`;
+  if(q.type==='tfng') body=`<div class="seg">${['T','F','NG'].map(v=>`<label class="opt" data-v="${v}"><input type="radio" name="q${q.n}" value="${v}"><span>${TFL[v]}</span></label>`).join('')}</div>`;
+  if(q.type==='match') body=`<select class="pick" data-n="${q.n}" aria-label="Answer for question ${q.n}"><option value="">Select a letter</option>${q.group.legend.map(l=>`<option value="${l[0]}">${l[0]}: ${l[1]}</option>`).join('')}</select>`;
+  return `<div class="q" id="q${q.n}"><div class="qn">${q.n}</div><div><div class="qtext">${q.t}</div>${body}</div>${flagBtn(q.n)}</div>`;
+}
+function flagBtn(n){return `<button class="flag" data-n="${n}" aria-label="Flag question ${n} for review" title="Flag for review">${ic('flag')}</button>`;}
+function setPart(i){
+  state.part=i;
+  $$('.tab').forEach((t,k)=>t.classList.toggle('on',k===i));
+  $$('.part').forEach((p,k)=>p.classList.toggle('on',k===i));
+}
+function setAns(n,v){
+  if(v===''||v==null)delete state.answers[n];else state.answers[n]=v;
+  refreshUI();
+}
+function toggleFlag(n){
+  state.flags.has(n)?state.flags.delete(n):state.flags.add(n);
+  refreshUI();
+}
+function answered(n){const v=state.answers[n];return v!==undefined&&String(v).trim()!=='';}
+function refreshUI(){
+  let c=0;
+  QS.forEach(q=>{
+    const a=answered(q.n);if(a)c++;
+    const el=$('#q'+q.n);if(!el)return;
+    el.classList.toggle('done',a);
+    el.querySelectorAll('.opt').forEach(o=>o.classList.toggle('sel',String(state.answers[q.n])===o.dataset.v));
+    const f=el.querySelector('.flag');f.classList.toggle('on',state.flags.has(q.n));
+    const pb=$('#pal [data-n="'+q.n+'"]');pb.classList.toggle('a',a);pb.classList.toggle('f',state.flags.has(q.n));
+  });
+  $('#ansCount').textContent=c+' of 30';
+  $('#ansBar').style.width=(c/30*100)+'%';
+}
+function jumpTo(n){
+  const q=QS.find(x=>x.n===n);setPart(q.part);
+  const el=$('#q'+n);
+  requestAnimationFrame(()=>{
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.classList.remove('hl');void el.offsetWidth;el.classList.add('hl');
+    const f=el.querySelector('.blank,select,input');if(f)setTimeout(()=>f.focus({preventScroll:true}),350);
+  });
+}
+function startTest(){
+  audio.pause();
+  state.phase='test';state.startedAt=Date.now();state.endAt=Date.now()+TEST_SECONDS*1000;
+  cancelAnimationFrame(raf);
+  buildTest();show('s-test');
+  setChip(true,'Secure session active');
+  tick();timerI=setInterval(tick,250);
+}
+function tick(){
+  const left=Math.ceil((state.endAt-Date.now())/1000);
+  $('#tleft').textContent=fmt(left);
+  const t=$('#timer');t.classList.toggle('low',left<=300&&left>60);t.classList.toggle('crit',left<=60);
+  $('#timebar').style.transform='scaleX('+Math.max(0,left/TEST_SECONDS)+')';
+  if(left===300)toast('Five minutes remaining.');
+  if(left<=0){clearInterval(timerI);finish(true);}
+}
+function askSubmit(){
+  const un=QS.filter(q=>!answered(q.n)).length,fl=state.flags.size;
+  modal({icon:'check',warn:un>0,title:'Submit your test?',
+    body:un>0?`You have <b>${un}</b> unanswered question${un>1?'s':''}${fl?` and <b>${fl}</b> flagged`:''}. Once you submit, you cannot return to the questions.`:`All 30 questions are answered${fl?`, with <b>${fl}</b> still flagged`:''}. Once you submit, you cannot return to the questions.`,
+    actions:[{label:'Keep working'},{label:'Submit now',primary:true,cb:()=>finish(false)}]});
 }
 
-// ============================================================
-// KEYWORD STREAM
-// ============================================================
-function buildKeywordStream() {
- const stream = document.getElementById('keywordsStream');
- stream.innerHTML = '';
- KEYWORDS.forEach((k, i) => {
- const el = document.createElement('div');
- el.className = 'keyword';
- el.dataset.idx = i;
- el.innerHTML = `<div class="label"><svg class="icon"><use href="#i-listening"/></svg>${k.label}</div>${k.text}`;
- stream.appendChild(el);
- });
+/* ---------- Scoring ---------- */
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,' ').trim().replace(/^(the|a|an)\s+/,'');
+function isRight(q){
+  const v=state.answers[q.n];if(!answered(q.n))return false;
+  if(q.type==='fill')return q.a.map(norm).includes(norm(v));
+  if(q.type==='mcq')return +v===q.a;
+  return v===q.a;
+}
+function band(raw){
+  const s=Math.round(raw/30*40);
+  const t=[[39,9],[37,8.5],[35,8],[32,7.5],[30,7],[26,6.5],[23,6],[18,5.5],[16,5],[13,4.5],[10,4],[8,3.5],[6,3],[4,2.5]];
+  for(const [m,b] of t)if(s>=m)return b;return s>=2?2:1;
+}
+function userText(q){
+  if(!answered(q.n))return 'No answer';
+  const v=state.answers[q.n];
+  if(q.type==='fill')return esc(v);
+  if(q.type==='mcq')return L[+v]+': '+q.o[+v];
+  if(q.type==='tfng')return TFL[v];
+  return v+': '+q.group.legend.find(l=>l[0]===v)[1];
+}
+function rightText(q){
+  if(q.type==='fill')return q.show;
+  if(q.type==='mcq')return L[q.a]+': '+q.o[q.a];
+  if(q.type==='tfng')return TFL[q.a];
+  return q.a+': '+q.group.legend.find(l=>l[0]===q.a)[1];
+}
+function finish(auto){
+  clearInterval(timerI);
+  const used=Math.min(TEST_SECONDS,Math.round((Date.now()-state.startedAt)/1000));
+  const res=QS.map(q=>({q,ok:isRight(q)}));
+  const raw=res.filter(r=>r.ok).length;
+  unlock();state.phase='result';
+  show('s-result');
+  if(auto)toast('Time is up. Your answers were submitted.');
+
+  const b=band(raw);
+  $('#resTitle').textContent=(state.name?state.name+', ':'')+(raw>=26?'excellent listening':raw>=18?'solid work':raw>=10?'a good start':'keep practising');
+  $('#resMsg').textContent=raw>=26?'You tracked the argument, the numbers and the speaker\u2019s attitude with real accuracy.':raw>=18?'You caught most of the main ideas. Review the questions below to see where detail or inference slipped.':'Detail and inference questions are where marks are lost. Read the reasons below, then try again.';
+  $('#pctNum').textContent=Math.round(raw/30*100)+'%';
+  $('#timeUsed').textContent=fmt(used);
+  $('#focusNum').textContent=state.focusLoss;
+  $('#bandNum').textContent=b.toFixed(1);
+  const circ=452.4;
+  requestAnimationFrame(()=>setTimeout(()=>{$('#ringFg').style.strokeDashoffset=circ*(1-raw/30);},120));
+  const t0=performance.now();
+  (function cnt(t){const p=Math.min(1,(t-t0)/1500);$('#scoreNum').textContent=Math.round(raw*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(cnt);})(t0);
+
+  $('#breakdown').innerHTML=PARTS.map((p,i)=>{
+    const rs=res.filter(r=>r.q.part===i),ok=rs.filter(r=>r.ok).length;
+    return `<div class="bk"><b>${p.title}</b><div class="sc">${ok}<small> / ${rs.length}</small></div><div class="bar"><i data-w="${ok/rs.length*100}"></i></div><small>${p.theme}</small></div>`;
+  }).join('');
+  setTimeout(()=>$$('.bk .bar i').forEach(i=>i.style.width=i.dataset.w+'%'),300);
+
+  $('#review').innerHTML=res.map((r,i)=>{
+    const q=r.q,cls=r.ok?'ok':'bad';
+    const qt=q.type==='fill'?q.t.replace('___','<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>'):q.t;
+    return `<article class="rv ${cls}" data-s="${cls}" style="animation-delay:${Math.min(i,12)*40}ms">
+      <div class="rv-h"><b>Question ${q.n}</b><span class="pill ${cls}">${ic(r.ok?'check':'x')}${r.ok?'Correct':(answered(q.n)?'Incorrect':'Unanswered')}</span></div>
+      <p class="rv-q">${qt}</p>
+      <div class="ans"><div class="yours ${cls}"><small>Your answer</small><b>${userText(q)}</b></div>${r.ok?'':`<div class="right"><small>Correct answer</small><b>${esc(rightText(q))}</b></div>`}</div>
+      <div class="why">${ic('info')}<div><b style="display:block;margin-bottom:.1rem">${r.ok?'Why this is right':'Why this answer is not accepted'}</b>${esc(q.exp).replace(/&quot;/g,'"')}</div></div>
+    </article>`;
+  }).join('');
+
+  $('#filters').onclick=e=>{
+    const b=e.target.closest('button');if(!b)return;
+    $$('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+    $$('.rv').forEach(c=>c.style.display=(b.dataset.f==='all'||c.dataset.s===b.dataset.f)?'':'none');
+  };
+  $('#filters [data-f="all"]').textContent='All 30';
+  $('#filters [data-f="bad"]').textContent='Incorrect ('+(30-raw)+')';
+  $('#filters [data-f="ok"]').textContent='Correct ('+raw+')';
 }
 
-function updateKeywordStream(time) {
- let newActive = -1;
- KEYWORDS.forEach((k, i) => {
- if (time >= k.time) newActive = i;
- });
- if (newActive !== activeKeywordIndex && newActive >= 0) {
- activeKeywordIndex = newActive;
- document.querySelectorAll('.keyword').forEach((el, i) => {
- el.classList.remove('active','passed');
- if (i < activeKeywordIndex) el.classList.add('passed');
- if (i === activeKeywordIndex) el.classList.add('active');
- });
- const activeEl = document.querySelector(`.keyword[data-idx="${activeKeywordIndex}"]`);
- if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
- }
-}
-
-// ============================================================
-// TIMERS
-// ============================================================
-function startListeningTimer() {
- const el = document.getElementById('listeningTime');
- state.intervals.listening = setInterval(() => {
- state.timer.listening--;
- const t = formatTimer(state.timer.listening);
- el.textContent = t;
- const tm = document.getElementById('listeningTimer');
- if (state.timer.listening < 60) tm.classList.add('danger');
- else if (state.timer.listening < 5*60) tm.classList.add('warning');
- if (state.timer.listening <= 0) {
- clearInterval(state.intervals.listening);
- document.getElementById('proceedBtn').disabled = false;
- }
- }, 1000);
-}
-
-function startQuestionsTimer() {
- const el = document.getElementById('questionsTime');
- state.intervals.questions = setInterval(() => {
- state.timer.questions--;
- const t = formatTimer(state.timer.questions);
- el.textContent = t;
- const tm = document.getElementById('questionsTimer');
- if (state.timer.questions < 60) tm.classList.add('danger');
- else if (state.timer.questions < 3*60) tm.classList.add('warning');
- if (state.timer.questions <= 0) {
- clearInterval(state.intervals.questions);
- document.getElementById('warningText').textContent = 'Time expired — submitting';
- document.getElementById('submitBtn').click();
- }
- }, 1000);
-}
-
-function formatTimer(secs) {
- if (secs < 0) secs = 0;
- const m = Math.floor(secs / 60), s = secs % 60;
- return m + ':' + (s < 10 ? '0' : '') + s;
-}
-
-// ============================================================
-// RENDER QUESTIONS
-// ============================================================
-function renderQuestions() {
- const container = document.getElementById('questionsContainer');
- container.innerHTML = '';
- QUESTIONS.forEach((sec, sIdx) => {
- const secEl = document.createElement('div');
- secEl.innerHTML = `
- <div class="section-header">
- <div>
- <div class="num">${sec.section}</div>
- <h2>${sec.title}</h2>
- </div>
- <div class="count">${sec.range}</div>
- </div>
- <div class="section-instructions">${sec.instr}</div>
- `;
-
- sec.items.forEach((q, idx) => {
- const card = document.createElement('div');
- card.className = 'question-card';
- card.dataset.id = q.id;
- const header = `<div class="q-header"><div class="q-number">${q.id}</div><div class="q-text">${q.text || q.label}</div></div>`;
-
- let body = '';
- if (q.opts) {
- body += '<div class="options">';
- q.opts.forEach(o => {
- const [letter, text] = o;
- body += `<label class="option" data-q="${q.id}" data-val="${letter}">
- <input type="radio" name="q${q.id}" value="${letter}">
- <div class="bullet"></div>
- <span><strong style="margin-right:8px;color:var(--gold-2);font-family:var(--sans);font-size:13px;letter-spacing:1px;">${letter}</strong>${text}</span>
- </label>`;
- });
- body += '</div>';
- } else if (q.type === 'fill') {
- body += `<input type="text" class="input-line" data-q="${q.id}" placeholder="Type your answer">`;
- } else {
- body += `<input type="text" class="input-line" data-q="${q.id}" placeholder="Type your answer">`;
- }
-
- card.innerHTML = header + body;
- secEl.appendChild(card);
- });
-
- container.appendChild(secEl);
- });
-
- // Listen for changes
- container.addEventListener('change', updateAnswers);
- container.addEventListener('input', updateAnswers);
-}
-
-function updateAnswers(e) {
- const target = e.target;
- const q = parseInt(target.dataset.q);
- const val = target.value.trim();
- if (val) {
- state.answers[q] = val;
- const card = document.querySelector(`.question-card[data-id="${q}"]`);
- if (card) card.classList.add('answered');
- }
- // Update progress
- const count = Object.keys(state.answers).length;
- document.getElementById('answeredCount').textContent = count;
- document.getElementById('toolbarProgress').style.width = (count / 30 * 100) + '%';
- if (count === 30) document.getElementById('submitWarning').classList.add('hidden');
-}
-
-// Option click handler for radio
-document.addEventListener('click', e => {
- const opt = e.target.closest('.option');
- if (!opt) return;
- const q = parseInt(opt.dataset.q);
- const val = opt.dataset.val;
- opt.querySelector('input').checked = true;
- document.querySelectorAll(`.option[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
- opt.classList.add('selected');
- state.answers[q] = val;
- const card = document.querySelector(`.question-card[data-id="${q}"]`);
- if (card) card.classList.add('answered');
- const count = Object.keys(state.answers).length;
- document.getElementById('answeredCount').textContent = count;
- document.getElementById('toolbarProgress').style.width = (count / 30 * 100) + '%';
- if (count === 30) document.getElementById('submitWarning').classList.add('hidden');
-});
-
-// ============================================================
-// RESULTS & SCORING
-// ============================================================
-function renderResults() {
- let correct = 0;
- const wrong = [], all = [];
-
- Object.keys(ANSWERS).forEach(q => {
- const id = parseInt(q);
- const ansKey = ANSWERS[q];
- const userAns = state.answers[id];
- const isCorrect = userAns && userAns.toLowerCase().trim() === ansKey.correct.toLowerCase().trim();
- if (isCorrect) correct++;
- else wrong.push({ id, userAns: userAns || '— (no answer)', correct: ansKey.correct, explain: ansKey.explain });
- all.push({ id, userAns, correct: ansKey.correct, isCorrect, explain: ansKey.explain });
- });
-
- const pct = Math.round(correct / 30 * 100);
- const band = calculateBand(correct);
-
- document.getElementById('rawScore').textContent = correct + ' / 30';
- document.getElementById('percentScore').textContent = pct + '%';
- const bandEl = document.getElementById('bandScore');
- bandEl.textContent = band.toFixed(1);
- bandEl.classList.toggle('high', band >= 7);
- bandEl.classList.toggle('low', band < 5);
-
- // Section breakdown
- const sections = [
- { name: 'Section A — Multiple Choice', range: [1,8] },
- { name: 'Section B — Note Completion', range: [9,16] },
- { name: 'Section C — Sentence Completion', range: [17,23] },
- { name: 'Section D — Matching', range: [24,30] },
- ];
- const bd = document.getElementById('sectionBreakdown');
- sections.forEach(s => {
- const secCorrect = all.filter(x => x.id >= s.range[0] && x.id <= s.range[1] && x.isCorrect).length;
- const total = s.range[1] - s.range[0] + 1;
- const row = document.createElement('div');
- row.className = 'section-row';
- row.innerHTML = `
- <div class="label">${s.name}</div>
- <div class="stat"><strong>${secCorrect}</strong> / ${total} correct</div>
- `;
- bd.appendChild(row);
- });
-
- // Review list
- const rl = document.getElementById('reviewList');
- all.sort((a,b) => a.id - b.id).forEach(item => {
- const el = document.createElement('div');
- el.className = 'review-item ' + (item.isCorrect ? 'correct' : '');
- const q = QUESTIONS.flatMap(s => s.items).find(x => x.id === item.id);
- el.innerHTML = `
- <div class="review-head">
- <div class="q-tag">Question ${item.id}</div>
- <div class="verdict ${item.isCorrect ? 'right' : 'wrong'}">
- <svg class="icon"><use href="#${item.isCorrect ? 'i-check' : 'i-x'}"/></svg>
- ${item.isCorrect ? 'Correct' : 'Incorrect'}
- </div>
- </div>
- <div class="review-q">${q ? q.text : ''}</div>
- <div class="answer-row">
- <div class="your">
- <div class="a-label">Your Answer</div>
- <div class="a-value ${item.isCorrect ? 'right' : 'wrong'}">${item.userAns || '— (no answer)'}</div>
- </div>
- <div class="correct">
- <div class="a-label">Correct Answer</div>
- <div class="a-value right">${item.correct}</div>
- </div>
- </div>
- <div class="explanation"><strong>Why:</strong> ${item.explain}</div>
- `;
- rl.appendChild(el);
- });
-}
-
-function calculateBand(score) {
- // IELTS Listening conversion table (approximate, raw 30 → band 9)
- const table = { 30:9, 29:8.5, 28:8.5, 27:8, 26:8, 25:7.5, 24:7.5, 23:7, 22:7, 21:6.5, 20:6.5,
- 19:6, 18:6, 17:5.5, 16:5.5, 15:5, 14:5, 13:4.5, 12:4.5, 11:4, 10:4,
- 9:3.5, 8:3.5, 7:3, 6:3, 5:2.5, 4:2.5, 3:2, 2:1.5, 1:1, 0:0 };
- return table[score] !== undefined ? table[score] : 0;
-}
-
-// ============================================================
-// INIT
-// ============================================================
-window.addEventListener('load', () => {
- document.getElementById('listeningTime').textContent = formatTimer(state.timer.listening);
- document.getElementById('questionsTime').textContent = formatTimer(state.timer.questions);
-});
+})();
 </script>
 </body>
 </html>
