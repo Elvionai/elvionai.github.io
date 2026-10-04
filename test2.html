@@ -2,789 +2,1818 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Tactical Strike — 3D Shooting Range</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IELTS Listening Practice Test — Philadelphia Voice Edition</title>
 <style>
+ :root {
+-bg: #0a0e1a;
+-bg-2: #111827;
+-surface: #1a2030;
+-surface-2: #232b3d;
+-border: #2a3447;
+-text: #e5e9f0;
+-text-dim: #8a94a8;
+-accent: #c9a961;
+-accent-2: #d4b574;
+-success: #4ade80;
+-danger: #ef4444;
+-warning: #f59e0b;
+-info: #60a5fa;
+ }
  * { margin: 0; padding: 0; box-sizing: border-box; }
- html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', monospace; user-select: none; }
- canvas { display: block; }
+ html, body {
+ background: var(--bg);
+ color: var(--text);
+ font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+ min-height: 100vh;
+ overflow-x: hidden;
+ }
+ body { background: radial-gradient(ellipse at top, #1a2035 0%, #0a0e1a 70%); }
+ ::selection { background: var(--accent); color: #000; }
 
- #menu {
- position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
- display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100;
- color: #fff;
- }
- #menu h1 {
- font-size: 72px; letter-spacing: 8px; color: #ff3344; text-shadow: 0 0 20px #ff0033, 0 0 40px #ff0033;
- margin-bottom: 10px; font-weight: 900;
- }
- #menu h2 { font-size: 18px; color: #aaa; margin-bottom: 50px; letter-spacing: 4px; }
- #menu .instructions {
- background: rgba(255,255,255,0.05); border: 1px solid #333; padding: 25px 40px;
- border-radius: 8px; margin-bottom: 40px; line-height: 2; font-size: 14px;
- }
- #menu .instructions span { color: #ff3344; font-weight: bold; }
- #startBtn {
- background: linear-gradient(135deg, #ff3344, #b30000); color: #fff; border: none;
- padding: 18px 60px; font-size: 20px; letter-spacing: 4px; cursor: pointer;
- border-radius: 4px; font-weight: bold; transition: all 0.2s;
- box-shadow: 0 0 20px rgba(255,51,68,0.5);
- }
- #startBtn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,51,68,0.8); }
+/* Disable text selection in exam mode */
+.exam-mode { user-select: none; -webkit-user-select: none; }
+.exam-mode input, .exam-mode textarea { user-select: text; -webkit-user-select: text; }
 
- #crosshair {
- position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
- width: 30px; height: 30px; pointer-events: none; z-index: 10; display: none;
+/* ========== HEADER ========== */
+.topbar {
+ position: fixed; top: 0; left: 0; right: 0; height: 64px;
+ background: rgba(10, 14, 26, 0.95);
+ backdrop-filter: blur(12px);
+ border-bottom: 1px solid var(--border);
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 0 32px; z-index: 100;
  }
- #crosshair::before, #crosshair::after {
- content: ''; position: absolute; background: rgba(255,255,255,0.9);
- box-shadow: 0 0 4px #000;
+ .brand { display: flex; align-items: center; gap: 14px; }
+ .brand-logo {
+ width: 38px; height: 38px;
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ border-radius: 8px;
+ display: flex; align-items: center; justify-content: center;
+ box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
  }
- #crosshair::before { width: 2px; height: 100%; left: 50%; transform: translateX(-50%); }
- #crosshair::after { width: 100%; height: 2px; top: 50%; transform: translateY(-50%); }
- #crosshair .dot {
- position: absolute; width: 4px; height: 4px; background: #ff3344;
- border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);
- box-shadow: 0 0 6px #ff0033;
+ .brand-text { line-height: 1.2; }
+ .brand-text .title { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); }
+ .brand-text .subtitle { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+
+ .topbar-meta { display: flex; align-items: center; gap: 24px; }
+ .timer {
+ display: flex; align-items: center; gap: 10px;
+ background: var(--surface);
+ border: 1px solid var(--border);
+ padding: 10px 18px; border-radius: 8px;
+ font-variant-numeric: tabular-nums;
+ }
+ .timer.warn { border-color: var(--warning); color: var(--warning); }
+ .timer.danger { border-color: var(--danger); color: var(--danger); animation: pulse 1s infinite; }
+ .timer svg { width: 18px; height: 18px; }
+ .timer .time { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+
+ .progress-info {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ padding: 10px 18px; border-radius: 8px;
+ font-size: 13px; color: var(--text-dim);
+ display: flex; align-items: center; gap: 10px;
+ }
+ .progress-info strong { color: var(--text); font-weight: 700; }
+
+ .lock-badge {
+ display: flex; align-items: center; gap: 8px;
+ background: rgba(239, 68, 68, 0.1);
+ border: 1px solid rgba(239, 68, 68, 0.3);
+ padding: 8px 14px; border-radius: 8px;
+ color: var(--danger); font-size: 12px; letter-spacing: 1px;
+ }
+ .lock-badge svg { width: 14px; height: 14px; }
+
+@keyframes pulse {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.6; }
+}
+
+/* ========== PHASE CONTAINERS ========== */
+.phase {
+ min-height: 100vh;
+ padding: 96px 32px 64px;
+ display: none;
+ animation: phaseIn 0.5s ease;
+ }
+ .phase.active { display: block; }
+@keyframes phaseIn {
+ from { opacity: 0; transform: translateY(20px); }
+ to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== WELCOME PHASE ========== */
+.welcome {
+ max-width: 920px; margin: 0 auto;
+ padding-top: 40px;
+ }
+ .welcome-header { text-align: center; margin-bottom: 56px; }
+ .welcome-eyebrow {
+ display: inline-block;
+ border: 1px solid var(--accent);
+ color: var(--accent);
+ padding: 6px 18px;
+ border-radius: 20px;
+ font-size: 11px;
+ letter-spacing: 3px;
+ margin-bottom: 24px;
+ }
+ .welcome-title {
+ font-size: 56px;
+ font-weight: 800;
+ letter-spacing: -1px;
+ line-height: 1.1;
+ margin-bottom: 20px;
+ background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+webkit-background-clip: text;
+webkit-text-fill-color: transparent;
+ background-clip: text;
+ }
+ .welcome-tagline {
+ font-size: 18px;
+ color: var(--text-dim);
+ max-width: 600px; margin: 0 auto;
+ line-height: 1.6;
  }
 
- #hud {
- position: fixed; bottom: 0; left: 0; right: 0; padding: 20px 40px;
- display: flex; justify-content: space-between; align-items: flex-end;
- pointer-events: none; z-index: 10; display: none; color: #fff;
- text-shadow: 0 0 8px #000;
+ .info-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 20px;
+ margin-bottom: 48px;
  }
- #hud .left, #hud .center, #hud .right { display: flex; flex-direction: column; gap: 5px; }
- #hud .label { font-size: 11px; color: #888; letter-spacing: 2px; }
- #hud .value { font-size: 36px; font-weight: bold; letter-spacing: 2px; }
- #health .value { color: #00ff88; transition: color 0.3s; }
- #ammo .value { color: #ffcc00; }
- #score .value { color: #ff3344; font-size: 28px; }
- #timer .value { color: #00aaff; font-size: 28px; }
+ .info-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 24px;
+ display: flex; align-items: flex-start; gap: 16px;
+ }
+ .info-icon {
+ width: 44px; height: 44px;
+ background: rgba(201, 169, 97, 0.1);
+ border-radius: 10px;
+ display: flex; align-items: center; justify-content: center;
+ color: var(--accent); flex-shrink: 0;
+ }
+ .info-icon svg { width: 22px; height: 22px; }
+ .info-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.5px; }
+ .info-card p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
 
- #hitmarker {
- position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
- width: 40px; height: 40px; pointer-events: none; opacity: 0; z-index: 11;
+ .rules {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 16px;
+ padding: 32px;
+ margin-bottom: 40px;
  }
- #hitmarker.show { animation: hitFlash 0.3s ease-out; }
- #hitmarker::before, #hitmarker::after {
- content: ''; position: absolute; background: #fff; box-shadow: 0 0 6px #ff0033;
+ .rules h2 {
+ font-size: 18px; font-weight: 700;
+ margin-bottom: 20px;
+ display: flex; align-items: center; gap: 12px;
+ letter-spacing: 1px;
  }
- #hitmarker::before { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); }
- #hitmarker::after { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); }
- @keyframes hitFlash {
- 0% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
- 50% { opacity: 1; }
- 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+ .rules h2 svg { width: 22px; height: 22px; color: var(--accent); }
+ .rules ul { list-style: none; }
+ .rules li {
+ display: flex; align-items: flex-start; gap: 14px;
+ padding: 12px 0;
+ border-bottom: 1px solid var(--border);
+ font-size: 14px;
+ line-height: 1.6;
+ color: var(--text-dim);
+ }
+ .rules li:last-child { border-bottom: none; }
+ .rules li svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+ .rules li strong { color: var(--text); font-weight: 600; }
+
+ .start-btn {
+ display: block; width: 100%; max-width: 480px; margin: 0 auto;
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ color: #0a0e1a;
+ border: none;
+ padding: 20px 40px;
+ font-size: 16px;
+ font-weight: 700;
+ letter-spacing: 2px;
+ border-radius: 12px;
+ cursor: pointer;
+ transition: all 0.3s;
+ display: flex; align-items: center; justify-content: center; gap: 12px;
+ }
+ .start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201, 169, 97, 0.3); }
+ .start-btn svg { width: 20px; height: 20px; }
+
+/* ========== LISTENING PHASE ========== */
+.listening {
+ max-width: 1000px; margin: 0 auto;
+ }
+ .listening-hero {
+ text-align: center;
+ margin-bottom: 48px;
+ }
+ .listening-eyebrow {
+ display: inline-flex; align-items: center; gap: 10px;
+ color: var(--accent);
+ font-size: 12px;
+ letter-spacing: 3px;
+ margin-bottom: 16px;
+ }
+ .rec-dot {
+ width: 10px; height: 10px; border-radius: 50%;
+ background: var(--danger);
+ animation: recBlink 1.4s infinite;
+ }
+ @keyframes recBlink {
+ 0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--danger); }
+ 50% { opacity: 0.3; box-shadow: none; }
+ }
+ .listening-title {
+ font-size: 36px;
+ font-weight: 700;
+ margin-bottom: 8px;
+ }
+ .listening-subtitle { color: var(--text-dim); font-size: 15px; }
+
+ .player-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 16px;
+ padding: 32px;
+ margin-bottom: 32px;
+ }
+ .player-main {
+ display: flex; align-items: center; gap: 24px;
+ margin-bottom: 20px;
+ }
+ .play-btn {
+ width: 72px; height: 72px;
+ border-radius: 50%;
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ border: none;
+ display: flex; align-items: center; justify-content: center;
+ cursor: pointer;
+ color: #0a0e1a;
+ flex-shrink: 0;
+ transition: all 0.2s;
+ box-shadow: 0 0 24px rgba(201, 169, 97, 0.3);
+ }
+ .play-btn:hover { transform: scale(1.05); }
+ .play-btn svg { width: 32px; height: 32px; }
+
+ .player-info { flex: 1; }
+ .player-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+ .player-author { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; }
+
+ .progress-bar {
+ height: 6px;
+ background: var(--surface-2);
+ border-radius: 3px;
+ overflow: hidden;
+ position: relative;
+ }
+ .progress-fill {
+ height: 100%;
+ background: linear-gradient(90deg, var(--accent), var(--accent-2));
+ width: 0%;
+ transition: width 0.1s linear;
+ border-radius: 3px;
  }
 
- #damageFlash {
- position: fixed; inset: 0; background: radial-gradient(circle at center, transparent 50%, rgba(255,0,0,0.5) 100%);
- pointer-events: none; opacity: 0; z-index: 9; transition: opacity 0.3s;
+ .time-row {
+ display: flex; justify-content: space-between;
+ margin-top: 8px;
+ font-size: 12px;
+ color: var(--text-dim);
+ font-variant-numeric: tabular-nums;
  }
 
- #gameover {
- position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none;
- flex-direction: column; align-items: center; justify-content: center; z-index: 50; color: #fff;
+ .keywords-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 16px;
+ padding: 28px;
+ margin-bottom: 32px;
  }
- #gameover h1 { font-size: 64px; color: #ff3344; letter-spacing: 6px; margin-bottom: 20px; }
- #gameover .final { font-size: 24px; margin-bottom: 40px; color: #aaa; }
- #gameover .final span { color: #fff; font-weight: bold; }
+ .keywords-header {
+ display: flex; align-items: center; justify-content: space-between;
+ margin-bottom: 20px;
+ }
+ .keywords-title {
+ font-size: 14px;
+ font-weight: 700;
+ letter-spacing: 2px;
+ color: var(--text-dim);
+ display: flex; align-items: center; gap: 10px;
+ }
+ .keywords-title svg { width: 18px; height: 18px; color: var(--accent); }
+ .keywords-hint { font-size: 12px; color: var(--text-dim); }
 
- #reload {
- position: fixed; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 60px));
- color: #ffcc00; font-size: 14px; letter-spacing: 4px; display: none; z-index: 11;
- text-shadow: 0 0 8px #000;
+ .keywords-stream {
+ display: flex; flex-wrap: wrap;
+ gap: 10px;
+ min-height: 100px;
+ align-content: flex-start;
+ }
+ .keyword {
+ padding: 10px 18px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 24px;
+ font-size: 13px;
+ letter-spacing: 0.3px;
+ color: var(--text-dim);
+ opacity: 0.3;
+ transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+ transform: scale(0.9);
+ }
+ .keyword.active {
+ opacity: 1;
+ color: var(--accent);
+ background: rgba(201, 169, 97, 0.12);
+ border-color: var(--accent);
+ transform: scale(1.05);
+ box-shadow: 0 0 16px rgba(201, 169, 97, 0.25);
+ animation: keywordPop 0.6s ease;
+ }
+@keyframes keywordPop {
+ 0% { transform: scale(0.5); opacity: 0; }
+ 50% { transform: scale(1.15); }
+ 100% { transform: scale(1.05); opacity: 1; }
+ }
+
+ .listening-actions {
+ display: flex; gap: 16px; justify-content: center;
+ }
+ .btn-secondary, .btn-primary {
+ padding: 16px 32px;
+ border-radius: 10px;
+ font-size: 14px;
+ font-weight: 700;
+ letter-spacing: 1.5px;
+ cursor: pointer;
+ transition: all 0.2s;
+ display: flex; align-items: center; gap: 10px;
+ border: 1px solid var(--border);
+ background: var(--surface);
+ color: var(--text);
+ }
+ .btn-primary {
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ color: #0a0e1a;
+ border: none;
+ }
+ .btn-secondary:hover { background: var(--surface-2); }
+ .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201, 169, 97, 0.3); }
+ .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+ .btn-secondary svg, .btn-primary svg { width: 18px; height: 18px; }
+
+/* ========== QUESTIONS PHASE ========== */
+.questions-wrap { max-width: 960px; margin: 0 auto; }
+.phase-banner {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-left: 3px solid var(--accent);
+ padding: 18px 24px;
+ border-radius: 8px;
+ margin-bottom: 32px;
+ display: flex; align-items: center; gap: 16px;
+ }
+ .phase-banner svg { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
+ .phase-banner-text { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+ .phase-banner-text strong { color: var(--text); }
+
+ .section-header {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 24px;
+ margin: 32px 024px;
+ display: flex; align-items: center; gap: 16px;
+ }
+ .section-num {
+ width: 48px; height: 48px;
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ border-radius: 12px;
+ display: flex; align-items: center; justify-content: center;
+ color: #0a0e1a;
+ font-size: 20px;
+ font-weight: 800;
+ flex-shrink: 0;
+ }
+ .section-info h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+ .section-info p { font-size: 13px; color: var(--text-dim); }
+
+ .question-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 24px;
+ margin-bottom: 16px;
+ transition: border-color 0.2s;
+ }
+ .question-card.answered { border-color: rgba(201, 169, 97, 0.4); }
+ .question-head {
+ display: flex; align-items: center; gap: 12px;
+ margin-bottom: 16px;
+ }
+ .q-num {
+ width: 32px; height: 32px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ display: flex; align-items: center; justify-content: center;
+ font-size: 13px; font-weight: 700;
+ color: var(--accent);
+ flex-shrink: 0;
+ }
+ .question-card.answered .q-num {
+ background: var(--accent);
+ color: #0a0e1a;
+ }
+ .q-text { font-size: 15px; line-height: 1.6; color: var(--text); }
+ .q-text strong { color: var(--accent); }
+
+ .options { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+ .option {
+ display: flex; align-items: center; gap: 14px;
+ padding: 14px 18px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ cursor: pointer;
+ transition: all 0.15s;
+ font-size: 14px;
+ line-height: 1.5;
+ }
+ .option:hover { border-color: rgba(201, 169, 97, 0.4); }
+ .option input { display: none; }
+ .option-marker {
+ width: 22px; height: 22px;
+ border: 2px solid var(--border);
+ border-radius: 50%;
+ flex-shrink: 0;
+ display: flex; align-items: center; justify-content: center;
+ transition: all 0.15s;
+ }
+ .option input:checked + .option-marker { border-color: var(--accent); background: var(--accent); }
+ .option input:checked + .option-marker::after {
+ content: ''; width: 8px; height: 8px;
+ background: #0a0e1a;
+ border-radius: 50%;
+ }
+ .option.selected { border-color: var(--accent); background: rgba(201, 169, 97, 0.06); }
+
+ .fill-input {
+ width: 100%;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ padding: 14px 18px;
+ color: var(--text);
+ font-size: 15px;
+ font-family: inherit;
+ margin-top: 8px;
+ transition: all 0.15s;
+ }
+ .fill-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1); }
+ .fill-hint { font-size: 12px; color: var(--text-dim); margin-top: 6px; letter-spacing: 0.5px; }
+
+ .match-table {
+ margin-top: 16px;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 16px;
+ }
+ .match-side {
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ padding: 16px;
+ }
+ .match-side-label {
+ font-size: 11px;
+ letter-spacing: 2px;
+ color: var(--text-dim);
+ margin-bottom: 12px;
+ font-weight: 700;
+ }
+ .match-item {
+ padding: 8px 0;
+ border-bottom: 1px solid var(--border);
+ font-size: 14px;
+ line-height: 1.5;
+ }
+ .match-item:last-child { border-bottom: none; }
+ .match-item .num {
+ display: inline-block;
+ width: 24px; height: 24px;
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 6px;
+ text-align: center;
+ line-height: 22px;
+ font-size: 12px;
+ font-weight: 700;
+ color: var(--accent);
+ margin-right: 10px;
+ }
+ .match-options {
+ display: flex; flex-wrap: wrap;
+ gap: 8px;
+ }
+ .match-pill {
+ padding: 8px 14px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ border-radius: 20px;
+ font-size: 13px;
+ cursor: pointer;
+ transition: all 0.15s;
+ }
+ .match-pill:hover { border-color: rgba(201, 169, 97, 0.4); }
+ .match-pill.selected { background: var(--accent); color: #0a0e1a; border-color: var(--accent); font-weight: 600; }
+
+ .submit-bar {
+ position: fixed; bottom: 0; left: 0; right: 0;
+ background: rgba(10, 14, 26, 0.95);
+ backdrop-filter: blur(12px);
+ border-top: 1px solid var(--border);
+ padding: 16px 32px;
+ display: flex; align-items: center; justify-content: space-between;
+ z-index: 50;
+ }
+ .submit-info { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text-dim); }
+ .submit-info strong { color: var(--text); font-size: 15px; }
+
+/* ========== RESULTS PHASE ========== */
+.results { max-width: 960px; margin: 0 auto; }
+ .score-hero {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 20px;
+ padding: 48px;
+ text-align: center;
+ margin-bottom: 32px;
+ position: relative;
+ overflow: hidden;
+ }
+ .score-hero::before {
+ content: '';
+ position: absolute; top: 0; left: 0; right: 0;
+ height: 4px;
+ background: linear-gradient(90deg, var(--accent), var(--success), var(--accent));
+ }
+ .score-trophy {
+ width: 80px; height: 80px;
+ margin: 0 auto 20px;
+ background: linear-gradient(135deg, var(--accent), #8b7340);
+ border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ box-shadow: 0 0 32px rgba(201, 169, 97, 0.4);
+ }
+ .score-trophy svg { width: 40px; height: 40px; color: #0a0e1a; }
+ .score-eyebrow {
+ font-size: 12px;
+ letter-spacing: 4px;
+ color: var(--accent);
+ margin-bottom: 12px;
+ }
+ .score-display {
+ display: flex; align-items: baseline; justify-content: center; gap: 16px;
+ margin-bottom: 16px;
+ }
+ .score-big {
+ font-size: 96px;
+ font-weight: 800;
+ background: linear-gradient(135deg, #ffffff, var(--accent));
+webkit-background-clip: text;
+webkit-text-fill-color: transparent;
+ background-clip: text;
+ line-height: 1;
+ }
+ .score-fraction { font-size: 24px; color: var(--text-dim); }
+ .band-display {
+ display: inline-block;
+ padding: 8px 24px;
+ background: rgba(201, 169, 97, 0.1);
+ border: 1px solid var(--accent);
+ border-radius: 24px;
+ font-size: 14px;
+ letter-spacing: 2px;
+ color: var(--accent);
+ font-weight: 700;
+ }
+ .band-display strong { font-size: 18px; margin-left: 8px; }
+
+ .stats-row {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 16px;
+ margin-bottom: 32px;
+ }
+ .stat-box {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 20px;
+ text-align: center;
+ }
+ .stat-icon {
+ width: 40px; height: 40px;
+ margin: 0 auto 12px;
+ background: var(--surface-2);
+ border-radius: 10px;
+ display: flex; align-items: center; justify-content: center;
+ }
+ .stat-icon svg { width: 20px; height: 20px; }
+ .stat-value { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+ .stat-label { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+ .stat-box.correct .stat-icon { color: var(--success); }
+ .stat-box.wrong .stat-icon { color: var(--danger); }
+ .stat-box.unanswered .stat-icon { color: var(--warning); }
+ .stat-box.score-color .stat-icon { color: var(--accent); }
+ .stat-box.correct .stat-value { color: var(--success); }
+ .stat-box.wrong .stat-value { color: var(--danger); }
+ .stat-box.unanswered .stat-value { color: var(--warning); }
+ .stat-box.score-color .stat-value { color: var(--accent); }
+
+ .breakdown-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 24px;
+ margin-bottom: 24px;
+ }
+ .breakdown-card h3 {
+ font-size: 16px;
+ font-weight: 700;
+ margin-bottom: 16px;
+ letter-spacing: 1px;
+ display: flex; align-items: center; gap: 10px;
+ }
+ .breakdown-card h3 svg { width: 18px; height: 18px; color: var(--accent); }
+ .section-row {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 12px 0;
+ border-bottom: 1px solid var(--border);
+ }
+ .section-row:last-child { border-bottom: none; }
+ .section-row .label { font-size: 14px; }
+ .section-row .score { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+ .bar-track {
+ flex: 1;
+ height: 6px;
+ background: var(--surface-2);
+ border-radius: 3px;
+ margin: 0 16px;
+ overflow: hidden;
+ max-width: 200px;
+ }
+ .bar-fill {
+ height: 100%;
+ background: linear-gradient(90deg, var(--accent), var(--success));
+ border-radius: 3px;
+ transition: width 0.8s ease;
+ }
+
+ .answers-review h3 {
+ font-size: 18px;
+ margin-bottom: 20px;
+ letter-spacing: 1px;
+ display: flex; align-items: center; gap: 10px;
+ }
+ .answers-review h3 svg { width: 22px; height: 22px; color: var(--accent); }
+
+ .review-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 20px;
+ margin-bottom: 12px;
+ border-left: 3px solid var(--border);
+ }
+ .review-card.correct { border-left-color: var(--success); }
+ .review-card.wrong { border-left-color: var(--danger); }
+ .review-card.unanswered-r { border-left-color: var(--warning); }
+
+ .review-head {
+ display: flex; align-items: center; gap: 12px;
+ margin-bottom: 12px;
+ }
+ .review-icon {
+ width: 28px; height: 28px;
+ border-radius: 8px;
+ display: flex; align-items: center; justify-content: center;
+ flex-shrink: 0;
+ }
+ .review-icon svg { width: 16px; height: 16px; }
+ .review-card.correct .review-icon { background: rgba(74, 222, 128, 0.15); color: var(--success); }
+ .review-card.wrong .review-icon { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+ .review-card.unanswered-r .review-icon { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+ .review-q { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+ .review-q strong { color: var(--text); }
+ .review-q .qn { color: var(--accent); font-weight: 700; margin-right: 8px; }
+
+ .review-body { padding-left: 40px; }
+ .answer-row {
+ display: flex; align-items: center; gap: 10px;
+ margin: 6px 0;
+ font-size: 13px;
+ }
+ .answer-row .lbl { color: var(--text-dim); min-width: 90px; }
+ .answer-row .val { color: var(--text); font-weight: 600; }
+ .answer-row .val.right { color: var(--success); }
+ .answer-row .val.wrong-val { color: var(--danger); text-decoration: line-through; }
+
+ .review-explanation {
+ margin-top: 12px;
+ padding: 14px;
+ background: var(--surface-2);
+ border-radius: 8px;
+ font-size: 13px;
+ line-height: 1.6;
+ color: var(--text-dim);
+ border-left: 2px solid var(--info);
+ }
+ .review-explanation strong { color: var(--info); }
+
+ .action-row { display: flex; gap: 16px; justify-content: center; margin-top: 40px; }
+
+/* ========== MODAL ========== */
+.modal-bg {
+ position: fixed; inset: 0;
+ background: rgba(0, 0, 0, 0.8);
+ backdrop-filter: blur(8px);
+ z-index: 200;
+ display: none;
+ align-items: center; justify-content: center;
+ }
+ .modal-bg.active { display: flex; animation: phaseIn 0.3s; }
+ .modal {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 16px;
+ padding: 32px;
+ max-width: 440px;
+ text-align: center;
+ }
+ .modal-icon {
+ width: 64px; height: 64px;
+ background: rgba(239, 68, 68, 0.1);
+ border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ margin: 0 auto 20px;
+ color: var(--danger);
+ }
+ .modal-icon svg { width: 32px; height: 32px; }
+ .modal h3 { font-size: 20px; margin-bottom: 12px; }
+ .modal p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+ .modal-actions { display: flex; gap: 12px; justify-content: center; }
+
+/* ========== RESPONSIVE ========== */
+ @media (max-width: 768px) {
+ .welcome-title { font-size: 36px; }
+ .info-grid { grid-template-columns: 1fr; }
+ .stats-row { grid-template-columns: repeat(2, 1fr); }
+ .score-big { font-size: 64px; }
+ .match-table { grid-template-columns: 1fr; }
+ .topbar { padding: 0 16px; }
+ .topbar-meta { gap: 12px; }
+ .progress-info { display: none; }
  }
 </style>
 </head>
 <body>
 
-<div id="menu">
- <h1>TACTICAL STRIKE</h1>
- <h2>3D SHOOTING RANGE</h2>
- <div class="instructions">
- <span>WASD</span> — Move &nbsp;&nbsp;|&nbsp;&nbsp; <span>MOUSE</span> — Aim &nbsp;&nbsp;|&nbsp;&nbsp; <span>CLICK</span> — Fire<br>
- <span>R</span> — Reload &nbsp;&nbsp;|&nbsp;&nbsp; <span>SHIFT</span> — Sprint &nbsp;&nbsp;|&nbsp;&nbsp; <span>SPACE</span> — Jump<br>
- Eliminate all targets before time runs out. Headshots = bonus points.
+<!-- ========== SVG ICON LIBRARY ========== -->
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+ <defs>
+ <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+ <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+ <symbol id="i-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+ <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M17 4h3v3a3 3 0 0 1-3 3"/><path d="M7 4H4v3a3 3 0 0 0 3 3"/></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+ <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+ <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+ <symbol id="i-listening" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/><circle cx="12" cy="10" r="2" fill="currentColor"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+ <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+ <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4"/><path d="M18 5l3 3"/><path d="M15 8l3 3"/></symbol>
+ </defs>
+</svg>
+
+<!-- ========== TOP BAR ========== -->
+<header class="topbar">
+ <div class="brand">
+ <div class="brand-logo"><svg width="20" height="20" style="color:#0a0e1a"><use href="#i-headphones"/></svg></div>
+ <div class="brand-text">
+ <div class="title">IELTS LISTENING TEST</div>
+ <div class="subtitle">Philadelphia Voice Edition</div>
  </div>
- <button id="startBtn">START MISSION</button>
+ </div>
+ <div class="topbar-meta">
+ <div class="progress-info" id="progressInfo" style="display:none">
+ <svg width="16" height="16"><use href="#i-target"/></svg>
+ <span><strong id="answeredCount">0</strong> / 30 Answered</span>
+ </div>
+ <div class="timer" id="timer">
+ <svg><use href="#i-clock"/></svg>
+ <span class="time" id="timeDisplay">40:00</span>
+ </div>
+ <div class="lock-badge" id="lockBadge" style="display:none">
+ <svg><use href="#i-lock"/></svg>
+ <span>SECURE</span>
+ </div>
+ </div>
+</header>
+
+<!-- ========== PHASE 1: WELCOME ========== -->
+<section class="phase active" id="phase-welcome">
+ <div class="welcome">
+ <div class="welcome-header">
+ <div class="welcome-eyebrow">OFFICIAL PRACTICE EXAMINATION</div>
+ <h1 class="welcome-title">IELTS Academic<br/>Listening Test</h1>
+ <p class="welcome-tagline">A complete timed examination featuring 30 complex questions based on a Philadelphia-voiced listening passage. Read all instructions carefully before commencing.</p>
+ </div>
+
+ <div class="info-grid">
+ <div class="info-card">
+ <div class="info-icon"><svg><use href="#i-listening"/></svg></div>
+ <div>
+ <h3>Listening Phase</h3>
+ <p>Audio plays once. You may not pause after the first 30 seconds. Live keywords highlight as the voice progresses.</p>
+ </div>
+ </div>
+ <div class="info-card">
+ <div class="info-icon"><svg><use href="#i-target"/></svg></div>
+ <div>
+ <h3>30 Questions</h3>
+ <p>Multiple choice, note completion, sentence completion, and matching questions distributed across four sections.</p>
+ </div>
+ </div>
+ <div class="info-card">
+ <div class="info-icon"><svg><use href="#i-clock"/></svg></div>
+ <div>
+ <h3>40 Minutes Total</h3>
+ <p>Approximately 30 minutes for listening and answering, plus 10 minutes to review and submit your answers.</p>
+ </div>
+ </div>
+ </div>
+
+ <div class="rules">
+ <h2><svg><use href="#i-shield"/></svg>Examination Regulations</h2>
+ <ul>
+ <li><svg><use href="#i-check"/></svg><span><strong>Full attention required.</strong> The audio plays once. Background noise and interruptions will compromise your performance.</span></li>
+ <li><svg><use href="#i-check"/></svg><span><strong>No navigation permitted.</strong> Once the test begins, leaving or refreshing the page will be recorded as a violation.</span></li>
+ <li><svg><use href="#i-check"/></svg><span><strong>Two-stage process.</strong> You must complete the listening phase before the question phase becomes accessible.</span></li>
+ <li><svg><use href="#i-check"/></svg><span><strong>Live keyword assistance.</strong> Relevant phrases highlight automatically as the audio progresses to guide your attention.</span></li>
+ <li><svg><use href="#i-check"/></svg><span><strong>Word limits apply.</strong> Several questions require answers of no more than three words. Concision is rewarded.</span></li>
+ <li><svg><use href="#i-check"/></svg><span><strong>Results upon submission.</strong> Score, band equivalent, full breakdown, and explanations for every incorrect answer will be displayed.</span></li>
+ </ul>
+ </div>
+
+ <button class="start-btn" id="startBtn" onclick="beginTest()">
+ <svg><use href="#i-play"/></svg>
+ COMMENCE EXAMINATION
+ </button>
+ </div>
+</section>
+
+<!-- ========== PHASE 2: LISTENING ========== -->
+<section class="phase" id="phase-listening">
+ <div class="listening">
+ <div class="listening-hero">
+ <div class="listening-eyebrow">
+ <span class="rec-dot"></span>
+ AUDIO RECORDING IN PROGRESS
+ </div>
+ <h2 class="listening-title">Listening Passage</h2>
+ <p class="listening-subtitle">A reading on audiobooks, neuroscience, and oral tradition — narrated in the Philadelphia voice.</p>
+ </div>
+
+ <div class="player-card">
+ <div class="player-main">
+ <button class="play-btn" id="playBtn" onclick="toggleAudio()">
+ <svg id="playIcon"><use href="#i-play"/></svg>
+ </button>
+ <div class="player-info">
+ <div class="player-title">Yes, Audiobooks Count as Reading</div>
+ <div class="player-author">Narrated by Philadelphia · Elvion AI Voice</div>
+ <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+ <div class="time-row">
+ <span id="currentTime">0:00</span>
+ <span id="durationTime">--:--</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="keywords-card">
+ <div class="keywords-header">
+ <div class="keywords-title">
+ <svg><use href="#i-key"/></svg>
+ LIVE KEYWORD TRACKER
+ </div>
+ <div class="keywords-hint">Phrases illuminate as they are mentioned</div>
+ </div>
+ <div class="keywords-stream" id="keywordsStream"></div>
+ </div>
+
+ <div class="listening-actions">
+ <button class="btn-secondary" onclick="restartAudio()">
+ <svg><use href="#i-arrow"/></svg>
+ Restart Audio
+ </button>
+ <button class="btn-primary" id="proceedBtn" onclick="proceedToQuestions()" disabled>
+ <svg><use href="#i-arrow"/></svg>
+ Proceed to Questions
+ </button>
+ </div>
+ </div>
+</section>
+
+<!-- ========== PHASE 3: QUESTIONS ========== -->
+<section class="phase" id="phase-questions">
+ <div class="questions-wrap">
+ <div class="phase-banner">
+ <svg><use href="#i-target"/></svg>
+ <div class="phase-banner-text">
+ <strong>Question Phase Active.</strong> Answer all30 questions. You may review and revise your responses until time expires or you submit.
+ </div>
+ </div>
+
+ <div id="questionsContainer"></div>
+
+ <div class="submit-bar">
+ <div class="submit-info">
+ <svg width="18" height="18"><use href="#i-target"/></svg>
+ <span><strong id="finalAnswered">0</strong> of 30 answered</span>
+ </div>
+ <button class="btn-primary" onclick="confirmSubmit()" style="padding:14px 28px">
+ <svg><use href="#i-check"/></svg>
+ Submit Final Answers
+ </button>
+ </div>
+ </div>
+</section>
+
+<!-- ========== PHASE 4: RESULTS ========== -->
+<section class="phase" id="phase-results">
+ <div class="results">
+ <div class="score-hero">
+ <div class="score-trophy"><svg><use href="#i-trophy"/></svg></div>
+ <div class="score-eyebrow">EXAMINATION COMPLETE</div>
+ <div class="score-display">
+ <div class="score-big" id="scoreFinal">0</div>
+ <div class="score-fraction">/ 30</div>
+ </div>
+ <div class="band-display">IELTS BAND EQUIVALENT<strong id="bandScore">5.0</strong></div>
+ </div>
+
+ <div class="stats-row">
+ <div class="stat-box correct">
+ <div class="stat-icon"><svg><use href="#i-check"/></svg></div>
+ <div class="stat-value" id="correctCount">0</div>
+ <div class="stat-label">Correct</div>
+ </div>
+ <div class="stat-box wrong">
+ <div class="stat-icon"><svg><use href="#i-x"/></svg></div>
+ <div class="stat-value" id="wrongCount">0</div>
+ <div class="stat-label">Incorrect</div>
+ </div>
+ <div class="stat-box unanswered">
+ <div class="stat-icon"><svg><use href="#i-warning"/></svg></div>
+ <div class="stat-value" id="unansweredCount">0</div>
+ <div class="stat-label">Unanswered</div>
+ </div>
+ <div class="stat-box score-color">
+ <div class="stat-icon"><svg><use href="#i-chart"/></svg></div>
+ <div class="stat-value" id="accuracyRate">0%</div>
+ <div class="stat-label">Accuracy</div>
+ </div>
+ </div>
+
+ <div class="breakdown-card">
+ <h3><svg><use href="#i-flag"/></svg>Section Breakdown</h3>
+ <div id="sectionBreakdown"></div>
+ </div>
+
+ <div class="answers-review">
+ <h3><svg><use href="#i-book"/></svg>Detailed Answer Review</h3>
+ <div id="reviewContainer"></div>
+ </div>
+
+ <div class="action-row">
+ <button class="btn-secondary" onclick="location.reload()">
+ <svg><use href="#i-arrow"/></svg>
+ Retake Examination
+ </button>
+ </div>
+ </div>
+</section>
+
+<!-- ========== CONFIRM SUBMIT MODAL ========== -->
+<div class="modal-bg" id="confirmModal">
+ <div class="modal">
+ <div class="modal-icon"><svg><use href="#i-warning"/></svg></div>
+ <h3>Submit Final Answers?</h3>
+ <p id="modalBody">You are about to submit your final answers. This action cannot be undone.</p>
+ <div class="modal-actions">
+ <button class="btn-secondary" onclick="closeModal()">Continue Review</button>
+ <button class="btn-primary" onclick="submitTest()">Submit Now</button>
+ </div>
+ </div>
 </div>
 
-<div id="crosshair"><div class="dot"></div></div>
+<audio id="audio" preload="auto" src="https://elvionai.com.ng/audios/8875eb4b-41ce-4b87-a844-6aac2e8e.MP3"></audio>
 
-<div id="hud">
- <div class="left">
- <div id="health"><div class="label">HEALTH</div><div class="value">100</div></div>
- </div>
- <div class="center">
- <div id="ammo"><div class="label">AMMO</div><div class="value">30 / 30</div></div>
- </div>
- <div class="right">
- <div id="score"><div class="label">SCORE</div><div class="value">0</div></div>
- <div id="timer"><div class="label">TIME</div><div class="value">60</div></div>
- </div>
-</div>
-
-<div id="hitmarker"></div>
-<div id="damageFlash"></div>
-<div id="reload">RELOADING...</div>
-
-<div id="gameover">
- <h1 id="goTitle">MISSION COMPLETE</h1>
- <div class="final">Final Score: <span id="finalScore">0</span> &nbsp;&nbsp;|&nbsp;&nbsp; Targets: <span id="finalKills">0/0</span></div>
- <button id="startBtn" style="background: linear-gradient(135deg, #ff3344, #b30000); color: #fff; border: none; padding: 18px 60px; font-size: 20px; letter-spacing: 4px; cursor: pointer; border-radius: 4px; font-weight: bold;" onclick="location.reload()">RESTART</button>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ============================================================
-// TACTICAL STRIKE - 3D Shooting Range
+// IELTS LISTENING TEST — Philadelphia Voice Edition
 // ============================================================
 
-let scene, camera, renderer, clock;
-let player = { height: 1.7, speed: 0.15, sprintSpeed: 0.25, velocity: new THREE.Vector3(), onGround: true };
-let keys = {};
-let mouse = { x: 0, y: 0, sensitivity: 0.002, locked: false };
-let yaw = 0, pitch = 0;
-let weapon, muzzleLight;
-let targets = [];
-let particles = [];
-let bullets = [];
+const AUDIO_URL = "https://elvionai.com.ng/audios/8875eb4b-41ce-4b87-a844-6aac2e8e.MP3";
+const TOTAL_TIME = 40 * 60; // 40 minutes in seconds
+const LISTENING_DURATION = 360; // ~6 min expected audio length
 
-let game = {
- health: 100, ammo: 30, maxAmmo: 30, score: 0, kills: 0, totalTargets: 0,
- timeLeft: 60, shooting: false, reloading: false, recoilOffset: 0,
- bobTime: 0, isMoving: false
+// Keywords synced with audio timestamps (in seconds, relative to audio start)
+const KEYWORDS = [
+ { text: "audiobook", t: 5 },
+ { text: "literary snobbery", t: 18 },
+ { text: "brain science", t: 48 },
+ { text: "neuroscience", t: 65 },
+ { text: "identical neural pathways", t: 85 },
+ { text: "cognitive engine", t: 105 },
+ { text: "oral storytelling", t: 130 },
+ { text: "Johannes Gutenberg", t: 152 },
+ { text: "African literature", t: 178 },
+ { text: "griots of West Africa", t: 200 },
+ { text: "democratize knowledge", t: 232 },
+ { text: "voice actor", t: 268 },
+ { text: "literary snobs", t: 308 },
+ { text: "expand your mind", t: 338 }
+];
+
+// 30 IELTS-style questions with answers & explanations
+const QUESTIONS = [
+ // SECTION 1 — Multiple Choice (Q1-Q8)
+ {
+ section: 1,
+ type: "mcq",
+ q: "The conversation the author describes with the 'aunt' takes place:",
+ options: [
+ { id: "A", text: "In a quiet library between strangers" },
+ { id: "B", text: "Online, almost every single week" },
+ { id: "C", text: "During a formal book review panel" },
+ { id: "D", text: "On a university campus" }
+ ],
+ answer: "B",
+ explanation: "The article explicitly states the same conversation happens online 'almost every single week' when the author mentions being 'tired of having the same conversation online almost every single week with some aunty who insists that audiobooks don't count as reading.'"
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "According to the author, what do 'book purists' typically assume about audiobook listening?",
+ options: [
+ { id: "A", text: "It requires more mental effort than reading" },
+ { id: "B", text: "It is a form of cheating because it is passive" },
+ { id: "C", text: "It is only suitable for fiction" },
+ { id: "D", text: "It improves comprehension significantly" }
+ ],
+ answer: "B",
+ explanation: "The author writes, 'Book purists assume that listening to a voice read words to you is somehow cheating, as if the brain is sitting idle while the audiobook plays.' This reveals the assumption that listening is a passive, cheat-like activity."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "The author introduces neuroscience primarily to argue that:",
+ options: [
+ { id: "A", text: "Audiobooks are superior to physical books" },
+ { id: "B", text: "Both reading and listening activate identical neural pathways" },
+ { id: "C", text: "Listening harms brain development" },
+ { id: "D", text: "Physical books should be replaced entirely" }
+ ],
+ answer: "B",
+ explanation: "The article cites neuroscience findings to demonstrate that the brain activates the same regions whether reading printed text or listening to spoken words, using this to dismantle the 'passive listener' argument. The phrase 'identical neural pathways' appears directly in the text."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "The metaphor comparing audiobooks to digital photographs argues that:",
+ options: [
+ { id: "A", text: "Digital media is always inferior to physical media" },
+ { id: "B", text: "The delivery format does not determine the value of the content" },
+ { id: "C", text: "Photography and literature share identical audiences" },
+ { id: "D", text: "Photographs should only be printed on paper" }
+ ],
+ answer: "B",
+ explanation: "The author draws a parallel: 'No one argues that a digital photograph is less of a photograph than a printed one. The container does not determine the content.' This metaphor reframes the debate around format rather than substance."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "Johannes Gutenberg is mentioned because he:",
+ options: [
+ { id: "A", text: "Invented the audiobook player device" },
+ { id: "B", text: "Represents the relatively recent invention of mass-printed books" },
+ { id: "C", text: "Was a famous audiobook narrator" },
+ { id: "D", text: "Openly opposed oral storytelling traditions" }
+ ],
+ answer: "B",
+ explanation: "Gutenberg is cited to emphasize how recent the printed-book tradition actually is in human history: 'Gutenberg invented his press in the 1440s. The printed book, as we know it, is barely six centuries old.' This historical framing contextualizes audiobooks as part of a longer continuum of storytelling formats."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "According to the author, the griots of West Africa were:",
+ options: [
+ { id: "A", text: "Early opponents of oral tradition" },
+ { id: "B", text: "Living libraries who memorized and performed genealogical records" },
+ { id: "C", text: "The first published novelists" },
+ { id: "D", text: "Critics of audiobook culture" }
+ ],
+ answer: "B",
+ explanation: "The article describes griots as 'living libraries' who 'memorized centuries of genealogical records, historical battles, cultural values, and entire epics, then performed them from memory with rhythm, cadence, and vocal mastery.' They are used to elevate the legitimacy of audio-based storytelling."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "The author uses the description of daily life in Lagos primarily to illustrate:",
+ options: [
+ { id: "A", text: "The poor quality of public transportation" },
+ { id: "B", text: "How audiobooks convert wasted time into productive learning" },
+ { id: "C", text: "The importance of relocating abroad" },
+ { id: "D", text: "Why physical books are impractical in cities" }
+ ],
+ answer: "B",
+ explanation: "The Lagos routine is used as a concrete example of how 'audiobooks turn dead time into productive time.' The author describes morning commutes, gym sessions, and cooking hours — illustrating how busy professionals reclaim hours through listening."
+ },
+ {
+ section: 1,
+ type: "mcq",
+ q: "What does the author claim audiobooks ultimately do for busy professionals?",
+ options: [
+ { id: "A", text: "Replace the need for sleep entirely" },
+ { id: "B", text: "Democratize knowledge by reclaiming scattered hours" },
+ { id: "C", text: "Eliminate all daily commute time" },
+ { id: "D", text: "Make physical books completely obsolete" }
+ ],
+ answer: "B",
+ explanation: "The author explicitly writes that audiobooks 'democratize knowledge.' They allow people with demanding schedules and chaotic commutes to access literature, transforming 'scattered' uncommitted hours into learning opportunities."
+ },
+
+ // SECTION 2 — Note Completion (Q9-Q16)
+ {
+ section: 2,
+ type: "fill",
+ q: "<strong>Cognitive science findings:</strong> Reading printed text and listening to spoken words activate the same9 __________.",
+ answer: ["neural pathways"],
+ explanation: "The phrase 'identical neural pathways' appears explicitly in the article's neuroscience section, identifying the brain regions shared between reading and listening."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "The brain constructs scenes, feels tension, and analyzes 10 __________ during both reading and listening.",
+ answer: ["subtext"],
+ explanation: "The article states the brain 'still constructs scenes, still feels tension, still analyzes subtext' regardless of whether input is visual or auditory. 'Subtext' is the precise term used."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "Both methods require identical cognitive work of comprehension, critical thinking, and 11 __________.",
+ answer: ["empathy building"],
+ explanation: "The article explicitly lists these three as identical cognitive demands: 'comprehension, critical thinking, and empathy building are required in equal measure.'"
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "<strong>Historical context:</strong> Before the printing press, stories were preserved through the 12 __________.",
+ answer: ["spoken word", "oral word", "oral tradition", "spoken tradition"],
+ explanation: "The article states 'before Gutenberg, before paper, before ink, stories lived in the spoken word.' Multiple phrasings are accepted as they all reference the same concept from the passage."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "The 13 __________ of West Africa were living libraries who memorized centuries of records.",
+ answer: ["griots"],
+ explanation: "The article names them directly: 'the griots of West Africa were living libraries.' This is a proper noun referring to the West African oral historians mentioned throughout the passage."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "They delivered stories with rhythm, cadence, and 14 __________.",
+ answer: ["vocal mastery"],
+ explanation: "The article uses the exact phrase 'rhythm, cadence, and vocal mastery' to describe how griots performed. This three-part construction is quoted directly from the source."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "<strong>Modern practicality:</strong> Many professionals live in cities like 15 __________ with demanding schedules.",
+ answer: ["lagos"],
+ explanation: "The article references Lagos specifically as an example of a busy city where professionals juggle demanding schedules. The writer uses Lagos as a concrete case study of urban professional life."
+ },
+ {
+ section: 2,
+ type: "fill",
+ q: "Audiobooks turn chaotic commutes into productive learning time through intelligent 16 __________.",
+ answer: ["time management"],
+ explanation: "The article concludes that audiobooks represent 'intelligent time management' — a phrase that frames audiobook listening as a deliberate productivity strategy rather than a passive indulgence."
+ },
+
+ // SECTION 3 — Sentence Completion (Q17-Q23)
+ {
+ section: 3,
+ type: "fill",
+ q: "The author argues that literary snobbery is the most exhausting form of 17 __________.",
+ answer: ["gatekeeping in the modern world", "gatekeeping", "modern gatekeeping"],
+ explanation: "The article directly states 'literary snobbery is the most exhausting form of gatekeeping in the modern world.' Any close paraphrase capturing 'gatekeeping' is accepted."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "When an author reads their own memoir, listeners gain access to the author's 18 __________.",
+ answer: ["rhythmic pacing", "intended rhythm", "exact rhythmic pacing"],
+ explanation: "The article states listeners 'gain access to the exact rhythmic pacing that the author intended' — emphasizing authorial intent that silent reading cannot reproduce."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "According to the article, the goal of literature was never to worship paper, ink, or 19 __________.",
+ answer: ["glue"],
+ explanation: "The author explicitly writes 'the goal of literature was never to worship paper, ink, or glue.' This memorable three-item list appears verbatim and tests close-listening precision."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "The author claims an audiobook often offers a deeper 20 __________ than reading silently.",
+ answer: ["emotional experience"],
+ explanation: "The article asserts audiobooks can deliver 'a deeper emotional experience than reading silently' because voice actors add tone, accent, and emotional texture that silent reading cannot replicate."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "Literary purists assume that listening to a voice is as passive as 21 __________.",
+ answer: ["watching television"],
+ explanation: "The article makes this exact comparison: 'listening to a voice is as passive as watching television' — a deliberate analogy that the author uses to dismiss the passive-listener assumption."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "African literature was historically built on the foundation of spoken 22 __________.",
+ answer: ["genius", "storytelling", "word"],
+ explanation: "The article states 'African literature was built on the foundation of spoken genius, not written tradition.' 'Spoken genius' is the precise phrase; 'storytelling' is accepted as a close synonym."
+ },
+ {
+ section: 3,
+ type: "fill",
+ q: "Reading words silently in your head requires you to 23 __________ the tone.",
+ answer: ["guess"],
+ explanation: "The article directly contrasts reading silently (where you 'have to guess the tone') with audiobooks (where the voice provides the tone). 'Guess' is the specific verb used."
+ },
+
+ // SECTION 4 — Matching (Q24-Q30)
+ {
+ section: 4,
+ type: "match",
+ q: "24. The most exhausting form of gatekeeping in the modern world.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "H",
+ explanation: "This phrase describes literary snobs — option H (Literary snobs). The article explicitly calls literary snobbery 'the most exhausting form of gatekeeping in the modern world.'"
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "25. Used as a metaphor to show that the delivery format does not determine content validity.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "E",
+ explanation: "The digital photographs metaphor — option E — is used precisely to argue that format doesn't determine whether something counts as 'real.' Just as a digital photo is still a photograph, an audiobook is still reading."
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "26. The historical precedent for preserving stories before printed books existed.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "B",
+ explanation: "Oral storytelling — option B — is the historical tradition referenced as the original method of preserving and transmitting stories before Gutenberg's press made printed books possible."
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "27. Their discoveries show identical brain activation regardless of input method.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "A",
+ explanation: "Cognitive neuroscience — option A — is the field whose discoveries ('identical neural pathways') demonstrate that listening and reading activate the same brain regions, debunking the passive-listener myth."
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "28. Performers who add rhythm, sarcasm, and accents to spoken literature.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "F",
+ explanation: "Voice performance — option F — refers to the artistic dimension added by voice actors. The article describes how they bring 'rhythm, sarcasm, and accents,' enriching the listening experience beyond what silent reading can offer."
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "29. Living libraries who memorized centuries of genealogical records.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "D",
+ explanation: "West African griots — option D — are specifically described as 'living libraries' who 'memorized centuries of genealogical records, historical battles, cultural values, and entire epics.'"
+ },
+ {
+ section: 4,
+ type: "match",
+ q: "30. Requires the reader to guess the tone that an audiobook provides directly.",
+ options: ["A", "B", "C", "D", "E", "F", "G", "H"],
+ answer: "G",
+ explanation: "Reading silently — option G — is contrasted with audiobooks precisely because silent readers must 'guess the tone.' Audiobooks eliminate this guesswork by providing the tone directly through voice performance."
+ }
+];
+
+const MATCH_OPTIONS = {
+ A: "Cognitive neuroscience",
+ B: "Oral storytelling",
+ C: "Johannes Gutenberg",
+ D: "West African griots",
+ E: "Digital photographs metaphor",
+ F: "Voice performance",
+ G: "Reading silently",
+ H: "Literary snobs"
 };
 
-const raycaster = new THREE.Raycaster();
-const shootDir = new THREE.Vector2(0, 0);
+const SECTION_INFO = {
+ 1: { name: "Section 1", desc: "Multiple Choice — Choose the correct option (A, B, C, or D)" },
+ 2: { name: "Section 2", desc: "Note Completion — Complete the notes with no more than three words" },
+ 3: { name: "Section 3", desc: "Sentence Completion — Complete the sentences with no more than three words" },
+ 4: { name: "Section 4", desc: "Matching — Match each item with the correct option (A–H)" }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+ phase: 'welcome',
+ timeLeft: TOTAL_TIME,
+ answers: {},
+ audioPlaying: false,
+ audioCurrentTime: 0,
+ audioDuration: 0,
+ triggeredKeywords: new Set(),
+ intervalId: null,
+ testStarted: false
+};
 
 // ============================================================
 // INIT
 // ============================================================
-function init() {
- scene = new THREE.Scene();
- scene.background = new THREE.Color(0x0a0a15);
- scene.fog = new THREE.Fog(0x0a0a15, 30, 90);
+window.addEventListener('load', () => {
+ buildKeywords();
+ renderQuestions();
+ setupNavProtection();
 
- camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 200);
- camera.position.set(0, player.height, 0);
-
- renderer = new THREE.WebGLRenderer({ antialias: true });
- renderer.setSize(window.innerWidth, window.innerHeight);
- renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
- renderer.shadowMap.enabled = true;
- renderer.shadowMap.type = THREE.PCFSoftShadowMap;
- renderer.toneMapping = THREE.ACESFilmicToneMapping;
- renderer.toneMappingExposure = 1.0;
- document.body.appendChild(renderer.domElement);
-
- clock = new THREE.Clock();
-
- setupLights();
- buildEnvironment();
- buildWeapon();
- spawnTargets(12);
-
- window.addEventListener('resize', onResize);
- setupControls();
- animate();
-}
-
-// ============================================================
-// LIGHTING - Realistic moody atmosphere
-// ============================================================
-function setupLights() {
- // Ambient
- const ambient = new THREE.AmbientLight(0x404060, 0.3);
- scene.add(ambient);
-
- // Main directional (sunlight through skylights)
- const sun = new THREE.DirectionalLight(0xffeebb, 0.9);
- sun.position.set(15, 30, 10);
- sun.castShadow = true;
- sun.shadow.mapSize.width = 2048;
- sun.shadow.mapSize.height = 2048;
- sun.shadow.camera.left = -40;
- sun.shadow.camera.right = 40;
- sun.shadow.camera.top = 40;
- sun.shadow.camera.bottom = -40;
- sun.shadow.camera.near = 0.5;
- sun.shadow.camera.far = 100;
- sun.shadow.bias = -0.0005;
- scene.add(sun);
-
- // Overhead industrial lights
- for (let i = -20; i <= 20; i += 10) {
- const lamp = new THREE.PointLight(0xffaa55, 0.8, 25, 2);
- lamp.position.set(i, 8, 0);
- scene.add(lamp);
-
- // Lamp fixture
- const fixture = new THREE.Mesh(
- new THREE.CylinderGeometry(0.3, 0.5, 0.3, 16),
- new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.9, roughness: 0.4 })
- );
- fixture.position.set(i, 8.2, 0);
- scene.add(fixture);
-
- // Bulb glow
- const bulb = new THREE.Mesh(
- new THREE.SphereGeometry(0.15, 16, 16),
- new THREE.MeshBasicMaterial({ color: 0xffeecc })
- );
- bulb.position.set(i, 8, 0);
- scene.add(bulb);
- }
-
- // Rim back light
- const rim = new THREE.DirectionalLight(0x4488ff, 0.3);
- rim.position.set(0, 10, -20);
- scene.add(rim);
-}
-
-// ============================================================
-// ENVIRONMENT - Warehouse / shooting range
-// ============================================================
-function buildEnvironment() {
- // Floor (concrete)
- const floorGeo = new THREE.PlaneGeometry(80, 80, 40, 40);
- const floorMat = new THREE.MeshStandardMaterial({
- color: 0x2a2a2e, roughness: 0.85, metalness: 0.1
+ const audio = document.getElementById('audio');
+ audio.addEventListener('loadedmetadata', () => {
+ state.audioDuration = audio.duration;
+ document.getElementById('durationTime').textContent = formatTime(audio.duration);
  });
- const floor = new THREE.Mesh(floorGeo, floorMat);
- floor.rotation.x = -Math.PI / 2;
- floor.receiveShadow = true;
- scene.add(floor);
 
- // Floor grid lines (for visual depth)
- const gridMat = new THREE.MeshBasicMaterial({ color: 0x444444, transparent: true, opacity: 0.3 });
- for (let i = -40; i <= 40; i += 4) {
- const line = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.01, 80), gridMat);
- line.position.set(i, 0.01, 0);
- scene.add(line);
- const line2 = new THREE.Mesh(new THREE.BoxGeometry(80, 0.01, 0.05), gridMat);
- line2.position.set(0, 0.01, i);
- scene.add(line2);
- }
-
- // Walls (corrugated metal feel)
- const wallMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1f, roughness: 0.6, metalness: 0.7 });
- const backWall = new THREE.Mesh(new THREE.BoxGeometry(80, 12, 0.5), wallMat);
- backWall.position.set(0, 6, -30);
- backWall.receiveShadow = true;
- backWall.castShadow = true;
- scene.add(backWall);
-
- const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.5, 12, 60), wallMat);
- leftWall.position.set(-40, 6, 0);
- leftWall.receiveShadow = true;
- scene.add(leftWall);
-
- const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.5, 12, 60), wallMat);
- rightWall.position.set(40, 6, 0);
- rightWall.receiveShadow = true;
- scene.add(rightWall);
-
- // Ceiling
- const ceiling = new THREE.Mesh(
- new THREE.BoxGeometry(80, 0.5, 60),
- new THREE.MeshStandardMaterial({ color: 0x0a0a0f, roughness: 0.9 })
- );
- ceiling.position.set(0, 12, 0);
- scene.add(ceiling);
-
- // Shooting lane markers (crates and barrels)
- const crateMat = new THREE.MeshStandardMaterial({ color: 0x5a4a30, roughness: 0.9 });
- const metalMat = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.8, roughness: 0.3 });
-
- for (let i = -15; i <= 15; i += 5) {
- const crate = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.2, 1.2), crateMat);
- crate.position.set(i, 0.6, -25);
- crate.castShadow = true;
- crate.receiveShadow = true;
- scene.add(crate);
- }
-
- // Barrels
- for (let i = -18; i <= 18; i += 6) {
- const barrel = new THREE.Mesh(
- new THREE.CylinderGeometry(0.5, 0.5, 1.2, 16),
- metalMat
- );
- barrel.position.set(i, 0.6, 5);
- barrel.castShadow = true;
- barrel.receiveShadow = true;
- scene.add(barrel);
- }
-
- // Sandbag barriers at the back
- for (let x = -10; x <= 10; x += 2.5) {
- const sandbag = new THREE.Mesh(
- new THREE.BoxGeometry(1.8, 0.6, 0.9),
- new THREE.MeshStandardMaterial({ color: 0x8a7a5a, roughness: 0.95 })
- );
- sandbag.position.set(x, 0.3, -22);
- sandbag.castShadow = true;
- sandbag.receiveShadow = true;
- scene.add(sandbag);
- }
-
- // Particle dust in air (atmospheric)
- const dustGeo = new THREE.BufferGeometry();
- const dustCount = 200;
- const dustPos = new Float32Array(dustCount * 3);
- for (let i = 0; i < dustCount * 3; i += 3) {
- dustPos[i] = (Math.random() - 0.5) * 60;
- dustPos[i+1] = Math.random() * 10;
- dustPos[i+2] = (Math.random() - 0.5) * 50;
- }
- dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
- const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({
- color: 0xffffff, size: 0.05, transparent: true, opacity: 0.4
- }));
- scene.add(dust);
-}
-
-// ============================================================
-// WEAPON - First person gun model
-// ============================================================
-function buildWeapon() {
- weapon = new THREE.Group();
-
- const metalMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.95, roughness: 0.25 });
- const darkMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, metalness: 0.8, roughness: 0.4 });
- const gripMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0a, roughness: 0.9 });
-
- // Body
- const body = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.4), metalMat);
- weapon.add(body);
-
- // Barrel
- const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.03, 0.5, 12), metalMat);
- barrel.rotation.x = Math.PI / 2;
- barrel.position.set(0, 0.02, -0.4);
- weapon.add(barrel);
-
- // Magazine
- const mag = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.18, 0.1), darkMat);
- mag.position.set(0, -0.15, -0.05);
- weapon.add(mag);
-
- // Grip
- const grip = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.18, 0.08), gripMat);
- grip.position.set(0, -0.12, 0.1);
- grip.rotation.x = 0.2;
- weapon.add(grip);
-
- // Sight
- const sight = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.08), metalMat);
- sight.position.set(0, 0.1, -0.05);
- weapon.add(sight);
-
- weapon.position.set(0.25, -0.25, -0.5);
- weapon.rotation.y = Math.PI; // face forward
- camera.add(weapon);
- scene.add(camera);
-
- // Muzzle flash light
- muzzleLight = new THREE.PointLight(0xffaa44, 0, 5, 2);
- muzzleLight.position.set(0, 0.02, -0.9);
- weapon.add(muzzleLight);
-}
-
-// ============================================================
-// TARGETS - Humanoid silhouettes
-// ============================================================
-function spawnTargets(count) {
- const targetMat = new THREE.MeshStandardMaterial({ color: 0xcc2222, roughness: 0.6, metalness: 0.3 });
-
- for (let i = 0; i < count; i++) {
- const target = new THREE.Group();
- target.userData = { alive: true, velocity: 0, fallen: false, hitCount: 0 };
-
- // Body (torso)
- const torso = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.0, 0.2), targetMat.clone());
- torso.position.y = 1.5;
- torso.castShadow = true;
- torso.receiveShadow = true;
- target.add(torso);
-
- // Head
- const head = new THREE.Mesh(new THREE.SphereGeometry(0.25, 16, 16), targetMat.clone());
- head.position.y = 2.2;
- head.castShadow = true;
- head.userData.isHead = true;
- target.add(head);
- target.userData.head = head;
-
- // Arms
- const armL = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.8, 0.18), targetMat.clone());
- armL.position.set(-0.4, 1.5, 0);
- armL.castShadow = true;
- target.add(armL);
-
- const armR = armL.clone();
- armR.position.x = 0.4;
- target.add(armR);
-
- // Legs
- const legL = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.9, 0.2), targetMat.clone());
- legL.position.set(-0.15, 0.45, 0);
- legL.castShadow = true;
- target.add(legL);
-
- const legR = legL.clone();
- legR.position.x = 0.15;
- target.add(legR);
-
- // Target zone marker (white center on torso)
- const center = new THREE.Mesh(
- new THREE.CircleGeometry(0.15, 16),
- new THREE.MeshBasicMaterial({ color: 0xffffff })
- );
- center.position.set(0, 1.5, 0.11);
- target.add(center);
-
- // Position
- const angle = (i / count) * Math.PI * 2;
- const dist = 15 + Math.random() * 10;
- const x = Math.cos(angle) * dist;
- const z = -20 + Math.sin(angle) * dist * 0.3;
- target.position.set(x, 0, z);
- target.lookAt(0, 1.5, 0);
-
- scene.add(target);
- targets.push(target);
- game.totalTargets++;
- }
-}
-
-// ============================================================
-// PARTICLES - Blood splatter, sparks, dust
-// ============================================================
-function spawnHitParticles(position, color, count = 15) {
- const geo = new THREE.BufferGeometry();
- const positions = new Float32Array(count * 3);
- const velocities = [];
-
- for (let i = 0; i < count; i++) {
- positions[i*3] = position.x;
- positions[i*3+1] = position.y;
- positions[i*3+2] = position.z;
- velocities.push(new THREE.Vector3(
- (Math.random() - 0.5) * 0.3,
- Math.random() * 0.2 + 0.1,
- (Math.random() - 0.5) * 0.3
- ));
- }
-
- geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
- const mat = new THREE.PointsMaterial({
- color: color, size: 0.15, transparent: true, opacity: 1.0
+ audio.addEventListener('timeupdate', () => {
+ state.audioCurrentTime = audio.currentTime;
+ updateProgress();
+ checkKeywords();
  });
- const points = new THREE.Points(geo, mat);
- scene.add(points);
 
- particles.push({ points, velocities, life: 1.0, maxLife: 1.0 });
+ audio.addEventListener('ended', () => {
+ document.getElementById('playIcon').innerHTML = '<use href="#i-play"/>';
+ document.getElementById('playBtn').disabled = false;
+ state.audioPlaying = false;
+ enableProceed();
+ });
+});
+
+function formatTime(s) {
+ if (!s || isNaN(s)) return '--:--';
+ const m = Math.floor(s / 60);
+ const sec = Math.floor(s % 60);
+ return `${m}:${sec.toString().padStart(2, '0')}`;
 }
 
-function spawnBulletTrail(from, to) {
- const geo = new THREE.BufferGeometry().setFromPoints([from, to]);
- const mat = new THREE.LineBasicMaterial({ color: 0xffff88, transparent: true, opacity: 0.8 });
- const line = new THREE.Line(geo, mat);
- scene.add(line);
+// ============================================================
+// NAVIGATION PROTECTION
+// ============================================================
+function setupNavProtection() {
+ window.addEventListener('beforeunload', (e) => {
+ if (state.testStarted && state.phase !== 'results') {
+ e.preventDefault();
+ e.returnValue = '';
+ return '';
+ }
+ });
+
+ document.addEventListener('keydown', (e) => {
+ if (!state.testStarted) return;
+ if ((e.ctrlKey || e.metaKey) && ['r', 'R', 'w', 'W'].includes(e.key)) {
+ e.preventDefault();
+ showWarning('Keyboard shortcuts are disabled during the examination.');
+ }
+ if (e.key === 'F5') {
+ e.preventDefault();
+ showWarning('Page refresh is not permitted during the examination.');
+ }
+ if (e.key === 'Escape' && state.testStarted && state.phase !== 'results') {
+ // Allow Escape to exit fullscreen but track as violation
+ }
+ });
+
+ document.addEventListener('contextmenu', e => {
+ if (state.testStarted && state.phase !== 'results') e.preventDefault();
+ });
+
+ document.addEventListener('copy', e => {
+ if (state.testStarted && state.phase !== 'results') {
+ e.preventDefault();
+ showWarning('Copying is disabled during the examination.');
+ }
+ });
+}
+
+function showWarning(msg) {
+ const m = document.getElementById('confirmModal');
+ document.querySelector('#confirmModal h3').textContent = 'Examination Violation';
+ document.querySelector('#confirmModal p').textContent = msg;
+ document.querySelector('#confirmModal .modal-icon').innerHTML = '<svg><use href="#i-warning"/></svg>';
+ m.classList.add('active');
  setTimeout(() => {
- scene.remove(line);
- geo.dispose();
- mat.dispose();
- }, 80);
+ if (state.testStarted && state.phase !== 'results') m.classList.remove('active');
+ }, 2500);
 }
 
 // ============================================================
-// CONTROLS
+// BEGIN TEST
 // ============================================================
-function setupControls() {
- document.getElementById('startBtn').addEventListener('click', startGame);
+function beginTest() {
+ state.testStarted = true;
+ document.body.classList.add('exam-mode');
+ document.getElementById('lockBadge').style.display = 'flex';
 
- document.addEventListener('keydown', e => {
- keys[e.code] = true;
- if (e.code === 'KeyR' && !game.reloading && game.ammo < game.maxAmmo) reload();
- });
- document.addEventListener('keyup', e => keys[e.code] = false);
+ goToPhase('listening');
 
- document.addEventListener('mousemove', e => {
- if (!mouse.locked) return;
- yaw -= e.movementX * mouse.sensitivity;
- pitch -= e.movementY * mouse.sensitivity;
- pitch = Math.max(-Math.PI/2 + 0.01, Math.min(Math.PI/2 - 0.01, pitch));
- });
+ if (document.documentElement.requestFullscreen) {
+ document.documentElement.requestFullscreen().catch(() => {});
+ }
 
- document.addEventListener('mousedown', e => {
- if (!mouse.locked) return;
- if (e.button === 0) shoot();
- });
-
- document.addEventListener('pointerlockchange', () => {
- mouse.locked = document.pointerLockElement === renderer.domElement;
- });
-
- renderer.domElement.addEventListener('click', () => {
- if (game.health <= 0 || game.timeLeft <= 0) return;
- renderer.domElement.requestPointerLock();
- });
-}
-
-function startGame() {
- document.getElementById('menu').style.display = 'none';
- document.getElementById('crosshair').style.display = 'block';
- document.getElementById('hud').style.display = 'flex';
- renderer.domElement.requestPointerLock();
  startTimer();
 }
 
 function startTimer() {
- const timerEl = document.querySelector('#timer .value');
- const interval = setInterval(() => {
- game.timeLeft--;
- timerEl.textContent = game.timeLeft;
- if (game.timeLeft <= 0 || game.health <= 0) {
- clearInterval(interval);
- endGame();
+ state.intervalId = setInterval(() => {
+ state.timeLeft--;
+ updateTimerDisplay();
+ if (state.timeLeft <= 0) {
+ clearInterval(state.intervalId);
+ if (state.phase !== 'results') submitTest();
  }
  }, 1000);
 }
 
-function endGame() {
- document.exitPointerLock();
- document.getElementById('crosshair').style.display = 'none';
- document.getElementById('hud').style.display = 'none';
- document.getElementById('gameover').style.display = 'flex';
- document.getElementById('finalScore').textContent = game.score;
- document.getElementById('finalKills').textContent = `${game.kills}/${game.totalTargets}`;
- if (game.health <= 0) document.getElementById('goTitle').textContent = 'YOU DIED';
+function updateTimerDisplay() {
+ const m = Math.floor(state.timeLeft / 60);
+ const s = state.timeLeft % 60;
+ document.getElementById('timeDisplay').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+ const t = document.getElementById('timer');
+ t.classList.remove('warn', 'danger');
+ if (state.timeLeft <= 60) t.classList.add('danger');
+ else if (state.timeLeft <= 300) t.classList.add('warn');
 }
 
 // ============================================================
-// SHOOTING
+// PHASE SWITCHING
 // ============================================================
-function shoot() {
- if (game.reloading || game.ammo <= 0) {
- if (game.ammo <= 0) reload();
- return;
- }
+function goToPhase(phase) {
+ state.phase = phase;
+ document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+ document.getElementById(`phase-${phase}`).classList.add('active');
+ window.scrollTo(0, 0);
+}
 
- game.ammo--;
- updateHUD();
- game.recoilOffset += 0.05;
-
- // Muzzle flash
- muzzleLight.intensity = 3;
- setTimeout(() => muzzleLight.intensity = 0, 50);
-
- // Muzzle flash particle
- spawnHitParticles(
- new THREE.Vector3(0, 0, -0.9).applyMatrix4(camera.matrixWorld),
- 0xffaa44, 8
- );
-
- // Raycast
- raycaster.setFromCamera(shootDir, camera);
- const intersects = raycaster.intersectObjects(targets, true);
-
- if (intersects.length > 0) {
- const hit = intersects[0];
- const target = findTargetRoot(hit.object);
-
- if (target && target.userData.alive) {
- const isHead = hit.object.userData.isHead;
- target.userData.hitCount++;
-
- // Particle effect
- spawnHitParticles(hit.point, 0xff3333, 20);
-
- // Bullet hole / mark
- const mark = new THREE.Mesh(
- new THREE.CircleGeometry(0.05, 8),
- new THREE.MeshBasicMaterial({ color: 0x000000 })
- );
- mark.position.copy(hit.point);
- mark.lookAt(camera.position);
- target.add(mark);
-
- // Damage / fall
- if (isHead) {
- game.score += 250;
- target.userData.alive = false;
- target.userData.velocity = 0.15;
- fallTarget(target);
- game.kills++;
- showHitmarker();
- } else if (target.userData.hitCount >= 2) {
- game.score += 100;
- target.userData.alive = false;
- target.userData.velocity = 0.1;
- fallTarget(target);
- game.kills++;
- showHitmarker();
+// ============================================================
+// AUDIO PLAYER
+// ============================================================
+function toggleAudio() {
+ const audio = document.getElementById('audio');
+ const icon = document.getElementById('playIcon');
+ if (audio.paused) {
+ audio.play();
+ icon.innerHTML = '<use href="#i-pause"/>';
+ state.audioPlaying = true;
  } else {
- game.score += 50;
- showHitmarker(false);
+ audio.pause();
+ icon.innerHTML = '<use href="#i-play"/>';
+ state.audioPlaying = false;
  }
- updateHUD();
- }
- }
-
- // Bullet trail (visual)
- const from = new THREE.Vector3(0, 0, -0.9).applyMatrix4(camera.matrixWorld);
- const to = raycaster.ray.origin.clone().add(raycaster.ray.direction.clone().multiplyScalar(100));
- spawnBulletTrail(from, to);
 }
 
-function findTargetRoot(obj) {
- while (obj.parent && !obj.userData.alive && obj.userData.alive !== false && !obj.parent === scene) {
- if (obj.userData.alive !== undefined) return obj;
- obj = obj.parent;
- }
- // Walk up to find target group
- let current = obj;
- while (current.parent) {
- if (targets.includes(current)) return current;
- current = current.parent;
- }
- return null;
+function restartAudio() {
+ const audio = document.getElementById('audio');
+ audio.currentTime = 0;
+ audio.play();
+ document.getElementById('playIcon').innerHTML = '<use href="#i-pause"/>';
+ state.audioPlaying = true;
+ state.triggeredKeywords.clear();
+ document.querySelectorAll('.keyword').forEach(k => k.classList.remove('active'));
 }
 
-function fallTarget(target) {
- target.userData.fallen = true;
+function updateProgress() {
+ const pct = state.audioDuration ? (state.audioCurrentTime / state.audioDuration) * 100 : 0;
+ document.getElementById('progressFill').style.width = pct + '%';
+ document.getElementById('currentTime').textContent = formatTime(state.audioCurrentTime);
 }
 
-function showHitmarker(headshot = true) {
- const hm = document.getElementById('hitmarker');
- hm.style.background = headshot ? '#ff3344' : '#ffffff';
- hm.classList.remove('show');
- void hm.offsetWidth;
- hm.classList.add('show');
-}
-
-function reload() {
- game.reloading = true;
- document.getElementById('reload').style.display = 'block';
- setTimeout(() => {
- game.ammo = game.maxAmmo;
- game.reloading = false;
- document.getElementById('reload').style.display = 'none';
- updateHUD();
- }, 1500);
-}
-
-function updateHUD() {
- document.querySelector('#health .value').textContent = game.health;
- document.querySelector('#ammo .value').textContent = `${game.ammo} / ${game.maxAmmo}`;
- document.querySelector('#score .value').textContent = game.score;
- const h = document.querySelector('#health .value');
- h.style.color = game.health > 50 ? '#00ff88' : game.health > 25 ? '#ffaa00' : '#ff3344';
+function enableProceed() {
+ document.getElementById('proceedBtn').disabled = false;
 }
 
 // ============================================================
-// MOVEMENT
+// KEYWORDS
 // ============================================================
-function updateMovement(delta) {
- const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
- const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
- const moveDir = new THREE.Vector3();
-
- game.isMoving = false;
-
- if (keys['KeyW']) { moveDir.add(forward); game.isMoving = true; }
- if (keys['KeyS']) { moveDir.sub(forward); game.isMoving = true; }
- if (keys['KeyA']) { moveDir.sub(right); game.isMoving = true; }
- if (keys['KeyD']) { moveDir.add(right); game.isMoving = true; }
-
- const speed = keys['ShiftLeft'] || keys['ShiftRight'] ? player.sprintSpeed : player.speed;
- if (moveDir.length() > 0) {
- moveDir.normalize().multiplyScalar(speed);
- camera.position.add(moveDir);
- game.bobTime += delta * (keys['ShiftLeft'] ? 12 : 8);
- } else {
- game.bobTime *= 0.9;
- }
-
- // Bounds
- camera.position.x = Math.max(-38, Math.min(38, camera.position.x));
- camera.position.z = Math.max(-28, Math.min(28, camera.position.z));
- camera.position.y = player.height + Math.sin(game.bobTime) * 0.04 * (game.isMoving ? 1 : 0);
-
- // Camera rotation
- camera.rotation.set(0, 0, 0);
- camera.rotation.order = 'YXZ';
- camera.rotation.y = yaw;
- camera.rotation.x = pitch - game.recoilOffset;
-
- // Recoil decay
- game.recoilOffset *= 0.85;
+function buildKeywords() {
+ const stream = document.getElementById('keywordsStream');
+ KEYWORDS.forEach((k, i) => {
+ const el = document.createElement('div');
+ el.className = 'keyword';
+ el.id = `kw-${i}`;
+ el.textContent = k.text;
+ el.style.animationDelay = `${i * 0.05}s`;
+ stream.appendChild(el);
+ });
 }
 
-// ============================================================
-// UPDATE TARGETS
-// ============================================================
-function updateTargets(delta) {
- targets.forEach((t, i) => {
- if (!t.userData.alive && t.userData.fallen && t.rotation.z < Math.PI / 2) {
- t.userData.velocity += 0.008;
- t.rotation.z += t.userData.velocity;
- t.rotation.x += t.userData.velocity * 0.5;
+function checkKeywords() {
+ KEYWORDS.forEach((k, i) => {
+ if (state.audioCurrentTime >= k.t && !state.triggeredKeywords.has(i)) {
+ state.triggeredKeywords.add(i);
+ const el = document.getElementById(`kw-${i}`);
+ el.classList.add('active');
  }
  });
 }
 
-function updateParticles(delta) {
- for (let i = particles.length - 1; i >= 0; i--) {
- const p = particles[i];
- p.life -= delta * 1.5;
- if (p.life <= 0) {
- scene.remove(p.points);
- p.points.geometry.dispose();
- p.points.material.dispose();
- particles.splice(i, 1);
- continue;
- }
- const pos = p.points.geometry.attributes.position.array;
- for (let j = 0; j < p.velocities.length; j++) {
- pos[j*3] += p.velocities[j].x;
- pos[j*3+1] += p.velocities[j].y;
- pos[j*3+2] += p.velocities[j].z;
- p.velocities[j].y -= 0.01; // gravity
- }
- p.points.geometry.attributes.position.needsUpdate = true;
- p.points.material.opacity = p.life;
- }
+function proceedToQuestions() {
+ const audio = document.getElementById('audio');
+ audio.pause();
+ goToPhase('questions');
+ document.getElementById('progressInfo').style.display = 'flex';
 }
 
 // ============================================================
-// GAME LOOP
+// QUESTIONS RENDERING
 // ============================================================
-function animate() {
- requestAnimationFrame(animate);
- const delta = Math.min(clock.getDelta(), 0.1);
+function renderQuestions() {
+ const container = document.getElementById('questionsContainer');
+ container.innerHTML = '';
 
- if (mouse.locked) {
- updateMovement(delta);
- updateTargets(delta);
+ let lastSection = 0;
+ QUESTIONS.forEach((q, idx) => {
+ if (q.section !== lastSection) {
+ lastSection = q.section;
+ const header = document.createElement('div');
+ header.className = 'section-header';
+ header.innerHTML = `
+ <div class="section-num">${q.section}</div>
+ <div class="section-info">
+ <h2>${SECTION_INFO[q.section].name}</h2>
+ <p>${SECTION_INFO[q.section].desc}</p>
+ </div>
+ `;
+ container.appendChild(header);
  }
- updateParticles(delta);
 
- renderer.render(scene, camera);
+ const card = document.createElement('div');
+ card.className = 'question-card';
+ card.id = `q-${idx + 1}`;
+
+ let body = '';
+ if (q.type === 'mcq') {
+ body = `<div class="options">${q.options.map(o => `
+ <label class="option" data-q="${idx + 1}" data-v="${o.id}">
+ <input type="radio" name="q${idx + 1}" value="${o.id}">
+ <span class="option-marker"></span>
+<span><strong>${o.id}.</strong> ${o.text}</span>
+ </label>
+ `).join('')}</div>`;
+ } else if (q.type === 'fill') {
+ body = `
+ <input type="text" class="fill-input" id="input-${idx + 1}" data-q="${idx + 1}" placeholder="Type your answer here..." autocomplete="off" />
+ <div class="fill-hint">No more than three words and/or a number</div>
+ `;
+ } else if (q.type === 'match') {
+ const pills = ['A','B','C','D','E','F','G','H'].map(l => `
+ <div class="match-pill" data-q="${idx + 1}" data-v="${l}">${l}</div>
+ `).join('');
+ body = `<div class="match-options">${pills}</div>`;
+ }
+
+ card.innerHTML = `
+ <div class="question-head">
+ <div class="q-num">${idx + 1}</div>
+ <div class="q-text">${q.q}</div>
+ </div>
+ ${body}
+ `;
+ container.appendChild(card);
+ });
+
+ // Wire interactions
+ container.querySelectorAll('.option').forEach(opt => {
+ opt.addEventListener('click', () => {
+ const qNum = opt.dataset.q;
+ const val = opt.dataset.v;
+ const card = document.getElementById(`q-${qNum}`);
+ card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+ opt.classList.add('selected');
+ state.answers[qNum] = val;
+ card.classList.add('answered');
+ updateAnsweredCount();
+ });
+ });
+
+ container.querySelectorAll('.fill-input').forEach(input => {
+ input.addEventListener('input', () => {
+ const qNum = input.dataset.q;
+ state.answers[qNum] = input.value.trim();
+ const card = document.getElementById(`q-${qNum}`);
+ if (input.value.trim()) card.classList.add('answered');
+ else card.classList.remove('answered');
+ updateAnsweredCount();
+ });
+ });
+
+ container.querySelectorAll('.match-pill').forEach(pill => {
+ pill.addEventListener('click', () => {
+ const qNum = pill.dataset.q;
+ const val = pill.dataset.v;
+ const card = document.getElementById(`q-${qNum}`);
+ card.querySelectorAll('.match-pill').forEach(p => p.classList.remove('selected'));
+ pill.classList.add('selected');
+ state.answers[qNum] = val;
+ card.classList.add('answered');
+ updateAnsweredCount();
+ });
+ });
 }
 
-function onResize() {
- camera.aspect = window.innerWidth / window.innerHeight;
- camera.updateProjectionMatrix();
- renderer.setSize(window.innerWidth, window.innerHeight);
+function updateAnsweredCount() {
+ const c = Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
+ document.getElementById('answeredCount').textContent = c;
+ document.getElementById('finalAnswered').textContent = c;
 }
 
-init();
+// ============================================================
+// SUBMISSION
+// ============================================================
+function confirmSubmit() {
+ const unanswered = 30 - Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
+ const m = document.getElementById('confirmModal');
+ document.querySelector('#confirmModal h3').textContent = 'Submit Final Answers?';
+ document.querySelector('#confirmModal p').textContent =
+ unanswered > 0
+ ? `You have ${unanswered} unanswered question${unanswered > 1 ? 's' : ''}. Once submitted, you cannot modify your responses.`
+ : 'You have answered all questions. Submit to view your final results.';
+ document.querySelector('#confirmModal .modal-icon').innerHTML = '<svg><use href="#i-check"/></svg>';
+ m.classList.add('active');
+}
+
+function closeModal() {
+ document.getElementById('confirmModal').classList.remove('active');
+}
+
+function submitTest() {
+ closeModal();
+ if (state.intervalId) clearInterval(state.intervalId);
+
+ // Grade let correct = 0;
+ const breakdown = {1: { c: 0, t: 0 }, 2: { c: 0, t: 0 }, 3: { c: 0, t: 0 }, 4: { c: 0, t: 0 } };
+ const reviewItems = [];
+
+ QUESTIONS.forEach((q, idx) => {
+ const qNum = idx + 1;
+ const userAnswer = (state.answers[qNum] || '').toString().toLowerCase().trim();
+ const correctAnswer = q.answer.toLowerCase();
+ breakdown[q.section].t++;
+
+ let isCorrect = false;
+ if (q.type === 'fill') {
+ const accepted = q.answer.map(a => a.toLowerCase());
+ isCorrect = accepted.includes(userAnswer);
+ } else {
+ isCorrect = userAnswer === correctAnswer;
+ }
+
+ if (isCorrect) {
+ correct++;
+ breakdown[q.section].c++;
+ }
+
+ reviewItems.push({
+ num: qNum,
+ section: q.section,
+ question: q.q,
+ userAnswer: state.answers[qNum] || '',
+ correctAnswer: q.answer,
+ correctAnswerText: q.type === 'match' ? `${q.answer} (${MATCH_OPTIONS[q.answer]})` : (q.type === 'fill' ? q.answer[0] : q.answer),
+ userAnswerText: state.answers[qNum] ? (q.type === 'match' ? `${state.answers[qNum]} (${MATCH_OPTIONS[state.answers[qNum]] || ''})` : state.answers[qNum]) : '(No answer)',
+ isCorrect,
+ unanswered: !state.answers[qNum],
+ explanation: q.explanation
+ });
+
+ const card = document.getElementById(`q-${qNum}`);
+ if (card) {
+ card.style.borderLeftWidth = '3px';
+ }
+ });
+
+ const wrong = Object.values(state.answers).filter(v => v !== '' && v !== undefined).length - correct;
+ const unanswered =30 - Object.values(state.answers).filter(v => v !== '' && v !== undefined).length;
+ const accuracy = Math.round((correct / 30) * 100);
+
+ // IELTS Band conversion (approximate for listening)
+ let band = '5.0';
+ if (correct >= 30) band = '9.0';
+ else if (correct >= 27) band = '8.5';
+ else if (correct >= 23) band = '8.0';
+ else if (correct >= 20) band = '7.5';
+ else if (correct >= 16) band = '7.0';
+ else if (correct >= 13) band = '6.5';
+ else if (correct >= 10) band = '6.0';
+ else if (correct >= 7) band = '5.5';
+ else if (correct >= 5) band = '5.0';
+ else if (correct >= 3) band = '4.0';
+ else band = '3.0';
+
+ // Render results
+ document.getElementById('scoreFinal').textContent = correct;
+ document.getElementById('correctCount').textContent = correct;
+ document.getElementById('wrongCount').textContent = wrong;
+ document.getElementById('unansweredCount').textContent = unanswered;
+ document.getElementById('accuracyRate').textContent = accuracy + '%';
+ document.getElementById('bandScore').textContent = band;
+
+ // Section breakdown
+ const bd = document.getElementById('sectionBreakdown');
+ bd.innerHTML = '';
+ [1, 2, 3, 4].forEach(s => {
+ const c = breakdown[s].c;
+ const t = breakdown[s].t;
+ const pct = Math.round((c / t) * 100);
+ const row = document.createElement('div');
+ row.className = 'section-row';
+ row.innerHTML = `
+ <span class="label">${SECTION_INFO[s].name} — ${c}/${t} correct</span>
+ <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+ <span class="score">${pct}%</span>
+ `;
+ bd.appendChild(row);
+ });
+
+ // Review
+ const review = document.getElementById('reviewContainer');
+ review.innerHTML = '';
+ reviewItems.forEach(r => {
+ const div = document.createElement('div');
+ div.className = `review-card ${r.isCorrect ? 'correct' : (r.unanswered ? 'unanswered-r' : 'wrong')}`;
+ const iconHTML = r.isCorrect ? '<svg><use href="#i-check"/></svg>' : (r.unanswered ? '<svg><use href="#i-warning"/></svg>' : '<svg><use href="#i-x"/></svg>');
+ div.innerHTML = `
+ <div class="review-head">
+ <div class="review-icon">${iconHTML}</div>
+ <div class="review-q"><span class="qn">Q${r.num}</span><strong>${r.question.replace(/<\/?strong>/g, '')}</strong></div>
+ </div>
+ <div class="review-body">
+ <div class="answer-row"><span class="lbl">Your answer:</span> <span class="val ${r.isCorrect ? 'right' : 'wrong-val'}">${r.userAnswerText}</span></div>
+ ${!r.isCorrect ? `<div class="answer-row"><span class="lbl">Correct answer:</span> <span class="val right">${r.correctAnswerText}</span></div>` : ''}
+ <div class="review-explanation"><strong>Explanation:</strong> ${r.explanation}</div>
+ </div>
+ `;
+ review.appendChild(div);
+ });
+
+ // Exit fullscreen
+ if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+
+ document.getElementById('lockBadge').style.display = 'none';
+ document.body.classList.remove('exam-mode');
+ goToPhase('results');
+}
 </script>
 </body>
 </html>
