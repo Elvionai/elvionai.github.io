@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kayla Ajibade | Letter Writing Result</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9edf2;--card:#fff;--text:#18263a;--muted:#5d6a7e;--line:#d6dce6;--accent:#2c3fa8;--ok:#12764f;
+  --red:#d3202f;--paper:#fdfcf8;--rule:#cfe0ee;--margin:#f0b9bd;--ink:#26303f;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --pen:'Caveat','Segoe Script','Bradley Hand',cursive;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1522;--card:#142235;--text:#e6edf7;--muted:#9fb0c7;--line:#243750;--accent:#8fa2ff;--ok:#4fc995}}
+:root[data-theme="dark"]{--bg:#0c1522;--card:#142235;--text:#e6edf7;--muted:#9fb0c7;--line:#243750;--accent:#8fa2ff;--ok:#4fc995}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:clamp(1rem,3vw,2.2rem)}
+.ic{width:1.2em;height:1.2em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em;flex:none}
+
+/* header + summary */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.head h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.05;margin:0;letter-spacing:-.015em}
+.head p{margin:.4rem 0 0;color:var(--muted)}
+.btn{display:inline-flex;gap:.5rem;align-items:center;border:1px solid var(--line);background:var(--card);color:var(--text);padding:.6rem 1rem;border-radius:10px;font:500 .95rem var(--sans);cursor:pointer;transition:border-color .2s,transform .2s}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.btn:focus-visible,.theme:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:.8rem}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem}
+.tile small{color:var(--muted);display:block}
+.tile b{font-family:var(--serif);font-weight:500;font-size:2rem;line-height:1.1}
+.tile b span{font-size:1.1rem;color:var(--muted)}
+.tile .bar{height:6px;border-radius:9px;background:var(--line);margin-top:.6rem;overflow:hidden}
+.tile .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:9px;transition:width 1.4s cubic-bezier(.22,.8,.24,1)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem 1.2rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin-bottom:.8rem}
+.meta div small{display:block;color:var(--muted);font-size:.82rem}
+.meta div b{font-weight:500}
+.crit{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.6rem}
+.crit .tile b{font-size:1.5rem}
+
+/* paper */
+.paper{position:relative;background:var(--paper);color:var(--ink);border-radius:6px;box-shadow:0 30px 60px -34px rgba(0,0,0,.5),0 2px 0 rgba(0,0,0,.04);padding:clamp(1.4rem,4vw,3rem) clamp(1rem,3vw,2.4rem) 2.4rem clamp(2.6rem,6vw,4.4rem);overflow:hidden;
+  background-image:repeating-linear-gradient(transparent 0 calc(2.45rem - 1px),var(--rule) calc(2.45rem - 1px) 2.45rem);background-position:0 3.1rem}
+.paper::before{content:"";position:absolute;left:clamp(1.9rem,4.6vw,3.4rem);top:0;bottom:0;width:2px;background:var(--margin)}
+.pt{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1.2rem;min-height:5.6rem}
+.pt .t{font-family:var(--serif);font-size:1.15rem;line-height:2.45rem;padding-top:0}
+.pt .t span{display:block;color:#6b7482;font-size:.95rem}
+.stamp{font-family:var(--pen);color:var(--red);font-weight:700;font-size:clamp(2.8rem,7vw,4.2rem);line-height:1;position:relative;padding:.35rem 1.2rem;transform:rotate(-6deg);flex:none}
+.stamp svg{position:absolute;inset:-4px -6px;width:calc(100% + 12px);height:calc(100% + 8px);overflow:visible}
+.stamp svg ellipse{fill:none;stroke:var(--red);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:520}
+.stamp span{opacity:0;display:inline-block;transform:scale(1.5)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:1.4rem;margin-bottom:2.45rem}
+.row p{font-family:var(--serif);font-size:1.12rem;line-height:2.45rem;margin:0}
+.notes{font-family:var(--pen);color:var(--red);font-size:1.28rem;line-height:1.15;display:grid;gap:.5rem;align-content:start;padding-top:.3rem}
+.note{display:flex;gap:.45rem;opacity:0;transform:translateX(-8px) rotate(-1deg);transition:opacity .45s,transform .45s}
+.note em{font-style:normal;font-weight:700;min-width:1.9rem;border:1.8px solid var(--red);border-radius:50%;height:1.9rem;display:grid;place-items:center;font-size:1rem;flex:none;line-height:1}
+.note.good em{border-radius:6px}
+.go .note{opacity:1;transform:none;transition-delay:calc(var(--i)*.35s + .5s)}
+
+/* marks */
+.mk{position:relative;display:inline;white-space:normal}
+.mk i{position:absolute;left:50%;top:-1.55rem;transform:translateX(-50%) rotate(-3deg);white-space:nowrap;font:700 1.3rem/1 var(--pen);color:var(--red);opacity:0;transition:opacity .35s}
+.mk.c::before{content:"";position:absolute;inset:.35rem -.35rem .15rem;border:2px solid var(--red);border-radius:50%;transform:rotate(-2deg);clip-path:inset(0 100% 0 0);transition:clip-path .5s ease}
+.mk.u{background:linear-gradient(var(--red),var(--red)) 0 100%/0 2px no-repeat;transition:background-size .7s ease;padding-bottom:1px}
+.mk.t{background:linear-gradient(#12764f,#12764f) 0 100%/0 2px no-repeat;transition:background-size .7s ease;padding-bottom:1px}
+.go .mk{transition-delay:calc(var(--i)*.35s)}
+.go .mk.c::before{clip-path:inset(0 0 0 0)}
+.go .mk.c i{opacity:1;transition-delay:calc(var(--i)*.35s + .4s)}
+.go .mk.u,.go .mk.t{background-size:100% 2px}
+.mk.t.tick::after{content:"";position:absolute;right:-1.1rem;top:.45rem;width:.45rem;height:.85rem;border:solid #12764f;border-width:0 3px 3px 0;transform:rotate(40deg) scale(0);transition:transform .3s .8s}
+.go .mk.tick::after{transform:rotate(40deg) scale(1)}
+
+.final{margin-top:1rem;border:2.5px solid var(--red);border-radius:14px 22px 16px 24px/22px 14px 24px 16px;padding:1.1rem 1.4rem;font-family:var(--pen);color:var(--red);font-size:1.5rem;line-height:1.3;transform:rotate(-.6deg);opacity:0;transition:opacity .6s,transform .6s;position:relative;background:rgba(211,32,47,.03)}
+.final.go{opacity:1;transform:rotate(-.6deg)}
+.final b{font-size:1.9rem;display:block;margin-bottom:.2rem}
+.final ul{margin:.3rem 0 0;padding-left:1.4rem}
+.sig{margin-top:.6rem;text-align:right;font-size:2rem;font-weight:700;transform:rotate(-3deg)}
+.key{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin:1rem 0 1.2rem;font-size:.88rem;color:var(--muted)}
+.key span{display:flex;align-items:center;gap:.4rem}
+.key em{font:700 .85rem var(--pen);font-style:normal;color:#d3202f;border:1.6px solid #d3202f;border-radius:50%;width:1.55rem;height:1.55rem;display:grid;place-items:center}
+.key em.g{border-radius:6px}
+.foot{margin-top:1.4rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:820px){
+  .sum,.crit{grid-template-columns:repeat(2,1fr)}
+  .row{grid-template-columns:1fr;gap:.4rem;margin-bottom:2rem}
+  .notes{padding:.5rem .8rem;background:rgba(211,32,47,.05);border-left:3px solid var(--red);border-radius:0 8px 8px 0;margin-top:.2rem}
+  .paper{background-image:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.note,.mk i,.stamp span{opacity:1!important;transform:none!important}.mk.c::before{clip-path:none!important}.mk.u,.mk.t{background-size:100% 2px!important}.stamp svg ellipse{stroke-dashoffset:0!important}.final{opacity:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div>
+      <h1>Kayla Ajibade</h1>
+      <p>Letter writing assessment &middot; Informal letter &middot; Giving up social media before exams</p>
+    </div>
+    <button class="btn" id="replay"><svg class="ic" viewBox="0 0 24 24"><path d="M20 11.500A8 8 0 1 0 18 17"/><path d="M20.500 4.500v6.500H14"/></svg>Replay the marking</button>
+  </div>
+
+  <div class="sum">
+    <div class="tile"><small>Letter mark</small><b>14<span> / 20</span></b><div class="bar"><i data-w="70"></i></div></div>
+    <div class="tile"><small>Quiz score</small><b>17<span> / 20</span></b><div class="bar"><i data-w="85"></i></div></div>
+    <div class="tile"><small>Planning checklist</small><b>6<span> of 6</span></b><div class="bar"><i data-w="100"></i></div></div>
+  </div>
+
+  <div class="meta">
+    <div><small>Marked by</small><b>Mr. Kola</b></div>
+    <div><small>Word count</small><b>257 words</b></div>
+    <div><small>Paragraphs</small><b>5</b></div>
+    <div><small>Time since start</small><b>72 h 24 min</b></div>
+    <div><small>Coach questions used</small><b>0</b></div>
+    <div><small>Paste attempts blocked</small><b>1</b></div>
+    <div><small>Plan notes</small><b>None submitted</b></div>
+  </div>
+
+  <div class="crit">
+    <div class="tile"><small>Content and ideas</small><b>4<span> / 5</span></b></div>
+    <div class="tile"><small>Organisation</small><b>4<span> / 5</span></b></div>
+    <div class="tile"><small>Accuracy</small><b>3<span> / 5</span></b></div>
+    <div class="tile"><small>Register and tone</small><b>3<span> / 5</span></b></div>
+  </div>
+
+  <div class="key" aria-label="Marking key">
+    <span><em>Sp</em>Spelling</span><span><em>Gr</em>Grammar</span><span><em>P</em>Punctuation</span><span><em>R</em>Register</span><span><em class="g">&#10003;</em>Strong writing</span>
+  </div>
+
+  <article class="paper" id="paper" aria-label="Kayla's letter, marked">
+    <div class="pt">
+      <div class="t">Kayla Ajibade<span>Informal letter &middot; 257 words</span></div>
+      <div class="stamp" id="stamp"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><ellipse cx="50" cy="30" rx="48" ry="27"/></svg><span>14/20</span></div>
+    </div>
+    <div id="rows"></div>
+    <div class="final" id="final">
+      <b>Teacher's remarks: Good thinking, Kayla. 14/20</b>
+      You argue a clear, balanced position and the middle ground you reach (a time limit) is sensible and personal to Sam.
+      <ul>
+        <li>Proofread slowly. Most lost marks are small slips, not big ideas.</li>
+        <li>Keep an informal sign-off: &ldquo;Best wishes&rdquo; or &ldquo;Take care&rdquo;.</li>
+        <li>Split long sentences and cut repeated words.</li>
+      </ul>
+      <div class="sig">Mr. Kola</div>
+    </div>
+  </article>
+  <p class="foot">The quiz score and submission details come from the online assessment record.</p>
+</div>
+
+<script>
+(function(){
+  /* {c|wrong|correction} circle + fix   {u|text} red underline   {t|text} green underline with tick   {k|text} green underline */
+  var L=[
+   {p:"Dear Sam,",n:[]},
+   {p:"How are you and how is your day going? I'm writing to you to express my concerns about you {c|givig|giving} up social media before {c|you|your} exams{c|.I|. I} think that this could have a more negative impact on you than you think.",
+    n:[["Sp","Spelling: giving."],["Gr","Your exams, not you exams."],["P","Leave a space after a full stop."],["R","Warm start, but a bit stiff for a friend. Try &ldquo;Hope you're well!&rdquo;"]]},
+   {p:"It might look like it's a good idea to give up social media because apps like TikTok and Instagram are designed to keep you engaged, but {t|I think that these apps can also help you with your studies}. {c|In my opinionI think|In my opinion,} if used in the right ways, you can use these apps to study for your exams. For example, {t|you can search up different channels that post educational content} that might even explain the work better than your teachers would.",
+    n:[["&#10003;","Good counter-argument. You see both sides."],["P","Missing space, and &ldquo;in my opinion I think&rdquo; says the same thing twice."],["&#10003;","A clear, useful example."]]},
+   {p:"However, having access to social media could be a bad thing because you could decide to take a 10 minute break but then, because social media is designed to keep you scrolling and scrolling, it could be hard for you to stop. {u|This is why I think that you should set a time limit} on how long you use your devices for social media so you {c|dont|don't} feel like you've been completely banned from it but feel like {c|theres|there's} a time to watch videos and a time to focus on your work.",
+    n:[["P","Very long sentence. Break it after &ldquo;stop&rdquo;."],["&#10003;","Strong, practical advice."],["Sp","Apostrophes: don't, there's."]]},
+   {p:"{c|Because of this Sam,|Because of this, Sam,} I don't think that you should completely give up on social media, but limit it. {c|Ihope|I hope} you take this letter to heart and I wish you the best on your exams and I hope you pass!",
+    n:[["P","Commas around the name."],["Sp","Two words: I hope."],["&#10003;","Kind, friendly ending. Try not to repeat &ldquo;I hope&rdquo;."]]},
+   {p:"{c|Yours faithfull|Best wishes} <br>Kayla",
+    n:[["R","&ldquo;Yours faithfully&rdquo; is for formal letters to &ldquo;Dear Sir/Madam&rdquo;. Use a friendly close here."],["Sp","Spelling: faithfully, ending in -ly."]]}
+  ];
+  var rows=document.getElementById('rows');
+  L.forEach(function(r){
+    var h=r.p.replace(/\{(\w)\|([^|}]+)(?:\|([^}]*))?\}/g,function(m,k,a,b){
+      if(k==='c')return '<span class="mk c">'+a+'<i>'+b+'</i></span>';
+      if(k==='u')return '<span class="mk u">'+a+'</span>';
+      return '<span class="mk t tick">'+a+'</span>';
+    });
+    var d=document.createElement('div');d.className='row';
+    var notes=r.n.map(function(n,i){return '<div class="note'+(n[0].indexOf('#')>-1?' good':'')+'" style="--i:'+(i+1)+'"><em>'+n[0]+'</em><span>'+n[1]+'</span></div>';}).join('');
+    d.innerHTML='<p>'+h+'</p><div class="notes">'+notes+'</div>';
+    d.querySelectorAll('.mk').forEach(function(m,i){m.style.setProperty('--i',i);});
+    rows.appendChild(d);
+  });
+
+  var els=[].slice.call(document.querySelectorAll('.row'));
+  function reveal(el){el.classList.add('go');}
+  function stamp(){
+    var s=document.getElementById('stamp'),e=s.querySelector('ellipse'),t=s.querySelector('span');
+    e.style.transition='stroke-dashoffset .9s ease';e.style.strokeDashoffset=0;
+    t.style.transition='opacity .3s .5s,transform .45s .5s cubic-bezier(.3,1.6,.5,1)';t.style.opacity=1;t.style.transform='none';
+  }
+  function run(){
+    els.forEach(function(el){el.classList.remove('go');});
+    var f=document.getElementById('final');f.classList.remove('go');
+    var s=document.getElementById('stamp'),e=s.querySelector('ellipse'),t=s.querySelector('span');
+    e.style.transition='none';e.style.strokeDashoffset=520;t.style.transition='none';t.style.opacity=0;t.style.transform='scale(1.5)';
+    document.querySelectorAll('.bar i').forEach(function(i){i.style.width='0';});
+    setTimeout(function(){document.querySelectorAll('.bar i').forEach(function(i){i.style.width=i.dataset.w+'%';});},150);
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){reveal(x.target);io.unobserve(x.target);if(x.target===els[els.length-1]){setTimeout(function(){f.classList.add('go');stamp();},1600);}}});},{threshold:.35});
+      els.forEach(function(el){io.observe(el);});
+    }else{els.forEach(reveal);f.classList.add('go');stamp();}
+  }
+  document.getElementById('replay').addEventListener('click',function(){window.scrollTo({top:document.getElementById('paper').offsetTop-20,behavior:'smooth'});setTimeout(run,500);});
+  run();
+})();
+</script>
+</body>
+</html>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); 
+
+  gtag('config', 'G-J1YTKP10ZX');
+</script>
