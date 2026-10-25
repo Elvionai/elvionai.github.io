@@ -1,70 +1,112 @@
 {
   "id": "/app.html",
-  "name": "Philadelphia AI",
-  "short_name": "PhiladelphiaAI",
-  "description": "Philadelphia AI — intelligent innovation and futuristic research from ElvionAI.",
+  "name": "Philadelphia AI by Elvion",
+  "short_name": "Philadelphia AI",
+  "description": "Philadelphia AI by Elvion — Intelligence Unleashed. Your creative AI suite for chat, image synthesis, voiceovers, video, writing, and learning.",
   "start_url": "/app.html",
   "scope": "/",
   "display": "standalone",
-  "display_override": ["standalone", "fullscreen"],
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#050505",
   "theme_color": "#050505",
   "lang": "en",
   "dir": "ltr",
-  "orientation": "portrait",
-  "categories": ["productivity", "education", "technology"],
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "education", "technology", "utilities"],
   "prefer_related_applications": false,
   "related_applications": [],
-
   "icons": [
     {
-      "src": "images/IMG_20250715_102103_129.jpg",
+      "src": "images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "images/IMG_20251007_234104_159.webp",
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icon-512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/IMG_20250715_102103_129.jpg",
+      "sizes": "1280x1212",
       "type": "image/jpeg",
       "purpose": "any"
     }
   ],
-
+  "screenshots": [
+    {
+      "src": "images/IMG_20250824_133336_309.jpg",
+      "sizes": "1080x1080",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Philadelphia AI Creative Studios"
+    },
+    {
+      "src": "images/IMG_20250715_102103_129.jpg",
+      "sizes": "1280x1212",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Philadelphia AI by Elvion"
+    }
+  ],
   "shortcuts": [
     {
-      "name": "Chat",
+      "name": "Chat Studio",
       "short_name": "Chat",
-      "url": "https://elvionai.com.ng/profile.html",
+      "description": "Chat with Philadelphia AI or Bobby",
+      "url": "/profile.html",
       "icons": [
-        { "src": "/images/IMG_20250715_102103_129.jpg", "sizes": "192x192", "type": "image/jpeg" }
+        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     },
     {
       "name": "Image Studio",
       "short_name": "Images",
+      "description": "Generate AI art and photorealistic visuals",
       "url": "/image-studio.html",
       "icons": [
-        { "src": "/images/IMG_20250824_133336_309.jpg", "sizes": "512x512", "type": "image/jpeg" }
+        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+      ]
+    },
+    {
+      "name": "Audio Studio",
+      "short_name": "Audio",
+      "description": "Synthesize voiceovers and music tracks",
+      "url": "/audio-studio.html",
+      "icons": [
+        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     },
     {
       "name": "Writing Studio",
       "short_name": "Write",
+      "description": "Draft novels, scripts, and stories",
       "url": "/writing-studio.html",
       "icons": [
-        { "src": "/images/IMG_20250715_102103_129.jpg", "sizes": "192x192", "type": "image/jpeg" }
+        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     }
   ],
-
   "protocol_handlers": [
     {
       "protocol": "web+philadelphiaai",
       "url": "/app.html?query=%s"
     }
   ],
-
   "edge_side_panel": { "preferred_width": 400 },
   "launch_handler": { "client_mode": "focus-existing" }
 }
