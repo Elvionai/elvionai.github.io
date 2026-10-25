@@ -1,6 +1,7 @@
-// ✅ Philadelphia AI Service Worker
-const CACHE_NAME = "philadelphia-ai-cache-v3";
-const CACHE_ASSETS = [
+// ✅ Philadelphia AI — Enhanced App Service Worker v4
+const CACHE_NAME = "philadelphia-ai-cache-v4";
+
+const CORE_ASSETS = [
   "/",
   "/app.html",
   "/philadelphia.html",
@@ -13,7 +14,6 @@ const CACHE_ASSETS = [
   "/studyingatelvion.html",
   "/terms.html",
   "/university.html",
-  "/studio.html",
   "/image-studio.html",
   "/video-studio.html",
   "/audio-studio.html",
@@ -23,47 +23,89 @@ const CACHE_ASSETS = [
   "/api.html",
   "/blog.html",
   "/manifest.json",
+  "/app-shell.js",
   "/images/IMG_20250715_102103_129.jpg",
   "/images/IMG_20250824_133336_309.jpg",
-  "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Orbitron:wght@400;500;700;900&display=swap",
-  "https://fonts.gstatic.com"
+  "/images/icon-192.png",
+  "/images/icon-512.png"
 ];
 
-// ✅ INSTALL — cache all essential assets immediately
+// ✅ INSTALL — Cache assets individually so a single 404 never breaks SW installation
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CACHE_ASSETS))
-  );
-  self.skipWaiting();
-  console.log("✅ Philadelphia AI Service Worker installed and cached assets");
-});
-
-// ✅ ACTIVATE — clean up old caches and take control
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log("🧹 Removing old cache:", key);
-            return caches.delete(key);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await Promise.allSettled(
+        CORE_ASSETS.map(async (url) => {
+          try {
+            const response = await fetch(url, { cache: "no-cache" });
+            if (response.ok) {
+              await cache.put(url, response);
+            }
+          } catch (err) {
+            // Ignore individual asset failure during install
           }
         })
       );
     })
   );
-  clients.claim();
-  console.log("🔥 Philadelphia AI Service Worker activated");
+  self.skipWaiting();
 });
 
-// ✅ FETCH — cache first, fallback to network, offline fallback to app.html
+// ✅ ACTIVATE — Clean up old caches and take control immediately
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
+  );
+  self.clients.claim();
+});
+
+// ✅ FETCH — Network-first for API requests, Stale-While-Revalidate for app pages/assets
 self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  if (request.method !== "GET") return;
+
+  const url = new URL(request.url);
+
+  // Always go straight to network for backend API calls or Firebase/Auth
+  if (
+    url.hostname.includes("railway.app") ||
+    url.hostname.includes("googleapis.com") ||
+    url.hostname.includes("firebase") ||
+    url.pathname.startsWith("/api/")
+  ) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return (
-        cachedResponse ||
-        fetch(event.request).catch(() => caches.match("/app.html"))
-      );
+    caches.match(request).then((cachedResponse) => {
+      const networkFetch = fetch(request)
+        .then((networkResponse) => {
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            url.origin === self.location.origin
+          ) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          if (request.mode === "navigate") {
+            return caches.match("/app.html") || caches.match("/philadelphia.html");
+          }
+          return cachedResponse;
+        });
+
+      return cachedResponse || networkFetch;
     })
   );
 });
