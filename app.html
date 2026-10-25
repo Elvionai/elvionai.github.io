@@ -7,15 +7,17 @@
   <meta name="description" content="Philadelphia AI App — your mobile creative suite for chat, image, video, audio, writing, and more.">
   <meta name="theme-color" content="#050505" />
 
-  <link rel="apple-touch-icon" href="images/IMG_20250715_102103_129.jpg" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/IMG_20250715_102103_129.jpg" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/IMG_20250824_133336_309.jpg" />
+  <link rel="apple-touch-icon" href="images/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
   <link rel="manifest" href="manifest.json" />
 
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Philadelphia AI" />
   <meta name="application-name" content="Philadelphia AI" />
+  <script src="app-shell.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -286,6 +288,12 @@
       Philadelphia <span>AI</span>
     </div>
     <div class="header-actions">
+      <a href="philadelphia-ai.apk" download="Philadelphia-AI.apk" class="icon-btn" title="Download Android APK" style="width:auto; padding:0 12px; border-radius:50px; gap:6px; font-size:0.78rem; font-weight:700;">
+        <i class="fa-brands fa-android"></i> <span>APK</span>
+      </a>
+      <button type="button" class="icon-btn" title="Switch Studio" onclick="window.ElvionAppShell && window.ElvionAppShell.toggleSwitcher()">
+        <i class="fa-solid fa-layer-group"></i>
+      </button>
       <a href="https://elvionai.com.ng/profile.html" class="icon-btn" title="Profile">
         <i class="fa-solid fa-user"></i>
       </a>
@@ -302,6 +310,14 @@
       <div class="welcome-greeting">Welcome back</div>
       <h1>Where do you want to begin?</h1>
       <p>Pick a studio to start creating, learning, or building. Your tools, one tap away.</p>
+      <div id="app-install-bar" style="margin-top:1.2rem; display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem;">
+        <button id="app-pwa-btn" type="button" style="display:none; align-items:center; gap:8px; padding:0.65rem 1.3rem; border-radius:50px; border:none; background:var(--gradient-gold); color:#000; font-family:var(--font-futuristic); font-size:0.78rem; font-weight:700; cursor:pointer; box-shadow:var(--glow-gold);">
+          <i class="fa-solid fa-mobile-screen-button"></i> Install App on Device
+        </button>
+        <a href="philadelphia-ai.apk" download="Philadelphia-AI.apk" style="display:inline-flex; align-items:center; gap:8px; padding:0.65rem 1.3rem; border-radius:50px; border:1px solid var(--border-glow); background:rgba(201,169,110,0.12); color:var(--accent-soft); font-family:var(--font-futuristic); font-size:0.78rem; font-weight:700; text-decoration:none;">
+          <i class="fa-brands fa-android"></i> Download Android APK
+        </a>
+      </div>
     </section>
 
     <!-- Studios Section -->
@@ -456,6 +472,24 @@
         tile.addEventListener('touchstart', () => tile.classList.add('active'), { passive: true });
         tile.addEventListener('touchend', () => setTimeout(() => tile.classList.remove('active'), 300));
       });
+
+      // Native PWA Install Trigger inside App Hub
+      let deferredAppPrompt = null;
+      const appPwaBtn = document.getElementById('app-pwa-btn');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredAppPrompt = e;
+        if (appPwaBtn) appPwaBtn.style.display = 'inline-flex';
+      });
+      if (appPwaBtn) {
+        appPwaBtn.addEventListener('click', async () => {
+          if (!deferredAppPrompt) return;
+          deferredAppPrompt.prompt();
+          await deferredAppPrompt.userChoice;
+          deferredAppPrompt = null;
+          appPwaBtn.style.display = 'none';
+        });
+      }
     });
   </script>
 </body>
