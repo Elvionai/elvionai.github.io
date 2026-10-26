@@ -17,31 +17,37 @@
   "related_applications": [],
   "icons": [
     {
-      "src": "images/icon-192.png",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "images/icon-192.png",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "images/icon-512.png",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "images/icon-512.png",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "images/IMG_20250715_102103_129.jpg",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23050505'/%3E%3Ccircle cx='256' cy='256' r='210' fill='none' stroke='%23c9a96e' stroke-width='14'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='260' fill='%23c9a96e'%3EP%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/IMG_20250715_102103_129.jpg",
       "sizes": "1280x1212",
       "type": "image/jpeg",
       "purpose": "any"
@@ -49,14 +55,14 @@
   ],
   "screenshots": [
     {
-      "src": "images/IMG_20250824_133336_309.jpg",
+      "src": "/images/IMG_20250824_133336_309.jpg",
       "sizes": "1080x1080",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Philadelphia AI Creative Studios"
     },
     {
-      "src": "images/IMG_20250715_102103_129.jpg",
+      "src": "/images/IMG_20250715_102103_129.jpg",
       "sizes": "1280x1212",
       "type": "image/jpeg",
       "form_factor": "wide",
@@ -70,7 +76,7 @@
       "description": "Chat with Philadelphia AI or Bobby",
       "url": "/profile.html",
       "icons": [
-        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+        { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     },
     {
@@ -79,7 +85,7 @@
       "description": "Generate AI art and photorealistic visuals",
       "url": "/image-studio.html",
       "icons": [
-        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+        { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     },
     {
@@ -88,7 +94,7 @@
       "description": "Synthesize voiceovers and music tracks",
       "url": "/audio-studio.html",
       "icons": [
-        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+        { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     },
     {
@@ -97,16 +103,9 @@
       "description": "Draft novels, scripts, and stories",
       "url": "/writing-studio.html",
       "icons": [
-        { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" }
+        { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" }
       ]
     }
   ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+philadelphiaai",
-      "url": "/app.html?query=%s"
-    }
-  ],
-  "edge_side_panel": { "preferred_width": 400 },
   "launch_handler": { "client_mode": "focus-existing" }
 }
