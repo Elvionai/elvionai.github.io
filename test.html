@@ -662,7 +662,6 @@ pre::before{content:"CODE // " attr(data-lang);position:absolute;top:10px;left:1
     <div class="panel-section-title">Images & Art</div>
     <button class="panel-link" data-tool="image"><i class="fa-solid fa-image"></i> Create Image <span class="tool-price-badge">~10 cr</span></button>
     <button class="panel-link" data-tool="edit-photo"><i class="fa-solid fa-wand-magic-sparkles"></i> Edit Photo <span class="tool-price-badge">~15 cr</span></button>
-    <button class="panel-link" data-tool="remove-bg"><i class="fa-solid fa-scissors"></i> Remove Background <span class="tool-price-badge">~2 cr</span></button>
     <button class="panel-link" data-tool="comic"><i class="fa-solid fa-book-open"></i> Create Comic <span class="tool-price-badge">~10/panel</span></button>
     <div class="panel-section-title" style="margin-top:14px">Audio & Video</div>
     <button class="panel-link" data-tool="voice-gen"><i class="fa-solid fa-microphone-lines"></i> Voice Generation <span class="tool-price-badge">~10 cr</span></button>
@@ -734,6 +733,206 @@ pre::before{content:"CODE // " attr(data-lang);position:absolute;top:10px;left:1
   </div>
 </div>
 
+  <!-- Video Generation Maintenance Notification -->
+<div id="elvion-video-maintenance">
+  <div class="evm-notification">
+    <div class="evm-icon">
+      ⚙
+    </div>
+
+    <div class="evm-content">
+      <div class="evm-title">Video Generation</div>
+      <div class="evm-status">
+        <span class="evm-dot"></span>
+        Temporarily unavailable
+      </div>
+
+      <p>
+        The Video Generation endpoint is currently under maintenance.
+        Kindly bear with us as we work on it and get it back online.
+      </p>
+    </div>
+
+    <button class="evm-close" onclick="document.getElementById('elvion-video-maintenance').remove()" aria-label="Close notification">
+      &times;
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Scoped entirely to the Video Generation notification */
+  #elvion-video-maintenance {
+    all: initial;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 999999;
+    font-family: Inter, Arial, sans-serif;
+  }
+
+  #elvion-video-maintenance *,
+  #elvion-video-maintenance *::before,
+  #elvion-video-maintenance *::after {
+    box-sizing: border-box;
+  }
+
+  #elvion-video-maintenance .evm-notification {
+    position: relative;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 18px 18px 16px;
+
+    background:
+      radial-gradient(circle at top right, rgba(212, 175, 55, 0.10), transparent 45%),
+      linear-gradient(145deg, #11100d, #080808);
+
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    border-radius: 16px;
+
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.55),
+      0 0 30px rgba(212, 175, 55, 0.08);
+
+    color: #f5f1e6;
+    animation: evm-slide-in 0.45s ease-out;
+  }
+
+  #elvion-video-maintenance .evm-icon {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(212, 175, 55, 0.10);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+
+    color: #d4af37;
+    font-size: 20px;
+
+    box-shadow: inset 0 0 18px rgba(212, 175, 55, 0.05);
+  }
+
+  #elvion-video-maintenance .evm-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #elvion-video-maintenance .evm-title {
+    margin: 0 0 5px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #f7f2e5;
+  }
+
+  #elvion-video-maintenance .evm-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 9px;
+
+    color: #d4af37;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  #elvion-video-maintenance .evm-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d4af37;
+
+    box-shadow: 0 0 9px rgba(212, 175, 55, 0.8);
+
+    animation: evm-pulse 1.8s infinite;
+  }
+
+  #elvion-video-maintenance p {
+    margin: 0;
+    color: rgba(245, 241, 230, 0.68);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  #elvion-video-maintenance .evm-close {
+    all: unset;
+
+    position: absolute;
+    top: 9px;
+    right: 11px;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(245, 241, 230, 0.45);
+    font-size: 21px;
+    line-height: 1;
+
+    cursor: pointer;
+    border-radius: 50%;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  #elvion-video-maintenance .evm-close:hover {
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.08);
+  }
+
+  @keyframes evm-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-12px) translateX(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) translateX(0);
+    }
+  }
+
+  @keyframes evm-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.45;
+      transform: scale(0.75);
+    }
+  }
+
+  @media (max-width: 480px) {
+    #elvion-video-maintenance {
+      top: 14px;
+      right: 14px;
+      left: 14px;
+    }
+
+    #elvion-video-maintenance .evm-notification {
+      width: 100%;
+    }
+  }
+</style>
+  
 <!-- ====== SCRIPTS (stage 2 goes here) ====== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
@@ -765,22 +964,29 @@ const API = 'https://web-production-9a18.up.railway.app';
 const EP = { bobby: `${API}/api/llama/chat`, minimax: `${API}/api/minimax/chat` };
 
 // ── AUTH FETCH INTERCEPTOR ──────────────────────────────────────
-const originalFetch = window.fetch;
-window.fetch = async function(resource, config){
+const originalFetch = window.fetch.bind(window);
+const fetch = async function(resource, config){
   let url = resource;
   if (resource instanceof Request) url = resource.url;
   else if (resource instanceof URL) url = resource.href;
-  if (typeof url === 'string' && url.startsWith(API) && auth?.currentUser) {
+  const activeUser = auth?.currentUser || currentUser;
+  if (typeof url === 'string' && url.startsWith(API) && activeUser?.getIdToken) {
     try{
-      const token = await auth.currentUser.getIdToken();
+      const token = await activeUser.getIdToken();
       config = config || {};
       config.headers = config.headers || {};
       if (config.headers instanceof Headers) config.headers.set('X-Firebase-Token', token);
       else config.headers['X-Firebase-Token'] = token;
     }catch(e){ console.warn('Token fetch failed', e); }
   }
-  return originalFetch.call(window, resource, config);
+  return originalFetch(resource, config);
 };
+try {
+  Object.defineProperty(window, 'fetch', { value: fetch, configurable: true, writable: true });
+} catch (e) {
+  // In iframe environments where window.fetch is a non-configurable getter,
+  // all module calls still use the local `fetch` wrapper above.
+}
 
 const TOOL_PREFIX = '\u0000TOOL\u0000';
 const THINK_SEP = '\u0000THINK\u0000';
@@ -1880,7 +2086,20 @@ if(localStorage.getItem(TOUR_KEY) !== '1') setTimeout(startTour, 800);
 $('logout-btn').onclick=()=>{auth.signOut();window.location.href='signup-login.html'};
 
 onAuthStateChanged(auth,user=>{
-  if(!user){window.location.href='signup-login.html';return}
+  if(!user){
+    if(sessionStorage.getItem('elvion_guest_mode') === 'true'){
+      user = {
+        uid: 'guest_demo',
+        displayName: 'Guest Explorer',
+        email: 'guest@elvionai.com.ng',
+        photoURL: 'https://i.ibb.co/YTkKPfvf/IMG-20250715-102103-129.jpg',
+        getIdToken: async () => 'guest_token'
+      };
+    } else {
+      window.location.href='signup-login.html';
+      return;
+    }
+  }
   currentUser=user;
   const name=user.displayName||(user.email||'').split('@')[0];
   $('pp-img').src=user.photoURL||'https://i.ibb.co/YTkKPfvf/IMG-20250715-102103-129.jpg';
@@ -1898,11 +2117,13 @@ $('profile-form').onsubmit=async e=>{
   if(!currentUser)return;
   $('profile-status').textContent='Saving...';
   try{
-    await updateProfile(currentUser,{displayName:$('edit-name').value,photoURL:$('edit-photo').value});
-    await auth.currentUser.reload();
+    if(currentUser.uid !== 'guest_demo'){
+      await updateProfile(currentUser,{displayName:$('edit-name').value,photoURL:$('edit-photo').value});
+      await auth.currentUser.reload();
+    }
     $('profile-status').textContent='✓ Updated';
-    $('pp-img').src=auth.currentUser.photoURL||'https://i.ibb.co/YTkKPfvf/IMG-20250715-102103-129.jpg';
-    $('brand-sub').textContent=`WORKSPACE: ${auth.currentUser.displayName.toUpperCase()}`;
+    $('pp-img').src=currentUser.photoURL||'https://i.ibb.co/YTkKPfvf/IMG-20250715-102103-129.jpg';
+    $('brand-sub').textContent=`WORKSPACE: ${$('edit-name').value.toUpperCase()}`;
     setTimeout(()=>{closePanel('workspace');$('profile-status').textContent=''},1200);
   }catch(err){$('profile-status').textContent=err.message}
 };
@@ -1910,14 +2131,22 @@ $('profile-form').onsubmit=async e=>{
 // ── FIRESTORE CHATS ────────────────────────────────────────────
 async function loadChats(uid){
   if(chatsUnsub)chatsUnsub();
-  const q=query(collection(db,'users',uid,'chats'),orderBy('createdAt','desc'));
-  chatsUnsub=onSnapshot(q,async snap=>{
-    if(snap.empty){await createChat(uid);return}
-    const chats=snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderChatList(chats,uid);
-    if(!currentChatId||!chats.find(c=>c.id===currentChatId))currentChatId=chats[0].id;
-    subscribeMessages(uid,currentChatId);
-  });
+  try{
+    const q=query(collection(db,'users',uid,'chats'),orderBy('createdAt','desc'));
+    chatsUnsub=onSnapshot(q,async snap=>{
+      if(snap.empty){await createChat(uid);return}
+      const chats=snap.docs.map(d=>({id:d.id,...d.data()}));
+      renderChatList(chats,uid);
+      if(!currentChatId||!chats.find(c=>c.id===currentChatId))currentChatId=chats[0].id;
+      subscribeMessages(uid,currentChatId);
+    }, err=>{
+      console.warn('Firestore chats query error:', err);
+      renderChat([]);
+    });
+  }catch(e){
+    console.warn('loadChats error:', e);
+    renderChat([]);
+  }
 }
 async function createChat(uid){
   const summary = getCrossChatSummary();
@@ -2660,7 +2889,7 @@ const toolDefs={
     <button type="submit" class="submit-btn"><i class="fa-solid fa-microphone-lines"></i> Generate Voice</button>`,
     init: tf => {
       const prov = tf.querySelector('#tf-provider'), style = tf.querySelector('#tf-style');
-      const voices = { gemini:["podcast","cinematic","upbeat","soft","dramatic"], 'philadelphia-v2':["amara","breeze","nova","titan","luna"], minimax:["anime","movie","narrator","knight","elder","sweet","casual","ceo","hero","elegant"] };
+      const voices = { gemini:["podcast","cinematic","upbeat","soft","dramatic"], 'philadelphia-v2':["philadelphia","breeze","nova","titan","luna"], minimax:["anime","movie","narrator","knight","elder","sweet","casual","ceo","hero","elegant"] };
       const update=()=>{ style.innerHTML = voices[prov.value].map(v => `<option value="${v}">${v.charAt(0).toUpperCase() + v.slice(1)}</option>`).join(''); };
       prov.onchange=update; update();
     },
@@ -2716,42 +2945,57 @@ const toolDefs={
     }
   },
   'video-h3':{ title:'Video (Pro, w/ Audio)', form:`
+    <label class="form-label">Model</label>
+    <select class="form-select" id="tf-model"><option value="pro">Pro (reference, audio, up to 2K)</option><option value="fast">Fast (quicker, cheaper)</option></select>
     <label class="form-label">Mode</label>
     <select class="form-select" id="tf-mode"><option value="text">Text to Video</option><option value="image">Image to Video</option><option value="reference">Reference (style + voice)</option></select>
     <label class="form-label">Prompt</label>
     <textarea class="form-textarea" id="tf-prompt" required placeholder="A drone shot over Lagos, cinematic score..."></textarea>
     <div id="tf-h3-images-wrap" style="display:none"><label class="form-label">First Frame Image</label><input type="file" class="form-input" id="tf-first" accept="image/*"><label class="form-label">Last Frame (optional)</label><input type="file" class="form-input" id="tf-last" accept="image/*"></div>
     <div id="tf-h3-ref-wrap" style="display:none"><label class="form-label">Reference Images (up to 9)</label><input type="file" class="form-input" id="tf-refimgs" accept="image/*" multiple><label class="form-label">Reference Video URL (optional)</label><input type="text" class="form-input" id="tf-refvid" placeholder="https://..."></div>
-    <label class="form-label">Duration (4-15s)</label><input class="form-input" type="number" id="tf-dur" value="6" min="4" max="15">
+    <label class="form-label">Duration</label><input class="form-input" type="number" id="tf-dur" value="6" min="4" max="15">
     <label class="form-label">Resolution</label><select class="form-select" id="tf-res"><option value="768P">768P (cheaper)</option><option value="2K">2K</option></select>
     <label class="form-label">Camera Motion</label><select class="form-select" id="tf-cam"><option value="none">None</option><option value="push_in">Push In</option><option value="orbit">Orbit</option><option value="drone">Drone</option></select>
     <label class="form-label">Audio Mood</label><select class="form-select" id="tf-audio"><option value="none">None</option><option value="cinematic_score">Cinematic Score</option><option value="upbeat">Upbeat</option><option value="ambient">Ambient</option></select>
     <button type="submit" class="submit-btn"><i class="fa-solid fa-clapperboard"></i> Generate Video</button>`,
     init: tf => {
-      const mode=tf.querySelector('#tf-mode');
+      const model=tf.querySelector('#tf-model'), mode=tf.querySelector('#tf-mode'), dur=tf.querySelector('#tf-dur'), res=tf.querySelector('#tf-res');
+      const refOpt = mode.querySelector('option[value="reference"]');
       const update=()=>{
         tf.querySelector('#tf-h3-images-wrap').style.display = mode.value==='image'?'block':'none';
         tf.querySelector('#tf-h3-ref-wrap').style.display = mode.value==='reference'?'block':'none';
+        if(model.value==='fast'){
+          refOpt.disabled = true;
+          if(mode.value==='reference') mode.value='text';
+          res.innerHTML = '<option value="480P">480P (fastest)</option><option value="768P">768P</option>';
+          dur.min = 5; if(+dur.value < 5) dur.value = 5;
+        } else {
+          refOpt.disabled = false;
+          res.innerHTML = '<option value="768P">768P (cheaper)</option><option value="2K">2K</option>';
+          dur.min = 4;
+        }
       };
-      mode.onchange=update; update();
+      model.onchange=update; mode.onchange=update; update();
     },
     run:async form=>{
+      const isFast = form.querySelector('#tf-model').value==='fast';
       const mode=form.querySelector('#tf-mode').value, prompt=form.querySelector('#tf-prompt').value;
       const duration=parseInt(form.querySelector('#tf-dur').value)||6, resolution=form.querySelector('#tf-res').value;
       const camera_motion=form.querySelector('#tf-cam').value, audio_mood=form.querySelector('#tf-audio').value;
-      await saveMsg('user',`H3 Video (${mode}): "${prompt.slice(0,40)}..."`);
-      showOrbLoader('Submitting Pro video job...');
+      await saveMsg('user',`Video (${isFast?'Fast':'Pro'}, ${mode}): "${prompt.slice(0,40)}..."`);
+      showOrbLoader('Submitting video job...');
       try{
         let res, ep;
+        const base = isFast ? '/api/studio/h3max' : '/api/studio/h3';
         if(mode==='text'){
-          ep='/api/studio/h3/generate-text';
+          ep=`${base}/generate-text`;
           res=await fetch(API+ep,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,duration,resolution,ratio:'16:9',camera_motion,audio_mood}),signal:currentCtrl?.signal});
         } else if(mode==='image'){
           const first=form.querySelector('#tf-first').files[0]; if(!first) return '❌ Select a first frame image.';
           const fd=new FormData(); fd.append('prompt',prompt); fd.append('first_frame',first);
           const last=form.querySelector('#tf-last').files[0]; if(last) fd.append('last_frame',last);
           fd.append('duration',duration); fd.append('resolution',resolution); fd.append('camera_motion',camera_motion); fd.append('audio_mood',audio_mood);
-          ep='/api/studio/h3/generate-image';
+          ep=`${base}/generate-image`;
           res=await fetch(API+ep,{method:'POST',body:fd,signal:currentCtrl?.signal});
         } else {
           const refImgs=[...(form.querySelector('#tf-refimgs').files||[])], refVid=form.querySelector('#tf-refvid').value.trim();
@@ -2765,7 +3009,7 @@ const toolDefs={
         const d=await res.json();
         if(!res.ok||!d.task_id) throw new Error(d.detail||'Task submission failed');
         removeOrbLoader();
-        await showToolResult(`⏳ Pro video job queued (${d.credits_charged} credits). Task ID: \`${d.task_id}\` — checking every 20 seconds...`);
+        await showToolResult(`⏳ Video job queued (${d.credits_charged} credits). Task ID: \`${d.task_id}\` — checking every 20 seconds...`);
         pollH3VideoTask(d.task_id);
         return null;
       }catch(e){ return e.name==='AbortError'?'❌ Stopped.':`❌ ${e.message}`; }
