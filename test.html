@@ -1058,7 +1058,7 @@ async function finishRun(L, d, t0) {
   await saveMsg('ai', L.thinkText ? L.thinkText + SEP + (shown||'I finished, but had nothing to show.') : (shown||'I finished, but had nothing to show.'),
     {arts: JSON.parse(JSON.stringify(leaves)), tools, steps: L.steps.slice(0,12), duration: dur});
   LS('ph_active_' + chatId, null);
-  flashCredits((L.credits || 0) + 2); updateWalletUI();
+  flashCredits((L.credits || 0) + 20); updateWalletUI();
   notifyDone(d.status === 'done' ? (leaves.some(a=>a.kind==='image') ? 'Your image is ready.' : leaves.length ? 'Your file is ready.' : 'Philadelphia has replied.') : 'Your task has stopped.');
 }
 
