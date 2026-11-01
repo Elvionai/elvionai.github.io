@@ -849,6 +849,20 @@ function fileCard(a) {
   f.innerHTML = `<div class="fi"><i class="fa-solid fa-${ic}"></i></div><div><div class="fn">${esc(a.name||'File')}</div><div class="fm">${esc(ext.toUpperCase())}${a.size?' · '+fmtSize(a.size):''}</div></div><a href="${attr(API+a.url)}" download><i class="fa-solid fa-download"></i> Download</a>`;
   return f;
 }
+function mediaCard(a) {
+  ART[a.id] = a;
+  const isV = a.kind === 'video';
+  const f = el('div','file-card media-card');
+  const dur = a.duration ? Math.floor(a.duration/60)+':'+String(Math.round(a.duration%60)).padStart(2,'0') : '';
+  f.style.cssText = 'display:block;max-width:420px';
+  f.innerHTML = `<div class="fn" style="margin-bottom:6px">${esc((a.desc||a.name||(isV?'Video':'Audio')).replace(/^\[[^\]]+\]\s*/,'').slice(0,80))}</div>`
+    + (isV ? `<video controls playsinline preload="metadata" style="width:100%;border-radius:10px;background:#000" src="${attr(API+a.url)}"></video>`
+           : `<audio controls preload="metadata" style="width:100%" src="${attr(API+a.url)}"></audio>`)
+    + `<div class="fm" style="margin-top:6px;display:flex;justify-content:space-between;gap:8px"><span>${isV?'Video':'Audio'}${dur?' · '+dur:''}${a.size?' · '+fmtSize(a.size):''}</span><a href="${attr(API+a.download_url)}" download><i class="fa-solid fa-download"></i> Download</a></div>`;
+  const m = f.querySelector('audio,video');
+  m.onerror = () => { if (f.dataset.r) { f.innerHTML = 'This file has expired.<br>Ask me to create it again.'; return; } f.dataset.r = 1; call(`/api/agent/artifacts/${a.id}/url`).then(r => r.json()).then(j => { a.url = j.url; a.download_url = j.download_url; m.src = API + j.url; }).catch(() => {}); };
+  return f;
+}
 const leafArts = arts => { const parents = new Set(arts.map(a => a.parent).filter(Boolean)); return arts.filter(a => a.kind !== 'image' || !parents.has(a.id)); };
 function download(a) { const l = el('a'); l.href = API + (a.download_url || a.url); l.download = a.name || 'philadelphia.png'; document.body.appendChild(l); l.click(); l.remove(); }
 let lbArt = null;
@@ -876,12 +890,12 @@ function userGroup(m) {
 function aiGroup(m) {
   let th = '', body = m.text || '';
   if (body.includes(SEP)) [th, body] = body.split(SEP);
-  const arts = m.arts || [], imgs = arts.filter(a => a.kind === 'image'), files = arts.filter(a => a.kind === 'file');
+  const arts = m.arts || [], imgs = arts.filter(a => a.kind === 'image'), files = arts.filter(a => a.kind === 'file' || a.kind === 'audio' || a.kind === 'video');
   const g = el('div','msg-group ai'); g.dataset.id = m.id || '';
   const st = (m.steps||[]).length ? `<details class="steps-sum"><summary><i class="fa-solid fa-list-check"></i> ${m.steps.length} step${m.steps.length>1?'s':''}</summary><div class="steps">${m.steps.map(s=>`<div class="step ${s.ok===false?'err':'ok'}"><span class="si"><i class="fa-solid fa-${s.ok===false?'xmark':'check'}"></i></span><span>${esc(s.l)}</span></div>`).join('')}</div></details>` : '';
   g.innerHTML = aiHead() + `<div class="bubble">${th?thinkHTML(th):''}${st}<div class="art-gallery${imgs.length===1?' single':''}"${imgs.length?'':' hidden'}></div><div class="art-files"></div><div class="ai-text">${!imgs.length&&isDraft(body)?draftCard(body):md(body)}</div></div>` + ctlAI(m.duration);
   imgs.forEach(a => g.querySelector('.art-gallery').appendChild(artFrame(a)));
-  files.forEach(a => g.querySelector('.art-files').appendChild(fileCard(a)));
+  files.forEach(a => g.querySelector('.art-files').appendChild(a.kind === 'file' ? fileCard(a) : mediaCard(a)));
   return g;
 }
 const STARTERS = [
@@ -972,10 +986,10 @@ function mkLive() {
   };
   L.addArt = a => {
     if (L.arts.some(x => x.id === a.id)) return;
-    const k = {id:a.id, kind:a.kind, name:a.name, width:a.width, height:a.height, desc:(a.desc||'').slice(0,160), parent:a.parent||null, url:a.url, download_url:a.download_url, size:a.size};
+    const k = {id:a.id, kind:a.kind, name:a.name, width:a.width, height:a.height, desc:(a.desc||'').slice(0,160), parent:a.parent||null, url:a.url, download_url:a.download_url, size:a.size, duration:a.duration};
     L.arts.push(k);
     if (k.kind === 'image') { const f = artFrame(k), ph = L.pend.shift(); if (ph) ph.replaceWith(f); else q('.art-gallery').appendChild(f); gal(); }
-    else q('.art-files').appendChild(fileCard(k));
+    else q('.art-files').appendChild(k.kind === 'file' ? fileCard(k) : mediaCard(k));
     scrollBot();
   };
   L.ask = p => {
@@ -1125,7 +1139,8 @@ const DOCX = ['.pdf','.docx','.txt','.md','.csv','.tsv','.json','.log','.xlsx'];
 async function addFiles(list) {
   for (const f of list) {
     const ext = '.' + (f.name.split('.').pop() || '').toLowerCase(), isImg = f.type.startsWith('image/');
-    if (!isImg && !DOCX.includes(ext)) { toast(`${f.name}: audio and video can't be attached here yet.`, 'e'); continue; }
+        const isMedia = /^(audio|video)\//.test(f.type) || ['.mp3','.wav','.m4a','.aac','.ogg','.flac','.mp4','.mov','.webm','.mkv'].includes(ext);
+    if (!isImg && !isMedia && !DOCX.includes(ext)) { toast(`${f.name}: this file type isn't supported.`, 'e'); continue; }
     if (pending.length >= 8) { toast('Up to 8 attachments at a time.','e'); break; }
     const p = {name:f.name, type:f.type || 'application/octet-stream', file:f, state:'up', id:null, url:'', thumb: isImg ? URL.createObjectURL(f) : ''};
     pending.push(p); drawPending();
