@@ -464,7 +464,7 @@ pre code{background:none!important;padding:0!important}
       <div class="input-bar">
         <div class="bar-left">
           <label for="file-input" class="bar-btn" title="Attach images, PDFs, documents"><i class="fa-solid fa-paperclip"></i></label>
-          <input type="file" id="file-input" accept="image/*,application/pdf,.docx,.txt,.md,.csv,.json,.xlsx,audio/*,video/*" multiple style="display:none">
+          <input type="file" id="file-input" accept="image/*,application/pdf,.docx,.pptx,.txt,.md,.csv,.tsv,.json,.xlsx,audio/*,video/*" multiple style="display:none">
           <button class="bar-btn" id="clipboard-paste-btn" title="Paste from clipboard"><i class="fa-solid fa-clipboard"></i></button>
           <button class="bar-btn" id="emoji-toggle" title="Emoji"><i class="fa-regular fa-face-smile"></i></button>
           <button class="bar-btn" id="mode-btn" title="Auto: I decide when to create. Tap to change."><i class="fa-solid fa-wand-magic-sparkles"></i><span id="mode-label">Auto</span></button>
@@ -912,17 +912,35 @@ function hero() {
 }
 function chipsFor(text, arts, tools) {
   const imgs = (arts||[]).filter(a => a.kind === 'image'), tl = new Set(tools||[]);
+
+  // images
   if (imgs.length) {
     if (tl.has('create_design')) return [['fa-mobile-screen','Make it story size (9:16)'],['fa-palette','Try a different colour mood'],['fa-file-pdf','Export it as a PDF']];
     if (tl.has('remove_background')) return [['fa-layer-group','Put it on a gradient background'],['fa-font','Add a caption'],['fa-file-image','Export it as PNG']];
     if (tl.has('generate_image')) return [['fa-font','Add a caption'],['fa-scissors','Remove the background'],['fa-expand','Resize for Instagram']];
     return [['fa-rotate','Try another version'],['fa-font','Add some text'],['fa-crop','Crop it square']];
   }
+
+  // video and audio
   if ((arts||[]).some(a => a.kind === 'video')) return [['fa-forward','Extend this video'],['fa-microphone','Add a voiceover'],['fa-closed-captioning','Add captions'],['fa-up-right-and-down-left-from-center','Upscale it']];
   if ((arts||[]).some(a => a.kind === 'audio')) return [['fa-film','Put this on a video'],['fa-rotate','Try another voice']];
-  if ((arts||[]).some(a => a.kind === 'file')) return [['fa-copy','Make another version'],['fa-pen','Change something in it']];
+
+  // websites
+  if (tl.has('build_website') || tl.has('edit_website')) return [['fa-palette','Change the colours'],['fa-plus','Add a new section'],['fa-image','Use my photos in it']];
+
+  // files and documents
+  const fl = (arts||[]).filter(a => a.kind === 'file');
+  if (fl.length) {
+    const n = (fl[0].name||'').toLowerCase();
+    if (/\.(pdf|docx|pptx|xlsx)$/.test(n)) return [['fa-pen','Change something in it'],['fa-palette','Make the design bolder'],['fa-file-lines', /\.pdf$/.test(n) ? 'Also give me a Word version' : 'Also give me a PDF version'],['fa-box-archive','Put everything in a zip']];
+    return [['fa-copy','Make another version'],['fa-pen','Change something in it']];
+  }
+
+  // text answers
   if (/```/.test(text||'')) return [['fa-lightbulb','Explain this code'],['fa-bolt','Optimize it'],['fa-shield-halved','Add error handling']];
+  if ((text||'').length > 500) return [['fa-compress','Make it shorter'],['fa-bolt','Make it punchier'],['fa-user-tie','Make it more formal'],['fa-face-smile','Make it more casual']];
   if (/poster|flyer|logo|design|brand/i.test(text||'')) return [['fa-palette','Design it for me'],['fa-swatchbook','Suggest a colour palette']];
+  if ((text||'').length > 500) return [['fa-compress','Make it shorter'],['fa-bolt','Make it punchier'],['fa-user-tie','Make it more formal'],['fa-face-smile','Make it more casual']];
   return [['fa-magnifying-glass','Go deeper'],['fa-lightbulb','Give me an example'],['fa-list','Summarize in 3 lines']];
 }
 function setChips(text, arts, tools) {
@@ -1155,7 +1173,7 @@ function paintMode() { $('mode-label').textContent = MODES[mode][0]; $('mode-btn
 $('mode-btn').onclick = () => { mode = {auto:'create', create:'chat', chat:'auto'}[mode]; LS('ph_mode', mode); paintMode(); toast(MODES[mode][1]); };
 paintMode();
 
-const DOCX = ['.pdf','.docx','.txt','.md','.csv','.tsv','.json','.log','.xlsx'];
+const DOCX = ['.pdf','.docx','.pptx','.txt','.md','.csv','.tsv','.json','.log','.xlsx'];
 async function addFiles(list) {
   for (const f of list) {
     const ext = '.' + (f.name.split('.').pop() || '').toLowerCase(), isImg = f.type.startsWith('image/');
