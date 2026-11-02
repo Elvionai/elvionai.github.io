@@ -917,6 +917,8 @@ function chipsFor(text, arts, tools) {
     if (tl.has('generate_image')) return [['fa-font','Add a caption'],['fa-scissors','Remove the background'],['fa-expand','Resize for Instagram']];
     return [['fa-rotate','Try another version'],['fa-font','Add some text'],['fa-crop','Crop it square']];
   }
+  if ((arts||[]).some(a => a.kind === 'video')) return [['fa-forward','Extend this video'],['fa-microphone','Add a voiceover'],['fa-closed-captioning','Add captions'],['fa-up-right-and-down-left-from-center','Upscale it']];
+  if ((arts||[]).some(a => a.kind === 'audio')) return [['fa-film','Put this on a video'],['fa-rotate','Try another voice']];
   if ((arts||[]).some(a => a.kind === 'file')) return [['fa-copy','Make another version'],['fa-pen','Change something in it']];
   if (/```/.test(text||'')) return [['fa-lightbulb','Explain this code'],['fa-bolt','Optimize it'],['fa-shield-halved','Add error handling']];
   if (/poster|flyer|logo|design|brand/i.test(text||'')) return [['fa-palette','Design it for me'],['fa-swatchbook','Suggest a colour palette']];
@@ -1050,7 +1052,7 @@ async function finishRun(L, d, t0) {
   if (!body && d.status === 'cancelled') body = 'Stopped.';
   if (!L.arts.length && d.snap) {
     const known = new Set(msgs.flatMap(m => (m.arts||[]).map(a => a.id)));
-    d.snap.filter(a => a.kind === 'image' && !/^uploaded/.test(a.desc||'') && !known.has(a.id)).slice(-4).forEach(a => L.addArt(a));
+    d.snap.filter(a => ['image','audio','video','file'].includes(a.kind) && !/^uploaded/.test(a.desc||'') && !known.has(a.id)).slice(-4).forEach(a => L.addArt(a));
   }
   L.pend.forEach(f => f.remove()); L.pend = [];
   const leaves = leafArts(L.arts), ids = new Set(leaves.map(a => a.id));
@@ -1094,7 +1096,7 @@ async function send(over, opts = {}) {
   const shownFiles = focus ? [...files, {name:'image', type:'image/png', aid:focus.id, url:focus.url}] : files;
   let agentText = text;
   if (focus) agentText = `(Work on image ${focus.id}.) ` + agentText;
-  if (mode === 'create') agentText += `\n\n(The user wants you to make something with your tools. Do not just describe it.)`;
+  if (mode === 'create') agentText += `\n\n(The user wants you to make something with your tools. Do not just describe it. If no tool can do it faithfully, say so plainly instead.)`;
   if (mode === 'chat') agentText += `\n\n(Reply in conversation only. Do not generate or edit images unless explicitly asked.)`;
   setBusy(true); stick = true;
   pending = []; drawPending(); setFocus(null); ti.value = ''; ti.style.height = '44px'; LS('ph_draft_' + chatId, null);
