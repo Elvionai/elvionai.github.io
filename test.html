@@ -768,7 +768,8 @@ function personaText() {
 }
 
 // ───────── markdown ─────────
-const codeBlock = (l,c) => { l = (l||'code').toLowerCase(); return `<pre data-lang="${attr(l)}"><div class="code-btns"><button class="code-btn preview-btn"><i class="fa-solid fa-eye"></i> Preview</button><button class="code-btn copy-btn"><i class="fa-solid fa-copy"></i> Copy</button></div><code class="language-${attr(l)}">${esc(c.replace(/\n$/,''))}</code></pre>`; };
+const RUNNABLE = new Set(['html','htm','css','javascript','js','python','py','jsx','react','tsx','svg','markdown','md']);
+const codeBlock = (l,c) => { l = (l||'code').toLowerCase(); const py = l==='python'||l==='py'; const run = RUNNABLE.has(l) ? `<button class="code-btn preview-btn"><i class="fa-solid ${py?'fa-play':'fa-eye'}"></i> ${py?'Run':'Preview'}</button>` : ''; return `<pre data-lang="${attr(l)}"><div class="code-btns">${run}<button class="code-btn save-btn"><i class="fa-solid fa-download"></i> Save</button><button class="code-btn copy-btn"><i class="fa-solid fa-copy"></i> Copy</button></div><code class="language-${attr(l)}">${esc(c.replace(/\n$/,''))}</code></pre>`; };
 function inline(s) {
   return esc(s).replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>')
     .replace(/(^|[^*\w])\*([^*\n]+)\*(?!\w)/g,'$1<em>$2</em>').replace(/~~([^~\n]+)~~/g,'<del>$1</del>')
@@ -844,15 +845,15 @@ async function refreshArt(f, a) {
 function fileCard(a) {
   ART[a.id] = a;
   const ext = (a.name||'').split('.').pop().toLowerCase();
-  const ic = {pdf:'file-pdf',csv:'file-csv',json:'file-code',svg:'file-code',png:'file-image',jpg:'file-image'}[ext] || 'file-lines';
-  const f = el('div','file-card');
+  const ic = {pdf:'file-pdf',csv:'file-csv',json:'file-code',svg:'file-code',png:'file-image',jpg:'file-image',gif:'file-image',html:'file-code',docx:'file-word',pptx:'file-powerpoint',xlsx:'file-excel',zip:'file-zipper'}[ext] || 'file-lines';
+  const f = el('div','file-card'); f.dataset.aid = a.id;
   f.innerHTML = `<div class="fi"><i class="fa-solid fa-${ic}"></i></div><div><div class="fn">${esc(a.name||'File')}</div><div class="fm">${esc(ext.toUpperCase())}${a.size?' · '+fmtSize(a.size):''}</div></div><a href="${attr(API+a.url)}" download><i class="fa-solid fa-download"></i> Download</a>`;
   return f;
 }
 function mediaCard(a) {
   ART[a.id] = a;
   const isV = a.kind === 'video';
-  const f = el('div','file-card media-card');
+  const f = el('div','file-card media-card'); f.dataset.aid = a.id;
   const dur = a.duration ? Math.floor(a.duration/60)+':'+String(Math.round(a.duration%60)).padStart(2,'0') : '';
   f.style.cssText = 'display:block;max-width:420px';
   f.innerHTML = `<div class="fn" style="margin-bottom:6px">${esc((a.desc||a.name||(isV?'Video':'Audio')).replace(/^\[[^\]]+\]\s*/,'').slice(0,80))}</div>`
@@ -863,7 +864,7 @@ function mediaCard(a) {
   m.onerror = () => { if (f.dataset.r) { f.innerHTML = 'This file has expired.<br>Ask me to create it again.'; return; } f.dataset.r = 1; call(`/api/agent/artifacts/${a.id}/url`).then(r => r.json()).then(j => { a.url = j.url; a.download_url = j.download_url; m.src = API + j.url; }).catch(() => {}); };
   return f;
 }
-const leafArts = arts => { const parents = new Set(arts.map(a => a.parent).filter(Boolean)); return arts.filter(a => a.kind !== 'image' || !parents.has(a.id)); };
+const leafArts = arts => { const parents = new Set(arts.map(a => a.parent).filter(Boolean)); return arts.filter(a => !parents.has(a.id)); };
 function download(a) { const l = el('a'); l.href = API + (a.download_url || a.url); l.download = a.name || 'philadelphia.png'; document.body.appendChild(l); l.click(); l.remove(); }
 let lbArt = null;
 function openLightbox(id) { const a = ART[id]; if (!a) return; lbArt = a; $('lb-img').src = API + a.url; $('lb-cap').textContent = (a.desc||'').replace(/^\[[^\]]+\]\s*/,'').slice(0,160); $('lightbox').classList.add('show'); }
@@ -1055,18 +1056,34 @@ async function finishRun(L, d, t0) {
     d.snap.filter(a => ['image','audio','video','file'].includes(a.kind) && !/^uploaded/.test(a.desc||'') && !known.has(a.id)).slice(-4).forEach(a => L.addArt(a));
   }
   L.pend.forEach(f => f.remove()); L.pend = [];
+
   const leaves = leafArts(L.arts), ids = new Set(leaves.map(a => a.id));
   L.g.querySelectorAll('.art-frame').forEach(f => { if (!f.dataset.aid || !ids.has(f.dataset.aid)) f.remove(); });
+  L.g.querySelectorAll('.file-card[data-aid]').forEach(f => { if (!ids.has(f.dataset.aid)) f.remove(); });
   const gl = L.q('.art-gallery'); gl.hidden = !gl.children.length; gl.classList.toggle('single', gl.children.length === 1);
+
   L.q('.orb-wrap')?.remove(); L.run.forEach(s => s.remove());
   const tb = L.q('.think-block');
   if (L.thinkText) { tb.classList.remove('live'); tb.open = false; tb.querySelector('.think-toggle span').textContent = 'Thought process'; } else tb.remove();
+
   const st = L.q('.steps');
-  if (L.steps.length) { const sum = el('details','steps-sum', `<summary><i class="fa-solid fa-list-check"></i> ${L.steps.length} step${L.steps.length>1?'s':''}</summary>`); st.hidden = false; st.replaceWith(sum); sum.appendChild(st); } else st.remove();
+  if (L.steps.length) {
+    const sum = el('details','steps-sum', `<summary><i class="fa-solid fa-list-check"></i> ${L.steps.length} step${L.steps.length>1?'s':''}</summary>`);
+    st.hidden = false; st.replaceWith(sum); sum.appendChild(st);
+  } else st.remove();
+
   const txt = L.q('.ai-text');
   let shown = body;
-  if (!body && !leaves.length) { shown = ''; txt.innerHTML = `<div class="ai-empty"><i class="fa-solid fa-circle-exclamation"></i> I finished, but there was nothing to show. <button class="ctrl-btn" data-act="retry"><i class="fa-solid fa-rotate-right"></i> Try again</button></div>`; }
-  else { shown = body || 'Here you go.'; if (d.status === 'error') txt.classList.add('err-text'); await reveal(txt, shown); if (!leaves.length && isDraft(shown)) txt.innerHTML = draftCard(shown); }
+  if (!body && !leaves.length) {
+    shown = '';
+    txt.innerHTML = `<div class="ai-empty"><i class="fa-solid fa-circle-exclamation"></i> I finished, but there was nothing to show. <button class="ctrl-btn" data-act="retry"><i class="fa-solid fa-rotate-right"></i> Try again</button></div>`;
+  } else {
+    shown = body || 'Here you go.';
+    if (d.status === 'error') txt.classList.add('err-text');
+    await reveal(txt, shown);
+    if (!leaves.length && isDraft(shown)) txt.innerHTML = draftCard(shown);
+  }
+
   const dur = ((performance.now() - t0) / 1000).toFixed(1);
   L.g.insertAdjacentHTML('beforeend', ctlAI(dur));
   const tools = [...L.tools];
@@ -1208,36 +1225,98 @@ async function showPdf(file, title) {
   } catch(e) { wrap.innerHTML = `<div style="color:var(--danger);padding:30px">Could not render this PDF.</div>`; }
 }
 
+// ───────── code: save, run, preview ─────────
+const CODE_EXT = {python:'py',py:'py',javascript:'js',js:'js',html:'html',htm:'html',css:'css',jsx:'jsx',react:'jsx',tsx:'tsx',json:'json',markdown:'md',md:'md',svg:'svg',sql:'sql',bash:'sh',sh:'sh',java:'java',cpp:'cpp',c:'c',go:'go',rust:'rs',php:'php',ts:'ts',typescript:'ts',yaml:'yml',xml:'xml'};
+function saveCode(l, s) { const b = new Blob([s], {type:'text/plain'}), a = el('a'); a.href = URL.createObjectURL(b); a.download = 'philadelphia.' + (CODE_EXT[l] || 'txt'); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+function previewDoc(l, s) {
+  const js = JSON.stringify(s).replace(/</g, '\\u003c');
+  if (l === 'python' || l === 'py') return `<html><body style="background:#0c0c0c;color:#eee;font-family:monospace;padding:16px"><pre id="o" style="white-space:pre-wrap">Loading Python...</pre><script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"><\/script><script>(async()=>{const o=document.getElementById('o');try{const py=await loadPyodide();o.textContent='';py.setStdout({batched:t=>o.textContent+=t+'\\n'});py.setStderr({batched:t=>o.textContent+=t+'\\n'});await py.loadPackagesFromImports(${js});await py.runPythonAsync(${js});if(!o.textContent)o.textContent='(finished, no output)'}catch(e){o.style.color='#ff6b6b';o.textContent+=String(e)}})()<\/script></body></html>`;
+  if (l === 'jsx' || l === 'react' || l === 'tsx') {
+    const code = s.replace(/^\s*import[\s\S]*?from\s+['"][^'"]+['"];?/gm, '').replace(/^\s*import\s+['"][^'"]+['"];?/gm, '').replace(/export\s+default\s+(function|class)\s+/g, '$1 ').replace(/export\s+default\s+/g, 'const __Default = ').replace(/^\s*export\s+/gm, '').replace(/<\/script/gi, '<\\/script');
+    return `<html><head><style>body{margin:0;font-family:system-ui,sans-serif;background:#fff}</style><script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"><\/script><script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"><\/script><script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.6/babel.min.js"><\/script></head><body><div id="root"></div><script type="text/babel" data-presets="react">const {useState,useEffect,useRef,useMemo,useCallback,useReducer,useContext,createContext,Fragment}=React;\n${code}\n;try{const __C=typeof __Default!=='undefined'?__Default:(typeof App!=='undefined'?App:null);ReactDOM.createRoot(document.getElementById('root')).render(__C?React.createElement(__C):'No App component found')}catch(e){document.body.innerText=String(e)}<\/script></body></html>`;
+  }
+  if (l === 'svg') return `<html><body style="margin:0;background:#fff;display:grid;place-items:center;min-height:100vh">${s}</body></html>`;
+  if (l === 'markdown' || l === 'md') return `<html><body style="font-family:Georgia,serif;max-width:720px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222">${md(s)}</body></html>`;
+  return null;
+}
+  
 // ───────── chat-wide click handling ─────────
 vp.addEventListener('click', async e => {
-  const chip = e.target.closest('[data-chip]'); if (chip) { send(chip.dataset.chip); return; }
-  const code = e.target.closest('.copy-btn,.preview-btn');
+  const chip = e.target.closest('[data-chip]');
+  if (chip) { send(chip.dataset.chip); return; }
+
+  const code = e.target.closest('.copy-btn,.preview-btn,.save-btn');
   if (code) {
     const pre = code.closest('pre'), c = pre.querySelector('code');
-    if (code.classList.contains('copy-btn')) { navigator.clipboard.writeText(c.innerText).catch(()=>{}); code.innerHTML = '<i class="fa-solid fa-check"></i> Done'; setTimeout(() => code.innerHTML = '<i class="fa-solid fa-copy"></i> Copy', 1400); }
-    else {
-      const l = (pre.dataset.lang||'').toLowerCase(), s = c.innerText;
-      $('code-preview-frame').srcdoc = (l==='html'||l==='htm') ? s : l==='css' ? `<html><head><style>${s}</style></head><body><p style="color:#888;font-family:serif;padding:20px">CSS preview: add HTML to see output</p></body></html>` : (l==='javascript'||l==='js') ? `<html><body style="background:#111;color:#eee;font-family:monospace;padding:20px"><script>try{${s}}catch(e){document.body.innerHTML='<span style=color:red>'+e+'</span>'}<\/script></body></html>` : `<html><body style="background:#111;color:#eee;font-family:monospace;padding:20px;white-space:pre">${esc(s)}</body></html>`;
-      $('code-preview-modal').classList.add('show');
+    const l = (pre.dataset.lang || '').toLowerCase(), s = c.innerText;
+
+    if (code.classList.contains('save-btn')) {
+      saveCode(l, s);
+      return;
     }
+
+    if (code.classList.contains('copy-btn')) {
+      navigator.clipboard.writeText(s).catch(() => {});
+      code.innerHTML = '<i class="fa-solid fa-check"></i> Done';
+      setTimeout(() => code.innerHTML = '<i class="fa-solid fa-copy"></i> Copy', 1400);
+      return;
+    }
+
+    // Preview / Run
+    const special = previewDoc(l, s);
+    if (special) {
+      $('code-preview-frame').srcdoc = special;
+    } else {
+      $('code-preview-frame').srcdoc =
+        (l === 'html' || l === 'htm') ? s :
+        l === 'css' ? `<html><head><style>${s}</style></head><body><p style="color:#888;font-family:serif;padding:20px">CSS preview: add HTML to see output</p></body></html>` :
+        (l === 'javascript' || l === 'js') ? `<html><body style="background:#111;color:#eee;font-family:monospace;padding:20px"><script>try{${s}}catch(e){document.body.innerHTML='<span style=color:red>'+e+'</span>'}<\/script></body></html>` :
+        `<html><body style="background:#111;color:#eee;font-family:monospace;padding:20px;white-space:pre">${esc(s)}</body></html>`;
+    }
+    $('code-preview-modal').classList.add('show');
     return;
   }
-  const mb = e.target.closest('.mdl-btn'); if (mb) { activePersona = mb.dataset.m; LS('ph_persona', activePersona); paintPersonaCards(); updateDisclaimer(); toast(`Engine switched to ${P[activePersona].label}`); return; }
-  const b = e.target.closest('[data-act]'); if (!b) return;
+
+  const mb = e.target.closest('.mdl-btn');
+  if (mb) {
+    activePersona = mb.dataset.m;
+    LS('ph_persona', activePersona);
+    paintPersonaCards();
+    updateDisclaimer();
+    toast(`Engine switched to ${P[activePersona].label}`);
+    return;
+  }
+
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
   const a = b.dataset.act, grp = b.closest('.msg-group'), fr = b.closest('.art-frame');
+
   if (a === 'zoom') openLightbox(fr.dataset.aid);
   else if (a === 'fedit') setFocus(ART[fr.dataset.aid]);
   else if (a === 'fdl') download(ART[fr.dataset.aid]);
-  else if (a === 'copy') { navigator.clipboard.writeText((grp.querySelector('.ai-text') || grp.querySelector('.bubble')).innerText).catch(()=>{}); const o = b.innerHTML; b.innerHTML = '<i class="fa-solid fa-check"></i> Done'; setTimeout(() => b.innerHTML = o, 1300); }
-  else if (a === 'share') { const t = grp.querySelector('.ai-text').innerText; if (navigator.share) navigator.share({title:'Philadelphia Studio', text:t.slice(0,300)}).catch(()=>{}); else { navigator.clipboard.writeText(t).catch(()=>{}); toast('Copied to clipboard.'); } }
+  else if (a === 'copy') {
+    navigator.clipboard.writeText((grp.querySelector('.ai-text') || grp.querySelector('.bubble')).innerText).catch(() => {});
+    const o = b.innerHTML;
+    b.innerHTML = '<i class="fa-solid fa-check"></i> Done';
+    setTimeout(() => b.innerHTML = o, 1300);
+  }
+  else if (a === 'share') {
+    const t = grp.querySelector('.ai-text').innerText;
+    if (navigator.share) navigator.share({ title: 'Philadelphia Studio', text: t.slice(0, 300) }).catch(() => {});
+    else { navigator.clipboard.writeText(t).catch(() => {}); toast('Copied to clipboard.'); }
+  }
   else if (a === 'listen') readAloud(b);
   else if (a === 'edit') editMsg(grp.dataset.id);
   else if (a === 'regen') regenMsg(grp.dataset.id);
-  else if (a === 'retry') { const u = [...msgs].reverse().find(m => m.role === 'user'); if (u && !busy) send(u.text); }
-  else if (a === 'dcopy') { navigator.clipboard.writeText($(b.dataset.t).innerText).catch(()=>{}); toast('Copied.'); }
-  else if (a === 'dmail') location.href = `mailto:?subject=${encodeURIComponent(b.dataset.s||'')}&body=${encodeURIComponent($(b.dataset.t).innerText)}`;
+  else if (a === 'retry') {
+    const u = [...msgs].reverse().find(m => m.role === 'user');
+    if (u && !busy) send(u.text);
+  }
+  else if (a === 'dcopy') { navigator.clipboard.writeText($(b.dataset.t).innerText).catch(() => {}); toast('Copied.'); }
+  else if (a === 'dmail') location.href = `mailto:?subject=${encodeURIComponent(b.dataset.s || '')}&body=${encodeURIComponent($(b.dataset.t).innerText)}`;
   else if (a === 'drefine') send((b.dataset.m === 'more' ? 'Expand this draft with more detail, same tone.' : 'Make this draft more concise.') + '\n\n' + $(b.dataset.t).innerText);
 });
+  
 async function deleteFrom(idx) {
   const b = writeBatch(db);
   msgs.slice(idx).forEach(m => m.id && b.delete(doc(db,'users',user.uid,'chats',chatId,'messages',m.id)));
