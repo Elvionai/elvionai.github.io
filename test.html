@@ -1074,7 +1074,7 @@ async function finishRun(L, d, t0) {
   await saveMsg('ai', L.thinkText ? L.thinkText + SEP + (shown||'I finished, but had nothing to show.') : (shown||'I finished, but had nothing to show.'),
     {arts: JSON.parse(JSON.stringify(leaves)), tools, steps: L.steps.slice(0,12), duration: dur});
   LS('ph_active_' + chatId, null);
-  flashCredits((L.credits || 0) + 20); updateWalletUI();
+  flashCredits(L.credits || 0); updateWalletUI();
   notifyDone(d.status === 'done' ? (leaves.some(a=>a.kind==='image') ? 'Your image is ready.' : leaves.length ? 'Your file is ready.' : 'Philadelphia has replied.') : 'Your task has stopped.');
 }
 
@@ -1109,7 +1109,8 @@ async function send(over, opts = {}) {
   if (first) setDoc(doc(db,'users',user.uid,'chats',chatId), {name: text.slice(0,40)}, {merge:true});
   const L = mkLive(), t0 = performance.now();
   try {
-    const body = {message: agentText.slice(0,8000), persona: personaText(), chat_id: chatId, artifact_ids: ids};
+    const body = {message: agentText.slice(0,8000), persona: personaText(), chat_id: chatId, artifact_ids: ids,
+                  locale: (navigator.language || 'en') + ' | ' + (Intl.DateTimeFormat().resolvedOptions().timeZone || '')};
     const par = LS('ph_run_' + chatId); if (par) body.parent_run_id = par;
     let r = await call('/api/agent/run', {method:'POST', json: body});
     if (r.status === 404 && body.parent_run_id) { delete body.parent_run_id; r = await call('/api/agent/run', {method:'POST', json: body}); }
