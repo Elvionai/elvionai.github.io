@@ -1,1087 +1,935 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elvion AI - Intelligence Unleashed</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --dark-navy: #00001a;
-            --black-bg: #000000;
-            --cyan-glow: #00ffff;
-            --light-blue-glow: #00aaff;
-            --text-color: #e0e0e0;
-            --heading-color: #ffffff;
-            --gradient-start: #0a1128;
-            --gradient-end: #121a30;
-            --card-bg: rgba(18, 26, 48, 0.7);
-            --border-glow: 0 0 10px var(--cyan-glow), 0 0 20px var(--light-blue-glow);
-            --hover-glow: 0 0 15px var(--cyan-glow), 0 0 30px var(--light-blue-glow);
-            --button-bg: linear-gradient(45deg, var(--cyan-glow), var(--light-blue-glow));
-            --button-text-color: var(--black-bg);
-            --form-bg: rgba(18, 26, 48, 0.8);
-            --input-border: 1px solid rgba(0, 255, 255, 0.3);
-            --input-focus-glow: 0 0 8px rgba(0, 255, 255, 0.6);
-            --star-color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Base Styles */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--black-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative; /* For star background */
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--heading-color);
-            margin-top: 0;
-            text-shadow: var(--border-glow);
-        }
-
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; }
-        h3 { font-size: 1.8rem; }
-
-        a {
-            color: var(--cyan-glow);
-            text-decoration: none;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--light-blue-glow);
-            text-shadow: 0 0 5px var(--cyan-glow);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 6rem 0;
-            position: relative;
-            z-index: 2; /* Ensure content is above stars */
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 2.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            border: none;
-            color: var(--button-text-color);
-            background: var(--button-bg);
-            box-shadow: var(--border-glow);
-            text-shadow: none; /* Reset text-shadow for button text */
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-glow);
-            color: var(--black-bg);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--cyan-glow);
-            color: var(--cyan-glow);
-            padding: 0.7rem 2rem;
-            text-shadow: 0 0 5px var(--cyan-glow);
-        }
-
-        .btn-outline:hover {
-            background: var(--button-bg);
-            color: var(--black-bg);
-            text-shadow: none;
-        }
-
-        /* Star Background Effect */
-        #stars-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .star {
-            position: absolute;
-            background-color: var(--star-color);
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle 4s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Navbar */
-        .navbar {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 26, 0.9); /* Deep navy transparent */
-            padding: 1rem 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .navbar-brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            text-shadow: var(--border-glow);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            font-weight: 500;
-            padding: 0.5rem 0;
-            position: relative;
-            text-shadow: none; /* No initial shadow for nav links */
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--cyan-glow);
-            box-shadow: 0 0 5px var(--cyan-glow);
-            transition: width 0.3s ease-in-out;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0.5rem;
-            background: transparent;
-            border: none;
-            position: relative;
-            z-index: 1001;
-        }
-
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background-color: var(--cyan-glow);
-            margin: 4px 0;
-            transition: 0.4s;
-            box-shadow: 0 0 5px var(--cyan-glow);
-        }
-
-        .hamburger.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active .bar:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-
-        .hamburger.active .bar:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-            isolation: isolate; /* Create new stacking context for children */
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 60% 80%, rgba(0,255,255,0.2) 0%, transparent 30%),
-                        radial-gradient(circle at 20% 40%, rgba(0,170,255,0.2) 0%, transparent 30%),
-                        radial-gradient(circle at 80% 20%, rgba(0,255,255,0.15) 0%, transparent 30%);
-            animation: plasma-effect 15s infinite alternate ease-in-out;
-            z-index: 0;
-        }
-
-        @keyframes plasma-effect {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-            50% { transform: scale(1.1) translate(5%, 10%); opacity: 1; }
-            100% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-        }
-        
-        /* Floating effect for hero content */
-        @keyframes floatEffect {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-10px) scale(1.01); }
-            100% { transform: translateY(0px) scale(1); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            padding: 0 1rem;
-            animation: floatEffect 8s infinite ease-in-out; /* Added floating animation */
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            text-shadow: 0 0 15px var(--cyan-glow), 0 0 30px var(--light-blue-glow);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            color: var(--text-color);
-            text-shadow: 0 0 5px rgba(0,255,255,0.3);
-        }
-
-        .hero-actions .btn:first-child {
-            margin-right: 1.5rem;
-        }
-
-        /* Cards Layout */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--border-glow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--hover-glow);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            color: var(--cyan-glow);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px var(--cyan-glow);
-        }
-
-        .card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Product Showcase */
-        .product-showcase .card {
-            text-align: left;
-            padding: 3rem;
-        }
-
-        .product-showcase h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .product-showcase .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 10px var(--cyan-glow));
-        }
-        
-        /* Placeholder image gradients */
-        .philadelphia-ai-img {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: white;
-            text-shadow: 0 0 10px rgba(0,255,255,0.7);
-        }
-        .seraphina-ai-img {
-            background: linear-gradient(135deg, #a737ff, #3d00ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: white;
-            text-shadow: 0 0 10px rgba(0,255,255,0.7);
-        }
-
-        /* University & Blog */
-        .university-info, .about-content, .privacy-content {
-            margin-top: 3rem;
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .university-info ul {
-            list-style: none;
-            padding: 0;
-            text-align: center;
-        }
-        
-        .university-info li {
-            background: var(--card-bg);
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: var(--border-glow);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .university-info li:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-glow);
-        }
-
-        .blog-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--border-glow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--hover-glow);
-        }
-
-        .blog-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            filter: drop-shadow(0 0 5px var(--cyan-glow));
-        }
-
-        .blog-card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card h3 {
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-        }
-
-        .blog-card p {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            flex-grow: 1;
-        }
-        
-        .blog-card .read-more {
-            margin-top: 1rem;
-            align-self: flex-start;
-            font-weight: 500;
-        }
-
-        /* About & Privacy & Terms */
-        .about-section h3, .privacy-section h3, .terms-section h3 {
-            color: var(--cyan-glow);
-            text-shadow: 0 0 8px var(--cyan-glow);
-            margin-bottom: 0.8rem;
-        }
-
-        .about-section .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .about-section .mission-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--border-glow);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .about-section .mission-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-glow);
-        }
-
-
-        /* Signup Form */
-        .signup-section {
-            background: var(--dark-navy);
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .signup-form {
-            max-width: 500px;
-            margin: 3rem auto 0 auto;
-            background: var(--form-bg);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: var(--border-glow);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            text-align: left;
-        }
-
-        .signup-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--cyan-glow);
-            text-shadow: 0 0 3px rgba(0,255,255,0.4);
-        }
-
-        .signup-form input[type="text"],
-        .signup-form input[type="email"],
-        .signup-form input[type="password"],
-        .signup-form select {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1.5rem;
-            border: var(--input-border);
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .signup-form input[type="text"]:focus,
-        .signup-form input[type="email"]:focus,
-        .signup-form input[type="password"]:focus,
-        .signup-form select:focus {
-            outline: none;
-            border-color: var(--cyan-glow);
-            box-shadow: var(--input-focus-glow);
-        }
-
-        .signup-form .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .signup-form .checkbox-group input[type="checkbox"] {
-            margin-right: 0.8rem;
-            transform: scale(1.2);
-            accent-color: var(--cyan-glow);
-        }
-        
-        .signup-form .checkbox-group label {
-            margin-bottom: 0;
-            color: var(--text-color);
-            text-shadow: none;
-            font-weight: 400;
-        }
-
-        .signup-form button[type="submit"] {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            background: var(--button-bg);
-            color: var(--button-text-color);
-            box-shadow: var(--border-glow);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-        }
-
-        .signup-form button[type="submit"]:hover {
-            box-shadow: var(--hover-glow);
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-navy);
-            color: var(--text-color);
-            padding: 4rem 0;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .footer .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2rem;
-            text-align: left;
-        }
-
-        .footer .col {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .footer h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--cyan-glow);
-            text-shadow: 0 0 5px rgba(0,255,255,0.4);
-        }
-
-        .footer ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer ul li a {
-            color: var(--text-color);
-        }
-
-        .footer ul li a:hover {
-            color: var(--light-blue-glow);
-            text-shadow: 0 0 5px var(--cyan-glow);
-        }
-
-        .footer .brand-info {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            text-shadow: var(--border-glow);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .footer .legal-info {
-            margin-top: 2rem;
-            text-align: center;
-            width: 100%;
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-            padding-top: 1.5rem;
-            color: rgba(224, 224, 224, 0.7);
-        }
-
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            .hero p {
-                font-size: 1.2rem;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: rgba(0, 0, 26, 0.95);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem 0;
-                border-top: 1px solid rgba(0, 255, 255, 0.2);
-                box-shadow: 0 8px 16px rgba(0, 255, 255, 0.1);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .navbar .container {
-                flex-wrap: nowrap;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            h2 { font-size: 2rem; }
-            h3 { font-size: 1.6rem; }
-
-            section {
-                padding: 4rem 0;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .hero-actions .btn {
-                display: block;
-                margin: 1rem auto;
-            }
-            .hero-actions .btn:first-child {
-                margin-right: auto;
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .product-showcase .card {
-                padding: 2rem;
-            }
-
-            .about-section .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .footer .col {
-                text-align: center;
-                margin-bottom: 2rem;
-            }
-
-            .footer h4 {
-                margin-top: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero p {
-                font-size: 0.9rem;
-            }
-            .btn {
-                padding: 0.8rem 1.8rem;
-                font-size: 0.9rem;
-            }
-            .signup-form {
-                padding: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="clckd" content="27c05e0ed05174e3974ce991bec3f15b" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="7searchppc" content="80910fb70aa8c58ced3fbc90bc69261f"/>
+  <title>Elvion AI — Intelligence Unleashed | Where Assistance Meets Excellence</title>
+  <meta name="description" content="Discover Elvion AI. Explore our learning platforms, creative studios, and developer APIs designed to empower human creativity." />
+  <meta name="google-adsense-account" content="ca-pub-2563254473675494">
+  <meta name="theme-color" content="#050505">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <style>
+    :root {
+      --font-brand: 'Playfair Display', serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --bg-deep: #050505;
+      --bg-space: #0a0a08;
+      --bg-card: #11110f;
+      --bg-elevated: #161614;
+      --text-primary: #efefef;
+      --text-secondary: #b5b0a3;
+      --text-muted: #6b665c;
+      --accent: #c9a96e;
+      --accent-soft: #e8d5b0;
+      --accent-green: #5fb87a;
+      --danger: #e05a5a;
+      --border-subtle: rgba(201, 169, 110, 0.15);
+      --border-glow: rgba(201, 169, 110, 0.4);
+      --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15);
+      --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
+      --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
+      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
+      --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.1) 0%, transparent 60%), 
+                       radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg-space);
+    }
+    
+    *::-webkit-scrollbar { width: 8px; }
+    *::-webkit-scrollbar-track { background: var(--bg-space); }
+    *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: var(--gradient-deep);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient Gold Rain/Snow Canvas */
+    #snow-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.7;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-brand);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    a:hover { color: var(--accent-soft); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    section { padding: 6rem 0; }
+    .text-center { text-align: center; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 10, 8, 0.95);
+      padding: 1rem 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-family: var(--font-brand);
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow-gold);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: var(--font-body);
+      position: relative;
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-soft);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--gradient-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Dropdown */
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      min-width: 220px;
+      box-shadow: var(--shadow-intense);
+    }
+    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.3s ease; }
+    .dropdown-menu li { list-style: none; margin: 0; }
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .dropdown-menu a i { width: 16px; color: var(--accent); text-align: center; }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-menu a:hover {
+      background: rgba(201, 169, 110, 0.1);
+      color: var(--text-primary);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+    }
+    .hamburger .bar {
+      width: 25px;
+      height: 3px;
+      background: var(--accent);
+      transition: 0.3s;
+      border-radius: 3px;
+    }
+
+    .mobile-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(6px);
+        z-index: 998;
+    }
+    .mobile-backdrop.active { display: block; }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 12rem;
+      padding-bottom: 6rem;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Subtle plasma effect behind hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(201, 169, 110, 0.1) 0%, transparent 40%);
+      animation: plasma-effect 10s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+    @keyframes plasma-effect {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      text-shadow: var(--glow-gold);
+    }
+    .hero-title span {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 750px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.9rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      color: #050505;
+      background: var(--gradient-gold);
+      box-shadow: var(--shadow-cosmic);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(201, 169, 110, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: rgba(201, 169, 110, 0.1);
+      color: var(--accent-soft);
+      box-shadow: var(--glow-gold);
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    /* Section Typography */
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .section-desc {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto 3.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Dual Models Grid */
+    .models-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2.5rem;
+    }
+    
+    .model-card {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: 3rem;
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-cosmic);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    
+    .model-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--border-glow);
+    }
+
+    .model-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 4px;
+        background: var(--gradient-gold);
+    }
+
+    .model-icon {
+        font-size: 3.5rem;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        text-shadow: var(--glow-gold);
+    }
+
+    .model-card h3 { font-size: 2rem; margin-bottom: 1rem; }
+    .model-card p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    
+    .model-features {
+        list-style: none;
+        margin-bottom: 2rem;
+    }
+    .model-features li {
+        margin-bottom: 0.8rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .model-features i { color: var(--accent-green); }
+
+    /* Studios Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: left;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-cosmic);
+    }
+
+    .feature-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      padding: 15px;
+      background: rgba(201, 169, 110, 0.08);
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .feature-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    .feature-card p { font-size: 0.95rem; color: var(--text-secondary); flex-grow: 1; margin-bottom: 1.5rem; }
+    
+    .feature-card .studio-link {
+        margin-top: auto;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .feature-card .studio-link:hover i { transform: translateX(4px); }
+    .feature-card .studio-link i { transition: transform 0.3s ease; }
+
+    /* Learning Section */
+    .learning-section {
+        background: radial-gradient(circle at center, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
+        border-top: 1px solid var(--border-subtle);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Blog Section */
+    .blog-card {
+      background: var(--bg-card);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-cosmic);
+      border-color: var(--border-glow);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .blog-card-content {
+      padding: 1.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1.4; }
+    .blog-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 8rem 0;
+        text-align: center;
+        background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.05));
+    }
+    .cta-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border-glow);
+        border-radius: 24px;
+        padding: 4rem 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-cosmic);
+        position: relative;
+        overflow: hidden;
+    }
+    .cta-box h2 { font-size: 2.8rem; margin-bottom: 1rem; }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-space);
+      padding: 5rem 0 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-brand);
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.8rem; }
+    .footer-col ul li a { color: var(--text-secondary); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(10, 10, 8, 0.98);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-links.active { display: flex; align-items: flex-start; }
+      .nav-links li { margin: 0.8rem 0; width: 100%; }
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding-left: 1rem;
+        border-left: 2px solid var(--border-subtle);
+      }
+      .dropdown:hover .dropdown-menu { animation: none; }
+      .hamburger { display: flex; }
+      
+      .hero-title { font-size: 3.5rem; }
+      .models-grid { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { padding-top: 8rem; }
+      .hero-title { font-size: 2.8rem; }
+      .hero-subtitle { font-size: 1.05rem; }
+      .hero-actions { flex-direction: column; gap: 1rem; }
+      .hero-actions .btn:first-child { margin-right: 0; }
+      .section-title { font-size: 2.2rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 3rem 1.5rem; }
+      .cta-box h2 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
-    <div id="stars-container"></div>
 
-    <header class="navbar">
-        <div class="container">
-            <a href="#" class="navbar-brand">Elvion AI</a>
-            <button class="hamburger" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <nav class="nav-links">
-                <li><a href="#university">Elvion University</a></li>
-                <li><a href="#">Chat & Explore Philadelphia AI (Website)</a></li>
-                <li><a href="https://t.me/PhiladelphiaAIbot" target="_blank" rel="noopener noreferrer">Chat Philadelphia AI (Telegram)</a></li>
-                <li><a href="https://elvionai.github.io/signup-login.html" target="_blank" rel="noopener noreferrer">Try Seraphina AI (Telegram)</a></li>
-                <li><a href="https://elvionai.github.io/profile.html" target="_blank" rel="noopener noreferrer">Visit Your Profile</a></li>
-                <li><a href="https://elvionai.github.io/signup-login.html" target="_blank" rel="noopener noreferrer">Sign Up / Login</a></li>
-                <li><a href="https://elvionai.github.io/privacy.html">Privacy Policy</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Join the Team</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="https://elvionai.github.io/terms.html">Terms and Conditions</a></li>
-            </nav>
+  <!-- Animated Background -->
+  <canvas id="snow-canvas"></canvas>
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav-links">
+        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+        <li class="dropdown">
+          <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Chat Studio</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio Studio</a></li>
+            <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio</a></li>
+            <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio</a></li>
+            <li><a href="https://elvionai.com.ng/website-studio.html"><i class="fa-solid fa-globe"></i> Website Studio</a></li>
+            <li><a href="https://elvionai.com.ng/writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
+          </ul>
+        </li>
+        <li><a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer">Telegram Chat</a></li>
+        <li><a href="https://elvionai.com.ng/api.html" target="_blank" rel="noopener noreferrer">For Developers (API)</a></li>
+        <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
+        <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
+        <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
+        <li><a href="https://elvionai.com.ng/terms.html">Terms</a></li>
+        <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.5rem 1.2rem; font-size: 0.8rem; margin-left: 1rem;">Sign Up / Login</a></li>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h1 class="hero-title">Where Assistance<br><span>Meets Excellence</span></h1>
+        <p class="hero-subtitle">
+          Elvion AI is a unified digital workstation. Strip away the complexity of modern technology and empower your creativity with our advanced reasoning models and dedicated multimedia studios.
+        </p>
+        <div class="hero-actions">
+          <a href="https://elvionai.com.ng/signup-login.html" class="btn">Get Started Now <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#studios" class="btn btn-outline">Explore Studios</a>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <h1>Elvion AI:<br>Intelligence Unleashed.</h1>
-                <p>Experience the next generation of AI. Explore our innovative models and empower your digital world.</p>
-                <div class="hero-actions">
-                    <a href="https://elvionai.github.io/signup-login.html" target="_blank" rel="noopener noreferrer" class="btn">Get Started Now</a>
-                    <a href="#products" class="btn btn-outline">Explore Our Models</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="features container text-center">
-            <h2>What you can do with Elvion</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <h3>AI-Driven Solutions</h3>
-                    <p>Our company focuses on developing cutting-edge AI technologies that drive innovation and solve real-world problems. By pushing the boundaries of AI research, we aim to create solutions that benefit industries and communities.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">💡</div>
-                    <h3>Generate Ideas</h3>
-                    <p>Spark creativity with AI-powered brainstorming, content generation, and innovative problem-solving. Elvion AI models challenges not only the human brain, but every other AI's existence. Find out!</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">📊</div>
-                    <h3>Analyze Data</h3>
-                    <p>Gain deep insights from complex datasets with advanced analytical capabilities and predictive modeling. No other technology does it better.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">📚</div>
-                    <h3>Learn & Grow</h3>
-                    <p>Access personalized learning resources and develop new skills with Elvion University's AI-driven curriculum. It is FREE of charge!</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="products" class="product-showcase container text-center">
-            <h2>Our Revolutionary AI Models</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="philadelphia-ai-img">Philadelphia AI</div>
-                    <h3>The AI Goddess🦅</h3>
-                    <p>Your friendly, chatty, and creatively vibrant human-like AI. Philadelphia AI excels at engaging conversations, storytelling, and imaginative content creation. Perfect for literally EVERYTHING! Including brainstorming, writing, or just a fun chat!</p>
-                    <ul>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Comic Generation</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Music Generation</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Idea Generation</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Website Generation</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Fun, interactive & emotional. </li>
-                    </ul>
-                    <a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer" class="btn">Try on Telegram</a>
-                </div>
-                <div class="card">
-                    <div class="seraphina-ai-img">Seraphina AI</div>
-                    <h3>The feminine and religious💅</h3>
-                    <p>The pinnacle of advanced artificial intelligence, a vision for 2025–2030. Seraphina AI offers unparalleled analytical depth, complex problem-solving, and a sophisticated understanding of complex requests. Designed for tomorrow's challenges, today.</p>
-                    <ul>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Advanced Problem Solving</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Deep Analytical Capabilities</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Visionary Understanding</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Predictive Intelligence</li>
-                        <li><span style="color: var(--cyan-glow);">&#10003;</span> Flash Response</li>
-                    </ul>
-                    <a href="https://elvionai.github.io/signup-login.html" target="_blank" rel="noopener noreferrer" class="btn">Explore Seraphina AI</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="university" class="university-section container text-center">
-            <h2>Elvion University</h2>
-            <p class="lead">Accelerate your career in your academics with our simulated degree programs and official ELV certifications.</p>
-            <div class="university-info">
-                <div>
-                    <h3>Simulated Degree Programs</h3>
-                    <p>Are you looking for insights on what to study after Secondary school? Dive deep into the foundations, gain understanding, know about your courses before you eventually study it. </p>
-                    <ul>
-                        <li>Anatomy</li>
-                        <li>Mass Communication</li>
-                        <li>English</li>
-                        <li>Biochemistry</li>                        
-                        <li>AI-Powered Software Engineering</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>ELV Certifications</h3>
-                    <p>Validate your expertise with ELV certifications. These certifications demonstrate your proficiency in specific courses you prefer to study.</p>
-                    <ul>
-                        <li>ELV Certified in Software Engineering</li>
-                        <li>ELV Certified in Web Development</li>
-                        <li>ELV Certified in English</li>
-                        <li>ELV Certified in Mass Communication</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="blog" class="blog-section container text-center">
-            <h2>Latest Insights from Our Blog</h2>
-            <div class="card-grid">
-                <div class="blog-card">
-                    <a href="https://ibb.co/QFG7vqgL"><img src="https://i.ibb.co/HDQLTMS6/20250830-101317.jpg" alt="20250830-101317" border="0"></a>
-                    <div class="blog-card-content">
-                        <h3>Is AI leaving or staying?</h3>
-                        <p>Is AI leaving or staying? The question itself feels like a playful whisper against the roaring tide of innovation...</p>
-                        <a href="#" class="read-more">Read More &rarr;</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <a href="https://ibb.co/5Wz6zfrf"><img src="https://i.ibb.co/HDMVMktk/20250830-102527.jpg" alt="20250830-102527" border="0"></a>
-                    <div class="blog-card-content">
-                        <h3>Top 10 Universities that Produces Tech Founders in Africa</h3>
-                        <p>While the spirit of entrepreneurship often defies traditional boundaries, institutions like the University of Lagos, Obafemi Awolowo University, Covenant University, and Federal University of Technology Akure (FUTA) frequently emerge in discussions about producing founders who are now leading groundbreaking startups. These institutions, through their rigorous curricula, robust alumni networks, and..</p>
-                        <a href="#" class="read-more">Read More &rarr;</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <a href="https://ibb.co/M5cM4GTR"><img src="https://i.ibb.co/R43zmBnC/20250830-103057.jpg" alt="20250830-103057" border="0"></a> 
-                    <div class="blog-card-content">
-                        <h3>Top 10 Formidable Skills to Learn in 2025</h3>
-                        <p>Beyond the foundational digital literacies, the emphasis is rapidly shifting towards capabilities like advanced AI and machine learning proficiency, robust data analysis, and sophisticated cybersecurity knowledge. However, the human element remains paramount, and will continue to...</p>
-                        <a href="#" class="read-more">Read More &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about-section container text-center">
-            <h2>About Elvion AI</h2>
-            <div class="about-content grid-3">
-                <div class="mission-card">
-                    <h3>Our Mission</h3>
-                    <p>To democratize advanced AI technology, making it accessible and beneficial for individuals and enterprises worldwide.</p>
-                </div>
-                <div class="mission-card">
-                    <h3>Our Vision</h3>
-                    <p>To be the global leader in transformative AI solutions, empowering humanity with intelligent tools that enhance creativity, productivity, and understanding.</p>
-                </div>
-                <div class="mission-card">
-                    <h3>Our Values</h3>
-                    <p>Innovation, Integrity, Collaboration, Excellence, and User Empowerment guide every decision and development at Elvion AI.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="privacy" class="privacy-section container text-center">
-            <h2>Your Privacy Matters</h2>
-            <div class="privacy-content">
-                <p>At Elvion AI, we are committed to protecting your privacy and data security. We employ state-of-the-art encryption and adhere to strict data protection regulations to ensure your information remains confidential and secure.</p>
-                <p>Our commitment extends to transparency in how we collect, use, and store your data. We believe you have the right to understand and control your digital footprint.</p>
-                <a href="#" class="btn btn-outline">View Full Privacy Policy</a>
-            </div>
-        </section>
-
-        <section id="signup" class="signup-section">
-            <div class="container text-center">
-                <h2>Join the Elvion AI Community</h2>
-                <p>Sign up today to unlock powerful AI tools and connect with a community shaping the future.</p>
-                <form class="signup-form">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" required placeholder="John Doe">
-
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
-
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="••••••••">
-
-                    <label for="country">Country</label>
-                    <select id="country" name="country" required>
-                        <option value="">Select your Country</option>
-                        <option value="US">United States</option>
-                        <option value="CA">Canada</option>
-                        <option value="GB">United Kingdom</option>
-                        <option value="AU">Australia</option>
-                        <option value="DE">Germany</option>
-                        <option value="FR">France</option>
-                        <option value="JP">Japan</option>
-                        <option value="IN">India</option>
-                        <option value="BR">Brazil</option>
-                        <option value="other">Other</option>
-                    </select>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="twofactor" name="twofactor">
-                        <label for="twofactor">Enable Two-Step Verification (Optional)</label>
-                    </div>
-
-                    <button type="submit">Create Account</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="col">
-                <span class="brand-info">Elvion AI</span>
-                <p>Where Assistance Meets Excellence.</p>
-            </div>
-            <div class="col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#university">University</a></li>
-                    <li><a href="#blog">Blog</a></li>
+    <!-- The Models -->
+    <section id="models" class="container">
+        <h2 class="section-title">Two Minds. One Goal.</h2>
+        <p class="section-desc">Experience our dual-engine architecture designed to tackle everything from architectural programming to creative storytelling.</p>
+        
+        <div class="models-grid">
+            <div class="model-card">
+                <i class="fa-solid fa-brain model-icon"></i>
+                <h3>Philadelphia AI</h3>
+                <p>Our flagship reasoning engine. Philadelphia thinks deeply, writes code flawlessly, stays fully current with real-world events, and natively browses the live web to generate highly accurate answers.</p>
+                <ul class="model-features">
+                    <li><i class="fa-solid fa-check"></i> Multi-turn Agentic Reasoning</li>
+                    <li><i class="fa-solid fa-check"></i> Live Internet Search Integration</li>
+                    <li><i class="fa-solid fa-check"></i> Advanced Software Architecture</li>
+                    <li><i class="fa-solid fa-check"></i> Deep Multimodal Vision Analysis</li>
                 </ul>
+                <a href="https://elvionai.com.ng/profile.html" class="btn" style="width: 100%; text-align: center;">Chat with Philadelphia</a>
             </div>
-            <div class="col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact Us</a></li>
+            
+            <div class="model-card">
+                <i class="fa-solid fa-robot model-icon"></i>
+                <h3>Bobby</h3>
+                <p>Your reliable, creative, and offline companion. Bobby is a brilliant ideation partner optimized for brainstorming, storytelling, and general reflection with a strict September 2023 knowledge cutoff.</p>
+                <ul class="model-features">
+                    <li><i class="fa-solid fa-check"></i> Masterful Creative Writing</li>
+                    <li><i class="fa-solid fa-check"></i> Offline Dependability</li>
+                    <li><i class="fa-solid fa-check"></i> Rapid Flash Responses</li>
+                    <li><i class="fa-solid fa-check"></i> Unbiased Reviewing</li>
                 </ul>
-            </div>
-            <div class="col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
-            <div class="legal-info">
-                &copy; <span id="current-year"></span> Elvion AI. All rights reserved.
+                <a href="https://elvionai.com.ng/profile" class="btn btn-outline" style="width: 100%; text-align: center;">Chat with Bobby</a>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hamburger menu toggle
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
+    <!-- The Studios -->
+    <section id="studios" class="container">
+      <h2 class="section-title">The Creative Suite</h2>
+      <p class="section-desc">We have dismantled the specialization barrier. Access seven dedicated environments built specifically to accelerate your workflow.</p>
+      
+      <div class="grid-container">
+        <div class="feature-card">
+          <i class="fa-solid fa-comments feature-icon"></i>
+          <h3>Chat Studio</h3>
+          <p>The core hub. Engage with Philadelphia and Bobby for deep research, coding, or casual conversations inside a beautifully optimized UI.</p>
+          <a href="https://elvionai.com.ng/profile.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-music feature-icon"></i>
+          <h3>Audio Studio</h3>
+          <p>Synthesize premium, ultra-realistic voiceovers with 17 unique characters, or compose full, high-fidelity music tracks directly from a text prompt.</p>
+          <a href="https://elvionai.com.ng/audio-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-image feature-icon"></i>
+          <h3>Image Studio</h3>
+          <p>Generate stunning visuals using Philadelphia V1 (Stylized) and V2 (Photoreal). Instantly remove backgrounds or apply magical photo edits.</p>
+          <a href="https://elvionai.com.ng/image-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-film feature-icon"></i>
+          <h3>Video Studio</h3>
+          <p>Render cinematic Text-to-Video and Image-to-Video sequences. Interpolate exact frames or lock animations to a specific character's face.</p>
+          <a href="https://elvionai.com.ng/video-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-globe feature-icon"></i>
+          <h3>Website Studio</h3>
+          <p>Skip the code editor. Describe the landing page or portfolio you want, and watch the studio design, code, and deploy it live to the web instantly.</p>
+          <a href="https://elvionai.com.ng/website-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-pen-nib feature-icon"></i>
+          <h3>Writing Studio</h3>
+          <p>A distraction-free environment for authors and copywriters. Draft, critique, and perfect your manuscripts with structured AI evaluations.</p>
+          <a href="https://elvionai.com.ng/writing-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fa-solid fa-book feature-icon"></i>
+          <h3>Cover Studio</h3>
+          <p>Formatting a book? Generate professional, print-ready book covers customized exactly to your genre, title, and dimensional requirements.</p>
+          <a href="https://elvionai.com.ng/cover-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="feature-card" style="border-color: var(--accent); box-shadow: var(--shadow-cosmic);">
+          <i class="fa-solid fa-code feature-icon" style="background: var(--gradient-gold); color: #000;"></i>
+          <h3>Developer API</h3>
+          <p>Integrate our entire ecosystem into your own apps. We offer a robust B2B REST API for Chat, Vision, Images, Video, Audio, and Music.</p>
+          <a href="https://elvionai.com.ng/api.html" class="studio-link" style="color: var(--accent);">Read Documentation <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
 
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
+    <!-- Elvion Learning -->
+    <section id="learning" class="learning-section">
+        <div class="container text-center">
+            <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem; text-shadow: var(--glow-gold);"></i>
+            <h2 class="section-title">Elvion Learning</h2>
+            <p class="section-desc">Accelerate your career with our 100% free, self-paced learning portal. Explore simulated course tracks and test your industry-level expertise to obtain official ELV skill-certifications without expensive bootcamps.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Software Engineering</span>
+                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Visual Arts</span>
+                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Mass Communication</span>
+                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Adult Education</span>
+            </div>
+            <a href="https://elvionai.com.ng/university.html" class="btn">Access Learning Portal</a>
+        </div>
+    </section>
 
-            // Close mobile menu when a link is clicked
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    // Only close if it's a section link or internal, not external links that open new tabs
-                    if (!link.target || link.target === '_self' || link.target === '_parent' || link.target === '_top') {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
+    <!-- Blog Preview -->
+    <section id="blog" class="container text-center">
+      <h2 class="section-title">From the Blog</h2>
+      <p class="section-desc">Insights, tutorials, and creative deep-dives from the Elvion Team.</p>
+      <div class="grid-container">
+        <div class="blog-card">
+          <img src="https://i.postimg.cc/sx1bpRPv/IMG-20260307-142846-909.png" alt="Finding your writing voice">
+          <div class="blog-card-content">
+            <h3>How to find your writing voice</h3>
+            <p>You do not find your voice by waiting for inspiration. You build it through imitation, practice, and paying attention to details.</p>
+            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://i.postimg.cc/hGzDbdd9/IMG-20260301-205111-926.png" alt="Start a blog">
+          <div class="blog-card-content">
+            <h3>How to start a Blog in 2026</h3>
+            <p>Most blogs fail not because the writer had nothing to say, but because they had no idea what they were building. This guide fixes that.</p>
+            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div style="width:100%; height:200px; background:linear-gradient(135deg, #141410, #0a0a08); display:flex; align-items:center; justify-content:center; color:rgba(201,169,110,0.4); font-size:3rem;"><i class="fa-solid fa-diagram-project"></i></div>
+          <div class="blog-card-content">
+            <h3>Build an AI Workflow</h3>
+            <p>Stop collecting random prompts. Build daily AI workflows that plan your day, power your content, and quietly run your life.</p>
+            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            // Dynamically update copyright year
-            document.getElementById('current-year').textContent = new Date().getFullYear();
+    <!-- Massive CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to unleash your creativity?</h2>
+                <p class="lead" style="margin-bottom: 2rem;">Join thousands of creators, developers, and students leveraging the Elvion AI ecosystem to do their best work.</p>
+                <a href="https://elvionai.com.ng/signup-login.html" class="btn" style="font-size: 1.1rem; padding: 1rem 3rem;">Create Free Account <i class="fa-solid fa-rocket" style="margin-left: 8px;"></i></a>
+            </div>
+        </div>
+    </section>
+  </main>
 
-            // Generate twinkling stars background
-            const starsContainer = document.getElementById('stars-container');
-            const numStars = 100; // Number of stars
-            const minSize = 1; // Minimum star size in px
-            const maxSize = 3; // Maximum star size in px
+  <a href="https://launchbuff.com" target="_blank" rel="noopener noreferrer" title="Featured on LaunchBuff">
+  <img src="https://launchbuff.com/badge-featured-dark.svg" alt="Featured on LaunchBuff" width="256" height="80" />
+  </a>
 
-            function createStar() {
-                const star = document.createElement('div');
-                star.className = 'star';
-                starsContainer.appendChild(star);
+  <a href="https://www.nxgntools.com/tools/philadelphia-ai?utm_source=philadelphia-ai" target="_blank" rel="noopener" style="display: inline-block; width: auto;">
+    <img src="https://www.nxgntools.com/api/embed/philadelphia-ai?type=FEATURED_ON" alt="Featured on NxGn Tools" style="height: 48px; width: auto;" />
+  </a>
 
-                const size = Math.random() * (maxSize - minSize) + minSize;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
+  <a href="https://ailaun.ch/projects/philadelphia-ai-by-elvion?utm_source=badge" target="_blank" rel="noopener noreferrer">
+  <img src="https://ailaun.ch/ailaunch/images/badges/featured-on-dark.svg" alt="Featured on AI Launch" style="height:44px;width:auto"/>
+  </a>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 style="font-family: var(--font-brand); font-size: 1.6rem; color: #fff; text-shadow: var(--glow-gold);">Elvion AI</h4>
+          <p style="color: var(--text-secondary); margin-bottom: 0;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://elvionai.com.ng/philadelphia.html">Chat Studio</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html">Image & Video Studio</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html">Audio Studio</a></li>
+            <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
+            <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
+            <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
+            <li><a href="https://elvionai.com.ng/about.html#join-us">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
+            <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
+            <li><a href="mailto:elvionailabs@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="current-year"></span> Elvion AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
 
-                // Randomize animation delay and duration for twinkling effect
-                star.style.animationDelay = `${Math.random() * 4}s`;
-                star.style.animationDuration = `${3 + Math.random() * 2}s`;
-            }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hamburger Menu
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const mobileBackdrop = document.getElementById('mobile-backdrop');
 
-            for (let i = 0; i < numStars; i++) {
-                createStar();
-            }
-        });
-    </script>
+      function toggleMobileMenu() {
+        const isOpen = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        if (isOpen) {
+            mobileBackdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+      }
+
+      function closeMobileMenu() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        mobileBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', toggleMobileMenu);
+      mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      // Dropdown toggle for mobile
+      const dropdownToggle = document.querySelector('.dropdown > a');
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      dropdownToggle.addEventListener('click', (e) => {
+        if(window.innerWidth <= 992) {
+            e.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+
+      // Update copyright year
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      // Ambient Background Animation (Falling Gold Snow)
+      const canvas = document.getElementById("snow-canvas");
+      if (canvas) {
+          const ctx = canvas.getContext("2d");
+          let flakes = [];
+          function resize() {
+              canvas.width = window.innerWidth;
+              canvas.height = window.innerHeight;
+              flakes = [];
+              for (let i = 0; i < 70; i++) {
+                  flakes.push({
+                      x: Math.random() * canvas.width,
+                      y: Math.random() * canvas.height,
+                      r: Math.random() * 2 + 0.5,
+                      speed: Math.random() * 1.2 + 0.3,
+                      wind: Math.random() * 0.4 - 0.2,
+                      opacity: Math.random() * 0.5 + 0.1
+                  });
+              }
+          }
+          function draw() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              flakes.forEach(f => {
+                  ctx.beginPath();
+                  ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                  ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
+                  ctx.shadowBlur = 6;
+                  ctx.shadowColor = "rgba(201, 169, 110, 0.4)";
+                  ctx.fill();
+                  f.y += f.speed;
+                  f.x += f.wind;
+                  if (f.y > canvas.height) {
+                      f.y = -5;
+                      f.x = Math.random() * canvas.width;
+                  }
+                  if (f.x < 0) f.x = canvas.width;
+                  if (f.x > canvas.width) f.x = 0;
+              });
+              requestAnimationFrame(draw);
+          }
+          resize();
+          window.addEventListener("resize", resize);
+          draw();
+      }
+    });
+  </script>
 </body>
-  </html>
+</html>
 
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date()); 
-
-  gtag('config', 'G-J1YTKP10ZX');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J1YTKP10ZX');
 </script>
