@@ -5,55 +5,48 @@
   <meta name="clckd" content="27c05e0ed05174e3974ce991bec3f15b" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="7searchppc" content="80910fb70aa8c58ced3fbc90bc69261f"/>
-  <title>Elvion AI — Intelligence Unleashed | Where Assistance Meets Excellence</title>
-  <meta name="description" content="Discover Elvion AI. Explore our learning platforms, creative studios, and developer APIs designed to empower human creativity." />
+  <title>Elvion AI | Intelligence Unleashed | Home of Philadelphia AI</title>
+  <meta name="description" content="Discover Elvion AI, creators of Philadelphia AI. Explore our agentic workstation, seven creative studios, free learning portal, and developer APIs." />
   <meta name="google-adsense-account" content="ca-pub-2563254473675494">
   <meta name="theme-color" content="#050505">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,400..700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
+
   <style>
     :root {
-      --font-brand: 'Playfair Display', serif;
+      --font-brand: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
       --bg-deep: #050505;
       --bg-space: #0a0a08;
-      --bg-card: #11110f;
-      --bg-elevated: #161614;
-      --text-primary: #efefef;
+      --bg-card: #10100e;
+      --bg-elevated: #151512;
+      --text-primary: #f2f0ea;
       --text-secondary: #b5b0a3;
-      --text-muted: #6b665c;
+      --text-muted: #6e695f;
       --accent: #c9a96e;
       --accent-soft: #e8d5b0;
+      --accent-rgb: 201, 169, 110;
       --accent-green: #5fb87a;
       --danger: #e05a5a;
-      --border-subtle: rgba(201, 169, 110, 0.15);
-      --border-glow: rgba(201, 169, 110, 0.4);
-      --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15);
-      --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
-      --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
-      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
-      --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.1) 0%, transparent 60%), 
-                       radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
+      --border-subtle: rgba(201, 169, 110, 0.14);
+      --border-glow: rgba(201, 169, 110, 0.42);
+      --shadow-cosmic: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 28px rgba(201, 169, 110, 0.1);
+      --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.92);
+      --glow-gold: 0 0 22px rgba(201, 169, 110, 0.35);
+      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #f0dfc0 50%, #9f7e43 100%);
+      --ease: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent) var(--bg-space);
-    }
-    
-    *::-webkit-scrollbar { width: 8px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-space); }
+    *::-webkit-scrollbar { width: 7px; height: 7px; }
     *::-webkit-scrollbar-track { background: var(--bg-space); }
     *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--font-body);
       background-color: var(--bg-deep);
@@ -63,544 +56,421 @@
       min-height: 100vh;
       position: relative;
     }
-
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: var(--gradient-deep);
+      background:
+        radial-gradient(80% 50% at 50% -10%, rgba(201, 169, 110, 0.14), transparent 65%),
+        radial-gradient(60% 50% at 85% 90%, rgba(201, 169, 110, 0.06), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Ambient Gold Rain/Snow Canvas */
+    #scroll-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--gradient-gold);
+      box-shadow: 0 0 12px var(--accent);
+      z-index: 2000;
+      transition: width 0.08s linear;
+    }
+
     #snow-canvas {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.7;
+      z-index: 1;
+      opacity: 0.75;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-brand);
-      color: #fff;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
+    h1, h2, h3, h4 { font-family: var(--font-brand); color: #fff; font-weight: 700; line-height: 1.2; }
+    a { color: var(--accent); text-decoration: none; transition: var(--ease); }
     a:hover { color: var(--accent-soft); }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    section { padding: 6rem 0; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.75rem; position: relative; z-index: 2; }
+    section { padding: 6.5rem 0; position: relative; z-index: 2; }
     .text-center { text-align: center; }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(0.985);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--d, 0ms);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
 
     /* Navbar */
     .navbar {
       position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 10, 8, 0.95);
-      padding: 1rem 0;
+      top: 0; width: 100%;
+      background: rgba(8, 8, 6, 0.86);
+      padding: 0.9rem 0;
       z-index: 1000;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
+      transition: var(--ease);
     }
-
-    .navbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
     .navbar-brand {
+      display: flex; align-items: center; gap: 10px;
       font-family: var(--font-brand);
-      font-size: 1.8rem;
-      font-weight: 900;
+      font-size: 1.65rem; font-weight: 900; letter-spacing: 1px;
       background: var(--gradient-gold);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: var(--glow-gold);
     }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-      align-items: center;
+    .brand-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      display: inline-block;
     }
-
+    .nav-links { display: flex; list-style: none; gap: 1.35rem; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 500;
-      font-family: var(--font-body);
-      position: relative;
-      padding: 0.5rem 0;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.82rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.4rem 0; position: relative;
     }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-soft);
-    }
-
+    .nav-links a:hover { color: var(--accent-soft); }
     .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: var(--gradient-gold);
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 0; background: var(--gradient-gold);
       transition: width 0.3s ease;
     }
+    .nav-links a:hover::after { width: 100%; }
 
-    .nav-links a:hover::after, .nav-links a.active::after {
-      width: 100%;
-    }
-
-    /* Dropdown */
     .dropdown { position: relative; }
     .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.5rem 0;
-      min-width: 220px;
+      display: none; position: absolute; top: 100%; left: 0;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 0.6rem; min-width: 240px;
       box-shadow: var(--shadow-intense);
     }
-    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.3s ease; }
-    .dropdown-menu li { list-style: none; margin: 0; }
+    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.25s ease; }
+    .dropdown-menu li { list-style: none; }
     .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0.7rem 1.2rem;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      text-transform: none;
-      letter-spacing: 0;
+      display: flex; align-items: center; gap: 10px;
+      padding: 0.65rem 0.9rem; font-size: 0.84rem;
+      color: var(--text-secondary); text-transform: none; letter-spacing: 0;
+      border-radius: 9px;
     }
-    .dropdown-menu a i { width: 16px; color: var(--accent); text-align: center; }
+    .dropdown-menu a i { width: 18px; color: var(--accent); text-align: center; }
     .dropdown-menu a::after { display: none; }
-    .dropdown-menu a:hover {
-      background: rgba(201, 169, 110, 0.1);
-      color: var(--text-primary);
-    }
+    .dropdown-menu a:hover { background: rgba(201, 169, 110, 0.12); color: #fff; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .nav-cmd-btn {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+      color: var(--text-secondary); border-radius: 10px; padding: 0.42rem 0.75rem;
+      font-size: 0.78rem; display: inline-flex; align-items: center; gap: 7px;
+      cursor: pointer; transition: var(--ease);
     }
+    .nav-cmd-btn:hover { border-color: var(--accent); color: #fff; }
+    .nav-cmd-btn kbd { font-family: var(--font-code); font-size: 0.68rem; background: rgba(0,0,0,0.5); padding: 1px 5px; border-radius: 4px; color: var(--accent); }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      background: none;
-      border: none;
-    }
-    .hamburger .bar {
-      width: 25px;
-      height: 3px;
-      background: var(--accent);
-      transition: 0.3s;
-      border-radius: 3px;
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    .mobile-backdrop {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(6px);
-        z-index: 998;
-    }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 4px; }
+    .hamburger .bar { width: 24px; height: 2.5px; background: var(--accent); transition: 0.3s; border-radius: 3px; }
+    .mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(6px); z-index: 998; }
     .mobile-backdrop.active { display: block; }
 
-    /* Hero Section */
-    .hero {
-      padding-top: 12rem;
-      padding-bottom: 6rem;
-      text-align: center;
-      position: relative;
-    }
-
-    /* Subtle plasma effect behind hero */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(201, 169, 110, 0.1) 0%, transparent 40%);
-      animation: plasma-effect 10s infinite alternate ease-in-out;
-      z-index: -1;
-    }
-    @keyframes plasma-effect {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.1); }
-    }
-
-    .hero-title {
-      font-size: 4.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-      text-shadow: var(--glow-gold);
-    }
-    .hero-title span {
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      max-width: 750px;
-      margin: 0 auto 2.5rem;
-      font-weight: 300;
-      line-height: 1.8;
-    }
-
+    /* Buttons */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0.9rem 2.5rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid transparent;
-      color: #050505;
-      background: var(--gradient-gold);
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0.92rem 2.2rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em;
+      cursor: pointer; transition: var(--ease); border: 1px solid transparent;
+      color: #050505; background: var(--gradient-gold);
       box-shadow: var(--shadow-cosmic);
     }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201, 169, 110, 0.5); color: #000; }
+    .btn-outline { background: rgba(201, 169, 110, 0.05); color: var(--accent-soft); border: 1px solid var(--border-glow); box-shadow: none; }
+    .btn-outline:hover { background: rgba(201, 169, 110, 0.15); color: #fff; box-shadow: var(--glow-gold); }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 25px rgba(201, 169, 110, 0.6);
+    /* Section Headers */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.38rem 1rem; border-radius: 50px;
+      background: rgba(201, 169, 110, 0.1); border: 1px solid var(--border-subtle);
+      color: var(--accent-soft); font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.2rem;
     }
+    .eyebrow .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green); animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse { 50% { opacity: 0.35; transform: scale(0.85); } }
+    .section-title { font-size: clamp(2.1rem, 4vw, 3.1rem); margin-bottom: 1rem; text-align: center; }
+    .section-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .section-desc { text-align: center; color: var(--text-secondary); max-width: 680px; margin: 0 auto 3.5rem; font-size: 1.06rem; }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      box-shadow: none;
-    }
-    .btn-outline:hover {
-      background: rgba(201, 169, 110, 0.1);
-      color: var(--accent-soft);
-      box-shadow: var(--glow-gold);
-    }
+    /* Hero */
+    .hero { padding-top: 10.5rem; padding-bottom: 4.5rem; text-align: center; }
+    .hero-title { font-size: clamp(2.6rem, 6vw, 4.7rem); line-height: 1.08; margin-bottom: 1.3rem; letter-spacing: -0.02em; }
+    .hero-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .tw-wrap { font-family: var(--font-code); font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--accent-soft); min-height: 1.8em; margin-bottom: 1rem; }
+    .tw-caret { display: inline-block; width: 2px; height: 1em; background: var(--accent); vertical-align: -2px; margin-left: 3px; animation: pulse 0.8s infinite; }
+    .hero-subtitle { font-size: 1.14rem; color: var(--text-secondary); max-width: 760px; margin: 0 auto 2.2rem; font-weight: 400; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
 
-    .hero-actions {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
+    /* Interactive Hero Studio Preview Window */
+    .studio-preview {
+      max-width: 1040px; margin: 0 auto;
+      background: linear-gradient(180deg, rgba(24,24,20,0.95), rgba(12,12,10,0.98));
+      border: 1px solid var(--border-glow); border-radius: 22px;
+      box-shadow: var(--shadow-intense), 0 0 60px rgba(201, 169, 110, 0.12);
+      overflow: hidden; text-align: left;
     }
-
-    /* Section Typography */
-    .section-title {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      text-align: center;
+    .sp-hdr {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.85rem 1.25rem; background: rgba(0,0,0,0.45);
+      border-bottom: 1px solid var(--border-subtle); flex-wrap: wrap;
     }
-    .section-desc {
-      text-align: center;
-      color: var(--text-secondary);
-      max-width: 650px;
-      margin: 0 auto 3.5rem;
-      font-size: 1.1rem;
+    .sp-dots { display: flex; gap: 6px; }
+    .sp-dots i { width: 10px; height: 10px; border-radius: 50%; background: #e05a5a; display: inline-block; }
+    .sp-dots i:nth-child(2) { background: #e0b45a; }
+    .sp-dots i:nth-child(3) { background: #5fb87a; }
+    .sp-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sp-tab {
+      padding: 0.42rem 0.9rem; border-radius: 10px; border: 1px solid transparent;
+      background: rgba(255,255,255,0.03); color: var(--text-secondary);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--ease);
+      display: inline-flex; align-items: center; gap: 6px;
     }
-
-    /* Dual Models Grid */
-    .models-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 2.5rem;
+    .sp-tab.on, .sp-tab:hover { background: rgba(201, 169, 110, 0.16); color: var(--accent-soft); border-color: var(--border-glow); }
+    .sp-body { padding: 1.8rem; min-height: 270px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; align-items: center; }
+    .sp-prompt {
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 1.1rem 1.25rem; margin-bottom: 1rem;
+      font-size: 0.92rem; color: var(--text-primary);
     }
-    
-    .model-card {
-        background: var(--bg-card);
-        border-radius: 20px;
-        padding: 3rem;
-        border: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-cosmic);
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
+    .sp-prompt small { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
+    .sp-steps { display: flex; flex-direction: column; gap: 8px; }
+    .sp-step {
+      display: flex; align-items: center; gap: 10px; padding: 0.55rem 0.9rem;
+      border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
+      font-size: 0.82rem; color: var(--text-secondary);
     }
-    
-    .model-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--border-glow);
-    }
-
-    .model-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 4px;
-        background: var(--gradient-gold);
-    }
-
-    .model-icon {
-        font-size: 3.5rem;
-        color: var(--accent);
-        margin-bottom: 1.5rem;
-        text-shadow: var(--glow-gold);
-    }
-
-    .model-card h3 { font-size: 2rem; margin-bottom: 1rem; }
-    .model-card p { color: var(--text-secondary); margin-bottom: 1.5rem; }
-    
-    .model-features {
-        list-style: none;
-        margin-bottom: 2rem;
-    }
-    .model-features li {
-        margin-bottom: 0.8rem;
-        color: var(--text-primary);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .model-features i { color: var(--accent-green); }
-
-    /* Studios Grid */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    .sp-step i { color: var(--accent-green); }
+    .sp-out {
+      background: #070706; border: 1px solid var(--border-subtle); border-radius: 16px;
+      padding: 1.3rem; min-height: 220px; display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
     }
 
-    .feature-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: left;
-      transition: all 0.3s ease;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    /* Live Metrics Counter Bar */
+    .metrics-bar {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem;
+      margin-top: 3.5rem; padding: 2rem; border-radius: 20px;
+      background: rgba(16, 16, 14, 0.85); border: 1px solid var(--border-subtle);
     }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-glow);
-      box-shadow: var(--shadow-cosmic);
+    .metric-box { text-align: center; padding: 0.5rem; }
+    .metric-val {
+      font-family: var(--font-brand); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900;
+      background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
+    .metric-lbl { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
+    /* Spotlight Cards */
+    .spot-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 18px; padding: 2.2rem; position: relative; overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .spot-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(201, 169, 110, 0.14), transparent 60%);
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .spot-card:hover { transform: translateY(-5px); border-color: var(--border-glow); box-shadow: var(--shadow-cosmic); }
+    .spot-card:hover::before { opacity: 1; }
+
+    /* Flagship Philadelphia Section */
+    .philly-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: stretch; }
+    .mode-pill-row { display: flex; gap: 10px; margin-bottom: 1.4rem; flex-wrap: wrap; }
+    .mode-badge {
+      padding: 0.45rem 1rem; border-radius: 12px; font-size: 0.78rem; font-weight: 700;
+      background: rgba(201, 169, 110, 0.12); border: 1px solid var(--border-glow); color: var(--accent-soft);
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; list-style: none; margin: 1.5rem 0 2rem; }
+    .check-grid li { display: flex; align-items: center; gap: 9px; font-size: 0.9rem; color: var(--text-primary); }
+    .check-grid i { color: var(--accent-green); font-size: 0.85rem; }
+
+    /* Interactive 10-Personality Switcher */
+    .persona-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.4rem; }
+    .p-chip {
+      padding: 0.48rem 0.95rem; border-radius: 50px; border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03); color: var(--text-secondary);
+      font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: var(--ease);
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .p-chip.on, .p-chip:hover { border-color: var(--accent); background: rgba(201, 169, 110, 0.16); color: #fff; }
+    .persona-stage {
+      background: rgba(0,0,0,0.45); border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 1.4rem; min-height: 185px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .persona-quote { font-size: 0.95rem; color: var(--accent-soft); font-style: italic; margin: 0.8rem 0; line-height: 1.65; }
+
+    /* Studios Bento Grid */
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.6rem; }
     .feature-icon {
-      font-size: 2.2rem;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-      display: inline-block;
-      padding: 15px;
-      background: rgba(201, 169, 110, 0.08);
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
+      font-size: 1.6rem; color: var(--accent); margin-bottom: 1.1rem;
+      width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(201, 169, 110, 0.1); border-radius: 13px; border: 1px solid var(--border-subtle);
     }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .mini-tag { font-size: 0.68rem; padding: 2px 9px; border-radius: 20px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .studio-link { margin-top: auto; font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; }
+    .studio-link:hover i { transform: translateX(4px); }
+    .studio-link i { transition: transform 0.25s ease; }
 
-    .feature-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
-    .feature-card p { font-size: 0.95rem; color: var(--text-secondary); flex-grow: 1; margin-bottom: 1.5rem; }
-    
-    .feature-card .studio-link {
-        margin-top: auto;
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .feature-card .studio-link:hover i { transform: translateX(4px); }
-    .feature-card .studio-link i { transition: transform 0.3s ease; }
+    /* API Code Playground & Credit Estimator */
+    .api-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    .code-win { background: #060605; border: 1px solid var(--border-glow); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+    .code-hdr { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.1rem; background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border-subtle); }
+    .code-pre { padding: 1.3rem; font-family: var(--font-code); font-size: 0.78rem; color: #d9d4c7; overflow-x: auto; line-height: 1.65; white-space: pre; flex: 1; }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.88rem; }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-price { font-family: var(--font-code); color: var(--accent-soft); font-weight: 600; }
 
-    /* Learning Section */
+    /* Learning & Blog */
     .learning-section {
-        background: radial-gradient(circle at center, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
-        border-top: 1px solid var(--border-subtle);
-        border-bottom: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.07) 0%, transparent 70%);
+      border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
     }
+    .track-pill {
+      padding: 0.65rem 1.3rem; border: 1px solid var(--border-subtle); border-radius: 50px;
+      font-size: 0.86rem; color: var(--text-primary); background: rgba(255,255,255,0.03);
+      display: inline-flex; align-items: center; gap: 8px; transition: var(--ease);
+    }
+    .track-pill i { color: var(--accent); }
+    .track-pill:hover { border-color: var(--accent); transform: translateY(-2px); background: rgba(201, 169, 110, 0.1); }
 
-    /* Blog Section */
-    .blog-card {
-      background: var(--bg-card);
-      border-radius: 15px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .blog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-cosmic);
-      border-color: var(--border-glow);
-    }
-    .blog-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .blog-card-content {
-      padding: 1.8rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .blog-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1.4; }
-    .blog-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+    .blog-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-subtle); transition: var(--ease); display: flex; flex-direction: column; text-align: left; }
+    .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-cosmic); border-color: var(--border-glow); }
+    .blog-card img { width: 100%; height: 210px; object-fit: cover; transition: transform 0.5s ease; }
+    .blog-card:hover img { transform: scale(1.04); }
+    .blog-card-content { padding: 1.6rem; flex-grow: 1; display: flex; flex-direction: column; }
 
-    /* CTA Section */
-    .cta-section {
-        padding: 8rem 0;
-        text-align: center;
-        background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.05));
+    /* FAQ Accordion */
+    .faq-wrap { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    details.faq-item { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.1rem 1.4rem; transition: var(--ease); }
+    details.faq-item[open] { border-color: var(--border-glow); background: var(--bg-elevated); }
+    details.faq-item summary { list-style: none; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: #fff; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary i { color: var(--accent); transition: transform 0.25s ease; }
+    details.faq-item[open] summary i { transform: rotate(45deg); }
+    details.faq-item p { margin-top: 0.85rem; color: var(--text-secondary); font-size: 0.93rem; }
+
+    /* Contact & Badges */
+    .contact-bar {
+      max-width: 860px; margin: 3.5rem auto 0; padding: 2rem; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(16,16,14,0.95));
+      border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
     }
-    .cta-box {
-        background: var(--bg-card);
-        border: 1px solid var(--border-glow);
-        border-radius: 24px;
-        padding: 4rem 2rem;
-        max-width: 800px;
-        margin: 0 auto;
-        box-shadow: var(--shadow-cosmic);
-        position: relative;
-        overflow: hidden;
+    .badges-strip {
+      display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      padding: 2.2rem 1.5rem; border-top: 1px solid var(--border-subtle); background: rgba(0,0,0,0.35); position: relative; z-index: 2;
     }
-    .cta-box h2 { font-size: 2.8rem; margin-bottom: 1rem; }
+    .badges-strip img { height: 46px; width: auto; opacity: 0.88; transition: var(--ease); }
+    .badges-strip img:hover { opacity: 1; transform: translateY(-2px); }
 
     /* Footer */
-    .footer {
-      background: var(--bg-space);
-      padding: 5rem 0 2rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    .footer-col h4 {
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      font-family: var(--font-brand);
-    }
+    .footer { background: var(--bg-space); padding: 4.5rem 0 2rem; border-top: 1px solid var(--border-subtle); position: relative; z-index: 2; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
+    .footer-col h4 { color: var(--accent); font-size: 1.05rem; margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 0.8rem; }
-    .footer-col ul li a { color: var(--text-secondary); font-size: 0.9rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: var(--text-primary); }
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+    .footer-col ul li a { color: var(--text-secondary); font-size: 0.9rem; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.84rem; }
 
-    /* Responsive */
+    /* Floating Back to Top & Command Modal */
+    #to-top {
+      position: fixed; right: 22px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gradient-gold); color: #000; border: none; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: var(--shadow-cosmic); z-index: 950; opacity: 0; pointer-events: none; transition: var(--ease);
+    }
+    #to-top.show { opacity: 1; pointer-events: auto; }
+    #cmd-modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
+      z-index: 3000; align-items: flex-start; justify-content: center; padding: 12vh 1rem 1rem;
+    }
+    #cmd-modal.show { display: flex; }
+    .cmd-box { width: 100%; max-width: 540px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-intense); }
+    .cmd-box input { width: 100%; padding: 1rem 1.2rem; background: transparent; border: none; border-bottom: 1px solid var(--border-subtle); color: #fff; font-size: 0.98rem; outline: none; }
+    .cmd-list { max-height: 320px; overflow-y: auto; padding: 0.5rem; }
+    .cmd-item { display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; border-radius: 10px; color: var(--text-primary); font-size: 0.88rem; }
+    .cmd-item i { color: var(--accent); width: 18px; text-align: center; }
+    .cmd-item small { margin-left: auto; color: var(--text-muted); font-size: 0.74rem; }
+    .cmd-item:hover { background: rgba(201, 169, 110, 0.14); color: #fff; }
+
     @media (max-width: 992px) {
       .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(10, 10, 8, 0.98);
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border-subtle);
+        display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(10, 10, 8, 0.98); padding: 1.5rem; border-bottom: 1px solid var(--border-subtle);
       }
       .nav-links.active { display: flex; align-items: flex-start; }
-      .nav-links li { margin: 0.8rem 0; width: 100%; }
-      .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        background: transparent;
-        padding-left: 1rem;
-        border-left: 2px solid var(--border-subtle);
-      }
-      .dropdown:hover .dropdown-menu { animation: none; }
+      .nav-links li { width: 100%; margin: 0.4rem 0; }
+      .dropdown-menu { position: static; box-shadow: none; border: none; background: transparent; padding-left: 1rem; border-left: 2px solid var(--border-subtle); }
       .hamburger { display: flex; }
-      
-      .hero-title { font-size: 3.5rem; }
-      .models-grid { grid-template-columns: 1fr; }
+      .sp-body, .philly-grid, .api-split { grid-template-columns: 1fr; }
+      .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
-    
-    @media (max-width: 768px) {
-      .hero { padding-top: 8rem; }
-      .hero-title { font-size: 2.8rem; }
-      .hero-subtitle { font-size: 1.05rem; }
-      .hero-actions { flex-direction: column; gap: 1rem; }
-      .hero-actions .btn:first-child { margin-right: 0; }
-      .section-title { font-size: 2.2rem; }
-      .card-grid { grid-template-columns: 1fr; }
-      .cta-box { padding: 3rem 1.5rem; }
-      .cta-box h2 { font-size: 2.2rem; }
+    @media (max-width: 640px) {
+      .hero { padding-top: 8.2rem; }
+      .check-grid, .footer-grid { grid-template-columns: 1fr; }
+      .metrics-bar { grid-template-columns: 1fr 1fr; padding: 1.2rem; }
+      .contact-bar { text-align: center; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated Background -->
+  <div id="scroll-bar"></div>
   <canvas id="snow-canvas"></canvas>
   <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
   <!-- Navigation -->
   <header class="navbar">
     <div class="container">
-      <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
-      <button class="hamburger" aria-label="Toggle navigation">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
+      <a href="https://elvionai.com.ng/index.html" class="navbar-brand"><span class="brand-dot"></span>Elvion AI</a>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="nav-cmd-btn" id="open-cmd" title="Quick navigation (Ctrl+K)"><i class="fa-solid fa-magnifying-glass"></i><span>Quick Jump</span><kbd>⌘K</kbd></button>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
       <nav class="nav-links">
-        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+        <li><a href="#philadelphia">Philadelphia AI</a></li>
         <li class="dropdown">
-          <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+          <a href="#studios">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
           <ul class="dropdown-menu">
-            <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Chat Studio</a></li>
-            <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio Studio</a></li>
-            <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
-            <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio</a></li>
-            <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio</a></li>
+            <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Philadelphia Studio Chat</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio & Voice Studio</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio (V1 & V2)</a></li>
+            <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio (Pro 2K)</a></li>
             <li><a href="https://elvionai.com.ng/website-studio.html"><i class="fa-solid fa-globe"></i> Website Studio</a></li>
             <li><a href="https://elvionai.com.ng/writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
+            <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
           </ul>
         </li>
-        <li><a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer">Telegram Chat</a></li>
-        <li><a href="https://elvionai.com.ng/api.html" target="_blank" rel="noopener noreferrer">For Developers (API)</a></li>
+        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+        <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
         <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
-        <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
-        <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
-        <li><a href="https://elvionai.com.ng/terms.html">Terms</a></li>
-        <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.5rem 1.2rem; font-size: 0.8rem; margin-left: 1rem;">Sign Up / Login</a></li>
+        <li><a href="https://elvionai.com.ng/about.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.5rem 1.25rem; font-size: 0.78rem;">Sign Up / Login</a></li>
       </nav>
     </div>
   </header>
@@ -608,328 +478,591 @@
   <main>
     <!-- Hero Section -->
     <section class="hero">
-      <div class="container hero-content">
-        <h1 class="hero-title">Where Assistance<br><span>Meets Excellence</span></h1>
-        <p class="hero-subtitle">
-          Elvion AI is a unified digital workstation. Strip away the complexity of modern technology and empower your creativity with our advanced reasoning models and dedicated multimedia studios.
+      <div class="container">
+        <div class="eyebrow reveal"><span class="pulse-dot"></span><span>Philadelphia Agentic Engine · 1M Context · Online</span></div>
+        <h1 class="hero-title reveal" style="--d:80ms">Where Assistance<br><span>Meets Excellence</span></h1>
+        <div class="tw-wrap reveal" style="--d:140ms"><span id="hero-tw">Autonomous multimodal creation</span><span class="tw-caret"></span></div>
+        <p class="hero-subtitle reveal" style="--d:200ms">
+          Elvion AI is a unified creative and engineering workstation. Powered by our flagship intelligence, <strong>Philadelphia AI</strong>, we bring together deep reasoning, native video and document vision, live web research, and 30+ autonomous studio tools in one workspace.
         </p>
-        <div class="hero-actions">
-          <a href="https://elvionai.com.ng/signup-login.html" class="btn">Get Started Now <i class="fa-solid fa-arrow-right"></i></a>
-          <a href="#studios" class="btn btn-outline">Explore Studios</a>
+        <div class="hero-actions reveal" style="--d:260ms">
+          <a href="https://elvionai.com.ng/signup-login.html" class="btn">Launch Philadelphia Studio <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#studios" class="btn btn-outline">Explore 7 Studios</a>
+          <a href="https://elvionai.com.ng/api.html" class="btn btn-outline"><i class="fa-solid fa-terminal"></i> Developer API</a>
+        </div>
+
+        <!-- Interactive Studio Sandbox Preview -->
+        <div class="studio-preview reveal" style="--d:320ms">
+          <div class="sp-hdr">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="sp-dots"><i></i><i></i><i></i></div>
+              <span style="font-family:var(--font-code);font-size:0.74rem;color:var(--text-secondary);">PHILADELPHIA STUDIO · LIVE CAPABILITY PREVIEW</span>
+            </div>
+            <div class="sp-tabs" id="sp-tabs">
+              <button class="sp-tab on" data-tab="0"><i class="fa-solid fa-wand-magic-sparkles"></i> Agentic Create</button>
+              <button class="sp-tab" data-tab="1"><i class="fa-solid fa-eye"></i> Video & PDF Vision</button>
+              <button class="sp-tab" data-tab="2"><i class="fa-solid fa-code"></i> Code Studio + Console</button>
+              <button class="sp-tab" data-tab="3"><i class="fa-solid fa-clapperboard"></i> 2K Cinema Video</button>
+              <button class="sp-tab" data-tab="4"><i class="fa-solid fa-phone-volume"></i> Live Voice Call</button>
+            </div>
+          </div>
+          <div class="sp-body" id="sp-body"></div>
+        </div>
+
+        <!-- Animated Metrics Counter Strip -->
+        <div class="metrics-bar reveal" id="metrics-bar">
+          <div class="metric-box"><div class="metric-val" data-count="1000000" data-fmt="1M">0</div><div class="metric-lbl">Token Context Window</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="30" data-suffix="+">0</div><div class="metric-lbl">Autonomous Agent Tools</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="25" data-suffix="+">0</div><div class="metric-lbl">Visual Synthesis Styles</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="10" data-suffix="">0</div><div class="metric-lbl">Distinct AI Personalities</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="7" data-suffix="">0</div><div class="metric-lbl">Dedicated Creative Studios</div></div>
         </div>
       </div>
     </section>
 
-    <!-- The Models -->
-    <section id="models" class="container">
-        <h2 class="section-title">Two Minds. One Goal.</h2>
-        <p class="section-desc">Experience our dual-engine architecture designed to tackle everything from architectural programming to creative storytelling.</p>
-        
-        <div class="models-grid">
-            <div class="model-card">
-                <i class="fa-solid fa-brain model-icon"></i>
-                <h3>Philadelphia AI</h3>
-                <p>Our flagship reasoning engine. Philadelphia thinks deeply, writes code flawlessly, stays fully current with real-world events, and natively browses the live web to generate highly accurate answers.</p>
-                <ul class="model-features">
-                    <li><i class="fa-solid fa-check"></i> Multi-turn Agentic Reasoning</li>
-                    <li><i class="fa-solid fa-check"></i> Live Internet Search Integration</li>
-                    <li><i class="fa-solid fa-check"></i> Advanced Software Architecture</li>
-                    <li><i class="fa-solid fa-check"></i> Deep Multimodal Vision Analysis</li>
-                </ul>
-                <a href="https://elvionai.com.ng/profile.html" class="btn" style="width: 100%; text-align: center;">Chat with Philadelphia</a>
-            </div>
-            
-            <div class="model-card">
-                <i class="fa-solid fa-robot model-icon"></i>
-                <h3>Bobby</h3>
-                <p>Your reliable, creative, and offline companion. Bobby is a brilliant ideation partner optimized for brainstorming, storytelling, and general reflection with a strict September 2023 knowledge cutoff.</p>
-                <ul class="model-features">
-                    <li><i class="fa-solid fa-check"></i> Masterful Creative Writing</li>
-                    <li><i class="fa-solid fa-check"></i> Offline Dependability</li>
-                    <li><i class="fa-solid fa-check"></i> Rapid Flash Responses</li>
-                    <li><i class="fa-solid fa-check"></i> Unbiased Reviewing</li>
-                </ul>
-                <a href="https://elvionai.com.ng/profile" class="btn btn-outline" style="width: 100%; text-align: center;">Chat with Bobby</a>
-            </div>
+    <!-- Flagship Product: Philadelphia AI & 10 Personalities -->
+    <section id="philadelphia" class="container">
+      <div class="text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-crown" style="color:var(--accent)"></i><span>Flagship Intelligence</span></div>
+        <h2 class="section-title">Meet <span>Philadelphia AI</span></h2>
+        <p class="section-desc">Built in Lagos for creators, engineers, students, and enterprises worldwide. Philadelphia combines a 1,000,000-token reasoning window with real-time execution.</p>
+      </div>
+
+      <div class="philly-grid">
+        <div class="spot-card reveal">
+          <div class="mode-pill-row">
+            <span class="mode-badge"><i class="fa-regular fa-comment-dots"></i> Chat Mode (1M Context)</span>
+            <span class="mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Create Mode (30+ Tools)</span>
+          </div>
+          <h3 style="font-size:1.85rem;margin-bottom:0.8rem;">One Intelligence. Every Modality.</h3>
+          <p style="color:var(--text-secondary);">
+            Unlike standard chatbots that stop at plain text, Philadelphia understands your intent. Discuss complex software architecture, paste entire books without truncation, inspect 50MB videos frame-by-frame, or switch to Create Mode to produce finished assets in one pass.
+          </p>
+          <ul class="check-grid">
+            <li><i class="fa-solid fa-check"></i> Native Video, Audio & PDF Vision</li>
+            <li><i class="fa-solid fa-check"></i> Live Web & URL Context Grounding</li>
+            <li><i class="fa-solid fa-check"></i> Automatic Cross-Chat Memory</li>
+            <li><i class="fa-solid fa-check"></i> In-Browser Python, React & HTML IDE</li>
+            <li><i class="fa-solid fa-check"></i> Interactive A/B/C/D Study Quizzes</li>
+            <li><i class="fa-solid fa-check"></i> 1-Click Live Vercel Web Deployment</li>
+            <li><i class="fa-solid fa-check"></i> Real-Time Two-Way Voice Calls</li>
+            <li><i class="fa-solid fa-check"></i> Designed PDF, Word, Slides & Excel</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="https://elvionai.com.ng/philadelphia.html" class="btn">Open Philadelphia Studio <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fa-brands fa-telegram"></i> Try on Telegram</a>
+          </div>
         </div>
+
+        <!-- Interactive 10-Personality Explorer -->
+        <div class="spot-card reveal" style="--d:120ms">
+          <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.5rem;">Adaptive Persona Engine</div>
+          <h3 style="font-size:1.6rem;margin-bottom:0.6rem;">10 Specialized Personalities</h3>
+          <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.1rem;">Tap a persona below to preview how Philadelphia adapts her voice, expertise, and workflow to match your goal:</p>
+          <div class="persona-chips" id="persona-chips"></div>
+          <div class="persona-stage" id="persona-stage"></div>
+        </div>
+      </div>
     </section>
 
-    <!-- The Studios -->
+    <!-- The 7 Creative Studios -->
     <section id="studios" class="container">
-      <h2 class="section-title">The Creative Suite</h2>
-      <p class="section-desc">We have dismantled the specialization barrier. Access seven dedicated environments built specifically to accelerate your workflow.</p>
-      
+      <div class="text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-layer-group" style="color:var(--accent)"></i><span>The Creative Suite</span></div>
+        <h2 class="section-title">Seven Dedicated <span>Workstations</span></h2>
+        <p class="section-desc">Every studio is purpose-built for a specific craft, connected to a single unified credit wallet.</p>
+      </div>
+
       <div class="grid-container">
-        <div class="feature-card">
-          <i class="fa-solid fa-comments feature-icon"></i>
-          <h3>Chat Studio</h3>
-          <p>The core hub. Engage with Philadelphia and Bobby for deep research, coding, or casual conversations inside a beautifully optimized UI.</p>
-          <a href="https://elvionai.com.ng/profile.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="spot-card reveal">
+          <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
+          <h3>Philadelphia Studio Chat</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">The flagship agentic workspace. Combine 1M-context reasoning, live web search, video/PDF analysis, interactive quizzes, and full-stack code execution.</p>
+          <div class="tag-row"><span class="mini-tag">1M Context</span><span class="mini-tag">Code IDE</span><span class="mini-tag">Live Call</span></div>
+          <a href="https://elvionai.com.ng/philadelphia.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-music feature-icon"></i>
-          <h3>Audio Studio</h3>
-          <p>Synthesize premium, ultra-realistic voiceovers with 17 unique characters, or compose full, high-fidelity music tracks directly from a text prompt.</p>
-          <a href="https://elvionai.com.ng/audio-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-image feature-icon"></i>
-          <h3>Image Studio</h3>
-          <p>Generate stunning visuals using Philadelphia V1 (Stylized) and V2 (Photoreal). Instantly remove backgrounds or apply magical photo edits.</p>
-          <a href="https://elvionai.com.ng/image-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-film feature-icon"></i>
-          <h3>Video Studio</h3>
-          <p>Render cinematic Text-to-Video and Image-to-Video sequences. Interpolate exact frames or lock animations to a specific character's face.</p>
+
+        <div class="spot-card reveal" style="--d:60ms">
+          <div class="feature-icon"><i class="fa-solid fa-film"></i></div>
+          <h3>Video Studio (Pro 2K)</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Generate cinema-grade Text-to-Video, Image-to-Video, and Reference-to-Video up to 2K resolution with synchronized orchestral score and camera motion presets.</p>
+          <div class="tag-row"><span class="mini-tag">Up to 2K</span><span class="mini-tag">Native Audio</span><span class="mini-tag">First/Last Frame</span></div>
           <a href="https://elvionai.com.ng/video-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-globe feature-icon"></i>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div class="feature-icon"><i class="fa-solid fa-image"></i></div>
+          <h3>Image Studio (V1 & V2)</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Create artwork across 25+ curated engines (Photoreal V2, Movie, Anime Core, Noir, V8), edit existing photos with character lock, or remove backgrounds in one tap.</p>
+          <div class="tag-row"><span class="mini-tag">25+ Engines</span><span class="mini-tag">Photo Edit</span><span class="mini-tag">Remove BG</span></div>
+          <a href="https://elvionai.com.ng/image-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="spot-card reveal">
+          <div class="feature-icon"><i class="fa-solid fa-music"></i></div>
+          <h3>Audio & Voice Studio</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Synthesize lifelike voiceovers with Philadelphia signature voices and 17 Seraphina characters, turn PDFs into spoken podcasts, or trim and master audio in-browser.</p>
+          <div class="tag-row"><span class="mini-tag">Podcast Host</span><span class="mini-tag">17 Voices</span><span class="mini-tag">Doc Narration</span></div>
+          <a href="https://elvionai.com.ng/audio-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="spot-card reveal" style="--d:60ms">
+          <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
           <h3>Website Studio</h3>
-          <p>Skip the code editor. Describe the landing page or portfolio you want, and watch the studio design, code, and deploy it live to the web instantly.</p>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Describe your landing page, portfolio, or web app in plain English. Philadelphia designs, codes, previews, and deploys it to a live production URL in seconds.</p>
+          <div class="tag-row"><span class="mini-tag">Instant Deploy</span><span class="mini-tag">Responsive HTML5</span><span class="mini-tag">Live Edits</span></div>
           <a href="https://elvionai.com.ng/website-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-pen-nib feature-icon"></i>
-          <h3>Writing Studio</h3>
-          <p>A distraction-free environment for authors and copywriters. Draft, critique, and perfect your manuscripts with structured AI evaluations.</p>
-          <a href="https://elvionai.com.ng/writing-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div class="feature-icon"><i class="fa-solid fa-pen-nib"></i></div>
+          <h3>Writing & Cover Studios</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Draft manuscripts, compile multi-source cited PDF research reports, generate multi-panel comics with speech bubbles, and design print-ready book covers.</p>
+          <div class="tag-row"><span class="mini-tag">Research Pro PDF</span><span class="mini-tag">Comic Maker</span><span class="mini-tag">Book Covers</span></div>
+          <div style="display:flex;gap:14px;margin-top:auto;">
+            <a href="https://elvionai.com.ng/writing-studio.html" class="studio-link">Writing Studio <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://elvionai.com.ng/cover-studio.html" class="studio-link">Cover Studio <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
-        
-        <div class="feature-card">
-          <i class="fa-solid fa-book feature-icon"></i>
-          <h3>Cover Studio</h3>
-          <p>Formatting a book? Generate professional, print-ready book covers customized exactly to your genre, title, and dimensional requirements.</p>
-          <a href="https://elvionai.com.ng/cover-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Developer API & Transparent Credit Estimator -->
+    <section id="developers" class="container">
+      <div class="text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-code" style="color:var(--accent)"></i><span>Elvion Developer Suite</span></div>
+        <h2 class="section-title">Build With the <span>Philadelphia API</span></h2>
+        <p class="section-desc">Integrate 1M-context reasoning, native video/image vision, 2K video generation, and voice synthesis directly into your applications with pay-as-you-go simplicity.</p>
+      </div>
+
+      <div class="api-split">
+        <div class="code-win reveal">
+          <div class="code-hdr">
+            <div class="sp-tabs" id="api-tabs">
+              <button class="sp-tab on" data-lang="py">Python</button>
+              <button class="sp-tab" data-lang="js">JavaScript</button>
+              <button class="sp-tab" data-lang="curl">cURL</button>
+            </div>
+            <button class="nav-cmd-btn" id="copy-api-btn"><i class="fa-solid fa-copy"></i> Copy Snippet</button>
+          </div>
+          <pre class="code-pre" id="api-code"></pre>
         </div>
-        
-        <div class="feature-card" style="border-color: var(--accent); box-shadow: var(--shadow-cosmic);">
-          <i class="fa-solid fa-code feature-icon" style="background: var(--gradient-gold); color: #000;"></i>
-          <h3>Developer API</h3>
-          <p>Integrate our entire ecosystem into your own apps. We offer a robust B2B REST API for Chat, Vision, Images, Video, Audio, and Music.</p>
-          <a href="https://elvionai.com.ng/api.html" class="studio-link" style="color: var(--accent);">Read Documentation <i class="fa-solid fa-arrow-right"></i></a>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem;">Transparent Wallet System</div>
+          <h3 style="font-size:1.55rem;margin-bottom:0.5rem;">Pay Only For What You Create</h3>
+          <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.1rem;">Claim free daily credits every day, or fund your wallet instantly (`1 Credit = ₦5`) with zero monthly lock-in.</p>
+          <div>
+            <div class="calc-row"><span>Philadelphia Studio Chat (1M Context + Search)</span><span class="calc-price">2 cr</span></div>
+            <div class="calc-row"><span>Multimodal Vision (Image / PDF / Audio / Link)</span><span class="calc-price">1 - 2 cr</span></div>
+            <div class="calc-row"><span>Image Generation (25+ Styles V1 / Creative V2)</span><span class="calc-price">10 - 15 cr</span></div>
+            <div class="calc-row"><span>Philadelphia Voiceover / Document Narration</span><span class="calc-price">5 - 15 cr</span></div>
+            <div class="calc-row"><span>Research Report Pro (Multi-Source Cited PDF)</span><span class="calc-price">28 cr</span></div>
+            <div class="calc-row"><span>Live Deployed Website / Video Generation</span><span class="calc-price">50 - 120+ cr</span></div>
+          </div>
+          <a href="https://elvionai.com.ng/api.html" class="btn" style="width:100%;margin-top:1.4rem;">Explore API Documentation <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Elvion Learning -->
     <section id="learning" class="learning-section">
-        <div class="container text-center">
-            <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem; text-shadow: var(--glow-gold);"></i>
-            <h2 class="section-title">Elvion Learning</h2>
-            <p class="section-desc">Accelerate your career with our 100% free, self-paced learning portal. Explore simulated course tracks and test your industry-level expertise to obtain official ELV skill-certifications without expensive bootcamps.</p>
-            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
-                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Software Engineering</span>
-                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Visual Arts</span>
-                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Mass Communication</span>
-                <span style="padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary);">Adult Education</span>
-            </div>
-            <a href="https://elvionai.com.ng/university.html" class="btn">Access Learning Portal</a>
+      <div class="container text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-graduation-cap" style="color:var(--accent)"></i><span>100% Free Skill Certification</span></div>
+        <h2 class="section-title">Elvion <span>Learning Portal</span></h2>
+        <p class="section-desc">Accelerate your career with our self-paced interactive university. Master simulated course tracks and pass industry-grade assessments to earn official ELV certifications.</p>
+        <div style="display: flex; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 2.4rem;">
+          <a href="https://elvionai.com.ng/university.html" class="track-pill"><i class="fa-solid fa-laptop-code"></i> Software Engineering</a>
+          <a href="https://elvionai.com.ng/university.html" class="track-pill"><i class="fa-solid fa-palette"></i> Visual Arts & Design</a>
+          <a href="https://elvionai.com.ng/university.html" class="track-pill"><i class="fa-solid fa-bullhorn"></i> Mass Communication</a>
+          <a href="https://elvionai.com.ng/university.html" class="track-pill"><i class="fa-solid fa-book-open-reader"></i> Adult Education</a>
         </div>
+        <a href="https://elvionai.com.ng/university.html" class="btn">Enter Elvion Learning <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
     </section>
 
     <!-- Blog Preview -->
     <section id="blog" class="container text-center">
-      <h2 class="section-title">From the Blog</h2>
-      <p class="section-desc">Insights, tutorials, and creative deep-dives from the Elvion Team.</p>
+      <div class="reveal">
+        <div class="eyebrow"><i class="fa-solid fa-newspaper" style="color:var(--accent)"></i><span>The Pulse</span></div>
+        <h2 class="section-title">From the <span>Elvion Blog</span></h2>
+        <p class="section-desc">Engineering deep-dives, creative workflows, and practical guides from the Elvion AI team.</p>
+      </div>
       <div class="grid-container">
-        <div class="blog-card">
+        <div class="blog-card reveal">
           <img src="https://i.postimg.cc/sx1bpRPv/IMG-20260307-142846-909.png" alt="Finding your writing voice">
           <div class="blog-card-content">
+            <span style="font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Creative Craft · 5 min read</span>
             <h3>How to find your writing voice</h3>
-            <p>You do not find your voice by waiting for inspiration. You build it through imitation, practice, and paying attention to details.</p>
-            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+            <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.2rem;flex-grow:1;">You do not find your voice by waiting for inspiration. You build it through deliberate practice, rhythm, and attention to detail.</p>
+            <a href="https://elvionai.com.ng/blog.html" style="font-weight:600;color:var(--accent);">Read Article &rarr;</a>
           </div>
         </div>
-        <div class="blog-card">
+        <div class="blog-card reveal" style="--d:80ms">
           <img src="https://i.postimg.cc/hGzDbdd9/IMG-20260301-205111-926.png" alt="Start a blog">
           <div class="blog-card-content">
+            <span style="font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Digital Publishing · 6 min read</span>
             <h3>How to start a Blog in 2026</h3>
-            <p>Most blogs fail not because the writer had nothing to say, but because they had no idea what they were building. This guide fixes that.</p>
-            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+            <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.2rem;flex-grow:1;">Most blogs fail not because the writer had nothing to say, but because they lacked a clear distribution and positioning blueprint.</p>
+            <a href="https://elvionai.com.ng/blog.html" style="font-weight:600;color:var(--accent);">Read Article &rarr;</a>
           </div>
         </div>
-        <div class="blog-card">
-          <div style="width:100%; height:200px; background:linear-gradient(135deg, #141410, #0a0a08); display:flex; align-items:center; justify-content:center; color:rgba(201,169,110,0.4); font-size:3rem;"><i class="fa-solid fa-diagram-project"></i></div>
+        <div class="blog-card reveal" style="--d:160ms">
+          <div style="width:100%;height:210px;background:linear-gradient(135deg,#181610,#0a0a08);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:3rem;"><i class="fa-solid fa-diagram-project"></i></div>
           <div class="blog-card-content">
-            <h3>Build an AI Workflow</h3>
-            <p>Stop collecting random prompts. Build daily AI workflows that plan your day, power your content, and quietly run your life.</p>
-            <a href="https://elvionai.com.ng/blog.html" class="read-more" style="margin-top:auto; font-weight:600; color:var(--accent);">Read Article &rarr;</a>
+            <span style="font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Agentic Systems · 4 min read</span>
+            <h3>Build an AI Workflow That Runs Daily</h3>
+            <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.2rem;flex-grow:1;">Stop collecting random prompts. Combine Philadelphia's Chat and Create modes into a repeatable daily production pipeline.</p>
+            <a href="https://elvionai.com.ng/blog.html" style="font-weight:600;color:var(--accent);">Read Article &rarr;</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Massive CTA -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-box">
-                <h2>Ready to unleash your creativity?</h2>
-                <p class="lead" style="margin-bottom: 2rem;">Join thousands of creators, developers, and students leveraging the Elvion AI ecosystem to do their best work.</p>
-                <a href="https://elvionai.com.ng/signup-login.html" class="btn" style="font-size: 1.1rem; padding: 1rem 3rem;">Create Free Account <i class="fa-solid fa-rocket" style="margin-left: 8px;"></i></a>
-            </div>
+    <!-- FAQ + Direct Contact Section -->
+    <section id="contact" class="container">
+      <div class="text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-circle-question" style="color:var(--accent)"></i><span>Answers & Support</span></div>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+        <p class="section-desc">Everything you need to know about Philadelphia AI, credits, and the Elvion workstation.</p>
+      </div>
+
+      <div class="faq-wrap reveal">
+        <details class="faq-item" open>
+          <summary><span>What makes Philadelphia AI different from standard chatbots?</span><i class="fa-solid fa-plus"></i></summary>
+          <p>Philadelphia AI is a full multimodal agent built by Elvion AI. In Chat Mode, she offers a 1,000,000-token context window, native video/PDF/audio understanding, live web search, and an in-browser code studio. In Create Mode, she orchestrates over 30 studio tools to generate images, 2K videos with sound, voiceovers, slide decks, PDFs, and live deployed websites.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>How do credits and daily rewards work?</span><i class="fa-solid fa-plus"></i></summary>
+          <p>Every registered user can claim free daily credits inside the workspace to chat and create. When you need more capacity for heavy video rendering or B2B API calls, you can top up your wallet anytime starting from ₦100 (1 Credit = ₦5).</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Can I use Elvion AI models in my own software or company?</span><i class="fa-solid fa-plus"></i></summary>
+          <p>Yes. You can generate an API key directly from your Elvion dashboard and call our REST endpoints for Philadelphia Chat, Vision Analysis, Image Generation, Remove Background, Seraphina Voice, and Pro 2K Video.</p>
+        </details>
+      </div>
+
+      <!-- Direct Contact Box (hello@elvionai.com.ng) -->
+      <div class="contact-bar reveal">
+        <div>
+          <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">Direct Concierge & Enterprise Support</div>
+          <h3 style="font-size:1.5rem;margin:0.25rem 0;">Need partnership, API onboarding, or custom assistance?</h3>
+          <p style="color:var(--text-secondary);font-size:0.92rem;">Reach our team directly at <strong style="color:#fff;">hello@elvionai.com.ng</strong></p>
         </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="mailto:hello@elvionai.com.ng" class="btn"><i class="fa-solid fa-envelope"></i> Email Us</a>
+          <button type="button" class="btn btn-outline" id="copy-email-btn"><i class="fa-solid fa-copy"></i> Copy Email</button>
+        </div>
+      </div>
     </section>
   </main>
 
-  <a href="https://launchbuff.com" target="_blank" rel="noopener noreferrer" title="Featured on LaunchBuff">
-  <img src="https://launchbuff.com/badge-featured-dark.svg" alt="Featured on LaunchBuff" width="256" height="80" />
-  </a>
+  <!-- Featured & Recognized On Showcase -->
+  <div class="badges-strip">
+    <span style="font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;font-weight:600;">Featured & Recognized On</span>
+    <a href="https://launchbuff.com" target="_blank" rel="noopener noreferrer" title="Featured on LaunchBuff">
+      <img src="https://launchbuff.com/badge-featured-dark.svg" alt="Featured on LaunchBuff" width="256" height="80" />
+    </a>
+    <a href="https://www.nxgntools.com/tools/philadelphia-ai?utm_source=philadelphia-ai" target="_blank" rel="noopener">
+      <img src="https://www.nxgntools.com/api/embed/philadelphia-ai?type=FEATURED_ON" alt="Featured on NxGn Tools" />
+    </a>
+    <a href="https://ailaun.ch/projects/philadelphia-ai-by-elvion?utm_source=badge" target="_blank" rel="noopener noreferrer">
+      <img src="https://ailaun.ch/ailaunch/images/badges/featured-on-dark.svg" alt="Featured on AI Launch" />
+    </a>
+  </div>
 
-  <a href="https://www.nxgntools.com/tools/philadelphia-ai?utm_source=philadelphia-ai" target="_blank" rel="noopener" style="display: inline-block; width: auto;">
-    <img src="https://www.nxgntools.com/api/embed/philadelphia-ai?type=FEATURED_ON" alt="Featured on NxGn Tools" style="height: 48px; width: auto;" />
-  </a>
-
-  <a href="https://ailaun.ch/projects/philadelphia-ai-by-elvion?utm_source=badge" target="_blank" rel="noopener noreferrer">
-  <img src="https://ailaun.ch/ailaunch/images/badges/featured-on-dark.svg" alt="Featured on AI Launch" style="height:44px;width:auto"/>
-  </a>
-  
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4 style="font-family: var(--font-brand); font-size: 1.6rem; color: #fff; text-shadow: var(--glow-gold);">Elvion AI</h4>
-          <p style="color: var(--text-secondary); margin-bottom: 0;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+          <h4 style="font-family: var(--font-brand); font-size: 1.55rem; color: #fff;">Elvion AI</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+          <a href="mailto:hello@elvionai.com.ng" style="font-size:0.88rem;font-weight:600;"><i class="fa-regular fa-envelope"></i> hello@elvionai.com.ng</a>
         </div>
         <div class="footer-col">
-          <h4>Ecosystem</h4>
+          <h4>Studios</h4>
           <ul>
-            <li><a href="https://elvionai.com.ng/philadelphia.html">Chat Studio</a></li>
-            <li><a href="https://elvionai.com.ng/image-studio.html">Image & Video Studio</a></li>
-            <li><a href="https://elvionai.com.ng/audio-studio.html">Audio Studio</a></li>
-            <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+            <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia Studio Chat</a></li>
+            <li><a href="https://elvionai.com.ng/video-studio.html">Video Studio (Pro 2K)</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html">Image Studio (V1 & V2)</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html">Audio & Voice Studio</a></li>
+            <li><a href="https://elvionai.com.ng/website-studio.html">Website Studio</a></li>
+            <li><a href="https://elvionai.com.ng/writing-studio.html">Writing & Cover Studios</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+            <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
+            <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
+            <li><a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer">Telegram Bot</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company & Legal</h4>
           <ul>
             <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
-            <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
-            <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
-            <li><a href="https://elvionai.com.ng/about.html#join-us">Careers</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
             <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
             <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
-            <li><a href="mailto:elvionailabs@gmail.com">Contact Support</a></li>
+            <li><a href="mailto:hello@elvionai.com.ng">Contact Support (hello@elvionai.com.ng)</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; <span id="current-year"></span> Elvion AI. All rights reserved.
+        &copy; <span id="current-year"></span> Elvion AI. Built with pride in Lagos, Nigeria. All rights reserved.
       </div>
     </div>
   </footer>
 
+  <button id="to-top" title="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Quick Jump Command Modal -->
+  <div id="cmd-modal">
+    <div class="cmd-box">
+      <input type="text" id="cmd-input" placeholder="Jump to any studio, API docs, learning portal, or contact…" autocomplete="off">
+      <div class="cmd-list" id="cmd-list"></div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Hamburger Menu
+      // 1. Mobile Navigation
       const hamburger = document.querySelector('.hamburger');
       const navLinks = document.querySelector('.nav-links');
       const mobileBackdrop = document.getElementById('mobile-backdrop');
-
-      function toggleMobileMenu() {
-        const isOpen = navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        if (isOpen) {
-            mobileBackdrop.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        } else {
-            mobileBackdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-      }
-
-      function closeMobileMenu() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        mobileBackdrop.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      hamburger.addEventListener('click', toggleMobileMenu);
-      mobileBackdrop.addEventListener('click', closeMobileMenu);
-
-      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+      const closeMenu = () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); mobileBackdrop.classList.remove('active'); document.body.style.overflow = ''; };
+      hamburger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active', open);
+        mobileBackdrop.classList.toggle('active', open);
+        document.body.style.overflow = open ? 'hidden' : '';
       });
+      mobileBackdrop.addEventListener('click', closeMenu);
+      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(l => l.addEventListener('click', closeMenu));
+      const ddToggle = document.querySelector('.dropdown > a'), ddMenu = document.querySelector('.dropdown-menu');
+      ddToggle.addEventListener('click', e => { if (window.innerWidth <= 992) { e.preventDefault(); ddMenu.style.display = ddMenu.style.display === 'block' ? 'none' : 'block'; } });
 
-      // Dropdown toggle for mobile
-      const dropdownToggle = document.querySelector('.dropdown > a');
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      dropdownToggle.addEventListener('click', (e) => {
-        if(window.innerWidth <= 992) {
-            e.preventDefault();
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-        }
-      });
-
-      // Update copyright year
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      // Ambient Background Animation (Falling Gold Snow)
-      const canvas = document.getElementById("snow-canvas");
-      if (canvas) {
-          const ctx = canvas.getContext("2d");
-          let flakes = [];
-          function resize() {
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              flakes = [];
-              for (let i = 0; i < 70; i++) {
-                  flakes.push({
-                      x: Math.random() * canvas.width,
-                      y: Math.random() * canvas.height,
-                      r: Math.random() * 2 + 0.5,
-                      speed: Math.random() * 1.2 + 0.3,
-                      wind: Math.random() * 0.4 - 0.2,
-                      opacity: Math.random() * 0.5 + 0.1
-                  });
-              }
-          }
-          function draw() {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              flakes.forEach(f => {
-                  ctx.beginPath();
-                  ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-                  ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
-                  ctx.shadowBlur = 6;
-                  ctx.shadowColor = "rgba(201, 169, 110, 0.4)";
-                  ctx.fill();
-                  f.y += f.speed;
-                  f.x += f.wind;
-                  if (f.y > canvas.height) {
-                      f.y = -5;
-                      f.x = Math.random() * canvas.width;
-                  }
-                  if (f.x < 0) f.x = canvas.width;
-                  if (f.x > canvas.width) f.x = 0;
+      // 2. Scroll Progress Bar & Back-to-Top
+      const scrollBar = document.getElementById('scroll-bar'), toTop = document.getElementById('to-top');
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+        toTop.classList.toggle('show', window.scrollY > 450);
+      }, {passive: true});
+      toTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+      // 3. Scroll-Reveal Observer & Animated Counters
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            en.target.classList.add('in');
+            if (en.target.id === 'metrics-bar' && !en.target.dataset.done) {
+              en.target.dataset.done = '1';
+              en.target.querySelectorAll('.metric-val').forEach(el => {
+                const target = +el.dataset.count, fmt = el.dataset.fmt, suf = el.dataset.suffix || '';
+                const t0 = performance.now(), dur = 1400;
+                (function step(now) {
+                  const p = Math.min(1, (now - t0) / dur), ease = 1 - Math.pow(1 - p, 3);
+                  el.textContent = (p >= 1 && fmt) ? fmt : Math.round(target * ease).toLocaleString() + suf;
+                  if (p < 1) requestAnimationFrame(step);
+                })(t0);
               });
-              requestAnimationFrame(draw);
+            }
           }
-          resize();
-          window.addEventListener("resize", resize);
-          draw();
+        });
+      }, {threshold: 0.14});
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      // 4. 3D Spotlight Hover Tracking
+      document.querySelectorAll('.spot-card').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+
+      // 5. Hero Typewriter
+      const phrases = [
+        'Autonomous image, video, audio & document creation',
+        '1,000,000-token deep reasoning with live web search',
+        'Native video, PDF, image & link understanding',
+        'In-browser Python, React & HTML live code studio',
+        '2K cinema video synthesis with synchronized audio'
+      ];
+      let pi = 0, ci = 0, del = false; const twEl = document.getElementById('hero-tw');
+      setInterval(() => {
+        const w = phrases[pi];
+        if (!del) { ci++; if (ci > w.length + 18) del = true; }
+        else { ci--; if (ci <= 0) { del = false; pi = (pi + 1) % phrases.length; } }
+        twEl.textContent = w.slice(0, Math.min(w.length, Math.max(0, ci)));
+      }, 52);
+
+      // 6. Interactive Hero Studio Sandbox Tabs
+      const spData = [
+        {prompt: 'Design a luxury rooftop music night flyer, generate a 15-second voiceover teaser, and export a printable event PDF.',
+         steps: ['Generated high-contrast poster artwork (Philadelphia V6)', 'Rendered typography & layout via create_design', 'Synthesized podcast-style voiceover (Kore)', 'Compiled print-ready event PDF'],
+         out: `<div style="text-align:center"><i class="fa-solid fa-wand-magic-sparkles" style="font-size:2.4rem;color:var(--accent);margin-bottom:10px;"></i><h4 style="margin-bottom:6px;">3 Studio Assets Created in 1 Run</h4><p style="font-size:0.84rem;color:var(--text-secondary);">Poster PNG · Teaser WAV · Event PDF saved automatically to your Gallery.</p></div>`},
+        {prompt: 'Analyze my attached 37-second vertical video clip and PDF brief: give me a shot-by-shot breakdown and audio transcript.',
+         steps: ['Decoded video stream & audio track via MiniMax-M3 & Gemini Vision', 'Mapped 6 structural beats & timestamps (00:00 to 00:37)', 'Transcribed spoken dialogue & diegetic sound cues', 'Generated interactive A/B/C/D production next steps'],
+         out: `<div style="font-family:var(--font-code);font-size:0.78rem;color:var(--accent-soft);line-height:1.6;">[00:00-00:02] Focus-pull reveal on subject<br>[00:08-00:10] Audio: "I wanted to put video."<br>[00:20-00:25] Peak close-up frame (#8 best thumbnail)<br><span style="color:var(--accent-green);">✓ Full visual + audio packet verified</span></div>`},
+        {prompt: 'Write an interactive playable arcade game in a single HTML5 file and run it with console logging.',
+         steps: ['Wrote 240-line HTML5 Canvas game in one unbreakable code block', 'Ran syntax & tag validation (0 problems)', 'Mounted live preview iframe + real-time console hook', 'Ready for 1-click live Vercel deployment'],
+         out: `<div style="font-family:var(--font-code);font-size:0.78rem;color:#8fd7a6;">› Running index.html in Code Studio…<br>› Canvas initialized (60 FPS)<br>› 0 errors · 0 warnings<br><span style="color:var(--accent);">🚀 Live URL: https://philly-site.vercel.app</span></div>`},
+        {prompt: 'Create a 6-second 2K aerial drone shot over Victoria Island, Lagos at golden hour with an orchestral score.',
+         steps: ['Selected Philadelphia Pro Video (2K, 16:9)', 'Applied aerial drone motion & orchestral audio presets', 'Rendered cinema MP4 with synchronized soundscape'],
+         out: `<div style="text-align:center"><i class="fa-solid fa-clapperboard" style="font-size:2.3rem;color:var(--accent);margin-bottom:10px;"></i><h4>2K Cinema Video + Native Sound</h4><p style="font-size:0.84rem;color:var(--text-secondary);">Supports Text-to-Video, First/Last Frame & Reference Audio.</p></div>`},
+        {prompt: 'Start a real-time spoken phone call with Philadelphia to brainstorm my startup pitch.',
+         steps: ['Connected low-latency bidirectional WebSocket audio', 'Active voice: Kore (Philadelphia Signature)', 'Live speech-to-speech with real-time captions'],
+         out: `<div style="text-align:center"><i class="fa-solid fa-phone-volume" style="font-size:2.3rem;color:var(--accent-green);margin-bottom:10px;"></i><h4>Live Voice Call Connected</h4><p style="font-size:0.84rem;color:var(--text-secondary);">"Oya, tell me who your customer is and what problem you solve first…"</p></div>`}
+      ];
+      const spBody = document.getElementById('sp-body');
+      function renderSp(idx) {
+        const d = spData[idx];
+        spBody.innerHTML = `<div><div class="sp-prompt"><small>User Request</small>${d.prompt}</div><div class="sp-steps">${d.steps.map(s => `<div class="sp-step"><i class="fa-solid fa-circle-check"></i><span>${s}</span></div>`).join('')}</div></div><div class="sp-out">${d.out}</div>`;
+      }
+      renderSp(0);
+      document.querySelectorAll('#sp-tabs .sp-tab').forEach(b => b.onclick = () => {
+        document.querySelectorAll('#sp-tabs .sp-tab').forEach(x => x.classList.toggle('on', x === b));
+        renderSp(+b.dataset.tab);
+      });
+
+      // 7. Interactive 10-Personality Switcher
+      const personas = [
+        ['Philadelphia', 'fa-sparkles', 'Flagship Creative Partner', '"Oya, let us break this down cleanly. Here is what is working in your draft, where the hook drops, and the exact next step we should take."'],
+        ['Professor Dope', 'fa-graduation-cap', 'Deep Academic Educator', '"Think of transformer attention like a spotlight in a crowded theatre. Let us walk through the intuition first, then the math, and finish with a quick A/B/C/D check."'],
+        ['Kodi', 'fa-terminal', 'Precise Staff Engineer', '"Your state mutation is causing race conditions on line 42. Here is the refactored, production-ready module in a single fenced block with zero side effects."'],
+        ['Zuri', 'fa-comments', 'Empathetic Relationship Advisor', '"Before you reply to that message, let us look at what both of you are actually trying to protect. Here are two calm, honest ways to phrase what you feel."'],
+        ['Reel', 'fa-clapperboard', 'CapCut & Premiere Video Editor', '"Your first 1.5 seconds are soft. Cold-open on the 00:23 cheek-cradle frame, cut on the laugh at 00:22, and pull the orange cast back toward neutral."'],
+        ['Tobi', 'fa-book-open-reader', 'Interactive Study Buddy', '"I just wrote a short comprehension passage on macroeconomics for you. Ready for 3 interactive A/B/C/D objective questions to test your recall?"'],
+        ['Coach Nia', 'fa-dumbbell', 'Structured Fitness Coach', '"Four days a week, progressive overload on compounds, and strict form cues on your hinge. Let us lock in your split for the next 6 weeks."'],
+        ['Kemi', 'fa-briefcase', 'Business & Pitch Strategist', '"What is your unit economics at 500 customers? Let us tighten your pricing tier and unit margin before we build the 10-slide investor deck."'],
+        ['Sage', 'fa-compass', 'Plain Balanced Assistant', '"Here is a concise, neutral summary of the three options along with their trade-offs, costs, and timelines."'],
+        ['Custom Identity', 'fa-dna', 'Your Own AI Character', '"Define your character name, background, dialect, age, and backstory inside the Studio—and Philadelphia stays 100% in character."']
+      ];
+      const pChips = document.getElementById('persona-chips'), pStage = document.getElementById('persona-stage');
+      function selectPersona(i) {
+        const p = personas[i];
+        pChips.querySelectorAll('.p-chip').forEach((c, idx) => c.classList.toggle('on', idx === i));
+        pStage.innerHTML = `<div><div style="display:flex;align-items:center;gap:10px;"><i class="fa-solid ${p[1]}" style="color:var(--accent);font-size:1.2rem;"></i><div><strong style="color:#fff;font-size:1.05rem;">${p[0]}</strong><div style="font-size:0.75rem;color:var(--text-muted);">${p[2]}</div></div></div><div class="persona-quote">${p[3]}</div></div><a href="https://elvionai.com.ng/philadelphia.html" style="font-size:0.82rem;font-weight:600;">Chat with ${p[0]} in Studio &rarr;</a>`;
+      }
+      pChips.innerHTML = personas.map((p, i) => `<button type="button" class="p-chip${i===0?' on':''}" data-i="${i}"><i class="fa-solid ${p[1]}"></i>${p[0]}</button>`).join('');
+      pChips.onclick = e => { const b = e.target.closest('.p-chip'); if (b) selectPersona(+b.dataset.i); };
+      selectPersona(0);
+
+      // 8. Developer API Code Playground
+      const snippets = {
+        py: `import requests\n\nresp = requests.post(\n    "https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat",\n    headers={"Authorization": "Bearer elv_live_your_api_key"},\n    json={\n        "message": "Analyze our Q4 growth metrics and propose 3 actions.",\n        "system_prompt": "You are Philadelphia AI by Elvion AI."\n    }\n)\nprint(resp.json()["reply"])`,
+        js: `const res = await fetch("https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat", {\n  method: "POST",\n  headers: {\n    "Authorization": "Bearer elv_live_your_api_key",\n    "Content-Type": "application/json"\n  },\n  body: JSON.stringify({\n    message: "Generate a responsive pricing table component.",\n    system_prompt: "You are Philadelphia AI by Elvion AI."\n  })\n});\nconst data = await res.json();\nconsole.log(data.reply);`,
+        curl: `curl -X POST https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat \\\n  -H "Authorization: Bearer elv_live_your_api_key" \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "message": "Summarize the latest West African fintech trends.",\n    "system_prompt": "You are Philadelphia AI by Elvion AI."\n  }'`
+      };
+      const apiCode = document.getElementById('api-code');
+      apiCode.textContent = snippets.py;
+      document.querySelectorAll('#api-tabs .sp-tab').forEach(b => b.onclick = () => {
+        document.querySelectorAll('#api-tabs .sp-tab').forEach(x => x.classList.toggle('on', x === b));
+        apiCode.textContent = snippets[b.dataset.lang];
+      });
+      document.getElementById('copy-api-btn').onclick = function() {
+        navigator.clipboard.writeText(apiCode.textContent).catch(() => {});
+        this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+        setTimeout(() => this.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Snippet', 1600);
+      };
+
+      // 9. Copy Contact Email (hello@elvionai.com.ng)
+      document.getElementById('copy-email-btn').onclick = function() {
+        navigator.clipboard.writeText('hello@elvionai.com.ng').catch(() => {});
+        this.innerHTML = '<i class="fa-solid fa-check"></i> Copied hello@elvionai.com.ng';
+        setTimeout(() => this.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Email', 2000);
+      };
+
+      // 10. Quick Jump Command Modal (Ctrl+K)
+      const cmdModal = document.getElementById('cmd-modal'), cmdInput = document.getElementById('cmd-input'), cmdList = document.getElementById('cmd-list');
+      const cmdLinks = [
+        ['fa-comments', 'Philadelphia Studio Chat', 'Flagship Agent', 'https://elvionai.com.ng/philadelphia.html'],
+        ['fa-film', 'Video Studio (Pro 2K)', 'Text & Image to Video', 'https://elvionai.com.ng/video-studio.html'],
+        ['fa-image', 'Image Studio (V1 & V2)', '25+ Art Engines', 'https://elvionai.com.ng/image-studio.html'],
+        ['fa-music', 'Audio & Voice Studio', 'TTS & Narration', 'https://elvionai.com.ng/audio-studio.html'],
+        ['fa-globe', 'Website Studio', 'Instant Live Deploy', 'https://elvionai.com.ng/website-studio.html'],
+        ['fa-pen-nib', 'Writing Studio', 'Manuscripts & Reports', 'https://elvionai.com.ng/writing-studio.html'],
+        ['fa-book', 'Cover Studio', 'Print-Ready Covers', 'https://elvionai.com.ng/cover-studio.html'],
+        ['fa-graduation-cap', 'Elvion Learning', 'Free Certifications', 'https://elvionai.com.ng/university.html'],
+        ['fa-code', 'Developer API Documentation', 'REST API', 'https://elvionai.com.ng/api.html'],
+        ['fa-envelope', 'Email Support: hello@elvionai.com.ng', 'Contact Us', 'mailto:hello@elvionai.com.ng'],
+        ['fa-user-plus', 'Sign Up / Login', 'Account', 'https://elvionai.com.ng/signup-login.html']
+      ];
+      function paintCmd(q = '') {
+        const ql = q.toLowerCase();
+        cmdList.innerHTML = cmdLinks.filter(x => x[1].toLowerCase().includes(ql) || x[2].toLowerCase().includes(ql))
+          .map(x => `<a class="cmd-item" href="${x[3]}"><i class="fa-solid ${x[0]}"></i><span>${x[1]}</span><small>${x[2]}</small></a>`).join('');
+      }
+      const openCmd = () => { cmdModal.classList.add('show'); cmdInput.value = ''; paintCmd(); setTimeout(() => cmdInput.focus(), 40); };
+      document.getElementById('open-cmd').onclick = openCmd;
+      cmdInput.oninput = () => paintCmd(cmdInput.value);
+      cmdModal.onclick = e => { if (e.target === cmdModal) cmdModal.classList.remove('show'); };
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openCmd(); }
+        if (e.key === 'Escape') cmdModal.classList.remove('show');
+      });
+
+      // 11. Interactive Gold Constellation Particle Canvas
+      const canvas = document.getElementById('snow-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let flakes = [], mx = -999, my = -999;
+        window.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, {passive: true});
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          flakes = Array.from({length: 65}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.9 + 0.6,
+            speed: Math.random() * 0.65 + 0.2,
+            wind: Math.random() * 0.3 - 0.15,
+            opacity: Math.random() * 0.45 + 0.12
+          }));
+        }
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < flakes.length; i++) {
+            const f = flakes[i];
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
+            ctx.fill();
+            const dx = f.x - mx, dy = f.y - my, dist = Math.hypot(dx, dy);
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(f.x, f.y);
+              ctx.lineTo(mx, my);
+              ctx.strokeStyle = `rgba(201, 169, 110, ${(1 - dist / 130) * 0.22})`;
+              ctx.stroke();
+            }
+            f.y += f.speed; f.x += f.wind;
+            if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
+            if (f.x < 0) f.x = canvas.width;
+            if (f.x > canvas.width) f.x = 0;
+          }
+          requestAnimationFrame(draw);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        draw();
       }
     });
   </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1YTKP10ZX');
+  </script>
 </body>
 </html>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J1YTKP10ZX');
-</script>
