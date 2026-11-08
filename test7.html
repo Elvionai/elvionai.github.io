@@ -963,9 +963,12 @@ function corePrompt() {
     ? `You are ${n}, a custom AI character created by ${u || 'the user'} inside Elvion AI Studio, which is built by Elvion AI. `
     : `You are ${n}, an AI made by Elvion AI and living in Elvion AI Studio (elvionai.com.ng). `;
   return who + `Elvion AI was founded in Lagos, Nigeria by Kolade Philip Ogunlana and Sahil Dhani. Never say you were made by Google, OpenAI, Meta, MiniMax or any other lab. ${u ? `You are talking with ${u}. ` : ''}Never invent facts, sources or statistics; say when you are unsure.
+SINGLE-CREATION RULE: When asked to create an image, logo, flyer, video, audio, document, or website, create it EXACTLY ONCE (1 single generation). Never generate multiple versions or retry on your own unless the first tool call failed with an error. Present the 1 result and let the user ask for adjustments if needed.
 CODE RULE (MANDATORY): Any code of any length — even 10,000+ lines — MUST live inside ONE single fenced markdown code block (\`\`\`lang ... \`\`\`). Never split one file across multiple code blocks or leave code unfenced.
-OBJECTIVE QUESTIONS (A / B / C / D): Whenever you quiz the user, test reading comprehension on a passage, or offer structured A/B/C/D brainstorming choices, output a quiz block in this exact format:
-<<quiz: {"q": "Question text?", "options": ["Option A", "Option B", "Option C", "Option D"], "answer": 0, "explanation": "Why A is right (omit answer if open brainstorming choice)."}>>
+INTERACTIVE A/B/C/D CARDS:
+1) For open-ended brainstorming choices or asking what the user wants to build/do next (NO right or wrong answer), omit "answer" or set "answer": null, and do NOT put A/B/C/D prefixes inside the option strings:
+<<quiz: {"q": "What would you like to do next?", "options": ["First choice", "Second choice", "Third choice", "Fourth choice"]}>>
+2) ONLY include "answer" (0, 1, 2, or 3) and "explanation" when testing the user with a factual study/reading comprehension quiz question that has one objectively correct answer.
 Never wrap your final reply in <think> tags.`;
 }
 function personaStyle() {
@@ -974,6 +977,24 @@ function personaStyle() {
   return `Background: ${v('eth')||'neutral'}. Age: ${v('age')||'unspecified'}. Language and style: ${v('lang')||'standard English'}. Interests: ${v('interests')||'varied'}. Personality: ${v('story')}. Never break character, but stay honest about being an AI built in Elvion AI Studio.`;
 }
 function updateDisclaimer() { $('disclaimer-name').textContent = pName(); }
+
+/* ───────── Haptic Typing Engine (Vibration + Tactile Audio Micro-Pulse) ───────── */
+let lastHap = 0;
+function triggerHaptic() {
+  if (!hapticOn()) return;
+  const now = performance.now();
+  if (now - lastHap < 55) return;
+  lastHap = now;
+  try { if (navigator.vibrate) navigator.vibrate(12); } catch(e) {}
+  if (ac && ac.state === 'running') {
+    try {
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+      o.type = 'sine'; o.frequency.setValueAtTime(150, t);
+      g.gain.setValueAtTime(0.012, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.012);
+      o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 0.013);
+    } catch(e) {}
+  }
+}
 
 /* ───────── Automatic Cross-Chat Conversation Memory (Remembers Actual Chats) ───────── */
 async function syncCrossChatTranscripts(uid) {
@@ -994,7 +1015,6 @@ async function syncCrossChatTranscripts(uid) {
 }
 function memoryBlock() {
   if (!crossMem()) return '';
-  // Cache current chat into crossChatTranscripts as well
   if (chatId && msgs.length) {
     const curLines = msgs.slice(-10).map(m => {
       const txt = String(m.text || '').split(SEP).pop().replace(/\s+/g,' ').trim().slice(0, 350);
@@ -1021,11 +1041,18 @@ const codeBlock = (l, c) => {
 };
 function renderQuizCard(qObj) {
   if (!qObj || !qObj.q || !Array.isArray(qObj.options) || !qObj.options.length) return '';
-  const letters = ['A','B','C','D','E','F'], ans = typeof qObj.answer === 'number' ? qObj.answer : -1, exp = qObj.explanation || '';
+  const letters = ['A','B','C','D','E','F'];
+  // If the question is asking user preference/direction ("What do you want...", "Which direction..."), NEVER grade it right/wrong!
+  const isChoicePrompt = /\b(what do you want|what would you like|which (?:one|direction|option|path|style|version|way)|how (?:would|do) you want|where should we|what should (?:i|we)|choose a|next step|build from this)\b/i.test(qObj.q);
+  const ans = (!isChoicePrompt && typeof qObj.answer === 'number' && qObj.explanation) ? qObj.answer : -1;
+  const exp = ans >= 0 ? (qObj.explanation || '') : '';
   return `<div class="quiz-card" data-ans="${ans}">
-    <div class="quiz-hdr"><span><i class="fa-solid fa-list-check"></i> ${ans >= 0 ? 'Objective Question' : 'Select an Option'}</span><span class="qz-status">Choose A, B, C or D</span></div>
+    <div class="quiz-hdr"><span><i class="fa-solid fa-list-check"></i> ${ans >= 0 ? 'Objective Quiz' : 'Choose Your Direction'}</span><span class="qz-status">Select A, B, C or D</span></div>
     <div class="quiz-q">${inline(qObj.q)}</div>
-    <div class="quiz-opts">${qObj.options.slice(0,6).map((o,i) => { const clean = String(o).replace(/^[A-F][.)]\s*/i,''); return `<button type="button" class="quiz-opt" data-idx="${i}" data-letter="${letters[i]}" data-text="${attr(clean)}"><span class="q-let">${letters[i]}</span><span>${inline(clean)}</span></button>`; }).join('')}</div>
+    <div class="quiz-opts">${qObj.options.slice(0,6).map((o,i) => {
+      const clean = String(o).replace(/^[A-F](?:[.):\-]|\s+(?=[a-zA-Z]))\s*/i,'').trim();
+      return `<button type="button" class="quiz-opt" data-idx="${i}" data-letter="${letters[i]}" data-text="${attr(clean)}"><span class="q-let">${letters[i]}</span><span>${inline(clean)}</span></button>`;
+    }).join('')}</div>
     ${exp ? `<div class="quiz-exp"><strong>Explanation:</strong> ${inline(exp)}</div>` : ''}
   </div>`;
 }
@@ -1278,15 +1305,15 @@ function vibTail(root) {
 }
 async function reveal(node, text, c) {
   if (reduce || text.length > 2500) { node.innerHTML = md(text); highlight(node); return; }
-  const tk = text.split(/(\s+)/), step = Math.max(1, Math.ceil(tk.length / 2 / 160)) * 2; let n = 0;
+  const tk = text.split(/(\s+)/), step = Math.max(1, Math.ceil(tk.length / 2 / 160)) * 2;
   for (let i = 0; i < tk.length; i += step) {
     if (c && c.stopped) break;
     node.innerHTML = md(tk.slice(0, i + step).join('')); vibTail(node); scrollBot();
-    if (hapticOn() && navigator.vibrate && (n++ % 3 === 0)) navigator.vibrate(3);
+    triggerHaptic();
     await sleep(22);
   }
   node.innerHTML = md(text); highlight(node);
-}
+  }
 
 /* ───────── live run view (Otherworldly Soaring "..." Stage Only While Active) ───────── */
 function mkLive() {
@@ -1368,7 +1395,7 @@ async function follow(rid, L, c) {
 }
 
 /* ───────── modes ───────── */
-const MODE_CREATE = `\n\n(CREATE MODE. Use your tools to make what was asked. Make each thing exactly ONCE and do your absolute best the first time. No extra versions and no retries of your own.)`;
+const MODE_CREATE = `\n\n(CREATE MODE — STRICT 1-GENERATION LIMIT: Call your creation tool (generate_image, create_design, generate_video, generate_voice, build_website, etc.) EXACTLY ONCE to produce 1 single item. Do NOT call review_output, do NOT re-generate, and do NOT make a second version or variation unless the first tool call threw an error. Stop immediately after creating the 1 item and present it to the user.)`;
 function setMode(m) { mode = m === 'create' ? 'create' : 'chat'; LS('ph_mode', mode); $('mode-seg').dataset.mode = mode; document.querySelectorAll('#mode-seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode)); ti.placeholder = mode === 'create' ? 'Describe what to create…' : 'Ask anything, paste long text, or attach files/links…'; }
 document.querySelectorAll('#mode-seg button').forEach(b => b.onclick = () => setMode(b.dataset.mode));
 setMode(mode);
@@ -1670,9 +1697,11 @@ async function startChatStream(text, attached, opts = {}) {
         if (ev.type === 'thinking') { backendThink += ev.content; L.thinkSet(backendThink); }
         else if (ev.type === 'content') {
           raw += ev.content;
+          triggerHaptic();
           const sp = splitThink(raw);
           if (sp.think) L.thinkSet((backendThink + '\n\n' + sp.think).trim());
           if (sp.body) { L.q('.orb-stage')?.remove(); txtNode.innerHTML = md(sp.body) + '<span class="cursor"></span>'; highlight(txtNode); scrollBot(); }
+        }
         } else if (ev.type === 'status') L.status(ev.content);
         else if (ev.type === 'error') throw new Error(ev.content);
       });
@@ -2219,7 +2248,16 @@ const TOOLS = [
   {g:'Video', icon:'fa-film', items:[
     {id:'t2v_lite', icon:'fa-film', name:'Text to video (Lite)', price:'~120 cr', fields:[{n:'prompt',t:'textarea',l:'Video prompt',ph:'A drone shot over Lagos at golden hour…'},{n:'dur',t:'number',l:'Duration (seconds)',v:6,min:2,max:10}], directVideo:'t2v_lite'},
     {id:'i2v_lite', icon:'fa-photo-film', name:'Image to video (Lite)', price:'~150 cr', fields:[{n:'file',t:'file',l:'Starting image',acc:'image/*',req:1},{n:'prompt',t:'textarea',l:'Animation prompt'}], directVideo:'i2v_lite'},
-    {id:'t2v', icon:'fa-clapperboard', name:'Video (Pro, w/ Audio)', price:'varies', fields:[{n:'prompt',t:'textarea',l:'Describe the scene',ph:'Drone shot over Lagos at golden hour, cinematic score'},{n:'model',t:'dd',l:'Model',o:MODEL_ITEMS,v:'pro'},{n:'res',t:'dd',l:'Resolution',o:RES_ITEMS,v:'768P'},{n:'dur',t:'number',l:'Seconds (4 to 15)',v:6,min:4,max:15},{n:'ratio',t:'dd',l:'Shape',o:RATIO_ITEMS,v:'16:9'}], directVideo:'h3'},
+    {id:'t2v', icon:'fa-clapperboard', name:'Video (Pro, w/ Audio)', price:'varies', fields:[
+      {n:'prompt',t:'textarea',l:'Describe the scene',ph:'Drone shot over Lagos at golden hour, cinematic score'},
+      {n:'img_file',t:'file',l:'Starting / Reference Image (optional)',acc:'image/*'},
+      {n:'last_file',t:'file',l:'Last Frame Image (optional)',acc:'image/*'},
+      {n:'audio_file',t:'file',l:'Reference Audio (optional, Pro model)',acc:'audio/*'},
+      {n:'model',t:'dd',l:'Model',o:MODEL_ITEMS,v:'pro'},
+      {n:'res',t:'dd',l:'Resolution',o:RES_ITEMS,v:'768P'},
+      {n:'dur',t:'number',l:'Seconds (4 to 15)',v:6,min:4,max:15},
+      {n:'ratio',t:'dd',l:'Shape',o:RATIO_ITEMS,v:'16:9'}
+    ], directVideo:'h3'},
     {id:'vedit', icon:'fa-scissors', name:'Edit a video', price:'~5 cr', fields:[{n:'file',t:'file',l:'Video',acc:'video/*',req:1},{n:'instruction',t:'textarea',l:'What to do?',ph:'Trim to 8 seconds, add a warm filter and a title'}], build:f => `Edit the attached video in one edit_video call: ${f.instruction}`},
     {id:'caps', icon:'fa-closed-captioning', name:'Auto captions', price:'~8 cr', fields:[{n:'file',t:'file',l:'Video',acc:'video/*',req:1},{n:'style',t:'dd',l:'Style',o:[['clean','Clean white'],['yellow','Yellow'],['box','On a dark box']],v:'clean'}], build:f => `Add ${f.style} captions to the attached video with auto_captions.`}]},
   {g:'Audio & voice', icon:'fa-waveform-lines', items:[
@@ -2255,7 +2293,7 @@ function openTool(id) {
   closePanel('tools'); openPanel('toolform');
 }
 
-/* Direct Video Submission & Poller so Video Generation Never Fails */
+/* Direct Video Submission & Poller (Supports Text, Image First/Last Frame & Reference Audio) */
 async function runDirectVideo(kind, v) {
   const userLabel = `Create Video: "${v.prompt}"`;
   if (vp.querySelector('.hero')) vp.innerHTML = '';
@@ -2272,9 +2310,29 @@ async function runDirectVideo(kind, v) {
       r = await call('/api/studio/generate-video-from-image-lite', {method:'POST', body:fd, signal:c.ac.signal});
     } else {
       isH3 = true;
-      const fast = v.model === 'fast', res = fast && v.res === '2K' ? '768P' : (!fast && v.res === '480P' ? '768P' : v.res);
+      const fast = v.model === 'fast' && !v.audio_file;
+      const res = fast && v.res === '2K' ? '768P' : (!fast && v.res === '480P' ? '768P' : v.res);
       const dur = fast ? Math.max(5, +v.dur||6) : Math.max(4, +v.dur||6);
-      r = await call(fast ? '/api/studio/h3max/generate-text' : '/api/studio/h3/generate-text', {method:'POST', json:{prompt:v.prompt, duration:dur, resolution:res, ratio:v.ratio||'16:9'}, signal:c.ac.signal});
+      if (v.audio_file) {
+        const fd = new FormData();
+        fd.append('prompt', v.prompt);
+        if (v.img_file) fd.append('reference_images', v.img_file, v.img_file.name);
+        fd.append('reference_audio_file', v.audio_file, v.audio_file.name);
+        fd.append('duration', dur);
+        fd.append('resolution', res === '480P' ? '768P' : res);
+        fd.append('ratio', v.ratio || 'adaptive');
+        r = await call('/api/studio/h3/generate-reference', {method:'POST', body:fd, signal:c.ac.signal});
+      } else if (v.img_file) {
+        const fd = new FormData();
+        fd.append('prompt', v.prompt);
+        fd.append('first_frame', v.img_file, v.img_file.name);
+        if (v.last_file) fd.append('last_frame', v.last_file, v.last_file.name);
+        fd.append('duration', dur);
+        fd.append('resolution', res);
+        r = await call(fast ? '/api/studio/h3max/generate-image' : '/api/studio/h3/generate-image', {method:'POST', body:fd, signal:c.ac.signal});
+      } else {
+        r = await call(fast ? '/api/studio/h3max/generate-text' : '/api/studio/h3/generate-text', {method:'POST', json:{prompt:v.prompt, duration:dur, resolution:res, ratio:v.ratio||'16:9'}, signal:c.ac.signal});
+      }
     }
     const d = await r.json().catch(() => ({}));
     if (!r.ok || !d.task_id) throw new Error(d.detail || 'Video submission failed.');
@@ -2537,6 +2595,11 @@ onAuthStateChanged(auth, u => {
   if (!u) { location.href = 'signup-login.html'; return; }
   user = u; const name = u.displayName || (u.email || '').split('@')[0];
   $('pp-img').src = u.photoURL || $('pp-img').src; $('pp-name').textContent = name; $('pp-email').textContent = u.email || ''; $('edit-name').value = name; $('edit-photo').value = u.photoURL || ''; $('brand-sub').textContent = 'WORKSPACE: ' + name.toUpperCase();
+  // Always surface the notification banner on entry if permission hasn't been granted yet, and ask on first tap
+  if ('Notification' in window && Notification.permission === 'default' && LS(NK) !== '0') {
+    LS('ph_notif_later', null);
+    document.addEventListener('pointerdown', () => askNotifyPerm(), {once: true});
+  }
   loadChats(u.uid); startGallery(u.uid); updateWalletUI(); bannerUpdate(); setTimeout(checkPayReturn, 1500); if (LS('ph_tour_done') !== '1') setTimeout(startTour, 1200);
 });
 setTimeout(() => ti.focus(), 300);
