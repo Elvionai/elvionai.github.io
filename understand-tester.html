@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Philadelphia · Understand Tester</title>
+<style>
+:root{
+  --bg:#f3f1f8; --surface:#ffffff; --ink:#1d1830; --muted:#6b6682; --line:#ddd8ea;
+  --accent:#5b3fd6; --accent-ink:#ffffff; --ok:#1f7a4d; --err:#b3261e; --code:#ece8f7;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14111f; --surface:#1e1a30; --ink:#ece8fb; --muted:#9d97b8; --line:#352f52;
+    --accent:#8b73ff; --accent-ink:#120d28; --ok:#5fd39a; --err:#ff8a80; --code:#2a2445;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  padding:max(16px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom));
+}
+main{max-width:720px;margin:0 auto}
+h1{font-size:1.4rem;margin:8px 0 2px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 18px;font-size:.92rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+label:first-child{margin-top:0}
+input[type=text],input[type=password],textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--bg);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus,button:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+.tab{
+  flex:1 0 auto;padding:10px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;white-space:nowrap;
+}
+.tab[aria-selected=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.drop{
+  display:block;border:2px dashed var(--line);border-radius:12px;padding:22px 12px;text-align:center;
+  color:var(--muted);cursor:pointer;margin-top:0;
+}
+.drop.over{border-color:var(--accent);color:var(--ink)}
+.drop input{display:none}
+.preview{margin-top:12px}
+.preview img,.preview video{max-width:100%;max-height:240px;border-radius:10px;display:block}
+.preview audio{width:100%}
+.fname{font-size:.85rem;color:var(--muted);margin-top:6px;word-break:break-all}
+button.run{
+  width:100%;margin-top:14px;padding:13px;border:0;border-radius:10px;font:inherit;font-weight:600;
+  background:var(--accent);color:var(--accent-ink);cursor:pointer;
+}
+button.run:disabled{opacity:.55;cursor:wait}
+.row{display:flex;gap:8px;align-items:center}
+.row input{flex:1}
+.link{background:none;border:0;color:var(--accent);font:inherit;cursor:pointer;padding:0;font-size:.85rem}
+#status{font-size:.88rem;margin:0 0 10px;min-height:1.3em}
+#status.ok{color:var(--ok)} #status.err{color:var(--err)}
+#out{white-space:pre-wrap;word-wrap:break-word;line-height:1.6}
+.meta{font-size:.8rem;color:var(--muted);margin-bottom:8px}
+details{margin-top:6px}
+summary{cursor:pointer;color:var(--accent);font-size:.9rem}
+code{background:var(--code);padding:1px 5px;border-radius:5px;font-size:.85em}
+ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<main>
+  <h1>Understand tester</h1>
+  <p class="sub">Send a file and a question to your four Gemini endpoints.</p>
+
+  <section class="card" aria-label="Connection">
+    <label for="base">API base URL</label>
+    <input id="base" type="text" value="https://web-production-9a18.up.railway.app" autocomplete="off" spellcheck="false">
+    <label for="apikey">Firebase Web API key</label>
+    <input id="apikey" type="text" autocomplete="off" spellcheck="false" placeholder="AIza...">
+    <label for="email">Email</label>
+    <input id="email" type="text" autocomplete="username" spellcheck="false" placeholder="you@example.com">
+    <label for="password">Password</label>
+    <div class="row">
+      <input id="password" type="password" autocomplete="current-password" placeholder="Your Philadelphia password">
+      <button class="link" id="showPw" type="button">Show</button>
+    </div>
+    <p class="sub" id="authState" style="margin:10px 0 0">Not signed in. Analyze will sign you in automatically.</p>
+    <details>
+      <summary>Where do I find the API key?</summary>
+      <ol>
+        <li>Open the Firebase console and pick your project.</li>
+        <li>Go to Project settings, then General.</li>
+        <li>Copy the Web API key. It's the same key your website already uses publicly.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>Sign in with Google instead? Paste a token</summary>
+      <label for="token">Firebase ID token</label>
+      <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="Optional: overrides email sign-in">
+      <ol>
+        <li>On your logged-in site, run <code>await firebase.auth().currentUser.getIdToken(true)</code> in the console.</li>
+      </ol>
+    </details>
+  </section>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+
+  <section class="card">
+    <label for="prompt">Question</label>
+    <textarea id="prompt"></textarea>
+
+    <label id="fileLabel" style="margin-top:14px">File</label>
+    <label class="drop" id="drop" for="file">
+      <span id="dropText">Tap to choose a file, or drop one here</span>
+      <input id="file" type="file">
+    </label>
+    <div class="preview" id="preview"></div>
+    <div class="fname" id="fname"></div>
+
+    <button class="run" id="run" type="button">Analyze</button>
+  </section>
+
+  <section class="card hidden" id="result" aria-live="polite">
+    <p id="status"></p>
+    <div class="meta" id="meta"></div>
+    <div id="out"></div>
+  </section>
+</main>
+
+<script>
+const ENDPOINTS = {
+  video: { label: "Video", path: "/understand-video", accept: "video/*", cost: 1,
+           prompt: "Watch this video carefully and explain what it's about in detail." },
+  audio: { label: "Audio", path: "/understand-audio", accept: "audio/*", cost: 1,
+           prompt: "Transcribe this audio file and summarize its content." },
+  image: { label: "Image", path: "/understand-image", accept: "image/*", cost: 1,
+           prompt: "Describe this image in detail and tell me what it represents." },
+  pdf:   { label: "PDF",   path: "/understand-pdf",   accept: "application/pdf", cost: 1,
+           prompt: "Summarize this document, highlighting its key arguments and conclusions." }
+};
+
+const $ = id => document.getElementById(id);
+let current = "video";
+let file = null;
+let objectUrl = null;
+
+// Remember connection settings between visits (guarded: storage can be blocked)
+try {
+  const b = localStorage.getItem("ut_base"); if (b) $("base").value = b;
+  const k = localStorage.getItem("ut_key"); if (k) $("apikey").value = k;
+  const em = localStorage.getItem("ut_email"); if (em) $("email").value = em;
+} catch (e) {}
+
+// Tabs
+const tabs = $("tabs");
+Object.entries(ENDPOINTS).forEach(([key, ep]) => {
+  const b = document.createElement("button");
+  b.className = "tab"; b.type = "button"; b.role = "tab"; b.dataset.key = key;
+  b.textContent = ep.label;
+  b.onclick = () => selectTab(key);
+  tabs.appendChild(b);
+});
+
+function selectTab(key) {
+  current = key;
+  const ep = ENDPOINTS[key];
+  tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.key === key));
+  $("prompt").value = ep.prompt;
+  $("file").accept = ep.accept;
+  $("fileLabel").textContent = ep.label + " file";
+  clearFile();
+  $("result").classList.add("hidden");
+}
+
+function clearFile() {
+  file = null; $("file").value = "";
+  if (objectUrl) { URL.revokeObjectURL(objectUrl); objectUrl = null; }
+  $("preview").innerHTML = ""; $("fname").textContent = "";
+  $("dropText").textContent = "Tap to choose a file, or drop one here";
+}
+
+function setFile(f) {
+  if (!f) return;
+  file = f;
+  if (objectUrl) URL.revokeObjectURL(objectUrl);
+  objectUrl = URL.createObjectURL(f);
+  const p = $("preview"); p.innerHTML = "";
+  let el = null;
+  if (f.type.startsWith("image/")) { el = document.createElement("img"); el.alt = "Selected image"; }
+  else if (f.type.startsWith("video/")) { el = document.createElement("video"); el.controls = true; el.muted = true; }
+  else if (f.type.startsWith("audio/")) { el = document.createElement("audio"); el.controls = true; }
+  if (el) { el.src = objectUrl; p.appendChild(el); }
+  $("fname").textContent = `${f.name} · ${(f.size / 1048576).toFixed(2)} MB`;
+  $("dropText").textContent = "Choose a different file";
+}
+
+$("file").onchange = e => setFile(e.target.files[0]);
+const drop = $("drop");
+["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => setFile(e.dataTransfer.files[0]));
+
+$("showPw").onclick = () => {
+  const t = $("password"); const show = t.type === "password";
+  t.type = show ? "text" : "password";
+  $("showPw").textContent = show ? "Hide" : "Show";
+};
+
+let idToken = null, idTokenAt = 0;
+
+async function getToken() {
+  const manual = $("token").value.trim();
+  if (manual) return manual;
+  if (idToken && Date.now() - idTokenAt < 50 * 60 * 1000) return idToken;
+  const key = $("apikey").value.trim(), email = $("email").value.trim(), pw = $("password").value;
+  if (!key || !email || !pw) throw new Error("Enter the Firebase Web API key, email and password.");
+  const r = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + encodeURIComponent(key), {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password: pw, returnSecureToken: true })
+  });
+  const d = await r.json();
+  if (!r.ok) {
+    const code = (d.error && d.error.message) || "UNKNOWN";
+    const map = { INVALID_LOGIN_CREDENTIALS: "Wrong email or password. If you normally sign in with Google, use the token option instead.",
+                  EMAIL_NOT_FOUND: "No account with that email.", INVALID_PASSWORD: "Wrong password.",
+                  API_KEY_INVALID: "The Web API key is not valid." };
+    throw new Error("Sign-in failed: " + (map[code] || code));
+  }
+  idToken = d.idToken; idTokenAt = Date.now();
+  try { localStorage.setItem("ut_key", key); localStorage.setItem("ut_email", email); } catch (e) {}
+  $("authState").textContent = "Signed in as " + email;
+  return idToken;
+}
+
+function setStatus(msg, cls) {
+  const s = $("status"); s.textContent = msg; s.className = cls || "";
+}
+
+$("run").onclick = async () => {
+  const base = $("base").value.trim().replace(/\/+$/, "");
+  const ep = ENDPOINTS[current];
+
+  $("result").classList.remove("hidden");
+  $("out").textContent = ""; $("meta").textContent = "";
+  if (!base) return setStatus("Enter your API base URL.", "err");
+  if (!file) return setStatus(`Choose a ${ep.label.toLowerCase()} file first.`, "err");
+
+  try { localStorage.setItem("ut_base", base); } catch (e) {}
+
+  const fd = new FormData();
+  fd.append("prompt", $("prompt").value.trim() || ep.prompt);
+  fd.append("file", file);
+
+  const btn = $("run");
+  btn.disabled = true; btn.textContent = "Analyzing…";
+  setStatus("Signing in…");
+  let token;
+  try { token = await getToken(); }
+  catch (e) { setStatus(e.message, "err"); btn.disabled = false; btn.textContent = "Analyze"; return; }
+  setStatus(current === "video" ? "Uploading. Video can take a minute to process…" : "Uploading and analyzing…");
+  const t0 = performance.now();
+
+  try {
+    const res = await fetch(base + ep.path, {
+      method: "POST",
+      headers: { "X-Firebase-Token": token },
+      body: fd
+    });
+    const secs = ((performance.now() - t0) / 1000).toFixed(1);
+    const raw = await res.text();
+    let data = null;
+    try { data = JSON.parse(raw); } catch (e) {}
+
+    if (!res.ok) {
+      const detail = data && (data.detail || data.error) ? (data.detail || data.error) : raw.slice(0, 400);
+      let hint = "";
+      if (res.status === 401) hint = " Your sign-in was rejected. Check the account and try again.";
+      if (res.status === 402) hint = " Not enough credits on this account.";
+      setStatus(`Error ${res.status}: ${typeof detail === "string" ? detail : JSON.stringify(detail)}.${hint}`, "err");
+      return;
+    }
+    setStatus("Done", "ok");
+    $("meta").textContent = `${ep.path} · ${res.status} · ${secs}s · ~${ep.cost} credit`;
+    $("out").textContent = (data && data.response) ? data.response : raw;
+  } catch (err) {
+    setStatus("Request failed: " + err.message + ". Check the base URL, that the server is running, and CORS.", "err");
+  } finally {
+    btn.disabled = false; btn.textContent = "Analyze";
+  }
+};
+
+selectTab("video");
+</script>
+</body>
+</html>
