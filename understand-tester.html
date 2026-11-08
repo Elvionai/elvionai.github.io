@@ -74,7 +74,7 @@ ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
 <body>
 <main>
   <h1>Understand tester</h1>
-  <p class="sub">Send a file and a question to your four Gemini endpoints.</p>
+  <p class="sub">Send a file or links and a question to your Gemini endpoints.</p>
 
   <section class="card" aria-label="Connection">
     <label for="base">API base URL</label>
@@ -113,6 +113,12 @@ ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
     <label for="prompt">Question</label>
     <textarea id="prompt"></textarea>
 
+    <div id="urlBox" class="hidden">
+      <label for="urls" style="margin-top:14px">Links (one per line, up to 20)</label>
+      <textarea id="urls" placeholder="https://example.com/article&#10;https://example.com/report.pdf" spellcheck="false"></textarea>
+      <div class="fname">Public pages, PDFs and images only. No logins, paywalls, YouTube or Google Docs.</div>
+    </div>
+    <div id="fileBox">
     <label id="fileLabel" style="margin-top:14px">File</label>
     <label class="drop" id="drop" for="file">
       <span id="dropText">Tap to choose a file, or drop one here</span>
@@ -120,6 +126,7 @@ ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
     </label>
     <div class="preview" id="preview"></div>
     <div class="fname" id="fname"></div>
+    </div>
 
     <button class="run" id="run" type="button">Analyze</button>
   </section>
@@ -139,6 +146,8 @@ const ENDPOINTS = {
            prompt: "Transcribe this audio file and summarize its content." },
   image: { label: "Image", path: "/understand-image", accept: "image/*", cost: 1,
            prompt: "Describe this image in detail and tell me what it represents." },
+  url:   { label: "Link",  path: "/api/tools/understand-url", noFile: true, cost: 2,
+           prompt: "Summarize the key points of these pages and extract any important data." },
   pdf:   { label: "PDF",   path: "/understand-pdf",   accept: "application/pdf", cost: 1,
            prompt: "Summarize this document, highlighting its key arguments and conclusions." }
 };
@@ -170,8 +179,9 @@ function selectTab(key) {
   const ep = ENDPOINTS[key];
   tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.key === key));
   $("prompt").value = ep.prompt;
-  $("file").accept = ep.accept;
-  $("fileLabel").textContent = ep.label + " file";
+  $("fileBox").classList.toggle("hidden", !!ep.noFile);
+  $("urlBox").classList.toggle("hidden", !ep.noFile);
+  if (!ep.noFile) { $("file").accept = ep.accept; $("fileLabel").textContent = ep.label + " file"; }
   clearFile();
   $("result").classList.add("hidden");
 }
@@ -247,13 +257,14 @@ $("run").onclick = async () => {
   $("result").classList.remove("hidden");
   $("out").textContent = ""; $("meta").textContent = "";
   if (!base) return setStatus("Enter your API base URL.", "err");
-  if (!file) return setStatus(`Choose a ${ep.label.toLowerCase()} file first.`, "err");
+  if (ep.noFile) { if (!$("urls").value.trim()) return setStatus("Paste at least one link.", "err"); }
+  else if (!file) return setStatus(`Choose a ${ep.label.toLowerCase()} file first.`, "err");
 
   try { localStorage.setItem("ut_base", base); } catch (e) {}
 
   const fd = new FormData();
   fd.append("prompt", $("prompt").value.trim() || ep.prompt);
-  fd.append("file", file);
+  if (ep.noFile) fd.append("urls", $("urls").value.trim()); else fd.append("file", file);
 
   const btn = $("run");
   btn.disabled = true; btn.textContent = "Analyzing…";
@@ -285,7 +296,11 @@ $("run").onclick = async () => {
     }
     setStatus("Done", "ok");
     $("meta").textContent = `${ep.path} · ${res.status} · ${secs}s · ~${ep.cost} credit`;
-    $("out").textContent = (data && data.response) ? data.response : raw;
+    let outText = (data && data.response) ? data.response : raw;
+    if (data && data.sources && data.sources.length) {
+      outText += "\n\nSources:\n" + data.sources.map(x => "- " + (x.title || "Link") + ": " + x.url).join("\n");
+    }
+    $("out").textContent = outText;
   } catch (err) {
     setStatus("Request failed: " + err.message + ". Check the base URL, that the server is running, and CORS.", "err");
   } finally {
