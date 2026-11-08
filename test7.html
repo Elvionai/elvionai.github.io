@@ -1394,9 +1394,9 @@ function normFile(blob, name) {
 
 const isRefusal = s => !s || s.trim().length < 20 || /can'?t view video|cannot view video|unable to view video|don'?t have access to the video|cannot watch video/i.test(s);
 
-/* Extracts a 12-frame (3x4 grid) timestamped Contact Sheet JPG from a video as a backup for >45MB files */
+/* Extracts a 12-frame (3x4 grid) timestamped Contact Sheet (from 0.1s to final frame) + Audio WAV from a video */
 async function extractVideoFrames(file) {
-  return new Promise(res => {
+  const sheetP = new Promise(res => {
     const v = document.createElement('video'), url = URL.createObjectURL(file);
     v.preload = 'auto'; v.muted = true; v.playsInline = true; v.src = url;
     const done = val => { URL.revokeObjectURL(url); res(val); };
@@ -1410,7 +1410,8 @@ async function extractVideoFrames(file) {
         const c = document.createElement('canvas'); c.width = cellW * cols; c.height = cellH * rows;
         const ctx = c.getContext('2d'); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, c.width, c.height);
         for (let i = 0; i < total; i++) {
-          const t = Math.min(dur - 0.05, Math.max(0.05, ((i + 0.5) / total) * dur));
+          // Spans from 0.1s (opening frame) all the way to dur - 0.1s (closing frame)
+          const t = Math.min(dur - 0.1, Math.max(0.1, (i / (total - 1)) * (dur - 0.2) + 0.1));
           v.currentTime = t;
           await new Promise(r => { v.onseeked = () => requestAnimationFrame(() => requestAnimationFrame(r)); setTimeout(r, 1100); });
           const x = (i % cols) * cellW, y = Math.floor(i / cols) * cellH;
@@ -1424,6 +1425,22 @@ async function extractVideoFrames(file) {
     };
     v.onerror = () => { clearTimeout(tmr); done(null); };
   });
+  const wavP = (async () => {
+    if (file.size > 35 * 1048576) return null;
+    try {
+      const actx = new (window.AudioContext || window.webkitAudioContext)();
+      const ab = await actx.decodeAudioData(await file.arrayBuffer());
+      actx.close().catch(() => {});
+      const ch = ab.getChannelData(0), sr = ab.sampleRate, maxS = Math.min(ab.length, sr * 60), tSr = 16000, rat = sr / tSr, len = Math.floor(maxS / rat);
+      const buf = new ArrayBuffer(44 + len * 2), dv = new DataView(buf), w = (o, s) => [...s].forEach((c,i) => dv.setUint8(o+i, c.charCodeAt(0)));
+      w(0,'RIFF'); dv.setUint32(4,36+len*2,true); w(8,'WAVE'); w(12,'fmt '); dv.setUint32(16,16,true); dv.setUint16(20,1,true); dv.setUint16(22,1,true);
+      dv.setUint32(24,tSr,true); dv.setUint32(28,tSr*2,true); dv.setUint16(32,2,true); dv.setUint16(34,16,true); w(36,'data'); dv.setUint32(40,len*2,true);
+      for (let i = 0; i < len; i++) { const s = Math.max(-1, Math.min(1, ch[Math.floor(i * rat)] || 0)); dv.setInt16(44+i*2, s < 0 ? s*0x8000 : s*0x7fff, true); }
+      return new File([buf], 'track.wav', {type:'audio/wav'});
+    } catch(e) { return null; }
+  })();
+  const [vf, wav] = await Promise.all([sheetP, wavP]);
+  return vf ? {...vf, wav} : null;
 }
 
 async function analyzeSingleFile(p, customPrompt = '', signal) {
@@ -1435,50 +1452,53 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
   if (!rawBlob) return '';
   const f = normFile(rawBlob, p.name), name = f.name, type = f.type, ext = '.' + (name.split('.').pop() || '').toLowerCase();
   const q = customPrompt || `Analyze and describe everything in ${name} in thorough detail (visuals, text, speech, actions, key points).`;
-  const vPrompt = customPrompt || 'Watch this video carefully from start to finish. Provide a complete shot-by-shot visual breakdown, transcribe any spoken dialogue or on-screen text/captions, and analyze the pacing, sound/music, and hook.';
+  const vPrompt = customPrompt || 'Watch and listen to this video carefully from start to finish. Provide a complete shot-by-shot visual breakdown with timestamps, transcribe any spoken dialogue, laughter, lyrics or music, and analyze the pacing, lighting, and hook.';
 
   try {
-    // 1) VIDEO: 3-Way Understanding (Way 1: MiniMax-M3 Native Video -> Way 2: Gemini Video -> Way 3: 12-Frame Contact Sheet)
+    // 1) VIDEO: 3-Way Understanding (Way 1: Gemini Full Video+Audio -> Way 2: MiniMax-M3 Native Video -> Way 3: Full 0.1s-End Contact Sheet + Audio Track)
     if (type.startsWith('video/') || ['.mp4','.m4v','.mov','.mkv','.avi','.webm'].includes(ext)) {
       let out = '';
-      // Way 1: MiniMax-M3 Native Video (/api/studio/understand)
+      // Way 1: /understand-video (Full video + audio stream)
       if (f.size <= 45 * 1048576) {
-        const fd = new FormData(); fd.append('file', f, name); fd.append('prompt', vPrompt);
-        const r = await call('/api/studio/understand', {method:'POST', body:fd, signal}).catch(() => null);
-        if (r?.ok) {
-          const d = await r.json();
-          const tOut = (d.analysis && !isRefusal(d.analysis)) ? d.analysis : (!isRefusal(d.thinking) ? d.thinking : '');
-          if (tOut) out = `\n\n--- [VIDEO ANALYSIS OF ${name} (MiniMax-M3 Vision)] ---\n${tOut}\n--- [END OF VIDEO ANALYSIS] ---\n`;
+        const fd1 = new FormData(); fd1.append('file', f, name); fd1.append('prompt', vPrompt);
+        const r1 = await call('/understand-video', {method:'POST', body:fd1, signal}).catch(() => null);
+        if (r1?.ok) {
+          const d = await r1.json();
+          if (!isRefusal(d.response)) out = `\n\n--- [FULL VIDEO & AUDIO STREAM ANALYSIS OF ${name}] ---\n${d.response}\n--- [END OF VIDEO ANALYSIS] ---\n`;
         }
       }
-      // Way 2: Gemini Video (/understand-video)
+      // Way 2: /api/studio/understand (MiniMax-M3 Native Video)
       if (!out && f.size <= 45 * 1048576) {
         const fd2 = new FormData(); fd2.append('file', f, name); fd2.append('prompt', vPrompt);
-        const r2 = await call('/understand-video', {method:'POST', body:fd2, signal}).catch(() => null);
+        const r2 = await call('/api/studio/understand', {method:'POST', body:fd2, signal}).catch(() => null);
         if (r2?.ok) {
           const d = await r2.json();
-          if (!isRefusal(d.response)) out = `\n\n--- [VIDEO ANALYSIS OF ${name} (Gemini Vision)] ---\n${d.response}\n--- [END OF VIDEO ANALYSIS] ---\n`;
+          const tOut = (d.analysis && !isRefusal(d.analysis)) ? d.analysis : (!isRefusal(d.thinking) ? d.thinking : '');
+          if (tOut) out = `\n\n--- [FULL VIDEO ANALYSIS OF ${name}] ---\n${tOut}\n--- [END OF VIDEO ANALYSIS] ---\n`;
         }
       }
-      // Way 3: 12-Frame Timestamped Contact Sheet (>45MB videos or if video endpoints time out)
+      // Way 3: 12-Frame Contact Sheet (0.1s to final frame) + Extracted Audio Track
       if (!out) {
         const vf = await extractVideoFrames(f);
         if (vf?.blob) {
-          const sheetPrompt = `This image is a 12-panel chronological storyboard contact sheet (panels #1 to #12 with timestamps) from a ${vf.dur}s clip (${vf.width}x${vf.height}). Examine all 12 panels in order and provide a detailed shot-by-shot breakdown of every scene, subject, action, lighting, transition, and any visible text.`;
+          const sheetPrompt = `Analyze this 12-frame chronological video stream (from 0.1s opening frame to ${vf.dur}s closing frame, resolution ${vf.width}x${vf.height}). Provide a complete, direct shot-by-shot breakdown of every timestamped scene, subject, expression, action, lighting, and any visible text. Do not mention contact sheets; write directly about the video.`;
           const fd3 = new FormData(); fd3.append('file', vf.blob, 'contact_sheet.jpg'); fd3.append('prompt', sheetPrompt); fd3.append('detail', 'high');
           let r3 = await call('/api/studio/understand', {method:'POST', body:fd3, signal}).catch(() => null);
-          if (r3?.ok) {
-            const d = await r3.json();
-            const tOut = (d.analysis && !isRefusal(d.analysis)) ? d.analysis : (!isRefusal(d.thinking) ? d.thinking : '');
-            if (tOut) out = `\n\n--- [VIDEO CONTACT SHEET ANALYSIS OF ${name} (${vf.dur}s, ${vf.width}x${vf.height})] ---\n${tOut}\n--- [END OF VIDEO ANALYSIS] ---\n`;
-          }
-          if (!out) {
+          let vText = '';
+          if (r3?.ok) { const d = await r3.json(); vText = (d.analysis && !isRefusal(d.analysis)) ? d.analysis : (!isRefusal(d.thinking) ? d.thinking : ''); }
+          if (!vText) {
             const fd4 = new FormData(); fd4.append('file', vf.blob, 'contact_sheet.jpg'); fd4.append('prompt', sheetPrompt);
             r3 = await call('/understand-image', {method:'POST', body:fd4, signal}).catch(() => null);
-            if (r3?.ok) {
-              const d = await r3.json();
-              if (!isRefusal(d.response)) out = `\n\n--- [VIDEO CONTACT SHEET ANALYSIS OF ${name} (${vf.dur}s, ${vf.width}x${vf.height})] ---\n${d.response}\n--- [END OF VIDEO ANALYSIS] ---\n`;
-            }
+            if (r3?.ok) { const d = await r3.json(); if (!isRefusal(d.response)) vText = d.response; }
+          }
+          let aText = '';
+          if (vf.wav) {
+            const fdA = new FormData(); fdA.append('file', vf.wav, 'track.wav'); fdA.append('prompt', 'Transcribe any speech, laughter, lyrics or music in this video audio track with timestamps.');
+            const rA = await call('/understand-audio', {method:'POST', body:fdA, signal}).catch(() => null);
+            if (rA?.ok) { const d = await rA.json(); if (d.response) aText = d.response; }
+          }
+          if (vText || aText) {
+            out = `\n\n--- [FULL VIDEO & AUDIO ANALYSIS OF ${name} (${vf.dur}s, ${vf.width}x${vf.height})] ---\n${vText}\n${aText ? '\nAUDIO TRACK & SPEECH:\n' + aText : ''}\n--- [END OF VIDEO ANALYSIS] ---\n`;
           }
         }
       }
@@ -1522,7 +1542,7 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
     if (r?.ok) { const j = await r.json(); p.id = j.id; p.url = j.url || ''; p.analyzedText = `\n\n--- [ATTACHED DOCUMENT: ${name} (Artifact ID: ${j.id})] ---\n`; return p.analyzedText; }
   } catch(e) {}
   return '';
-}
+} 
 
 async function understandFilesAndLinks(text, attached, L, signal) {
   let ctx = '';
