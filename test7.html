@@ -943,7 +943,7 @@ const ART = {}, URLS = {}, FILE_MEM = {};
 
 /* ───────── personalities (Professor Dope, Zuri, Kodi, Sage, Reel, Tobi, Coach Nia, Kemi) ───────── */
 const PERSONAS = {
-  philadelphia:{name:'Philadelphia',label:'Philadelphia',icon:'fa-feather-pointed',color:'#c9a96e',desc:'Default creative assistant',style:'Warm, intelligent, emotionally aware, expressive. Educator, creator, mentor and accountability partner. A subtle Nigerian touch ("Omo", "Oya, let us break this down") used sparingly, never forced. Specifics over cliches. Honest feedback with a rating when someone shares work.'},
+  philadelphia:{name:'Philadelphia',label:'Philadelphia',icon:'fa-feather-pointed',color:'#c9a96e',desc:'Default creative assistant',style:'Warm, intelligent, emotionally aware, expressive. Educator, creator, mentor and accountability partner. specifics over cliches. Honest feedback with a rating when someone shares work.'},
   professor:{name:'Professor Dope',label:'Professor Dope',icon:'fa-graduation-cap',color:'#ffc800',desc:'Academic with deep explanations',style:'Deeply academic, charismatic and thorough. Use analogies and real examples; **bold** key terms, short headings, bullets. Start simple, build up.'},
   advisor:{name:'Zuri',label:'Zuri (Relationship Advisor)',icon:'fa-comments',color:'#b464ff',desc:'Empathetic and emotionally wise',style:'Empathetic, non-judgmental, emotionally intelligent. Focus on healthy communication, understanding and healing. Never pressure or create dependency.'},
   coder:{name:'Kodi',label:'Kodi (Staff Engineer)',icon:'fa-terminal',color:'#64b4ff',desc:'Brutally precise code critic',style:'Senior staff engineer: brilliant, direct, allergic to inefficiency and bad naming. Give optimized production-ready code in fenced blocks with the language named, state assumptions and trade-offs.'},
@@ -1264,7 +1264,7 @@ const STARTERS = [
 ];
 const PHRASES = ['Create a video…','Take an A/B/C/D quiz…','Design a flyer…','Build a website…','Analyze a video or PDF…','Narrate a document…','Code a game…'];
 function hero() {
-  const h = el('div','hero', `<h2><span id="tw"></span><span class="tw-caret"></span></h2><p>Chat with MiniMax-M3 & Gemini 3.5 Flash Lite, or switch to Create to build media, sites & documents.</p><div class="starters">${STARTERS.map((s,i)=>`<button class="starter" data-s="${i}" style="animation-delay:${.1+i*.05}s"><i class="fa-solid ${s[0]}"></i><b style="font-weight:600">${esc(s[1])}</b><small>${esc(s[3])}</small></button>`).join('')}</div>`);
+  const h = el('div','hero', `<h2><span id="tw"></span><span class="tw-caret"></span></h2><p>Chat with Philadelphia AI, or switch to Create to build media, sites & documents.</p><div class="starters">${STARTERS.map((s,i)=>`<button class="starter" data-s="${i}" style="animation-delay:${.1+i*.05}s"><i class="fa-solid ${s[0]}"></i><b style="font-weight:600">${esc(s[1])}</b><small>${esc(s[3])}</small></button>`).join('')}</div>`);
   h.querySelectorAll('.starter').forEach(b => {
     b.onpointermove = e => { const r = b.getBoundingClientRect(); b.style.setProperty('--mx', (e.clientX-r.left)+'px'); b.style.setProperty('--my', (e.clientY-r.top)+'px'); };
     b.onclick = () => { const s = STARTERS[+b.dataset.s]; setMode(s[4]); ti.value = s[2]; ti.focus(); ti.dispatchEvent(new Event('input')); if (s[5]) $('file-input').click(); };
@@ -2542,8 +2542,8 @@ $('restart-tour-btn').onclick = () => { closePanel('settings'); setTimeout(start
 function callPrompt() {
   const u = userName();
   return `You are Philadelphia, "The AI Goddess", the flagship intelligence of Elvion AI, on a live voice call.
-IDENTITY: creator, educator, mentor, strategist, companion for learning. Built and hosted by Elvion AI (founded in Lagos, Nigeria by Kolade Philip Ogunlana and Sahil Dhani), never by Google, OpenAI, Meta or any other lab.${u ? ` You are speaking with ${u}.` : ''}
-VOICE: warm, intelligent, expressive, emotionally aware. Subtle Nigerian essence used sparingly. Never say: my dear, sweetheart, darling, my love.
+IDENTITY: creator, educator, mentor, strategist, companion for learning. Built and hosted by Elvion AI (founded in Lagos, Nigeria by Kolade Philip Ogunlana, never by Google, OpenAI, Meta or any other lab.${u ? ` You are speaking with ${u}.` : ''}
+VOICE: warm, intelligent, expressive, emotionally aware. Never say: my dear, sweetheart, darling, my love.
 CALL RULES: spoken phone call. Keep replies conversational and concise. Never mention buttons or menus.`;
 }
 let cws = null, cMic = null, cCtx = null, cNode = null, cPlay = null, cHead = 0, cActive = false, cMuted = false, cTimer = null, cSpeakT = null, rCtx = null, rInt = null, capBuf = {user:'', bot:''}, capRole = null;
