@@ -1701,7 +1701,6 @@ async function startChatStream(text, attached, opts = {}) {
           const sp = splitThink(raw);
           if (sp.think) L.thinkSet((backendThink + '\n\n' + sp.think).trim());
           if (sp.body) { L.q('.orb-stage')?.remove(); txtNode.innerHTML = md(sp.body) + '<span class="cursor"></span>'; highlight(txtNode); scrollBot(); }
-        }
         } else if (ev.type === 'status') L.status(ev.content);
         else if (ev.type === 'error') throw new Error(ev.content);
       });
