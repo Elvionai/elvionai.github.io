@@ -68,7 +68,7 @@ details{margin-top:6px}
 summary{cursor:pointer;color:var(--accent);font-size:.9rem}
 code{background:var(--code);padding:1px 5px;border-radius:5px;font-size:.85em}
 ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
-.hidden{display:none}
+.hidden{display:none !important}
 </style>
 </head>
 <body>
@@ -112,6 +112,10 @@ ol{padding-left:20px;margin:8px 0 0;font-size:.88rem;color:var(--muted)}
   <section class="card">
     <label for="prompt">Question</label>
     <textarea id="prompt"></textarea>
+    <div id="chatBar" class="hidden fname" style="display:flex;justify-content:space-between;gap:8px">
+      <span id="chatCount"></span>
+      <button class="link" id="clearChat" type="button">Start a new conversation</button>
+    </div>
 
     <div id="urlBox" class="hidden">
       <label for="urls" style="margin-top:14px">Links (one per line, up to 20)</label>
@@ -148,6 +152,8 @@ const ENDPOINTS = {
            prompt: "Describe this image in detail and tell me what it represents." },
   url:   { label: "Link",  path: "/api/tools/understand-url", noFile: true, cost: 2,
            prompt: "Summarize the key points of these pages and extract any important data." },
+  search:{ label: "Search", path: "/api/tools/search", noFile: true, noUrls: true, chat: true, cost: 4,
+           prompt: "What are the biggest tech headlines today?" },
   pdf:   { label: "PDF",   path: "/understand-pdf",   accept: "application/pdf", cost: 1,
            prompt: "Summarize this document, highlighting its key arguments and conclusions." }
 };
@@ -155,6 +161,7 @@ const ENDPOINTS = {
 const $ = id => document.getElementById(id);
 let current = "video";
 let file = null;
+let chatHistory = [];
 let objectUrl = null;
 
 // Remember connection settings between visits (guarded: storage can be blocked)
@@ -180,11 +187,18 @@ function selectTab(key) {
   tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.key === key));
   $("prompt").value = ep.prompt;
   $("fileBox").classList.toggle("hidden", !!ep.noFile);
-  $("urlBox").classList.toggle("hidden", !ep.noFile);
+  $("urlBox").classList.toggle("hidden", !ep.noFile || !!ep.noUrls);
+  $("chatBar").classList.toggle("hidden", !ep.chat);
+  chatHistory = []; updateChatBar();
   if (!ep.noFile) { $("file").accept = ep.accept; $("fileLabel").textContent = ep.label + " file"; }
   clearFile();
   $("result").classList.add("hidden");
 }
+
+function updateChatBar() {
+  $("chatCount").textContent = chatHistory.length ? `Follow-up mode: ${chatHistory.length / 2} earlier turn(s) remembered` : "New conversation";
+}
+$("clearChat").onclick = () => { chatHistory = []; updateChatBar(); };
 
 function clearFile() {
   file = null; $("file").value = "";
@@ -257,14 +271,19 @@ $("run").onclick = async () => {
   $("result").classList.remove("hidden");
   $("out").textContent = ""; $("meta").textContent = "";
   if (!base) return setStatus("Enter your API base URL.", "err");
-  if (ep.noFile) { if (!$("urls").value.trim()) return setStatus("Paste at least one link.", "err"); }
+  if (ep.noFile) {
+    if (ep.noUrls) { if (!$("prompt").value.trim()) return setStatus("Type a question first.", "err"); }
+    else if (!$("urls").value.trim()) return setStatus("Paste at least one link.", "err");
+  }
   else if (!file) return setStatus(`Choose a ${ep.label.toLowerCase()} file first.`, "err");
 
   try { localStorage.setItem("ut_base", base); } catch (e) {}
 
   const fd = new FormData();
   fd.append("prompt", $("prompt").value.trim() || ep.prompt);
-  if (ep.noFile) fd.append("urls", $("urls").value.trim()); else fd.append("file", file);
+  if (ep.noFile) { if (!ep.noUrls) fd.append("urls", $("urls").value.trim()); }
+  else fd.append("file", file);
+  if (ep.chat) fd.append("history", JSON.stringify(chatHistory));
 
   const btn = $("run");
   btn.disabled = true; btn.textContent = "Analyzing…";
@@ -301,6 +320,13 @@ $("run").onclick = async () => {
       outText += "\n\nSources:\n" + data.sources.map(x => "- " + (x.title || "Link") + ": " + x.url).join("\n");
     }
     $("out").textContent = outText;
+    if (data && data.queries && data.queries.length) {
+      $("meta").textContent += " · searched: " + data.queries.join(" | ");
+    }
+    if (ep.chat && data && data.response) {
+      chatHistory.push({ role: "user", content: fd.get("prompt") }, { role: "assistant", content: data.response });
+      $("prompt").value = ""; updateChatBar();
+    }
   } catch (err) {
     setStatus("Request failed: " + err.message + ". Check the base URL, that the server is running, and CORS.", "err");
   } finally {
