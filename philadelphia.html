@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Philadelphia AI by Elvion — Intelligence Unleashed</title>
+  <title>Philadelphia AI by Elvion | Intelligence Unleashed</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Philadelphia AI by Elvion: The world's most advanced and emotionally intelligent AI assistant for conversation, code, writing, and creative generation.">
+  <meta name="description" content="Philadelphia AI by Elvion: The flagship agentic AI workstation for deep reasoning, code execution, 2K cinema video, visual synthesis, voiceovers, and 120+ autonomous tools.">
   <meta name="theme-color" content="#050505" />
 
-  <link rel="apple-touch-icon" href="images/IMG_20250715_102103_129.jpg" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/IMG_20250715_102103_129.jpg" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/IMG_20250824_133336_309.jpg" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="images/icon-192.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" />
   <link rel="manifest" href="manifest.json" />
 
   <meta name="mobile-web-app-capable" content="yes" />
@@ -22,49 +18,46 @@
   <meta name="apple-mobile-web-app-title" content="Philadelphia AI" />
   <meta name="application-name" content="Philadelphia AI" />
   <script src="app-shell.js" defer></script>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Philadelphia AI" />
-  <meta name="application-name" content="Philadelphia AI" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,400..700&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+
   <style>
     :root {
-      --font-brand: 'Playfair Display', serif;
+      --font-brand: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-code: 'Fira Code', monospace;
       --font-futuristic: 'Orbitron', sans-serif;
       --bg-deep: #050505;
       --bg-space: #0a0a08;
-      --bg-card: rgba(15, 15, 12, 0.95);
-      --bg-elevated: #161614;
-      --text-primary: #efefef;
+      --bg-card: rgba(16, 16, 13, 0.94);
+      --bg-elevated: #161613;
+      --text-primary: #f2f0ea;
       --text-secondary: #b5b0a3;
-      --text-muted: #6b665c;
+      --text-muted: #6e695f;
       --accent: #c9a96e;
       --accent-soft: #e8d5b0;
+      --accent-rgb: 201, 169, 110;
       --accent-green: #5fb87a;
       --danger: #e05a5a;
       --border-subtle: rgba(201, 169, 110, 0.15);
-      --border-glow: rgba(201, 169, 110, 0.4);
-      --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15);
-      --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
-      --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
-      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
-      --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.1) 0%, transparent 60%), 
-                       radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
+      --border-glow: rgba(201, 169, 110, 0.44);
+      --shadow-cosmic: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 28px rgba(201, 169, 110, 0.12);
+      --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.95);
+      --glow-gold: 0 0 22px rgba(201, 169, 110, 0.38);
+      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #f0dfc0 50%, #9f7e43 100%);
+      --radius: 18px;
+      --ease: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-space); }
-    *::-webkit-scrollbar { width: 8px; }
+    *::-webkit-scrollbar { width: 7px; height: 7px; }
     *::-webkit-scrollbar-track { background: var(--bg-space); }
     *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
 
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
     body {
       font-family: var(--font-body);
       background-color: var(--bg-deep);
@@ -74,125 +67,174 @@
       min-height: 100vh;
       position: relative;
     }
-
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: var(--gradient-deep);
+      background:
+        radial-gradient(80% 50% at 50% -10%, rgba(201, 169, 110, 0.14), transparent 65%),
+        radial-gradient(60% 50% at 85% 90%, rgba(201, 169, 110, 0.06), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    #snow-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.7; }
+    #scroll-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px; width: 0%;
+      background: var(--gradient-gold);
+      box-shadow: 0 0 12px var(--accent);
+      z-index: 2500;
+      transition: width 0.08s linear;
+    }
 
-    h1, h2, h3, h4, h5, h6 { font-family: var(--font-brand); color: #fff; font-weight: 700; margin-bottom: 1rem; }
-    
-    a { color: var(--accent); text-decoration: none; transition: all 0.3s ease; }
-    a:hover { color: var(--accent-soft); text-shadow: var(--glow-gold); }
+    #snow-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.72; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
-    section { padding: 6rem 0; }
-    .text-center { text-align: center; }
+    h1, h2, h3, h4 { font-family: var(--font-brand); color: #fff; font-weight: 700; line-height: 1.22; }
+    a { color: var(--accent); text-decoration: none; transition: var(--ease); }
+    a:hover { color: var(--accent-soft); }
 
-    /* Navbar */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+    section { padding: 6rem 0; position: relative; z-index: 2; }
+
+    /* Scroll Animations (Safe on Mobile & Desktop) */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      will-change: opacity, transform;
+    }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Splash Screen */
+    #splash-screen {
+      position: fixed; inset: 0; background: var(--bg-deep);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #splash-screen img {
+      width: 112px; height: 112px; border-radius: 26px; border: 2px solid var(--accent);
+      box-shadow: 0 0 28px rgba(201, 169, 110, 0.45);
+      animation: pulseSplash 1.8s infinite alternate;
+    }
+    #splash-screen h1 {
+      margin-top: 1.2rem; font-family: var(--font-futuristic); font-size: 1.55rem;
+      background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+    @keyframes pulseSplash { from { transform: scale(0.97); opacity: 0.85; } to { transform: scale(1.04); opacity: 1; } }
+    .energy-trail {
+      position: absolute; width: 2px; height: 0; background: linear-gradient(to bottom, var(--accent), transparent);
+      top: 58%; animation: trail 1.4s ease forwards;
+    }
+    @keyframes trail { 0% { height: 0; opacity: 0; } 35% { height: 35%; opacity: 1; } 100% { height: 90%; opacity: 0; } }
+    .hide-splash { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Navbar (Desktop + Mobile Drawer) */
     .navbar {
       position: fixed;
-      top: 0; width: 100%;
-      background: rgba(10, 10, 8, 0.95);
-      padding: 1rem 0;
+      top: 0; left: 0; width: 100%;
+      background: rgba(8, 8, 6, 0.92);
+      padding: 0.85rem 0;
       z-index: 1000;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
-      transition: all 0.3s ease;
     }
-    .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-    
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
     .navbar-brand {
       font-family: var(--font-futuristic);
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #fff;
-      text-shadow: var(--glow-gold);
       display: flex;
       align-items: center;
-      gap: 12px;
-      letter-spacing: 1px;
+      gap: 11px;
+      letter-spacing: 0.8px;
+      z-index: 1002;
     }
-    .navbar-brand img { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--accent); }
-
-    .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+    .navbar-brand img {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 12px rgba(201, 169, 110, 0.3);
+      object-fit: cover;
+    }
+    .nav-links { display: flex; list-style: none; gap: 1.25rem; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
-      font-size: 0.85rem;
-      font-weight: 500;
-      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
       position: relative;
-      padding: 0.5rem 0;
+      padding: 0.45rem 0;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent-soft); }
     .nav-links a::after {
       content: ''; position: absolute; width: 0; height: 2px;
       bottom: 0; left: 0; background: var(--gradient-gold); transition: width 0.3s ease;
     }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover::after { width: 100%; }
 
-    /* Dropdown */
     .dropdown { position: relative; }
     .dropdown-menu {
       display: none; position: absolute; top: 100%; left: 0;
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: 8px; padding: 0.5rem 0; min-width: 220px; box-shadow: var(--shadow-intense);
+      background: #11110e; border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 0.55rem; min-width: 235px;
+      box-shadow: var(--shadow-intense); z-index: 1005;
     }
-    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.3s ease; }
-    .dropdown-menu li { list-style: none; margin: 0; }
+    @media (min-width: 993px) {
+      .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.25s ease; }
+    }
+    .dropdown-menu li { list-style: none; }
     .dropdown-menu a {
-      display: flex; align-items: center; gap: 10px; padding: 0.7rem 1.2rem;
-      font-size: 0.85rem; color: var(--text-secondary); text-transform: none; letter-spacing: 0;
+      display: flex; align-items: center; gap: 10px; padding: 0.65rem 0.95rem;
+      font-size: 0.84rem; color: var(--text-secondary); text-transform: none; letter-spacing: 0;
+      border-radius: 9px;
     }
-    .dropdown-menu a i { width: 16px; color: var(--accent); text-align: center; }
+    .dropdown-menu a i { width: 18px; color: var(--accent); text-align: center; }
     .dropdown-menu a::after { display: none; }
-    .dropdown-menu a:hover { background: rgba(201, 169, 110, 0.1); color: var(--text-primary); }
+    .dropdown-menu a:hover { background: rgba(201, 169, 110, 0.14); color: #fff; }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     .hamburger {
-      display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; z-index: 1001;
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      width: 42px; height: 42px; border-radius: 10px;
+      background: rgba(201, 169, 110, 0.08); border: 1px solid var(--border-subtle);
+      cursor: pointer; gap: 5px; z-index: 1002;
     }
-    .hamburger .bar { width: 25px; height: 3px; background: var(--accent); transition: 0.3s; border-radius: 3px; }
-    .mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); z-index: 998; }
+    .hamburger .bar { width: 22px; height: 2.5px; background: var(--accent); transition: 0.3s; border-radius: 3px; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(6px); z-index: 998; }
     .mobile-backdrop.active { display: block; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0.9rem 2.1rem; border-radius: 50px; font-weight: 700;
+      font-family: var(--font-futuristic); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: var(--ease); border: 1px solid transparent;
+      color: #050505; background: var(--gradient-gold); box-shadow: var(--shadow-cosmic);
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(201, 169, 110, 0.55); color: #000; }
+    .btn-outline { background: rgba(201, 169, 110, 0.06); color: var(--accent-soft); border: 1px solid var(--border-glow); box-shadow: none; }
+    .btn-outline:hover { background: rgba(201, 169, 110, 0.16); color: #fff; box-shadow: var(--glow-gold); }
 
     /* Hero Section */
     .hero {
       position: relative;
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      padding: 9.5rem 0 4.5rem;
       text-align: center;
-      padding: 8rem 1.5rem 4rem;
-      overflow: hidden;
     }
-    .hero-logo img {
-      width: clamp(80px, 15vw, 110px); height: clamp(80px, 15vw, 110px);
-      border-radius: 24px; object-fit: cover; border: 2px solid var(--accent);
-      box-shadow: var(--shadow-cosmic);
-      margin-bottom: 1.5rem;
-      animation: floatLogo 4s infinite alternate cubic-bezier(0.5, 0, 0.5, 1);
-    }
-    @keyframes floatLogo { from { transform: translateY(0) scale(1); } to { transform: translateY(-10px) scale(1.03); } }
-    
-    .hero-title-container {
-      min-height: 1.2em;
-      margin-bottom: 1rem;
-    }
+    .hero-title-container { min-height: 1.25em; margin-bottom: 1rem; }
     .hero-title {
       font-family: var(--font-futuristic);
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-size: clamp(2.2rem, 6.5vw, 4.3rem);
       font-weight: 900;
       background: var(--gradient-gold);
       -webkit-background-clip: text;
@@ -201,57 +243,110 @@
       letter-spacing: 1px;
     }
     .cursor {
-      display: inline-block; width: 6px; height: 1em;
-      background: var(--accent); margin-left: 5px; vertical-align: middle;
+      display: inline-block; width: 4px; height: 0.9em;
+      background: var(--accent); margin-left: 6px; vertical-align: -2px;
       animation: blink 0.8s infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
 
     .hero-desc {
-      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 2.2vw, 1.16rem);
       color: var(--text-secondary);
-      max-width: 750px;
-      margin: 0 auto 2.5rem;
-      font-weight: 300;
+      max-width: 760px;
+      margin: 0 auto 2.2rem;
     }
     .hero-desc strong { color: var(--text-primary); }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
 
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 0.9rem 2.2rem; border-radius: 50px; font-weight: 700;
-      font-family: var(--font-futuristic); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
-      cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent;
-      color: #050505; background: var(--gradient-gold); box-shadow: var(--shadow-cosmic);
+    /* Interactive Studio Showcase Window */
+    .studio-showcase {
+      max-width: 1060px; margin: 0 auto;
+      background: linear-gradient(180deg, rgba(22, 22, 18, 0.96), rgba(10, 10, 8, 0.98));
+      border: 1px solid var(--border-glow); border-radius: 22px;
+      box-shadow: var(--shadow-intense), 0 0 55px rgba(201, 169, 110, 0.12);
+      overflow: hidden; text-align: left;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(201, 169, 110, 0.6); }
-    .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); box-shadow: none; }
-    .btn-outline:hover { background: rgba(201, 169, 110, 0.1); color: var(--accent-soft); box-shadow: var(--glow-gold); }
-    .hero-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-
-    /* Models & Studios Grid */
-    .section-title { font-size: 2.5rem; text-align: center; }
-    .section-desc { text-align: center; color: var(--text-secondary); max-width: 650px; margin: 0 auto 3rem; }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    .sc-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.85rem 1.25rem; background: rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid var(--border-subtle); flex-wrap: wrap;
     }
-    
+    .sc-dots { display: flex; gap: 6px; }
+    .sc-dots i { width: 10px; height: 10px; border-radius: 50%; background: #e05a5a; display: inline-block; }
+    .sc-dots i:nth-child(2) { background: #e0b45a; }
+    .sc-dots i:nth-child(3) { background: #5fb87a; }
+    .sc-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sc-tab {
+      padding: 0.44rem 0.9rem; border-radius: 10px; border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.04); color: var(--text-secondary);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--ease);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .sc-tab.on, .sc-tab:hover { background: rgba(201, 169, 110, 0.16); color: var(--accent-soft); border-color: var(--border-glow); }
+    .sc-body { padding: 1.7rem; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.5rem; align-items: center; }
+    .sc-prompt {
+      background: rgba(0, 0, 0, 0.55); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+      font-size: 0.92rem; color: var(--text-primary);
+    }
+    .sc-prompt small { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
+    .sc-steps { display: flex; flex-direction: column; gap: 8px; }
+    .sc-step {
+      display: flex; align-items: center; gap: 10px; padding: 0.55rem 0.9rem;
+      border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);
+      font-size: 0.82rem; color: var(--text-secondary);
+    }
+    .sc-step i { color: var(--accent-green); }
+    .sc-visual {
+      background: #060605; border: 1px solid var(--border-subtle); border-radius: 16px;
+      overflow: hidden; min-height: 230px; display: flex; flex-direction: column; justify-content: center; position: relative;
+    }
+    .sc-visual img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .sc-visual-cap {
+      position: absolute; inset: auto 0 0 0; padding: 0.75rem 1rem;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
+      font-size: 0.8rem; color: var(--accent-soft);
+    }
+
+    /* Animated Metrics Strip */
+    .metrics-strip {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;
+      margin-top: 3rem; padding: 1.8rem; border-radius: 20px;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+    }
+    .m-item { text-align: center; }
+    .m-val {
+      font-family: var(--font-futuristic); font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 900;
+      background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .m-lbl { font-size: 0.74rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 4px; }
+
+    /* Section Headings */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.35rem 1rem; border-radius: 50px;
+      background: rgba(201, 169, 110, 0.1); border: 1px solid var(--border-subtle);
+      color: var(--accent-soft); font-size: 0.74rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .section-title { font-size: clamp(2rem, 4vw, 2.85rem); text-align: center; margin-bottom: 0.8rem; }
+    .section-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .section-desc { text-align: center; color: var(--text-secondary); max-width: 670px; margin: 0 auto 3.2rem; font-size: 1.02rem; }
+
+    /* Cards & Grids */
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.6rem; }
     .feature-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
+      border-radius: var(--radius);
+      padding: 2.1rem 1.8rem;
       text-align: left;
-      transition: all 0.3s ease;
+      transition: var(--ease);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      opacity: 0; transform: translateY(20px);
     }
-    .feature-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
     .feature-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: var(--gradient-gold); transform: scaleX(0); transition: transform 0.3s ease;
@@ -260,166 +355,178 @@
     .feature-card:hover::before { transform: scaleX(1); }
 
     .feature-icon {
-      font-size: 2.2rem; color: var(--accent); margin-bottom: 1.2rem; display: inline-block;
-      padding: 15px; background: rgba(201, 169, 110, 0.08); border-radius: 12px; border: 1px solid var(--border-subtle);
+      font-size: 1.65rem; color: var(--accent); margin-bottom: 1.1rem;
+      width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(201, 169, 110, 0.09); border-radius: 12px; border: 1px solid var(--border-subtle);
     }
-    .feature-card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; font-family: var(--font-brand); }
-    .feature-card p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex-grow: 1; }
-    
-    .card-link {
-        margin-top: auto; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; color: var(--accent);
-    }
+    .feature-card h3 { font-size: 1.35rem; margin-bottom: 0.65rem; }
+    .feature-card p { font-size: 0.93rem; color: var(--text-secondary); margin-bottom: 1.3rem; flex-grow: 1; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .card-tag { font-size: 0.68rem; padding: 2px 9px; border-radius: 20px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .card-link { margin-top: auto; font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
     .card-link i { transition: transform 0.3s ease; }
     .feature-card:hover .card-link i { transform: translateX(4px); }
 
+    /* Visual Showcase Gallery Strip */
+    .visual-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 1rem; }
+    .vis-card {
+      border-radius: 16px; overflow: hidden; border: 1px solid var(--border-subtle);
+      background: var(--bg-card); position: relative; group: 1;
+    }
+    .vis-card img { width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .vis-card:hover img { transform: scale(1.05); }
+    .vis-meta {
+      padding: 1rem 1.2rem; background: var(--bg-card);
+      border-top: 1px solid var(--border-subtle);
+    }
+    .vis-meta b { display: block; color: #fff; font-size: 0.95rem; margin-bottom: 2px; }
+    .vis-meta small { color: var(--text-secondary); font-size: 0.8rem; }
+
+    /* Persona Switcher + Pay As You Go Split */
+    .split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
+    .p-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 1rem 0 1.2rem; }
+    .p-chip {
+      padding: 0.44rem 0.9rem; border-radius: 50px; border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03); color: var(--text-secondary);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--ease);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .p-chip.on, .p-chip:hover { border-color: var(--accent); background: rgba(201, 169, 110, 0.16); color: #fff; }
+    .p-box {
+      background: rgba(0, 0, 0, 0.45); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 1.3rem; min-height: 170px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+
+    .rate-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 1rem 0; }
+    .rate-pill { background: rgba(201, 169, 110, 0.09); border: 1px solid var(--border-glow); border-radius: 11px; padding: 0.6rem 0.4rem; text-align: center; }
+    .rate-pill b { display: block; font-family: var(--font-code); font-size: 0.88rem; color: var(--accent-soft); }
+    .rate-pill small { font-size: 0.65rem; color: var(--text-secondary); text-transform: uppercase; }
+    .price-line { padding: 0.62rem 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.84rem; }
+    .price-line:last-child { border-bottom: none; }
+    .price-top { display: flex; justify-content: space-between; font-weight: 600; color: #fff; }
+    .price-sub { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
+
     /* Testimonials */
-    .testimonial-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .testimonial-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.6rem; }
     .testimonial {
       background: var(--bg-card); border-radius: var(--radius); padding: 2rem;
       border: 1px solid var(--border-subtle); display: flex; flex-direction: column; justify-content: space-between; gap: 1.2rem;
-      opacity: 0; transform: translateY(20px);
     }
-    .testimonial.visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .testimonial .quote { font-style: italic; font-size: 1rem; color: var(--text-primary); border-left: 3px solid var(--accent); padding-left: 1rem; }
-    .testimonial .user { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 10px; font-size: 0.95rem; margin-top: auto; }
-    .testimonial .user img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
-    .testimonial .user .country { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+    .testimonial .quote { font-style: italic; font-size: 0.96rem; color: var(--text-primary); border-left: 3px solid var(--accent); padding-left: 1rem; }
+    .testimonial .user { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 10px; font-size: 0.92rem; margin-top: auto; }
+    .testimonial .user img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+    .testimonial .user .country { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
     .code-demo {
-      background: #030303; border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.85rem; margin-top: 1rem;
+      background: #030303; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.8rem;
       font-family: var(--font-code); overflow-x: auto; border: 1px solid var(--border-subtle); color: var(--accent-soft);
     }
 
-    /* Developer Section */
+    /* Developer Banner */
     .developer-banner {
-      background: var(--bg-elevated); border-radius: var(--radius); padding: 2.5rem;
-      border: 1px solid var(--border-subtle); box-shadow: var(--shadow-cosmic);
-      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin-top: 4rem;
+      background: linear-gradient(135deg, rgba(201, 169, 110, 0.12), rgba(22, 22, 18, 0.96));
+      border-radius: 22px; padding: 2.5rem;
+      border: 1px solid var(--border-glow); box-shadow: var(--shadow-cosmic);
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
     }
-    .developer-banner img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
     .dev-info { flex: 1; min-width: 250px; }
-    .dev-info h4 { font-family: var(--font-futuristic); font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .dev-info h4 { font-family: var(--font-futuristic); font-size: 1.35rem; color: var(--accent); margin-bottom: 0.45rem; }
     .dev-info p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
-    .dev-links { display: flex; gap: 1rem; }
-    .dev-links a { width: 45px; height: 45px; border-radius: 50%; background: rgba(201, 169, 110, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid var(--border-subtle); }
-    .dev-links a:hover { background: var(--accent); color: #000; transform: scale(1.1); box-shadow: var(--glow-gold); }
+    .dev-links { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+    .dev-links a {
+      width: 46px; height: 46px; border-radius: 50%; background: rgba(201, 169, 110, 0.12);
+      display: flex; align-items: center; justify-content: center; font-size: 1.15rem; border: 1px solid var(--border-subtle);
+    }
+    .dev-links a:hover { background: var(--accent); color: #000; transform: scale(1.08); box-shadow: var(--glow-gold); }
 
-    /* Footer */
-    .footer { background: var(--bg-space); padding: 4rem 0 2rem; border-top: 1px solid var(--border-subtle); text-align: center; margin-top: 4rem; }
-    .footer-logo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent); margin-bottom: 1rem; }
-    .footer p { color: var(--text-muted); font-size: 0.9rem; }
+    /* Partner Badges & Footer */
+    .badges-bar {
+      display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      padding: 2rem 1.5rem; border-top: 1px solid var(--border-subtle); background: rgba(0, 0, 0, 0.4); position: relative; z-index: 2;
+    }
+    .badges-bar img { height: 42px; width: auto; opacity: 0.88; transition: var(--ease); }
+    .badges-bar img:hover { opacity: 1; transform: translateY(-2px); }
 
-    /* Splash Screen & PWA */
-    #splash-screen {
-      position: fixed; inset: 0; background: var(--bg-deep);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      z-index: 9999; transition: opacity 1s ease, visibility 1s ease;
-    }
-    #splash-screen img {
-      width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--accent);
-      box-shadow: 0 0 20px var(--accent), 0 0 60px var(--accent-soft);
-      animation: pulseSplash 2s infinite alternate;
-    }
-    #splash-screen h1 {
-      margin-top: 1.5rem; font-family: var(--font-futuristic); font-size: 1.8rem;
-      color: var(--accent); text-shadow: var(--glow-gold); letter-spacing: 2px;
-    }
-    @keyframes pulseSplash { from { transform: scale(1); opacity: 0.85; } to { transform: scale(1.05); opacity: 1; } }
-    .energy-trail {
-      position: absolute; width: 2px; height: 0; background: linear-gradient(to bottom, var(--accent), transparent);
-      top: 60%; animation: trail 1.5s ease forwards;
-    }
-    @keyframes trail { 0% { height: 0; opacity: 0; } 30% { height: 40%; opacity: 1; } 100% { height: 100%; opacity: 0; } }
-    .hide-splash { opacity: 0; visibility: hidden; }
+    .footer { background: var(--bg-space); padding: 3.5rem 0 2rem; border-top: 1px solid var(--border-subtle); text-align: center; position: relative; z-index: 2; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; font-size: 0.88rem; }
+    .footer p { color: var(--text-muted); font-size: 0.86rem; }
 
-    /* Always Visible Floating Neon Install Button */
+    /* Floating PWA Install Button & Modal */
     #installButton {
-      position: fixed; bottom: 25px; right: 25px;
+      position: fixed; bottom: 22px; right: 22px;
       background: var(--gradient-gold); color: #000; font-family: var(--font-futuristic);
-      border: none; padding: 12px 22px; border-radius: 50px; font-size: 0.9rem; font-weight: 700;
+      border: none; padding: 12px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
       cursor: pointer; box-shadow: var(--shadow-cosmic); transition: transform 0.3s;
-      animation: pulseGlow 2s infinite ease-in-out; z-index: 1000; display: none; text-transform: uppercase;
+      animation: pulseGlow 2s infinite ease-in-out; z-index: 990; display: none; text-transform: uppercase;
+      align-items: center; gap: 8px;
     }
-    #installButton:hover { transform: scale(1.1); }
-    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 15px var(--accent); } 50% { box-shadow: 0 0 30px var(--accent-soft); } }
+    #installButton:hover { transform: scale(1.06); }
+    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 15px var(--accent); } 50% { box-shadow: 0 0 28px var(--accent-soft); } }
 
-    /* Elegant Custom PWA Instructions Card */
     .pwa-instructions {
-      display: none;
-      position: fixed;
-      bottom: 90px;
-      right: 25px;
-      width: 320px;
-      max-width: 90vw;
-      background: rgba(15, 15, 12, 0.95);
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: var(--shadow-cosmic);
-      z-index: 1001;
-      backdrop-filter: blur(8px);
-      animation: slideUpInst 0.3s ease-out;
+      display: none; position: fixed; bottom: 82px; right: 22px;
+      width: 320px; max-width: 90vw; background: rgba(15, 15, 12, 0.97);
+      border: 1px solid var(--accent); border-radius: 14px; padding: 20px;
+      box-shadow: var(--shadow-intense); z-index: 1001; backdrop-filter: blur(10px);
     }
-    @keyframes slideUpInst {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .pwa-inst-content h3 {
-      font-family: var(--font-futuristic);
-      font-size: 1.05rem;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .pwa-inst-content p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-    .close-inst {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-    .close-inst:hover {
-      color: var(--danger);
-    }
+    .pwa-inst-content h3 { font-family: var(--font-futuristic); font-size: 1rem; color: var(--accent); margin-bottom: 8px; }
+    .pwa-inst-content p { font-size: 0.86rem; color: var(--text-secondary); }
+    .close-inst { position: absolute; top: 10px; right: 15px; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; }
+    .close-inst:hover { color: var(--danger); }
 
     #installToast {
-      position: fixed; bottom: 90px; right: 25px;
-      background: rgba(15, 15, 12, 0.9); border: 1px solid var(--accent); color: var(--accent);
-      font-family: var(--font-futuristic); font-size: 0.85rem; font-weight: 600;
-      padding: 12px 20px; border-radius: 12px; box-shadow: var(--glow-gold);
-      opacity: 0; transform: translateY(30px); transition: all 0.5s ease; z-index: 1000; backdrop-filter: blur(6px);
+      position: fixed; bottom: 82px; right: 22px;
+      background: rgba(15, 15, 12, 0.95); border: 1px solid var(--accent); color: var(--accent);
+      font-family: var(--font-futuristic); font-size: 0.82rem; font-weight: 600;
+      padding: 12px 18px; border-radius: 12px; box-shadow: var(--glow-gold);
+      opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.4s ease; z-index: 1000;
     }
     #installToast.show { opacity: 1; transform: translateY(0); }
 
-    /* Responsive */
+    /* Responsive Mobile & Tablet */
     @media (max-width: 992px) {
-      .nav-links {
-        display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-        background: rgba(10, 10, 8, 0.98); padding: 1.5rem; border-bottom: 1px solid var(--border-subtle);
-      }
-      .nav-links.active { display: flex; align-items: flex-start; }
-      .nav-links li { margin: 0.8rem 0; width: 100%; }
-      .dropdown-menu { position: static; box-shadow: none; border: none; background: transparent; padding-left: 1rem; border-left: 2px solid var(--border-subtle); }
-      .dropdown:hover .dropdown-menu { animation: none; }
       .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 66px; left: 0; right: 0;
+        max-height: calc(100vh - 66px);
+        overflow-y: auto;
+        background: rgba(10, 10, 8, 0.98);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-glow);
+        box-shadow: var(--shadow-intense);
+        z-index: 1001;
+      }
+      .nav-links.active { display: flex; }
+      .nav-links li { width: 100%; margin: 0.35rem 0; }
+      .nav-links > li > a { display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.92rem; padding: 0.55rem 0; }
+      .dropdown-menu {
+        position: static; box-shadow: none; border: none; background: rgba(255, 255, 255, 0.02);
+        padding: 0.4rem 0 0.4rem 1rem; border-left: 2px solid var(--accent); margin-top: 0.3rem; width: 100%;
+      }
+      .dropdown.open .dropdown-menu { display: block; }
+      .sc-body, .split-2, .visual-grid { grid-template-columns: 1fr; }
+      .metrics-strip { grid-template-columns: repeat(2, 1fr); }
       .developer-banner { flex-direction: column; text-align: center; justify-content: center; }
     }
-    @media (max-width: 768px) {
-      .hero { padding-top: 6rem; min-height: 70vh; }
-      .hero-title { font-size: 2.5rem; }
-      .hero-actions { flex-direction: column; gap: 1rem; }
-      .section-title { font-size: 2.2rem; }
+    @media (max-width: 640px) {
+      .hero { padding-top: 7.5rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .rate-badges { grid-template-columns: 1fr; }
+      .metrics-strip { grid-template-columns: 1fr 1fr; padding: 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Splash Screen -->
+  <div id="scroll-bar"></div>
+
+  <!-- Splash Screen (Uses the single official navbar logo) -->
   <div id="splash-screen">
-    <img src="images/IMG_20250715_102103_129.jpg" alt="Philadelphia AI Logo" />
+    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Elvion AI Logo" />
     <h1>Philadelphia AI</h1>
     <div class="energy-trail"></div>
   </div>
@@ -427,19 +534,20 @@
   <canvas id="snow-canvas"></canvas>
   <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
-  <!-- Navigation -->
+  <!-- Navigation (Only place on the page with the logo) -->
   <header class="navbar">
     <div class="container">
       <a href="index.html" class="navbar-brand">
-        <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"> Philadelphia <span style="font-family: var(--font-body); font-weight: 300;">AI</span>
+        <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Elvion AI Logo">
+        <span>Philadelphia <span style="font-family: var(--font-body); font-weight: 300; color: var(--accent-soft);">AI</span></span>
       </a>
-      <button class="hamburger" aria-label="Toggle navigation">
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-      <nav class="nav-links">
-        <li><a href="university.html">Elvion Learning</a></li>
-        <li class="dropdown">
-          <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+      <nav class="nav-links" id="nav-links">
+        <li><a href="#philadelphia">Philadelphia AI</a></li>
+        <li class="dropdown" id="studios-dropdown">
+          <a href="#studios" id="studios-toggle"><span>Studios</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 4px;"></i></a>
           <ul class="dropdown-menu">
             <li><a href="philadelphia.html"><i class="fa-solid fa-comments"></i> Chat Studio</a></li>
             <li><a href="audio-studio.html"><i class="fa-solid fa-music"></i> Audio Studio</a></li>
@@ -450,11 +558,13 @@
             <li><a href="writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
           </ul>
         </li>
+        <li><a href="#pricing">Pay As You Go</a></li>
+        <li><a href="university.html">Elvion Learning</a></li>
         <li><a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer">Telegram Bot</a></li>
-        <li><a href="api.html" target="_blank" rel="noopener noreferrer">Developer API</a></li>
+        <li><a href="api.html">Developer API</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="signup-login.html" class="btn" style="padding: 0.5rem 1.2rem; font-size: 0.8rem; box-shadow: none;">Sign Up / Login</a></li>
+        <li><a href="signup-login.html" class="btn" style="padding: 0.52rem 1.3rem; font-size: 0.76rem; box-shadow: none;">Sign Up / Login</a></li>
       </nav>
     </div>
   </header>
@@ -462,101 +572,201 @@
   <main>
     <!-- Hero Section -->
     <section class="hero" id="home">
-      <div class="container hero-content">
-        <div class="hero-logo">
-          <img src="images/IMG_20250715_102103_129.jpg" alt="Philadelphia AI">
+      <div class="container">
+        <div class="section-eyebrow fade-in-up"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i><span>Elvion AI Flagship Workstation</span></div>
+        <div class="hero-title-container fade-in-up">
+          <h1 class="hero-title"><span id="typewriter">Mother of All AIs</span><span class="cursor"></span></h1>
         </div>
-        <div class="hero-title-container">
-          <h1 class="hero-title"><span id="typewriter"></span><span class="cursor"></span></h1>
-        </div>
-        <p class="hero-desc">
-          <strong>Meet the world’s most advanced reasoning companion.</strong><br>
-          Philadelphia AI isn’t just smart. But creative, context-aware, and emotionally intelligent. Write, chat, code, analyze, and imagine all in one place.
+        <p class="hero-desc fade-in-up">
+          <strong>Meet the world’s most advanced reasoning and creation companion.</strong><br>
+          Philadelphia AI combines a 1,000,000-token context window, native video and document vision, live web search, an interactive Code Studio, and 120+ autonomous creation tools in one workspace.
         </p>
-        <div class="hero-actions">
+        <div class="hero-actions fade-in-up">
           <a href="signup-login.html" class="btn"><i class="fa-solid fa-rocket"></i> Start Exploring</a>
+          <a href="philadelphia.html" class="btn btn-outline"><i class="fa-solid fa-comments"></i> Launch Studio Chat</a>
           <a href="https://t.me/writingurubot" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> Try on Telegram</a>
         </div>
+
+        <!-- Interactive Live Studio Showcase -->
+        <div class="studio-showcase fade-in-up">
+          <div class="sc-bar">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="sc-dots"><i></i><i></i><i></i></div>
+              <span style="font-family:var(--font-code);font-size:0.73rem;color:var(--text-secondary);">PHILADELPHIA AI · INTERACTIVE WORKSTATION</span>
+            </div>
+            <div class="sc-tabs" id="sc-tabs">
+              <button type="button" class="sc-tab on" data-tab="0"><i class="fa-solid fa-wand-magic-sparkles"></i> Agentic Create</button>
+              <button type="button" class="sc-tab" data-tab="1"><i class="fa-solid fa-eye"></i> Video & PDF Vision</button>
+              <button type="button" class="sc-tab" data-tab="2"><i class="fa-solid fa-code"></i> Live Code Studio</button>
+              <button type="button" class="sc-tab" data-tab="3"><i class="fa-solid fa-clapperboard"></i> 2K Cinema Video</button>
+              <button type="button" class="sc-tab" data-tab="4"><i class="fa-solid fa-phone-volume"></i> Live Voice Call</button>
+            </div>
+          </div>
+          <div class="sc-body" id="sc-body"></div>
+        </div>
+
+        <!-- Animated Metrics Counter Strip -->
+        <div class="metrics-strip fade-in-up" id="metrics-strip">
+          <div class="m-item"><div class="m-val" data-count="1000000" data-fmt="1M">1M</div><div class="m-lbl">Token Context Window</div></div>
+          <div class="m-item"><div class="m-val" data-count="120" data-suf="+">120+</div><div class="m-lbl">Autonomous Agent Tools</div></div>
+          <div class="m-item"><div class="m-val" data-count="35" data-suf="+">35+</div><div class="m-lbl">Visual Art Engines</div></div>
+          <div class="m-item"><div class="m-val" data-count="10" data-suf="">10</div><div class="m-lbl">Specialized Personalities</div></div>
+          <div class="m-item"><div class="m-val" data-count="7" data-suf="">7</div><div class="m-lbl">Creative Studios</div></div>
+        </div>
       </div>
     </section>
 
-    <!-- Two Minds Section -->
-    <section id="models" class="container">
-      <h2 class="section-title">Two Minds. One Ecosystem.</h2>
-      <p class="section-desc">Experience our dual-engine architecture designed to tackle everything from complex strategic planning to creative storytelling.</p>
-      
-      <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-        <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-brain feature-icon"></i>
-          <h3>Philadelphia AI</h3>
-          <p>Our elite flagship reasoning engine. Thinks deeply, writes code flawlessly, stays fully current with real-world events, and naturally browses the live web to generate highly accurate answers.</p>
-          <a href="https://elvionai.com.ng/profile.html" class="card-link">Chat with Philadelphia <i class="fa-solid fa-arrow-right"></i></a>
+    <!-- Visual Showcase Gallery -->
+    <section class="container" id="philadelphia">
+      <div class="text-center fade-in-up">
+        <div class="section-eyebrow"><i class="fa-solid fa-bolt" style="color:var(--accent)"></i><span>Multimodal Mastery</span></div>
+        <h2 class="section-title">One Intelligence. <span>Infinite Output.</span></h2>
+        <p class="section-desc">From photorealistic visual synthesis and multi-panel comics to full-stack web deployment and sourced research reports, Philadelphia AI executes complex workflows in a single pass.</p>
+      </div>
+
+      <div class="visual-grid">
+        <div class="vis-card fade-in-up">
+          <img src="https://i.postimg.cc/sx1bpRPv/IMG-20260307-142846-909.png" alt="Visual Synthesis & Design" loading="lazy">
+          <div class="vis-meta">
+            <b>35+ Visual Synthesis & Design Engines</b>
+            <small>Generate photorealistic portraits, cinema frames, anime, flyers, book covers, and transparent cutouts.</small>
+          </div>
         </div>
-        
-        <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-robot feature-icon"></i>
-          <h3>Bobby</h3>
-          <p>Your reliable, creative, and offline companion. Bobby is a brilliant ideation partner optimized for brainstorming, storytelling, and general reflection.</p>
-          <a href="https://elvionai.com.ng/profile.html" class="card-link">Chat with Bobby <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="vis-card fade-in-up">
+          <img src="https://i.postimg.cc/hGzDbdd9/IMG-20260301-205111-926.png" alt="Deep Research & Publishing" loading="lazy">
+          <div class="vis-meta">
+            <b>1M-Context Vision & Sourced Research</b>
+            <small>Analyze full video streams, audio tracks, and long PDFs, or compile cited multi-page PDF reports.</small>
+          </div>
+        </div>
+        <div class="vis-card fade-in-up">
+          <div style="height:240px;background:radial-gradient(circle at 50% 35%,rgba(201,169,110,0.22),#080806 75%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;text-align:center;">
+            <i class="fa-solid fa-laptop-code" style="font-size:3rem;color:var(--accent);margin-bottom:0.8rem;"></i>
+            <span style="font-family:var(--font-code);font-size:0.8rem;color:var(--accent-soft);">HTML5 · React · Python · Live Console</span>
+          </div>
+          <div class="vis-meta">
+            <b>In-Browser Code Studio & Instant Web Deploy</b>
+            <small>Write, preview, debug with a live console, and publish responsive websites to a live URL in one click.</small>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Creative Studios -->
+    <!-- 10 Personalities + Pay As You Go Pricing -->
+    <section class="container" id="pricing">
+      <div class="split-2">
+        <!-- 10 Personalities Switcher -->
+        <div class="feature-card fade-in-up">
+          <div style="font-size:0.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem;">Adaptive Persona Engine</div>
+          <h3>10 Distinct AI Personalities</h3>
+          <p style="margin-bottom:0.5rem;">Switch between specialized minds inside Philadelphia Studio, or build your own Custom Identity with a unique backstory and voice:</p>
+          <div class="p-chips" id="p-chips"></div>
+          <div class="p-box" id="p-box"></div>
+        </div>
+
+        <!-- Pay As You Go Pricing -->
+        <div class="feature-card fade-in-up">
+          <div style="font-size:0.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem;">Transparent Wallet System</div>
+          <h3>Pay As You Go Pricing</h3>
+          <p style="margin-bottom:0.4rem;">Claim free daily credits every day, or top up your wallet anytime with zero monthly lock-in:</p>
+          <div class="rate-badges">
+            <div class="rate-pill"><b>$1 = 220+ Credits</b><small>USD Rate</small></div>
+            <div class="rate-pill"><b>₦5 = 1 Credit</b><small>NGN Rate</small></div>
+            <div class="rate-pill"><b>~$0.0045 = 1 Cr</b><small>Per Credit Tool</small></div>
+          </div>
+          <div>
+            <div class="price-line">
+              <div class="price-top"><span>Image Generation & Graphic Runs</span><span style="color:var(--accent-soft);font-family:var(--font-code);">10 - 15 cr</span></div>
+              <div class="price-sub">Varying on runs on the images such as photo edits, canvas drawing, background removal, posters, and graphics designing.</div>
+            </div>
+            <div class="price-line">
+              <div class="price-top"><span>Philadelphia Chat & Deep Reasoning</span><span style="color:var(--accent-soft);font-family:var(--font-code);">2 cr</span></div>
+              <div class="price-sub">Varying on live web research, link extraction, code execution, interactive quizzes, and 1M-context analysis.</div>
+            </div>
+            <div class="price-line">
+              <div class="price-top"><span>Video, Audio & Document Vision</span><span style="color:var(--accent-soft);font-family:var(--font-code);">1 - 6 cr</span></div>
+              <div class="price-sub">Varying on runs across high-res images, PDFs, audio tracks, and full video stream breakdowns.</div>
+            </div>
+            <div class="price-line">
+              <div class="price-top"><span>2K Cinema Video, Voice & Websites</span><span style="color:var(--accent-soft);font-family:var(--font-code);">5 - 120+ cr</span></div>
+              <div class="price-sub">Varying on video resolution/duration, voiceovers, cited PDF research reports, slide decks, live websites, and 100+ more tools.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 7 Creative Studios -->
     <section class="container" id="studios">
-      <h2 class="section-title">The Creative Suite</h2>
-      <p class="section-desc">Generate art, synthesize audio, and build websites seamlessly without leaving the platform.</p>
+      <div class="text-center fade-in-up">
+        <div class="section-eyebrow"><i class="fa-solid fa-layer-group" style="color:var(--accent)"></i><span>The Creative Suite</span></div>
+        <h2 class="section-title">Seven Dedicated <span>Studios</span></h2>
+        <p class="section-desc">Generate art, render 2K cinema video, synthesize voiceovers, and deploy websites without leaving the platform.</p>
+      </div>
       <div class="grid-container">
         <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-wand-magic-sparkles feature-icon"></i>
+          <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
+          <h3>Philadelphia Chat Studio</h3>
+          <p>The flagship agentic hub. Combine 1M-context reasoning, live web search, video/PDF analysis, interactive A/B/C/D quizzes, and live voice calls.</p>
+          <div class="card-tags"><span class="card-tag">1M Context</span><span class="card-tag">120+ Tools</span><span class="card-tag">Live Call</span></div>
+          <a href="philadelphia.html" class="card-link">Open Chat Studio <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="feature-card fade-in-up">
+          <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
           <h3>Image & Design Studio</h3>
-          <p>Instantly generate stunning visuals using highly stylized aesthetic models or breathtaking photorealism.</p>
+          <p>Instantly generate visuals across 35+ stylized and photorealistic engines, edit photos with character lock, or remove backgrounds in one tap.</p>
+          <div class="card-tags"><span class="card-tag">35+ Styles</span><span class="card-tag">Photo Edit</span><span class="card-tag">Remove BG</span></div>
           <a href="image-studio.html" class="card-link">Open Image Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-film feature-icon"></i>
+          <div class="feature-icon"><i class="fa-solid fa-film"></i></div>
           <h3>Cinematic Video Studio</h3>
-          <p>Render cinematic Text-to-Video sequences, animate starting frames, or lock animations strictly to a subject.</p>
+          <p>Render Text-to-Video and Image-to-Video up to 2K resolution with synchronized audio, camera motion presets, and frame interpolation.</p>
+          <div class="card-tags"><span class="card-tag">Up to 2K</span><span class="card-tag">Native Audio</span><span class="card-tag">Reference Mode</span></div>
           <a href="video-studio.html" class="card-link">Open Video Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-music feature-icon"></i>
+          <div class="feature-icon"><i class="fa-solid fa-music"></i></div>
           <h3>Audio & Voice Studio</h3>
-          <p>Synthesize premium, ultra-realistic voiceovers with 17 unique characters, or compose full music tracks.</p>
+          <p>Synthesize lifelike voiceovers with Philadelphia signature voices and 17 character voices, narrate documents into podcasts, or edit audio in-browser.</p>
+          <div class="card-tags"><span class="card-tag">Podcast Host</span><span class="card-tag">17 Voices</span><span class="card-tag">Audio Editor</span></div>
           <a href="audio-studio.html" class="card-link">Open Audio Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-globe feature-icon"></i>
+          <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
           <h3>Website Studio</h3>
-          <p>Describe the landing page you want, and watch our studio design, code, and deploy it live instantly.</p>
+          <p>Describe the landing page or web application you want, and watch the studio design, code, preview, and deploy it to a live URL immediately.</p>
+          <div class="card-tags"><span class="card-tag">Instant Live URL</span><span class="card-tag">Responsive HTML5</span><span class="card-tag">AI Edits</span></div>
           <a href="website-studio.html" class="card-link">Open Website Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-book-open feature-icon"></i>
-          <h3>Writing & Cover Studio</h3>
-          <p>Draft and perfect your manuscripts, then generate professional, print-ready book covers for publishing.</p>
-          <a href="writing-studio.html" class="card-link">Open Writing Studio <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="feature-card fade-in-up">
-          <i class="fa-solid fa-code feature-icon" style="background: var(--gradient-gold); color: #000; box-shadow: var(--shadow-cosmic);"></i>
-          <h3>Developer API</h3>
-          <p>Integrate our entire multi-model ecosystem into your own applications with our robust B2B REST API.</p>
-          <a href="api.html" class="card-link" style="color: var(--accent);">Read API Docs <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
+          <h3>Writing, Cover & API Suite</h3>
+          <p>Draft manuscripts, generate print-ready book covers, earn free certificates on Elvion Learning, or integrate our B2B REST API into your apps.</p>
+          <div class="card-tags"><span class="card-tag">Writing & Covers</span><span class="card-tag">Elvion Learning</span><span class="card-tag">REST API</span></div>
+          <div style="display:flex;gap:14px;margin-top:auto;flex-wrap:wrap;">
+            <a href="writing-studio.html" class="card-link">Writing <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="cover-studio.html" class="card-link">Covers <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="api.html" class="card-link">API Docs <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Testimonials -->
     <section class="container" id="testimonials">
-      <h2 class="section-title">What Creators Are Saying</h2>
+      <div class="text-center fade-in-up">
+        <div class="section-eyebrow"><i class="fa-solid fa-star" style="color:var(--accent)"></i><span>Global Creators</span></div>
+        <h2 class="section-title">What Creators Are <span>Saying</span></h2>
+      </div>
       <div class="testimonial-list">
         <div class="testimonial fade-in-up">
           <p class="quote">"I never thought an AI could help me architect my backend so flawlessly. Philadelphia AI is a lifesaver!"</p>
           <div class="user">
             <i class="fa-solid fa-user-astronaut" style="font-size: 2rem; color: var(--accent);"></i>
             <div>
-                <span><a href="https://t.me/@toxic_devil_official" target="_blank">Abhinav (Developer)</a></span>
-                <div class="country">India</div>
+              <span><a href="https://t.me/@toxic_devil_official" target="_blank" rel="noopener">Abhinav (Developer)</a></span>
+              <div class="country">India</div>
             </div>
           </div>
           <div class="code-demo"><pre><code>// Clean solutions
@@ -566,62 +776,73 @@ console.log(sum(2, 3)); // 5</code></pre></div>
         <div class="testimonial fade-in-up">
           <p class="quote">"Philadelphia AI is my daily companion. Understands context instantly and helps me outline my entire syllabus."</p>
           <div class="user">
-            <a href="https://ibb.co/PvhbK7Nc" target="_blank"><img src="https://i.ibb.co/Xrsd1hb7/IMG-20250730-WA0039.jpg" alt="User Rahman"></a>
+            <a href="https://ibb.co/PvhbK7Nc" target="_blank" rel="noopener"><img src="https://i.ibb.co/Xrsd1hb7/IMG-20250730-WA0039.jpg" alt="User Rahman"></a>
             <div>
-                <span><a href="https://www.instagram.com/rahman__hakeem" target="_blank">Rahman</a></span>
-                <div class="country">Saudi Arabia</div>
+              <span><a href="https://www.instagram.com/rahman__hakeem" target="_blank" rel="noopener">Rahman</a></span>
+              <div class="country">Saudi Arabia</div>
             </div>
           </div>
         </div>
         <div class="testimonial fade-in-up">
-          <p class="quote">"Every morning, I get inspired by the weight of its words. It’s more than just an engine; it genuinely feels like a collaborator."</p>
+          <p class="quote">"Every morning, I get inspired by the weight of its words. It is more than just an engine; it genuinely feels like a collaborator."</p>
           <div class="user">
             <i class="fa-solid fa-pen-nib" style="font-size: 2rem; color: var(--accent);"></i>
             <div>
-                <span><a href="https://www.instagram.com/sami_samprita" target="_blank">Priya (Writer)</a></span>
-                <div class="country">India</div>
+              <span><a href="https://www.instagram.com/sami_samprita" target="_blank" rel="noopener">Priya (Writer)</a></span>
+              <div class="country">India</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Developer Banner -->
-    <section class="container">
-      <div class="developer-banner fade-in-up">
-        <img src="images/IMG_20250715_102103_129.jpg" alt="Elvion Logo"> 
+      <!-- Developer & Community Banner (No extra logo) -->
+      <div class="developer-banner fade-in-up" style="margin-top: 3.5rem;">
         <div class="dev-info">
           <h4>Powered by Elvion AI</h4>
-          <p>This ecosystem is built and maintained by the Elvion AI architecture team. For enterprise API access, custom integrations, or to join the movement, connect with us.</p>
+          <p>Built and maintained by the Elvion AI architecture team. For enterprise API access, custom integrations, or community support, reach us at <a href="mailto:hello@elvionai.com.ng" style="font-weight:600;">hello@elvionai.com.ng</a> or connect with us directly.</p>
         </div>
         <div class="dev-links">
-          <a href="https://t.me/writingurubot" target="_blank" title="Contact on Telegram"><i class="fab fa-telegram"></i></a>
-          <a href="https://wa.me/+2349160331432" target="_blank" title="Contact on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://t.me/writingurufc" target="_blank" title="Join Community"><i class="fa-solid fa-users"></i></a>
+          <a href="mailto:hello@elvionai.com.ng" title="Email Support"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://t.me/writingurubot" target="_blank" rel="noopener" title="Contact on Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/+2349160331432" target="_blank" rel="noopener" title="Contact on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://t.me/writingurufc" target="_blank" rel="noopener" title="Join Community"><i class="fa-solid fa-users"></i></a>
         </div>
       </div>
     </section>
   </main>
 
-  <a href="https://smollaunch.com" target="_blank" rel="noopener">
-  <img src="https://smollaunch.com/badges/featured-dark.svg" alt="Philadelphia AI by Elvion  — Featured on Smol Launch" loading="lazy" width="250" height="60" />
-  </a>
+  <!-- Partner Badges -->
+  <div class="badges-bar">
+    <a href="https://smollaunch.com" target="_blank" rel="noopener">
+      <img src="https://smollaunch.com/badges/featured-dark.svg" alt="Philadelphia AI by Elvion Featured on Smol Launch" loading="lazy" width="250" height="60" />
+    </a>
+    <a href="https://www.indietool.io" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.indietool.io/badge.svg" alt="Featured on IndieTool" style="height: 36px; width: auto;" />
+    </a>
+  </div>
 
-  <a href="https://www.indietool.io" target="_blank" rel="noopener noreferrer">
-  <img src="https://www.indietool.io/badge.svg" alt="Featured on IndieTool" style="height: 30px; width: auto;" />
-  </a>
-
+  <!-- Footer (No duplicate logo) -->
   <footer class="footer">
     <div class="container">
-      <img src="images/IMG_20250715_102103_129.jpg" alt="Elvion Logo" class="footer-logo"><br>
-      <p>&copy; <span id="current-year"></span> Philadelphia AI by Elvion.<br>
-      <span style="color: var(--accent); font-weight: 500;">The Future is Now.</span></p>
+      <div class="footer-links">
+        <a href="philadelphia.html">Studio Chat</a>
+        <a href="image-studio.html">Image Studio</a>
+        <a href="video-studio.html">Video Studio</a>
+        <a href="audio-studio.html">Audio Studio</a>
+        <a href="website-studio.html">Website Studio</a>
+        <a href="university.html">Elvion Learning</a>
+        <a href="api.html">Developer API</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:hello@elvionai.com.ng">hello@elvionai.com.ng</a>
+      </div>
+      <p>&copy; <span id="current-year"></span> Philadelphia AI by Elvion. <span style="color: var(--accent); font-weight: 500;">The Future is Now.</span></p>
     </div>
   </footer>
 
   <!-- Floating Install & Instruction elements -->
   <button id="installButton"><i class="fa-solid fa-bolt"></i> Install App</button>
-  
+
   <div id="pwaInstructionsModal" class="pwa-instructions">
     <div class="pwa-inst-content">
       <span class="close-inst">&times;</span>
@@ -629,7 +850,7 @@ console.log(sum(2, 3)); // 5</code></pre></div>
       <p>To add this application to your device home screen:</p>
       <ul style="text-align: left; margin-top: 10px; font-size: 0.85rem; padding-left: 20px; color: var(--text-secondary);">
         <li style="margin-bottom: 6px;">On iOS Safari: Tap the Share icon <i class="fa-solid fa-share-from-square"></i> and select <b>"Add to Home Screen"</b>.</li>
-        <li>On Chrome / Android: Click <b>"Install app"</b> as it appears on your screen. If it doesn't work then you already have the app. </li>
+        <li>On Chrome / Android: Click <b>"Install app"</b> when prompted, or open your browser menu and tap <b>"Install app"</b>.</li>
       </ul>
     </div>
   </div>
@@ -638,142 +859,203 @@ console.log(sum(2, 3)); // 5</code></pre></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Handle Splash Screen
+      // 1. Splash Screen
       const splash = document.getElementById('splash-screen');
-      const trail = document.querySelector('.energy-trail');
-
       setTimeout(() => {
-        if(trail) trail.style.animationPlayState = 'running';
-        setTimeout(() => {
-          if(splash) splash.classList.add('hide-splash');
-        }, 1800); 
-        setTimeout(() => {
-          if(splash) splash.style.display = 'none';
-        }, 3000); 
-      }, 100);
+        if (splash) splash.classList.add('hide-splash');
+        setTimeout(() => { if (splash) splash.style.display = 'none'; }, 850);
+      }, 1200);
 
-      // Mobile Menu
-      const hamburger = document.querySelector('.hamburger');
-      const navLinks = document.querySelector('.nav-links');
+      // 2. Scroll Progress Bar
+      const scrollBar = document.getElementById('scroll-bar');
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      }, {passive: true});
+
+      // 3. Mobile & Desktop Menu
+      const hamburger = document.getElementById('hamburger-btn');
+      const navLinks = document.getElementById('nav-links');
       const mobileBackdrop = document.getElementById('mobile-backdrop');
-
-      function toggleMobileMenu() {
-        const isOpen = navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        if (isOpen) {
-            mobileBackdrop.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        } else {
-            mobileBackdrop.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-      }
+      const studiosDropdown = document.getElementById('studios-dropdown');
+      const studiosToggle = document.getElementById('studios-toggle');
 
       function closeMobileMenu() {
         hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
         navLinks.classList.remove('active');
         mobileBackdrop.classList.remove('active');
         document.body.style.overflow = '';
       }
 
-      hamburger.addEventListener('click', toggleMobileMenu);
+      hamburger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        mobileBackdrop.classList.toggle('active', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
       mobileBackdrop.addEventListener('click', closeMobileMenu);
 
-      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(link => {
+      document.querySelectorAll('#nav-links a:not(#studios-toggle)').forEach(link => {
         link.addEventListener('click', closeMobileMenu);
       });
 
-      const dropdownToggle = document.querySelector('.dropdown > a');
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      dropdownToggle.addEventListener('click', (e) => {
-        if(window.innerWidth <= 992) {
-            e.preventDefault();
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      studiosToggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 992) {
+          e.preventDefault();
+          studiosDropdown.classList.toggle('open');
         }
       });
 
-      // Gold Snow Background
-      const canvas = document.getElementById("snow-canvas");
-      if (canvas) {
-          const ctx = canvas.getContext("2d");
-          let flakes = [];
-          function resize() {
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              flakes = [];
-              for (let i = 0; i < 70; i++) {
-                  flakes.push({
-                      x: Math.random() * canvas.width,
-                      y: Math.random() * canvas.height,
-                      r: Math.random() * 2 + 0.5,
-                      speed: Math.random() * 1.2 + 0.3,
-                      wind: Math.random() * 0.4 - 0.2,
-                      opacity: Math.random() * 0.5 + 0.1
-                  });
-              }
-          }
-          function draw() {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              flakes.forEach(f => {
-                  ctx.beginPath();
-                  ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-                  ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
-                  ctx.shadowBlur = 6;
-                  ctx.shadowColor = "rgba(201, 169, 110, 0.4)";
-                  ctx.fill();
-                  f.y += f.speed;
-                  f.x += f.wind;
-                  if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
-                  if (f.x < 0) f.x = canvas.width;
-                  if (f.x > canvas.width) f.x = 0;
-              });
-              requestAnimationFrame(draw);
-          }
-          resize();
-          window.addEventListener("resize", resize);
-          draw();
-      }
-
-      // Typing Animation
-      const titleText = "Mother of All AIs";
+      // 4. Rotating Typewriter Hero Title
+      const phrases = [
+        'Mother of All AIs',
+        '120+ Autonomous Tools',
+        '1M Context Reasoning',
+        '2K Cinema Video & Audio',
+        'Live Code & Web Studio'
+      ];
       const titleElement = document.getElementById('typewriter');
-      let charIndex = 0;
+      let pIdx = 0, cIdx = phrases[0].length, deleting = false;
+      setTimeout(() => {
+        setInterval(() => {
+          const word = phrases[pIdx];
+          if (!deleting) {
+            cIdx++;
+            if (cIdx > word.length + 14) deleting = true;
+          } else {
+            cIdx--;
+            if (cIdx <= 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+          }
+          if (titleElement) titleElement.textContent = word.slice(0, Math.min(word.length, Math.max(0, cIdx)));
+        }, 70);
+      }, 1600);
 
-      function typeWriter() {
-        if (titleElement && charIndex < titleText.length) {
-          titleElement.textContent += titleText.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeWriter, 120);
-        }
+      // 5. Interactive Hero Studio Showcase
+      const scItems = [
+        {prompt: 'Design a luxury rooftop music night flyer, generate a 15-second voiceover teaser, and export a printable event PDF.',
+         steps: ['Generated high-contrast poster artwork (Philadelphia V6)', 'Rendered typography & layout via create_design', 'Synthesized podcast-style voiceover (Kore)', 'Compiled print-ready event PDF'],
+         vis: `<img src="https://i.postimg.cc/sx1bpRPv/IMG-20260307-142846-909.png" alt="Created Artwork"><div class="sc-visual-cap"><i class="fa-solid fa-circle-check" style="color:var(--accent-green)"></i> Poster PNG + Voiceover WAV + Event PDF saved to Gallery</div>`},
+        {prompt: 'Analyze my attached 37-second vertical video clip and PDF brief: give me a shot-by-shot breakdown and audio transcript.',
+         steps: ['Decoded video stream & audio track via Philadelphia Vision', 'Mapped 6 structural beats & timestamps (00:00 to 00:37)', 'Transcribed spoken dialogue & diegetic sound cues', 'Generated interactive A/B/C/D production next steps'],
+         vis: `<div style="padding:1.4rem;font-family:var(--font-code);font-size:0.78rem;color:var(--accent-soft);line-height:1.65;">[00:00-00:02] Focus-pull reveal on subject<br>[00:08-00:10] Audio: "I wanted to put video."<br>[00:20-00:25] Peak close-up frame (#8 best cover)<br><span style="color:var(--accent-green);">✓ Full visual + audio stream verified</span></div>`},
+        {prompt: 'Write an interactive playable arcade game in a single HTML5 file and run it with console logging.',
+         steps: ['Wrote 240-line HTML5 Canvas game in one unbreakable code block', 'Ran syntax & tag validation (0 problems)', 'Mounted live preview iframe + real-time console hook', 'Deployed to a live production web link'],
+         vis: `<div style="padding:1.4rem;font-family:var(--font-code);font-size:0.78rem;color:#8fd7a6;line-height:1.65;">› Running index.html in Code Studio…<br>› Canvas initialized (60 FPS)<br>› 0 errors · 0 warnings<br><span style="color:var(--accent);">🚀 Live URL deployed & copied</span></div>`},
+        {prompt: 'Create a 6-second 2K aerial drone shot at golden hour with an orchestral score.',
+         steps: ['Selected Philadelphia Pro Video (2K, 16:9)', 'Applied aerial drone motion & orchestral audio presets', 'Rendered cinema MP4 with synchronized soundscape'],
+         vis: `<img src="https://i.postimg.cc/hGzDbdd9/IMG-20260301-205111-926.png" alt="2K Video"><div class="sc-visual-cap"><i class="fa-solid fa-clapperboard" style="color:var(--accent)"></i> 2K Cinema MP4 with Native Audio Ready</div>`},
+        {prompt: 'Start a real-time spoken phone call with Philadelphia to brainstorm my startup pitch.',
+         steps: ['Connected low-latency bidirectional voice stream', 'Active voice: Kore (Philadelphia Signature)', 'Live speech-to-speech with real-time captions'],
+         vis: `<div style="padding:1.5rem;text-align:center;"><i class="fa-solid fa-phone-volume" style="font-size:2.4rem;color:var(--accent-green);margin-bottom:10px;"></i><h4 style="margin-bottom:6px;">Live Voice Call Connected</h4><p style="font-size:0.83rem;color:var(--text-secondary);">"Let us structure your pitch clearly. Tell me who your customer is and what problem you solve first."</p></div>`}
+      ];
+      const scBody = document.getElementById('sc-body');
+      function renderSc(i) {
+        const d = scItems[i];
+        scBody.innerHTML = `<div><div class="sc-prompt"><small>User Prompt</small>${d.prompt}</div><div class="sc-steps">${d.steps.map(s => `<div class="sc-step"><i class="fa-solid fa-circle-check"></i><span>${s}</span></div>`).join('')}</div></div><div class="sc-visual">${d.vis}</div>`;
       }
-      setTimeout(typeWriter, 2200); // Start after splash screen
+      renderSc(0);
+      document.querySelectorAll('#sc-tabs .sc-tab').forEach(b => b.onclick = () => {
+        document.querySelectorAll('#sc-tabs .sc-tab').forEach(x => x.classList.toggle('on', x === b));
+        renderSc(+b.dataset.tab);
+      });
 
-      // Scroll Fade-in Observer
+      // 6. Interactive 10-Personality Switcher
+      const personas = [
+        ['Philadelphia', 'fa-wand-magic-sparkles', 'Flagship Creative Partner', '"Let us break this down step by step. Here is what is working in your draft, where the hook drops, and the exact next move we should make."'],
+        ['Professor Dope', 'fa-graduation-cap', 'Deep Academic Educator', '"Think of transformer attention like a spotlight in a theatre. Let us walk through the intuition first, then the math, and finish with a quick A/B/C/D check."'],
+        ['Kodi', 'fa-terminal', 'Precise Staff Engineer', '"Your state mutation is causing race conditions on line 42. Here is the refactored, production-ready module in a single fenced block with zero side effects."'],
+        ['Zuri', 'fa-comments', 'Empathetic Relationship Advisor', '"Before you reply to that message, let us look at what both of you are actually trying to protect. Here are two calm, honest ways to phrase what you feel."'],
+        ['Reel', 'fa-clapperboard', 'CapCut & Premiere Video Editor', '"Your first 1.5 seconds are soft. Cold-open on the 00:23 close-up frame, cut on the laugh at 00:22, and pull the orange cast back toward neutral."'],
+        ['Tobi', 'fa-book-open-reader', 'Interactive Study Buddy', '"I just wrote a short comprehension passage on macroeconomics for you. Ready for 3 interactive A/B/C/D objective questions to test your recall?"'],
+        ['Coach Nia', 'fa-dumbbell', 'Structured Fitness Coach', '"Four days a week, progressive overload on compounds, and strict form cues on your hinge. Let us lock in your split for the next 6 weeks."'],
+        ['Kemi', 'fa-briefcase', 'Business & Pitch Strategist', '"What are your unit economics at 500 customers? Let us tighten your pricing tier and unit margin before we build the 10-slide investor deck."'],
+        ['Sage', 'fa-compass', 'Plain Balanced Assistant', '"Here is a concise, neutral summary of the three options along with their trade-offs, costs, and timelines."'],
+        ['Custom Identity', 'fa-dna', 'Your Own AI Character', '"Define your character name, background, dialect, age, and backstory inside the Studio, and Philadelphia stays 100% in character."']
+      ];
+      const pChips = document.getElementById('p-chips'), pBox = document.getElementById('p-box');
+      function pickPersona(i) {
+        const p = personas[i];
+        pChips.querySelectorAll('.p-chip').forEach((c, idx) => c.classList.toggle('on', idx === i));
+        pBox.innerHTML = `<div><div style="display:flex;align-items:center;gap:10px;"><i class="fa-solid ${p[1]}" style="color:var(--accent);font-size:1.15rem;"></i><div><strong style="color:#fff;">${p[0]}</strong><div style="font-size:0.74rem;color:var(--text-muted);">${p[2]}</div></div></div><p style="font-style:italic;color:var(--accent-soft);margin:0.75rem 0;font-size:0.9rem;">${p[3]}</p></div><a href="philadelphia.html" style="font-size:0.82rem;font-weight:600;">Launch ${p[0]} in Studio &rarr;</a>`;
+      }
+      pChips.innerHTML = personas.map((p, i) => `<button type="button" class="p-chip${i===0?' on':''}" data-i="${i}"><i class="fa-solid ${p[1]}"></i>${p[0]}</button>`).join('');
+      pChips.onclick = e => { const b = e.target.closest('.p-chip'); if (b) pickPersona(+b.dataset.i); };
+      pickPersona(0);
+
+      // 7. Scroll Fade-in Observer (Guaranteed visible on mobile & desktop)
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            if (entry.target.id === 'metrics-strip' && !entry.target.dataset.done) {
+              entry.target.dataset.done = '1';
+              entry.target.querySelectorAll('.m-val').forEach(el => {
+                const target = +el.dataset.count, fmt = el.dataset.fmt, suf = el.dataset.suf || '';
+                const t0 = performance.now(), dur = 1200;
+                (function step(now) {
+                  const p = Math.min(1, (now - t0) / dur), ease = 1 - Math.pow(1 - p, 3);
+                  el.textContent = (p >= 1 && fmt) ? fmt : Math.round(target * ease).toLocaleString() + suf;
+                  if (p < 1) requestAnimationFrame(step);
+                })(t0);
+              });
+            }
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.02 });
 
       document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-      
-      // Footer Year
+      setTimeout(() => { document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('visible')); }, 1800);
+
+      // 8. Gold Snow Background
+      const canvas = document.getElementById('snow-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let flakes = [];
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          flakes = Array.from({length: 65}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 2 + 0.5,
+            speed: Math.random() * 0.9 + 0.25,
+            wind: Math.random() * 0.36 - 0.18,
+            opacity: Math.random() * 0.45 + 0.1
+          }));
+        }
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          flakes.forEach(f => {
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
+            ctx.fill();
+            f.y += f.speed; f.x += f.wind;
+            if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
+            if (f.x < 0) f.x = canvas.width;
+            if (f.x > canvas.width) f.x = 0;
+          });
+          requestAnimationFrame(draw);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        draw();
+      }
+
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      // PWA Install Logic
+      // 9. PWA Install Logic
       let deferredPrompt;
       const installButton = document.getElementById('installButton');
       const installToast = document.getElementById('installToast');
       const instModal = document.getElementById('pwaInstructionsModal');
       const closeInst = document.querySelector('.close-inst');
 
-      // Make the button display after the splash screen has faded
-      setTimeout(() => {
-        installButton.style.display = 'flex';
-      }, 3000);
+      setTimeout(() => { installButton.style.display = 'inline-flex'; }, 2200);
 
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -786,19 +1068,12 @@ console.log(sum(2, 3)); // 5</code></pre></div>
           deferredPrompt.prompt();
           await deferredPrompt.userChoice;
           deferredPrompt = null;
-        } else {
-          // Fallback: Show elegant, gold instructions card
-          if (instModal) {
-            instModal.style.display = 'block';
-          }
+        } else if (instModal) {
+          instModal.style.display = instModal.style.display === 'block' ? 'none' : 'block';
         }
       });
 
-      if (closeInst) {
-        closeInst.addEventListener('click', () => {
-          if (instModal) instModal.style.display = 'none';
-        });
-      }
+      if (closeInst) closeInst.addEventListener('click', () => { instModal.style.display = 'none'; });
 
       window.addEventListener('appinstalled', () => {
         installToast.classList.add('show');
@@ -807,19 +1082,19 @@ console.log(sum(2, 3)); // 5</code></pre></div>
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js').catch(err => console.log('SW fail:', err));
+          navigator.serviceWorker.register('service-worker.js').catch(() => {});
         });
       }
     });
   </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1YTKP10ZX');
+  </script>
 </body>
 </html>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date()); 
-  gtag('config', 'G-J1YTKP10ZX');
-</script>
