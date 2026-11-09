@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="7searchppc" content="80910fb70aa8c58ced3fbc90bc69261f"/>
   <title>Elvion AI | Intelligence Unleashed | Home of Philadelphia AI</title>
-  <meta name="description" content="Discover Elvion AI, creators of Philadelphia AI. Explore our agentic workstation, seven creative studios, free learning portal, and developer APIs." />
+  <meta name="description" content="Discover Elvion AI, creators of Philadelphia AI. Explore our agentic workstation with 120+ autonomous tools, seven creative studios, free learning portal, and developer APIs." />
   <meta name="google-adsense-account" content="ca-pub-2563254473675494">
   <meta name="theme-color" content="#050505">
 
@@ -125,16 +125,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .brand-dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-      display: inline-block;
-    }
-    .nav-links { display: flex; list-style: none; gap: 1.35rem; align-items: center; }
+    .nav-links { display: flex; list-style: none; gap: 1.25rem; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
-      font-size: 0.82rem; font-weight: 600;
+      font-size: 0.81rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.06em;
       padding: 0.4rem 0; position: relative;
     }
@@ -167,12 +161,11 @@
 
     .nav-cmd-btn {
       background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
-      color: var(--text-secondary); border-radius: 10px; padding: 0.42rem 0.75rem;
+      color: var(--text-secondary); border-radius: 10px; padding: 0.45rem 0.85rem;
       font-size: 0.78rem; display: inline-flex; align-items: center; gap: 7px;
       cursor: pointer; transition: var(--ease);
     }
     .nav-cmd-btn:hover { border-color: var(--accent); color: #fff; }
-    .nav-cmd-btn kbd { font-family: var(--font-code); font-size: 0.68rem; background: rgba(0,0,0,0.5); padding: 1px 5px; border-radius: 4px; color: var(--accent); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -201,10 +194,6 @@
       background: rgba(201, 169, 110, 0.1); border: 1px solid var(--border-subtle);
       color: var(--accent-soft); font-size: 0.75rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.2rem;
-    }
-    .eyebrow .pulse-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green);
-      box-shadow: 0 0 10px var(--accent-green); animation: pulse 1.8s infinite;
     }
     @keyframes pulse { 50% { opacity: 0.35; transform: scale(0.85); } }
     .section-title { font-size: clamp(2.1rem, 4vw, 3.1rem); margin-bottom: 1rem; text-align: center; }
@@ -332,14 +321,20 @@
     .studio-link:hover i { transform: translateX(4px); }
     .studio-link i { transition: transform 0.25s ease; }
 
-    /* API Code Playground & Credit Estimator */
-    .api-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    /* Pay As You Go & API Split */
+    .api-split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: stretch; }
     .code-win { background: #060605; border: 1px solid var(--border-glow); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
     .code-hdr { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.1rem; background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border-subtle); }
     .code-pre { padding: 1.3rem; font-family: var(--font-code); font-size: 0.78rem; color: #d9d4c7; overflow-x: auto; line-height: 1.65; white-space: pre; flex: 1; }
-    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.88rem; }
+    .rate-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1rem 0 1.2rem; }
+    .rate-box { background: rgba(201,169,110,0.08); border: 1px solid var(--border-glow); border-radius: 12px; padding: 0.65rem 0.5rem; text-align: center; }
+    .rate-box b { display: block; font-family: var(--font-code); font-size: 0.95rem; color: var(--accent-soft); }
+    .rate-box small { font-size: 0.68rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .calc-row { padding: 0.75rem 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.86rem; }
     .calc-row:last-child { border-bottom: none; }
-    .calc-price { font-family: var(--font-code); color: var(--accent-soft); font-weight: 600; }
+    .calc-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 600; color: #fff; }
+    .calc-sub { font-size: 0.77rem; color: var(--text-secondary); margin-top: 2px; line-height: 1.45; }
+    .calc-price { font-family: var(--font-code); color: var(--accent-soft); font-weight: 700; white-space: nowrap; }
 
     /* Learning & Blog */
     .learning-section {
@@ -429,7 +424,7 @@
     }
     @media (max-width: 640px) {
       .hero { padding-top: 8.2rem; }
-      .check-grid, .footer-grid { grid-template-columns: 1fr; }
+      .check-grid, .footer-grid, .rate-badges { grid-template-columns: 1fr; }
       .metrics-bar { grid-template-columns: 1fr 1fr; padding: 1.2rem; }
       .contact-bar { text-align: center; justify-content: center; }
     }
@@ -444,9 +439,9 @@
   <!-- Navigation -->
   <header class="navbar">
     <div class="container">
-      <a href="https://elvionai.com.ng/index.html" class="navbar-brand"><span class="brand-dot"></span>Elvion AI</a>
+      <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
       <div style="display:flex;align-items:center;gap:10px;">
-        <button class="nav-cmd-btn" id="open-cmd" title="Quick navigation (Ctrl+K)"><i class="fa-solid fa-magnifying-glass"></i><span>Quick Jump</span><kbd>⌘K</kbd></button>
+        <button class="nav-cmd-btn" id="open-cmd" title="Quick navigation"><i class="fa-solid fa-magnifying-glass"></i><span>Quick Jump</span></button>
         <button class="hamburger" aria-label="Toggle navigation">
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
@@ -465,10 +460,10 @@
             <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
           </ul>
         </li>
+        <li><a href="#pricing">Pay As You Go</a></li>
         <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
         <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
         <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
-        <li><a href="https://elvionai.com.ng/about.html">About</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.5rem 1.25rem; font-size: 0.78rem;">Sign Up / Login</a></li>
       </nav>
@@ -479,20 +474,19 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="eyebrow reveal"><span class="pulse-dot"></span><span>Philadelphia Agentic Engine · 1M Context · Online</span></div>
-        <h1 class="hero-title reveal" style="--d:80ms">Where Assistance<br><span>Meets Excellence</span></h1>
-        <div class="tw-wrap reveal" style="--d:140ms"><span id="hero-tw">Autonomous multimodal creation</span><span class="tw-caret"></span></div>
-        <p class="hero-subtitle reveal" style="--d:200ms">
-          Elvion AI is a unified creative and engineering workstation. Powered by our flagship intelligence, <strong>Philadelphia AI</strong>, we bring together deep reasoning, native video and document vision, live web research, and 30+ autonomous studio tools in one workspace.
+        <h1 class="hero-title reveal">Where Assistance<br><span>Meets Excellence</span></h1>
+        <div class="tw-wrap reveal" style="--d:80ms"><span id="hero-tw">Autonomous multimodal creation</span><span class="tw-caret"></span></div>
+        <p class="hero-subtitle reveal" style="--d:140ms">
+          Elvion AI is a unified creative and engineering workstation. Powered by our flagship intelligence, <strong>Philadelphia AI</strong>, we bring together deep reasoning, native video and document vision, live web research, and 120+ continuously evolving autonomous studio tools in one workspace.
         </p>
-        <div class="hero-actions reveal" style="--d:260ms">
+        <div class="hero-actions reveal" style="--d:200ms">
           <a href="https://elvionai.com.ng/signup-login.html" class="btn">Launch Philadelphia Studio <i class="fa-solid fa-arrow-right"></i></a>
           <a href="#studios" class="btn btn-outline">Explore 7 Studios</a>
-          <a href="https://elvionai.com.ng/api.html" class="btn btn-outline"><i class="fa-solid fa-terminal"></i> Developer API</a>
+          <a href="#pricing" class="btn btn-outline">Pay As You Go</a>
         </div>
 
         <!-- Interactive Studio Sandbox Preview -->
-        <div class="studio-preview reveal" style="--d:320ms">
+        <div class="studio-preview reveal" style="--d:260ms">
           <div class="sp-hdr">
             <div style="display:flex;align-items:center;gap:12px;">
               <div class="sp-dots"><i></i><i></i><i></i></div>
@@ -512,8 +506,8 @@
         <!-- Animated Metrics Counter Strip -->
         <div class="metrics-bar reveal" id="metrics-bar">
           <div class="metric-box"><div class="metric-val" data-count="1000000" data-fmt="1M">0</div><div class="metric-lbl">Token Context Window</div></div>
-          <div class="metric-box"><div class="metric-val" data-count="30" data-suffix="+">0</div><div class="metric-lbl">Autonomous Agent Tools</div></div>
-          <div class="metric-box"><div class="metric-val" data-count="25" data-suffix="+">0</div><div class="metric-lbl">Visual Synthesis Styles</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="120" data-suffix="+">0</div><div class="metric-lbl">Autonomous Agentic Tools</div></div>
+          <div class="metric-box"><div class="metric-val" data-count="35" data-suffix="+">0</div><div class="metric-lbl">Visual Synthesis Engines</div></div>
           <div class="metric-box"><div class="metric-val" data-count="10" data-suffix="">0</div><div class="metric-lbl">Distinct AI Personalities</div></div>
           <div class="metric-box"><div class="metric-val" data-count="7" data-suffix="">0</div><div class="metric-lbl">Dedicated Creative Studios</div></div>
         </div>
@@ -525,18 +519,18 @@
       <div class="text-center reveal">
         <div class="eyebrow"><i class="fa-solid fa-crown" style="color:var(--accent)"></i><span>Flagship Intelligence</span></div>
         <h2 class="section-title">Meet <span>Philadelphia AI</span></h2>
-        <p class="section-desc">Built in Lagos for creators, engineers, students, and enterprises worldwide. Philadelphia combines a 1,000,000-token reasoning window with real-time execution.</p>
+        <p class="section-desc">Engineered for creators, developers, students, and enterprises worldwide. Philadelphia combines a 1,000,000-token reasoning window with real-time autonomous tool execution and continuous model improvements.</p>
       </div>
 
       <div class="philly-grid">
         <div class="spot-card reveal">
           <div class="mode-pill-row">
             <span class="mode-badge"><i class="fa-regular fa-comment-dots"></i> Chat Mode (1M Context)</span>
-            <span class="mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Create Mode (30+ Tools)</span>
+            <span class="mode-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Create Mode (120+ Agentic Tools)</span>
           </div>
           <h3 style="font-size:1.85rem;margin-bottom:0.8rem;">One Intelligence. Every Modality.</h3>
           <p style="color:var(--text-secondary);">
-            Unlike standard chatbots that stop at plain text, Philadelphia understands your intent. Discuss complex software architecture, paste entire books without truncation, inspect 50MB videos frame-by-frame, or switch to Create Mode to produce finished assets in one pass.
+            Unlike standard chatbots that stop at plain text, Philadelphia understands your intent. Discuss complex software architecture, paste entire books without truncation, inspect full video streams frame-by-frame, or switch to Create Mode to produce finished assets in one pass.
           </p>
           <ul class="check-grid">
             <li><i class="fa-solid fa-check"></i> Native Video, Audio & PDF Vision</li>
@@ -544,7 +538,7 @@
             <li><i class="fa-solid fa-check"></i> Automatic Cross-Chat Memory</li>
             <li><i class="fa-solid fa-check"></i> In-Browser Python, React & HTML IDE</li>
             <li><i class="fa-solid fa-check"></i> Interactive A/B/C/D Study Quizzes</li>
-            <li><i class="fa-solid fa-check"></i> 1-Click Live Vercel Web Deployment</li>
+            <li><i class="fa-solid fa-check"></i> 1-Click Live Cloud Web Deployment</li>
             <li><i class="fa-solid fa-check"></i> Real-Time Two-Way Voice Calls</li>
             <li><i class="fa-solid fa-check"></i> Designed PDF, Word, Slides & Excel</li>
           </ul>
@@ -558,7 +552,7 @@
         <div class="spot-card reveal" style="--d:120ms">
           <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.5rem;">Adaptive Persona Engine</div>
           <h3 style="font-size:1.6rem;margin-bottom:0.6rem;">10 Specialized Personalities</h3>
-          <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.1rem;">Tap a persona below to preview how Philadelphia adapts her voice, expertise, and workflow to match your goal:</p>
+          <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:1.1rem;">Select a persona below to preview how Philadelphia adapts her voice, expertise, and workflow to match your goal:</p>
           <div class="persona-chips" id="persona-chips"></div>
           <div class="persona-stage" id="persona-stage"></div>
         </div>
@@ -593,8 +587,8 @@
         <div class="spot-card reveal" style="--d:120ms">
           <div class="feature-icon"><i class="fa-solid fa-image"></i></div>
           <h3>Image Studio (V1 & V2)</h3>
-          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Create artwork across 25+ curated engines (Photoreal V2, Movie, Anime Core, Noir, V8), edit existing photos with character lock, or remove backgrounds in one tap.</p>
-          <div class="tag-row"><span class="mini-tag">25+ Engines</span><span class="mini-tag">Photo Edit</span><span class="mini-tag">Remove BG</span></div>
+          <p style="color:var(--text-secondary);font-size:0.93rem;margin-bottom:1rem;">Create artwork across 35+ curated engines (Photoreal V2, Movie, Anime Core, Noir, V8), edit existing photos with character lock, or remove backgrounds in one tap.</p>
+          <div class="tag-row"><span class="mini-tag">35+ Engines</span><span class="mini-tag">Photo Edit</span><span class="mini-tag">Remove BG</span></div>
           <a href="https://elvionai.com.ng/image-studio.html" class="studio-link">Enter Studio <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
@@ -627,16 +621,59 @@
       </div>
     </section>
 
-    <!-- Developer API & Transparent Credit Estimator -->
-    <section id="developers" class="container">
+    <!-- Pay As You Go Pricing & Developer API -->
+    <section id="pricing" class="container">
       <div class="text-center reveal">
-        <div class="eyebrow"><i class="fa-solid fa-code" style="color:var(--accent)"></i><span>Elvion Developer Suite</span></div>
-        <h2 class="section-title">Build With the <span>Philadelphia API</span></h2>
-        <p class="section-desc">Integrate 1M-context reasoning, native video/image vision, 2K video generation, and voice synthesis directly into your applications with pay-as-you-go simplicity.</p>
+        <div class="eyebrow"><i class="fa-solid fa-coins" style="color:var(--accent)"></i><span>Pay As You Go & Developer Suite</span></div>
+        <h2 class="section-title">Flexible <span>Pay As You Go</span> Pricing</h2>
+        <p class="section-desc">No subscriptions or forced monthly commitments. Claim free daily credits every day, or top up your wallet anytime and pay only for the exact tools you run.</p>
       </div>
 
       <div class="api-split">
-        <div class="code-win reveal">
+        <!-- Pay As You Go Breakdown Card -->
+        <div class="spot-card reveal">
+          <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.35rem;">Universal Credit Wallet</div>
+          <h3 style="font-size:1.6rem;margin-bottom:0.4rem;">Pay As You Go Rates</h3>
+          <p style="color:var(--text-secondary);font-size:0.88rem;">One unified credit balance works across every Studio and Developer API endpoint:</p>
+
+          <div class="rate-badges">
+            <div class="rate-box"><b>$1 = 220+ Credits</b><small>USD Conversion</small></div>
+            <div class="rate-box"><b>₦5 = 1 Credit</b><small>NGN Conversion</small></div>
+            <div class="rate-box"><b>~$0.0045 = 1 Cr</b><small>Per Credit Unit</small></div>
+          </div>
+
+          <div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Image Generation & Graphic Runs</span><span class="calc-price">10 - 15 cr</span></div>
+              <div class="calc-sub">Varying on runs on the images such as photo edits, canvas drawing, background removal, typography, posters, and graphics designing.</div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Philadelphia Chat & Deep Reasoning</span><span class="calc-price">2 cr</span></div>
+              <div class="calc-sub">Varying on deep web research, live link extraction, code studio execution, and 1M-context document analysis.</div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Multimodal Vision & File Inspection</span><span class="calc-price">1 - 6 cr</span></div>
+              <div class="calc-sub">Varying on runs across high-resolution images, scanned PDFs, audio tracks, and full video stream breakdowns.</div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Cinema Video & Motion Synthesis</span><span class="calc-price">15 - 120+ cr</span></div>
+              <div class="calc-sub">Varying on resolution up to 2K, duration, frame interpolation, character lock, video edits, and synchronized audio.</div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Voice Synthesis & Audio Engineering</span><span class="calc-price">3 - 25 cr</span></div>
+              <div class="calc-sub">Varying on voice models, document podcast narration, character acting, custom sound effects, and audio mastering.</div>
+            </div>
+            <div class="calc-row">
+              <div class="calc-top"><span>Websites, Documents & Research Pro</span><span class="calc-price">3 - 50 cr</span></div>
+              <div class="calc-sub">Varying on live website deployment, multi-source cited PDF reports, Word documents, slide decks, spreadsheets, and more.</div>
+            </div>
+          </div>
+          <div style="font-size:0.8rem;color:var(--accent-soft);font-style:italic;margin-top:0.8rem;">+ Over 120 autonomous tools and workflows with continuous improvements added regularly.</div>
+          <a href="https://elvionai.com.ng/signup-login.html" class="btn" style="width:100%;margin-top:1.2rem;">Start With Free Daily Credits <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Developer API Code Playground -->
+        <div class="code-win reveal" style="--d:120ms">
           <div class="code-hdr">
             <div class="sp-tabs" id="api-tabs">
               <button class="sp-tab on" data-lang="py">Python</button>
@@ -646,21 +683,10 @@
             <button class="nav-cmd-btn" id="copy-api-btn"><i class="fa-solid fa-copy"></i> Copy Snippet</button>
           </div>
           <pre class="code-pre" id="api-code"></pre>
-        </div>
-
-        <div class="spot-card reveal" style="--d:120ms">
-          <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem;">Transparent Wallet System</div>
-          <h3 style="font-size:1.55rem;margin-bottom:0.5rem;">Pay Only For What You Create</h3>
-          <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.1rem;">Claim free daily credits every day, or fund your wallet instantly (`1 Credit = ₦5`) with zero monthly lock-in.</p>
-          <div>
-            <div class="calc-row"><span>Philadelphia Studio Chat (1M Context + Search)</span><span class="calc-price">2 cr</span></div>
-            <div class="calc-row"><span>Multimodal Vision (Image / PDF / Audio / Link)</span><span class="calc-price">1 - 2 cr</span></div>
-            <div class="calc-row"><span>Image Generation (25+ Styles V1 / Creative V2)</span><span class="calc-price">10 - 15 cr</span></div>
-            <div class="calc-row"><span>Philadelphia Voiceover / Document Narration</span><span class="calc-price">5 - 15 cr</span></div>
-            <div class="calc-row"><span>Research Report Pro (Multi-Source Cited PDF)</span><span class="calc-price">28 cr</span></div>
-            <div class="calc-row"><span>Live Deployed Website / Video Generation</span><span class="calc-price">50 - 120+ cr</span></div>
+          <div style="padding:1.2rem;border-top:1px solid var(--border-subtle);background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:0.82rem;color:var(--text-secondary);">Build apps with Philadelphia Chat, Vision, Image, Voice & 2K Video APIs.</span>
+            <a href="https://elvionai.com.ng/api.html" class="btn btn-outline" style="padding:0.55rem 1.2rem;font-size:0.78rem;">API Docs <i class="fa-solid fa-arrow-right"></i></a>
           </div>
-          <a href="https://elvionai.com.ng/api.html" class="btn" style="width:100%;margin-top:1.4rem;">Explore API Documentation <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
@@ -724,21 +750,21 @@
       <div class="text-center reveal">
         <div class="eyebrow"><i class="fa-solid fa-circle-question" style="color:var(--accent)"></i><span>Answers & Support</span></div>
         <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
-        <p class="section-desc">Everything you need to know about Philadelphia AI, credits, and the Elvion workstation.</p>
+        <p class="section-desc">Everything you need to know about Philadelphia AI, Pay As You Go credits, and the Elvion workstation.</p>
       </div>
 
       <div class="faq-wrap reveal">
         <details class="faq-item" open>
           <summary><span>What makes Philadelphia AI different from standard chatbots?</span><i class="fa-solid fa-plus"></i></summary>
-          <p>Philadelphia AI is a full multimodal agent built by Elvion AI. In Chat Mode, she offers a 1,000,000-token context window, native video/PDF/audio understanding, live web search, and an in-browser code studio. In Create Mode, she orchestrates over 30 studio tools to generate images, 2K videos with sound, voiceovers, slide decks, PDFs, and live deployed websites.</p>
+          <p>Philadelphia AI is a full multimodal agent built by Elvion AI. In Chat Mode, she offers a 1,000,000-token context window, native video/PDF/audio understanding, live web search, and an in-browser code studio. In Create Mode, she orchestrates 120+ studio tools to generate images, 2K videos with sound, voiceovers, slide decks, PDFs, and live deployed websites.</p>
         </details>
         <details class="faq-item">
-          <summary><span>How do credits and daily rewards work?</span><i class="fa-solid fa-plus"></i></summary>
-          <p>Every registered user can claim free daily credits inside the workspace to chat and create. When you need more capacity for heavy video rendering or B2B API calls, you can top up your wallet anytime starting from ₦100 (1 Credit = ₦5).</p>
+          <summary><span>How does Pay As You Go pricing work?</span><i class="fa-solid fa-plus"></i></summary>
+          <p>Every registered user can claim free daily credits inside the workspace. When you need more capacity, you can fund your wallet on a Pay As You Go basis ($1 = 220+ credits, ₦5 = 1 credit, or ~$0.0045 per credit) and spend credits only on the exact tools you run.</p>
         </details>
         <details class="faq-item">
-          <summary><span>Can I use Elvion AI models in my own software or company?</span><i class="fa-solid fa-plus"></i></summary>
-          <p>Yes. You can generate an API key directly from your Elvion dashboard and call our REST endpoints for Philadelphia Chat, Vision Analysis, Image Generation, Remove Background, Seraphina Voice, and Pro 2K Video.</p>
+          <summary><span>Can I integrate Philadelphia AI into my own software or company?</span><i class="fa-solid fa-plus"></i></summary>
+          <p>Yes. You can generate an API key directly from your Elvion dashboard and call our REST endpoints for Philadelphia Chat, Vision Analysis, Image Generation, Remove Background, Voice Synthesis, and Pro 2K Video.</p>
         </details>
       </div>
 
@@ -794,6 +820,7 @@
         <div class="footer-col">
           <h4>Platform</h4>
           <ul>
+            <li><a href="#pricing">Pay As You Go Pricing</a></li>
             <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
             <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
             <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
@@ -811,7 +838,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; <span id="current-year"></span> Elvion AI. Built with pride in Lagos, Nigeria. All rights reserved.
+        &copy; <span id="current-year"></span> Elvion AI. All rights reserved.
       </div>
     </div>
   </footer>
@@ -821,7 +848,7 @@
   <!-- Quick Jump Command Modal -->
   <div id="cmd-modal">
     <div class="cmd-box">
-      <input type="text" id="cmd-input" placeholder="Jump to any studio, API docs, learning portal, or contact…" autocomplete="off">
+      <input type="text" id="cmd-input" placeholder="Search studios, Pay As You Go pricing, API docs, or support…" autocomplete="off">
       <div class="cmd-list" id="cmd-list"></div>
     </div>
   </div>
@@ -888,7 +915,7 @@
 
       // 5. Hero Typewriter
       const phrases = [
-        'Autonomous image, video, audio & document creation',
+        '120+ autonomous tools for image, video, audio & document creation',
         '1,000,000-token deep reasoning with live web search',
         'Native video, PDF, image & link understanding',
         'In-browser Python, React & HTML live code studio',
@@ -902,23 +929,23 @@
         twEl.textContent = w.slice(0, Math.min(w.length, Math.max(0, ci)));
       }, 52);
 
-      // 6. Interactive Hero Studio Sandbox Tabs
+      // 6. Interactive Hero Studio Sandbox Tabs (Philadelphia Model Only)
       const spData = [
         {prompt: 'Design a luxury rooftop music night flyer, generate a 15-second voiceover teaser, and export a printable event PDF.',
          steps: ['Generated high-contrast poster artwork (Philadelphia V6)', 'Rendered typography & layout via create_design', 'Synthesized podcast-style voiceover (Kore)', 'Compiled print-ready event PDF'],
          out: `<div style="text-align:center"><i class="fa-solid fa-wand-magic-sparkles" style="font-size:2.4rem;color:var(--accent);margin-bottom:10px;"></i><h4 style="margin-bottom:6px;">3 Studio Assets Created in 1 Run</h4><p style="font-size:0.84rem;color:var(--text-secondary);">Poster PNG · Teaser WAV · Event PDF saved automatically to your Gallery.</p></div>`},
         {prompt: 'Analyze my attached 37-second vertical video clip and PDF brief: give me a shot-by-shot breakdown and audio transcript.',
-         steps: ['Decoded video stream & audio track via MiniMax-M3 & Gemini Vision', 'Mapped 6 structural beats & timestamps (00:00 to 00:37)', 'Transcribed spoken dialogue & diegetic sound cues', 'Generated interactive A/B/C/D production next steps'],
+         steps: ['Decoded video stream & audio track via Philadelphia Vision Engine', 'Mapped 6 structural beats & timestamps (00:00 to 00:37)', 'Transcribed spoken dialogue & diegetic sound cues', 'Generated interactive A/B/C/D production next steps'],
          out: `<div style="font-family:var(--font-code);font-size:0.78rem;color:var(--accent-soft);line-height:1.6;">[00:00-00:02] Focus-pull reveal on subject<br>[00:08-00:10] Audio: "I wanted to put video."<br>[00:20-00:25] Peak close-up frame (#8 best thumbnail)<br><span style="color:var(--accent-green);">✓ Full visual + audio packet verified</span></div>`},
         {prompt: 'Write an interactive playable arcade game in a single HTML5 file and run it with console logging.',
-         steps: ['Wrote 240-line HTML5 Canvas game in one unbreakable code block', 'Ran syntax & tag validation (0 problems)', 'Mounted live preview iframe + real-time console hook', 'Ready for 1-click live Vercel deployment'],
-         out: `<div style="font-family:var(--font-code);font-size:0.78rem;color:#8fd7a6;">› Running index.html in Code Studio…<br>› Canvas initialized (60 FPS)<br>› 0 errors · 0 warnings<br><span style="color:var(--accent);">🚀 Live URL: https://philly-site.vercel.app</span></div>`},
-        {prompt: 'Create a 6-second 2K aerial drone shot over Victoria Island, Lagos at golden hour with an orchestral score.',
+         steps: ['Wrote 240-line HTML5 Canvas game in one unbreakable code block', 'Ran syntax & tag validation (0 problems)', 'Mounted live preview iframe + real-time console hook', 'Ready for 1-click live cloud deployment'],
+         out: `<div style="font-family:var(--font-code);font-size:0.78rem;color:#8fd7a6;">› Running index.html in Code Studio…<br>› Canvas initialized (60 FPS)<br>› 0 errors · 0 warnings<br><span style="color:var(--accent);">🚀 Live URL deployed & copied to clipboard</span></div>`},
+        {prompt: 'Create a 6-second 2K aerial drone shot at golden hour with an orchestral score.',
          steps: ['Selected Philadelphia Pro Video (2K, 16:9)', 'Applied aerial drone motion & orchestral audio presets', 'Rendered cinema MP4 with synchronized soundscape'],
          out: `<div style="text-align:center"><i class="fa-solid fa-clapperboard" style="font-size:2.3rem;color:var(--accent);margin-bottom:10px;"></i><h4>2K Cinema Video + Native Sound</h4><p style="font-size:0.84rem;color:var(--text-secondary);">Supports Text-to-Video, First/Last Frame & Reference Audio.</p></div>`},
         {prompt: 'Start a real-time spoken phone call with Philadelphia to brainstorm my startup pitch.',
-         steps: ['Connected low-latency bidirectional WebSocket audio', 'Active voice: Kore (Philadelphia Signature)', 'Live speech-to-speech with real-time captions'],
-         out: `<div style="text-align:center"><i class="fa-solid fa-phone-volume" style="font-size:2.3rem;color:var(--accent-green);margin-bottom:10px;"></i><h4>Live Voice Call Connected</h4><p style="font-size:0.84rem;color:var(--text-secondary);">"Oya, tell me who your customer is and what problem you solve first…"</p></div>`}
+         steps: ['Connected low-latency bidirectional voice stream', 'Active voice: Kore (Philadelphia Signature)', 'Live speech-to-speech with real-time captions'],
+         out: `<div style="text-align:center"><i class="fa-solid fa-phone-volume" style="font-size:2.3rem;color:var(--accent-green);margin-bottom:10px;"></i><h4>Live Voice Call Connected</h4><p style="font-size:0.84rem;color:var(--text-secondary);">"Let us structure your pitch clearly. Tell me who your customer is and what problem you solve first."</p></div>`}
       ];
       const spBody = document.getElementById('sp-body');
       function renderSp(idx) {
@@ -931,18 +958,18 @@
         renderSp(+b.dataset.tab);
       });
 
-      // 7. Interactive 10-Personality Switcher
+      // 7. Interactive 10-Personality Switcher (Pure Standard English)
       const personas = [
-        ['Philadelphia', 'fa-sparkles', 'Flagship Creative Partner', '"Oya, let us break this down cleanly. Here is what is working in your draft, where the hook drops, and the exact next step we should take."'],
-        ['Professor Dope', 'fa-graduation-cap', 'Deep Academic Educator', '"Think of transformer attention like a spotlight in a crowded theatre. Let us walk through the intuition first, then the math, and finish with a quick A/B/C/D check."'],
+        ['Philadelphia', 'fa-sparkles', 'Flagship Creative Partner', '"Let us break this down step by step. Here is what is working in your draft, where the hook drops, and the exact next move we should make."'],
+        ['Professor Dope', 'fa-graduation-cap', 'Deep Academic Educator', '"Think of transformer attention like a spotlight in a theatre. Let us walk through the intuition first, then the math, and finish with a quick A/B/C/D check."'],
         ['Kodi', 'fa-terminal', 'Precise Staff Engineer', '"Your state mutation is causing race conditions on line 42. Here is the refactored, production-ready module in a single fenced block with zero side effects."'],
         ['Zuri', 'fa-comments', 'Empathetic Relationship Advisor', '"Before you reply to that message, let us look at what both of you are actually trying to protect. Here are two calm, honest ways to phrase what you feel."'],
-        ['Reel', 'fa-clapperboard', 'CapCut & Premiere Video Editor', '"Your first 1.5 seconds are soft. Cold-open on the 00:23 cheek-cradle frame, cut on the laugh at 00:22, and pull the orange cast back toward neutral."'],
+        ['Reel', 'fa-clapperboard', 'CapCut & Premiere Video Editor', '"Your first 1.5 seconds are soft. Cold-open on the 00:23 close-up frame, cut on the laugh at 00:22, and pull the orange cast back toward neutral."'],
         ['Tobi', 'fa-book-open-reader', 'Interactive Study Buddy', '"I just wrote a short comprehension passage on macroeconomics for you. Ready for 3 interactive A/B/C/D objective questions to test your recall?"'],
         ['Coach Nia', 'fa-dumbbell', 'Structured Fitness Coach', '"Four days a week, progressive overload on compounds, and strict form cues on your hinge. Let us lock in your split for the next 6 weeks."'],
-        ['Kemi', 'fa-briefcase', 'Business & Pitch Strategist', '"What is your unit economics at 500 customers? Let us tighten your pricing tier and unit margin before we build the 10-slide investor deck."'],
+        ['Kemi', 'fa-briefcase', 'Business & Pitch Strategist', '"What are your unit economics at 500 customers? Let us tighten your pricing tier and unit margin before we build the 10-slide investor deck."'],
         ['Sage', 'fa-compass', 'Plain Balanced Assistant', '"Here is a concise, neutral summary of the three options along with their trade-offs, costs, and timelines."'],
-        ['Custom Identity', 'fa-dna', 'Your Own AI Character', '"Define your character name, background, dialect, age, and backstory inside the Studio—and Philadelphia stays 100% in character."']
+        ['Custom Identity', 'fa-dna', 'Your Own AI Character', '"Define your character name, background, dialect, age, and backstory inside the Studio, and Philadelphia stays 100% in character."']
       ];
       const pChips = document.getElementById('persona-chips'), pStage = document.getElementById('persona-stage');
       function selectPersona(i) {
@@ -958,7 +985,7 @@
       const snippets = {
         py: `import requests\n\nresp = requests.post(\n    "https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat",\n    headers={"Authorization": "Bearer elv_live_your_api_key"},\n    json={\n        "message": "Analyze our Q4 growth metrics and propose 3 actions.",\n        "system_prompt": "You are Philadelphia AI by Elvion AI."\n    }\n)\nprint(resp.json()["reply"])`,
         js: `const res = await fetch("https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat", {\n  method: "POST",\n  headers: {\n    "Authorization": "Bearer elv_live_your_api_key",\n    "Content-Type": "application/json"\n  },\n  body: JSON.stringify({\n    message: "Generate a responsive pricing table component.",\n    system_prompt: "You are Philadelphia AI by Elvion AI."\n  })\n});\nconst data = await res.json();\nconsole.log(data.reply);`,
-        curl: `curl -X POST https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat \\\n  -H "Authorization: Bearer elv_live_your_api_key" \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "message": "Summarize the latest West African fintech trends.",\n    "system_prompt": "You are Philadelphia AI by Elvion AI."\n  }'`
+        curl: `curl -X POST https://web-production-9a18.up.railway.app/api/developer/philadelphia/chat \\\n  -H "Authorization: Bearer elv_live_your_api_key" \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "message": "Summarize the latest global fintech trends.",\n    "system_prompt": "You are Philadelphia AI by Elvion AI."\n  }'`
       };
       const apiCode = document.getElementById('api-code');
       apiCode.textContent = snippets.py;
@@ -979,12 +1006,13 @@
         setTimeout(() => this.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Email', 2000);
       };
 
-      // 10. Quick Jump Command Modal (Ctrl+K)
+      // 10. Quick Jump Command Modal
       const cmdModal = document.getElementById('cmd-modal'), cmdInput = document.getElementById('cmd-input'), cmdList = document.getElementById('cmd-list');
       const cmdLinks = [
         ['fa-comments', 'Philadelphia Studio Chat', 'Flagship Agent', 'https://elvionai.com.ng/philadelphia.html'],
+        ['fa-coins', 'Pay As You Go Pricing', '$1 = 220+ cr · ₦5 = 1 cr', '#pricing'],
         ['fa-film', 'Video Studio (Pro 2K)', 'Text & Image to Video', 'https://elvionai.com.ng/video-studio.html'],
-        ['fa-image', 'Image Studio (V1 & V2)', '25+ Art Engines', 'https://elvionai.com.ng/image-studio.html'],
+        ['fa-image', 'Image Studio (V1 & V2)', '35+ Art Engines', 'https://elvionai.com.ng/image-studio.html'],
         ['fa-music', 'Audio & Voice Studio', 'TTS & Narration', 'https://elvionai.com.ng/audio-studio.html'],
         ['fa-globe', 'Website Studio', 'Instant Live Deploy', 'https://elvionai.com.ng/website-studio.html'],
         ['fa-pen-nib', 'Writing Studio', 'Manuscripts & Reports', 'https://elvionai.com.ng/writing-studio.html'],
@@ -998,6 +1026,7 @@
         const ql = q.toLowerCase();
         cmdList.innerHTML = cmdLinks.filter(x => x[1].toLowerCase().includes(ql) || x[2].toLowerCase().includes(ql))
           .map(x => `<a class="cmd-item" href="${x[3]}"><i class="fa-solid ${x[0]}"></i><span>${x[1]}</span><small>${x[2]}</small></a>`).join('');
+        cmdList.querySelectorAll('a[href^="#"]').forEach(a => a.onclick = () => cmdModal.classList.remove('show'));
       }
       const openCmd = () => { cmdModal.classList.add('show'); cmdInput.value = ''; paintCmd(); setTimeout(() => cmdInput.focus(), 40); };
       document.getElementById('open-cmd').onclick = openCmd;
