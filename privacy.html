@@ -1,717 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Privacy Policy — Elvion AI</title>
-    <meta name="description" content="Elvion AI Privacy Policy. Learn how we securely handle, protect, and process your data, prompts, and payments across our intelligent ecosystem.">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <style>
-        :root {
-            --font-brand: 'Playfair Display', serif;
-            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-futuristic: 'Orbitron', sans-serif;
-            --bg-deep: #050505;
-            --bg-space: #0a0a08;
-            --bg-card: #11110f;
-            --bg-elevated: #161614;
-            --text-primary: #efefef;
-            --text-secondary: #b5b0a3;
-            --text-muted: #6b665c;
-            --accent: #c9a96e;
-            --accent-soft: #e8d5b0;
-            --accent-green: #5fb87a;
-            --danger: #e05a5a;
-            --border-subtle: rgba(201, 169, 110, 0.15);
-            --border-glow: rgba(201, 169, 110, 0.4);
-            --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15);
-            --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
-            --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
-            --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
-            --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.1) 0%, transparent 60%), 
-                             radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Privacy Policy | Elvion AI</title>
+  <meta name="description" content="Elvion AI Privacy Policy. Learn how we protect your data, private chats, multimodal uploads, voice calls, and payments across Philadelphia AI and our studios.">
+  <meta name="theme-color" content="#050505">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,400..700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --font-brand: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+      --bg-deep: #050505; --bg-space: #0a0a08; --bg-card: #10100e; --bg-elevated: #161613;
+      --text-primary: #f2f0ea; --text-secondary: #b5b0a3; --text-muted: #6e695f;
+      --accent: #c9a96e; --accent-soft: #e8d5b0; --accent-green: #5fb87a; --danger: #e05a5a;
+      --border-subtle: rgba(201, 169, 110, 0.15); --border-glow: rgba(201, 169, 110, 0.42);
+      --shadow-cosmic: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 28px rgba(201, 169, 110, 0.08);
+      --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.92);
+      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #f0dfc0 50%, #9f7e43 100%);
+      --ease: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-space); }
+    *::-webkit-scrollbar { width: 7px; height: 7px; }
+    *::-webkit-scrollbar-track { background: var(--bg-space); }
+    *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body { font-family: var(--font-body); background-color: var(--bg-deep); color: var(--text-primary); line-height: 1.75; overflow-x: hidden; min-height: 100vh; position: relative; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(80% 50% at 50% -10%, rgba(201, 169, 110, 0.12), transparent 65%), radial-gradient(60% 50% at 85% 90%, rgba(201, 169, 110, 0.05), transparent 60%); pointer-events: none; z-index: 0; }
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--gradient-gold); box-shadow: 0 0 12px var(--accent); z-index: 2000; transition: width 0.08s linear; }
+    #snow-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.65; }
+    h1, h2, h3, h4 { font-family: var(--font-brand); color: #fff; font-weight: 700; line-height: 1.25; }
+    a { color: var(--accent); text-decoration: none; transition: var(--ease); }
+    a:hover { color: var(--accent-soft); }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
 
-        html { scroll-behavior: smooth; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) var(--bg-space);
-        }
-        
-        *::-webkit-scrollbar { width: 8px; }
-        *::-webkit-scrollbar-track { background: var(--bg-space); }
-        *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
+    /* Navbar */
+    .navbar { position: fixed; top: 0; width: 100%; background: rgba(8, 8, 6, 0.9); padding: 0.9rem 0; z-index: 1000; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle); }
+    .navbar .container-nav { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .navbar-brand { font-family: var(--font-brand); font-size: 1.65rem; font-weight: 900; letter-spacing: 1px; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; list-style: none; gap: 1.25rem; align-items: center; }
+    .nav-links a { color: var(--text-secondary); font-size: 0.81rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.4rem 0; position: relative; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-soft); }
+    .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--gradient-gold); transition: width 0.3s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .dropdown { position: relative; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 0.6rem; min-width: 240px; box-shadow: var(--shadow-intense); z-index: 1001; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu li { list-style: none; }
+    .dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 0.65rem 0.9rem; font-size: 0.84rem; color: var(--text-secondary); text-transform: none; letter-spacing: 0; border-radius: 9px; }
+    .dropdown-menu a i { width: 18px; color: var(--accent); text-align: center; }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-menu a:hover { background: rgba(201, 169, 110, 0.12); color: #fff; }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 4px; }
+    .hamburger .bar { width: 24px; height: 2.5px; background: var(--accent); transition: 0.3s; border-radius: 3px; }
+    .mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(6px); z-index: 998; }
+    .mobile-backdrop.active { display: block; }
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-deep);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0.65rem 1.4rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; transition: var(--ease); border: 1px solid transparent; color: #050505; background: var(--gradient-gold); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(201, 169, 110, 0.45); color: #000; }
+    .btn-outline { background: rgba(201, 169, 110, 0.06); color: var(--accent-soft); border: 1px solid var(--border-glow); }
+    .btn-outline:hover { background: rgba(201, 169, 110, 0.16); color: #fff; }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: var(--gradient-deep);
-            pointer-events: none;
-            z-index: 0;
-        }
+    /* Hero & Summary */
+    .privacy-main { padding-top: 7.8rem; padding-bottom: 5rem; position: relative; z-index: 2; }
+    .doc-hero { text-align: center; margin-bottom: 2.2rem; padding: 2.6rem 1.5rem; background: linear-gradient(180deg, rgba(22, 22, 18, 0.92), rgba(14, 14, 12, 0.96)); border: 1px solid var(--border-glow); border-radius: 22px; box-shadow: var(--shadow-cosmic); }
+    .doc-badge-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .doc-pill { padding: 0.35rem 0.9rem; border-radius: 50px; background: rgba(201, 169, 110, 0.1); border: 1px solid var(--border-subtle); color: var(--accent-soft); font-family: var(--font-code); font-size: 0.72rem; display: inline-flex; align-items: center; gap: 6px; }
+    .doc-title { font-size: clamp(2.1rem, 5vw, 3.4rem); margin-bottom: 0.7rem; }
+    .doc-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .doc-sub { color: var(--text-secondary); max-width: 700px; margin: 0 auto 1.4rem; font-size: 0.98rem; }
 
-        /* Ambient Gold Rain/Snow Canvas */
-        #snow-canvas {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.7;
-        }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.4rem; }
+    .sum-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.35rem; transition: var(--ease); }
+    .sum-card:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: var(--shadow-cosmic); }
+    .sum-ico { width: 38px; height: 38px; border-radius: 10px; background: rgba(201, 169, 110, 0.12); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; margin-bottom: 0.8rem; }
+    .sum-card h3 { font-size: 1rem; margin-bottom: 0.35rem; font-family: var(--font-body); font-weight: 700; }
+    .sum-card p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.55; }
 
-        h1, h2, h3, h4 {
-            font-family: var(--font-brand);
-            color: var(--heading-color);
-            margin-top: 0;
-            font-weight: 700;
-        }
+    /* Layout & Mobile-Friendly TOC */
+    .privacy-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
+    .toc-panel { position: sticky; top: 88px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 1.2rem; max-height: calc(100vh - 110px); overflow-y: auto; }
+    .toc-search { width: 100%; padding: 0.65rem 0.85rem; background: var(--bg-deep); border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--text-primary); font-size: 0.82rem; outline: none; margin-bottom: 0.85rem; }
+    .toc-search:focus { border-color: var(--accent); }
+    .toc-toggle-btn { display: none; width: 100%; padding: 0.6rem 0.85rem; background: rgba(201,169,110,0.1); border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--accent-soft); font-size: 0.8rem; font-weight: 600; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 0.6rem; }
+    .toc-title { font-family: var(--font-code); font-size: 0.68rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; display: block; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .toc-list a { display: block; padding: 0.45rem 0.7rem; border-radius: 8px; font-size: 0.8rem; color: var(--text-secondary); border-left: 2px solid transparent; transition: var(--ease); }
+    .toc-list a:hover, .toc-list a.active { background: rgba(201, 169, 110, 0.12); color: #fff; border-left-color: var(--accent); }
 
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
+    /* Clauses */
+    .document-wrapper { background: var(--bg-card); border-radius: 20px; padding: 2.8rem; box-shadow: var(--shadow-cosmic); border: 1px solid var(--border-subtle); }
+    .clause { padding-bottom: 2.2rem; margin-bottom: 2.2rem; border-bottom: 1px solid rgba(201, 169, 110, 0.1); }
+    .clause:last-of-type { border-bottom: none; margin-bottom: 0.5rem; padding-bottom: 0; }
+    .clause-num { font-family: var(--font-code); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.25rem; }
+    .clause h2 { font-size: clamp(1.3rem, 3vw, 1.65rem); color: var(--accent-soft); margin-bottom: 0.9rem; }
+    .clause h3 { font-size: 1.08rem; color: #fff; margin: 1.2rem 0 0.5rem; font-family: var(--font-body); font-weight: 700; }
+    .clause p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.9rem; }
+    .clause ul { list-style: none; margin: 0.7rem 0 1.1rem; padding-left: 0; }
+    .clause li { position: relative; padding-left: 1.5rem; margin-bottom: 0.7rem; font-size: 0.94rem; color: var(--text-secondary); }
+    .clause li::before { content: '✦'; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 0.85rem; }
+    .clause strong { color: var(--text-primary); font-weight: 600; }
 
-        a:hover {
-            color: var(--accent-soft);
-            text-shadow: 0 0 5px var(--accent);
-        }
+    .callout { background: rgba(201, 169, 110, 0.06); border: 1px solid var(--border-glow); border-left: 4px solid var(--accent); padding: 1.15rem 1.3rem; border-radius: 0 12px 12px 0; margin: 1.1rem 0; }
+    .callout.green { background: rgba(95, 184, 122, 0.07); border-color: rgba(95, 184, 122, 0.35); border-left-color: var(--accent-green); }
+    .callout p { margin: 0; color: var(--text-primary); font-size: 0.91rem; }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
+    .closing-box { margin-top: 2rem; padding: 1.8rem; border-radius: 16px; background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(16,16,14,0.95)); border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; flex-wrap: wrap; }
 
-        /* NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 8, 0.95);
-            padding: 1rem 0;
-            z-index: 1000;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-subtle);
-        }
+    /* Footer & Floating Top Button */
+    .footer { background: var(--bg-space); padding: 4rem 0 2rem; border-top: 1px solid var(--border-subtle); position: relative; z-index: 2; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.2rem; max-width: 1240px; margin: 0 auto 2.5rem; padding: 0 1.5rem; }
+    .footer-col h4 { color: var(--accent); font-size: 1.02rem; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.65rem; }
+    .footer-col ul li a { color: var(--text-secondary); font-size: 0.88rem; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { text-align: center; padding-top: 1.8rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.82rem; }
+    #to-top { position: fixed; right: 20px; bottom: 22px; width: 42px; height: 42px; border-radius: 50%; background: var(--gradient-gold); color: #000; border: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-cosmic); z-index: 950; opacity: 0; pointer-events: none; transition: var(--ease); }
+    #to-top.show { opacity: 1; pointer-events: auto; }
 
-        .navbar .container-nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            font-family: var(--font-brand);
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: var(--glow-gold);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            font-family: var(--font-body);
-            position: relative;
-            padding: 0.5rem 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-soft);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--gradient-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Dropdown */
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 0.5rem 0;
-            min-width: 220px;
-            box-shadow: var(--shadow-intense);
-            z-index: 1001;
-        }
-        .nav-links li:hover .dropdown-menu { display: block; animation: fadeUp 0.3s ease; }
-        .dropdown-menu li { list-style: none; margin: 0; }
-        .dropdown-menu a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.7rem 1.2rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-transform: none;
-            letter-spacing: 0;
-        }
-        .dropdown-menu a i { width: 16px; color: var(--accent); text-align: center; }
-        .dropdown-menu a::after { display: none; }
-        .dropdown-menu a:hover {
-            background: rgba(201, 169, 110, 0.1);
-            color: var(--text-primary);
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            background: none;
-            border: none;
-            z-index: 1001;
-        }
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background: var(--accent);
-            transition: 0.3s;
-            border-radius: 3px;
-        }
-        .mobile-backdrop {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            z-index: 998;
-        }
-        .mobile-backdrop.active { display: block; }
-
-        /* Document Styling */
-        .privacy-main {
-            padding-top: 10rem;
-            padding-bottom: 6rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .document-wrapper {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 4rem;
-            box-shadow: var(--shadow-cosmic);
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(8px);
-        }
-
-        .doc-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .doc-header .animated-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 20px rgba(201, 169, 110, 0.3);
-            margin-bottom: 1.5rem;
-            animation: floatLogo 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatLogo {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        .doc-title {
-            font-size: 3.5rem;
-            color: var(--accent);
-            text-shadow: var(--glow-gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .doc-meta {
-            font-family: var(--font-futuristic);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .doc-content h2 {
-            font-size: 1.8rem;
-            color: var(--accent-soft);
-            margin-top: 3.5rem;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(201, 169, 110, 0.1);
-        }
-        
-        .doc-content h3 {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-family: var(--font-body);
-        }
-
-        .doc-content p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .doc-content ul {
-            list-style: none;
-            margin-bottom: 2rem;
-            padding-left: 0;
-        }
-
-        .doc-content li {
-            position: relative;
-            padding-left: 1.8rem;
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .doc-content li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        .doc-content strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .highlight-box {
-            background: rgba(201, 169, 110, 0.05);
-            border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin: 2rem 0;
-        }
-
-        .highlight-box p {
-            margin: 0;
-            color: var(--text-primary);
-            font-style: italic;
-        }
-
-        /* FOOTER */
-        .footer {
-            background: var(--bg-space);
-            padding: 4rem 0 2rem;
-            border-top: 1px solid var(--border-subtle);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-            padding: 0 2rem;
-        }
-        .footer-col h4 {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            font-family: var(--font-brand);
-        }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.8rem; }
-        .footer-col ul li a { color: var(--text-secondary); font-size: 0.9rem; transition: color 0.2s; }
-        .footer-col ul li a:hover { color: var(--text-primary); }
-        .brand-info {
-            font-family: var(--font-brand);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.8rem;
-            display: block;
-            text-shadow: var(--glow-gold);
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 992px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%; left: 0; right: 0;
-                background: rgba(10, 10, 8, 0.98);
-                padding: 1.5rem;
-                border-bottom: 1px solid var(--border-subtle);
-            }
-            .nav-links.active { display: flex; align-items: flex-start; }
-            .nav-links li { margin: 0.8rem 0; width: 100%; }
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                border: none;
-                background: transparent;
-                padding-left: 1rem;
-                border-left: 2px solid var(--border-subtle);
-            }
-            .dropdown:hover .dropdown-menu { animation: none; }
-            .hamburger { display: flex; }
-            
-            .document-wrapper { padding: 3rem 2rem; }
-        }
-
-        @media (max-width: 768px) {
-            .doc-title { font-size: 2.5rem; }
-            .document-wrapper { padding: 2rem 1.2rem; }
-            .doc-content h2 { font-size: 1.5rem; }
-            .doc-content p, .doc-content li { font-size: 0.95rem; }
-            .privacy-main { padding-top: 7rem; }
-        }
-    </style>
+    @media (max-width: 992px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10, 10, 8, 0.98); padding: 1.5rem; border-bottom: 1px solid var(--border-subtle); }
+      .nav-links.active { display: flex; align-items: flex-start; }
+      .nav-links li { width: 100%; margin: 0.4rem 0; }
+      .dropdown-menu { position: static; box-shadow: none; border: none; background: transparent; padding-left: 1rem; border-left: 2px solid var(--border-subtle); }
+      .hamburger { display: flex; }
+      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .privacy-layout { grid-template-columns: 1fr; }
+      .toc-panel { position: static; max-height: none; }
+      .toc-toggle-btn { display: flex; }
+      .toc-title, .toc-list { display: none; }
+      .toc-panel.open .toc-list { display: flex; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .summary-grid, .footer-grid { grid-template-columns: 1fr; }
+      .document-wrapper { padding: 1.5rem 1.15rem; }
+      .doc-hero { padding: 1.8rem 1.1rem; }
+      .privacy-main { padding-top: 6.4rem; }
+    }
+    @media print {
+      .navbar, .toc-panel, #snow-canvas, #scroll-bar, .footer, .doc-actions, #to-top { display: none !important; }
+      body { background: #fff; color: #000; }
+      .document-wrapper, .doc-hero, .sum-card { background: #fff; border: 1px solid #ccc; box-shadow: none; color: #000; }
+      .clause p, .clause li, .clause h2, .clause h3 { color: #000 !important; opacity: 1 !important; transform: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <div id="scroll-bar"></div>
+  <canvas id="snow-canvas"></canvas>
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
-    <!-- Animated Gold Rain -->
-    <canvas id="snow-canvas"></canvas>
+  <header class="navbar">
+    <div class="container-nav">
+      <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
+      <button class="hamburger" aria-label="Toggle navigation"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+      <nav class="nav-links">
+        <li><a href="https://elvionai.com.ng/index.html">Home</a></li>
+        <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia AI</a></li>
+        <li class="dropdown">
+          <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Philadelphia Studio Chat</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio & Voice Studio</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio</a></li>
+            <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio</a></li>
+            <li><a href="https://elvionai.com.ng/website-studio.html"><i class="fa-solid fa-globe"></i> Website Studio</a></li>
+            <li><a href="https://elvionai.com.ng/writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
+            <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
+          </ul>
+        </li>
+        <li><a href="https://elvionai.com.ng/index.html#pricing">Pay As You Go</a></li>
+        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+        <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
+        <li><a href="https://elvionai.com.ng/terms.html">Terms</a></li>
+        <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.48rem 1.2rem; font-size: 0.76rem;">Sign Up / Login</a></li>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Mobile Menu Backdrop -->
-    <div class="mobile-backdrop" id="mobile-backdrop"></div>
-
-    <header class="navbar">
-        <div class="container-nav">
-            <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
-            <button class="hamburger" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <nav class="nav-links">
-                <li><a href="https://elvionai.com.ng/index.html">Home</a></li>
-                <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
-                <li><a href="https://elvionai.com.ng/philadelphia.html">Explore AI</a></li>
-                <li class="dropdown">
-                    <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/website-studio.html"><i class="fa-solid fa-globe"></i> Website Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Chat Studio</a></li>
-                    </ul>
-                </li>
-                <li><a href="https://elvionai.com.ng/api.html" target="_blank" rel="noopener noreferrer">Developers API</a></li>
-                <li><a href="https://elvionai.com.ng/signup-login.html">Sign Up / Login</a></li>
-                <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
-                <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
-            </nav>
+  <main class="privacy-main">
+    <div class="container">
+      <div class="doc-hero reveal">
+        <div class="doc-badge-row">
+          <span class="doc-pill"><i class="fa-regular fa-calendar-check"></i> Effective Date: November 9, 2026</span>
+          <span class="doc-pill"><i class="fa-solid fa-user-shield"></i> NDPA & GDPR Aligned</span>
+          <span class="doc-pill"><i class="fa-solid fa-lock"></i> Zero Chat Training</span>
         </div>
-    </header>
-
-    <main class="privacy-main">
-        <div class="container">
-            <div class="document-wrapper">
-                <div class="doc-header">
-                    <img src="images/IMG_20250715_102103_129.jpg" alt="Elvion AI Logo" class="animated-logo" onerror="this.src='https://i.ibb.co/YTkKPfvf/IMG-20250715-102103-129.jpg'">
-                    <h1 class="doc-title">Privacy Policy</h1>
-                    <div class="doc-meta">
-                        Effective Date: June 15, 2026 &nbsp;|&nbsp; Applies to Elvion AI and all associated branches
-                    </div>
-                </div>
-
-                <div class="doc-content">
-                    <div class="highlight-box">
-                        <p>At Elvion AI, we believe privacy is a fundamental right, not an afterthought. This comprehensive policy outlines exactly what data we collect, how it is processed across our ecosystem of studios and developer APIs, and the strict measures we take to protect your digital footprint.</p>
-                    </div>
-
-                    <h2>1. Information We Collect</h2>
-                    <p>To provide our advanced AI generation and conversational services, we collect the following categories of information:</p>
-                    <ul>
-                        <li><strong>Account Information:</strong> When you register via the Elvion AI Developer Platform or Chat Studio, we collect your name, email address, Firebase authentication UID, and profile picture (if linked via OAuth like Google or Twitter).</li>
-                        <li><strong>Financial & Payment Data:</strong> When you purchase credits, transaction details are processed by our secure third-party payment gateway, <strong>Korapay</strong>. We record your transaction reference and credit allocation, but <strong>we do not collect, process, or store your raw credit card numbers or banking credentials</strong> on our servers.</li>
-                        <li><strong>User-Generated Content & Prompts:</strong> We collect the text prompts, images, audio files, and documents you intentionally submit to our chat interfaces and creative studios (e.g., Image Studio, Video Studio, Audio Studio).</li>
-                        <li><strong>Technical & Usage Data:</strong> We automatically collect diagnostic data including your IP address, browser type, device information, and interaction logs (such as the specific endpoints you call and the frequency of your API requests).</li>
-                    </ul>
-
-                    <h2>2. How We Use Your Information</h2>
-                    <p>Your data is strictly utilized to operate, secure, and improve the Elvion AI platform. Specifically, we use it to:</p>
-                    <ul>
-                        <li>Deliver requested services, generate multimedia content, and maintain context in your conversations with models like Philadelphia and Bobby.</li>
-                        <li>Deduct the appropriate API or Studio credits from your wallet balance based on your usage.</li>
-                        <li>Process payments, verify transaction legitimacy, and manage your daily reward claims.</li>
-                        <li>Authenticate your access and prevent unauthorized or malicious use of our Developer APIs.</li>
-                        <li>Analyze technical trends to optimize our cloud infrastructure and improve AI response latency.</li>
-                    </ul>
-
-                    <h2>3. AI Prompts & User Responsibility</h2>
-                    <p>Our studios allow you to generate incredible content, but <strong>you are entirely responsible for the prompts and media you submit</strong>. By using Elvion AI, you agree that:</p>
-                    <ul>
-                        <li>You will not upload personally identifiable, highly sensitive, or classified information into the chat prompts or file uploaders.</li>
-                        <li>We do not claim ownership of the raw data you input; however, you grant us the right to transmit this data to our processing partners to fulfill your generation request.</li>
-                        <li>We reserve the right to automatically scan prompts and inputs to prevent the generation of illegal, abusive, or explicitly harmful material in accordance with global safety guidelines.</li>
-                    </ul>
-
-                    <h2>4. Third-Party Services & Integrations</h2>
-                    <p>To provide cutting-edge capabilities, Elvion AI acts as a sophisticated orchestration layer. We securely transmit your specific inputs to trusted third-party providers strictly for processing. These include:</p>
-                    <ul>
-                        <li><strong>Korapay:</strong> Our exclusive payment processor for securely managing credit top-ups.</li>
-                        <li><strong>Vercel:</strong> Hosts and temporarily stores the HTML/CSS generated via our Website Studio.</li>
-                    </ul>
-                    <p>These partners are bound by strict enterprise data processing agreements and are not permitted to use your direct prompt data for arbitrary public training.</p>
-
-                    <h2>5. Google AdSense and Third-Party Advertising</h2>
-                    <p>Certain public areas of our platform, specifically the <strong>Elvion Blog</strong>, utilize Google AdSense to display advertisements. Because of this:</p>
-                    <ul>
-                        <li>Third-party vendors, including Google, use cookies to serve ads based on your prior visits to our website or other websites on the internet.</li>
-                        <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to Elvion AI and/or other sites on the Internet.</li>
-                        <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ads Settings</a>.</li>
-                    </ul>
-
-                    <h2>6. Cookies and Tracking Technologies</h2>
-                    <p>We use cookies and similar local storage technologies to enhance your experience:</p>
-                    <ul>
-                        <li><strong>Essential Cookies:</strong> Required to keep you securely logged into your Elvion dashboard and to track your selected AI persona (e.g., keeping Philadelphia or Bobby active).</li>
-                        <li><strong>Performance Cookies:</strong> Help us understand how users navigate our tools so we can improve the interface.</li>
-                        <li><strong>Advertising Cookies:</strong> As mentioned above, utilized by Google AdSense on our blog to deliver relevant content.</li>
-                    </ul>
-
-                    <h2>7. Data Security</h2>
-                    <p>We implement robust, industry-standard security measures to protect your data. Your authentication is secured by Google Firebase, and all data transmitted between your browser and our backend is encrypted via HTTPS (SSL/TLS). However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security against highly sophisticated cyber-attacks.</p>
-
-                    <h2>8. Children's Privacy</h2>
-                    <p>Elvion AI is not directed at children under the age of 13. We do not knowingly collect personal information from anyone under 13. If you are a parent or guardian and believe your child has provided us with personal information without consent, please contact us immediately, and we will take steps to remove that information from our servers.</p>
-
-                    <h2>9. Your Data Rights</h2>
-                    <p>Depending on your jurisdiction, you have the right to access, correct, or request the deletion of your personal data. You can manage your profile directly from your Elvion Dashboard. For complete account deletion or data export requests, please contact our support team.</p>
-
-                    <h2>10. Changes to This Privacy Policy</h2>
-                    <p>As AI technology evolves rapidly, so too might our practices. We may update this Privacy Policy periodically. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Effective Date" at the top.</p>
-
-                    <h2>11. Contact Us</h2>
-                    <p>If you have any questions, concerns, or legal inquiries regarding this Privacy Policy or how your data is handled, please contact us at:</p>
-                    <ul>
-                        <li><strong>Email:</strong> <a href="mailto:elvionailabs@gmail.com">elvionailabs@gmail.com</a></li>
-                    </ul>
-                    
-                    <div class="closing">
-                        Thank you for trusting Elvion AI.
-                    </div>
-                </div>
-            </div>
+        <h1 class="doc-title">Privacy <span>Policy</span></h1>
+        <p class="doc-sub">At Elvion AI, privacy is a foundational engineering standard. Learn exactly what data we collect, how your prompts and multimodal uploads are protected across Philadelphia AI, and how to exercise your data rights.</p>
+        <div class="doc-actions" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+          <a href="https://elvionai.com.ng/terms.html" class="btn btn-outline"><i class="fa-solid fa-scale-balanced"></i> Terms & Conditions</a>
+          <a href="mailto:hello@elvionai.com.ng" class="btn btn-outline"><i class="fa-regular fa-envelope"></i> Privacy Desk</a>
         </div>
-    </main>
+      </div>
 
-    <footer class="footer">
-        <div class="container-nav">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <span class="brand-info">Elvion AI</span>
-                    <p style="color: var(--text-secondary); margin-bottom: 0;">Where Assistance Meets Excellence.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Ecosystem</h4>
-                    <ul>
-                        <li><a href="https://elvionai.com.ng/philadelphia.html">Chat Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/image-studio.html">Image & Video Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/audio-studio.html">Audio Studio</a></li>
-                        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
-                        <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
-                        <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
-                        <li><a href="https://elvionai.com.ng/about.html#join-us">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
-                        <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
-                        <li><a href="mailto:elvionailabs@gmail.com">Contact Support</a></li>
-                    </ul>
-                </div>
+      <!-- 4-Pillar Privacy Highlights -->
+      <div class="summary-grid">
+        <div class="sum-card reveal"><div class="sum-ico"><i class="fa-solid fa-user-lock"></i></div><h3>Private Workspace</h3><p>Your conversations, uploaded files, and studio creations are private. We do not sell your personal data or train public models on your chats.</p></div>
+        <div class="sum-card reveal"><div class="sum-ico"><i class="fa-solid fa-credit-card"></i></div><h3>Zero Card Storage</h3><p>Payments are processed via Korapay. Elvion AI never collects, views, or stores your raw credit card numbers or bank login credentials.</p></div>
+        <div class="sum-card reveal"><div class="sum-ico"><i class="fa-solid fa-sliders"></i></div><h3>Memory Toggle Control</h3><p>You control Cross-Chat Memory with a single toggle in Settings and can delete individual conversations or Gallery items immediately.</p></div>
+        <div class="sum-card reveal"><div class="sum-ico"><i class="fa-solid fa-trash-can"></i></div><h3>30-Day Full Erasure</h3><p>Export your chats anytime as Markdown or request complete account and data deletion via hello@elvionai.com.ng.</p></div>
+      </div>
+
+      <div class="privacy-layout">
+        <aside class="toc-panel" id="toc-panel">
+          <input type="text" class="toc-search" id="clause-search" placeholder="Search privacy topics (e.g. cookies, voice, delete)…" autocomplete="off">
+          <button type="button" class="toc-toggle-btn" id="toc-toggle"><span>Jump to Section (12 Clauses)</span><i class="fa-solid fa-chevron-down"></i></button>
+          <span class="toc-title">Privacy Sections</span>
+          <ul class="toc-list" id="toc-list">
+            <li><a href="#priv-1" class="active">1. Information We Collect</a></li>
+            <li><a href="#priv-2">2. How We Use Your Data</a></li>
+            <li><a href="#priv-3">3. Private Chats & AI Training</a></li>
+            <li><a href="#priv-4">4. Multimodal Uploads & Voice</a></li>
+            <li><a href="#priv-5">5. Cross-Chat Memory & Local Cache</a></li>
+            <li><a href="#priv-6">6. Infrastructure & Sub-Processors</a></li>
+            <li><a href="#priv-7">7. Cookies & Google AdSense</a></li>
+            <li><a href="#priv-8">8. Data Security & Encryption</a></li>
+            <li><a href="#priv-9">9. Data Retention & Deletion</a></li>
+            <li><a href="#priv-10">10. Children's Privacy (13+)</a></li>
+            <li><a href="#priv-11">11. Your Global Privacy Rights</a></li>
+            <li><a href="#priv-12">12. Contact & Privacy Desk</a></li>
+          </ul>
+        </aside>
+
+        <div class="document-wrapper">
+          <div class="clause reveal" id="priv-1">
+            <span class="clause-num">Section 01</span>
+            <h2>1. Information We Collect</h2>
+            <p>To provide our conversational, multimodal vision, and creative studio services across <strong>Elvion AI</strong> and <strong>Philadelphia AI</strong>, we collect only the minimum information necessary:</p>
+            <ul>
+              <li><strong>Account & Identity Information:</strong> When you register or sign in via Elvion AI, we collect your display name, email address, unique Firebase authentication UID, and optional profile avatar URL.</li>
+              <li><strong>Financial & Wallet Transaction Data:</strong> When you fund your Pay As You Go credit wallet, payment processing is handled directly by our PCI-DSS compliant payment processor, <strong>Korapay</strong>. We record your transaction reference, NGN/USD amount, and credit allocation, but <strong>Elvion AI never collects, processes, or stores your raw credit/debit card numbers or bank account passwords</strong>.</li>
+              <li><strong>Workspace Inputs & Generated Outputs:</strong> We process the text prompts, code snippets, documents, PDFs, images, audio files, videos, and URLs you submit ("Inputs") and the responses or media generated for you ("Outputs").</li>
+              <li><strong>Technical & API Telemetry:</strong> We collect standard diagnostic logs including IP address, browser/device type, timestamp, credit deduction logs, and Developer API endpoint usage to prevent fraud and maintain service reliability.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-2">
+            <span class="clause-num">Section 02</span>
+            <h2>2. How We Use Your Information and Legal Bases</h2>
+            <p>We process your information strictly to operate, secure, and improve your Elvion AI experience:</p>
+            <ul>
+              <li><strong>Service Delivery (Contractual Necessity):</strong> Authenticating your session, streaming Philadelphia AI responses, executing studio tools, syncing your chat history and Gallery across your devices, and deploying websites you create.</li>
+              <li><strong>Wallet & Credit Accounting:</strong> Deducting credits for completed runs, issuing automatic credit refunds if a tool run fails on the server, and managing daily free credit claims and referral rewards.</li>
+              <li><strong>Platform Security & Abuse Prevention (Legitimate Interest):</strong> Protecting our APIs and studios against automated attacks, unauthorized key sharing, payment fraud, and violations of our Acceptable Use Policy.</li>
+              <li><strong>Optional Notifications (Consent):</strong> Sending browser or device pop-up notifications when a background task or reply finishes, only when you explicitly grant notification permission.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-3">
+            <span class="clause-num">Section 03</span>
+            <h2>3. Private Conversations and Zero Model Training</h2>
+            <div class="callout green">
+              <p><strong>Our Core Privacy Promise:</strong> Elvion AI does not sell your data, does not read your private conversations, and does not use your private workspace prompts, uploads, or outputs to train foundational AI models.</p>
             </div>
-            <div class="footer-bottom">
-                &copy; <span id="current-year"></span> Elvion AI. All rights reserved.
+            <ul>
+              <li><strong>Automated Processing Only:</strong> Your conversations with Philadelphia AI are processed automatically by our inference and orchestration servers. Human staff do not review your private chats unless you explicitly submit a conversation to support for debugging or unless required by law to investigate a severe safety violation.</li>
+              <li><strong>Developer API Confidentiality:</strong> Payloads sent through `/api/developer/*` using an Elvion Developer API key are strictly confidential and isolated to your account.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-4">
+            <span class="clause-num">Section 04</span>
+            <h2>4. Multimodal File Uploads, Video Vision, and Live Voice Calls</h2>
+            <ul>
+              <li><strong>Document, Image, Audio & Video Uploads:</strong> When you attach files in Philadelphia Studio, they are used solely to answer your questions, extract context, or perform the edits you request. Temporary cloud artifacts are cached for approximately <strong>10 days</strong> so you can view and download them in your chat and Gallery, after which expired cloud artifacts are purged.</li>
+              <li><strong>Live Voice Calls & Microphone Access:</strong> When you initiate a Live Voice Call or use the in-browser Voice Studio, your browser requests microphone permission. Live call audio is streamed over encrypted WebSockets solely to generate real-time spoken responses and live captions, and is not permanently recorded or sold.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-5">
+            <span class="clause-num">Section 05</span>
+            <h2>5. Cross-Chat Memory and Local Device Storage</h2>
+            <ul>
+              <li><strong>Cross-Chat Memory Toggle:</strong> Philadelphia Studio features a "Remember across chats" toggle in Settings. When enabled, your workspace automatically references recent messages from your own other conversations in Firestore so Philadelphia remembers context across threads. You can turn this toggle off at any time in Settings.</li>
+              <li><strong>Local IndexedDB & Draft Persistence:</strong> To ensure instant 0ms file attachment and prevent lost work when you refresh a page or lose internet connection, your browser stores active composer drafts, attached file previews, and cached Gallery items locally on your device using `localStorage` and `IndexedDB`. Clearing your browser data or signing out removes local session caches.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-6">
+            <span class="clause-num">Section 06</span>
+            <h2>6. Infrastructure Partners and Sub-Processors</h2>
+            <p>To deliver low-latency authentication, payments, and cloud deployment, we work with enterprise infrastructure providers bound by strict data-processing and confidentiality obligations:</p>
+            <ul>
+              <li><strong>Google Firebase (Authentication & Firestore):</strong> Manages encrypted user authentication, session tokens, chat synchronization, and credit ledger records.</li>
+              <li><strong>Korapay:</strong> Processes NGN/USD wallet top-up transactions securely.</li>
+              <li><strong>Cloud Compute & Web Deployment Providers:</strong> Host our FastAPI backend and deploy static HTML5 websites when you explicitly click "Publish" or "Create Website" in the Studio.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-7">
+            <span class="clause-num">Section 07</span>
+            <h2>7. Cookies and Google AdSense (Public Blog)</h2>
+            <ul>
+              <li><strong>Essential Workspace Storage:</strong> Inside the Studio, we use essential authentication tokens and local preferences (such as your active theme, selected persona, and voice settings) to keep your workspace functioning smoothly.</li>
+              <li><strong>Google AdSense on Public Pages:</strong> Certain public informational pages, such as the Elvion Blog, may display advertisements served by Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to our website or other websites.</li>
+              <li><strong>Opting Out of Personalized Ads:</strong> Users may opt out of personalized advertising at any time by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-8">
+            <span class="clause-num">Section 08</span>
+            <h2>8. Data Security and Encryption</h2>
+            <p>We implement defence-in-depth technical safeguards to protect your information:</p>
+            <ul>
+              <li>All traffic between your browser/application and Elvion AI servers is encrypted in transit using industry-standard <strong>HTTPS / TLS</strong> and secure WebSockets (`WSS`).</li>
+              <li>Workspace requests require verified Firebase ID tokens (`X-Firebase-Token`) or authenticated Developer API bearer keys, enforcing strict per-user data isolation.</li>
+              <li> SSRF (Server-Side Request Forgery) protections block private-network targeting on URL-reading endpoints.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-9">
+            <span class="clause-num">Section 09</span>
+            <h2>9. Data Retention, Export, and Anytime Deletion</h2>
+            <ul>
+              <li><strong>Self-Service Deletion:</strong> You can delete individual chat conversations and Gallery creations directly inside the Studio at any time with immediate effect.</li>
+              <li><strong>Self-Service Export:</strong> You can export any conversation as a Markdown (`.md`) file from the Settings panel and download any generated image, video, audio file, code file, or PDF directly to your device.</li>
+              <li><strong>Full Account Erasure (Within 30 Days):</strong> You may request complete deletion of your Elvion AI account and all associated personal data by emailing <a href="mailto:hello@elvionai.com.ng">hello@elvionai.com.ng</a> from your registered email address. We complete verified erasure requests within <strong>30 days</strong>, retaining only anonymized financial ledger entries where strictly required by tax or financial law.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-10">
+            <span class="clause-num">Section 10</span>
+            <h2>10. Children's Privacy (13+ Policy)</h2>
+            <p>Elvion AI is designed for users aged <strong>13 and older</strong>. We do not knowingly collect personal data from children under 13. Users aged 13 to 17 may use the platform only with parent or legal guardian consent. If you are a parent or guardian and believe a child under 13 has provided personal data to Elvion AI, please contact us at <a href="mailto:hello@elvionai.com.ng">hello@elvionai.com.ng</a> and we will promptly delete the account and associated data.</p>
+          </div>
+
+          <div class="clause reveal" id="priv-11">
+            <span class="clause-num">Section 11</span>
+            <h2>11. Your Global Privacy Rights (NDPA, GDPR, CCPA)</h2>
+            <p>Regardless of where you live, we extend strong data protection rights to all Elvion AI users, aligned with the Nigeria Data Protection Act (NDPA), the EU General Data Protection Regulation (GDPR), and the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+              <li><strong>Right to Access & Portability:</strong> Request a copy of the personal data associated with your account or export your chats directly in-app.</li>
+              <li><strong>Right to Rectification:</strong> Update your display name, avatar, and preferences directly in your Workspace panel at any time.</li>
+              <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> Delete individual chats in-app or request full account deletion.</li>
+              <li><strong>Right to Restrict or Object to Processing:</strong> Toggle off Cross-Chat Memory, disable notifications, or revoke API keys at any time.</li>
+            </ul>
+          </div>
+
+          <div class="clause reveal" id="priv-12">
+            <span class="clause-num">Section 12</span>
+            <h2>12. Policy Updates & Contacting Our Privacy Desk</h2>
+            <p>We may update this Privacy Policy periodically to reflect new studio capabilities or regulatory requirements. When we make material updates, we will revise the "Effective Date" at the top of this page. For any privacy questions, data subject requests, or account deletion requests, reach our team at:</p>
+            <div class="closing-box">
+              <div>
+                <div style="font-size:0.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">Elvion AI Privacy & Data Protection Desk</div>
+                <h3 style="font-size:1.35rem;margin:0.2rem 0;">hello@elvionai.com.ng</h3>
+                <p style="font-size:0.88rem;color:var(--text-secondary);margin:0;">We respond to all privacy, data export, and account deletion requests promptly.</p>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="mailto:hello@elvionai.com.ng" class="btn"><i class="fa-solid fa-envelope"></i> Email Privacy Desk</a>
+                <button type="button" class="btn btn-outline" id="copy-email-btn"><i class="fa-solid fa-copy"></i> Copy Email</button>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hamburger menu toggle
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const mobileBackdrop = document.getElementById('mobile-backdrop');
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 style="font-family: var(--font-brand); font-size: 1.55rem; color: #fff;">Elvion AI</h4>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+        <a href="mailto:hello@elvionai.com.ng" style="font-size:0.88rem;font-weight:600;"><i class="fa-regular fa-envelope"></i> hello@elvionai.com.ng</a>
+      </div>
+      <div class="footer-col">
+        <h4>Studios</h4>
+        <ul>
+          <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia Studio Chat</a></li>
+          <li><a href="https://elvionai.com.ng/video-studio.html">Video Studio (Pro 2K)</a></li>
+          <li><a href="https://elvionai.com.ng/image-studio.html">Image Studio (V1 & V2)</a></li>
+          <li><a href="https://elvionai.com.ng/audio-studio.html">Audio & Voice Studio</a></li>
+          <li><a href="https://elvionai.com.ng/website-studio.html">Website Studio</a></li>
+          <li><a href="https://elvionai.com.ng/writing-studio.html">Writing & Cover Studios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="https://elvionai.com.ng/index.html#pricing">Pay As You Go Pricing</a></li>
+          <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+          <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
+          <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company & Legal</h4>
+        <ul>
+          <li><a href="https://elvionai.com.ng/about.html">About Us</a></li>
+          <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
+          <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
+          <li><a href="mailto:hello@elvionai.com.ng">Contact Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="current-year"></span> Elvion AI. All rights reserved.</div>
+  </footer>
 
-            function toggleMobileMenu() {
-                const isOpen = navLinks.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                if (isOpen) {
-                    mobileBackdrop.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    mobileBackdrop.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
+  <button id="to-top" title="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-            function closeMobileMenu() {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                mobileBackdrop.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger'), navLinks = document.querySelector('.nav-links'), mobileBackdrop = document.getElementById('mobile-backdrop');
+      const closeMenu = () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); mobileBackdrop.classList.remove('active'); document.body.style.overflow = ''; };
+      hamburger.addEventListener('click', () => { const open = navLinks.classList.toggle('active'); hamburger.classList.toggle('active', open); mobileBackdrop.classList.toggle('active', open); document.body.style.overflow = open ? 'hidden' : ''; });
+      mobileBackdrop.addEventListener('click', closeMenu);
+      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(l => l.addEventListener('click', closeMenu));
+      const ddToggle = document.querySelector('.dropdown > a'), ddMenu = document.querySelector('.dropdown-menu');
+      ddToggle.addEventListener('click', e => { if (window.innerWidth <= 992) { e.preventDefault(); ddMenu.style.display = ddMenu.style.display === 'block' ? 'none' : 'block'; } });
 
-            hamburger.addEventListener('click', toggleMobileMenu);
-            mobileBackdrop.addEventListener('click', closeMobileMenu);
+      const tocPanel = document.getElementById('toc-panel'), tocToggle = document.getElementById('toc-toggle');
+      tocToggle.onclick = () => tocPanel.classList.toggle('open');
+      document.querySelectorAll('#toc-list a').forEach(a => a.addEventListener('click', () => tocPanel.classList.remove('open')));
 
-            document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
+      document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Dropdown toggle for mobile
-            const dropdownToggle = document.querySelector('.dropdown > a');
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            dropdownToggle.addEventListener('click', (e) => {
-                if(window.innerWidth <= 992) {
-                    e.preventDefault();
-                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-                }
-            });
+      const scrollBar = document.getElementById('scroll-bar'), toTop = document.getElementById('to-top');
+      const clauses = [...document.querySelectorAll('.clause')], tocLinks = [...document.querySelectorAll('#toc-list a')];
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+        toTop.classList.toggle('show', window.scrollY > 400);
+        let curId = clauses[0]?.id;
+        for (const c of clauses) { if (c.getBoundingClientRect().top <= 160) curId = c.id; }
+        tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + curId));
+      }, {passive: true});
+      toTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
 
-            // Dynamically update copyright year
-            document.getElementById('current-year').textContent = new Date().getFullYear();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
+      }, {threshold: 0.01});
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+        io.observe(el);
+      });
+      setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')), 900);
 
-            // Generate twinkling stars background
-            const canvas = document.getElementById("snow-canvas");
-            if (canvas) {
-                const ctx = canvas.getContext("2d");
-                let flakes = [];
-                function resize() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    flakes = [];
-                    for (let i = 0; i < 70; i++) {
-                        flakes.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            r: Math.random() * 2 + 0.5,
-                            speed: Math.random() * 1.2 + 0.3,
-                            wind: Math.random() * 0.4 - 0.2,
-                            opacity: Math.random() * 0.5 + 0.1
-                        });
-                    }
-                }
-                function draw() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    flakes.forEach(f => {
-                        ctx.beginPath();
-                        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
-                        ctx.shadowBlur = 6;
-                        ctx.shadowColor = "rgba(201, 169, 110, 0.4)";
-                        ctx.fill();
-                        f.y += f.speed;
-                        f.x += f.wind;
-                        if (f.y > canvas.height) {
-                            f.y = -5;
-                            f.x = Math.random() * canvas.width;
-                        }
-                        if (f.x < 0) f.x = canvas.width;
-                        if (f.x > canvas.width) f.x = 0;
-                    });
-                    requestAnimationFrame(draw);
-                }
-                resize();
-                window.addEventListener("resize", resize);
-                draw();
-            }
-        });
-    </script>
+      const searchInput = document.getElementById('clause-search');
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        clauses.forEach(c => { c.style.display = (!q || c.textContent.toLowerCase().includes(q)) ? '' : 'none'; });
+      });
+
+      document.getElementById('copy-email-btn').onclick = function() {
+        navigator.clipboard.writeText('hello@elvionai.com.ng').catch(() => {});
+        this.innerHTML = '<i class="fa-solid fa-check"></i> Copied hello@elvionai.com.ng';
+        setTimeout(() => this.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Email', 2000);
+      };
+
+      const canvas = document.getElementById('snow-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d'); let flakes = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; flakes = Array.from({length: 50}, () => ({x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.8 + 0.5, speed: Math.random() * 0.6 + 0.2, wind: Math.random() * 0.3 - 0.15, opacity: Math.random() * 0.4 + 0.1})); }
+        function draw() { ctx.clearRect(0, 0, canvas.width, canvas.height); flakes.forEach(f => { ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`; ctx.fill(); f.y += f.speed; f.x += f.wind; if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; } if (f.x < 0) f.x = canvas.width; if (f.x > canvas.width) f.x = 0; }); requestAnimationFrame(draw); }
+        resize(); window.addEventListener('resize', resize); draw();
+      }
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-J1YTKP10ZX');</script>
 </body>
 </html>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date()); 
-  gtag('config', 'G-J1YTKP10ZX');
-</script>
