@@ -850,11 +850,24 @@ const crossMem = () => LS(CCM) !== '0';
 window.toast = (msg, type) => { const t = el('div','toast'+(type==='e'?' bad':'')); t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3400); };
 
 async function call(path, o = {}) {
-  const h = {'X-Firebase-Token': await auth.currentUser.getIdToken(), ...(o.headers||{})};
-  let body = o.body;
-  if (o.json !== undefined) { h['Content-Type'] = 'application/json'; body = JSON.stringify(o.json); }
-  return fetch(path.startsWith('http') ? path : API + path, {method: o.method || 'GET', headers: h, body, signal: o.signal});
-}
+  if (auth.authStateReady) await auth.authStateReady();
+  const u = auth.currentUser || user;
+  if (!u) throw new Error('Please sign in first.');
+  let tok = await u.getIdToken(false);
+  const sendReq = t => {
+    const h = {'X-Firebase-Token': t, ...(o.headers||{})};
+    let body = o.body;
+    if (o.json !== undefined) { h['Content-Type'] = 'application/json'; body = JSON.stringify(o.json); }
+    return fetch(path.startsWith('http') ? path : API + path, {method: o.method || 'GET', headers: h, body, signal: o.signal});
+  };
+  let res = await sendReq(tok);
+  // If token expired (401), force-refresh the Firebase token and retry once automatically
+  if (res.status === 401) {
+    tok = await u.getIdToken(true);
+    res = await sendReq(tok);
+  }
+  return res;
+  }
 
 /* IndexedDB for instant 0ms file persistence & local gallery */
 const IDB = (() => {
@@ -2590,18 +2603,22 @@ $('profile-form').onsubmit = async e => {
   try { await updateProfile(user, {displayName:$('edit-name').value, photoURL:$('edit-photo').value}); await auth.currentUser.reload(); st.textContent = '✓ Updated'; $('pp-img').src = auth.currentUser.photoURL || $('pp-img').src; $('brand-sub').textContent = 'WORKSPACE: ' + (auth.currentUser.displayName||'').toUpperCase(); setTimeout(() => { closePanel('workspace'); st.textContent = ''; }, 1100); }
   catch(err) { st.textContent = err.message; }
 };
-onAuthStateChanged(auth, u => {
+let authChecked = false;
+onAuthStateChanged(auth, async u => {
+  if (!u && !authChecked) {
+    authChecked = true;
+    if (auth.authStateReady) await auth.authStateReady();
+    u = auth.currentUser;
+  }
   if (!u) { location.href = 'signup-login.html'; return; }
   user = u; const name = u.displayName || (u.email || '').split('@')[0];
   $('pp-img').src = u.photoURL || $('pp-img').src; $('pp-name').textContent = name; $('pp-email').textContent = u.email || ''; $('edit-name').value = name; $('edit-photo').value = u.photoURL || ''; $('brand-sub').textContent = 'WORKSPACE: ' + name.toUpperCase();
-  // Always surface the notification banner on entry if permission hasn't been granted yet, and ask on first tap
   if ('Notification' in window && Notification.permission === 'default' && LS(NK) !== '0') {
     LS('ph_notif_later', null);
     document.addEventListener('pointerdown', () => askNotifyPerm(), {once: true});
   }
   loadChats(u.uid); startGallery(u.uid); updateWalletUI(); bannerUpdate(); setTimeout(checkPayReturn, 1500); if (LS('ph_tour_done') !== '1') setTimeout(startTour, 1200);
 });
-setTimeout(() => ti.focus(), 300);
 
 </script>
 
