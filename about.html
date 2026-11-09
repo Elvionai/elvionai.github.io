@@ -2,54 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us — Elvion AI | Where Assistance Meets Excellence</title>
-  <meta name="description" content="Discover Elvion AI. Explore our learning platforms, creative studios, and developer APIs designed to empower human creativity." />
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>About Us | Elvion AI | Where Assistance Meets Excellence</title>
+  <meta name="description" content="Learn about Elvion AI (Emergent Learning & Vision for Intelligence Ontologies), creators of Philadelphia AI, our seven creative studios, and our free learning portal." />
+  <meta name="theme-color" content="#050505">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..900;1,400..700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  
+
   <style>
     :root {
-      --font-brand: 'Playfair Display', serif;
+      --font-brand: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
       --bg-deep: #050505;
       --bg-space: #0a0a08;
-      --bg-card: #11110f;
-      --bg-elevated: #161614;
-      --text-primary: #efefef;
+      --bg-card: #10100e;
+      --bg-elevated: #151512;
+      --text-primary: #f2f0ea;
       --text-secondary: #b5b0a3;
-      --text-muted: #6b665c;
+      --text-muted: #6e695f;
       --accent: #c9a96e;
       --accent-soft: #e8d5b0;
+      --accent-rgb: 201, 169, 110;
       --accent-green: #5fb87a;
       --danger: #e05a5a;
-      --border-subtle: rgba(201, 169, 110, 0.15);
-      --border-glow: rgba(201, 169, 110, 0.4);
-      --shadow-cosmic: 0 0 30px rgba(201, 169, 110, 0.15);
-      --shadow-intense: 0 14px 50px rgba(0, 0, 0, 0.9);
-      --glow-gold: 0 0 20px rgba(201, 169, 110, 0.4);
-      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #e8d5b0 50%, #af8f50 100%);
-      --gradient-deep: radial-gradient(circle at top, rgba(201, 169, 110, 0.1) 0%, transparent 60%), 
-                       radial-gradient(circle at bottom, rgba(15, 15, 12, 0.8) 0%, transparent 60%);
+      --border-subtle: rgba(201, 169, 110, 0.14);
+      --border-glow: rgba(201, 169, 110, 0.42);
+      --shadow-cosmic: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 28px rgba(201, 169, 110, 0.1);
+      --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.92);
+      --glow-gold: 0 0 22px rgba(201, 169, 110, 0.35);
+      --gradient-gold: linear-gradient(135deg, #c9a96e 0%, #f0dfc0 50%, #9f7e43 100%);
+      --ease: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent) var(--bg-space);
-    }
-    
-    *::-webkit-scrollbar { width: 8px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-space); }
+    *::-webkit-scrollbar { width: 7px; height: 7px; }
     *::-webkit-scrollbar-track { background: var(--bg-space); }
     *::-webkit-scrollbar-thumb { background: var(--gradient-gold); border-radius: 10px; }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--font-body);
       background-color: var(--bg-deep);
@@ -59,512 +53,471 @@
       min-height: 100vh;
       position: relative;
     }
-
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: var(--gradient-deep);
+      background:
+        radial-gradient(80% 50% at 50% -10%, rgba(201, 169, 110, 0.14), transparent 65%),
+        radial-gradient(60% 50% at 85% 90%, rgba(201, 169, 110, 0.06), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Ambient Gold Rain/Snow Canvas */
+    #scroll-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--gradient-gold);
+      box-shadow: 0 0 12px var(--accent);
+      z-index: 2000;
+      transition: width 0.08s linear;
+    }
+
     #snow-canvas {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.7;
+      z-index: 1;
+      opacity: 0.75;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-brand);
-      color: #fff;
-      font-weight: 700;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
+    h1, h2, h3, h4 { font-family: var(--font-brand); color: #fff; font-weight: 700; line-height: 1.2; }
+    a { color: var(--accent); text-decoration: none; transition: var(--ease); }
     a:hover { color: var(--accent-soft); }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    section { padding: 5rem 0; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.75rem; position: relative; z-index: 2; }
+    section { padding: 6rem 0; position: relative; z-index: 2; }
     .text-center { text-align: center; }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(0.985);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--d, 0ms);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
 
     /* Navbar */
     .navbar {
       position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 10, 8, 0.95);
-      padding: 1rem 0;
+      top: 0; width: 100%;
+      background: rgba(8, 8, 6, 0.86);
+      padding: 0.9rem 0;
       z-index: 1000;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
+      transition: var(--ease);
     }
-
-    .navbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
     .navbar-brand {
+      display: flex; align-items: center; gap: 10px;
       font-family: var(--font-brand);
-      font-size: 1.8rem;
-      font-weight: 900;
+      font-size: 1.65rem; font-weight: 900; letter-spacing: 1px;
       background: var(--gradient-gold);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: var(--glow-gold);
     }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
+    .nav-links { display: flex; list-style: none; gap: 1.25rem; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 500;
-      font-family: var(--font-body);
-      position: relative;
-      padding: 0.5rem 0;
+      font-size: 0.81rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.4rem 0; position: relative;
     }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-soft);
-    }
-
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-soft); }
     .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: var(--gradient-gold);
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 0; background: var(--gradient-gold);
       transition: width 0.3s ease;
     }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-    .nav-links a:hover::after, .nav-links a.active::after {
-      width: 100%;
-    }
-
-    /* Dropdown */
     .dropdown { position: relative; }
     .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.5rem 0;
-      min-width: 200px;
+      display: none; position: absolute; top: 100%; left: 0;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 0.6rem; min-width: 240px;
       box-shadow: var(--shadow-intense);
     }
-    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.3s ease; }
-    .dropdown-menu li { list-style: none; margin: 0; }
+    .dropdown:hover .dropdown-menu { display: block; animation: fadeUp 0.25s ease; }
+    .dropdown-menu li { list-style: none; }
     .dropdown-menu a {
-      display: block;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
+      display: flex; align-items: center; gap: 10px;
+      padding: 0.65rem 0.9rem; font-size: 0.84rem;
+      color: var(--text-secondary); text-transform: none; letter-spacing: 0;
+      border-radius: 9px;
     }
+    .dropdown-menu a i { width: 18px; color: var(--accent); text-align: center; }
     .dropdown-menu a::after { display: none; }
-    .dropdown-menu a:hover {
-      background: rgba(201, 169, 110, 0.1);
-      color: var(--accent);
-    }
+    .dropdown-menu a:hover { background: rgba(201, 169, 110, 0.12); color: #fff; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .nav-cmd-btn {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+      color: var(--text-secondary); border-radius: 10px; padding: 0.45rem 0.85rem;
+      font-size: 0.78rem; display: inline-flex; align-items: center; gap: 7px;
+      cursor: pointer; transition: var(--ease);
     }
+    .nav-cmd-btn:hover { border-color: var(--accent); color: #fff; }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      background: none;
-      border: none;
-    }
-    .hamburger .bar {
-      width: 25px;
-      height: 3px;
-      background: var(--accent);
-      transition: 0.3s;
-      border-radius: 3px;
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Hero Section */
-    .hero {
-      padding-top: 10rem;
-      padding-bottom: 4rem;
-      text-align: center;
-    }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 4px; }
+    .hamburger .bar { width: 24px; height: 2.5px; background: var(--accent); transition: 0.3s; border-radius: 3px; }
+    .mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(6px); z-index: 998; }
+    .mobile-backdrop.active { display: block; }
 
-    .hero-title {
-      font-size: 3.8rem;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-    .hero-title span {
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      max-width: 750px;
-      margin: 0 auto 2.5rem;
-      font-weight: 300;
-      line-height: 1.8;
-    }
-
+    /* Buttons */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 0.8rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      color: #050505;
-      background: var(--gradient-gold);
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0.92rem 2.2rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em;
+      cursor: pointer; transition: var(--ease); border: 1px solid transparent;
+      color: #050505; background: var(--gradient-gold);
       box-shadow: var(--shadow-cosmic);
     }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201, 169, 110, 0.5); color: #000; }
+    .btn-outline { background: rgba(201, 169, 110, 0.05); color: var(--accent-soft); border: 1px solid var(--border-glow); box-shadow: none; }
+    .btn-outline:hover { background: rgba(201, 169, 110, 0.15); color: #fff; box-shadow: var(--glow-gold); }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 25px rgba(201, 169, 110, 0.6);
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.38rem 1rem; border-radius: 50px;
+      background: rgba(201, 169, 110, 0.1); border: 1px solid var(--border-subtle);
+      color: var(--accent-soft); font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.2rem;
     }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; text-align: center; }
+    .section-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .section-desc { text-align: center; color: var(--text-secondary); max-width: 680px; margin: 0 auto 3.2rem; font-size: 1.05rem; }
 
-    /* Ecosystem Grid */
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    .section-desc {
-      text-align: center;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 3rem;
-    }
+    /* Hero */
+    .hero { padding-top: 10.5rem; padding-bottom: 4rem; text-align: center; }
+    .hero-title { font-size: clamp(2.5rem, 5.5vw, 4.3rem); line-height: 1.1; margin-bottom: 1.3rem; letter-spacing: -0.02em; }
+    .hero-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-subtitle { font-size: 1.14rem; color: var(--text-secondary); max-width: 780px; margin: 0 auto 2.4rem; }
 
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+    /* Interactive E.L.V.I.O.N. Acronym Explorer */
+    .acronym-box {
+      max-width: 980px; margin: 1rem auto 0;
+      background: linear-gradient(180deg, rgba(22,22,18,0.95), rgba(12,12,10,0.98));
+      border: 1px solid var(--border-glow); border-radius: 22px;
+      padding: 2.2rem; box-shadow: var(--shadow-intense);
     }
+    .acr-letters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 1.6rem; }
+    .acr-btn {
+      padding: 1rem 0.5rem; border-radius: 14px; border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03); cursor: pointer; transition: var(--ease);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .acr-btn b { font-family: var(--font-brand); font-size: 1.9rem; color: var(--accent); line-height: 1; }
+    .acr-btn span { font-size: 0.68rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+    .acr-btn.on, .acr-btn:hover { background: rgba(201, 169, 110, 0.16); border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--glow-gold); }
+    .acr-btn.on b { color: #fff; }
+    .acr-stage {
+      background: rgba(0,0,0,0.45); border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 1.5rem 1.8rem; text-align: left; min-height: 115px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .acr-stage h3 { font-size: 1.35rem; color: var(--accent-soft); margin-bottom: 0.35rem; }
+    .acr-stage p { color: var(--text-secondary); font-size: 0.95rem; }
 
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    /* Spotlight Cards & Grids */
+    .spot-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 18px; padding: 2.2rem; position: relative; overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      display: flex; flex-direction: column;
     }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gradient-gold);
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.3s ease;
+    .spot-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(201, 169, 110, 0.14), transparent 60%);
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
     }
+    .spot-card:hover { transform: translateY(-5px); border-color: var(--border-glow); box-shadow: var(--shadow-cosmic); }
+    .spot-card:hover::before { opacity: 1; }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-glow);
-      box-shadow: var(--shadow-cosmic);
-      background: var(--bg-elevated);
-    }
-    .feature-card:hover::before { transform: scaleX(1); }
-
+    .story-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: stretch; }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.6rem; }
     .feature-icon {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
+      font-size: 1.6rem; color: var(--accent); margin-bottom: 1.1rem;
+      width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(201, 169, 110, 0.1); border-radius: 13px; border: 1px solid var(--border-subtle);
     }
+    .pillar-num { font-family: var(--font-code); font-size: 0.76rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
 
-    .feature-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-    .feature-card p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-    }
-
-    /* On-Page Join Form */
+    /* Join Us Form Section */
     .join-section {
-      background: rgba(10, 10, 8, 0.6);
+      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
       border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
     }
-    
+    .role-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 820px; margin: 0 auto 2rem; }
+    .role-chip {
+      padding: 0.48rem 1rem; border-radius: 50px; border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03); color: var(--text-secondary);
+      font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: var(--ease);
+    }
+    .role-chip.on, .role-chip:hover { border-color: var(--accent); background: rgba(201, 169, 110, 0.16); color: #fff; }
+
     .form-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      padding: 3rem;
-      border-radius: 20px;
-      border: 1px solid var(--border-subtle);
+      max-width: 820px; margin: 0 auto;
+      background: var(--bg-card); padding: 3rem;
+      border-radius: 22px; border: 1px solid var(--border-glow);
       box-shadow: var(--shadow-intense);
     }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-bottom: 1.4rem; }
+    .form-group { margin-bottom: 1.4rem; text-align: left; }
+    .form-row .form-group { margin-bottom: 0; }
     .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-soft);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: block; font-size: 0.8rem; font-weight: 600;
+      color: var(--accent-soft); margin-bottom: 0.5rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
     }
-
     .form-control {
-      width: 100%;
-      padding: 0.9rem 1rem;
-      background: var(--bg-deep);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
+      width: 100%; padding: 0.9rem 1rem;
+      background: var(--bg-deep); border: 1px solid var(--border-subtle);
+      border-radius: 10px; color: var(--text-primary);
+      font-family: var(--font-body); font-size: 0.94rem;
+      transition: var(--ease);
     }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 120px;
-    }
-
+    .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
     select.form-control {
       appearance: none;
       background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c9a96e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem top 50%;
-      background-size: 0.65rem auto;
+      background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: 0.65rem auto;
     }
-    
     .form-control option { background: var(--bg-card); }
+    .submit-btn-wrap { text-align: center; margin-top: 2rem; }
+    .submit-btn-wrap .btn { width: 100%; max-width: 320px; }
 
-    .submit-btn-wrap {
-      text-align: center;
-      margin-top: 2rem;
+    .contact-bar {
+      max-width: 820px; margin: 3rem auto 0; padding: 2rem; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(16,16,14,0.95));
+      border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
     }
-    .submit-btn-wrap .btn { width: 100%; max-width: 300px; }
 
     /* Footer */
-    .footer {
-      background: var(--bg-space);
-      padding: 4rem 0 2rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    .footer-col h4 {
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
+    .footer { background: var(--bg-space); padding: 4.5rem 0 2rem; border-top: 1px solid var(--border-subtle); position: relative; z-index: 2; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
+    .footer-col h4 { color: var(--accent); font-size: 1.05rem; margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 0.8rem; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
     .footer-col ul li a { color: var(--text-secondary); font-size: 0.9rem; }
-    .footer-col ul li a:hover { color: var(--text-primary); }
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.84rem; }
 
-    /* Responsive */
+    #to-top {
+      position: fixed; right: 22px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gradient-gold); color: #000; border: none; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: var(--shadow-cosmic); z-index: 950; opacity: 0; pointer-events: none; transition: var(--ease);
+    }
+    #to-top.show { opacity: 1; pointer-events: auto; }
+
+    #cmd-modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
+      z-index: 3000; align-items: flex-start; justify-content: center; padding: 12vh 1rem 1rem;
+    }
+    #cmd-modal.show { display: flex; }
+    .cmd-box { width: 100%; max-width: 540px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-intense); }
+    .cmd-box input { width: 100%; padding: 1rem 1.2rem; background: transparent; border: none; border-bottom: 1px solid var(--border-subtle); color: #fff; font-size: 0.98rem; outline: none; }
+    .cmd-list { max-height: 320px; overflow-y: auto; padding: 0.5rem; }
+    .cmd-item { display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; border-radius: 10px; color: var(--text-primary); font-size: 0.88rem; }
+    .cmd-item i { color: var(--accent); width: 18px; text-align: center; }
+    .cmd-item small { margin-left: auto; color: var(--text-muted); font-size: 0.74rem; }
+    .cmd-item:hover { background: rgba(201, 169, 110, 0.14); color: #fff; }
+
     @media (max-width: 992px) {
       .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(10, 10, 8, 0.98);
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border-subtle);
+        display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(10, 10, 8, 0.98); padding: 1.5rem; border-bottom: 1px solid var(--border-subtle);
       }
-      .nav-links.active { display: flex; }
-      .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        background: transparent;
-        padding-left: 1rem;
-        border-left: 2px solid var(--border-subtle);
-      }
-      .dropdown:hover .dropdown-menu { animation: none; }
+      .nav-links.active { display: flex; align-items: flex-start; }
+      .nav-links li { width: 100%; margin: 0.4rem 0; }
+      .dropdown-menu { position: static; box-shadow: none; border: none; background: transparent; padding-left: 1rem; border-left: 2px solid var(--border-subtle); }
       .hamburger { display: flex; }
-      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .story-grid, .form-row { grid-template-columns: 1fr; }
+      .acr-letters { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 768px) {
-      .hero-title { font-size: 2.8rem; }
-      .hero { padding-top: 8rem; }
-      .form-wrapper { padding: 2rem 1.5rem; }
+    @media (max-width: 640px) {
+      .hero { padding-top: 8.2rem; }
+      .form-wrapper { padding: 2rem 1.35rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .contact-bar { text-align: center; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated Background -->
+  <div id="scroll-bar"></div>
   <canvas id="snow-canvas"></canvas>
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
   <!-- Navigation -->
   <header class="navbar">
     <div class="container">
       <a href="https://elvionai.com.ng/index.html" class="navbar-brand">Elvion AI</a>
-      <button class="hamburger" aria-label="Toggle navigation">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="nav-cmd-btn" id="open-cmd" title="Quick navigation"><i class="fa-solid fa-magnifying-glass"></i><span>Quick Jump</span></button>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
       <nav class="nav-links">
         <li><a href="https://elvionai.com.ng/index.html">Home</a></li>
-        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
-        <li><a href="https://elvionai.com.ng/philadelphia.html">Explore AI</a></li>
+        <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia AI</a></li>
         <li class="dropdown">
           <a href="#" style="cursor: default;">Studios <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left:4px;"></i></a>
           <ul class="dropdown-menu">
-            <li><a href="https://elvionai.com.ng/audio-studio.html">Audio Studio</a></li>
-            <li><a href="https://elvionai.com.ng/cover-studio.html">Cover Studio</a></li>
-            <li><a href="https://elvionai.com.ng/image-studio.html">Image Studio</a></li>
-            <li><a href="https://elvionai.com.ng/video-studio.html">Video Studio</a></li>
-            <li><a href="https://elvionai.com.ng/website-studio.html">Website Studio</a></li>
-            <li><a href="https://elvionai.com.ng/writing-studio.html">Writing Studio</a></li>
+            <li><a href="https://elvionai.com.ng/philadelphia.html"><i class="fa-solid fa-comments"></i> Philadelphia Studio Chat</a></li>
+            <li><a href="https://elvionai.com.ng/audio-studio.html"><i class="fa-solid fa-music"></i> Audio & Voice Studio</a></li>
+            <li><a href="https://elvionai.com.ng/image-studio.html"><i class="fa-solid fa-image"></i> Image Studio (V1 & V2)</a></li>
+            <li><a href="https://elvionai.com.ng/video-studio.html"><i class="fa-solid fa-film"></i> Video Studio (Pro 2K)</a></li>
+            <li><a href="https://elvionai.com.ng/website-studio.html"><i class="fa-solid fa-globe"></i> Website Studio</a></li>
+            <li><a href="https://elvionai.com.ng/writing-studio.html"><i class="fa-solid fa-pen-nib"></i> Writing Studio</a></li>
+            <li><a href="https://elvionai.com.ng/cover-studio.html"><i class="fa-solid fa-book"></i> Cover Studio</a></li>
           </ul>
         </li>
-        <li><a href="https://elvionai.com.ng/api.html">Developers API</a></li>
+        <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
+        <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
         <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
-        <li><a href="https://elvionai.com.ng/signup-login.html">Sign Up / Login</a></li>
+        <li><a href="https://elvionai.com.ng/about.html" class="active">About</a></li>
+        <li><a href="#join-us">Careers</a></li>
+        <li><a href="https://elvionai.com.ng/signup-login.html" class="btn" style="padding: 0.5rem 1.25rem; font-size: 0.78rem;">Sign Up / Login</a></li>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section + Interactive E.L.V.I.O.N. Acronym Explorer -->
     <section class="hero container">
-      <h1 class="hero-title">Where Assistance <span>Meets Excellence</span></h1>
-      <p class="hero-subtitle">
-        Elvion AI is a groundbreaking intelligence ecosystem built to empower creators, developers, and learners. We strip away the complexity of modern technology and replace it with simple, intuitive, and highly capable tools.
+      <div class="eyebrow reveal"><i class="fa-solid fa-compass" style="color:var(--accent)"></i><span>Our Identity & Ontology</span></div>
+      <h1 class="hero-title reveal" style="--d:60ms">Engineering Intelligence<br><span>With Soul and Precision</span></h1>
+      <p class="hero-subtitle reveal" style="--d:120ms">
+        Elvion AI stands for <strong>Emergent Learning & Vision for Intelligence Ontologies</strong>. We build agentic systems, creative workstations, and open educational pathways that turn human imagination into finished work.
       </p>
-      <a href="#ecosystem" class="btn">Explore The Ecosystem <i class="fa-solid fa-arrow-down"></i></a>
+
+      <div class="acronym-box reveal" style="--d:180ms">
+        <div style="font-size:0.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:0.9rem;">Click Each Letter to Explore Our Core Ontology</div>
+        <div class="acr-letters" id="acr-letters"></div>
+        <div class="acr-stage" id="acr-stage"></div>
+      </div>
     </section>
 
-    <!-- Features / Ecosystem -->
-    <section id="ecosystem" class="container">
-      <h2 class="section-title">Everything is Simple</h2>
-      <p class="section-desc">We don't just provide an AI; we provide a collaborative partner. Whether you are generating art, coding software, or learning a new skill, our dedicated studios deliver exceptional results instantly.</p>
-      
-      <div class="grid-container">
-        <div class="feature-card">
-          <i class="fa-solid fa-graduation-cap feature-icon"></i>
-          <h3>Elvion Learning</h3>
-          <p>A comprehensive learning platform offering simulated ELV certifications. Master skills from software engineering to creative writing entirely for free.</p>
+    <!-- Our Story & Flagship Vision -->
+    <section id="story" class="container">
+      <div class="story-grid">
+        <div class="spot-card reveal">
+          <div class="pillar-num">OUR ORIGIN & VISION</div>
+          <h2 style="font-size:2rem;margin-bottom:1rem;">Built to Dismantle the Barrier Between Idea and Execution</h2>
+          <p style="color:var(--text-secondary);margin-bottom:1rem;">
+            Founded by writer, educator, and creative technologist <strong>Kolade Philip Ogunlana</strong>, Elvion AI began with a simple observation: modern artificial intelligence was fragmented. Creators had to juggle separate subscriptions for reasoning, image synthesis, video production, voice acting, coding, and document layout.
+          </p>
+          <p style="color:var(--text-secondary);margin-bottom:1.5rem;">
+            We built <strong>Philadelphia AI</strong> and the seven Elvion Studios to unify those worlds. Instead of a passive chatbot that stops at advice, Philadelphia is an active creative director, staff engineer, and research partner equipped with over 120 autonomous tools.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;">
+            <a href="https://elvionai.com.ng/philadelphia.html" class="btn">Launch Philadelphia Studio <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#join-us" class="btn btn-outline">Join Our Mission</a>
+          </div>
         </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-wand-magic-sparkles feature-icon"></i>
-          <h3>Creative Studios</h3>
-          <p>Access specialized environments like the Image Studio, Video Studio, Audio Studio, and Book Cover Creator. Build entire creative campaigns from a single prompt.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-code feature-icon"></i>
-          <h3>Developer API</h3>
-          <p>Power your own applications with our B2B Developer Suite. Access the Philadelphia reasoning engine, vision analysis, and multimodal generation endpoints.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-brain feature-icon"></i>
-          <h3>Philadelphia Chat</h3>
-          <p>Experience our flagship reasoning engine. Searches the live web, writes code architectures, and adapts dynamically to your personal writing style.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-globe feature-icon"></i>
-          <h3>Website Studio</h3>
-          <p>Skip the coding. Simply describe the business or portfolio you want, and our studio will design, code, and deploy a live website for you instantly.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-robot feature-icon"></i>
-          <h3>Bobby Chat</h3>
-          <p>Your friendly, offline conversational companion. Highly optimized for brainstorming, storytelling, and reliable problem-solving.</p>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div class="pillar-num">OUR OPERATING PRINCIPLES</div>
+          <h3 style="font-size:1.65rem;margin-bottom:1rem;">What Guides Everything We Build</h3>
+          <div style="display:flex;flex-direction:column;gap:1.1rem;">
+            <div style="padding-bottom:1rem;border-bottom:1px solid var(--border-subtle);">
+              <strong style="color:#fff;display:block;margin-bottom:3px;"><i class="fa-solid fa-scale-balanced" style="color:var(--accent);margin-right:8px;"></i>Accuracy Over Flattery</strong>
+              <span style="font-size:0.9rem;color:var(--text-secondary);">Philadelphia is engineered to be truthful, verify facts against live sources, and give constructive, earned critiques rather than hollow praise.</span>
+            </div>
+            <div style="padding-bottom:1rem;border-bottom:1px solid var(--border-subtle);">
+              <strong style="color:#fff;display:block;margin-bottom:3px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);margin-right:8px;"></i>Make It Once, Make It Exceptional</strong>
+              <span style="font-size:0.9rem;color:var(--text-secondary);">Our agentic workflows plan typography, hierarchy, and composition before executing so you get production-grade output without wasted credits.</span>
+            </div>
+            <div>
+              <strong style="color:#fff;display:block;margin-bottom:3px;"><i class="fa-solid fa-graduation-cap" style="color:var(--accent);margin-right:8px;"></i>Radical Access to Knowledge</strong>
+              <span style="font-size:0.9rem;color:var(--text-secondary);">Through Elvion Learning and Pay As You Go credits ($1 = 220+ credits, ₦5 = 1 credit), world-class AI and skill certifications remain accessible to everyone.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-        <section id="philosophy" class="container text-center">
-      <h2>Our Core Philosophy</h2>
-      <p class="lead">Our name stands for <strong>Emergent Learning & Vision for Intelligence Ontologies</strong>. It defines our approach to the challenge of building truly useful systems.</p>
-        </section>
+    <!-- The Elvion Ecosystem -->
+    <section id="ecosystem" class="container">
+      <div class="text-center reveal">
+        <div class="eyebrow"><i class="fa-solid fa-cubes" style="color:var(--accent)"></i><span>Unified Architecture</span></div>
+        <h2 class="section-title">The <span>Elvion Ecosystem</span></h2>
+        <p class="section-desc">Every product under the Elvion umbrella shares a single identity, memory layer, and universal credit wallet.</p>
+      </div>
+
+      <div class="grid-container">
+        <div class="spot-card reveal">
+          <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>Philadelphia Studio Chat</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">Our flagship 1M-context intelligence with 10 specialized personalities, native video/PDF/audio vision, live web search, interactive A/B/C/D study quizzes, and an in-browser Code Studio.</p>
+        </div>
+
+        <div class="spot-card reveal" style="--d:60ms">
+          <div class="feature-icon"><i class="fa-solid fa-film"></i></div>
+          <h3>7 Dedicated Creative Studios</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">Purpose-built environments for Pro 2K Video with synchronized audio, 35+ Image Synthesis styles, 17-character Voice & Audio mastering, Book Cover design, and Writing.</p>
+        </div>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+          <h3>Instant Website Studio</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">Describe any business, landing page, or web application in plain English. Philadelphia designs, codes, previews, and deploys it to a live URL in one click.</p>
+        </div>
+
+        <div class="spot-card reveal">
+          <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3>Elvion Learning University</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">A 100% free, self-paced educational portal offering simulated degree tracks and official ELV skill certifications in Software Engineering, Visual Arts, and Communication.</p>
+        </div>
+
+        <div class="spot-card reveal" style="--d:60ms">
+          <div class="feature-icon"><i class="fa-solid fa-code"></i></div>
+          <h3>B2B Developer API Suite</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">Production REST endpoints allowing startups and enterprises to integrate Philadelphia reasoning, vision analysis, image generation, voice, and 2K video into their own apps.</p>
+        </div>
+
+        <div class="spot-card reveal" style="--d:120ms">
+          <div class="feature-icon"><i class="fa-solid fa-phone-volume"></i></div>
+          <h3>Live Voice & Telegram Anywhere</h3>
+          <p style="color:var(--text-secondary);font-size:0.93rem;">Talk to Philadelphia hands-free on a real-time two-way voice call inside the web studio, or collaborate on the go through our official Telegram bot.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Join The Team Form -->
     <section id="join-us" class="join-section">
       <div class="container">
-        <h2 class="section-title">Join Our Mission</h2>
-        <p class="section-desc">Building the future of AI requires diverse perspectives and brilliant minds. This is a voluntary role with many perks and compensation opportunities as we scale globally.</p>
-        
-        <div class="form-wrapper">
+        <div class="text-center reveal">
+          <div class="eyebrow"><i class="fa-solid fa-users-gear" style="color:var(--accent)"></i><span>Careers & Contributors</span></div>
+          <h2 class="section-title">Join Our <span>Mission</span></h2>
+          <p class="section-desc" style="margin-bottom:1.8rem;">Building the future of agentic AI requires diverse perspectives, engineers, writers, and community builders. Click a role below to pre-fill your application:</p>
+        </div>
+
+        <div class="role-chips reveal" id="role-chips">
+          <button type="button" class="role-chip" data-role="AI Development/Training">AI Development & Training</button>
+          <button type="button" class="role-chip" data-role="Website Development/Design">Website Development & Design</button>
+          <button type="button" class="role-chip" data-role="Content Creation (Blogging, Copywriting)">Content Creation & Blogging</button>
+          <button type="button" class="role-chip" data-role="Social Media/Community Management">Community Management</button>
+          <button type="button" class="role-chip" data-role="Marketing/Promotions">Marketing & Growth</button>
+          <button type="button" class="role-chip" data-role="Data Analysis/Review">Data Analysis & Review</button>
+          <button type="button" class="role-chip" data-role="Writing">Creative Writing & Editorial</button>
+        </div>
+
+        <div class="form-wrapper reveal" style="--d:100ms">
           <form action="https://formspree.io/f/mldrbpwo" method="POST">
-            
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name</label>
@@ -579,11 +532,11 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="number">WhatsApp Number</label>
-                <input type="number" id="number" name="Whatsapp Number" class="form-control" required placeholder="+234...">
+                <input type="tel" id="number" name="Whatsapp Number" class="form-control" required placeholder="+234...">
               </div>
               <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="Email" class="form-control" required placeholder="john@example.com">
+                <input type="email" id="email" name="Email" class="form-control" required placeholder="you@example.com">
               </div>
             </div>
 
@@ -605,7 +558,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="service">Role you'd like to fill</label>
+                <label for="service">Role You Would Like to Fill</label>
                 <select id="service" name="Service Offer" class="form-control" required>
                   <option value="">Select a Role</option>
                   <option value="AI Development/Training">AI Development/Training</option>
@@ -619,26 +572,39 @@
                 </select>
               </div>
             </div>
-            
+
             <div class="form-group">
-              <label for="photo-url">Portfolio or Photo URL (Optional)</label>
-              <input type="url" id="photo-url" name="Photo URL" class="form-control" placeholder="https://linkedin.com/in/... ">
+              <label for="photo-url">Portfolio or LinkedIn URL (Optional)</label>
+              <input type="url" id="photo-url" name="Photo URL" class="form-control" placeholder="https://linkedin.com/in/...">
             </div>
 
             <div class="form-group">
-              <label for="message">Why do you want to join us? (Optional)</label>
-              <textarea id="message" name="Message" class="form-control" placeholder="Tell us about your passion for technology..."></textarea>
+              <label for="message">Why do you want to join Elvion AI? (Optional)</label>
+              <textarea id="message" name="Message" class="form-control" placeholder="Tell us about your craft, experience, and passion for building with AI..."></textarea>
             </div>
-            
+
             <div class="submit-btn-wrap">
               <button type="submit" class="btn">Submit Application <i class="fa-solid fa-paper-plane"></i></button>
             </div>
-            
-            <p style="text-align:center; margin-top:1.5rem; font-size:0.85rem; color:var(--text-muted);">
-              For follow-up, you can join our team group for updates: <br>
-              <a href="https://chat.whatsapp.com/DyelZ2fxyIx2sS2ZXxhTS6" target="_blank" rel="noopener noreferrer" style="font-weight:600; text-decoration:underline;">Join WhatsApp Group</a>
+
+            <p style="text-align:center; margin-top:1.5rem; font-size:0.86rem; color:var(--text-secondary);">
+              After applying, join our official contributor community for updates:<br>
+              <a href="https://chat.whatsapp.com/DyelZ2fxyIx2sS2ZXxhTS6" target="_blank" rel="noopener noreferrer" style="font-weight:700; text-decoration:underline;"><i class="fa-brands fa-whatsapp"></i> Join Elvion Team WhatsApp Group</a>
             </p>
           </form>
+        </div>
+
+        <!-- Direct Contact Concierge -->
+        <div class="contact-bar reveal">
+          <div>
+            <div style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;">Direct Inquiries & Press</div>
+            <h3 style="font-size:1.45rem;margin:0.25rem 0;">Have a partnership proposal or question for our team?</h3>
+            <p style="color:var(--text-secondary);font-size:0.92rem;">Write to us directly at <strong style="color:#fff;">hello@elvionai.com.ng</strong></p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="mailto:hello@elvionai.com.ng" class="btn"><i class="fa-solid fa-envelope"></i> Email Us</a>
+            <button type="button" class="btn btn-outline" id="copy-email-btn"><i class="fa-solid fa-copy"></i> Copy Email</button>
+          </div>
         </div>
       </div>
     </section>
@@ -649,14 +615,15 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff;">Elvion AI</h4>
-          <p style="color: var(--text-secondary); font-size: 0.9rem;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+          <h4 style="font-family: var(--font-brand); font-size: 1.55rem; color: #fff;">Elvion AI</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Intelligence Unleashed.<br>Where assistance meets excellence.</p>
+          <a href="mailto:hello@elvionai.com.ng" style="font-size:0.88rem;font-weight:600;"><i class="fa-regular fa-envelope"></i> hello@elvionai.com.ng</a>
         </div>
         <div class="footer-col">
           <h4>Platforms</h4>
           <ul>
-            <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia Chat</a></li>
-            <li><a href="https://t.me/PhiladelphiaAIbot" target="_blank">Telegram Bot</a></li>
+            <li><a href="https://elvionai.com.ng/philadelphia.html">Philadelphia Studio Chat</a></li>
+            <li><a href="https://t.me/writingurubot" target="_blank" rel="noopener noreferrer">Telegram Bot</a></li>
             <li><a href="https://elvionai.com.ng/api.html">Developer API</a></li>
             <li><a href="https://elvionai.com.ng/university.html">Elvion Learning</a></li>
           </ul>
@@ -666,15 +633,16 @@
           <ul>
             <li><a href="https://elvionai.com.ng/about.html" class="active">About Us</a></li>
             <li><a href="#join-us">Careers / Join</a></li>
-            <li><a href="https://elvionai.com.ng/blog.html">Blog</a></li>
-            <li><a href="https://chat.whatsapp.com/JptM4cckWGKLJ6L9fkg2fW?mode=ems_copy_c" target="_blank">Create Your Own AI</a></li>
+            <li><a href="https://elvionai.com.ng/blog.html">The Pulse (Blog)</a></li>
+            <li><a href="https://chat.whatsapp.com/JptM4cckWGKLJ6L9fkg2fW?mode=ems_copy_c" target="_blank" rel="noopener noreferrer">Create Your Own AI</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Legal</h4>
+          <h4>Legal & Support</h4>
           <ul>
             <li><a href="https://elvionai.com.ng/privacy.html">Privacy Policy</a></li>
             <li><a href="https://elvionai.com.ng/terms.html">Terms of Service</a></li>
+            <li><a href="mailto:hello@elvionai.com.ng">hello@elvionai.com.ng</a></li>
           </ul>
         </div>
       </div>
@@ -684,87 +652,177 @@
     </div>
   </footer>
 
+  <button id="to-top" title="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Quick Jump Command Modal -->
+  <div id="cmd-modal">
+    <div class="cmd-box">
+      <input type="text" id="cmd-input" placeholder="Search studios, careers, API docs, or support…" autocomplete="off">
+      <div class="cmd-list" id="cmd-list"></div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Hamburger Menu
+      // 1. Mobile Navigation
       const hamburger = document.querySelector('.hamburger');
       const navLinks = document.querySelector('.nav-links');
-
+      const mobileBackdrop = document.getElementById('mobile-backdrop');
+      const closeMenu = () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); mobileBackdrop.classList.remove('active'); document.body.style.overflow = ''; };
       hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        
-        // Transform hamburger icon to 'X' visually
-        const bars = hamburger.querySelectorAll('.bar');
-        if(hamburger.classList.contains('active')) {
-            bars[0].style.transform = 'translateY(8px) rotate(45deg)';
-            bars[1].style.opacity = '0';
-            bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
-        } else {
-            bars[0].style.transform = 'none';
-            bars[1].style.opacity = '1';
-            bars[2].style.transform = 'none';
-        }
+        const open = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active', open);
+        mobileBackdrop.classList.toggle('active', open);
+        document.body.style.overflow = open ? 'hidden' : '';
       });
+      mobileBackdrop.addEventListener('click', closeMenu);
+      document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(l => l.addEventListener('click', closeMenu));
+      const ddToggle = document.querySelector('.dropdown > a'), ddMenu = document.querySelector('.dropdown-menu');
+      ddToggle.addEventListener('click', e => { if (window.innerWidth <= 992) { e.preventDefault(); ddMenu.style.display = ddMenu.style.display === 'block' ? 'none' : 'block'; } });
 
-      // Update copyright year
       document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      // Ambient Background Animation (Falling Gold Snow)
-      const canvas = document.getElementById("snow-canvas");
+      // 2. Scroll Progress & Back to Top
+      const scrollBar = document.getElementById('scroll-bar'), toTop = document.getElementById('to-top');
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+        toTop.classList.toggle('show', window.scrollY > 450);
+      }, {passive: true});
+      toTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+      // 3. Scroll Reveal Observer
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
+      }, {threshold: 0.14});
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      // 4. Spotlight Hover Cards
+      document.querySelectorAll('.spot-card').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+
+      // 5. Interactive E.L.V.I.O.N. Acronym Explorer
+      const acrData = [
+        ['E', 'Emergent', 'Emergent Intelligence', 'We design systems where complex creative problem-solving, tool chaining, and multi-step reasoning emerge naturally from a single human instruction.'],
+        ['L', 'Learning', 'Continuous Learning & Education', 'From automatic cross-chat memory inside Philadelphia Studio to free skill certifications in Elvion Learning, every interaction expands human capability.'],
+        ['V', 'Vision', 'Multimodal Vision & Foresight', 'True intelligence sees and hears. Philadelphia natively inspects video streams, high-resolution imagery, audio tracks, and long-form documents.'],
+        ['I', 'Intelligence', 'Agentic Intelligence', 'Powered by a 1,000,000-token context window and 120+ autonomous studio tools that execute code, design graphics, and deploy live websites.'],
+        ['O', 'Ontologies', 'Structured Ontologies', 'We map knowledge, personas, and creative workflows into clear, structured frameworks so creators and enterprise developers get predictable excellence.'],
+        ['N', 'Network', 'Unified Global Network', 'Seven dedicated creative studios, live voice calls, Telegram integration, and a B2B developer suite connected to one universal Pay As You Go wallet.']
+      ];
+      const acrLetters = document.getElementById('acr-letters'), acrStage = document.getElementById('acr-stage');
+      function selectAcr(i) {
+        const d = acrData[i];
+        acrLetters.querySelectorAll('.acr-btn').forEach((b, idx) => b.classList.toggle('on', idx === i));
+        acrStage.innerHTML = `<h3>${d[0]} · ${d[2]}</h3><p>${d[3]}</p>`;
+      }
+      acrLetters.innerHTML = acrData.map((d, i) => `<button type="button" class="acr-btn${i===0?' on':''}" data-i="${i}"><b>${d[0]}</b><span>${d[1]}</span></button>`).join('');
+      acrLetters.onclick = e => { const b = e.target.closest('.acr-btn'); if (b) selectAcr(+b.dataset.i); };
+      selectAcr(0);
+
+      // 6. Interactive Role Chips Pre-Filling Form Select
+      const roleSelect = document.getElementById('service');
+      document.querySelectorAll('#role-chips .role-chip').forEach(chip => {
+        chip.onclick = () => {
+          document.querySelectorAll('#role-chips .role-chip').forEach(c => c.classList.toggle('on', c === chip));
+          roleSelect.value = chip.dataset.role;
+          roleSelect.scrollIntoView({behavior: 'smooth', block: 'center'});
+          roleSelect.focus();
+        };
+      });
+
+      // 7. Copy Contact Email
+      document.getElementById('copy-email-btn').onclick = function() {
+        navigator.clipboard.writeText('hello@elvionai.com.ng').catch(() => {});
+        this.innerHTML = '<i class="fa-solid fa-check"></i> Copied hello@elvionai.com.ng';
+        setTimeout(() => this.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Email', 2000);
+      };
+
+      // 8. Quick Jump Command Modal
+      const cmdModal = document.getElementById('cmd-modal'), cmdInput = document.getElementById('cmd-input'), cmdList = document.getElementById('cmd-list');
+      const cmdLinks = [
+        ['fa-house', 'Elvion AI Homepage', 'Home', 'https://elvionai.com.ng/index.html'],
+        ['fa-comments', 'Philadelphia Studio Chat', 'Flagship Agent', 'https://elvionai.com.ng/philadelphia.html'],
+        ['fa-users-gear', 'Apply to Join Elvion AI', 'Careers Form', '#join-us'],
+        ['fa-graduation-cap', 'Elvion Learning Portal', 'Free Certifications', 'https://elvionai.com.ng/university.html'],
+        ['fa-code', 'Developer API Documentation', 'REST API', 'https://elvionai.com.ng/api.html'],
+        ['fa-envelope', 'Email Support: hello@elvionai.com.ng', 'Contact Us', 'mailto:hello@elvionai.com.ng']
+      ];
+      function paintCmd(q = '') {
+        const ql = q.toLowerCase();
+        cmdList.innerHTML = cmdLinks.filter(x => x[1].toLowerCase().includes(ql) || x[2].toLowerCase().includes(ql))
+          .map(x => `<a class="cmd-item" href="${x[3]}"><i class="fa-solid ${x[0]}"></i><span>${x[1]}</span><small>${x[2]}</small></a>`).join('');
+        cmdList.querySelectorAll('a[href^="#"]').forEach(a => a.onclick = () => cmdModal.classList.remove('show'));
+      }
+      const openCmd = () => { cmdModal.classList.add('show'); cmdInput.value = ''; paintCmd(); setTimeout(() => cmdInput.focus(), 40); };
+      document.getElementById('open-cmd').onclick = openCmd;
+      cmdInput.oninput = () => paintCmd(cmdInput.value);
+      cmdModal.onclick = e => { if (e.target === cmdModal) cmdModal.classList.remove('show'); };
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openCmd(); }
+        if (e.key === 'Escape') cmdModal.classList.remove('show');
+      });
+
+      // 9. Interactive Constellation Gold Particle Canvas
+      const canvas = document.getElementById('snow-canvas');
       if (canvas) {
-          const ctx = canvas.getContext("2d");
-          let flakes = [];
-          function resize() {
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              flakes = [];
-              for (let i = 0; i < 70; i++) {
-                  flakes.push({
-                      x: Math.random() * canvas.width,
-                      y: Math.random() * canvas.height,
-                      r: Math.random() * 2 + 0.5,
-                      speed: Math.random() * 1.2 + 0.3,
-                      wind: Math.random() * 0.4 - 0.2,
-                      opacity: Math.random() * 0.5 + 0.1
-                  });
-              }
+        const ctx = canvas.getContext('2d');
+        let flakes = [], mx = -999, my = -999;
+        window.addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, {passive: true});
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          flakes = Array.from({length: 65}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.9 + 0.6,
+            speed: Math.random() * 0.65 + 0.2,
+            wind: Math.random() * 0.3 - 0.15,
+            opacity: Math.random() * 0.45 + 0.12
+          }));
+        }
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < flakes.length; i++) {
+            const f = flakes[i];
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
+            ctx.fill();
+            const dx = f.x - mx, dy = f.y - my, dist = Math.hypot(dx, dy);
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(f.x, f.y);
+              ctx.lineTo(mx, my);
+              ctx.strokeStyle = `rgba(201, 169, 110, ${(1 - dist / 130) * 0.22})`;
+              ctx.stroke();
+            }
+            f.y += f.speed; f.x += f.wind;
+            if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
+            if (f.x < 0) f.x = canvas.width;
+            if (f.x > canvas.width) f.x = 0;
           }
-          function draw() {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              flakes.forEach(f => {
-                  ctx.beginPath();
-                  ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-                  ctx.fillStyle = `rgba(201, 169, 110, ${f.opacity})`;
-                  ctx.shadowBlur = 6;
-                  ctx.shadowColor = "rgba(201, 169, 110, 0.4)";
-                  ctx.fill();
-                  f.y += f.speed;
-                  f.x += f.wind;
-                  if (f.y > canvas.height) {
-                      f.y = -5;
-                      f.x = Math.random() * canvas.width;
-                  }
-                  if (f.x < 0) f.x = canvas.width;
-                  if (f.x > canvas.width) f.x = 0;
-              });
-              requestAnimationFrame(draw);
-          }
-          resize();
-          window.addEventListener("resize", resize);
-          draw();
+          requestAnimationFrame(draw);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        draw();
       }
     });
   </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1YTKP10ZX');
+  </script>
 </body>
 </html>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date()); 
-
-  gtag('config', 'G-J1YTKP10ZX');
-</script>
