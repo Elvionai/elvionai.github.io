@@ -465,13 +465,6 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
           <div class="qa-nm">Voice</div>
           <div class="qa-desc">Text to speech · two engines</div>
         </div>
-        <div class="qa-card qm" onclick="navTo('music')">
-          <div class="qa-glow m"></div>
-          <div class="qa-cost">20 cr</div>
-          <i class="fa-solid fa-music qa-ic"></i>
-          <div class="qa-nm">Music</div>
-          <div class="qa-desc">AI song generation</div>
-        </div>
         <div class="qa-card qn" onclick="navTo('narrate')">
           <div class="qa-glow n"></div>
           <div class="qa-cost">15–26 cr</div>
@@ -582,116 +575,6 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
       <div class="hist-section">
         <div class="hist-lbl">Voice History</div>
         <div class="hist-list" id="voice-hist"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════ MUSIC ══════════════ -->
-<div id="scr-music" class="scr">
-  <div class="scr-inner">
-    <div class="page">
-      <div class="sec-hd">
-        <div class="sec-title">MUSIC STUDIO</div>
-        <div class="sec-sub">From lyrics to sound — compose your world</div>
-      </div>
-
-      <div class="pb-notice">
-        <i class="fa-solid fa-circle-info"></i>
-        Add a mood description and optional lyrics to generate original music. Upload reference audio to clone a vocal or instrumental style.
-      </div>
-
-      <div class="mb8">
-        <span class="lbl-row">Music Mood / Prompt</span>
-        <input id="music-prompt" type="text" class="inp" placeholder="e.g. Dark cinematic orchestral with a haunting female lead…" oninput="autoSave('music')">
-        <div class="sug-row">
-          <span class="sug" onclick="setVal('music-prompt','Soulful R&B ballad, warm piano, midnight feelings')">R&B Ballad</span>
-          <span class="sug" onclick="setVal('music-prompt','Epic fantasy orchestra, rising strings, triumphant')">Epic Fantasy</span>
-          <span class="sug" onclick="setVal('music-prompt','Afrobeats, percussive, joyful, summer vibes')">Afrobeats</span>
-          <span class="sug" onclick="setVal('music-prompt','Lofi hip-hop, chill, rain sounds, study mood')">Lofi</span>
-          <span class="sug" onclick="setVal('music-prompt','Dark techno, pulsing bass, underground rave energy')">Techno</span>
-        </div>
-      </div>
-
-      <div class="mb8">
-        <span class="lbl-row">Lyrics <span style="color:var(--t3);font-style:italic;text-transform:none;letter-spacing:0;font-size:.7rem">(optional)</span></span>
-        <textarea id="music-lyrics" class="inp" rows="6" placeholder="Write your lyrics here, or leave empty for an instrumental…&#10;&#10;[Verse 1]&#10;…" oninput="updateCharCount('music-lyrics','music-char',3000);autoSave('music')"></textarea>
-        <div class="char-row">
-          <div class="char-c" id="music-char">0 / 3000</div>
-        </div>
-      </div>
-
-      <!-- Reference Upload (collapsed) -->
-      <div class="ref-toggle" id="ref-toggle-btn" onclick="toggleRef()">
-        <i class="fa-solid fa-sliders ref-ic"></i>
-        <span>Reference Audio — clone a voice or instrumental style</span>
-        <i class="fa-solid fa-chevron-down rt-arrow"></i>
-      </div>
-      <div class="ref-section" id="ref-section">
-        <div class="pb-notice" style="margin-bottom:10px">Upload a vocal sample to clone the singing voice, and/or an instrumental for genre style cloning. Files are processed and an ID is returned for generation.</div>
-
-        <span class="lbl-row">Vocal Reference</span>
-        <div class="upload-zone" id="voice-ref-zone" style="padding:16px 14px;margin-bottom:10px">
-          <input type="file" accept="audio/*" onchange="handleRefUpload(this,'voice_ref')">
-          <div class="uz-icon"><i class="fa-solid fa-microphone-lines"></i></div>
-          <div class="uz-main">Upload vocal sample</div>
-          <div class="uz-sub">MP3 · WAV · max 20 MB</div>
-          <div id="voice-ref-file" style="display:none" class="uz-file">
-            <i class="fa-solid fa-file-audio"></i><span id="voice-ref-name">–</span>
-            <span class="uz-rm" onclick="clearRef('voice_ref',event)"><i class="fa-solid fa-xmark"></i></span>
-          </div>
-        </div>
-
-        <span class="lbl-row">Instrumental Reference</span>
-        <div class="upload-zone" id="inst-ref-zone" style="padding:16px 14px;margin-bottom:10px">
-          <input type="file" accept="audio/*" onchange="handleRefUpload(this,'inst_ref')">
-          <div class="uz-icon"><i class="fa-solid fa-guitar"></i></div>
-          <div class="uz-main">Upload instrumental</div>
-          <div class="uz-sub">MP3 · WAV · max 20 MB</div>
-          <div id="inst-ref-file" style="display:none" class="uz-file">
-            <i class="fa-solid fa-file-audio"></i><span id="inst-ref-name">–</span>
-            <span class="uz-rm" onclick="clearRef('inst_ref',event)"><i class="fa-solid fa-xmark"></i></span>
-          </div>
-        </div>
-        <div class="ref-ids" id="ref-ids-display" style="display:none"></div>
-      </div>
-
-      <div class="rel-wrap" style="margin-top:4px">
-        <div class="gen-ov" id="music-gen-ov">
-          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-ring gr3"></div><div class="gen-center"><i class="fa-solid fa-music"></i></div></div>
-          <div class="gen-txt" id="music-gen-txt">Composing your track…</div>
-        </div>
-        <button class="btn btn-gold btn-full" id="music-gen-btn" onclick="generateMusic()">
-          <i class="fa-solid fa-music"></i> Generate Music
-        </button>
-      </div>
-
-      <div class="audio-player" id="music-player">
-        <div class="ap-label">Generated Track</div>
-        <div class="ap-title" id="music-ap-title">–</div>
-        <div class="waveform" id="music-wave"></div>
-        <input type="range" class="ap-seek" id="music-seek" value="0" min="0" step="0.1" oninput="seekAudio('music',this.value)">
-        <div class="ap-time-row"><span id="music-cur">0:00</span><span id="music-dur">0:00</span></div>
-        <div class="ap-controls">
-          <button class="ap-play" id="music-play-btn" onclick="togglePlay('music')"><i class="fa-solid fa-play" id="music-play-ic"></i></button>
-          <button class="ap-btn" onclick="restartAudio('music')"><i class="fa-solid fa-rotate-left"></i></button>
-          <button class="ap-btn" id="music-loop-btn" onclick="toggleLoop('music')" title="Loop"><i class="fa-solid fa-repeat"></i></button>
-          <button class="ap-btn" onclick="downloadAudio('music')"><i class="fa-solid fa-download"></i></button>
-          <div class="ap-info"><div class="ap-fmt" id="music-ap-fmt">MP3</div></div>
-        </div>
-        <div class="ap-speed-row">
-          <span class="ap-speed-lbl">Speed</span>
-          <button class="spd-btn" onclick="setSpeed('music',.75)">0.75×</button>
-          <button class="spd-btn on" onclick="setSpeed('music',1)">1×</button>
-          <button class="spd-btn" onclick="setSpeed('music',1.5)">1.5×</button>
-          <i class="fa-solid fa-volume-low" style="color:var(--t3);font-size:.72rem;margin-left:6px"></i>
-          <input type="range" class="ap-vol" id="music-vol" min="0" max="1" step="0.05" value="1" oninput="setVolume('music',this.value)">
-        </div>
-      </div>
-
-      <div class="hist-section">
-        <div class="hist-lbl">Music History</div>
-        <div class="hist-list" id="music-hist"></div>
       </div>
     </div>
   </div>
