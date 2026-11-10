@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Philadelphia Audio Studio — Elvion AI</title>
+<title>Philadelphia Audio Studio | Elvion AI</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J1YTKP10ZX');</script>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 :root{
-  --void:#01010a;--bg:#040410;--bg2:#060618;--bg3:#0a0a1e;
-  --card:#0c0c20;--card2:#0f0f26;--card3:#13132e;
-  --g1:#c9a96e;--g2:#e8c97e;--g3:#f5e0a0;--g4:#fdeec0;
+  --void:#02020a;--bg:#050512;--bg2:#08081a;
+  --card:#0c0d21;--card2:#10122b;--card3:#151836;
+  --g1:#c9a96e;--g2:#e8c97e;--g3:#f5e0a0;
   --gg:rgba(201,169,110,.18);--gs:rgba(201,169,110,.08);--gss:rgba(201,169,110,.04);
-  --gbdr:rgba(201,169,110,.22);--gbdr2:rgba(201,169,110,.42);
+  --gbdr:rgba(201,169,110,.24);--gbdr2:rgba(201,169,110,.45);
   --cyan:#00d8cc;--pur:#9b6cf6;--grn:#00c87a;--red:#e0547a;--blue:#4a80e0;
-  --t1:#f0ead8;--t2:#857d6d;--t3:#464038;
-  --bdr:rgba(201,169,110,.09);--bdr2:rgba(201,169,110,.18);
+  --t1:#f2ede0;--t2:#968e7e;--t3:#524c42;
+  --bdr:rgba(201,169,110,.1);--bdr2:rgba(201,169,110,.2);
   --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fi:'Cormorant Garamond',serif;--fc:'JetBrains Mono',monospace;
   --nh:56px;--bnh:64px;
   --glow:0 0 40px rgba(201,169,110,.28);--glow2:0 0 80px rgba(201,169,110,.1);--glow-sm:0 0 18px rgba(201,169,110,.2);
-  --shadow:0 16px 60px rgba(0,0,0,.95);
   --r6:6px;--r10:10px;--r12:12px;--r14:14px;--r18:18px;--r24:24px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -38,36 +37,34 @@ html,body{height:100%;width:100%;background:var(--void);color:var(--t1);font-fam
 @keyframes ptrise{0%,100%{opacity:0;transform:translateY(0)}25%{opacity:.9}75%{opacity:.3}to{opacity:0;transform:translateY(-120px) scale(.25)}}
 
 /* ── SPLASH ── */
-#splash{position:fixed;inset:0;z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--void);pointer-events:none;animation:splashOut .5s ease 2.8s forwards}
+#splash{position:fixed;inset:0;z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--void);pointer-events:none;animation:splashOut .5s ease 1.8s forwards}
 @keyframes splashOut{to{opacity:0;pointer-events:none}}
-.spl-logo{width:88px;height:88px;border-radius:22px;border:1px solid var(--gbdr);box-shadow:var(--glow),var(--glow2);background:var(--card);display:flex;align-items:center;justify-content:center;animation:splashPop .85s cubic-bezier(.34,1.56,.64,1),splashPulse 1.4s ease .9s 2}
-@keyframes splashPop{from{opacity:0;transform:scale(.25) rotate(-12deg)}to{opacity:1;transform:none}}
-@keyframes splashPulse{0%,100%{box-shadow:var(--glow)}50%{box-shadow:0 0 70px rgba(201,169,110,.6),0 0 130px rgba(201,169,110,.15)}}
-.spl-name{font-family:var(--ft);font-size:1.45rem;font-weight:900;color:var(--g1);letter-spacing:8px;margin-top:20px;animation:fadeUp .7s ease .4s both;text-shadow:0 0 60px rgba(201,169,110,.45)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.spl-sub{font-family:var(--fi);font-style:italic;font-size:.92rem;color:var(--t2);margin-top:5px;letter-spacing:2.5px;animation:fadeUp .7s ease .7s both}
-.spl-bar{width:120px;height:1.5px;background:var(--bdr);border-radius:2px;margin-top:26px;overflow:hidden;animation:fadeUp .5s ease 1s both}
-.spl-fill{height:100%;background:linear-gradient(90deg,transparent,var(--g1),transparent);animation:splBar 1.8s ease 1.1s both}
+.spl-logo{width:84px;height:84px;border-radius:22px;border:1.5px solid var(--g1);box-shadow:var(--glow),var(--glow2);overflow:hidden;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1)}
+.spl-logo img{width:100%;height:100%;object-fit:cover}
+@keyframes splashPop{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:none}}
+.spl-name{font-family:var(--ft);font-size:1.4rem;font-weight:900;color:var(--g1);letter-spacing:7px;margin-top:18px;text-shadow:0 0 50px rgba(201,169,110,.45)}
+.spl-sub{font-family:var(--fi);font-style:italic;font-size:.92rem;color:var(--t2);margin-top:4px;letter-spacing:2.5px}
+.spl-bar{width:120px;height:2px;background:var(--bdr);border-radius:2px;margin-top:22px;overflow:hidden}
+.spl-fill{height:100%;background:linear-gradient(90deg,transparent,var(--g1),transparent);animation:splBar 1.4s ease .2s both}
 @keyframes splBar{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 
 /* ── SCREENS ── */
 .scr{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;overflow:hidden}
-.scr.on{display:flex;animation:scrIn .3s ease}
+.scr.on{display:flex;animation:scrIn .28s ease}
 @keyframes scrIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .scr-inner{position:absolute;top:var(--nh);bottom:var(--bnh);left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gbdr) transparent}
 .scr-inner::-webkit-scrollbar{width:3px}
 .scr-inner::-webkit-scrollbar-thumb{background:var(--gbdr);border-radius:10px}
-.page{padding:14px 14px 32px}
+.page{padding:14px 14px 36px;max-width:880px;margin:0 auto;width:100%}
 
 /* ── HEADER ── */
-#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:600;display:none;align-items:center;gap:10px;padding:0 14px;background:rgba(4,4,16,.97);border-bottom:1px solid var(--bdr);backdrop-filter:blur(32px)}
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:600;display:none;align-items:center;gap:10px;padding:0 14px;background:rgba(4,4,16,.96);border-bottom:1px solid var(--bdr);backdrop-filter:blur(28px)}
 #hdr.on{display:flex}
-.hdr-logo{width:32px;height:32px;border-radius:9px;background:var(--card);border:1px solid var(--gbdr);box-shadow:var(--glow-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hdr-brand{font-family:var(--ft);font-size:.68rem;font-weight:900;color:var(--g1);letter-spacing:2.5px;line-height:1.1}
-.hdr-brand small{display:block;font-size:.42rem;color:var(--t3);letter-spacing:2px;font-family:var(--fb)}
+.hdr-logo{width:32px;height:32px;border-radius:9px;border:1px solid var(--g1);box-shadow:var(--glow-sm);overflow:hidden;flex-shrink:0}
+.hdr-logo img{width:100%;height:100%;object-fit:cover}
+.hdr-brand{font-family:var(--ft);font-size:.7rem;font-weight:900;color:var(--g1);letter-spacing:2.4px;line-height:1.1}
+.hdr-brand small{display:block;font-size:.44rem;color:var(--t2);letter-spacing:1.8px;font-family:var(--fb)}
 .hsp{flex:1}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn);animation:livepulse 2s infinite;flex-shrink:0}
-@keyframes livepulse{0%,100%{box-shadow:0 0 4px var(--grn)}50%{box-shadow:0 0 14px var(--grn),0 0 24px rgba(0,200,122,.3)}}
 .bal-chip{display:flex;align-items:center;gap:6px;padding:5px 11px;background:var(--gs);border:1px solid var(--gbdr);border-radius:22px;cursor:pointer;transition:.22s}
 .bal-chip:hover{background:var(--gg)}
 .bal-chip i{color:var(--g1);font-size:.72rem}
@@ -76,10 +73,10 @@ html,body{height:100%;width:100%;background:var(--void);color:var(--t1);font-fam
 .hav img{width:100%;height:100%;object-fit:cover}
 
 /* ── BOTTOM NAV ── */
-#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:600;display:none;background:rgba(4,4,16,.99);border-top:1px solid var(--bdr);backdrop-filter:blur(32px)}
+#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:600;display:none;background:rgba(4,4,16,.98);border-top:1px solid var(--bdr);backdrop-filter:blur(28px)}
 #bnav.on{display:flex}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.5px;cursor:pointer;color:var(--t3);font-size:.48rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;border:none;background:none;font-family:var(--fb);transition:.2s;position:relative;padding:5px 0}
-.ni i{font-size:1.05rem;transition:.22s}
+.ni i{font-size:1.02rem;transition:.22s}
 .ni.on{color:var(--g1)}
 .ni.on i{filter:drop-shadow(0 0 8px rgba(201,169,110,.55))}
 .ni.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--g1),var(--g2));border-radius:0 0 4px 4px;box-shadow:0 0 12px var(--g1)}
@@ -87,268 +84,212 @@ html,body{height:100%;width:100%;background:var(--void);color:var(--t1);font-fam
 /* ── AUTH ── */
 #scr-auth{align-items:center;justify-content:center;padding:28px;background:radial-gradient(ellipse 90% 70% at 42% 32%,rgba(12,8,30,.98),var(--void) 80%)}
 .auth-wrap{text-align:center;max-width:340px;width:100%}
-.auth-logo{width:86px;height:86px;border-radius:22px;margin:0 auto 22px;border:1px solid var(--gbdr);box-shadow:var(--glow),var(--glow2);background:var(--card);display:flex;align-items:center;justify-content:center;animation:authIn .9s cubic-bezier(.34,1.56,.64,1) 3s both,crownPulse 4s ease-in-out 4s infinite}
-@keyframes authIn{from{opacity:0;transform:translateY(28px) scale(.65)}to{opacity:1;transform:none}}
-@keyframes crownPulse{0%,100%{box-shadow:0 0 32px rgba(201,169,110,.22)}50%{box-shadow:0 0 70px rgba(201,169,110,.55),0 0 110px rgba(201,169,110,.12)}}
-.auth-ttl{font-family:var(--ft);font-size:2rem;font-weight:900;color:var(--g1);letter-spacing:6px;margin-bottom:4px;text-shadow:0 0 55px rgba(201,169,110,.38);animation:fadeUp .7s ease 3.1s both}
-.auth-studio{font-family:var(--fi);font-style:italic;font-size:1rem;color:var(--g2);letter-spacing:3px;margin-bottom:5px;animation:fadeUp .7s ease 3.25s both}
-.auth-tagline{font-family:var(--fi);font-style:italic;font-size:.88rem;color:var(--t2);line-height:1.8;margin-bottom:28px;animation:fadeUp .7s ease 3.4s both;min-height:3em}
-.auth-tagline .tc{animation:tcBlink .7s step-end infinite}
-@keyframes tcBlink{0%,100%{opacity:1}50%{opacity:0}}
-.g-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:15px 22px;border-radius:var(--r14);background:rgba(255,255,255,.05);border:1px solid var(--gbdr);color:var(--t1);font-size:.88rem;font-weight:600;cursor:pointer;font-family:var(--fb);transition:.3s;position:relative;overflow:hidden;animation:fadeUp .7s ease 3.6s both}
-.g-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);transform:translateX(-100%);transition:.5s}
+.auth-logo{width:84px;height:84px;border-radius:22px;margin:0 auto 20px;border:1.5px solid var(--g1);box-shadow:var(--glow),var(--glow2);overflow:hidden}
+.auth-logo img{width:100%;height:100%;object-fit:cover}
+.auth-ttl{font-family:var(--ft);font-size:1.95rem;font-weight:900;color:var(--g1);letter-spacing:5px;margin-bottom:4px}
+.auth-studio{font-family:var(--fi);font-style:italic;font-size:1rem;color:var(--g2);letter-spacing:3px;margin-bottom:6px}
+.auth-tagline{font-family:var(--fi);font-style:italic;font-size:.88rem;color:var(--t2);line-height:1.75;margin-bottom:26px;min-height:2.8em}
+.g-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:14px 22px;border-radius:var(--r14);background:rgba(255,255,255,.05);border:1px solid var(--gbdr);color:var(--t1);font-size:.88rem;font-weight:600;cursor:pointer;font-family:var(--fb);transition:.25s}
 .g-btn:hover{background:var(--gs);border-color:var(--g1);transform:translateY(-2px);box-shadow:var(--glow)}
-.g-btn:hover::after{transform:translateX(100%)}
 
-/* ── SECTION HEADER ── */
-.sec-hd{margin-bottom:16px}
-.sec-title{font-family:var(--ft);font-size:.95rem;font-weight:600;color:var(--g1);letter-spacing:2.5px}
-.sec-sub{font-family:var(--fi);font-style:italic;font-size:.8rem;color:var(--t2);margin-top:3px}
+/* ── SECTION HEADER & INPUTS ── */
+.sec-hd{margin-bottom:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sec-title{font-family:var(--ft);font-size:.95rem;font-weight:600;color:var(--g1);letter-spacing:2.2px}
+.sec-sub{font-family:var(--fi);font-style:italic;font-size:.82rem;color:var(--t2);margin-top:2px}
 
-/* ── INPUTS ── */
-.inp{background:rgba(0,0,0,.55);border:1px solid var(--bdr);color:var(--t1);padding:12px 14px;border-radius:var(--r12);font-family:var(--fb);font-size:.88rem;width:100%;transition:.2s;outline:none}
-.inp:focus{border-color:var(--gbdr);box-shadow:0 0 0 3px rgba(201,169,110,.05)}
+.inp{background:rgba(0,0,0,.55);border:1px solid var(--bdr);color:var(--t1);padding:12px 14px;border-radius:var(--r12);font-family:var(--fb);font-size:.86rem;width:100%;transition:.2s;outline:none}
+.inp:focus{border-color:var(--gbdr);box-shadow:0 0 0 3px rgba(201,169,110,.06)}
 .inp::placeholder{color:var(--t3)}
 textarea.inp{resize:none;line-height:1.65}
-select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(201,169,110,.6)' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:var(--r12);border:none;cursor:pointer;font-family:var(--fb);font-size:.88rem;font-weight:600;transition:.22s;position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);transform:translateX(-100%);transition:.5s}
-.btn:hover::after{transform:translateX(100%)}
-.btn:active{transform:scale(.97)}
-.btn-gold{background:linear-gradient(135deg,#c9a96e,#d4b060);color:#08060a;box-shadow:0 4px 20px rgba(201,169,110,.35)}
-.btn-gold:hover{background:linear-gradient(135deg,#d4b472,#e0bc72);box-shadow:0 6px 28px rgba(201,169,110,.5);transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:var(--r12);border:none;cursor:pointer;font-family:var(--fb);font-size:.86rem;font-weight:600;transition:.22s}
+.btn:active{transform:scale(.98)}
+.btn-gold{background:linear-gradient(135deg,#c9a96e,#e2c178);color:#08060a;box-shadow:0 4px 20px rgba(201,169,110,.32)}
+.btn-gold:hover{box-shadow:0 6px 28px rgba(201,169,110,.5);transform:translateY(-1px)}
 .btn-gold:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2)}
-.btn-ghost:hover{background:var(--gs);border-color:var(--gbdr);color:var(--g1)}
+.btn-ghost:hover{background:var(--gs);border:1px solid var(--gbdr);color:var(--g1)}
 .btn-full{width:100%;display:flex}
-.btn-sm{padding:8px 14px;font-size:.78rem;border-radius:var(--r10)}
-.btn-xs{padding:5px 10px;font-size:.7rem;border-radius:var(--r6)}
+.btn-sm{padding:8px 13px;font-size:.76rem;border-radius:var(--r10)}
+.btn-xs{padding:5px 10px;font-size:.68rem;border-radius:var(--r6)}
 
 /* ── HOME CARDS ── */
-.greet-card{padding:20px 18px;background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--bdr);border-radius:var(--r18);margin-bottom:14px;position:relative;overflow:hidden}
-.greet-card::after{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(201,169,110,.07),transparent 70%);pointer-events:none}
-.greet-tod{font-size:.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px}
-.greet-nm{font-family:var(--ft);font-size:1.25rem;font-weight:900;color:var(--g1);letter-spacing:3px}
-.greet-q{font-family:var(--fi);font-style:italic;font-size:.82rem;color:var(--t2);margin-top:5px;line-height:1.6}
+.greet-card{padding:20px 18px;background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--gbdr);border-radius:var(--r18);margin-bottom:14px;position:relative;overflow:hidden}
+.greet-tod{font-size:.58rem;color:var(--g1);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px}
+.greet-nm{font-family:var(--ft);font-size:1.25rem;font-weight:900;color:var(--g2);letter-spacing:2.5px}
+.greet-q{font-family:var(--fi);font-style:italic;font-size:.86rem;color:var(--t2);margin-top:4px}
 .credits-card{display:flex;align-items:center;gap:13px;padding:14px 16px;background:var(--card);border:1px solid var(--gbdr);border-radius:var(--r14);margin-bottom:14px}
-.cr-ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(201,169,110,.05));border:1px solid var(--gbdr);display:flex;align-items:center;justify-content:center;color:var(--g1);font-size:1.1rem;flex-shrink:0}
+.cr-ic{width:42px;height:42px;border-radius:12px;background:var(--gs);border:1px solid var(--gbdr);display:flex;align-items:center;justify-content:center;color:var(--g1);font-size:1.1rem;flex-shrink:0}
 .cr-info{flex:1}
-.cr-lbl{font-size:.54rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin-bottom:2px}
+.cr-lbl{font-size:.54rem;color:var(--t2);text-transform:uppercase;letter-spacing:2px;margin-bottom:2px}
 .cr-val{font-family:var(--ft);font-size:1.2rem;color:var(--g2)}
 .cr-acts{display:flex;gap:6px}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.stat-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r12);padding:12px 8px;text-align:center}
-.stat-v{font-family:var(--ft);font-size:1.1rem;color:var(--g2);margin-bottom:2px}
-.stat-l{font-size:.52rem;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.stat-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r12);padding:11px 6px;text-align:center}
+.stat-v{font-family:var(--ft);font-size:1.05rem;color:var(--g2);margin-bottom:2px}
+.stat-l{font-size:.5rem;color:var(--t2);text-transform:uppercase;letter-spacing:1.2px}
 .qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
 .qa-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r14);padding:16px 14px;cursor:pointer;transition:.22s;position:relative;overflow:hidden}
-.qa-card:hover{border-color:var(--bdr2);transform:translateY(-2px)}
-.qa-glow{position:absolute;bottom:-20px;right:-20px;width:72px;height:72px;border-radius:50%;pointer-events:none}
-.qa-glow.v{background:radial-gradient(circle,rgba(155,108,246,.12),transparent 70%)}
-.qa-glow.m{background:radial-gradient(circle,rgba(0,200,122,.1),transparent 70%)}
-.qa-glow.n{background:radial-gradient(circle,rgba(0,216,204,.1),transparent 70%)}
-.qa-glow.a{background:radial-gradient(circle,rgba(201,169,110,.1),transparent 70%)}
-.qa-ic{font-size:1.2rem;margin-bottom:10px}
+.qa-card:hover{border-color:var(--gbdr);transform:translateY(-2px)}
+.qa-ic{font-size:1.25rem;margin-bottom:9px;display:block}
 .qa-card.qv .qa-ic{color:var(--pur)}
-.qa-card.qm .qa-ic{color:var(--grn)}
 .qa-card.qn .qa-ic{color:var(--cyan)}
+.qa-card.qm .qa-ic{color:var(--grn)}
 .qa-card.qa .qa-ic{color:var(--g1)}
-.qa-nm{font-size:.8rem;font-weight:700;color:var(--t1);margin-bottom:2px}
-.qa-desc{font-size:.62rem;color:var(--t3);line-height:1.4}
-.qa-cost{position:absolute;top:9px;right:9px;font-size:.52rem;color:var(--t3);font-family:var(--fc);background:rgba(255,255,255,.04);padding:2px 6px;border-radius:6px}
+.qa-nm{font-size:.82rem;font-weight:700;color:var(--t1);margin-bottom:2px}
+.qa-desc{font-size:.63rem;color:var(--t2);line-height:1.4}
+.qa-cost{position:absolute;top:9px;right:9px;font-size:.52rem;color:var(--g2);font-family:var(--fc);background:rgba(201,169,110,.1);border:1px solid var(--bdr);padding:2px 7px;border-radius:6px}
 
-/* ── PROVIDER TOGGLE ── */
-.prov-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.prov-btn{padding:12px 10px;border-radius:var(--r12);background:var(--card);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;transition:.2s;text-align:center;font-family:var(--fb);width:100%}
-.prov-nm{display:block;font-size:.8rem;font-weight:700;margin-bottom:2px}
-.prov-cost{display:block;font-size:.58rem;color:var(--t3)}
-.prov-btn.on{background:var(--gs);border-color:var(--gbdr);color:var(--g1)}
-.prov-btn.on .prov-cost{color:rgba(201,169,110,.6)}
+/* ── 3-ENGINE PROVIDER TOGGLE (V1, V2, PRO) ── */
+.prov-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.prov-btn{padding:11px 8px;border-radius:var(--r12);background:var(--card);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;transition:.2s;text-align:center;font-family:var(--fb);width:100%}
+.prov-nm{display:block;font-size:.74rem;font-weight:700;margin-bottom:2px;color:var(--t1)}
+.prov-cost{display:block;font-size:.55rem;color:var(--t2)}
+.prov-btn.on{background:var(--gs);border-color:var(--gbdr2);box-shadow:var(--glow-sm)}
+.prov-btn.on .prov-nm{color:var(--g1)}
+.prov-btn.on .prov-cost{color:var(--g2)}
 
-/* ── STYLE CHIPS ── */
+/* ── STYLE & VOICE GRIDS ── */
 .style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
-.style-chip{padding:11px 8px;border-radius:var(--r10);background:var(--card2);border:1px solid var(--bdr);cursor:pointer;transition:.2s;text-align:center}
-.style-chip i{display:block;font-size:1rem;color:var(--t3);margin-bottom:6px;transition:.2s}
-.style-chip span{font-size:.67rem;color:var(--t2);font-weight:600;letter-spacing:.4px;display:block}
-.style-chip small{font-size:.57rem;color:var(--t3);display:block;margin-top:2px}
-.style-chip.on{background:var(--gs);border-color:var(--gbdr)}
-.style-chip.on i{color:var(--g1)}
-.style-chip.on span{color:var(--g1)}
+.style-chip{padding:10px 8px;border-radius:var(--r10);background:var(--card2);border:1px solid var(--bdr);cursor:pointer;transition:.2s;text-align:center}
+.style-chip i{display:block;font-size:.95rem;color:var(--t2);margin-bottom:5px}
+.style-chip span{font-size:.67rem;color:var(--t1);font-weight:600;display:block}
+.style-chip small{font-size:.55rem;color:var(--t2);display:block;margin-top:2px}
+.style-chip.on{background:var(--gs);border-color:var(--gbdr2)}
+.style-chip.on i,.style-chip.on span{color:var(--g1)}
 
-/* ── VOICE GRID ── */
-.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px;max-height:260px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gbdr) transparent}
-.voice-grid::-webkit-scrollbar{width:3px}
-.voice-grid::-webkit-scrollbar-thumb{background:var(--gbdr);border-radius:10px}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px;max-height:250px;overflow-y:auto;scrollbar-width:thin}
 .vc{padding:10px 11px;border-radius:var(--r10);background:var(--card2);border:1px solid var(--bdr);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:9px}
-.vc i{font-size:.88rem;color:var(--t3);transition:.2s;width:16px;text-align:center;flex-shrink:0}
+.vc i{font-size:.88rem;color:var(--t2);width:18px;text-align:center;flex-shrink:0}
 .vc-info .vn{font-size:.74rem;color:var(--t1);font-weight:600;line-height:1.2}
-.vc-info .vd{font-size:.6rem;color:var(--t3);margin-top:1px}
-.vc.on{background:var(--gs);border-color:var(--gbdr)}
+.vc-info .vd{font-size:.58rem;color:var(--t2);margin-top:2px}
+.vc.on{background:var(--gs);border-color:var(--gbdr2)}
 .vc.on i,.vc.on .vn{color:var(--g1)}
 
 /* ── AUDIO PLAYER ── */
-.audio-player{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--gbdr);border-radius:var(--r18);padding:18px 16px;margin-top:14px;animation:playerIn .4s cubic-bezier(.34,1.56,.64,1);display:none}
-.audio-player.on{display:block}
-@keyframes playerIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.audio-player{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--gbdr);border-radius:var(--r18);padding:18px 16px;margin-top:14px;display:none}
+.audio-player.on{display:block;animation:scrIn .35s ease}
 .ap-label{font-size:.54rem;color:var(--g1);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px}
-.ap-title{font-family:var(--fi);font-style:italic;font-size:.82rem;color:var(--t1);margin-bottom:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ap-title{font-family:var(--fi);font-style:italic;font-size:.86rem;color:var(--t1);margin-bottom:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .waveform{display:flex;align-items:center;justify-content:center;gap:2.5px;height:44px;margin-bottom:12px;padding:0 4px}
-.wb{width:3.5px;border-radius:3px;background:rgba(201,169,110,.18);flex-shrink:0;transition:background .3s}
+.wb{width:3.5px;border-radius:3px;background:rgba(201,169,110,.2);flex-shrink:0;transition:background .3s}
 .waveform.playing .wb{background:var(--g1);animation:waveAnim var(--sp,.55s) ease-in-out infinite alternate}
-@keyframes waveAnim{from{height:3px}to{height:var(--mh,24px)}}
-.ap-seek{width:100%;height:3px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;margin-bottom:6px}
-.ap-seek::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--g1);box-shadow:0 0 8px rgba(201,169,110,.6);cursor:pointer}
-.ap-time-row{display:flex;justify-content:space-between;font-size:.6rem;color:var(--t3);font-family:var(--fc);margin-bottom:12px}
-.ap-controls{display:flex;align-items:center;gap:9px}
-.ap-play{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--g1),#d4ae62);border:none;color:#08060a;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;box-shadow:0 4px 16px rgba(201,169,110,.35)}
-.ap-play:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(201,169,110,.55)}
-.ap-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.76rem;transition:.18s;flex-shrink:0}
-.ap-btn:hover{background:var(--gs);color:var(--g1);border-color:var(--gbdr)}
-.ap-btn.on{background:var(--gs);color:var(--g1);border-color:var(--gbdr)}
+@keyframes waveAnim{from{height:4px}to{height:var(--mh,28px)}}
+.ap-seek{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.12);border-radius:2px;outline:none;cursor:pointer;margin-bottom:6px}
+.ap-seek::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--g1);cursor:pointer}
+.ap-time-row{display:flex;justify-content:space-between;font-size:.6rem;color:var(--t2);font-family:var(--fc);margin-bottom:12px}
+.ap-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ap-play{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--g1),#e0bc72);border:none;color:#08060a;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 16px rgba(201,169,110,.35)}
+.ap-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.76rem;transition:.18s}
+.ap-btn:hover,.ap-btn.on{background:var(--gs);color:var(--g1);border-color:var(--gbdr)}
 .ap-info{margin-left:auto;text-align:right}
-.ap-fmt{font-size:.6rem;color:var(--t3);font-family:var(--fc)}
-.ap-size{font-size:.57rem;color:var(--t3);font-family:var(--fc);margin-top:1px}
-/* Speed row */
-.ap-speed-row{display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr)}
-.ap-speed-lbl{font-size:.57rem;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-right:2px}
-.spd-btn{padding:3px 9px;border-radius:8px;background:transparent;border:1px solid var(--bdr);color:var(--t3);font-size:.64rem;font-family:var(--fc);cursor:pointer;transition:.15s}
+.ap-fmt{font-size:.6rem;color:var(--g2);font-family:var(--fc)}
+.ap-speed-row{display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr);flex-wrap:wrap}
+.ap-speed-lbl{font-size:.57rem;color:var(--t2);text-transform:uppercase;letter-spacing:1.5px}
+.spd-btn{padding:3px 8px;border-radius:8px;background:transparent;border:1px solid var(--bdr);color:var(--t2);font-size:.63rem;font-family:var(--fc);cursor:pointer}
 .spd-btn.on{background:var(--gs);border-color:var(--gbdr);color:var(--g1)}
-.ap-vol{flex:1;height:2px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;margin-left:6px}
-.ap-vol::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--g2);cursor:pointer}
+.ap-vol{flex:1;min-width:70px;height:3px;accent-color:var(--g1);cursor:pointer;margin-left:6px}
 
-/* ── CHAR COUNTER ── */
-.char-row{display:flex;justify-content:space-between;align-items:center;margin-top:5px;margin-bottom:12px}
-.char-c{font-size:.6rem;color:var(--t3);font-family:var(--fc)}
+/* ── MASTERING & RECORDER STUDIO ── */
+.daw-card{background:var(--card);border:1px solid var(--gbdr);border-radius:var(--r18);padding:16px;margin-bottom:14px}
+#daw-canvas{width:100%;height:124px;background:#050510;border-radius:var(--r12);border:1px solid var(--bdr2);display:block;margin-bottom:12px}
+.daw-sliders{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-bottom:14px}
+.daw-sl{display:flex;flex-direction:column;gap:4px;font-size:.65rem;color:var(--t2)}
+.daw-sl span{display:flex;justify-content:space-between;color:var(--g2);font-family:var(--fc)}
+.daw-sl input[type=range]{width:100%;accent-color:var(--g1)}
+.daw-checks{display:flex;gap:16px;margin-bottom:14px;font-size:.76rem;color:var(--t1);flex-wrap:wrap}
+.daw-checks label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.daw-btns{display:flex;gap:7px;flex-wrap:wrap}
+
+/* ── UPLOAD & MISC ── */
+.char-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;margin-bottom:12px;flex-wrap:wrap;gap:6px}
+.char-c{font-size:.62rem;color:var(--t2);font-family:var(--fc)}
 .char-c.warn{color:var(--red)}
-
-/* ── UPLOAD ZONE ── */
+.sug-row{display:flex;gap:5px;flex-wrap:wrap}
+.sug{padding:4px 10px;background:var(--gs);border:1px solid var(--bdr);border-radius:12px;font-size:.64rem;color:var(--g1);cursor:pointer}
+.sug:hover{background:var(--gg);border-color:var(--gbdr)}
+.lbl-row{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;display:block}
 .upload-zone{border:2px dashed var(--bdr2);border-radius:var(--r14);padding:22px 18px;text-align:center;cursor:pointer;transition:.25s;background:var(--gss);position:relative;margin-bottom:14px}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--gbdr);background:var(--gs)}
-.upload-zone.drag{box-shadow:0 0 24px rgba(201,169,110,.15)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gbdr2);background:var(--gs)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.uz-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--bdr2);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:rgba(201,169,110,.4);font-size:1.1rem}
-.uz-main{font-size:.82rem;color:var(--t2);margin-bottom:4px;font-weight:500}
-.uz-sub{font-size:.63rem;color:var(--t3)}
-.uz-file{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--gs);border:1px solid var(--gbdr);border-radius:var(--r10);margin-top:10px;animation:playerIn .3s ease}
+.uz-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--bdr2);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--g1);font-size:1.1rem}
+.uz-main{font-size:.82rem;color:var(--t1);margin-bottom:4px;font-weight:500}
+.uz-sub{font-size:.63rem;color:var(--t2)}
+.uz-file{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--gs);border:1px solid var(--gbdr);border-radius:var(--r10);margin-top:10px;position:relative;z-index:2}
 .uz-file i{color:var(--g1);font-size:.9rem;flex-shrink:0}
 .uz-file span{font-size:.78rem;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.uz-rm{color:var(--t3);cursor:pointer;font-size:.8rem;flex-shrink:0;padding:2px}
+.uz-rm{color:var(--t2);cursor:pointer;font-size:.85rem;padding:2px 6px}
 .uz-rm:hover{color:var(--red)}
 
-/* ── HISTORY ── */
-.hist-section{margin-top:20px}
-.hist-lbl{font-size:.54rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.hist-section{margin-top:22px}
+.hist-lbl{font-size:.56rem;color:var(--t2);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
 .hist-list{display:flex;flex-direction:column;gap:8px}
-.hist-item{display:flex;align-items:center;gap:11px;padding:11px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r12);transition:.2s;cursor:pointer;animation:playerIn .35s ease}
-.hist-item:hover{border-color:var(--bdr2)}
+.hist-item{display:flex;align-items:center;gap:11px;padding:11px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r12);transition:.2s;cursor:pointer}
+.hist-item:hover{border-color:var(--gbdr)}
 .hi-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
-.hi-ic.v{background:rgba(155,108,246,.1);color:var(--pur)}
-.hi-ic.m{background:rgba(0,200,122,.1);color:var(--grn)}
-.hi-ic.n{background:rgba(0,216,204,.1);color:var(--cyan)}
-.hi-ic.a{background:rgba(201,169,110,.1);color:var(--g1)}
+.hi-ic.v{background:rgba(155,108,246,.12);color:var(--pur)}
+.hi-ic.n{background:rgba(0,216,204,.12);color:var(--cyan)}
+.hi-ic.a{background:rgba(201,169,110,.12);color:var(--g1)}
 .hi-meta{flex:1;min-width:0}
 .hi-ttl{font-size:.78rem;color:var(--t1);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hi-sub{font-size:.61rem;color:var(--t3);margin-top:2px}
-.empty-hist{text-align:center;padding:22px 16px;color:var(--t3);font-size:.76rem;font-family:var(--fi);font-style:italic}
-.empty-hist i{display:block;font-size:1.4rem;margin-bottom:8px;color:rgba(201,169,110,.2)}
+.hi-sub{font-size:.61rem;color:var(--t2);margin-top:2px}
+.empty-hist{text-align:center;padding:20px 16px;color:var(--t2);font-size:.78rem;font-family:var(--fi);font-style:italic}
 
-/* ── GEN OVERLAY ── */
 .rel-wrap{position:relative}
-.gen-ov{position:absolute;inset:0;z-index:50;background:rgba(1,1,10,.88);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:var(--r18);backdrop-filter:blur(10px);min-height:140px}
+.gen-ov{position:absolute;inset:0;z-index:50;background:rgba(2,2,10,.9);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;border-radius:var(--r18);backdrop-filter:blur(10px);min-height:130px}
 .gen-ov.on{display:flex}
-.gen-rings{position:relative;width:64px;height:64px}
+.gen-rings{position:relative;width:58px;height:58px}
 .gen-ring{position:absolute;border-radius:50%;border:2px solid transparent}
-.gr1{inset:0;border-top-color:var(--g1);border-right-color:rgba(201,169,110,.22);animation:spin 1s linear infinite;filter:drop-shadow(0 0 6px rgba(201,169,110,.5))}
-.gr2{inset:10px;border-bottom-color:var(--g1);border-left-color:rgba(201,169,110,.18);animation:spin .62s linear infinite reverse}
-.gr3{inset:20px;border-top-color:rgba(201,169,110,.55);animation:spin 1.5s linear infinite}
+.gr1{inset:0;border-top-color:var(--g1);animation:spin 1s linear infinite}
+.gr2{inset:9px;border-bottom-color:var(--g2);animation:spin .65s linear infinite reverse}
 @keyframes spin{to{transform:rotate(360deg)}}
-.gen-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--g1);animation:breathe 1.8s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.7;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
-.gen-txt{font-family:var(--fi);font-style:italic;font-size:.76rem;color:var(--t2);letter-spacing:1.5px;animation:breathe 2.2s ease-in-out infinite}
-.gen-step{font-size:.62rem;color:var(--t3);font-family:var(--fc);letter-spacing:1px}
+.gen-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--g1)}
+.gen-txt{font-family:var(--fi);font-style:italic;font-size:.8rem;color:var(--g2);letter-spacing:1.2px}
+.gen-step{font-size:.62rem;color:var(--t2);font-family:var(--fc)}
 
-/* ── MISC ── */
-.mb8{margin-bottom:8px}
-.mb12{margin-bottom:12px}
-.mb14{margin-bottom:14px}
-.pb-notice{padding:12px 14px;background:rgba(201,169,110,.05);border:1px solid var(--bdr);border-radius:var(--r10);font-size:.76rem;color:var(--t2);line-height:1.65;margin-bottom:14px}
-.pb-notice i{color:var(--g1);margin-right:5px}
-.sug-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;margin-bottom:12px}
-.sug{padding:4px 10px;background:var(--gs);border:1px solid var(--bdr);border-radius:12px;font-size:.64rem;color:var(--g1);cursor:pointer;transition:.16s}
-.sug:hover{background:var(--gg);border-color:var(--gbdr)}
-.lbl-row{font-size:.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;display:block}
-.info-row{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
-.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;font-size:.6rem;font-weight:600}
-.tag.gold{background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.2);color:var(--g1)}
-.tag.grn{background:rgba(0,200,122,.1);border:1px solid rgba(0,200,122,.2);color:var(--grn)}
-.tag.cyan{background:rgba(0,216,204,.1);border:1px solid rgba(0,216,204,.2);color:var(--cyan)}
-.m-sep{height:1px;background:var(--bdr);margin:14px 0}
-
-/* Reference collapsible */
-.ref-toggle{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--card2);border:1px dashed var(--bdr2);border-radius:var(--r12);cursor:pointer;margin-bottom:10px;transition:.2s}
-.ref-toggle:hover{border-color:var(--gbdr);background:var(--gs)}
-.ref-toggle i.ref-ic{color:var(--t3);font-size:.88rem}
-.ref-toggle span{font-size:.8rem;color:var(--t2);flex:1}
-.rt-arrow{color:var(--t3);font-size:.72rem;transition:.2s}
-.ref-toggle.open .rt-arrow{transform:rotate(180deg)}
-.ref-section{display:none}
-.ref-section.on{display:block;animation:playerIn .3s ease}
-.ref-ids{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
-.ref-id-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(0,200,122,.05);border:1px solid rgba(0,200,122,.15);border-radius:var(--r10);font-size:.72rem;color:var(--grn)}
-.ref-id-val{font-family:var(--fc);font-size:.62rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.ref-id-rm{margin-left:auto;cursor:pointer;color:rgba(0,200,122,.5);font-size:.72rem}
-.ref-id-rm:hover{color:var(--red)}
-
-/* Mode chips */
 .mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
 .mode-chip{padding:10px 8px;border-radius:var(--r10);background:var(--card2);border:1px solid var(--bdr);cursor:pointer;transition:.2s;text-align:center}
-.mode-chip i{display:block;font-size:.95rem;color:var(--t3);margin-bottom:5px;transition:.2s}
-.mode-chip span{font-size:.66rem;color:var(--t2);font-weight:600}
-.mode-chip.on{background:var(--gs);border-color:var(--gbdr)}
+.mode-chip i{display:block;font-size:.95rem;color:var(--t2);margin-bottom:5px}
+.mode-chip span{font-size:.66rem;color:var(--t1);font-weight:600}
+.mode-chip.on{background:var(--gs);border-color:var(--gbdr2)}
 .mode-chip.on i,.mode-chip.on span{color:var(--g1)}
-
-/* Custom prompt wrap */
 .custom-wrap{display:none}
-.custom-wrap.on{display:block;animation:playerIn .25s ease}
+.custom-wrap.on{display:block}
+.result-card{background:var(--card2);border:1px solid var(--gbdr);border-radius:var(--r14);padding:14px;margin-top:14px;display:none}
+.result-card.on{display:block}
+.res-lbl{font-size:.58rem;color:var(--g1);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.res-txt{font-size:.84rem;color:var(--t1);line-height:1.75;white-space:pre-wrap;max-height:320px;overflow-y:auto}
 
-/* Result card */
-.result-card{background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r14);padding:14px;margin-top:14px;display:none}
-.result-card.on{display:block;animation:playerIn .4s ease}
-.res-lbl{font-size:.57rem;color:var(--g1);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.res-txt{font-size:.84rem;color:var(--t1);line-height:1.78;white-space:pre-wrap;max-height:300px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gbdr) transparent}
-.res-txt::-webkit-scrollbar{width:3px}
-.res-txt::-webkit-scrollbar-thumb{background:var(--gbdr);border-radius:10px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb14{margin-bottom:14px}
+.m-sep{height:1px;background:var(--bdr);margin:14px 0}
+.info-row{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:10px;font-size:.62rem;font-weight:600}
+.tag.gold{background:rgba(201,169,110,.12);border:1px solid var(--gbdr);color:var(--g1)}
+.tag.grn{background:rgba(0,200,122,.12);border:1px solid rgba(0,200,122,.25);color:var(--grn)}
 
-/* ── TOASTS ── */
+/* ── TOASTS & MODALS ── */
 #toasts{position:fixed;top:calc(var(--nh) + 8px);right:12px;z-index:1000;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:var(--r12);font-size:.8rem;backdrop-filter:blur(12px);animation:toastIn .3s cubic-bezier(.34,1.56,.64,1);max-width:280px}
+.toast{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:var(--r12);font-size:.8rem;backdrop-filter:blur(12px);animation:toastIn .3s ease;max-width:290px}
 @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-.toast.s{background:rgba(0,200,122,.14);border:1px solid rgba(0,200,122,.28);color:#00c87a}
-.toast.e{background:rgba(224,84,122,.14);border:1px solid rgba(224,84,122,.28);color:#e0547a}
-.toast.i{background:rgba(74,128,224,.14);border:1px solid rgba(74,128,224,.28);color:#4a80e0}
-.toast.g{background:rgba(201,169,110,.14);border:1px solid rgba(201,169,110,.28);color:var(--g1)}
+.toast.s{background:rgba(0,200,122,.16);border:1px solid rgba(0,200,122,.35);color:#00c87a}
+.toast.e{background:rgba(224,84,122,.16);border:1px solid rgba(224,84,122,.35);color:#e0547a}
+.toast.i{background:rgba(74,128,224,.16);border:1px solid rgba(74,128,224,.35);color:#4a80e0}
 
-/* ── MODALS ── */
-.modal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.78);display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px)}
+.modal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.8);display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px)}
 .modal.on{display:flex}
-.mbox{width:100%;max-width:480px;max-height:88vh;background:var(--card);border-radius:var(--r24) var(--r24) 0 0;border-top:1px solid var(--bdr);overflow-y:auto;animation:slideUp .35s cubic-bezier(.34,1.56,.64,1);scrollbar-width:none;padding-bottom:calc(var(--bnh) + 8px)}
+.mbox{width:100%;max-width:480px;max-height:88vh;background:var(--card);border-radius:var(--r24) var(--r24) 0 0;border-top:1px solid var(--gbdr);overflow-y:auto;animation:slideUp .32s ease;padding-bottom:calc(var(--bnh) + 8px)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
-.mbox::-webkit-scrollbar{display:none}
 .m-pill{width:36px;height:4px;background:var(--bdr2);border-radius:3px;margin:12px auto 0}
 .m-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px}
 .m-ttl{font-family:var(--ft);font-size:.84rem;color:var(--g1);letter-spacing:2px}
-.m-cls{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:.15s}
-.m-cls:hover{background:rgba(255,255,255,.1);color:var(--t1)}
+.m-cls{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .m-body{padding:0 18px 18px}
-.m-lbl{font-size:.56rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px;margin:14px 0 6px;display:block}
+.m-lbl{font-size:.56rem;color:var(--t2);text-transform:uppercase;letter-spacing:2px;margin:14px 0 6px;display:block}
 .m-row{display:flex;gap:8px}
 </style>
 </head>
 <body>
 
-<!-- BG -->
 <div class="bg-wrap">
   <canvas id="aurora"></canvas>
   <div class="bg-grid"></div>
@@ -358,45 +299,22 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 
 <!-- SPLASH -->
 <div id="splash">
-  <div class="spl-logo">
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <circle cx="22" cy="22" r="20" stroke="rgba(201,169,110,.35)" stroke-width="1"/>
-      <rect x="19" y="9" width="6" height="22" rx="3" fill="var(--g1)"/>
-      <path d="M10 22 Q10 12 19 12" stroke="rgba(201,169,110,.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M34 22 Q34 12 25 12" stroke="rgba(201,169,110,.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M7 22 Q7 7 19 9" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <path d="M37 22 Q37 7 25 9" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <circle cx="22" cy="35" r="2.5" fill="rgba(201,169,110,.6)"/>
-      <rect x="20" y="32" width="4" height="3" fill="rgba(201,169,110,.4)"/>
-    </svg>
-  </div>
+  <div class="spl-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
   <div class="spl-name">PHILADELPHIA</div>
-  <div class="spl-sub">Audio Studio</div>
+  <div class="spl-sub">Audio & Voice Studio</div>
   <div class="spl-bar"><div class="spl-fill"></div></div>
 </div>
 
-<!-- TOASTS -->
 <div id="toasts"></div>
 
 <!-- HEADER -->
 <header id="hdr">
-  <div class="hdr-logo">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <rect x="8.5" y="3" width="3" height="10" rx="1.5" fill="var(--g1)"/>
-      <path d="M5 10 Q5 6 8.5 6" stroke="rgba(201,169,110,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-      <path d="M15 10 Q15 6 11.5 6" stroke="rgba(201,169,110,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-      <path d="M3 10 Q3 4 8.5 4" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <path d="M17 10 Q17 4 11.5 4" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <circle cx="10" cy="16" r="1.5" fill="rgba(201,169,110,.6)"/>
-      <rect x="9" y="13" width="2" height="3" fill="rgba(201,169,110,.4)"/>
-    </svg>
-  </div>
-  <div class="hdr-brand">PHILADELPHIA<small>AUDIO STUDIO</small></div>
+  <div class="hdr-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
+  <div class="hdr-brand">PHILADELPHIA<small>AUDIO & VOICE STUDIO</small></div>
   <div class="hsp"></div>
-  <div class="live-dot"></div>
   <div class="bal-chip" onclick="openM('wallet-m')">
     <i class="fa-solid fa-coins"></i>
-    <span id="hdr-bal">–</span>
+    <span id="hdr-bal">--</span>
   </div>
   <div class="hav" id="hav-btn" onclick="openM('profile-m')">
     <i class="fa-solid fa-user" style="font-size:.65rem"></i>
@@ -406,21 +324,10 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 <!-- ══════════════ AUTH ══════════════ -->
 <div id="scr-auth" class="scr on">
   <div class="auth-wrap">
-    <div class="auth-logo">
-      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
-        <circle cx="23" cy="23" r="21" stroke="rgba(201,169,110,.3)" stroke-width="1"/>
-        <rect x="20" y="9" width="6" height="22" rx="3" fill="var(--g1)"/>
-        <path d="M10 23 Q10 12 20 12" stroke="rgba(201,169,110,.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M36 23 Q36 12 26 12" stroke="rgba(201,169,110,.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M6 23 Q6 6 20 10" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-        <path d="M40 23 Q40 6 26 10" stroke="rgba(201,169,110,.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
-        <circle cx="23" cy="37" r="2.5" fill="rgba(201,169,110,.6)"/>
-        <rect x="21.5" y="34" width="3" height="3" fill="rgba(201,169,110,.45)"/>
-      </svg>
-    </div>
+    <div class="auth-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
     <div class="auth-ttl">PHILADELPHIA</div>
-    <div class="auth-studio">Audio Studio</div>
-    <div class="auth-tagline"><span id="tw-text"></span><span class="tc">|</span></div>
+    <div class="auth-studio">Audio & Voice Studio</div>
+    <div class="auth-tagline"><span id="tw-text"></span></div>
     <button class="g-btn" onclick="signIn()">
       <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H9.09v3.22h4.27c-.19 1.04-.79 1.93-1.7 2.52v2.09h2.75c1.6-1.48 2.53-3.65 2.53-6.24 0-.44-.04-.87-.11-1.29-.01-.11-.32-.3-.32-.3z"/><path fill="#34A853" d="M9.09 17c2.3 0 4.24-.76 5.66-2.06l-2.75-2.13c-.78.52-1.77.83-2.91.83-2.24 0-4.13-1.51-4.81-3.54H1.44v2.21C2.86 15.19 5.79 17 9.09 17z"/><path fill="#FBBC05" d="M4.28 10.1c-.17-.52-.27-1.07-.27-1.64 0-.57.1-1.12.27-1.64V4.61H1.44A8.92 8.92 0 000 8.46a8.92 8.92 0 001.44 3.85l2.84-2.21z"/><path fill="#EA4335" d="M9.09 3.28c1.26 0 2.39.43 3.28 1.28l2.45-2.45C13.32.75 11.38 0 9.09 0 5.79 0 2.86 1.81 1.44 4.61l2.84 2.21c.68-2.03 2.57-3.54 4.81-3.54z"/></svg>
       Continue with Google
@@ -435,122 +342,144 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
       <div class="greet-card">
         <div class="greet-tod" id="greet-tod">Good Morning</div>
         <div class="greet-nm" id="greet-nm">Creator</div>
-        <div class="greet-q">What sound will you bring into the world today?</div>
+        <div class="greet-q">Synthesize lifelike voices, narrate documents, master audio, and transcribe speech with Philadelphia AI.</div>
       </div>
       <div class="credits-card">
         <div class="cr-ic"><i class="fa-solid fa-coins"></i></div>
         <div class="cr-info">
           <div class="cr-lbl">Studio Credits</div>
-          <div class="cr-val" id="home-bal">–</div>
+          <div class="cr-val" id="home-bal">--</div>
         </div>
         <div class="cr-acts">
-          <button class="btn btn-ghost btn-sm" onclick="claimDaily()" title="Claim daily reward"><i class="fa-solid fa-gift"></i></button>
+          <button class="btn btn-ghost btn-sm" onclick="claimDaily()" title="Claim daily reward"><i class="fa-solid fa-gift"></i> Daily</button>
           <button class="btn btn-gold btn-sm" onclick="openM('wallet-m')">Fund</button>
         </div>
       </div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-v" id="st-total">0</div><div class="stat-l">Total Made</div></div>
-        <div class="stat-card"><div class="stat-v" id="st-voice">0</div><div class="stat-l">Voices</div></div>
-        <div class="stat-card"><div class="stat-v" id="st-music">0</div><div class="stat-l">Tracks</div></div>
+        <div class="stat-card"><div class="stat-v" id="st-total">0</div><div class="stat-l">Total Audio</div></div>
+        <div class="stat-card"><div class="stat-v" id="st-voice">0</div><div class="stat-l">Voiceovers</div></div>
+        <div class="stat-card"><div class="stat-v" id="st-narr">0</div><div class="stat-l">Narrations</div></div>
+        <div class="stat-card"><div class="stat-v" id="st-anal">0</div><div class="stat-l">Analyses</div></div>
       </div>
       <div class="sec-hd">
-        <div class="sec-title">QUICK CREATE</div>
-        <div class="sec-sub">Choose your medium</div>
+        <div>
+          <div class="sec-title">AUDIO WORKSTATIONS</div>
+          <div class="sec-sub">Powered by Philadelphia V1, V2 & Pro</div>
+        </div>
       </div>
       <div class="qa-grid">
         <div class="qa-card qv" onclick="navTo('voice')">
-          <div class="qa-glow v"></div>
-          <div class="qa-cost">10–25 cr</div>
-          <i class="fa-solid fa-microphone qa-ic"></i>
-          <div class="qa-nm">Voice</div>
-          <div class="qa-desc">Text to speech · two engines</div>
+          <div class="qa-cost">5 - 25 cr</div>
+          <i class="fa-solid fa-microphone-lines qa-ic"></i>
+          <div class="qa-nm">Voice Studio</div>
+          <div class="qa-desc">Philadelphia V1, V2 Neural & Pro (32 voices & styles)</div>
         </div>
         <div class="qa-card qn" onclick="navTo('narrate')">
-          <div class="qa-glow n"></div>
-          <div class="qa-cost">15–26 cr</div>
+          <div class="qa-cost">6 - 26 cr</div>
           <i class="fa-solid fa-book-open-reader qa-ic"></i>
-          <div class="qa-nm">Narrate</div>
-          <div class="qa-desc">Document to spoken audio</div>
+          <div class="qa-nm">Document Narration</div>
+          <div class="qa-desc">Turn PDFs & manuscripts into spoken podcasts</div>
+        </div>
+        <div class="qa-card qm" onclick="navTo('studio')">
+          <div class="qa-cost">Free</div>
+          <i class="fa-solid fa-sliders qa-ic"></i>
+          <div class="qa-nm">Master & Recorder</div>
+          <div class="qa-desc">Record mic, trim waveform, boost, fade & normalize</div>
         </div>
         <div class="qa-card qa" onclick="navTo('analyze')">
-          <div class="qa-glow a"></div>
           <div class="qa-cost">1 cr</div>
           <i class="fa-solid fa-waveform-lines qa-ic"></i>
-          <div class="qa-nm">Analyze</div>
-          <div class="qa-desc">Transcribe · understand audio</div>
+          <div class="qa-nm">Audio Intelligence</div>
+          <div class="qa-desc">Transcribe, summarize, meeting minutes & sentiment</div>
         </div>
       </div>
       <div class="hist-section">
-        <div class="hist-lbl">Recent Creations</div>
+        <div class="hist-lbl">Recent Audio Creations (Tap to Play)</div>
         <div class="hist-list" id="home-hist"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ VOICE ══════════════ -->
+<!-- ══════════════ VOICE STUDIO (V1, V2 & PRO) ══════════════ -->
 <div id="scr-voice" class="scr">
   <div class="scr-inner">
     <div class="page">
       <div class="sec-hd">
-        <div class="sec-title">VOICE STUDIO</div>
-        <div class="sec-sub">Transform your words into living speech</div>
+        <div>
+          <div class="sec-title">VOICE STUDIO</div>
+          <div class="sec-sub">Three engines: Expressive V1, Neural V2 & Character Pro</div>
+        </div>
+        <button class="btn btn-ghost btn-xs" onclick="aiWriteScript()"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--g1)"></i> AI Write Script (2 cr)</button>
       </div>
 
-      <!-- Engine selector — no brand names shown -->
+      <!-- 3-Tier Engine Selector: V1, V2, Pro -->
       <div class="prov-row">
         <button class="prov-btn on" id="prov-v1" onclick="setVoiceProvider('v1')">
-          <span class="prov-nm"><i class="fa-solid fa-bolt" style="margin-right:4px"></i>Philadelphia V1</span>
-          <span class="prov-cost">10 credits · 5 styles</span>
+          <span class="prov-nm"><i class="fa-solid fa-bolt"></i> Philadelphia V1</span>
+          <span class="prov-cost">10 cr · 5 Styles</span>
         </button>
         <button class="prov-btn" id="prov-v2" onclick="setVoiceProvider('v2')">
-          <span class="prov-nm"><i class="fa-solid fa-crown" style="margin-right:4px"></i>Philadelphia V2</span>
-          <span class="prov-cost">25 credits · 17 voices</span>
+          <span class="prov-nm"><i class="fa-solid fa-sparkles"></i> Philadelphia V2</span>
+          <span class="prov-cost">5 cr · 10 Neural Voices</span>
+        </button>
+        <button class="prov-btn" id="prov-pro" onclick="setVoiceProvider('pro')">
+          <span class="prov-nm"><i class="fa-solid fa-crown"></i> Philadelphia Pro</span>
+          <span class="prov-cost">25 cr · 17 HD Characters</span>
         </button>
       </div>
 
       <div class="mb8">
-        <textarea id="voice-text" class="inp" rows="5" maxlength="1000" placeholder="Enter your text here… The AI will bring it to life." oninput="updateCharCount('voice-text','voice-char',1000);autoSave('voice')"></textarea>
+        <textarea id="voice-text" class="inp" rows="5" maxlength="3000" placeholder="Enter your script here, or tap 'AI Write Script' above to generate a podcast intro, commercial, or narration..." oninput="updateCharCount('voice-text','voice-char',3000);autoSave('voice')"></textarea>
         <div class="char-row">
-          <div class="char-c" id="voice-char">0 / 1000</div>
-          <div class="sug-row" style="margin:0">
-            <span class="sug" onclick="setVal('voice-text','The world is listening. Speak your truth with clarity and grace — every word is a golden note in the symphony of your story.')">Sample</span>
+          <div class="char-c" id="voice-char">0 / 3000</div>
+          <div class="sug-row">
+            <span class="sug" onclick="setVal('voice-text','Welcome back to the show. Today we are diving into how autonomous intelligence is reshaping creative production from the ground up.')">Podcast Intro</span>
+            <span class="sug" onclick="setVal('voice-text','In a world where every second counts, one decision will echo across eternity. Experience the new chapter today.')">Cinema Trailer</span>
             <span class="sug" onclick="clearField('voice-text')">Clear</span>
           </div>
         </div>
       </div>
 
-      <!-- V1 styles -->
+      <!-- V1 Styles Panel -->
       <div id="v1-panel">
-        <span class="lbl-row">Speaking Style</span>
+        <span class="lbl-row">Speaking Style (Philadelphia V1)</span>
         <div class="style-grid">
           <div class="style-chip on" data-style="podcast" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-podcast"></i><span>Podcast</span><small>Warm & relaxed</small></div>
-          <div class="style-chip" data-style="cinematic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-film"></i><span>Cinematic</span><small>Dramatic</small></div>
-          <div class="style-chip" data-style="upbeat" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-bolt-lightning"></i><span>Upbeat</span><small>Energetic</small></div>
-          <div class="style-chip" data-style="soft" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-feather"></i><span>Soft</span><small>Gentle</small></div>
-          <div class="style-chip" data-style="dramatic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-masks-theater"></i><span>Dramatic</span><small>Theatrical</small></div>
+          <div class="style-chip" data-style="cinematic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-film"></i><span>Cinematic</span><small>Deep & dramatic</small></div>
+          <div class="style-chip" data-style="upbeat" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-bolt-lightning"></i><span>Upbeat</span><small>Bright & energetic</small></div>
+          <div class="style-chip" data-style="soft" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-feather"></i><span>Soft</span><small>Gentle & calm</small></div>
+          <div class="style-chip" data-style="dramatic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-masks-theater"></i><span>Dramatic</span><small>Theatrical flair</small></div>
         </div>
       </div>
 
-      <!-- V2 voices -->
+      <!-- V2 Neural Voices Panel -->
       <div id="v2-panel" style="display:none">
-        <span class="lbl-row">Choose Voice</span>
+        <span class="lbl-row">Choose Neural Voice (Philadelphia V2 · 5 cr)</span>
         <div class="voice-grid" id="voice-grid-v2"></div>
+        <span class="lbl-row">Optional Delivery Direction</span>
+        <input id="v2-direction" type="text" class="inp mb14" placeholder="e.g. in a warm, confident podcast host tone with natural pauses">
+      </div>
+
+      <!-- Pro Character Voices Panel -->
+      <div id="pro-panel" style="display:none">
+        <span class="lbl-row">Choose HD Character Voice (Philadelphia Pro · 25 cr)</span>
+        <div class="voice-grid" id="voice-grid-pro"></div>
       </div>
 
       <div class="rel-wrap">
         <div class="gen-ov" id="voice-gen-ov">
-          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-ring gr3"></div><div class="gen-center"><i class="fa-solid fa-microphone"></i></div></div>
-          <div class="gen-txt" id="voice-gen-txt">Synthesising voice…</div>
+          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-center"><i class="fa-solid fa-microphone"></i></div></div>
+          <div class="gen-txt" id="voice-gen-txt">Synthesizing voice…</div>
         </div>
         <button class="btn btn-gold btn-full" id="voice-gen-btn" onclick="generateVoice()">
-          <i class="fa-solid fa-waveform-lines"></i> Generate Voice
+          <i class="fa-solid fa-waveform-lines"></i> Generate Voiceover
         </button>
       </div>
 
       <div class="audio-player" id="voice-player">
-        <div class="ap-label">Generated Voice</div>
-        <div class="ap-title" id="voice-ap-title">–</div>
+        <div class="ap-label">Generated Voiceover</div>
+        <div class="ap-title" id="voice-ap-title">--</div>
         <div class="waveform" id="voice-wave"></div>
         <input type="range" class="ap-seek" id="voice-seek" value="0" min="0" step="0.1" oninput="seekAudio('voice',this.value)">
         <div class="ap-time-row"><span id="voice-cur">0:00</span><span id="voice-dur">0:00</span></div>
@@ -558,66 +487,73 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
           <button class="ap-play" id="voice-play-btn" onclick="togglePlay('voice')"><i class="fa-solid fa-play" id="voice-play-ic"></i></button>
           <button class="ap-btn" onclick="restartAudio('voice')" title="Restart"><i class="fa-solid fa-rotate-left"></i></button>
           <button class="ap-btn" onclick="downloadAudio('voice')" title="Download"><i class="fa-solid fa-download"></i></button>
-          <button class="ap-btn" onclick="shareAudio('voice')" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
-          <div class="ap-info"><div class="ap-fmt" id="voice-ap-fmt">–</div></div>
+          <button class="ap-btn" onclick="sendToMastering('voice')" title="Edit in Mastering Studio"><i class="fa-solid fa-sliders"></i></button>
+          <div class="ap-info"><div class="ap-fmt" id="voice-ap-fmt">WAV</div></div>
         </div>
         <div class="ap-speed-row">
           <span class="ap-speed-lbl">Speed</span>
           <button class="spd-btn" onclick="setSpeed('voice',.75)">0.75×</button>
           <button class="spd-btn on" onclick="setSpeed('voice',1)">1×</button>
+          <button class="spd-btn" onclick="setSpeed('voice',1.25)">1.25×</button>
           <button class="spd-btn" onclick="setSpeed('voice',1.5)">1.5×</button>
           <button class="spd-btn" onclick="setSpeed('voice',2)">2×</button>
-          <i class="fa-solid fa-volume-low" style="color:var(--t3);font-size:.72rem;margin-left:6px"></i>
+          <i class="fa-solid fa-volume-low" style="color:var(--t2);font-size:.72rem;margin-left:6px"></i>
           <input type="range" class="ap-vol" id="voice-vol" min="0" max="1" step="0.05" value="1" oninput="setVolume('voice',this.value)">
         </div>
       </div>
 
       <div class="hist-section">
-        <div class="hist-lbl">Voice History</div>
+        <div class="hist-lbl">Voiceover History</div>
         <div class="hist-list" id="voice-hist"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ NARRATE ══════════════ -->
+<!-- ══════════════ DOCUMENT NARRATION (V1, V2 & PRO) ══════════════ -->
 <div id="scr-narrate" class="scr">
   <div class="scr-inner">
     <div class="page">
       <div class="sec-hd">
-        <div class="sec-title">DOCUMENT NARRATION</div>
-        <div class="sec-sub">Upload a document — hear it come alive</div>
+        <div>
+          <div class="sec-title">DOCUMENT NARRATION</div>
+          <div class="sec-sub">Upload a PDF or text document and turn it into a spoken podcast or audiobook</div>
+        </div>
       </div>
 
-      <!-- Engine selector for narration -->
+      <!-- 3-Tier Narration Engine Selector -->
       <div class="prov-row">
         <button class="prov-btn on" id="narr-prov-v1" onclick="setNarrProvider('v1')">
-          <span class="prov-nm"><i class="fa-solid fa-bolt" style="margin-right:4px"></i>Philadelphia V1</span>
-          <span class="prov-cost">15 credits - </span>
+          <span class="prov-nm"><i class="fa-solid fa-bolt"></i> Philadelphia V1</span>
+          <span class="prov-cost">15 cr · Podcast Host</span>
         </button>
         <button class="prov-btn" id="narr-prov-v2" onclick="setNarrProvider('v2')">
-          <span class="prov-nm"><i class="fa-solid fa-crown" style="margin-right:4px"></i>Philadelphia V2</span>
-          <span class="prov-cost">26 credits · richer voice · PDF</span>
+          <span class="prov-nm"><i class="fa-solid fa-sparkles"></i> Philadelphia V2</span>
+          <span class="prov-cost">6 cr · 10 Neural Voices</span>
+        </button>
+        <button class="prov-btn" id="narr-prov-pro" onclick="setNarrProvider('pro')">
+          <span class="prov-nm"><i class="fa-solid fa-crown"></i> Philadelphia Pro</span>
+          <span class="prov-cost">26 cr · 17 HD Voices</span>
         </button>
       </div>
 
       <div class="upload-zone" id="narr-zone">
         <input type="file" id="narr-file-inp" accept=".pdf,.txt,.doc,.docx,application/pdf,text/plain" onchange="handleDocUpload(this)">
         <div class="uz-icon"><i class="fa-solid fa-file-lines"></i></div>
-        <div class="uz-main">Drop your document here</div>
-        <div class="uz-sub" id="narr-zone-sub">PDF - AI narrates it for you</div>
+        <div class="uz-main">Drop your PDF or TXT document here</div>
+        <div class="uz-sub" id="narr-zone-sub">Philadelphia AI summarizes and narrates your document aloud</div>
         <div id="narr-file-display" style="display:none" class="uz-file">
           <i class="fa-solid fa-file-pdf" id="narr-file-ic"></i>
-          <span id="narr-file-name">–</span>
+          <span id="narr-file-name">--</span>
           <span class="uz-rm" onclick="clearDoc(event)"><i class="fa-solid fa-xmark"></i></span>
         </div>
       </div>
 
-      <!-- V1: style selector -->
+      <!-- V1 Styles -->
       <div id="narr-v1-opts">
-        <span class="lbl-row">Narration Style</span>
+        <span class="lbl-row">Narration Style (Philadelphia V1)</span>
         <div class="style-grid mb14">
-          <div class="style-chip on" data-style="podcast" onclick="selectNarrStyle(this)"><i class="fa-solid fa-podcast"></i><span>Podcast</span><small>Casual, warm</small></div>
+          <div class="style-chip on" data-style="podcast" onclick="selectNarrStyle(this)"><i class="fa-solid fa-podcast"></i><span>Podcast</span><small>Casual & warm</small></div>
           <div class="style-chip" data-style="cinematic" onclick="selectNarrStyle(this)"><i class="fa-solid fa-film"></i><span>Cinematic</span><small>Dramatic</small></div>
           <div class="style-chip" data-style="upbeat" onclick="selectNarrStyle(this)"><i class="fa-solid fa-bolt-lightning"></i><span>Upbeat</span><small>Energetic</small></div>
           <div class="style-chip" data-style="soft" onclick="selectNarrStyle(this)"><i class="fa-solid fa-feather"></i><span>Soft</span><small>Gentle</small></div>
@@ -625,15 +561,21 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
         </div>
       </div>
 
-      <!-- V2: voice selector -->
+      <!-- V2 Neural Voices -->
       <div id="narr-v2-opts" style="display:none">
-        <span class="lbl-row">Voice for Narration</span>
-        <div class="voice-grid" id="narr-voice-grid-v2" style="margin-bottom:14px"></div>
+        <span class="lbl-row">Select Neural Voice (Philadelphia V2 · 6 cr)</span>
+        <div class="voice-grid" id="narr-voice-grid-v2"></div>
+      </div>
+
+      <!-- Pro Voices -->
+      <div id="narr-pro-opts" style="display:none">
+        <span class="lbl-row">Select HD Character Voice (Philadelphia Pro · 26 cr)</span>
+        <div class="voice-grid" id="narr-voice-grid-pro"></div>
       </div>
 
       <div class="rel-wrap">
         <div class="gen-ov" id="narr-gen-ov">
-          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-ring gr3"></div><div class="gen-center"><i class="fa-solid fa-book-open-reader"></i></div></div>
+          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-center"><i class="fa-solid fa-book-open-reader"></i></div></div>
           <div class="gen-txt" id="narr-gen-txt">Reading your document…</div>
           <div class="gen-step" id="narr-gen-step"></div>
         </div>
@@ -643,8 +585,8 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
       </div>
 
       <div class="audio-player" id="narr-player">
-        <div class="ap-label">Narration</div>
-        <div class="ap-title" id="narr-ap-title">–</div>
+        <div class="ap-label">Document Narration</div>
+        <div class="ap-title" id="narr-ap-title">--</div>
         <div class="waveform" id="narr-wave"></div>
         <input type="range" class="ap-seek" id="narr-seek" value="0" min="0" step="0.1" oninput="seekAudio('narr',this.value)">
         <div class="ap-time-row"><span id="narr-cur">0:00</span><span id="narr-dur">0:00</span></div>
@@ -652,15 +594,17 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
           <button class="ap-play" id="narr-play-btn" onclick="togglePlay('narr')"><i class="fa-solid fa-play" id="narr-play-ic"></i></button>
           <button class="ap-btn" onclick="restartAudio('narr')"><i class="fa-solid fa-rotate-left"></i></button>
           <button class="ap-btn" onclick="downloadAudio('narr')"><i class="fa-solid fa-download"></i></button>
+          <button class="ap-btn" onclick="sendToMastering('narr')" title="Edit in Mastering Studio"><i class="fa-solid fa-sliders"></i></button>
           <div class="ap-info"><div class="ap-fmt" id="narr-ap-fmt">WAV</div></div>
         </div>
         <div class="ap-speed-row">
           <span class="ap-speed-lbl">Speed</span>
           <button class="spd-btn" onclick="setSpeed('narr',.75)">0.75×</button>
           <button class="spd-btn on" onclick="setSpeed('narr',1)">1×</button>
+          <button class="spd-btn" onclick="setSpeed('narr',1.25)">1.25×</button>
           <button class="spd-btn" onclick="setSpeed('narr',1.5)">1.5×</button>
           <button class="spd-btn" onclick="setSpeed('narr',2)">2×</button>
-          <i class="fa-solid fa-volume-low" style="color:var(--t3);font-size:.72rem;margin-left:6px"></i>
+          <i class="fa-solid fa-volume-low" style="color:var(--t2);font-size:.72rem;margin-left:6px"></i>
           <input type="range" class="ap-vol" id="narr-vol" min="0" max="1" step="0.05" value="1" oninput="setVolume('narr',this.value)">
         </div>
       </div>
@@ -673,13 +617,56 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
   </div>
 </div>
 
+<!-- ══════════════ MASTERING & RECORDER STUDIO ══════════════ -->
+<div id="scr-studio" class="scr">
+  <div class="scr-inner">
+    <div class="page">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-title">MASTERING & RECORDER STUDIO</div>
+          <div class="sec-sub">Record live audio, trim waveforms, normalize loudness & export WAV (Free)</div>
+        </div>
+      </div>
+
+      <div class="daw-card">
+        <canvas id="daw-canvas" width="900" height="220"></canvas>
+        <div id="daw-info" style="font-size:.66rem;color:var(--t2);font-family:var(--fc);margin-bottom:12px;">No audio loaded · Record from microphone or open a file</div>
+        <div class="daw-sliders">
+          <label class="daw-sl"><span>Trim Start <b id="daw-s-lbl">0%</b></span><input type="range" id="daw-start" min="0" max="98" value="0"></label>
+          <label class="daw-sl"><span>Trim End <b id="daw-e-lbl">100%</b></span><input type="range" id="daw-end" min="2" max="100" value="100"></label>
+          <label class="daw-sl"><span>Volume Gain <b id="daw-v-lbl">100%</b></span><input type="range" id="daw-vol" min="10" max="250" value="100"></label>
+          <label class="daw-sl"><span>Playback Speed <b id="daw-sp-lbl">1.00x</b></span><input type="range" id="daw-speed" min="50" max="200" value="100"></label>
+          <label class="daw-sl"><span>Fade In <b id="daw-fi-lbl">0.0s</b></span><input type="range" id="daw-fi" min="0" max="30" value="0"></label>
+          <label class="daw-sl"><span>Fade Out <b id="daw-fo-lbl">0.0s</b></span><input type="range" id="daw-fo" min="0" max="30" value="0"></label>
+        </div>
+        <div class="daw-checks">
+          <label><input type="checkbox" id="daw-norm" checked> Normalize Peak Loudness</label>
+          <label><input type="checkbox" id="daw-rev"> Reverse Audio</label>
+        </div>
+        <div class="daw-btns">
+          <button class="btn btn-ghost btn-sm" id="daw-rec-btn" onclick="dawToggleRec()"><i class="fa-solid fa-circle" style="color:var(--red)"></i> Record Mic</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('daw-file').click()"><i class="fa-solid fa-folder-open"></i> Open File</button>
+          <input type="file" id="daw-file" accept="audio/*,video/*" style="display:none" onchange="dawLoadFile(this)">
+          <button class="btn btn-ghost btn-sm" id="daw-play-btn" onclick="dawPlay()"><i class="fa-solid fa-play"></i> Preview</button>
+          <button class="btn btn-gold btn-sm" onclick="dawApply()"><i class="fa-solid fa-check"></i> Apply Edits</button>
+          <button class="btn btn-ghost btn-sm" onclick="dawUndo()"><i class="fa-solid fa-rotate-left"></i> Undo</button>
+          <button class="btn btn-ghost btn-sm" onclick="dawExport()"><i class="fa-solid fa-download"></i> Save WAV</button>
+          <button class="btn btn-ghost btn-sm" onclick="dawSendToAnalyze()"><i class="fa-solid fa-waveform-lines"></i> Transcribe / Analyze</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════ ANALYZE ══════════════ -->
 <div id="scr-analyze" class="scr">
   <div class="scr-inner">
     <div class="page">
       <div class="sec-hd">
-        <div class="sec-title">AUDIO ANALYSIS</div>
-        <div class="sec-sub">Transcribe, understand & extract meaning from audio</div>
+        <div>
+          <div class="sec-title">AUDIO INTELLIGENCE</div>
+          <div class="sec-sub">Transcribe, summarize & extract insights from any recording (1 credit)</div>
+        </div>
       </div>
 
       <div class="upload-zone" id="anal-zone">
@@ -689,7 +676,7 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
         <div class="uz-sub">MP3 · WAV · M4A · OGG · FLAC</div>
         <div id="anal-file-display" style="display:none" class="uz-file">
           <i class="fa-solid fa-file-audio"></i>
-          <span id="anal-file-name">–</span>
+          <span id="anal-file-name">--</span>
           <span class="uz-rm" onclick="clearAnal(event)"><i class="fa-solid fa-xmark"></i></span>
         </div>
       </div>
@@ -698,31 +685,33 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
       <div class="mode-grid mb14">
         <div class="mode-chip on" data-mode="transcribe" onclick="selectMode(this)"><i class="fa-solid fa-closed-captioning"></i><span>Transcribe</span></div>
         <div class="mode-chip" data-mode="summarize" onclick="selectMode(this)"><i class="fa-solid fa-list-check"></i><span>Summarize</span></div>
+        <div class="mode-chip" data-mode="minutes" onclick="selectMode(this)"><i class="fa-solid fa-briefcase"></i><span>Meeting Minutes</span></div>
         <div class="mode-chip" data-mode="sentiment" onclick="selectMode(this)"><i class="fa-solid fa-face-smile-beam"></i><span>Sentiment</span></div>
-        <div class="mode-chip" data-mode="extract" onclick="selectMode(this)"><i class="fa-solid fa-magnifying-glass"></i><span>Key Points</span></div>
         <div class="mode-chip" data-mode="translate" onclick="selectMode(this)"><i class="fa-solid fa-language"></i><span>Translate</span></div>
         <div class="mode-chip" data-mode="custom" onclick="selectMode(this)"><i class="fa-solid fa-pen-nib"></i><span>Custom</span></div>
       </div>
 
       <div class="custom-wrap" id="custom-wrap">
-        <input id="anal-prompt" type="text" class="inp mb14" placeholder="Enter your custom analysis prompt…">
+        <input id="anal-prompt" type="text" class="inp mb14" placeholder="Enter your custom question or instruction for this audio…">
       </div>
 
       <div class="rel-wrap">
         <div class="gen-ov" id="anal-gen-ov">
-          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-ring gr3"></div><div class="gen-center"><i class="fa-solid fa-waveform-lines"></i></div></div>
-          <div class="gen-txt">Analysing audio…</div>
+          <div class="gen-rings"><div class="gen-ring gr1"></div><div class="gen-ring gr2"></div><div class="gen-center"><i class="fa-solid fa-waveform-lines"></i></div></div>
+          <div class="gen-txt">Analyzing audio with Philadelphia AI…</div>
         </div>
         <button class="btn btn-gold btn-full" id="anal-gen-btn" onclick="analyzeAudio()" disabled>
-          <i class="fa-solid fa-waveform-lines"></i> Analyze Audio
+          <i class="fa-solid fa-waveform-lines"></i> Analyze Audio (1 Credit)
         </button>
       </div>
 
       <div class="result-card" id="anal-result">
         <div class="res-lbl">
-          <i class="fa-solid fa-circle-check"></i>
-          Analysis Result
-          <button class="btn btn-ghost btn-xs" style="margin-left:auto" onclick="copyResult()"><i class="fa-regular fa-copy"></i> Copy</button>
+          <i class="fa-solid fa-circle-check"></i> Analysis Result
+          <div style="margin-left:auto;display:flex;gap:6px;">
+            <button class="btn btn-ghost btn-xs" onclick="sendAnalysisToVoice()"><i class="fa-solid fa-microphone"></i> Speak Result</button>
+            <button class="btn btn-ghost btn-xs" onclick="copyResult()"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
         </div>
         <div class="res-txt" id="anal-res-txt"></div>
       </div>
@@ -738,8 +727,9 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 <!-- ══════════════ BOTTOM NAV ══════════════ -->
 <nav id="bnav">
   <button class="ni on" id="nav-home" onclick="navTo('home',this)"><i class="fa-solid fa-house"></i>Home</button>
-  <button class="ni" id="nav-voice" onclick="navTo('voice',this)"><i class="fa-solid fa-microphone"></i>Voice</button>
+  <button class="ni" id="nav-voice" onclick="navTo('voice',this)"><i class="fa-solid fa-microphone-lines"></i>Voice</button>
   <button class="ni" id="nav-narrate" onclick="navTo('narrate',this)"><i class="fa-solid fa-book-open-reader"></i>Narrate</button>
+  <button class="ni" id="nav-studio" onclick="navTo('studio',this)"><i class="fa-solid fa-sliders"></i>Master</button>
   <button class="ni" id="nav-analyze" onclick="navTo('analyze',this)"><i class="fa-solid fa-waveform-lines"></i>Analyze</button>
 </nav>
 
@@ -752,31 +742,31 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
       <div style="display:flex;align-items:center;gap:14px;padding:14px;background:var(--gs);border:1px solid var(--gbdr);border-radius:var(--r14);margin-bottom:4px">
         <div style="font-size:1.8rem;color:var(--g1)"><i class="fa-solid fa-coins"></i></div>
         <div>
-          <div style="font-size:.54rem;color:var(--t3);text-transform:uppercase;letter-spacing:2px">Available Credits</div>
-          <div style="font-family:var(--ft);font-size:1.5rem;color:var(--g2)" id="w-bal">–</div>
+          <div style="font-size:.54rem;color:var(--t2);text-transform:uppercase;letter-spacing:2px">Available Credits</div>
+          <div style="font-family:var(--ft);font-size:1.5rem;color:var(--g2)" id="w-bal">--</div>
         </div>
       </div>
-      <span class="m-lbl">Credit Costs</span>
+      <span class="m-lbl">Pay As You Go Credit Rates ($1 = 220+ cr · ₦5 = 1 cr)</span>
       <div style="font-size:.76rem;color:var(--t2);line-height:2">
-        Voice (V1) <span style="color:var(--g1);font-family:var(--fc);float:right">10 cr</span><br>
-        Voice (V2) <span style="color:var(--g1);font-family:var(--fc);float:right">25 cr</span><br>
-        Narration (V1) <span style="color:var(--g1);font-family:var(--fc);float:right">15 cr</span><br>
-        Narration (V2) <span style="color:var(--g1);font-family:var(--fc);float:right">26 cr</span><br>
-        Audio Analysis <span style="color:var(--g1);font-family:var(--fc);float:right">1 cr</span>
+        Voice (Philadelphia V2 Neural) <span style="color:var(--g1);font-family:var(--fc);float:right">5 cr</span><br>
+        Voice (Philadelphia V1 Styles) <span style="color:var(--g1);font-family:var(--fc);float:right">10 cr</span><br>
+        Voice (Philadelphia Pro Characters) <span style="color:var(--g1);font-family:var(--fc);float:right">25 cr</span><br>
+        Document Narration (V2 / V1 / Pro) <span style="color:var(--g1);font-family:var(--fc);float:right">6 / 15 / 26 cr</span><br>
+        Audio Intelligence & Transcription <span style="color:var(--g1);font-family:var(--fc);float:right">1 cr</span><br>
+        Mastering & Recorder Studio <span style="color:var(--grn);font-family:var(--fc);float:right">Free</span>
       </div>
       <div class="m-sep"></div>
-      <span class="m-lbl">Daily Reward</span>
-      <button class="btn btn-ghost btn-full mb12" onclick="claimDaily();closeM('wallet-m')"><i class="fa-solid fa-gift"></i> Claim Daily Credits</button>
-      <span class="m-lbl">Fund Wallet (₦)</span>
+      <button class="btn btn-ghost btn-full mb12" onclick="claimDaily();closeM('wallet-m')"><i class="fa-solid fa-gift"></i> Claim Daily Free Credits</button>
+      <span class="m-lbl">Fund Wallet (NGN)</span>
       <div class="m-row mb12">
         <input id="fund-amt" type="number" class="inp" placeholder="Amount (min ₦100)" min="100">
         <button class="btn btn-gold" onclick="initPay()" style="flex-shrink:0">Pay</button>
       </div>
       <div id="pvn" style="display:none;font-size:.75rem;color:var(--cyan);text-align:center;padding:8px"><i class="fa-solid fa-spinner fa-spin"></i> Verifying payment…</div>
       <div class="m-sep"></div>
-      <span class="m-lbl">Referral Code</span>
+      <span class="m-lbl">Redeem Referral Code</span>
       <div class="m-row">
-        <input id="referral-input" type="text" class="inp" placeholder="Enter a referral code">
+        <input id="referral-input" type="text" class="inp" placeholder="Enter friend's referral code">
         <button class="btn btn-ghost" onclick="redeemRef()" style="flex-shrink:0">Redeem</button>
       </div>
     </div>
@@ -787,20 +777,22 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 <div class="modal" id="profile-m">
   <div class="mbox">
     <div class="m-pill"></div>
-    <div class="m-head"><div class="m-ttl">PROFILE</div><div class="m-cls" onclick="closeM('profile-m')"><i class="fa-solid fa-xmark"></i></div></div>
+    <div class="m-head"><div class="m-ttl">CREATOR PROFILE</div><div class="m-cls" onclick="closeM('profile-m')"><i class="fa-solid fa-xmark"></i></div></div>
     <div class="m-body">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
         <div id="prof-av" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--pur),var(--g1));display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;border:2px solid var(--gbdr);overflow:hidden"><i class="fa-solid fa-user"></i></div>
         <div>
           <div id="prof-name" style="font-family:var(--ft);font-size:.9rem;color:var(--g2);letter-spacing:1.5px">Creator</div>
-          <div id="prof-email" style="font-size:.72rem;color:var(--t3);margin-top:2px">–</div>
+          <div id="prof-email" style="font-size:.72rem;color:var(--t2);margin-top:2px">--</div>
         </div>
       </div>
       <div class="info-row">
         <span class="tag gold"><i class="fa-solid fa-coins"></i> <span id="prof-bal">0</span> credits</span>
-        <span class="tag grn"><i class="fa-solid fa-microphone"></i> <span id="prof-voices">0</span> voices</span>
+        <span class="tag grn"><i class="fa-solid fa-microphone"></i> <span id="prof-voices">0</span> voiceovers</span>
+        <span class="tag gold"><i class="fa-solid fa-book-open-reader"></i> <span id="prof-narrs">0</span> narrations</span>
       </div>
       <div class="m-sep"></div>
+      <a href="philadelphia.html" class="btn btn-ghost btn-full mb8" style="text-decoration:none;"><i class="fa-solid fa-comments"></i> Open Philadelphia Studio Chat</a>
       <button class="btn btn-ghost btn-full" onclick="signOut()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
     </div>
   </div>
@@ -811,7 +803,6 @@ select.inp{cursor:pointer;appearance:none;background-image:url("data:image/svg+x
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
 
-// ── Firebase config (user's correct config) ──
 const firebaseConfig = {
   apiKey: "AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
   authDomain: "elvionai.firebaseapp.com",
@@ -829,10 +820,11 @@ try {
 } catch(err) { console.error("Firebase init error:", err); }
 
 const API = 'https://web-production-9a18.up.railway.app';
+const $id = id => document.getElementById(id);
 
-// ── App State & Database Upgrade ──
+// ── IndexedDB Audio History ──
 const dbPromise = new Promise((resolve, reject) => {
-  const req = indexedDB.open('PhiladelphiaAudioDB', 1);
+  const req = indexedDB.open('PhiladelphiaAudioDB_v2', 1);
   req.onupgradeneeded = e => {
     const db = e.target.result;
     if (!db.objectStoreNames.contains('history')) db.createObjectStore('history', { keyPath: 'ts' });
@@ -842,88 +834,102 @@ const dbPromise = new Promise((resolve, reject) => {
 });
 
 async function loadHistoryFromDB() {
-  const db = await dbPromise;
-  return new Promise(r => {
-    const req = db.transaction('history', 'readonly').objectStore('history').getAll();
-    req.onsuccess = () => r((req.result ||[]).sort((a,b) => b.ts - a.ts));
-  });
+  try {
+    const db = await dbPromise;
+    return new Promise(r => {
+      const req = db.transaction('history', 'readonly').objectStore('history').getAll();
+      req.onsuccess = () => r((req.result || []).sort((a,b) => b.ts - a.ts));
+      req.onerror = () => r([]);
+    });
+  } catch(e) { return []; }
 }
 
 let tok = null, bal = 0, curUser = null;
 
-// v1 = Gemini-backed, v2 = premium engine. User sees no brand names.
+// v1 = Expressive Styles (/voicegen), v2 = Neural Voices (/api/tools/text-to-speech-v2), pro = HD Characters (/api/tools/text-to-speech)
 let voiceProvider = localStorage.getItem('paud_vp') || 'v1';
-let v1Style      = localStorage.getItem('paud_gs') || 'podcast';
-let v2Voice      = localStorage.getItem('paud_mv') || 'elder';
-let narrProvider = localStorage.getItem('paud_np') || 'v1';
-let narrStyle    = localStorage.getItem('paud_ns') || 'podcast';
-let narrV2Voice  = localStorage.getItem('paud_nv2') || 'narrator';
-let analMode     = localStorage.getItem('paud_am') || 'transcribe';
+let v1Style       = localStorage.getItem('paud_gs') || 'podcast';
+let v2NeuralVoice = localStorage.getItem('paud_nv') || 'kore';
+let proVoice      = localStorage.getItem('paud_pv') || 'elder';
 
-const audios    = { voice: null, music: null, narr: null };
-const audioUrls = { voice: null, music: null, narr: null };
-const audioFmts = { voice: 'wav', music: 'mp3', narr: 'wav' };
-const audioLoops= { voice: false, music: false, narr: false };
+let narrProvider  = localStorage.getItem('paud_np') || 'v1';
+let narrStyle     = localStorage.getItem('paud_ns') || 'podcast';
+let narrV2Voice   = localStorage.getItem('paud_nnv') || 'kore';
+let narrProVoice  = localStorage.getItem('paud_npv') || 'narrator';
+let analMode      = localStorage.getItem('paud_am') || 'transcribe';
 
-let refIds   = { voiceId: null, instrumentalId: null };
+const audios     = { voice: null, narr: null };
+const audioUrls  = { voice: null, narr: null };
+const audioBlobs = { voice: null, narr: null };
+const audioFmts  = { voice: 'wav', narr: 'wav' };
+
 let narrFile = null, analFile = null;
-
-let histList =[];
+let histList = [];
 try { histList = JSON.parse(localStorage.getItem('paud_hist') || '[]'); } catch(e){}
 
 loadHistoryFromDB().then(list => {
   if (list.length > 0) { histList = list; renderHistory(); updateStats(); }
 });
 
-// V2 voice definitions (maps display label → backend key for VOICE_OPTIONS)
-const V2_VOICES =[
-  {id:'elder',     label:'Wise Elder',   desc:'Authoritative & deep',     icon:'fa-scroll'},
-  {id:'narrator',  label:'Narrator',     desc:'Clear & warm',              icon:'fa-book-open'},
-  {id:'casual',    label:'Casual',       desc:'Natural & friendly',        icon:'fa-comments'},
-  {id:'gentle',    label:'Gentle',       desc:'Patient & caring',          icon:'fa-heart'},
-  {id:'hero',      label:'Hero',         desc:'Bold & strong',             icon:'fa-shield-halved'},
-  {id:'elegant',   label:'Elegant',      desc:'Refined & cultured',        icon:'fa-gem'},
-  {id:'cute',      label:'Lively',       desc:'Bright & cheerful',         icon:'fa-star'},
-  {id:'anime',     label:'Expressive',   desc:'Animated & vivid',          icon:'fa-sparkles'},
-  {id:'movie',     label:'Deep Voice',   desc:'Cinematic male',            icon:'fa-clapperboard'},
-  {id:'ceo',       label:'Authority',    desc:'Commanding presence',       icon:'fa-briefcase'},
-  {id:'sweet',     label:'Sweet',        desc:'Warm & tender',             icon:'fa-sun'},
-  {id:'lovely',    label:'Lovely',       desc:'Charming & soft',           icon:'fa-circle-dot'},
-  {id:'friendly',  label:'Friendly',     desc:'Approachable',              icon:'fa-handshake'},
-  {id:'inspire',   label:'Inspire',      desc:'Motivational',              icon:'fa-fire'},
-  {id:'knight',    label:'Noble',        desc:'Dignified & brave',         icon:'fa-chess-knight'},
-  {id:'boy',       label:'Young',        desc:'Clear & fresh',             icon:'fa-user'},
-  {id:'abbess',    label:'Serenity',     desc:'Calm & spiritual',          icon:'fa-dove'},
+// Philadelphia V2 Neural Voices (/api/tools/text-to-speech-v2)
+const V2_NEURAL_VOICES = [
+  {id:'kore',       label:'Philadelphia (Kore)', desc:'Signature warm & poised',  icon:'fa-crown'},
+  {id:'zephyr',     label:'Zephyr',              desc:'Bright & friendly',        icon:'fa-wind'},
+  {id:'puck',       label:'Puck',                desc:'Upbeat & expressive',      icon:'fa-bolt'},
+  {id:'charon',     label:'Charon',              desc:'Steady documentary',       icon:'fa-film'},
+  {id:'fenrir',     label:'Fenrir',              desc:'Dynamic & commanding',     icon:'fa-fire'},
+  {id:'aoede',      label:'Aoede',               desc:'Breezy & melodic',         icon:'fa-feather'},
+  {id:'leda',       label:'Leda',                desc:'Youthful & clear',         icon:'fa-sparkles'},
+  {id:'orus',       label:'Orus',                desc:'Grounded & resonant',      icon:'fa-mountain'},
+  {id:'callirrhoe', label:'Callirrhoe',          desc:'Relaxed conversational',   icon:'fa-podcast'},
+  {id:'achernar',   label:'Achernar',            desc:'Soft & intimate',          icon:'fa-moon'}
 ];
 
-function buildVoiceGrid(containerId, selectedId, onSelectFn) {
-  const el = $id(containerId);
-  if (!el) return;
-  el.innerHTML = V2_VOICES.map(v => `
+// Philadelphia Pro Character Voices (/api/tools/text-to-speech)
+const PRO_VOICES = [
+  {id:'elder',     label:'Wise Elder',   desc:'Authoritative & deep',     icon:'fa-scroll'},
+  {id:'narrator',  label:'Narrator',     desc:'Clear & warm storyteller', icon:'fa-book-open'},
+  {id:'casual',    label:'Casual',       desc:'Natural & friendly',       icon:'fa-comments'},
+  {id:'gentle',    label:'Gentle',       desc:'Patient & caring',         icon:'fa-heart'},
+  {id:'hero',      label:'Hero',         desc:'Bold & courageous',        icon:'fa-shield-halved'},
+  {id:'elegant',   label:'Elegant',      desc:'Refined & cultured',       icon:'fa-gem'},
+  {id:'cute',      label:'Lively',       desc:'Bright & cheerful',        icon:'fa-star'},
+  {id:'anime',     label:'Expressive',   desc:'Animated & vivid',         icon:'fa-wand-magic-sparkles'},
+  {id:'movie',     label:'Cinema Deep',  desc:'Movie trailer baritone',   icon:'fa-clapperboard'},
+  {id:'ceo',       label:'Authority',    desc:'Executive presence',       icon:'fa-briefcase'},
+  {id:'sweet',     label:'Sweet',        desc:'Warm & tender',            icon:'fa-sun'},
+  {id:'lovely',    label:'Lovely',       desc:'Charming & soft',          icon:'fa-circle-dot'},
+  {id:'friendly',  label:'Friendly',     desc:'Approachable host',        icon:'fa-handshake'},
+  {id:'inspire',   label:'Inspire',      desc:'Motivational speaker',     icon:'fa-fire'},
+  {id:'knight',    label:'Noble',        desc:'Dignified & brave',        icon:'fa-chess-knight'},
+  {id:'boy',       label:'Young',        desc:'Clear & fresh',            icon:'fa-user'},
+  {id:'abbess',    label:'Serenity',     desc:'Calm & meditative',        icon:'fa-dove'}
+];
+
+function buildVoiceGrid(containerId, list, selectedId, onSelectFn) {
+  const el = $id(containerId); if (!el) return;
+  el.innerHTML = list.map(v => `
     <div class="vc${v.id === selectedId ? ' on' : ''}" data-vid="${v.id}" onclick="${onSelectFn}(this)">
       <i class="fa-solid ${v.icon}"></i>
       <div class="vc-info"><div class="vn">${v.label}</div><div class="vd">${v.desc}</div></div>
     </div>`).join('');
 }
 
-// ── Auto-save drafts ──
-function autoSave(key) {
+window.autoSave = (key) => {
   if (key === 'voice') localStorage.setItem('paud_vdraft', $id('voice-text').value);
-  if (key === 'music') {
-    localStorage.setItem('paud_mprompt', $id('music-prompt').value);
-    localStorage.setItem('paud_mlyrics', $id('music-lyrics').value);
-  }
-}
+};
 
 // ── Auth ──
 if (auth) {
-  getRedirectResult(auth).catch(e => {
-    if (e?.code && !e.code.includes('cancelled')) console.warn('Redirect auth:', e.code);
+  getRedirectResult(auth).catch(() => {});
+  onAuthStateChanged(auth, async user => {
+    if (user) { curUser = user; tok = await user.getIdToken(); showApp(user); }
+    else showAuth();
   });
 }
 
 window.signIn = async () => {
-  if (!auth) { toast('Auth service unavailable.', 'e'); return; }
+  if (!auth) { toast('Auth unavailable.', 'e'); return; }
   try { await signInWithPopup(auth, provider); }
   catch(e) {
     if (e.code === 'auth/popup-blocked') { try { await signInWithRedirect(auth, provider); } catch {} return; }
@@ -933,16 +939,8 @@ window.signIn = async () => {
 };
 
 window.signOut = async () => {
-  try { await fbSignOut(auth); tok = null; curUser = null; showAuth(); }
-  catch(e) {}
+  try { await fbSignOut(auth); tok = null; curUser = null; showAuth(); closeM('profile-m'); } catch(e) {}
 };
-
-if (auth) {
-  onAuthStateChanged(auth, async user => {
-    if (user) { curUser = user; tok = await user.getIdToken(); showApp(user); }
-    else showAuth();
-  });
-}
 
 function showAuth() {
   $id('hdr').classList.remove('on'); $id('bnav').classList.remove('on');
@@ -951,7 +949,6 @@ function showAuth() {
 }
 
 async function showApp(user) {
-  // Update avatar
   const av = $id('hav-btn');
   if (user.photoURL) av.innerHTML = `<img src="${user.photoURL}">`;
   const profAv = $id('prof-av');
@@ -959,7 +956,6 @@ async function showApp(user) {
   $id('prof-name').textContent = (user.displayName || 'Creator').toUpperCase();
   $id('prof-email').textContent = user.email || '';
 
-  // Greeting
   const h = new Date().getHours();
   $id('greet-tod').textContent = h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening';
   $id('greet-nm').textContent = (user.displayName || 'Creator').split(' ')[0];
@@ -972,6 +968,7 @@ async function showApp(user) {
   initPanels();
   restoreDrafts();
   renderHistory();
+  dawDraw();
   await loadUser();
   setTimeout(checkPayReturn, 800);
 }
@@ -991,97 +988,139 @@ function updBal() {
   $id('prof-bal').textContent = bal;
 }
 
-// ── Navigation ──
 window.navTo = (tab, el) => {
   document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
   document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
-  $id(`scr-${tab}`).classList.add('on');
+  $id(`scr-${tab}`)?.classList.add('on');
   (el || $id(`nav-${tab}`))?.classList.add('on');
+  if (tab === 'studio') setTimeout(dawDraw, 60);
 };
 
-// ── Panel Init ──
 function initPanels() {
+  if (!['v1','v2','pro'].includes(voiceProvider)) voiceProvider = 'v1';
+  if (!['v1','v2','pro'].includes(narrProvider)) narrProvider = 'v1';
   setVoiceProvider(voiceProvider);
   setNarrProvider(narrProvider);
-  // Restore v1 style selection
   document.querySelectorAll('#v1-panel .style-chip').forEach(c => c.classList.toggle('on', c.dataset.style === v1Style));
-  // Restore narr v1 style
   document.querySelectorAll('#narr-v1-opts .style-chip').forEach(c => c.classList.toggle('on', c.dataset.style === narrStyle));
 }
 
-// ── Voice Provider ──
+// ── 3-Tier Voice Provider (V1, V2, Pro) ──
 window.setVoiceProvider = (p) => {
   voiceProvider = p; localStorage.setItem('paud_vp', p);
   $id('prov-v1').classList.toggle('on', p === 'v1');
   $id('prov-v2').classList.toggle('on', p === 'v2');
-  $id('v1-panel').style.display = p === 'v1' ? '' : 'none';
-  $id('v2-panel').style.display = p === 'v2' ? '' : 'none';
-  if (p === 'v2') buildVoiceGrid('voice-grid-v2', v2Voice, 'selectV2Voice');
+  $id('prov-pro').classList.toggle('on', p === 'pro');
+  $id('v1-panel').style.display  = p === 'v1'  ? '' : 'none';
+  $id('v2-panel').style.display  = p === 'v2'  ? '' : 'none';
+  $id('pro-panel').style.display = p === 'pro' ? '' : 'none';
+  if (p === 'v2')  buildVoiceGrid('voice-grid-v2',  V2_NEURAL_VOICES, v2NeuralVoice, 'selectV2NeuralVoice');
+  if (p === 'pro') buildVoiceGrid('voice-grid-pro', PRO_VOICES,       proVoice,      'selectProVoice');
 };
 
-window.selectV2Voice = (el) => {
+window.selectV2NeuralVoice = el => {
   document.querySelectorAll('#voice-grid-v2 .vc').forEach(v => v.classList.remove('on'));
-  el.classList.add('on');
-  v2Voice = el.dataset.vid; localStorage.setItem('paud_mv', v2Voice);
+  el.classList.add('on'); v2NeuralVoice = el.dataset.vid; localStorage.setItem('paud_nv', v2NeuralVoice);
 };
-
-window.selectVoiceStyle = (el) => {
+window.selectProVoice = el => {
+  document.querySelectorAll('#voice-grid-pro .vc').forEach(v => v.classList.remove('on'));
+  el.classList.add('on'); proVoice = el.dataset.vid; localStorage.setItem('paud_pv', proVoice);
+};
+window.selectVoiceStyle = el => {
   el.parentElement.querySelectorAll('.style-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  v1Style = el.dataset.style; localStorage.setItem('paud_gs', v1Style);
+  el.classList.add('on'); v1Style = el.dataset.style; localStorage.setItem('paud_gs', v1Style);
 };
 
-// ── Narration Provider ──
+// ── 3-Tier Narration Provider (V1, V2, Pro) ──
 window.setNarrProvider = (p) => {
   narrProvider = p; localStorage.setItem('paud_np', p);
   $id('narr-prov-v1').classList.toggle('on', p === 'v1');
   $id('narr-prov-v2').classList.toggle('on', p === 'v2');
-  $id('narr-v1-opts').style.display = p === 'v1' ? '' : 'none';
-  $id('narr-v2-opts').style.display = p === 'v2' ? '' : 'none';
-  // V2 only supports PDF/TXT
-  $id('narr-zone-sub').textContent = p === 'v2' ? 'PDF · TXT — Step 1: AI summarises, Step 2: V2 voice speaks it' : 'PDF · TXT · DOC — AI narrates it for you';
-  if (p === 'v2') buildVoiceGrid('narr-voice-grid-v2', narrV2Voice, 'selectNarrV2Voice');
+  $id('narr-prov-pro').classList.toggle('on', p === 'pro');
+  $id('narr-v1-opts').style.display  = p === 'v1'  ? '' : 'none';
+  $id('narr-v2-opts').style.display  = p === 'v2'  ? '' : 'none';
+  $id('narr-pro-opts').style.display = p === 'pro' ? '' : 'none';
+  if (p === 'v2')  buildVoiceGrid('narr-voice-grid-v2',  V2_NEURAL_VOICES, narrV2Voice,  'selectNarrV2Voice');
+  if (p === 'pro') buildVoiceGrid('narr-voice-grid-pro', PRO_VOICES,       narrProVoice, 'selectNarrProVoice');
 };
 
-window.selectNarrV2Voice = (el) => {
+window.selectNarrV2Voice = el => {
   document.querySelectorAll('#narr-voice-grid-v2 .vc').forEach(v => v.classList.remove('on'));
-  el.classList.add('on');
-  narrV2Voice = el.dataset.vid; localStorage.setItem('paud_nv2', narrV2Voice);
+  el.classList.add('on'); narrV2Voice = el.dataset.vid; localStorage.setItem('paud_nnv', narrV2Voice);
 };
-
-window.selectNarrStyle = (el) => {
+window.selectNarrProVoice = el => {
+  document.querySelectorAll('#narr-voice-grid-pro .vc').forEach(v => v.classList.remove('on'));
+  el.classList.add('on'); narrProVoice = el.dataset.vid; localStorage.setItem('paud_npv', narrProVoice);
+};
+window.selectNarrStyle = el => {
   el.parentElement.querySelectorAll('.style-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  narrStyle = el.dataset.style; localStorage.setItem('paud_ns', narrStyle);
+  el.classList.add('on'); narrStyle = el.dataset.style; localStorage.setItem('paud_ns', narrStyle);
 };
 
-// ── Analysis mode ──
-window.selectMode = (el) => {
+window.selectMode = el => {
   document.querySelectorAll('.mode-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  analMode = el.dataset.mode; localStorage.setItem('paud_am', analMode);
+  el.classList.add('on'); analMode = el.dataset.mode; localStorage.setItem('paud_am', analMode);
   $id('custom-wrap').classList.toggle('on', analMode === 'custom');
 };
 
-// ── Waveforms ──
+// ── AI Scriptwriter (/api/minimax/chat) ──
+window.aiWriteScript = async () => {
+  if (!tok) { toast('Sign in first', 'e'); return; }
+  const topic = prompt('What should the voiceover script be about? (e.g. A 30-second luxury perfume commercial, or a podcast intro on AI):');
+  if (!topic || !topic.trim()) return;
+  toast('Philadelphia AI is writing your script…', 'i');
+  try {
+    tok = await curUser.getIdToken();
+    const r = await fetch(`${API}/api/minimax/chat`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Firebase-Token': tok},
+      body: JSON.stringify({
+        message: `Write a natural, ready-to-read spoken voiceover script (80 to 150 words) for: ${topic}. Output ONLY the spoken words, no stage directions or brackets.`,
+        history: [],
+        system_prompt: 'You are Philadelphia AI, an expert voiceover scriptwriter. Output only the spoken script.'
+      })
+    });
+    if (!r.ok) throw new Error('Script generation failed');
+    const reader = r.body.getReader(), dec = new TextDecoder();
+    let buf = '', out = '';
+    for (;;) {
+      const {value, done} = await reader.read(); if (done) break;
+      buf += dec.decode(value, {stream: true}); let nl;
+      while ((nl = buf.indexOf('\n\n')) !== -1) {
+        const ln = buf.slice(0, nl); buf = buf.slice(nl + 2);
+        if (!ln.startsWith('data: ')) continue;
+        const ds = ln.slice(6).trim(); if (ds === '[DONE]') continue;
+        try {
+          const ev = JSON.parse(ds);
+          if (ev.type === 'content') {
+            out += ev.content;
+            $id('voice-text').value = out.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+            updateCharCount('voice-text', 'voice-char', 3000);
+          }
+        } catch(e) {}
+      }
+    }
+    autoSave('voice'); loadUser(); toast('Script ready!', 's');
+  } catch(e) { toast(e.message || 'Could not write script', 'e'); }
+};
+
+// ── Waveforms & Players ──
 function buildWaveForms() {
-  ['voice-wave','music-wave','narr-wave'].forEach(id => {
+  ['voice-wave','narr-wave'].forEach(id => {
     const el = $id(id); if (!el) return; el.innerHTML = '';
-    for (let i = 0; i < 36; i++) {
+    for (let i = 0; i < 38; i++) {
       const b = document.createElement('div'); b.className = 'wb';
       const mh = 6 + Math.random() * 32, sp = (.3 + Math.random() * .55).toFixed(2), dl = (Math.random() * .5).toFixed(2);
-      b.style.cssText = `height:${3+Math.random()*8}px;--mh:${mh}px;--sp:${sp}s;animation-delay:${dl}s`;
+      b.style.cssText = `height:${4+Math.random()*8}px;--mh:${mh}px;--sp:${sp}s;animation-delay:${dl}s`;
       el.appendChild(b);
     }
   });
 }
 
-// ── Audio Player ──
-function setupPlayer(name, url, title, fmt) {
+function setupPlayer(name, url, title, fmt, blob = null) {
   if (audios[name]) { try { audios[name].pause(); URL.revokeObjectURL(audioUrls[name]); } catch(e){} }
-  audioUrls[name] = url; audioFmts[name] = fmt;
+  audioUrls[name] = url; audioFmts[name] = fmt; if (blob) audioBlobs[name] = blob;
   const a = new Audio(url); audios[name] = a;
-  a.loop = audioLoops[name] || false;
   a.addEventListener('loadedmetadata', () => {
     $id(`${name}-dur`).textContent = fmtTime(a.duration);
     $id(`${name}-seek`).max = a.duration;
@@ -1090,26 +1129,22 @@ function setupPlayer(name, url, title, fmt) {
     const pct = a.duration ? (a.currentTime / a.duration * 100) : 0;
     $id(`${name}-seek`).value = a.currentTime;
     $id(`${name}-cur`).textContent = fmtTime(a.currentTime);
-    $id(`${name}-seek`).style.background = `linear-gradient(90deg,var(--g1) ${pct}%,rgba(255,255,255,.1) ${pct}%)`;
+    $id(`${name}-seek`).style.background = `linear-gradient(90deg,var(--g1) ${pct}%,rgba(255,255,255,.12) ${pct}%)`;
   });
   a.addEventListener('ended', () => {
-    if (!a.loop) {
-      $id(`${name}-play-ic`).className = 'fa-solid fa-play';
-      $id(`${name}-wave`).classList.remove('playing');
-    }
+    $id(`${name}-play-ic`).className = 'fa-solid fa-play';
+    $id(`${name}-wave`).classList.remove('playing');
   });
   $id(`${name}-ap-title`).textContent = title;
   $id(`${name}-ap-fmt`).textContent = fmt.toUpperCase();
-  $id(`${name}-cur`).textContent = '0:00'; $id(`${name}-dur`).textContent = '–';
+  $id(`${name}-cur`).textContent = '0:00'; $id(`${name}-dur`).textContent = '--';
   $id(`${name}-seek`).value = 0;
-  $id(`${name}-seek`).style.background = `linear-gradient(90deg,var(--g1) 0%,rgba(255,255,255,.1) 0%)`;
   $id(`${name}-player`).classList.add('on');
 }
 
 window.togglePlay = (name) => {
   const a = audios[name]; if (!a) return;
   if (a.paused) {
-    // Pause other players
     Object.keys(audios).forEach(k => {
       if (k !== name && audios[k] && !audios[k].paused) {
         audios[k].pause();
@@ -1128,54 +1163,20 @@ window.togglePlay = (name) => {
 };
 
 window.seekAudio = (name, val) => { if (audios[name]) audios[name].currentTime = parseFloat(val); };
-
-window.restartAudio = (name) => {
-  if (!audios[name]) return;
-  audios[name].currentTime = 0;
-  if (audios[name].paused) togglePlay(name);
-};
-
+window.restartAudio = (name) => { if (!audios[name]) return; audios[name].currentTime = 0; if (audios[name].paused) togglePlay(name); };
 window.downloadAudio = (name) => {
   const url = audioUrls[name]; if (!url) return;
-  const a = document.createElement('a');
-  a.href = url; a.download = `philly-${name}-${Date.now()}.${audioFmts[name]}`; a.click();
+  const a = document.createElement('a'); a.href = url; a.download = `philadelphia-${name}-${Date.now()}.${audioFmts[name]}`; a.click();
 };
-
-window.shareAudio = (name) => {
-  navigator.clipboard.writeText(window.location.href)
-    .then(() => toast('Page link copied!', 'i'))
-    .catch(() => toast('Copy failed', 'e'));
-};
-
 window.setSpeed = (name, rate) => {
   if (audios[name]) audios[name].playbackRate = rate;
-  // Update active speed button
-  const player = $id(`${name}-player`);
-  if (!player) return;
-  player.querySelectorAll('.spd-btn').forEach(b => {
-    b.classList.toggle('on', parseFloat(b.textContent) === rate);
-  });
+  $id(`${name}-player`)?.querySelectorAll('.spd-btn').forEach(b => b.classList.toggle('on', parseFloat(b.textContent) === rate));
 };
-
-window.setVolume = (name, val) => {
-  if (audios[name]) audios[name].volume = parseFloat(val);
-};
-
-window.toggleLoop = (name) => {
-  audioLoops[name] = !audioLoops[name];
-  if (audios[name]) audios[name].loop = audioLoops[name];
-  $id(`${name}-loop-btn`)?.classList.toggle('on', audioLoops[name]);
-};
-
-function fmtTime(s) {
-  if (!s || isNaN(s)) return '0:00';
-  return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;
-}
+window.setVolume = (name, val) => { if (audios[name]) audios[name].volume = parseFloat(val); };
+function fmtTime(s) { return (!s || isNaN(s)) ? '0:00' : `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`; }
 
 // ═══════════════════════════════════
-// ── GENERATE VOICE ──
-// V1: POST /voicegen  FormData{text, style}  → WAV
-// V2: POST /api/tools/text-to-speech  JSON{text, voice_id}  → MP3
+// ── GENERATE VOICE (V1, V2 & PRO) ──
 // ═══════════════════════════════════
 window.generateVoice = async () => {
   const text = $id('voice-text').value.trim();
@@ -1188,35 +1189,42 @@ window.generateVoice = async () => {
     let url, fmt, label, blob;
 
     if (voiceProvider === 'v1') {
-      $id('voice-gen-txt').textContent = `Synthesising ${v1Style} voice…`;
-      const fd = new FormData();
-      fd.append('text', text);
-      fd.append('style', v1Style);
+      $id('voice-gen-txt').textContent = `Synthesizing Philadelphia V1 (${v1Style})…`;
+      const fd = new FormData(); fd.append('text', text); fd.append('style', v1Style);
       const r = await fetch(`${API}/voicegen`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
       if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'Voice generation failed');
-      blob = await r.blob();
-      url = URL.createObjectURL(blob);
-      fmt = 'wav'; label = `V1 · ${v1Style}`;
+      blob = await r.blob(); url = URL.createObjectURL(blob); fmt = 'wav'; label = `V1 · ${v1Style}`;
+
+    } else if (voiceProvider === 'v2') {
+      const vObj = V2_NEURAL_VOICES.find(v => v.id === v2NeuralVoice) || V2_NEURAL_VOICES[0];
+      $id('voice-gen-txt').textContent = `Synthesizing Philadelphia V2 (${vObj.label})…`;
+      const dir = $id('v2-direction')?.value.trim();
+      const finalText = dir ? `Say ${dir}:\n${text}` : text;
+      const r = await fetch(`${API}/api/tools/text-to-speech-v2`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
+        body: JSON.stringify({ text: finalText, voice: v2NeuralVoice })
+      });
+      if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'V2 Voice generation failed');
+      blob = await r.blob(); url = URL.createObjectURL(blob); fmt = 'wav'; label = `V2 · ${vObj.label}`;
 
     } else {
-      $id('voice-gen-txt').textContent = `Synthesising premium voice…`;
+      const vObj = PRO_VOICES.find(v => v.id === proVoice) || PRO_VOICES[0];
+      $id('voice-gen-txt').textContent = `Synthesizing Philadelphia Pro (${vObj.label})…`;
       const r = await fetch(`${API}/api/tools/text-to-speech`, {
         method: 'POST',
         headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
-        body: JSON.stringify({ text, voice_id: v2Voice })
+        body: JSON.stringify({ text, voice_id: proVoice })
       });
-      if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'Voice generation failed');
-      blob = await r.blob();
-      url = URL.createObjectURL(blob);
-      fmt = 'mp3'; label = `V2 · ${V2_VOICES.find(v=>v.id===v2Voice)?.label||v2Voice}`;
+      if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'Pro Voice generation failed');
+      blob = await r.blob(); url = URL.createObjectURL(blob); fmt = 'mp3'; label = `Pro · ${vObj.label}`;
     }
 
-    const title = `${label} · "${text.slice(0,48)}${text.length>48?'…':''}"`;
-    setupPlayer('voice', url, title, fmt);
-    addHistory({ type:'voice', title, sub:label, ic:'v', fmt }, blob);
+    const title = `${label} · "${text.slice(0,46)}${text.length>46?'…':''}"`;
+    setupPlayer('voice', url, title, fmt, blob);
+    await addHistory({ type:'voice', title, sub:label, ic:'v', fmt }, blob);
     await loadUser();
-    toast('Voice ready!', 's');
-
+    toast('Voiceover ready!', 's');
   } catch(e) {
     toast(e.message || 'Voice generation failed', 'e');
   } finally {
@@ -1225,112 +1233,7 @@ window.generateVoice = async () => {
 };
 
 // ═══════════════════════════════════
-// ── GENERATE MUSIC ──
-// Endpoint: POST /api/tools/generate-music
-// Body: JSON {prompt, lyrics, model, voice_id, instrumental_id}
-// ═══════════════════════════════════
-window.generateMusic = async () => {
-  const prompt = $id('music-prompt').value.trim();
-  const lyrics = $id('music-lyrics').value.trim();
-  if (!prompt && !lyrics) { toast('Add a mood description or lyrics', 'e'); return; }
-  if (!tok) { toast('Please sign in', 'e'); return; }
-
-  showGenOv('music', true);
-  $id('music-gen-txt').textContent = 'Composing your track…';
-  try {
-    tok = await curUser.getIdToken();
-
-    // Build payload matching backend MusicRequest model exactly:
-    // prompt: str, lyrics: str, model: str, voice_id: Optional[str], instrumental_id: Optional[str]
-    const payload = {
-      prompt:           prompt || '',
-      lyrics:           lyrics || '',
-      model:            'music-1.5',
-      voice_id:         refIds.voiceId         || null,
-      instrumental_id:  refIds.instrumentalId  || null,
-    };
-
-    const r = await fetch(`${API}/api/tools/generate-music`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
-      body: JSON.stringify(payload)
-    });
-    if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'Music generation failed');
-
-    const blob = await r.blob();
-    const url = URL.createObjectURL(blob);
-    const title = prompt ? `"${prompt.slice(0,52)}${prompt.length>52?'…':''}"` : 'Custom Track';
-    setupPlayer('music', url, title, 'mp3');
-    addHistory({ type:'music', title, sub:`Studio · ${new Date().toLocaleDateString()}`, ic:'m', fmt:'mp3' }, blob);
-    await loadUser();
-    toast('Track ready!', 's');
-
-  } catch(e) {
-    toast(e.message || 'Music generation failed', 'e');
-  } finally {
-    showGenOv('music', false);
-  }
-};
-
-// ═══════════════════════════════════
-// ── REFERENCE UPLOAD ──
-// POST /api/tools/upload-music  FormData{file, purpose}
-// MiniMax returns: {base_resp:{...}, file:{file_id, voice_id, instrumental_id}}
-// ═══════════════════════════════════
-window.handleRefUpload = async (inp, type) => {
-  const file = inp.files[0]; if (!file) return;
-  const isVoice = (type === 'voice_ref');
-  const fileEl  = $id(isVoice ? 'voice-ref-file' : 'inst-ref-file');
-  const nameEl  = $id(isVoice ? 'voice-ref-name' : 'inst-ref-name');
-  fileEl.style.display = 'flex'; nameEl.textContent = file.name;
-  if (!tok) { toast('Sign in first', 'e'); return; }
-  toast('Uploading reference…', 'i');
-  try {
-    tok = await curUser.getIdToken();
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('purpose', isVoice ? 'voice_clone' : 'song');
-    const r = await fetch(`${API}/api/tools/upload-music`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.detail || 'Upload failed');
-    // Parse MiniMax response — voice_id / instrumental_id live under d.file or d directly
-    const vid = d?.file?.voice_id         || d?.voice_id         || null;
-    const iid = d?.file?.instrumental_id  || d?.instrumental_id  || null;
-    if (isVoice)  { refIds.voiceId        = vid; if (vid) toast('Vocal reference uploaded!', 's'); else toast('Upload OK — no voice ID returned', 'i'); }
-    if (!isVoice) { refIds.instrumentalId = iid; if (iid) toast('Instrumental reference uploaded!', 's'); else toast('Upload OK — no instrumental ID returned', 'i'); }
-    updateRefIds();
-  } catch(e) {
-    toast(e.message || 'Upload failed', 'e');
-    fileEl.style.display = 'none';
-  }
-};
-
-function updateRefIds() {
-  const el = $id('ref-ids-display'); const rows =[];
-  if (refIds.voiceId)        rows.push(`<div class="ref-id-row"><i class="fa-solid fa-microphone-lines"></i><span>Vocal ref active</span><span class="ref-id-val">${refIds.voiceId}</span><span class="ref-id-rm" onclick="clearRefId('voiceId')"><i class="fa-solid fa-xmark"></i></span></div>`);
-  if (refIds.instrumentalId) rows.push(`<div class="ref-id-row"><i class="fa-solid fa-guitar"></i><span>Instrumental ref active</span><span class="ref-id-val">${refIds.instrumentalId}</span><span class="ref-id-rm" onclick="clearRefId('instrumentalId')"><i class="fa-solid fa-xmark"></i></span></div>`);
-  el.innerHTML = rows.join(''); el.style.display = rows.length ? '' : 'none';
-}
-
-window.clearRefId = (key) => { refIds[key] = null; updateRefIds(); };
-
-window.clearRef = (type, e) => {
-  e.preventDefault(); e.stopPropagation();
-  if (type === 'voice_ref') { refIds.voiceId = null; $id('voice-ref-file').style.display='none'; }
-  if (type === 'inst_ref')  { refIds.instrumentalId = null; $id('inst-ref-file').style.display='none'; }
-  updateRefIds();
-};
-
-window.toggleRef = () => {
-  $id('ref-toggle-btn').classList.toggle('open');
-  $id('ref-section').classList.toggle('on');
-};
-
-// ═══════════════════════════════════
-// ── DOCUMENT NARRATION ──
-// V1: POST /api/tools/audio-narration  FormData{file, style}  → WAV
-// V2: Step 1: POST /understand-pdf  FormData{file, prompt}  → {response: text}
-//     Step 2: POST /api/tools/text-to-speech  JSON{text, voice_id}  → MP3
+// ── DOCUMENT NARRATION (V1, V2 & PRO) ──
 // ═══════════════════════════════════
 window.handleDocUpload = (inp) => {
   narrFile = inp.files[0]; if (!narrFile) return;
@@ -1342,7 +1245,7 @@ window.handleDocUpload = (inp) => {
 
 window.clearDoc = (e) => {
   e.preventDefault(); e.stopPropagation();
-  narrFile = null; $id('narr-file-display').style.display='none';
+  narrFile = null; $id('narr-file-display').style.display = 'none';
   $id('narr-gen-btn').disabled = true; $id('narr-file-inp').value = '';
 };
 
@@ -1356,91 +1259,294 @@ window.generateNarration = async () => {
     tok = await curUser.getIdToken();
 
     if (narrProvider === 'v1') {
-      // ─ Philadelphia V1: single endpoint ─
-      $id('narr-gen-txt').textContent = 'Reading & summarising…';
+      $id('narr-gen-txt').textContent = 'Reading & narrating document…';
       stepEl.textContent = '';
-      const fd = new FormData();
-      fd.append('file', narrFile); fd.append('style', narrStyle);
+      const fd = new FormData(); fd.append('file', narrFile); fd.append('style', narrStyle);
       const r = await fetch(`${API}/api/tools/audio-narration`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
       if (!r.ok) throw new Error((await r.json().catch(()=>({}))).detail || 'Narration failed');
-      const blob = await r.blob();
-      const url = URL.createObjectURL(blob);
-      const title = `${narrFile.name} · ${narrStyle}`;
-      setupPlayer('narr', url, title, 'wav');
-      addHistory({ type:'narrate', title, sub:`V1 · ${narrStyle}`, ic:'n', fmt:'wav' }, blob);
+      const blob = await r.blob(), url = URL.createObjectURL(blob);
+      const title = `${narrFile.name} · V1 (${narrStyle})`;
+      setupPlayer('narr', url, title, 'wav', blob);
+      await addHistory({ type:'narrate', title, sub:`V1 · ${narrStyle}`, ic:'n', fmt:'wav' }, blob);
 
     } else {
-      // ─ Philadelphia V2: two-step process ─
-      // Step 1: Get text summary via understand-pdf (PDF) or read client-side (TXT)
-      $id('narr-gen-txt').textContent = 'Summarising document…';
+      $id('narr-gen-txt').textContent = 'Summarizing document…';
       stepEl.textContent = 'Step 1 of 2';
-
       let summaryText = '';
-      const isPdf = narrFile.type === 'application/pdf' || narrFile.name.endsWith('.pdf');
-      const isTxt = narrFile.type === 'text/plain' || narrFile.name.endsWith('.txt');
-
+      const isTxt = narrFile.type === 'text/plain' || narrFile.name.toLowerCase().endsWith('.txt');
       if (isTxt) {
-        // Read text file client-side — no extra credit cost
-        summaryText = await narrFile.text();
-        if (summaryText.length > 4000) summaryText = summaryText.slice(0, 4000);
-      } else if (isPdf) {
-        const narrationPrompt = 'Provide a lively, engaging, podcast-style spoken summary of this document. Highlight key points, important ideas, and end with a memorable conclusion. Make it conversational and natural to speak aloud. Do not include any formatting or headers — write it as flowing speech.';
-        const fd = new FormData();
-        fd.append('file', narrFile); fd.append('prompt', narrationPrompt);
-        const r1 = await fetch(`${API}/understand-pdf`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
-        if (!r1.ok) throw new Error((await r1.json().catch(()=>({}))).detail || 'Summary failed');
-        const d1 = await r1.json();
-        summaryText = d1.response || '';
+        summaryText = (await narrFile.text()).slice(0, 3500);
       } else {
-        throw new Error('V2 narration supports PDF and TXT files. Use V1 for other formats.');
+        const fd = new FormData();
+        fd.append('file', narrFile);
+        fd.append('prompt', 'Provide a lively, engaging spoken podcast summary of this document. Highlight key points and conclusions in natural flowing speech without markdown headers.');
+        const r1 = await fetch(`${API}/understand-pdf`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
+        if (!r1.ok) throw new Error((await r1.json().catch(()=>({}))).detail || 'Document analysis failed');
+        summaryText = (await r1.json()).response || '';
       }
-
       if (!summaryText.trim()) throw new Error('Could not extract text from document');
 
-      // Step 2: V2 TTS
-      $id('narr-gen-txt').textContent = 'Converting to voice…';
+      $id('narr-gen-txt').textContent = 'Synthesizing voice narration…';
       stepEl.textContent = 'Step 2 of 2';
-      tok = await curUser.getIdToken(); // Refresh token between calls
-      const r2 = await fetch(`${API}/api/tools/text-to-speech`, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
-        body: JSON.stringify({ text: summaryText.slice(0, 3000), voice_id: narrV2Voice })
-      });
-      if (!r2.ok) throw new Error((await r2.json().catch(()=>({}))).detail || 'TTS failed');
-      const blob = await r2.blob();
-      const url = URL.createObjectURL(blob);
-      const voiceName = V2_VOICES.find(v=>v.id===narrV2Voice)?.label || narrV2Voice;
-      const title = `${narrFile.name} · V2 · ${voiceName}`;
-      setupPlayer('narr', url, title, 'mp3');
-      addHistory({ type:'narrate', title, sub:`V2 · ${voiceName}`, ic:'n', fmt:'mp3' }, blob);
-      $id('narr-ap-fmt').textContent = 'MP3';
-      audioFmts.narr = 'mp3';
+      tok = await curUser.getIdToken();
+
+      let r2, fmt, vLabel;
+      if (narrProvider === 'v2') {
+        vLabel = V2_NEURAL_VOICES.find(v => v.id === narrV2Voice)?.label || narrV2Voice;
+        r2 = await fetch(`${API}/api/tools/text-to-speech-v2`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
+          body: JSON.stringify({ text: summaryText.slice(0, 3000), voice: narrV2Voice })
+        });
+        fmt = 'wav';
+      } else {
+        vLabel = PRO_VOICES.find(v => v.id === narrProVoice)?.label || narrProVoice;
+        r2 = await fetch(`${API}/api/tools/text-to-speech`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json', 'X-Firebase-Token':tok},
+          body: JSON.stringify({ text: summaryText.slice(0, 3000), voice_id: narrProVoice })
+        });
+        fmt = 'mp3';
+      }
+      if (!r2.ok) throw new Error((await r2.json().catch(()=>({}))).detail || 'Voice synthesis failed');
+      const blob = await r2.blob(), url = URL.createObjectURL(blob);
+      const tier = narrProvider === 'v2' ? 'V2' : 'Pro';
+      const title = `${narrFile.name} · ${tier} (${vLabel})`;
+      setupPlayer('narr', url, title, fmt, blob);
+      await addHistory({ type:'narrate', title, sub:`${tier} · ${vLabel}`, ic:'n', fmt }, blob);
     }
 
     await loadUser();
-    toast('Narration ready!', 's');
-    stepEl.textContent = '';
-
+    toast('Document narration ready!', 's');
   } catch(e) {
     toast(e.message || 'Narration failed', 'e');
-    stepEl.textContent = '';
   } finally {
+    stepEl.textContent = '';
     showGenOv('narr', false);
-    $id('narr-gen-btn').disabled = false;
+    $id('narr-gen-btn').disabled = !narrFile;
   }
 };
 
 // ═══════════════════════════════════
+// ── MASTERING & RECORDER STUDIO (DAW) ──
+// ═══════════════════════════════════
+const DAW = { buf: null, hist: [], ac: null, src: null, rec: null, stream: null, chunks: [] };
+
+function dawDraw() {
+  const c = $id('daw-canvas'); if (!c) return;
+  const ctx = c.getContext('2d'), w = c.width, h = c.height;
+  ctx.fillStyle = '#050510'; ctx.fillRect(0, 0, w, h);
+  if (!DAW.buf) {
+    ctx.fillStyle = '#524c42'; ctx.font = '20px "DM Sans", sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Record from Mic, Open an Audio File, or Send from Voice Studio', w / 2, h / 2);
+    return;
+  }
+  const ch = DAW.buf.getChannelData(0), step = Math.max(1, Math.floor(ch.length / w)), mid = h / 2;
+  const sPct = +$id('daw-start').value / 100, ePct = +$id('daw-end').value / 100;
+  const sx = sPct * w, ex = ePct * w;
+  for (let x = 0; x < w; x++) {
+    let mn = 1, mx = -1;
+    for (let j = 0; j < step; j++) { const v = ch[x * step + j] || 0; if (v < mn) mn = v; if (v > mx) mx = v; }
+    ctx.fillStyle = (x >= sx && x <= ex) ? '#c9a96e' : 'rgba(201,169,110,0.22)';
+    ctx.fillRect(x, mid + mn * mid * 0.9, 1, Math.max(2, (mx - mn) * mid * 0.9));
+  }
+  ctx.fillStyle = '#f5e0a0'; ctx.fillRect(sx, 0, 2, h); ctx.fillRect(ex - 2, 0, 2, h);
+  const selDur = ((ePct - sPct) * DAW.buf.duration).toFixed(1);
+  $id('daw-info').textContent = `Duration: ${DAW.buf.duration.toFixed(1)}s · Selected: ${selDur}s · Sample Rate: ${DAW.buf.sampleRate} Hz`;
+}
+
+['daw-start','daw-end','daw-vol','daw-speed','daw-fi','daw-fo'].forEach(id => {
+  $id(id)?.addEventListener('input', () => {
+    if (+$id('daw-start').value >= +$id('daw-end').value) {
+      if (id === 'daw-start') $id('daw-start').value = +$id('daw-end').value - 2;
+      else $id('daw-end').value = +$id('daw-start').value + 2;
+    }
+    $id('daw-s-lbl').textContent = $id('daw-start').value + '%';
+    $id('daw-e-lbl').textContent = $id('daw-end').value + '%';
+    $id('daw-v-lbl').textContent = $id('daw-vol').value + '%';
+    $id('daw-sp-lbl').textContent = ($id('daw-speed').value / 100).toFixed(2) + 'x';
+    $id('daw-fi-lbl').textContent = ($id('daw-fi').value / 10).toFixed(1) + 's';
+    $id('daw-fo-lbl').textContent = ($id('daw-fo').value / 10).toFixed(1) + 's';
+    dawDraw();
+  });
+});
+
+async function dawDecode(blob) {
+  DAW.ac = DAW.ac || new (window.AudioContext || window.webkitAudioContext)();
+  DAW.buf = await DAW.ac.decodeAudioData(await blob.arrayBuffer());
+  DAW.hist = [];
+  $id('daw-start').value = 0; $id('daw-end').value = 100;
+  $id('daw-s-lbl').textContent = '0%'; $id('daw-e-lbl').textContent = '100%';
+  dawDraw();
+}
+
+window.dawLoadFile = async inp => {
+  const f = inp.files?.[0]; inp.value = ''; if (!f) return;
+  try { await dawDecode(f); toast('Audio loaded into Mastering Studio!', 's'); }
+  catch(e) { toast('Could not decode audio file', 'e'); }
+};
+
+window.sendToMastering = async name => {
+  const b = audioBlobs[name];
+  if (!b) { toast('Generate audio first', 'e'); return; }
+  await dawDecode(b);
+  navTo('studio');
+  toast('Loaded into Mastering Studio!', 's');
+};
+
+window.dawToggleRec = async () => {
+  const btn = $id('daw-rec-btn');
+  if (DAW.rec && DAW.rec.state === 'recording') {
+    DAW.rec.stop(); return;
+  }
+  try {
+    DAW.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    DAW.chunks = [];
+    DAW.rec = new MediaRecorder(DAW.stream);
+    DAW.rec.ondataavailable = e => e.data.size && DAW.chunks.push(e.data);
+    DAW.rec.onstop = async () => {
+      DAW.stream.getTracks().forEach(t => t.stop());
+      btn.innerHTML = '<i class="fa-solid fa-circle" style="color:var(--red)"></i> Record Mic';
+      await dawDecode(new Blob(DAW.chunks));
+      toast('Recording captured!', 's');
+    };
+    DAW.rec.start();
+    btn.innerHTML = '<i class="fa-solid fa-stop" style="color:var(--red)"></i> Stop Recording';
+  } catch(e) { toast('Microphone permission denied', 'e'); }
+};
+
+function dawStopPlay() {
+  if (DAW.src) { try { DAW.src.stop(); } catch(e){} DAW.src = null; }
+  $id('daw-play-btn').innerHTML = '<i class="fa-solid fa-play"></i> Preview';
+}
+
+window.dawPlay = () => {
+  if (!DAW.buf) { toast('Load or record audio first', 'e'); return; }
+  if (DAW.src) { dawStopPlay(); return; }
+  DAW.ac = DAW.ac || new (window.AudioContext || window.webkitAudioContext)();
+  DAW.ac.resume();
+  const s = DAW.ac.createBufferSource(); s.buffer = DAW.buf;
+  s.playbackRate.value = +$id('daw-speed').value / 100;
+  const g = DAW.ac.createGain(); g.gain.value = +$id('daw-vol').value / 100;
+  s.connect(g).connect(DAW.ac.destination);
+  const st = +$id('daw-start').value / 100 * DAW.buf.duration;
+  const en = +$id('daw-end').value / 100 * DAW.buf.duration;
+  s.start(0, st, Math.max(0.1, en - st));
+  s.onended = dawStopPlay;
+  DAW.src = s;
+  $id('daw-play-btn').innerHTML = '<i class="fa-solid fa-stop"></i> Stop';
+};
+
+window.dawApply = async () => {
+  if (!DAW.buf) return toast('No audio loaded', 'e');
+  dawStopPlay();
+  const b = DAW.buf, ch = b.numberOfChannels, sr = b.sampleRate;
+  const s0 = Math.floor(+$id('daw-start').value / 100 * b.length);
+  const e0 = Math.floor(+$id('daw-end').value / 100 * b.length);
+  const len = Math.max(1, e0 - s0), spd = +$id('daw-speed').value / 100, vol = +$id('daw-vol').value / 100;
+  const fi = +$id('daw-fi').value / 10, fo = +$id('daw-fo').value / 10, rev = $id('daw-rev').checked;
+  const outLen = Math.max(1, Math.ceil(len / spd));
+  const oc = new OfflineAudioContext(ch, outLen, sr);
+  const tb = oc.createBuffer(ch, len, sr);
+  for (let c = 0; c < ch; c++) {
+    const src = b.getChannelData(c).subarray(s0, e0), dst = tb.getChannelData(c);
+    for (let i = 0; i < len; i++) dst[i] = rev ? src[len - 1 - i] : src[i];
+  }
+  const sn = oc.createBufferSource(); sn.buffer = tb; sn.playbackRate.value = spd;
+  const g = oc.createGain(), dur = outLen / sr;
+  g.gain.setValueAtTime(fi > 0 ? 0 : vol, 0);
+  if (fi > 0) g.gain.linearRampToValueAtTime(vol, Math.min(fi, dur));
+  if (fo > 0) { g.gain.setValueAtTime(vol, Math.max(0, dur - fo));
+    g.gain.linearRampToValueAtTime(0, dur);
+  }
+  sn.connect(g); g.connect(oc.destination); sn.start();
+  const out = await oc.startRendering();
+  if ($id('daw-norm').checked) {
+    let pk = 0;
+    for (let c = 0; c < ch; c++) {
+      const d = out.getChannelData(c);
+      for (let i = 0; i < d.length; i++) pk = Math.max(pk, Math.abs(d[i]));
+    }
+    if (pk > 0) {
+      const k = 0.96 / pk;
+      for (let c = 0; c < ch; c++) {
+        const d = out.getChannelData(c);
+        for (let i = 0; i < d.length; i++) d[i] *= k;
+      }
+    }
+  }
+  DAW.hist.push(DAW.buf);
+  DAW.buf = out;
+  $id('daw-start').value = 0; $id('daw-end').value = 100;
+  $id('daw-vol').value = 100; $id('daw-speed').value = 100;
+  $id('daw-fi').value = 0; $id('daw-fo').value = 0;
+  $id('daw-rev').checked = false;
+  $id('daw-s-lbl').textContent = '0%'; $id('daw-e-lbl').textContent = '100%';
+  $id('daw-v-lbl').textContent = '100%'; $id('daw-sp-lbl').textContent = '1.00x';
+  $id('daw-fi-lbl').textContent = '0.0s'; $id('daw-fo-lbl').textContent = '0.0s';
+  dawDraw();
+  toast('Mastering edits applied!', 's');
+};
+
+window.dawUndo = () => {
+  if (DAW.hist.length > 0) {
+    DAW.buf = DAW.hist.pop();
+    dawDraw();
+    toast('Edit undone', 'i');
+  } else toast('Nothing to undo');
+};
+
+function bufferToWav(buf) {
+  const ch = buf.numberOfChannels, sr = buf.sampleRate, n = buf.length;
+  const ba = ch * 2, ab = new ArrayBuffer(44 + n * ba), dv = new DataView(ab);
+  const w = (o, s) => [...s].forEach((c, i) => dv.setUint8(o + i, c.charCodeAt(0)));
+  w(0, 'RIFF'); dv.setUint32(4, 36 + n * ba, true); w(8, 'WAVE'); w(12, 'fmt ');
+  dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, ch, true);
+  dv.setUint32(24, sr, true); dv.setUint32(28, sr * ba, true); dv.setUint16(32, ba, true);
+  dv.setUint16(34, 16, true); w(36, 'data'); dv.setUint32(40, n * ba, true);
+  let o = 44;
+  for (let i = 0; i < n; i++) {
+    for (let c = 0; c < ch; c++) {
+      const s = Math.max(-1, Math.min(1, buf.getChannelData(c)[i]));
+      dv.setInt16(o, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+      o += 2;
+    }
+  }
+  return new Blob([ab], { type: 'audio/wav' });
+}
+
+window.dawExport = () => {
+  if (!DAW.buf) return toast('No audio loaded', 'e');
+  const blob = bufferToWav(DAW.buf);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `philadelphia-mastered-${Date.now()}.wav`;
+  a.click();
+  toast('Mastered WAV saved!', 's');
+};
+
+window.dawSendToAnalyze = () => {
+  if (!DAW.buf) return toast('No audio loaded', 'e');
+  const blob = bufferToWav(DAW.buf);
+  analFile = new File([blob], `mastered-${Date.now()}.wav`, { type: 'audio/wav' });
+  $id('anal-file-name').textContent = analFile.name;
+  $id('anal-file-display').style.display = 'flex';
+  $id('anal-gen-btn').disabled = false;
+  navTo('analyze');
+  toast('Loaded into Audio Intelligence!', 's');
+};
+
+// ═══════════════════════════════════
 // ── AUDIO ANALYSIS ──
-// POST /understand-audio  FormData{file, prompt}  → {response: text}
 // ═══════════════════════════════════
 const MODE_PROMPTS = {
-  transcribe: 'Transcribe this audio file accurately. Provide the complete, verbatim transcription.',
-  summarize:  'Summarize the key points and main content of this audio clearly and concisely.',
-  sentiment:  'Analyze the sentiment, tone, and emotions present in this audio. Describe the mood and feeling of the speaker(s).',
-  extract:    'Extract and list the key points, main arguments, and most important information from this audio.',
-  translate:  'Transcribe this audio file and translate the content to English if it is not already in English.',
-  custom:     null,
+  transcribe: 'Transcribe this audio recording accurately. Provide the complete verbatim transcription.',
+  summarize:  'Summarize the key points, main conclusions, and core message of this audio clearly and concisely.',
+  minutes:    'Listen to this recording and compile structured Meeting Minutes including: 1. Main Topics Discussed, 2. Key Decisions Made, 3. Action Items & Next Steps with owners.',
+  sentiment:  'Analyze the sentiment, emotional undertones, speaker tone, and delivery dynamics present in this recording.',
+  translate:  'Transcribe this audio recording and translate the content into clear, natural English.',
+  custom:     null
 };
 
 window.handleAudioUpload = (inp) => {
@@ -1452,7 +1558,7 @@ window.handleAudioUpload = (inp) => {
 
 window.clearAnal = (e) => {
   e.preventDefault(); e.stopPropagation();
-  analFile = null; $id('anal-file-display').style.display='none';
+  analFile = null; $id('anal-file-display').style.display = 'none';
   $id('anal-gen-btn').disabled = true; $id('anal-file-inp').value = '';
   $id('anal-result').classList.remove('on');
 };
@@ -1461,19 +1567,32 @@ window.analyzeAudio = async () => {
   if (!analFile) { toast('Upload an audio file first', 'e'); return; }
   if (!tok) { toast('Please sign in', 'e'); return; }
   const prompt = analMode === 'custom'
-    ? ($id('anal-prompt').value.trim() || 'Analyze this audio file.')
+    ? ($id('anal-prompt').value.trim() || 'Analyze this audio recording.')
     : MODE_PROMPTS[analMode];
   showGenOv('anal', true);
   try {
     tok = await curUser.getIdToken();
-    const fd = new FormData(); fd.append('file', analFile); fd.append('prompt', prompt);
-    const r = await fetch(`${API}/understand-audio`, { method:'POST', headers:{'X-Firebase-Token':tok}, body:fd });
+    const fd = new FormData();
+    fd.append('file', analFile);
+    fd.append('prompt', prompt);
+    const r = await fetch(`${API}/understand-audio`, {
+      method: 'POST',
+      headers: { 'X-Firebase-Token': tok },
+      body: fd
+    });
     const d = await r.json();
     if (!r.ok) throw new Error(d.detail || 'Analysis failed');
     $id('anal-res-txt').textContent = d.response;
     $id('anal-result').classList.add('on');
-    addHistory({ type:'analyze', title:`Analysis: ${analFile.name}`, sub:`${analMode} · ${new Date().toLocaleDateString()}`, ic:'a', resultText: d.response });
-    await loadUser(); toast('Analysis complete!', 's');
+    await addHistory({
+      type: 'analyze',
+      title: `Analysis: ${analFile.name}`,
+      sub: `${analMode.toUpperCase()} · ${new Date().toLocaleDateString()}`,
+      ic: 'a',
+      resultText: d.response
+    });
+    await loadUser();
+    toast('Analysis complete!', 's');
   } catch(e) {
     toast(e.message || 'Analysis failed', 'e');
   } finally {
@@ -1484,129 +1603,163 @@ window.analyzeAudio = async () => {
 
 window.copyResult = () => {
   const txt = $id('anal-res-txt').textContent; if (!txt) return;
-  navigator.clipboard.writeText(txt).then(()=>toast('Copied!','s')).catch(()=>toast('Copy failed','e'));
+  navigator.clipboard.writeText(txt).then(() => toast('Copied!', 's')).catch(() => toast('Copy failed', 'e'));
+};
+
+window.sendAnalysisToVoice = () => {
+  const txt = $id('anal-res-txt').textContent;
+  if (!txt) return;
+  $id('voice-text').value = txt.slice(0, 2800);
+  updateCharCount('voice-text', 'voice-char', 3000);
+  navTo('voice');
+  toast('Loaded into Voice Studio!', 's');
 };
 
 // ═══════════════════════════════════
-// ── HISTORY ──
+// ── HISTORY (IndexedDB + Storage) ──
 // ═══════════════════════════════════
 window.addHistory = async (item, blob = null) => {
   item.ts = Date.now();
   if (blob) item.audioBlob = blob;
   histList.unshift(item);
-  if (histList.length > 40) histList = histList.slice(0, 40);
-  
-  const db = await dbPromise;
-  const tx = db.transaction('history', 'readwrite');
-  tx.objectStore('history').put(item);
-  
-  const lightList = histList.map(h => ({...h, audioBlob: null}));
+  if (histList.length > 50) histList = histList.slice(0, 50);
+
+  try {
+    const db = await dbPromise;
+    const tx = db.transaction('history', 'readwrite');
+    tx.objectStore('history').put(item);
+  } catch(e) {}
+
+  const lightList = histList.map(h => ({ ...h, audioBlob: null }));
   localStorage.setItem('paud_hist', JSON.stringify(lightList));
-  
-  renderHistory(); updateStats();
+
+  renderHistory();
+  updateStats();
 };
 
 function renderHistory() {
   const renderList = (el, type, limit) => {
     if (!el) return;
-    const items = (type ? histList.filter(h=>h.type===type) : histList).slice(0, limit);
-    if (!items.length) { el.innerHTML = `<div class="empty-hist"><i class="fa-solid fa-compact-disc"></i>No ${type||''} creations yet</div>`; return; }
-    const icons = { voice:'fa-microphone', music:'fa-music', narrate:'fa-book-open-reader', analyze:'fa-waveform-lines' };
+    const items = (type ? histList.filter(h => h.type === type) : histList).slice(0, limit);
+    if (!items.length) {
+      el.innerHTML = `<div class="empty-hist"><i class="fa-solid fa-compact-disc"></i>No creations yet</div>`;
+      return;
+    }
+    const icons = { voice: 'fa-microphone-lines', narrate: 'fa-book-open-reader', analyze: 'fa-waveform-lines' };
     el.innerHTML = items.map(item => `
-      <div class="hist-item" onclick="playHistoryItem(${item.ts})" style="cursor:pointer">
-        <div class="hi-ic ${item.ic}"><i class="fa-solid ${icons[item.type]||'fa-circle'}"></i></div>
+      <div class="hist-item" onclick="playHistoryItem(${item.ts})">
+        <div class="hi-ic ${item.ic}"><i class="fa-solid ${icons[item.type] || 'fa-circle'}"></i></div>
         <div class="hi-meta">
           <div class="hi-ttl">${escHtml(item.title)}</div>
           <div class="hi-sub">${escHtml(item.sub)} · ${timeAgo(item.ts)}</div>
         </div>
       </div>`).join('');
   };
-  renderList($id('home-hist'), null, 5);
-  renderList($id('voice-hist'), 'voice', 6);
-  renderList($id('music-hist'), 'music', 6);
-  renderList($id('narr-hist'), 'narrate', 6);
-  renderList($id('anal-hist'), 'analyze', 6);
+  renderList($id('home-hist'), null, 6);
+  renderList($id('voice-hist'), 'voice', 8);
+  renderList($id('narr-hist'), 'narrate', 8);
+  renderList($id('anal-hist'), 'analyze', 8);
 }
 
 window.playHistoryItem = async (ts) => {
-  const db = await dbPromise;
-  const tx = db.transaction('history', 'readonly');
-  const req = tx.objectStore('history').get(ts);
-  req.onsuccess = () => {
-    const item = req.result;
-    if (!item) return;
-    if (item.type === 'analyze') {
+  let item = histList.find(h => h.ts === ts);
+  try {
+    const db = await dbPromise;
+    const req = db.transaction('history', 'readonly').objectStore('history').get(ts);
+    req.onsuccess = () => {
+      if (req.result) item = req.result;
+      if (!item) return;
+      if (item.type === 'analyze') {
         $id('anal-res-txt').textContent = item.resultText || 'Analysis text missing.';
         $id('anal-result').classList.add('on');
         navTo('analyze');
         return;
-    }
-    if (!item.audioBlob) { toast('Old file not saved in database', 'e'); return; }
-    const url = URL.createObjectURL(item.audioBlob);
-    setupPlayer(item.type, url, item.title, item.fmt || 'mp3');
-    navTo(item.type);
-    setTimeout(() => togglePlay(item.type), 150);
-  };
+      }
+      if (!item.audioBlob) { toast('Audio blob not stored in database', 'e'); return; }
+      const url = URL.createObjectURL(item.audioBlob);
+      setupPlayer(item.type === 'narrate' ? 'narr' : 'voice', url, item.title, item.fmt || 'wav', item.audioBlob);
+      navTo(item.type === 'narrate' ? 'narrate' : 'voice');
+      setTimeout(() => togglePlay(item.type === 'narrate' ? 'narr' : 'voice'), 150);
+    };
+  } catch(e) {}
 };
 
 function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function timeAgo(ts) {
-  const s = Math.floor((Date.now()-ts)/1000);
+  const s = Math.floor((Date.now() - ts) / 1000);
   if (s < 60) return 'just now';
-  if (s < 3600) return `${Math.floor(s/60)}m ago`;
-  if (s < 86400) return `${Math.floor(s/3600)}h ago`;
-  return `${Math.floor(s/86400)}d ago`;
+  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+  return `${Math.floor(s / 86400)}d ago`;
 }
 
 function updateStats() {
-  const v = histList.filter(h=>h.type==='voice').length;
-  const m = histList.filter(h=>h.type==='music').length;
-  $id('st-total').textContent = histList.length;
-  $id('st-voice').textContent = v; $id('st-music').textContent = m;
-  $id('prof-voices').textContent = v; $id('prof-tracks').textContent = m;
+  const v = histList.filter(h => h.type === 'voice').length;
+  const n = histList.filter(h => h.type === 'narrate').length;
+  const a = histList.filter(h => h.type === 'analyze').length;
+  if ($id('st-total')) $id('st-total').textContent = histList.length;
+  if ($id('st-voice')) $id('st-voice').textContent = v;
+  if ($id('st-narr'))  $id('st-narr').textContent  = n;
+  if ($id('st-anal'))  $id('st-anal').textContent  = a;
+  if ($id('prof-voices')) $id('prof-voices').textContent = v;
+  if ($id('prof-narrs'))  $id('prof-narrs').textContent  = n;
 }
 
 function restoreDrafts() {
   const vd = localStorage.getItem('paud_vdraft');
-  if (vd) { $id('voice-text').value = vd; updateCharCount('voice-text','voice-char',1000); }
-  const mp = localStorage.getItem('paud_mprompt'); if (mp) $id('music-prompt').value = mp;
-  const ml = localStorage.getItem('paud_mlyrics');
-  if (ml) { $id('music-lyrics').value = ml; updateCharCount('music-lyrics','music-char',3000); }
+  if (vd && $id('voice-text')) {
+    $id('voice-text').value = vd;
+    updateCharCount('voice-text', 'voice-char', 3000);
+  }
   updateStats();
 }
 
 // ── Helpers ──
 window.updateCharCount = (inpId, ctrId, max) => {
   const len = $id(inpId).value.length;
-  const el = $id(ctrId); el.textContent = `${len} / ${max}`;
-  el.classList.toggle('warn', len > max * .9);
+  const el = $id(ctrId); if (!el) return;
+  el.textContent = `${len} / ${max}`;
+  el.classList.toggle('warn', len > max * 0.9);
 };
 
 window.setVal = (id, val) => {
   const el = $id(id); if (!el) return;
-  el.value = val; el.dispatchEvent(new Event('input'));
+  el.value = val;
+  el.dispatchEvent(new Event('input'));
 };
 
-window.clearField = (id) => { $id(id).value = ''; $id(id).dispatchEvent(new Event('input')); };
+window.clearField = (id) => {
+  const el = $id(id); if (!el) return;
+  el.value = '';
+  el.dispatchEvent(new Event('input'));
+};
 
 function showGenOv(name, show) {
   $id(`${name}-gen-ov`)?.classList.toggle('on', show);
-  const btn = $id(`${name}-gen-btn`); if (btn) btn.disabled = show;
+  const btn = $id(`${name}-gen-btn`);
+  if (btn) btn.disabled = show;
 }
 
-// ── Wallet ──
+// ── Wallet & Payments ──
 window.claimDaily = async () => {
   if (!tok) { toast('Sign in first', 'e'); return; }
-  toast('Claiming…', 'i');
+  toast('Claiming daily reward…', 'i');
   try {
     tok = await curUser.getIdToken();
-    const r = await fetch(`${API}/api/user/claim-daily`, { method:'POST', headers:{'X-Firebase-Token':tok} });
-    const d = await r.json().catch(()=>({}));
-    if (r.ok) { toast(d.message||'Daily credits claimed!', 's'); await loadUser(); }
-    else toast(d.detail||d.message||'Already claimed today', 'e');
+    const r = await fetch(`${API}/api/user/claim-daily`, {
+      method: 'POST',
+      headers: { 'X-Firebase-Token': tok }
+    });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) {
+      toast(d.message || 'Daily credits claimed!', 's');
+      await loadUser();
+    } else {
+      toast(d.detail || d.message || 'Already claimed today', 'e');
+    }
   } catch(e) { toast('Network error', 'e'); }
 };
 
@@ -1616,116 +1769,163 @@ window.initPay = async () => {
   try {
     tok = await curUser.getIdToken();
     const r = await fetch(`${API}/api/payments/initiate`, {
-      method:'POST', headers:{'Content-Type':'application/json','X-Firebase-Token':tok},
-      body: JSON.stringify({amount:amt, redirect_url:location.href.split('?')[0]})
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({ amount: amt, redirect_url: location.href.split('?')[0] })
     });
     const d = await r.json();
-    if (r.ok) location.href = d.checkout_url; else toast(d.detail||'Payment failed','e');
-  } catch(e) { toast('Payment error','e'); }
+    if (r.ok) location.href = d.checkout_url;
+    else toast(d.detail || 'Payment failed', 'e');
+  } catch(e) { toast('Payment error', 'e'); }
 };
 
 function checkPayReturn() {
   const p = new URLSearchParams(location.search);
-  const ref = p.get('reference')||p.get('trxref');
-  if (!ref||!curUser) return;
-  history.replaceState({},document.title,location.pathname);
-  $id('pvn').style.display='block'; openM('wallet-m');
+  const ref = p.get('reference') || p.get('trxref');
+  if (!ref || !curUser) return;
+  history.replaceState({}, document.title, location.pathname);
+  $id('pvn').style.display = 'block';
+  openM('wallet-m');
   const verify = async tries => {
-    if (tries<=0){$id('pvn').style.display='none';return;}
+    if (tries <= 0) { $id('pvn').style.display = 'none'; return; }
     try {
       tok = await curUser.getIdToken();
-      const r = await fetch(`${API}/api/payments/verify?transaction_ref=${ref}`,{headers:{'X-Firebase-Token':tok}});
+      const r = await fetch(`${API}/api/payments/verify?transaction_ref=${ref}`, {
+        headers: { 'X-Firebase-Token': tok }
+      });
       const d = await r.json();
-      if(d.status==='success'){ $id('pvn').style.display='none'; closeM('wallet-m'); await loadUser(); toast(`+${d.credits_added} credits!`,'s'); }
-      else if(d.status==='pending') setTimeout(()=>verify(tries-1),4000);
-      else $id('pvn').style.display='none';
-    } catch{ setTimeout(()=>verify(tries-1),4000); }
+      if (d.status === 'success') {
+        $id('pvn').style.display = 'none';
+        closeM('wallet-m');
+        await loadUser();
+        toast(`+${d.credits_added} credits confirmed!`, 's');
+      } else if (d.status === 'pending') setTimeout(() => verify(tries - 1), 4000);
+      else $id('pvn').style.display = 'none';
+    } catch { setTimeout(() => verify(tries - 1), 4000); }
   };
   verify(18);
 }
 
 window.redeemRef = async () => {
-  const code = $id('referral-input').value.trim(); if (!code){toast('Enter a referral code','e');return;}
+  const code = $id('referral-input').value.trim();
+  if (!code) { toast('Enter a referral code', 'e'); return; }
   try {
     tok = await curUser.getIdToken();
-    const r = await fetch(`${API}/api/user/redeem-referral`,{method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},body:JSON.stringify({referrer_code:code})});
+    const r = await fetch(`${API}/api/user/redeem-referral`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({ referrer_code: code })
+    });
     const d = await r.json();
-    if(r.ok){toast('Referral successful!','s');await loadUser();$id('referral-input').value='';}
-    else toast(d.message||'Failed to redeem','e');
-  } catch(e){toast('Connection error','e');}
+    if (r.ok) {
+      toast('Referral redeemed successfully!', 's');
+      await loadUser();
+      $id('referral-input').value = '';
+    } else toast(d.message || 'Failed to redeem', 'e');
+  } catch(e) { toast('Connection error', 'e'); }
 };
 
-// ── Modal helpers ──
-function $id(id){ return document.getElementById(id); }
+// ── Modals & Notifications ──
 window.openM  = id => $id(id)?.classList.add('on');
 window.closeM = id => $id(id)?.classList.remove('on');
-document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e=>{ if(e.target===m) m.classList.remove('on'); }));
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('on'); }));
 
 window.toast = (msg, type) => {
-  const w=$id('toasts'), d=document.createElement('div'); d.className=`toast ${type}`;
-  const ic={s:'fa-circle-check',e:'fa-circle-xmark',i:'fa-circle-info',g:'fa-star'};
-  d.innerHTML=`<i class="fas ${ic[type]||'fa-circle-check'}"></i> ${msg}`;
-  w.appendChild(d); setTimeout(()=>d.remove(),3200);
+  const w = $id('toasts'), d = document.createElement('div');
+  d.className = `toast ${type}`;
+  const ic = { s: 'fa-circle-check', e: 'fa-circle-xmark', i: 'fa-circle-info', g: 'fa-star' };
+  d.innerHTML = `<i class="fa-solid ${ic[type] || 'fa-circle-check'}"></i> ${msg}`;
+  w.appendChild(d);
+  setTimeout(() => d.remove(), 3200);
 };
 
-// ── Aurora background ──
+// ── Aurora Canvas ──
 function startAurora() {
-  const cv=$id('aurora'); if(!cv) return;
-  const ctx=cv.getContext('2d');
-  const resize=()=>{cv.width=innerWidth;cv.height=innerHeight;};
-  resize(); addEventListener('resize',resize); let t=0;
-  (function draw(){
-    requestAnimationFrame(draw); ctx.clearRect(0,0,cv.width,cv.height); t+=.0025;[{cx:.2+Math.sin(t*.6)*.14,cy:.17+Math.cos(t*.5)*.1,r:.55,c:`rgba(201,169,110,${.055+Math.sin(t)*.02})`},
-     {cx:.82+Math.cos(t*.5)*.1,cy:.8+Math.sin(t*.4)*.08,r:.4,c:`rgba(155,108,246,${.038+Math.cos(t*.7)*.014})`},
-     {cx:.52+Math.sin(t*.8)*.08,cy:.48+Math.cos(t*.6)*.06,r:.3,c:`rgba(245,224,160,${.022+Math.sin(t*1.1)*.01})`},
-     {cx:.1+Math.cos(t*.4)*.07,cy:.6+Math.sin(t*.35)*.09,r:.28,c:`rgba(74,128,224,${.02+Math.sin(t*.9)*.01})`}
-    ].forEach(o=>{
-      const gx=cv.width*o.cx,gy=cv.height*o.cy,gr=cv.width*o.r;
-      const g=ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
-      g.addColorStop(0,o.c); g.addColorStop(1,'transparent');
-      ctx.fillStyle=g; ctx.fillRect(0,0,cv.width,cv.height);
+  const cv = $id('aurora'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const resize = () => { cv.width = innerWidth; cv.height = innerHeight; };
+  resize(); addEventListener('resize', resize);
+  let t = 0;
+  (function draw() {
+    requestAnimationFrame(draw);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    t += 0.0025;
+    [
+      { cx: 0.2 + Math.sin(t * 0.6) * 0.14, cy: 0.17 + Math.cos(t * 0.5) * 0.1, r: 0.55, c: `rgba(201,169,110,${0.055 + Math.sin(t) * 0.02})` },
+      { cx: 0.82 + Math.cos(t * 0.5) * 0.1, cy: 0.8 + Math.sin(t * 0.4) * 0.08, r: 0.4,  c: `rgba(155,108,246,${0.038 + Math.cos(t * 0.7) * 0.014})` },
+      { cx: 0.52 + Math.sin(t * 0.8) * 0.08, cy: 0.48 + Math.cos(t * 0.6) * 0.06, r: 0.3,  c: `rgba(245,224,160,${0.022 + Math.sin(t * 1.1) * 0.01})` },
+      { cx: 0.1 + Math.cos(t * 0.4) * 0.07, cy: 0.6 + Math.sin(t * 0.35) * 0.09, r: 0.28, c: `rgba(74,128,224,${0.02 + Math.sin(t * 0.9) * 0.01})` }
+    ].forEach(o => {
+      const gx = cv.width * o.cx, gy = cv.height * o.cy, gr = cv.width * o.r;
+      const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+      g.addColorStop(0, o.c); g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, cv.width, cv.height);
     });
   })();
 }
 
-// ── Particles ──
+// ── Particle System ──
 function spawnParticles() {
-  const c=$id('pts'); if(!c) return;
-  for(let i=0;i<34;i++){
-    const p=document.createElement('div'); p.className='pt';
-    const sz=Math.random()*2+.5;
-    p.style.cssText=`width:${sz}px;height:${sz}px;background:rgba(201,169,110,${Math.random()*.3+.04});left:${Math.random()*100}%;top:${Math.random()*100}%;`;
-    p.style.setProperty('--d',(6+Math.random()*15)+'s');
-    p.style.setProperty('--dl',(-Math.random()*15)+'s');
+  const c = $id('pts'); if (!c) return;
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'pt';
+    const sz = Math.random() * 2 + 0.5;
+    p.style.cssText = `width:${sz}px;height:${sz}px;background:rgba(201,169,110,${Math.random() * 0.3 + 0.04});left:${Math.random() * 100}%;top:${Math.random() * 100}%;`;
+    p.style.setProperty('--d', (6 + Math.random() * 15) + 's');
+    p.style.setProperty('--dl', (-Math.random() * 15) + 's');
     c.appendChild(p);
   }
 }
 
 // ── Drag & Drop ──
 function setupDrag(zoneId) {
-  const zone=$id(zoneId); if(!zone) return;
-  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
-  zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
-  zone.addEventListener('drop',e=>{
+  const zone = $id(zoneId); if (!zone) return;
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+  zone.addEventListener('drop', e => {
     e.preventDefault(); zone.classList.remove('drag');
-    const f=e.dataTransfer.files[0]; if(!f) return;
-    const inp=zone.querySelector('input[type=file]'); if(!inp) return;
-    const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    const f = e.dataTransfer.files[0]; if (!f) return;
+    const inp = zone.querySelector('input[type=file]'); if (!inp) return;
+    const dt = new DataTransfer(); dt.items.add(f); inp.files = dt.files;
     inp.dispatchEvent(new Event('change'));
   });
 }
 
-// ── Typewriter ──
-const TW='Speak. Compose. Narrate. Understand. — Your voice, shaped by gold.';
-function startTypewriter(){
-  const el=$id('tw-text'); if(!el) return; let i=0;
-  const iv=setInterval(()=>{if(i<TW.length){el.textContent+=TW[i];i++;}else clearInterval(iv);},38);
+// ── Splash Typewriter ──
+const TW = 'Speak. Narrate. Master. Understand. — Powered by Philadelphia Audio.';
+function startTypewriter() {
+  const el = $id('tw-text'); if (!el) return;
+  let i = 0;
+  const iv = setInterval(() => {
+    if (i < TW.length) { el.textContent += TW[i]; i++; }
+    else clearInterval(iv);
+  }, 32);
 }
 
-// ── INIT ──
-startAurora(); spawnParticles();
-setTimeout(()=>{const s=$id('splash');if(s){s.style.transition='opacity .5s';s.style.opacity='0';setTimeout(()=>s.style.display='none',520);}},2900);
-setTimeout(startTypewriter,3100);['narr-zone','anal-zone','voice-ref-zone','inst-ref-zone'].forEach(setupDrag);
+// ── Boot ──
+startAurora();
+spawnParticles();
+setTimeout(() => {
+  const s = $id('splash');
+  if (s) {
+    s.style.transition = 'opacity 0.4s';
+    s.style.opacity = '0';
+    setTimeout(() => s.style.display = 'none', 420);
+  }
+}, 1900);
+setTimeout(startTypewriter, 2100);
+['narr-zone', 'anal-zone'].forEach(setupDrag);
 </script>
 </body>
 </html>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); 
+
+  gtag('config', 'G-J1YTKP10ZX');
+</script>
