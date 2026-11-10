@@ -445,9 +445,9 @@ textarea.inp{resize:none;line-height:1.65}
       <div id="v1-panel">
         <span class="lbl-row">Speaking Style (Philadelphia V1)</span>
         <div class="style-grid">
-          <div class="style-chip on" data-style="podcast" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-podcast"></i><span>Podcast</span><small>Warm & relaxed</small></div>
+          <div class="style-chip on" data-style="podcast" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-podcast"></i><span>Philadelphia</span><small>Warm & relaxed</small></div>
           <div class="style-chip" data-style="cinematic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-film"></i><span>Cinematic</span><small>Deep & dramatic</small></div>
-          <div class="style-chip" data-style="upbeat" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-bolt-lightning"></i><span>Upbeat</span><small>Bright & energetic</small></div>
+          <div class="style-chip" data-style="upbeat" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-bolt-lightning"></i><span>Funny Daddy</span><small>Bright & energetic</small></div>
           <div class="style-chip" data-style="soft" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-feather"></i><span>Soft</span><small>Gentle & calm</small></div>
           <div class="style-chip" data-style="dramatic" onclick="selectVoiceStyle(this)"><i class="fa-solid fa-masks-theater"></i><span>Dramatic</span><small>Theatrical flair</small></div>
         </div>
@@ -873,21 +873,21 @@ loadHistoryFromDB().then(list => {
 
 // Philadelphia V2 Neural Voices (/api/tools/text-to-speech-v2)
 const V2_NEURAL_VOICES = [
-  {id:'kore',       label:'Philadelphia (Kore)', desc:'Signature warm & poised',  icon:'fa-crown'},
-  {id:'zephyr',     label:'Zephyr',              desc:'Bright & friendly',        icon:'fa-wind'},
-  {id:'puck',       label:'Puck',                desc:'Upbeat & expressive',      icon:'fa-bolt'},
-  {id:'charon',     label:'Charon',              desc:'Steady documentary',       icon:'fa-film'},
-  {id:'fenrir',     label:'Fenrir',              desc:'Dynamic & commanding',     icon:'fa-fire'},
-  {id:'aoede',      label:'Aoede',               desc:'Breezy & melodic',         icon:'fa-feather'},
-  {id:'leda',       label:'Leda',                desc:'Youthful & clear',         icon:'fa-sparkles'},
-  {id:'orus',       label:'Orus',                desc:'Grounded & resonant',      icon:'fa-mountain'},
-  {id:'callirrhoe', label:'Callirrhoe',          desc:'Relaxed conversational',   icon:'fa-podcast'},
-  {id:'achernar',   label:'Achernar',            desc:'Soft & intimate',          icon:'fa-moon'}
+  {id:'kore',       label:'Philadelphia (pro)', desc:'Signature warm & poised',  icon:'fa-crown'},
+  {id:'zephyr',     label:'Zernis',              desc:'Bright & friendly',        icon:'fa-wind'},
+  {id:'puck',       label:'Philsmagic',                desc:'Upbeat & expressive',      icon:'fa-bolt'},
+  {id:'charon',     label:'Charity',              desc:'Steady documentary',       icon:'fa-film'},
+  {id:'fenrir',     label:'Festo',              desc:'Dynamic & commanding',     icon:'fa-fire'},
+  {id:'aoede',      label:'Arch',               desc:'Breezy & melodic',         icon:'fa-feather'},
+  {id:'leda',       label:'Ledacris',                desc:'Youthful & clear',         icon:'fa-sparkles'},
+  {id:'orus',       label:'Oraptus',                desc:'Grounded & resonant',      icon:'fa-mountain'},
+  {id:'callirrhoe', label:'Caprice',          desc:'Relaxed conversational',   icon:'fa-podcast'},
+  {id:'achernar',   label:'Aeinar',            desc:'Soft & intimate',          icon:'fa-moon'}
 ];
 
 // Philadelphia Pro Character Voices (/api/tools/text-to-speech)
 const PRO_VOICES = [
-  {id:'elder',     label:'Wise Elder',   desc:'Authoritative & deep',     icon:'fa-scroll'},
+  {id:'elder',     label:'Seraphina',   desc:'Authoritative & deep',     icon:'fa-scroll'},
   {id:'narrator',  label:'Narrator',     desc:'Clear & warm storyteller', icon:'fa-book-open'},
   {id:'casual',    label:'Casual',       desc:'Natural & friendly',       icon:'fa-comments'},
   {id:'gentle',    label:'Gentle',       desc:'Patient & caring',         icon:'fa-heart'},
