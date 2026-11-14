@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1070,713 +1070,236 @@ window.applyFilters=()=>{
   filterState={bright:+b,contrast:+c,sat:+s,hue:+h,blur:+bl,sepia:+se,vign:filterState.vign};
 };
 window.applyVignette=()=>{const v=$('f-vign').value/100;$('img-display').style.boxShadow=v>0?`inset 0 0 ${v*120}px rgba(0,0,0,${v*.85})`:'none';filterState.vign=+$('f-vign').value;};
-const PRESETS={
-  cinematic:{bright:95,contrast:116,sat:86,hue:0,blur:0,sepia:6,vign:30},
-  vivid:{bright:106,contrast:122,sat:165,hue:0,blur:0,sepia:0,vign:0},
-  noir:{bright:86,contrast:140,sat:0,hue:0,blur:0,sepia:0,vign:40},
-  warm:{bright:104,contrast:108,sat:118,hue:-8,blur:0,sepia:22,vign:15},
-  vintage:{bright:98,contrast:92,sat:75,hue:5,blur:0,sepia:38,vign:35},
-  cyber:{bright:105,contrast:128,sat:155,hue:185,blur:0,sepia:0,vign:20},
-  reset:{bright:100,contrast:100,sat:100,hue:0,blur:0,sepia:0,vign:0}
+const PRESETS={cinematic:{bright:95,contrast:116,sat:86,hue:0,blur:0,sepia:6,vign:30},vivid:{bright:106,contrast:122,sat:165,hue:0,blur:0,sepia:0,vign:0},noir:{bright:86,contrast:140,sat:0,hue:0,blur:0,sepia:0,vign:40},warm:{bright:105,contrast:105,sat:122,hue:10,blur:0,sepia:22,vign:10},golden:{bright:104,contrast:112,sat:125,hue:35,blur:0,sepia:18,vign:18}};
+window.applyPreset=name=>{
+  const p=PRESETS[name];if(!p)return;
+  $('f-bright').value=p.bright;$('v-bright').textContent=p.bright+'%';
+  $('f-contrast').value=p.contrast;$('v-contrast').textContent=p.contrast+'%';
+  $('f-sat').value=p.sat;$('v-sat').textContent=p.sat+'%';
+  $('f-hue').value=p.hue;$('v-hue').textContent=p.hue+'°';
+  $('f-blur').value=p.blur;$('v-blur').textContent=p.blur+'px';
+  $('f-sepia').value=p.sepia;$('v-sepia').textContent=p.sepia+'%';
+  $('f-vign').value=p.vign;$('v-vign').textContent=p.vign+'%';
+  applyFilters();applyVignette();toast(`${name} filter applied`,"i");
+};
+window.resetFilters=()=>{
+  $('f-bright').value=100;$('v-bright').textContent='100%';
+  $('f-contrast').value=100;$('v-contrast').textContent='100%';
+  $('f-sat').value=100;$('v-sat').textContent='100%';
+  $('f-hue').value=0;$('v-hue').textContent='0°';
+  $('f-blur').value=0;$('v-blur').textContent='0px';
+  $('f-sepia').value=0;$('v-sepia').textContent='0%';
+  $('f-vign').value=0;$('v-vign').textContent='0%';
+  applyFilters();applyVignette();
 };
 
-window.setPreset=(name)=>{
-  const p=PRESETS[name]||PRESETS.reset;
-  ["bright","contrast","sat","hue","blur","sepia","vign"].forEach(k=>{
-    const el=document.getElementById("f-"+k);
-    if(el)el.value=p[k];
-  });
-  updateFilterPreview();
-};
-
-window.updateFilterPreview=()=>{
-  const g=k=>+(document.getElementById("f-"+k)?.value??(k==="bright"||k==="contrast"||k==="sat"?100:0));
-  const br=g("bright"),ct=g("contrast"),st=g("sat"),hu=g("hue"),bl=g("blur"),sp=g("sepia"),vg=g("vign");
-  ["bright","contrast","sat","hue","blur","sepia","vign"].forEach(k=>{
-    const vEl=document.getElementById("fv-"+k);
-    if(vEl)vEl.textContent=g(k)+(k==="hue"?"°":k==="blur"?"px":"%");
-  });
-  const img=document.getElementById("main-img");
-  if(img){
-    img.style.filter=`brightness(${br}%) contrast(${ct}%) saturate(${st}%) hue-rotate(${hu}deg) blur(${bl}px) sepia(${sp}%)`;
-  }
-  const vigEl=document.getElementById("vignette-ov");
-  if(vigEl){
-    vigEl.style.background=vg>0?`radial-gradient(circle, transparent ${100-vg}%, rgba(0,0,0,${Math.min(0.92,vg/65)}) 100%)`:"none";
-  }
-};
-
-window.bakeFilters=async()=>{
-  if(!curImg){toast("Load or generate an image first","e");return;}
-  toast("Baking color grade into image...","i");
-  try{
-    const g=k=>+(document.getElementById("f-"+k)?.value??100);
-    const br=g("bright"),ct=g("contrast"),st=g("sat"),hu=+(document.getElementById("f-hue")?.value||0),bl=+(document.getElementById("f-blur")?.value||0),sp=+(document.getElementById("f-sepia")?.value||0),vg=+(document.getElementById("f-vign")?.value||0);
-    const im=await loadImg(curImg);
-    const cv=document.createElement("canvas");cv.width=im.naturalWidth||1024;cv.height=im.naturalHeight||1024;
-    const ctx=cv.getContext("2d");
-    ctx.filter=`brightness(${br}%) contrast(${ct}%) saturate(${st}%) hue-rotate(${hu}deg) blur(${bl}px) sepia(${sp}%)`;
-    ctx.drawImage(im,0,0,cv.width,cv.height);
-    ctx.filter="none";
-    if(vg>0){
-      const rad=Math.max(cv.width,cv.height)*0.7;
-      const grd=ctx.createRadialGradient(cv.width/2,cv.height/2,rad*(1-vg/110),cv.width/2,cv.height/2,rad);
-      grd.addColorStop(0,"rgba(0,0,0,0)");
-      grd.addColorStop(1,`rgba(0,0,0,${Math.min(0.92,vg/65)})`);
-      ctx.fillStyle=grd;ctx.fillRect(0,0,cv.width,cv.height);
+function extractPalette(b64){
+  const img=new Image();
+  img.onload=()=>{
+    const cv=document.createElement('canvas');cv.width=64;cv.height=64;const ctx=cv.getContext('2d');ctx.drawImage(img,0,0,64,64);
+    const d=ctx.getImageData(0,0,64,64).data,cols={},step=4*12;
+    for(let i=0;i<d.length;i+=step){
+      const r=Math.round(d[i]/24)*24,g=Math.round(d[i+1]/24)*24,b=Math.round(d[i+2]/24)*24;
+      const k=`#${((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1)}`;
+      cols[k]=(cols[k]||0)+1;
     }
-    setPreset("reset");
-    setActiveImage(cv.toDataURL("image/png"),"Color Graded Image");
-    toast("Color grade baked into image!","s");
-  }catch(e){toast("Bake failed: "+e.message,"e");}
+    const top=Object.entries(cols).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0]);
+    $('pal-row').innerHTML=top.map(c=>`<div class="pal-sw" style="background:${c}" onclick="navigator.clipboard.writeText('${c}');toast('Copied ${c}','i')" title="Copy ${c}"></div>`).join('');
+  };
+  img.src=`data:image/png;base64,${b64}`;
+}
+
+window.exportWithFilters=()=>{
+  if(!curImg)return toast("No image to export","e");
+  const img=$('cur-img'),cv=document.createElement('canvas');
+  cv.width=img.naturalWidth||1024;cv.height=img.naturalHeight||1024;
+  const ctx=cv.getContext('2d');
+  ctx.filter=`brightness(${filterState.bright}%) contrast(${filterState.contrast}%) saturate(${filterState.sat}%) hue-rotate(${filterState.hue}deg) blur(${filterState.blur}px) sepia(${filterState.sepia}%)`;
+  ctx.drawImage(img,0,0,cv.width,cv.height);
+  if(filterState.vign>0){
+    ctx.filter='none';
+    const gr=ctx.createRadialGradient(cv.width/2,cv.height/2,cv.width*.25,cv.width/2,cv.height/2,cv.width*.72);
+    gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,`rgba(0,0,0,${filterState.vign/100*.85})`);
+    ctx.fillStyle=gr;ctx.fillRect(0,0,cv.width,cv.height);
+  }
+  const a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download=`philadelphia_graded_${Date.now()}.png`;a.click();
+  toast("Graded image exported!","s");
 };
 
-/* ══════════════════════════════════════════════════
-   TYPOGRAPHY & CAPTION OVERLAY ENGINE
-══════════════════════════════════════════════════ */
-let textPos={x:0.5,y:0.86};
-window.updateTextOverlay=()=>{
-  const ov=document.getElementById("txt-ov-layer");if(!ov)return;
-  const txt=(document.getElementById("t-text")?.value||"").trim();
-  if(!txt){ov.style.display="none";return;}
-  const font=document.getElementById("t-font")?.value||"Cinzel";
-  const col=document.getElementById("t-col")?.value||"#f3d493";
-  const sz=+(document.getElementById("t-size")?.value||34);
-  const fx=document.getElementById("t-fx")?.value||"foil";
-  ov.style.display="block";
-  ov.textContent=txt;
-  ov.style.fontFamily=`'${font}',serif`;
-  ov.style.color=col;
-  ov.style.fontSize=Math.max(12,Math.round(sz*0.55))+"px";
-  ov.style.left=(textPos.x*100)+"%";
-  ov.style.top=(textPos.y*100)+"%";
-  const fxStyles={
-    foil:`0 0 14px rgba(201,169,110,.8), 0 3px 8px rgba(0,0,0,.95)`,
-    shadow:`0 4px 16px rgba(0,0,0,1), 0 1px 4px #000`,
-    glow:`0 0 16px ${col}, 0 0 32px ${col}, 0 2px 5px #000`,
-    outline:`-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000`,
-    box:`none`
-  };
-  ov.style.textShadow=fxStyles[fx]||fxStyles.shadow;
-  ov.style.background=fx==="box"?"rgba(0,0,0,0.72)":"transparent";
-  ov.style.padding=fx==="box"?"6px 14px":"0";
-  ov.style.borderRadius=fx==="box"?"8px":"0";
-};
-
-(function initTextDrag(){
-  const ov=document.getElementById("txt-ov-layer"),stage=document.getElementById("canvas-wrap");
-  if(!ov||!stage)return;
-  let drag=false;
-  const start=e=>{drag=true;e.preventDefault();};
-  const move=e=>{
-    if(!drag)return;
-    const r=stage.getBoundingClientRect(),t=e.touches?e.touches[0]:e;
-    textPos.x=Math.max(0.08,Math.min(0.92,(t.clientX-r.left)/r.width));
-    textPos.y=Math.max(0.06,Math.min(0.94,(t.clientY-r.top)/r.height));
-    ov.style.left=(textPos.x*100)+"%";
-    ov.style.top=(textPos.y*100)+"%";
-  };
-  const end=()=>{drag=false;};
-  ov.addEventListener("mousedown",start);ov.addEventListener("touchstart",start,{passive:false});
-  window.addEventListener("mousemove",move);window.addEventListener("touchmove",move,{passive:false});
-  window.addEventListener("mouseup",end);window.addEventListener("touchend",end);
-})();
-
-window.bakeTextOverlay=async()=>{
-  if(!curImg){toast("Load or generate an image first","e");return;}
-  const txt=(document.getElementById("t-text")?.value||"").trim();
-  if(!txt){toast("Enter text first","e");return;}
-  try{
-    await document.fonts.ready;
-    const im=await loadImg(curImg);
-    const cv=document.createElement("canvas");cv.width=im.naturalWidth||1024;cv.height=im.naturalHeight||1024;
-    const ctx=cv.getContext("2d");
-    ctx.drawImage(im,0,0,cv.width,cv.height);
-    const font=document.getElementById("t-font")?.value||"Cinzel";
-    const col=document.getElementById("t-col")?.value||"#f3d493";
-    const sz=Math.round((+(document.getElementById("t-size")?.value||34))*(cv.width/640));
-    const fx=document.getElementById("t-fx")?.value||"foil";
-    const x=textPos.x*cv.width,y=textPos.y*cv.height;
-    ctx.save();
-    ctx.font=`800 ${sz}px '${font}',serif`;
-    ctx.textAlign="center";ctx.textBaseline="middle";
-    if(fx==="box"){
-      const mw=ctx.measureText(txt).width+sz*0.8;
-      ctx.fillStyle="rgba(0,0,0,0.75)";
-      ctx.fillRect(x-mw/2,y-sz*0.7,mw,sz*1.4);
-    }else if(fx==="outline"){
-      ctx.lineWidth=Math.max(4,sz*0.1);ctx.strokeStyle="#000";ctx.strokeText(txt,x,y);
+/* ── MOTION ANIMATIONS ── */
+window.selectAnim=(name,el)=>{curAnim=name;document.querySelectorAll('.ap').forEach(x=>x.classList.remove('on'));el.classList.add('on');};
+window.startAnim=()=>{
+  if(!curImg)return toast("Generate or load an image first","e");
+  stopAnim();
+  const wrap=$('anim-cv-wrap'),cv=$('anim-cv'),ctx=cv.getContext('2d'),img=$('cur-img');
+  cv.width=480;cv.height=Math.round((img.naturalHeight/img.naturalWidth||1)*480);
+  wrap.classList.add('on');animFr=0;
+  const pts=Array.from({length:36},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*2.5+1,vy:Math.random()*1.5+.4,vx:(Math.random()-.5)*.8}));
+  (function loop(){
+    animRAF=requestAnimationFrame(loop);
+    const spd=+$('anim-speed').value/5,int=+$('anim-intensity').value/5;
+    animFr+=spd;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    if(curAnim==='kenburns'){
+      const z=1+Math.sin(animFr*.015)*.08*int,px=Math.sin(animFr*.01)*18*int,py=Math.cos(animFr*.012)*12*int;
+      ctx.save();ctx.translate(cv.width/2+px,cv.height/2+py);ctx.scale(z,z);ctx.drawImage(img,-cv.width/2,-cv.height/2,cv.width,cv.height);ctx.restore();
+    }else if(curAnim==='glitch'){
+      ctx.drawImage(img,0,0,cv.width,cv.height);
+      if(Math.random()<0.25*int){
+        const sy=Math.random()*cv.height,sh=10+Math.random()*35,dx=(Math.random()-.5)*24*int;
+        ctx.drawImage(cv,0,sy,cv.width,sh,dx,sy,cv.width,sh);
+      }
+    }else if(curAnim==='dreamy'){
+      ctx.drawImage(img,0,0,cv.width,cv.height);
+      const a=.18+.15*Math.sin(animFr*.04)*int;
+      ctx.save();ctx.globalAlpha=Math.max(0,a);ctx.filter=`blur(${6*int}px) brightness(120%)`;ctx.drawImage(img,0,0,cv.width,cv.height);ctx.restore();
+    }else if(curAnim==='filmburn'){
+      ctx.drawImage(img,0,0,cv.width,cv.height);
+      const gx=(Math.sin(animFr*.025)*.5+.5)*cv.width;
+      const g=ctx.createRadialGradient(gx,cv.height*.3,10,gx,cv.height*.3,cv.width*.6);
+      g.addColorStop(0,`rgba(255,140,40,${.45*int})`);g.addColorStop(.5,`rgba(201,169,110,${.2*int})`);g.addColorStop(1,'transparent');
+      ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
     }else{
-      ctx.shadowColor=fx==="glow"?col:"rgba(0,0,0,0.92)";
-      ctx.shadowBlur=fx==="glow"?sz*0.65:sz*0.4;
-      ctx.shadowOffsetY=fx==="glow"?0:sz*0.06;
+      ctx.drawImage(img,0,0,cv.width,cv.height);
+      pts.forEach(p=>{
+        p.y-=p.vy*spd;p.x+=p.vx*spd;if(p.y<0){p.y=cv.height;p.x=Math.random()*cv.width;}
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r*int,0,Math.PI*2);ctx.fillStyle=curAnim==='goldleaf'?'rgba(245,224,160,.85)':'rgba(201,169,110,.75)';ctx.fill();
+      });
     }
-    ctx.fillStyle=col;ctx.fillText(txt,x,y);
-    ctx.restore();
-    document.getElementById("t-text").value="";
-    updateTextOverlay();
-    setActiveImage(cv.toDataURL("image/png"),"Captioned Artwork");
-    toast("Typography baked onto image!","s");
-  }catch(e){toast("Text bake failed: "+e.message,"e");}
+  })();
+};
+window.stopAnim=()=>{if(animRAF)cancelAnimationFrame(animRAF);animRAF=null;};
+window.captureFrame=()=>{
+  if(!$('anim-cv-wrap').classList.contains('on'))return toast("Play an animation first","i");
+  const a=document.createElement('a');a.href=$('anim-cv').toDataURL('image/png');a.download=`philadelphia_frame_${Date.now()}.png`;a.click();toast("Frame saved!","s");
+};
+window.downloadAnimMP4=()=>{
+  if(!$('anim-cv-wrap').classList.contains('on'))startAnim();
+  const cv=$('anim-cv'),stream=cv.captureStream(30),rec=new MediaRecorder(stream,{mimeType:'video/webm'}),chunks=[];
+  rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+  rec.onstop=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));a.download=`philadelphia_motion_${Date.now()}.webm`;a.click();toast("Motion WebM saved!","s");};
+  rec.start();toast("Recording 4s motion clip…","i");setTimeout(()=>rec.stop(),4000);
 };
 
-/* ══════════════════════════════════════════════════
-   INTERACTIVE DRAW, PAINT, GOLD FOIL & RETOUCH ENGINE
-══════════════════════════════════════════════════ */
-let drawMode=false,brushType="brush",drawStack=[],painting=false,sx0=0,sy0=0,snapData=null;
-const dcv=document.getElementById("draw-layer"),dctx=dcv?dcv.getContext("2d"):null;
-
-window.toggleDrawMode=(force)=>{
-  drawMode=force!==undefined?force:!drawMode;
-  if(!dcv)return;
-  dcv.classList.toggle("active",drawMode);
-  const btn=document.getElementById("btn-draw-toggle");
-  if(btn)btn.innerHTML=drawMode?`<i class="fas fa-check"></i> Drawing Active (Tap Bake to Save)`:`<i class="fas fa-paintbrush"></i> Enable Canvas Drawing`;
-  if(drawMode&&!drawStack.length)syncDrawCanvasSize();
+/* ── PRESETS & GALLERY ── */
+const STYLES_DATA=[
+  ['Cyberpunk','neon rain, cybernetic metropolis, cyan and gold','linear-gradient(135deg,#0f172a,#7c3aed)'],
+  ['Editorial','high-fashion studio lighting, 85mm lens, sharp detail','linear-gradient(135deg,#292524,#c9a96e)'],
+  ['Afrofuturism','gold geometric architecture, solar light, regal','linear-gradient(135deg,#451a03,#d97706)'],
+  ['Anime','studio cel-shaded cinema frame, dramatic sky','linear-gradient(135deg,#1e1b4b,#ec4899)'],
+  ['Oil Painting','classical museum brushwork, rich chiaroscuro','linear-gradient(135deg,#1c1917,#92400e)'],
+  ['3D Render','octane render, volumetric subsurface scattering','linear-gradient(135deg,#064e3b,#06b6d4)'],
+  ['Film Noir','dramatic monochrome shadows, 35mm grain','linear-gradient(135deg,#000,#525252)'],
+  ['Minimalist','clean negative space, luxury product composition','linear-gradient(135deg,#27272a,#a1a1aa)']
+];
+function buildStyleGrid(){
+  $('style-g').innerHTML=STYLES_DATA.map(([n,mod,bg])=>`<div class="sg" onclick="addStyleMod('${mod.replace(/'/g,"\\'")}',this)"><div class="sg-bg" style="background:${bg}"></div><div class="sg-lbl">${n}</div></div>`).join('');
+}
+window.addStyleMod=(mod,el)=>{
+  document.querySelectorAll('.sg').forEach(x=>x.classList.remove('on'));el.classList.add('on');
+  const ta=$('prompt-ta');ta.value=(ta.value.trim()?ta.value.trim()+', ':'')+mod;updateCharCount(ta);toast("Style added to prompt!","i");
 };
-
-function syncDrawCanvasSize(){
-  const img=document.getElementById("main-img");
-  if(!dcv||!img)return;
-  dcv.width=img.naturalWidth||1024;
-  dcv.height=img.naturalHeight||1024;
-  dctx.clearRect(0,0,dcv.width,dcv.height);
-  drawStack=[dctx.getImageData(0,0,dcv.width,dcv.height)];
+const TRENDING=[
+  'Golden hour luxury villa overlooking the Atlantic ocean, architectural digest photography',
+  'Macro shot of a mechanical gold watch submerged in crystal water with air bubbles',
+  'Cosmic nebula shaped like a soaring eagle, deep space photography, 8k'
+];
+function buildTrending(){
+  $('trending-prompts').innerHTML=TRENDING.map(p=>`<div class="ph-item" onclick="qp('${p.replace(/'/g,"\\'")}')"><i class="fas fa-bolt" style="color:var(--g1);font-size:.66rem"></i><span class="ph-txt">${p}</span></div>`).join('');
 }
 
-window.setBrushType=(t,el)=>{
-  brushType=t;
-  document.querySelectorAll(".b-tool").forEach(b=>b.classList.remove("on"));
-  if(el)el.classList.add("on");
-  if(!drawMode)toggleDrawMode(true);
+window.saveToGallery=async(silent=false)=>{
+  if(!curImgB64)return!silent&&toast("No image to save","e");
+  const item={id:Date.now(),b64:curImgB64,prompt:$('prompt-ta').value.trim()||'Studio Creation',ar:curAR,fav:isFav,ts:Date.now()};
+  gallery.unshift(item);await dbPut('gallery',item);
+  renderGallery();updateStats();
+  if(!silent)toast("Saved to Gallery!","s");
 };
-
-if(dcv&&dctx){
-  const pos=e=>{
-    const r=dcv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;
-    return {x:(t.clientX-r.left)*(dcv.width/r.width),y:(t.clientY-r.top)*(dcv.height/r.height)};
-  };
-  const start=e=>{
-    if(!drawMode)return;
-    e.preventDefault();painting=true;
-    const p=pos(e);sx0=p.x;sy0=p.y;
-    snapData=dctx.getImageData(0,0,dcv.width,dcv.height);
-    dctx.beginPath();dctx.moveTo(p.x,p.y);
-  };
-  const move=e=>{
-    if(!painting||!drawMode)return;
-    e.preventDefault();
-    const p=pos(e);
-    const sz=(+(document.getElementById("d-size")?.value||14))*(dcv.width/600);
-    const col=document.getElementById("d-col")?.value||"#f3d493";
-    dctx.lineCap="round";dctx.lineJoin="round";dctx.lineWidth=sz;
-    if(brushType==="erase"){
-      dctx.globalCompositeOperation="destination-out";dctx.strokeStyle="rgba(0,0,0,1)";dctx.shadowBlur=0;
-      dctx.lineTo(p.x,p.y);dctx.stroke();
-    }else if(brushType==="line"||brushType==="rect"||brushType==="circle"){
-      dctx.putImageData(snapData,0,0);dctx.globalCompositeOperation="source-over";
-      dctx.strokeStyle=col;dctx.shadowBlur=0;dctx.beginPath();
-      if(brushType==="line"){dctx.moveTo(sx0,sy0);dctx.lineTo(p.x,p.y);}
-      else if(brushType==="rect"){dctx.strokeRect(sx0,sy0,p.x-sx0,p.y-sy0);}
-      else{const rad=Math.hypot(p.x-sx0,p.y-sy0);dctx.arc(sx0,sy0,rad,0,Math.PI*2);}
-      dctx.stroke();
-    }else{
-      dctx.globalCompositeOperation="source-over";
-      if(brushType==="foil"){
-        const g=dctx.createLinearGradient(p.x-30,p.y-30,p.x+30,p.y+30);
-        g.addColorStop(0,"#9c7326");g.addColorStop(0.5,"#fff3c4");g.addColorStop(1,"#c9a96e");
-        dctx.strokeStyle=g;dctx.shadowColor="rgba(201,169,110,0.65)";dctx.shadowBlur=8;
-      }else if(brushType==="glow"){
-        dctx.strokeStyle=col;dctx.shadowColor=col;dctx.shadowBlur=sz*1.8;
-      }else{
-        dctx.strokeStyle=col;dctx.shadowBlur=0;
-      }
-      dctx.lineTo(p.x,p.y);dctx.stroke();
-    }
-  };
-  const end=()=>{
-    if(!painting)return;painting=false;
-    dctx.globalCompositeOperation="source-over";dctx.shadowBlur=0;
-    drawStack.push(dctx.getImageData(0,0,dcv.width,dcv.height));
-    if(drawStack.length>20)drawStack.shift();
-  };
-  dcv.addEventListener("mousedown",start);dcv.addEventListener("mousemove",move);window.addEventListener("mouseup",end);
-  dcv.addEventListener("touchstart",start,{passive:false});dcv.addEventListener("touchmove",move,{passive:false});dcv.addEventListener("touchend",end);
+async function loadGalleryDB(){gallery=(await dbGetAll('gallery')).sort((a,b)=>b.ts-a.ts);}
+let galFilter='all';
+window.filterGal=(f,el)=>{galFilter=f;document.querySelectorAll('.gf').forEach(x=>x.classList.remove('on'));el.classList.add('on');renderGallery();};
+function renderGallery(){
+  const g=$('gal-g');if(!g)return;
+  const list=gallery.filter(x=>galFilter==='all'||(galFilter==='fav'&&x.fav)||galFilter==='pro');
+  if(!list.length){g.innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--t3);padding:30px;font-size:.78rem;">No saved images yet.</div>`;return;}
+  g.innerHTML=list.map(it=>`<div class="gi" onclick="loadFromGallery(${it.id})"><img src="data:image/png;base64,${it.b64}"><button class="gi-del" onclick="delGal(${it.id},event)"><i class="fas fa-times"></i></button><div class="gi-info">${it.ar||'1:1'}</div></div>`).join('');
 }
+window.loadFromGallery=id=>{
+  const it=gallery.find(x=>x.id===id);if(!it)return;
+  prevImgB64=curImgB64;curImgB64=it.b64;curImg=`data:image/png;base64,${it.b64}`;
+  showImage(curImg);extractPalette(it.b64);goScr('studio');
+};
+window.delGal=async(id,e)=>{e.stopPropagation();gallery=gallery.filter(x=>x.id!==id);await dbDel('gallery',id);renderGallery();updateStats();};
+window.toggleFav=()=>{isFav=!isFav;updateFavBtn();};
+function updateFavBtn(){$('fav-btn').style.background=isFav?'rgba(224,90,122,.28)':'rgba(224,90,122,.1)';}
 
-window.undoDraw=()=>{
-  if(!dctx||drawStack.length<=1)return;
-  drawStack.pop();dctx.putImageData(drawStack[drawStack.length-1],0,0);
-};
-window.clearDraw=()=>{
-  if(!dctx||!dcv)return;
-  dctx.clearRect(0,0,dcv.width,dcv.height);
-  drawStack=[dctx.getImageData(0,0,dcv.width,dcv.height)];
-};
-window.bakeDraw=async()=>{
-  if(!curImg){toast("Generate or upload a base image first","e");return;}
-  try{
-    const im=await loadImg(curImg);
-    const cv=document.createElement("canvas");cv.width=im.naturalWidth||1024;cv.height=im.naturalHeight||1024;
-    const ctx=cv.getContext("2d");
-    ctx.drawImage(im,0,0,cv.width,cv.height);
-    if(dcv)ctx.drawImage(dcv,0,0,cv.width,cv.height);
-    clearDraw();toggleDrawMode(false);
-    setActiveImage(cv.toDataURL("image/png"),"Hand-Painted Artwork");
-    toast("Drawing merged onto image!","s");
-  }catch(e){toast("Could not merge drawing: "+e.message,"e");}
-};
-
-/* ══════════════════════════════════════════════════
-   PHILADELPHIA PRO GENERATION ENGINE (SECOND MODEL ONLY)
-══════════════════════════════════════════════════ */
-window.setRatio=(r,el)=>{
-  curRatio=r;
-  document.querySelectorAll(".r-pill").forEach(b=>b.classList.remove("on"));
-  if(el)el.classList.add("on");
-};
-window.setStylePreset=(s,el)=>{
-  curStyle=s;
-  document.querySelectorAll(".st-chip").forEach(b=>b.classList.remove("on"));
-  if(el)el.classList.add("on");
-};
-window.setBatch=(n,el)=>{
-  batchCount=n;
-  document.querySelectorAll(".b-cnt").forEach(b=>b.classList.remove("on"));
-  if(el)el.classList.add("on");
-  const cst=document.getElementById("gen-cost-lbl");
-  if(cst)cst.textContent=`(${n*15} credits)`;
-};
-
-window.generateImage=async()=>{
-  if(!tok){toast("Please sign in first","e");openM("auth-m");return;}
-  const rawPrompt=(document.getElementById("p-input")?.value||"").trim();
-  if(!rawPrompt){toast("Describe the image you want to create","e");return;}
-  const cost=batchCount*15;
-  if(bal<cost){toast(`Insufficient credits (need ${cost} cr)`,"e");openM("fund-m");return;}
-  const neg=(document.getElementById("p-neg")?.value||"").trim();
-  const opt=document.getElementById("p-opt")?.checked!==false;
-  const fullPrompt=curStyle&&curStyle!=="none"
-    ? `${rawPrompt}, ${curStyle} style, high detail masterpiece${neg?`, avoid: ${neg}`:""}`
-    : `${rawPrompt}${neg?`, avoid: ${neg}`:""}`;
-
-  showLoader(`Philadelphia Pro is rendering ${batchCount>1?batchCount+" images":"your image"}...`);
-  try{
-    const r=await fetch(`${API}/api/studio/generate-image`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json","X-Firebase-Token":tok},
-      body:JSON.stringify({
-        prompt:fullPrompt,
-        use_minimax:true,
-        aspect_ratio:curRatio,
-        n:batchCount,
-        prompt_optimizer:opt
-      })
-    });
-    const d=await r.json();
-    if(!r.ok)throw new Error(d.detail||"Generation failed");
-    const list=d.images_b64||(d.image_b64?[d.image_b64]:[]);
-    if(!list.length)throw new Error("No image returned");
-    hideLoader();
-    bal-=(d.credits_charged||cost);updBal();
-
-    const strip=document.getElementById("batch-strip");
-    if(strip){
-      strip.innerHTML="";
-      if(list.length>1){
-        strip.style.display="flex";
-        list.forEach((b64,idx)=>{
-          const src=b64.startsWith("data:")?b64:`data:image/png;base64,${b64}`;
-          const th=document.createElement("img");
-          th.src=src;th.className="batch-thumb"+(idx===0?" on":"");
-          th.onclick=()=>{
-            strip.querySelectorAll(".batch-thumb").forEach(x=>x.classList.remove("on"));
-            th.classList.add("on");
-            setActiveImage(src,rawPrompt,false);
-          };
-          strip.appendChild(th);
-          saveToGallery(src,rawPrompt);
-        });
-      }else{
-        strip.style.display="none";
-      }
-    }
-    const firstSrc=list[0].startsWith("data:")?list[0]:`data:image/png;base64,${list[0]}`;
-    setActiveImage(firstSrc,rawPrompt,list.length===1);
-    toast(`Created with Philadelphia Pro! (-${d.credits_charged||cost} cr)`,"s");
-  }catch(e){
-    hideLoader();
-    if(String(e.message).toLowerCase().includes("credit"))openM("fund-m");
-    toast("Error: "+e.message,"e");
-  }
-};
-
-/* ── PHOTO EDIT (IMAGE-TO-IMAGE), REMOVE BG & VISION ANALYZE ── */
-window.handleFileUpload=async(inp)=>{
-  const f=inp.files?.[0];inp.value="";if(!f)return;
-  const rd=new FileReader();
-  rd.onload=()=>{
-    setActiveImage(rd.result,f.name,true);
-    toast("Image loaded onto canvas!","s");
-  };
-  rd.readAsDataURL(f);
-};
-
-window.runPhotoEdit=async()=>{
-  if(!tok){toast("Sign in first","e");return;}
-  if(!curImg){toast("Load or generate a base image first","e");return;}
-  const inst=(document.getElementById("edit-prompt")?.value||"").trim()||(document.getElementById("p-input")?.value||"").trim();
-  if(!inst){toast("Describe how to transform or edit the image","e");return;}
-  if(bal<15){toast("Need 15 credits for Philadelphia Pro Edit","e");openM("fund-m");return;}
-  showLoader("Philadelphia Pro is transforming your image...");
-  try{
-    const blob=await (await fetch(curImg)).blob();
-    const fd=new FormData();
-    fd.append("file",new File([blob],"source.png",{type:blob.type||"image/png"}));
-    fd.append("prompt",inst);
-    fd.append("aspect_ratio",curRatio||"1:1");
-    const r=await fetch(`${API}/api/tools/edit-photo`,{method:"POST",headers:{"X-Firebase-Token":tok},body:fd});
-    if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.detail||"Photo edit failed");}
-    const outBlob=await r.blob();
-    const b64=await blobToDataURL(outBlob);
-    hideLoader();
-    setActiveImage(b64,inst,true);
-    bal-=15;updBal();
-    toast("Photo transformed with Philadelphia Pro!","s");
-  }catch(e){hideLoader();toast("Edit failed: "+e.message,"e");}
-};
-
-window.runRemoveBg=async()=>{
-  if(!tok){toast("Sign in first","e");return;}
-  if(!curImg){toast("Load or generate an image first","e");return;}
-  if(bal<2){toast("Need 2 credits","e");openM("fund-m");return;}
-  showLoader("Removing background...");
-  try{
-    const blob=await (await fetch(curImg)).blob();
-    const fd=new FormData();
-    fd.append("file",new File([blob],"image.png",{type:blob.type||"image/png"}));
-    const r=await fetch(`${API}/api/tools/remove-background`,{method:"POST",headers:{"X-Firebase-Token":tok},body:fd});
-    if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.detail||"Remove BG failed");}
-    const outBlob=await r.blob();
-    const b64=await blobToDataURL(outBlob);
-    hideLoader();
-    setActiveImage(b64,"Background Removed Cutout",true);
-    bal-=2;updBal();
-    toast("Background removed!","s");
-  }catch(e){hideLoader();toast("Failed: "+e.message,"e");}
-};
-
-window.runVisionInspect=async(mode="prompt")=>{
-  if(!tok){toast("Sign in first","e");return;}
-  if(!curImg){toast("Load or generate an image to inspect","e");return;}
-  showLoader("Philadelphia Vision is analyzing your image...");
-  try{
-    const blob=await (await fetch(curImg)).blob();
-    const fd=new FormData();
-    fd.append("file",new File([blob],"inspect.jpg",{type:blob.type||"image/jpeg"}));
-    fd.append("prompt",mode==="prompt"
-      ? "Reverse-engineer this image into a rich, detailed visual generation prompt capturing subject, lighting, camera angle, color palette, and style. Output ONLY the prompt."
-      : "Critique this image's composition, lighting, color harmony, and visual impact, and suggest 3 concrete improvements.");
-    const r=await fetch(`${API}/api/studio/understand`,{method:"POST",headers:{"X-Firebase-Token":tok},body:fd});
-    const d=await r.json();
-    if(!r.ok)throw new Error(d.detail||"Vision analysis failed");
-    hideLoader();
-    const text=(d.analysis||d.thinking||"").trim();
-    const box=document.getElementById("vision-out");
-    if(box){box.style.display="block";box.textContent=text;}
-    if(mode==="prompt"&&text){
-      document.getElementById("p-input").value=text;
-      toast("Extracted prompt copied to prompt box!","s");
-    }else{
-      toast("Vision critique complete!","s");
-    }
-    loadUser();
-  }catch(e){hideLoader();toast("Vision error: "+e.message,"e");}
-};
-
-/* ══════════════════════════════════════════════════
-   PHILADELPHIA AI AGENTIC DIRECTOR (/api/minimax/chat + /api/agent/run)
-══════════════════════════════════════════════════ */
-async function streamMinimaxChat(message,sysPrompt,onChunk){
-  const r=await fetch(`${API}/api/minimax/chat`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json","X-Firebase-Token":tok},
-    body:JSON.stringify({message,history:[],system_prompt:sysPrompt})
-  });
-  if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.detail||"Chat error");}
-  const reader=r.body.getReader(),dec=new TextDecoder();
-  let buf="",full="";
-  for(;;){
-    const {value,done}=await reader.read();if(done)break;
-    buf+=dec.decode(value,{stream:true});
-    let nl;
-    while((nl=buf.indexOf("\n\n"))!==-1){
-      const ln=buf.slice(0,nl);buf=buf.slice(nl+2);
-      if(!ln.startsWith("data: "))continue;
-      const ds=ln.slice(6).trim();if(ds==="[DONE]")continue;
-      try{const ev=JSON.parse(ds);if(ev.type==="content"){full+=ev.content;if(onChunk)onChunk(full);}}catch(e){}
-    }
-  }
-  return full.replace(/<think>[\s\S]*?<\/think>/gi,"").trim();
+function addPH(p,m){promptHistory.unshift({p,m});if(promptHistory.length>15)promptHistory.pop();localStorage.setItem('phl_img_ph',JSON.stringify(promptHistory));renderPH();}
+function renderPH(){
+  try{if(!promptHistory.length)promptHistory=JSON.parse(localStorage.getItem('phl_img_ph')||'[]');}catch(e){}
+  const el=$('ph-list');if(!el)return;
+  el.innerHTML=promptHistory.map(h=>`<div class="ph-item" onclick="qp('${h.p.replace(/'/g,"\\'")}')"><i class="fas fa-history" style="color:var(--g1);font-size:.66rem"></i><span class="ph-txt">${h.p}</span></div>`).join('')||`<div style="font-size:.7rem;color:var(--t3)">No prompts yet.</div>`;
 }
+window.clearHistory=()=>{promptHistory=[];localStorage.removeItem('phl_img_ph');renderPH();};
+function updateStats(){$('st-gen').textContent=genCount;$('st-save').textContent=gallery.length;$('st-fav').textContent=gallery.filter(x=>x.fav).length;}
 
-window.enhancePromptAI=async()=>{
-  if(!tok){toast("Sign in first","e");return;}
-  const inp=document.getElementById("p-input");
-  const raw=(inp?.value||"").trim();
-  if(!raw){toast("Type a rough idea first","e");return;}
-  toast("Philadelphia AI is sharpening your prompt...","i");
-  try{
-    const out=await streamMinimaxChat(
-      `Rewrite this rough idea into a breathtaking, detailed visual prompt for Philadelphia Pro (subject, lighting, lens, atmosphere, color grading, texture, composition). Keep it under 55 words and output ONLY the prompt text:\n\n${raw}`,
-      "You are Philadelphia AI, an elite visual prompt director. Output only the enhanced prompt."
-    );
-    if(out){inp.value=out;loadUser();toast("Prompt enhanced!","s");}
-  }catch(e){toast("Enhance failed: "+e.message,"e");}
+window.setExpFmt=(f,el)=>{expFmtSel=f;document.querySelectorAll('.eo').forEach(x=>x.classList.remove('on'));el.classList.add('on');};
+window.downloadImage=()=>{
+  if(!curImg)return;
+  const img=$('cur-img'),cv=document.createElement('canvas');cv.width=img.naturalWidth||1024;cv.height=img.naturalHeight||1024;
+  cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+  const a=document.createElement('a');a.href=cv.toDataURL(`image/${expFmtSel}`,+$('exp-quality').value/100);a.download=`philadelphia_${Date.now()}.${expFmtSel}`;a.click();
+  closeM('export-m');toast("Downloaded!","s");
 };
-
-window.sendAgentCommand=async(presetCmd)=>{
-  if(!tok){toast("Sign in first","e");return;}
-  const inp=document.getElementById("agent-inp");
-  const text=(presetCmd||inp?.value||"").trim();
-  if(!text)return;
-  if(!presetCmd&&inp)inp.value="";
-  const log=document.getElementById("agent-log");
-  if(log){
-    log.innerHTML+=`<div class="amsg usr">${escHtml(text)}</div>`;
-    log.scrollTop=log.scrollHeight;
-  }
-  const aiBubble=document.createElement("div");
-  aiBubble.className="amsg ai";
-  aiBubble.innerHTML=`<i class="fas fa-circle-notch fa-spin"></i> Working on it...`;
-  if(log){log.appendChild(aiBubble);log.scrollTop=log.scrollHeight;}
-
-  const sys=`You are Philadelphia AI, the flagship Agentic Image Director inside Elvion AI's Image Studio. Never mention third-party model names; you use Philadelphia Pro.
-You can control the studio directly by embedding these command tags in your response:
-<<PROMPT: "vivid visual prompt">> - Sets the generation prompt.
-<<RATIO: "1:1|16:9|9:16|4:3|3:4|21:9">> - Sets the aspect ratio.
-<<CAPTION: "Text to overlay on image">> - Adds typography caption on the image.
-<<GRADE: "cinematic|vivid|noir|warm|vintage|cyber|reset">> - Applies color grading.
-<<GENERATE>> - Immediately generates the image with Philadelphia Pro.
-<<EDIT: "edit instruction">> - Transforms the current canvas image.
-<<RMBG>> - Removes the background from the current image.
-<<AGENT_DESIGN: "detailed design brief">> - Runs the backend multi-step agent (/api/agent/run) to create a poster/flyer/graphic.
-When the user asks you to create or edit an image, include the appropriate command tag so it executes automatically, and reply briefly and warmly.`;
-
-  try{
-    const reply=await streamMinimaxChat(text,sys,chunk=>{
-      const clean=chunk.replace(/<think>[\s\S]*?<\/think>/gi,"").replace(/<<[^>]*>>/g,"").trim();
-      if(clean)aiBubble.textContent=clean;
-      if(log)log.scrollTop=log.scrollHeight;
-    });
-    const rx=/<<([A-Z_]+)(?::\s*"([^"]*)")?>>/g;
-    let cleanReply=reply;const cmds=[];let m;
-    while((m=rx.exec(reply))!==null){
-      cmds.push({cmd:m[1],arg:m[2]||""});
-      cleanReply=cleanReply.replace(m[0],"");
-    }
-    aiBubble.textContent=cleanReply.trim()||"Done! Executing your studio actions now.";
-
-    for(const c of cmds){
-      if(c.cmd==="PROMPT"&&c.arg)document.getElementById("p-input").value=c.arg;
-      if(c.cmd==="RATIO"&&c.arg){curRatio=c.arg;document.querySelectorAll(".r-pill").forEach(b=>b.classList.toggle("on",b.dataset.r===c.arg));}
-      if(c.cmd==="CAPTION"&&c.arg){document.getElementById("t-text").value=c.arg;updateTextOverlay();}
-      if(c.cmd==="GRADE"&&c.arg)setPreset(c.arg.toLowerCase());
-      if(c.cmd==="GENERATE")await generateImage();
-      if(c.cmd==="EDIT"&&c.arg){document.getElementById("edit-prompt").value=c.arg;await runPhotoEdit();}
-      if(c.cmd==="RMBG")await runRemoveBg();
-      if(c.cmd==="AGENT_DESIGN"&&c.arg)await runBackendAgentDesign(c.arg,aiBubble);
-    }
-    loadUser();
-  }catch(e){aiBubble.textContent="Error: "+e.message;}
+window.copyToClipboard=async()=>{
+  if(!curImgB64)return;
+  try{await navigator.clipboard.write([new ClipboardItem({'image/png':b64toBlob(curImgB64,'image/png')})]);toast("Copied image!","s");}
+  catch(e){toast("Copy not supported on this browser","e");}
 };
-
-async function runBackendAgentDesign(brief,statusNode){
-  showLoader("Philadelphia Agent is building your design...");
-  try{
-    const ids=[];
-    if(curImg){
-      const blob=await (await fetch(curImg)).blob();
-      const fd=new FormData();fd.append("file",new File([blob],"canvas.png",{type:"image/png"}));
-      const up=await fetch(`${API}/api/agent/upload`,{method:"POST",headers:{"X-Firebase-Token":tok},body:fd});
-      if(up.ok){const uj=await up.json();if(uj.id)ids.push(uj.id);}
-    }
-    const r=await fetch(`${API}/api/agent/run`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json","X-Firebase-Token":tok},
-      body:JSON.stringify({
-        message:`${brief}. Create the visual once at highest quality and stop.`,
-        persona:"You are Philadelphia AI Image Studio Agent. Produce one image/design artifact and stop.",
-        artifact_ids:ids
-      })
-    });
-    const j=await r.json();if(!r.ok)throw new Error(j.detail||"Agent start failed");
-    const rid=j.run_id;let after=0;
-    for(let i=0;i<65;i++){
-      await new Promise(res=>setTimeout(res,1500));
-      const sr=await fetch(`${API}/api/agent/runs/${rid}?after=${after}`,{headers:{"X-Firebase-Token":tok}});
-      if(!sr.ok)break;
-      const sd=await sr.json();
-      for(const ev of (sd.events||[])){
-        after=ev.seq;
-        if(ev.type==="tool_start")showLoader(ev.data?.label||"Running studio tool...");
-        if(ev.type==="artifact"&&ev.data?.kind==="image"&&ev.data?.url){
-          const ir=await fetch(API+ev.data.url);
-          const b64=await blobToDataURL(await ir.blob());
-          setActiveImage(b64,brief,true);
-        }
-      }
-      if(["done","error","cancelled"].includes(sd.status)){
-        if(sd.final_text&&statusNode)statusNode.textContent=sd.final_text.replace(/<think>[\s\S]*?<\/think>/gi,"").trim();
-        break;
-      }
-    }
-    hideLoader();loadUser();toast("Agentic design complete!","s");
-  }catch(e){hideLoader();toast("Agent error: "+e.message,"e");}
-}
-
-/* ══════════════════════════════════════════════════
-   CANVAS DISPLAY, BEFORE/AFTER COMPARE & EXPORTS
-══════════════════════════════════════════════════ */
-function setActiveImage(src,promptLabel="",saveGal=true){
-  if(curImg&&curImg!==src){
-    prevImg=curImg;
-    const cmpBtn=document.getElementById("btn-compare");
-    if(cmpBtn)cmpBtn.style.display="inline-flex";
-  }
-  curImg=src;
-  const empty=document.getElementById("empty-stage"),wrap=document.getElementById("canvas-wrap"),img=document.getElementById("main-img");
-  if(empty)empty.style.display="none";
-  if(wrap)wrap.style.display="inline-block";
-  if(img){
-    img.onload=()=>{if(drawMode)syncDrawCanvasSize();};
-    img.src=src;
-  }
-  if(saveGal)saveToGallery(src,promptLabel||"Philadelphia Pro Creation");
-}
-
-window.toggleCompare=(on)=>{
-  const img=document.getElementById("main-img");
-  if(!img||!prevImg)return;
-  img.src=on?prevImg:curImg;
+window.shareImage=async()=>{
+  if(!curImgB64)return;
+  try{await navigator.share({files:[new File([b64toBlob(curImgB64,'image/png')],'philadelphia.png',{type:'image/png'})],title:'Philadelphia Image Studio'});}catch(e){}
 };
+window.exportAllGallery=()=>{gallery.forEach((it,i)=>setTimeout(()=>{const a=document.createElement('a');a.href=`data:image/png;base64,${it.b64}`;a.download=`philadelphia_${i+1}.png`;a.click();},i*350));};
+window.clearAllData=async()=>{if(!confirm("Clear all saved images?"))return;for(const it of gallery)await dbDel('gallery',it.id);gallery=[];renderGallery();updateStats();toast("Cleared","i");};
 
-window.exportImage=async(fmt="png")=>{
-  if(!curImg){toast("Generate or load an image first","e");return;}
-  try{
-    const im=await loadImg(curImg);
-    const cv=document.createElement("canvas");cv.width=im.naturalWidth||1024;cv.height=im.naturalHeight||1024;
-    const ctx=cv.getContext("2d");
-    const g=k=>+(document.getElementById("f-"+k)?.value??100);
-    ctx.filter=`brightness(${g("bright")}%) contrast(${g("contrast")}%) saturate(${g("sat")}%) hue-rotate(${+(document.getElementById("f-hue")?.value||0)}deg) blur(${+(document.getElementById("f-blur")?.value||0)}px) sepia(${+(document.getElementById("f-sepia")?.value||0)}%)`;
-    ctx.drawImage(im,0,0,cv.width,cv.height);
-    ctx.filter="none";
-    if(dcv&&drawStack.length>1)ctx.drawImage(dcv,0,0,cv.width,cv.height);
-    const mime=fmt==="jpg"?"image/jpeg":fmt==="webp"?"image/webp":"image/png";
-    const link=document.createElement("a");
-    link.href=cv.toDataURL(mime,0.94);
-    link.download=`philadelphia_pro_${Date.now()}.${fmt}`;
-    link.click();
-    toast(`Exported as ${fmt.toUpperCase()}!`,"s");
-  }catch(e){toast("Export failed: "+e.message,"e");}
-};
+window.openLightbox=()=>{if(curImg)$('lightbox').classList.add('on');};
+window.closeLightbox=()=>$('lightbox').classList.remove('on');
+window.openM=id=>$(id)?.classList.add('on');
+window.closeM=id=>$(id)?.classList.remove('on');
+document.querySelectorAll('.mbg').forEach(b=>b.addEventListener('click',e=>{if(e.target===b)b.classList.remove('on');}));
+window.toast=(msg,type='i')=>{const d=document.createElement('div');d.className=`toast ${type}`;d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>d.remove(),3100);};
 
-/* ══════════════════════════════════════════════════
-   GALLERY, WALLET, DAILY REWARD & HELPERS
-══════════════════════════════════════════════════ */
-async function saveToGallery(src,prompt){
-  const item={id:Date.now()+Math.random(),src,prompt:String(prompt||"").slice(0,140),date:new Date().toLocaleDateString()};
-  await dbPut("gallery",item);
-  renderGallery();
-}
-window.renderGallery=async()=>{
-  const items=(await dbGetAll("gallery")).sort((a,b)=>b.id-a.id);
-  const grid=document.getElementById("gal-grid"),cnt=document.getElementById("gal-count");
-  if(cnt)cnt.textContent=items.length;
-  if(!grid)return;
-  if(!items.length){
-    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--t3);padding:28px 10px;font-size:.78rem;">Your generated and edited creations will appear here automatically.</div>`;
-    return;
-  }
-  grid.innerHTML="";
-  items.forEach(it=>{
-    const card=document.createElement("div");card.className="gal-item";
-    card.innerHTML=`<img src="${it.src}" alt="" loading="lazy"><div class="gal-ov"><span>${escHtml(it.prompt)}</span><div style="display:flex;gap:5px;margin-top:5px;"><button class="dt-btn" data-act="load"><i class="fas fa-pen"></i> Edit</button><button class="dt-btn" data-act="dl"><i class="fas fa-download"></i></button><button class="dt-btn" style="color:var(--red)" data-act="del"><i class="fas fa-trash"></i></button></div></div>`;
-    card.querySelector('[data-act="load"]').onclick=()=>{setActiveImage(it.src,it.prompt,false);closeM("gal-m");toast("Loaded onto canvas","s");};
-    card.querySelector('[data-act="dl"]').onclick=(e)=>{e.stopPropagation();const a=document.createElement("a");a.href=it.src;a.download=`philadelphia_${Date.now()}.png`;a.click();};
-    card.querySelector('[data-act="del"]').onclick=async(e)=>{e.stopPropagation();await dbDel("gallery",it.id);renderGallery();};
-    grid.appendChild(card);
-  });
-};
-
+/* ── WALLET & PAYMENTS ── */
 window.claimDaily=async()=>{
-  if(!tok)return;
-  try{
-    const r=await fetch(`${API}/api/user/claim-daily`,{method:"POST",headers:{"X-Firebase-Token":tok}});
-    const d=await r.json().catch(()=>({}));
-    if(r.ok){toast("✓ "+d.message,"s");loadUser();}
-    else toast(d.detail||d.message||"Already claimed today","e");
-  }catch(e){toast("Network error","e");}
+  try{const r=await fetch(`${API}/api/user/claim-daily`,{method:'POST',headers:{'X-Firebase-Token':tok}});const d=await r.json();if(r.ok){toast(d.message,"s");loadUser();}else toast(d.detail||"Already claimed","e");}catch(e){}
 };
-
-window.redeemRef=async()=>{
-  const code=(document.getElementById("ref-inp")?.value||"").trim();if(!code)return;
-  try{
-    const r=await fetch(`${API}/api/user/redeem-referral`,{method:"POST",headers:{"Content-Type":"application/json","X-Firebase-Token":tok},body:JSON.stringify({referrer_code:code})});
-    const d=await r.json();
-    if(r.ok){toast("Referral redeemed!","s");loadUser();document.getElementById("ref-inp").value="";}
-    else toast(d.detail||d.message||"Failed","e");
-  }catch(e){toast("Network error","e");}
-};
-
 window.initPay=async()=>{
-  const amt=parseInt(document.getElementById("fund-amt")?.value||1000);
-  if(amt<100){toast("Minimum ₦100","e");return;}
-  try{
-    const r=await fetch(`${API}/api/payments/initiate`,{method:"POST",headers:{"Content-Type":"application/json","X-Firebase-Token":tok},body:JSON.stringify({amount:amt,redirect_url:window.location.href.split("?")[0]})});
-    const d=await r.json();if(!r.ok)throw new Error(d.detail||"Payment failed");
-    window.location.href=d.checkout_url;
-  }catch(e){toast("Payment error: "+e.message,"e");}
+  const amt=+$('fund-amt').value;if(amt<100)return toast("Minimum ₦100","e");
+  const r=await fetch(`${API}/api/payments/initiate`,{method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},body:JSON.stringify({amount:amt,redirect_url:window.location.href.split('?')[0]})});
+  const d=await r.json();if(r.ok)window.location.href=d.checkout_url;else toast(d.detail||"Payment failed","e");
 };
-
 function checkPayReturn(){
-  const p=new URLSearchParams(window.location.search),ref=p.get("reference")||p.get("trxref");
-  if(!ref||!tok)return;
-  window.history.replaceState({},document.title,window.location.pathname);
-  openM("fund-m");
-  (async function poll(n){
-    if(n<=0)return;
-    try{
-      const r=await fetch(`${API}/api/payments/verify?transaction_ref=${ref}`,{headers:{"X-Firebase-Token":tok}});
-      const d=await r.json();
-      if(d.status==="success"||d.status==="already_credited"){
-        closeM("fund-m");bal=d.new_balance||bal+d.credits_added;updBal();
-        toast(`+${d.credits_added} credits added!`,"s");
-      }else if(d.status==="pending")setTimeout(()=>poll(n-1),4000);
-    }catch(e){setTimeout(()=>poll(n-1),4000);}
+  const p=new URLSearchParams(window.location.search),ref=p.get('reference')||p.get('trxref');if(!ref||!tok)return;
+  window.history.replaceState({},document.title,window.location.pathname);$('pvn').style.display='block';openM('fund-m');
+  (async function v(n){
+    if(n<=0){$('pvn').style.display='none';return;}
+    try{const d=await(await fetch(`${API}/api/payments/verify?transaction_ref=${ref}`,{headers:{'X-Firebase-Token':tok}})).json();if(d.status==='success'||d.status==='already_credited'){$('pvn').style.display='none';closeM('fund-m');loadUser();toast(`+${d.credits_added} credits added!`,"s");return;}}catch(e){}
+    setTimeout(()=>v(n-1),4000);
   })(15);
 }
-
-function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.crossOrigin="anonymous";i.onload=()=>res(i);i.onerror=rej;i.src=src;});}
-function blobToDataURL(b){return new Promise(res=>{const r=new FileReader();r.onload=()=>res(r.result);r.readAsDataURL(b);});}
-function escHtml(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function showLoader(t){const ov=document.getElementById("gen-ov"),tx=document.getElementById("gen-txt");if(tx)tx.textContent=t;if(ov)ov.classList.add("on");}
-function hideLoader(){document.getElementById("gen-ov")?.classList.remove("on");}
-window.openM=id=>{document.getElementById(id)?.classList.add("on");if(id==="gal-m")renderGallery();};
-window.closeM=id=>document.getElementById(id)?.classList.remove("on");
-window.switchTab=(id,el)=>{
-  document.querySelectorAll(".t-pane").forEach(p=>p.classList.remove("on"));
-  document.querySelectorAll(".t-btn").forEach(b=>b.classList.remove("on"));
-  document.getElementById("pane-"+id)?.classList.add("on");
-  if(el)el.classList.add("on");
+window.adminGift=async()=>{
+  const em=$('adm-em').value.trim(),amt=+$('adm-am').value;if(!em||!amt)return;
+  const r=await fetch(`${API}/api/admin/gift-credits`,{method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},body:JSON.stringify({target_email:em,amount:amt})});
+  if(r.ok)toast(`Gifted ${amt} credits!`,"s");
 };
-function toast(msg,type="s"){
-  const w=document.getElementById("toasts");if(!w)return;
-  const d=document.createElement("div");d.className=`toast ${type}`;
-  const ic={s:"fa-circle-check",e:"fa-circle-xmark",i:"fa-circle-info"}[type]||"fa-circle-check";
-  d.innerHTML=`<i class="fas ${ic}"></i> ${escHtml(msg)}`;
-  w.appendChild(d);setTimeout(()=>d.remove(),3200);
-}
+
+/* ── AMBIENT AURORA, PARTICLES & AUTH TYPEWRITER ── */
+(function initFX(){
+  const tw=$('tw-text'),txt='Where imagination meets Philadelphia Pro intelligence.';let i=0;
+  const iv=setInterval(()=>{if(tw&&i<txt.length){tw.textContent+=txt[i++];}else clearInterval(iv);},45);
+  const pt=$('particles');
+  for(let k=0;k<22;k++){const p=document.createElement('div');p.className='pt';const s=Math.random()*2+1;p.style.cssText=`width:${s}px;height:${s}px;background:rgba(201,169,110,${Math.random()*.4+.1});left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${8+Math.random()*10}s;--dl:${-Math.random()*10}s`;pt.appendChild(p);}
+})();
 </script>
 </body>
-</html>                                                                                                                                                                                                                                 
+</html>
