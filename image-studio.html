@@ -2,1002 +2,1089 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <title>Philadelphia Image Studio || Elvion AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Cormorant+Garamond:ital,wght@0,600;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,900;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J1YTKP10ZX');</script>
 <style>
 :root{
-  --void:#030308;--bg:#060711;--bg2:#0a0b18;--card:#101223;--card2:#16182e;
-  --g1:#c9a96e;--g2:#ebd098;--g-soft:rgba(201,169,110,.1);--gbdr:rgba(201,169,110,.28);
-  --pur:#8b5cf6;--grn:#10b981;--red:#ef4444;--blu:#3b82f6;
-  --t1:#f3efe6;--t2:#928b7c;--t3:#534d42;--bdr:rgba(255,255,255,.08);
-  --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;--fi:'Cormorant Garamond',serif;
-  --nh:56px;--bnh:60px;--glow:0 0 28px rgba(201,169,110,.25);
+  --void:#020207;--bg:#050510;--bg2:#080816;
+  --card:#0c0d1e;--card2:#111328;
+  --g1:#c9a96e;--g2:#e8c97e;--g3:#f5e0a0;
+  --g-glow:rgba(201,169,110,.25);--g-subtle:rgba(201,169,110,.08);
+  --gbdr:rgba(201,169,110,.28);--gbdr-high:rgba(201,169,110,.6);
+  --pur:#8b5cf6;--cyan:#00d4b8;--green:#00d490;--red:#e05a7a;
+  --t1:#f4f2ea;--t2:#999285;--t3:#544e43;
+  --bdr:rgba(255,255,255,.07);--bdr2:rgba(201,169,110,.18);
+  --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;
+  --nh:56px;--bnh:60px;
+  --r8:8px;--r12:12px;--r16:16px;--r20:20px;
+  --shadow:0 12px 40px rgba(0,0,0,.75);
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;width:100%;background:var(--void);color:var(--t1);font-family:var(--fb);overflow:hidden}
-button,input,select,textarea{font-family:inherit;color:inherit}
-button{cursor:pointer}
-[hidden]{display:none!important}
 
-.bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 30% 10%,rgba(201,169,110,.09),transparent 60%),radial-gradient(ellipse 60% 50% at 85% 90%,rgba(139,92,246,.07),transparent 60%)}
-#splash{position:fixed;inset:0;z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--void);animation:spOut .45s ease 1.5s forwards;pointer-events:none}
-@keyframes spOut{to{opacity:0;visibility:hidden}}
-.sp-logo{width:80px;height:80px;border-radius:20px;border:1.5px solid var(--g1);box-shadow:var(--glow);overflow:hidden;animation:pop .6s ease}
-.sp-logo img{width:100%;height:100%;object-fit:cover}
-@keyframes pop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:none}}
+/* Background Aurora */
+.bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none}
+#aurora-cv{position:absolute;inset:0;opacity:.7}
+.bg-vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(2,2,7,.92) 100%)}
 
-/* HEADER & NAV */
-#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:500;display:none;align-items:center;gap:10px;padding:0 14px;background:rgba(6,7,17,.96);border-bottom:1px solid var(--bdr);backdrop-filter:blur(20px)}
+/* Top Header */
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:500;display:none;align-items:center;gap:10px;padding:0 14px;background:rgba(5,5,16,.94);border-bottom:1px solid var(--bdr);backdrop-filter:blur(20px)}
 #hdr.on{display:flex}
-.hdr-logo{width:32px;height:32px;border-radius:8px;border:1px solid var(--gbdr);overflow:hidden;flex-shrink:0}
-.hdr-logo img{width:100%;height:100%;object-fit:cover}
-.hdr-brand{font-family:var(--ft);font-size:.74rem;font-weight:900;color:var(--g1);letter-spacing:2px;line-height:1.15}
-.hdr-brand small{display:block;font-family:var(--fb);font-size:.48rem;color:var(--t2);letter-spacing:1.6px}
+.hdr-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.hdr-logo{width:32px;height:32px;border-radius:9px;border:1px solid var(--g1);object-fit:cover;box-shadow:0 0 14px var(--g-glow)}
+.hdr-title{font-family:var(--ft);font-size:.76rem;font-weight:900;color:var(--g1);letter-spacing:2px;line-height:1.1}
+.hdr-title small{display:block;font-size:.46rem;color:var(--t2);letter-spacing:1.8px;font-family:var(--fb);text-transform:uppercase}
 .hsp{flex:1}
-.bal-tag{display:flex;align-items:center;gap:6px;padding:5px 11px;background:var(--g-soft);border:1px solid var(--gbdr);border-radius:20px;cursor:pointer}
-.bal-tag i{color:var(--g1);font-size:.72rem}.bal-tag span{font-family:var(--ft);font-size:.74rem;color:var(--g2);font-weight:700}
-.hbtn{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);display:flex;align-items:center;justify-content:center;font-size:.82rem}
-.hbtn:hover{border-color:var(--g1);color:var(--g1)}
-.hav{width:30px;height:30px;border-radius:50%;overflow:hidden;border:1.5px solid var(--gbdr);background:var(--card2);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.bal-chip{display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--g-subtle);border:1px solid var(--gbdr);border-radius:20px;cursor:pointer;transition:.2s}
+.bal-chip:hover{background:rgba(201,169,110,.16);border-color:var(--g1)}
+.bal-chip i{color:var(--g1);font-size:.72rem}
+.bal-chip span{font-family:var(--ft);font-size:.74rem;color:var(--g2);font-weight:700}
+.hav{width:32px;height:32px;border-radius:50%;overflow:hidden;border:1.5px solid var(--gbdr);cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--card)}
 .hav img{width:100%;height:100%;object-fit:cover}
 
-#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:500;display:none;background:rgba(6,7,17,.98);border-top:1px solid var(--bdr)}
+/* Bottom Nav */
+#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:500;display:none;background:rgba(5,5,16,.96);border-top:1px solid var(--bdr);backdrop-filter:blur(24px)}
 #bnav.on{display:flex}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--t3);font-size:.54rem;font-weight:600;text-transform:uppercase;letter-spacing:.7px;border:none;background:none;position:relative}
-.ni i{font-size:1.05rem}.ni.on{color:var(--g1)}
-.ni.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--g1)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--t3);font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;border:none;background:none;font-family:var(--fb);transition:.2s;position:relative}
+.ni i{font-size:1.05rem}
+.ni.on{color:var(--g1)}
+.ni.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--g1);border-radius:0 0 3px 3px;box-shadow:0 0 10px var(--g1)}
 
-/* SCREENS */
+/* Screen Container */
 .scr{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;overflow:hidden}
-.scr.on{display:flex;animation:pop .24s ease}
+.scr.on{display:flex}
 
-/* AUTH */
-#scr-auth{align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 50% 35%,rgba(16,18,35,.98),var(--void) 80%)}
-.auth-box{text-align:center;max-width:340px;width:100%}
-.auth-logo{width:84px;height:84px;border-radius:22px;margin:0 auto 18px;border:1.5px solid var(--gbdr);overflow:hidden;box-shadow:var(--glow)}
-.auth-logo img{width:100%;height:100%;object-fit:cover}
-.auth-title{font-family:var(--ft);font-size:1.85rem;font-weight:900;color:var(--g1);letter-spacing:4px}
-.auth-sub{font-family:var(--fi);font-style:italic;font-size:.98rem;color:var(--t2);margin:8px 0 26px;line-height:1.6}
-.g-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--gbdr);font-size:.88rem;font-weight:600;transition:.2s}
-.g-btn:hover{background:var(--g-soft);border-color:var(--g1)}
+/* Auth Screen */
+#scr-auth{align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at center,rgba(16,12,38,.98),var(--void) 80%)}
+.auth-box{max-width:340px;width:100%;text-align:center}
+.auth-box .auth-logo{width:86px;height:86px;border-radius:24px;border:2px solid var(--g1);box-shadow:0 0 35px var(--g-glow);margin:0 auto 16px;object-fit:cover}
+.auth-title{font-family:var(--ft);font-size:2rem;font-weight:900;color:var(--g1);letter-spacing:3px;margin-bottom:4px}
+.auth-sub{font-size:.65rem;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.auth-desc{font-size:.86rem;color:var(--t2);line-height:1.6;margin-bottom:24px}
+.g-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:13px 20px;border-radius:var(--r12);background:rgba(255,255,255,.05);border:1px solid var(--gbdr);color:var(--t1);font-size:.88rem;font-weight:600;cursor:pointer;transition:.22s}
+.g-btn:hover{background:var(--g-subtle);border-color:var(--g1);transform:translateY(-2px)}
 
-/* STUDIO LAYOUT (Responsive Split) */
-#scr-studio{top:var(--nh);bottom:var(--bnh);flex-direction:column}
-@media(min-width:960px){#scr-studio{flex-direction:row}}
-.canvas-zone{flex:1;min-height:40%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,rgba(18,20,40,.75),var(--void));padding:16px}
-.ctrl-panel{flex:1;max-height:56%;background:var(--bg2);border-top:1px solid var(--bdr);display:flex;flex-direction:column;min-width:0}
-@media(min-width:960px){.ctrl-panel{flex:0 0 430px;max-height:none;border-top:none;border-left:1px solid var(--bdr)}}
+/* Studio Viewport (Canvas Zone) */
+#scr-studio{top:var(--nh);bottom:var(--bnh)}
+.stage-zone{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse at center,rgba(18,15,40,.7),rgba(3,3,10,.98));overflow:hidden;padding:12px}
+.empty-stage{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:320px;z-index:2}
+.empty-logo{width:68px;height:68px;border-radius:20px;border:1.5px solid var(--gbdr);box-shadow:0 0 24px var(--g-glow);object-fit:cover;margin-bottom:4px}
+.empty-title{font-family:var(--ft);font-size:.88rem;color:var(--g1);letter-spacing:2px}
+.empty-desc{font-size:.78rem;color:var(--t2);line-height:1.5}
+.empty-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.et-pill{padding:5px 11px;border-radius:12px;font-size:.62rem;font-weight:600;background:var(--g-subtle);border:1px solid var(--gbdr);color:var(--g2);cursor:pointer;transition:.18s}
+.et-pill:hover{background:rgba(201,169,110,.18);border-color:var(--g1);transform:translateY(-1px)}
 
-.empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:340px}
-.es-orb{width:72px;height:72px;border-radius:50%;border:1px solid var(--gbdr);display:flex;align-items:center;justify-content:center;color:var(--g1);font-size:1.6rem;position:relative}
-.es-orb::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:1.5px solid transparent;border-top-color:var(--g1);animation:spin 2.4s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.es-pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px}
-.es-pill{padding:5px 11px;border-radius:14px;font-size:.62rem;font-weight:600;background:var(--g-soft);border:1px solid var(--gbdr);color:var(--g2)}
-.es-pill:hover{background:rgba(201,169,110,.22)}
+/* Active Canvas Stage */
+#stage-display{position:relative;max-width:100%;max-height:100%;display:none;z-index:2}
+#stage-display.on{display:block}
+#stage-img{max-width:min(90vw,500px);max-height:min(45vh,480px);object-fit:contain;border-radius:var(--r12);display:block;box-shadow:0 24px 60px rgba(0,0,0,.85),0 0 0 1px var(--gbdr);cursor:zoom-in;transition:filter .2s}
+.stage-actions{position:absolute;top:-12px;right:0;transform:translateY(-100%);display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.sa-btn{padding:5px 10px;border-radius:8px;font-size:.62rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;border:1px solid;font-family:var(--fb);transition:.16s}
+.sa-btn:hover{transform:translateY(-1px)}
+.sa-agent{background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.45);color:#d8b4fe}
+.sa-draw{background:rgba(0,212,184,.14);border-color:rgba(0,212,184,.4);color:var(--cyan)}
+.sa-save{background:rgba(0,212,144,.12);border-color:rgba(0,212,144,.35);color:var(--green)}
+.sa-dl{background:var(--g-subtle);border-color:var(--gbdr);color:var(--g1)}
 
-#img-display{position:relative;max-width:100%;max-height:100%;display:none}
-#img-display.on{display:flex;flex-direction:column;align-items:center}
-#cur-img{max-width:min(86vw,500px);max-height:min(38vh,500px);object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.85),0 0 0 1px var(--gbdr);cursor:zoom-in;display:block}
-@media(min-width:960px){#cur-img{max-width:100%;max-height:70vh}}
-.img-bar{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;justify-content:center}
-.ia{padding:5px 10px;border-radius:8px;font-size:.64rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--bdr);background:rgba(255,255,255,.04);color:var(--t1)}
-.ia:hover{border-color:var(--g1);color:var(--g2)}
-.ia.pri{background:var(--g-soft);border-color:var(--gbdr);color:var(--g2)}
-.ia.fav.on{color:var(--red);border-color:rgba(239,68,68,.4)}
-
-/* QUAD & COMPARE */
-#quad-grid{display:none;gap:8px;max-width:460px;width:100%}
+/* Quad Mode Grid */
+#quad-grid{display:none;gap:8px;padding:8px;max-width:min(90vw,480px);z-index:2}
 #quad-grid.on{display:grid;grid-template-columns:1fr 1fr}
-.qi{border-radius:10px;overflow:hidden;position:relative;cursor:pointer;border:2px solid transparent}
-.qi:hover{border-color:var(--g1)}
-.qi img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.qi span{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:rgba(201,169,110,.92);color:#000;padding:2px 9px;border-radius:8px;font-size:.6rem;font-weight:700}
+.quad-card{border-radius:var(--r10);overflow:hidden;cursor:pointer;border:2px solid transparent;position:relative;box-shadow:var(--shadow);transition:.18s}
+.quad-card:hover{border-color:var(--g1);transform:scale(1.02)}
+.quad-card img{width:100%;height:100%;object-fit:cover;display:block}
+.quad-card .q-btn{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:var(--g1);color:#000;padding:3px 10px;border-radius:10px;font-size:.6rem;font-weight:700;white-space:nowrap;font-family:var(--ft)}
 
-#compare-wrap{position:relative;max-width:min(84vw,440px);display:none;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.85)}
+/* Compare Mode Slider */
+#compare-wrap{position:relative;max-width:min(90vw,480px);display:none;border-radius:var(--r12);overflow:hidden;box-shadow:var(--shadow);z-index:2}
 #compare-wrap.on{display:block}
-#compare-before{width:100%;display:block}
+#compare-before,#compare-after{width:100%;height:auto;display:block}
 #compare-after-wrap{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden}
-#compare-after-wrap img{height:100%;width:auto;max-width:none;display:block}
-.cmp-line{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--g1);cursor:col-resize;transform:translateX(-50%);z-index:5}
-.cmp-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--g1);color:#000;display:flex;align-items:center;justify-content:center;font-size:.65rem}
+#compare-after-wrap img{width:min(90vw,480px);max-width:none}
+.cmp-divider{position:absolute;top:0;bottom:0;width:3px;background:var(--g1);cursor:col-resize;left:50%;transform:translateX(-50%);z-index:5}
+.cmp-thumb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--g1);color:#000;display:flex;align-items:center;justify-content:center;font-size:.65rem;border:2px solid #000}
 
-#gen-ov{position:absolute;inset:0;z-index:50;display:none;background:rgba(4,5,12,.9);backdrop-filter:blur(10px);flex-direction:column;align-items:center;justify-content:center;gap:12px}
+/* Loading Overlay */
+#gen-ov{position:absolute;inset:0;z-index:60;display:none;background:rgba(4,4,14,.92);backdrop-filter:blur(12px);flex-direction:column;align-items:center;justify-content:center;gap:12px}
 #gen-ov.on{display:flex}
-.gen-ring{width:54px;height:54px;border-radius:50%;border:2.5px solid rgba(201,169,110,.2);border-top-color:var(--g1);animation:spin .9s linear infinite}
+.ring-spin{width:56px;height:56px;border-radius:50%;border:2px solid transparent;border-top-color:var(--g1);border-right-color:var(--g2);animation:spin .85s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gen-title{font-family:var(--ft);font-size:.84rem;color:var(--g1);letter-spacing:2px}
+.gen-sub{font-size:.64rem;color:var(--t2);font-family:var(--fc)}
 
-/* CONTROL TABS */
-.cp-tabs{display:flex;background:rgba(0,0,0,.35);border-bottom:1px solid var(--bdr);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
-.cp-tabs::-webkit-scrollbar{display:none}
-.cpt{flex:1;min-width:68px;padding:10px 6px;font-size:.58rem;font-weight:600;color:var(--t3);text-align:center;text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:5px}
-.cpt.on{color:var(--g1);border-color:var(--g1)}
-.cpb{flex:1;overflow-y:auto;padding:12px}
-.cpsec{display:none}
-.cpsec.on{display:block;animation:pop .2s ease}
+/* Studio Control Panel */
+.dock-panel{flex-shrink:0;background:var(--bg2);border-top:1px solid var(--bdr);display:flex;flex-direction:column;max-height:50vh}
+.dock-tabs{display:flex;background:rgba(0,0,0,.4);border-bottom:1px solid var(--bdr);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.dock-tabs::-webkit-scrollbar{display:none}
+.dtab{flex:1;min-width:64px;padding:10px 4px 8px;font-size:.56rem;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;letter-spacing:.6px;text-transform:uppercase;border-bottom:2px solid transparent;transition:.16s;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:5px}
+.dtab.on{color:var(--g1);border-color:var(--g1)}
+.dock-body{flex:1;overflow-y:auto;scrollbar-width:thin;padding:12px;max-width:880px;margin:0 auto;width:100%}
+.dpane{display:none}
+.dpane.on{display:block}
 
-.sh{font-size:.58rem;font-weight:700;color:var(--g1);text-transform:uppercase;letter-spacing:1.6px;margin:8px 0 6px;display:flex;align-items:center;gap:6px}
-.fc{display:flex;flex-direction:column;gap:4px;margin-bottom:9px}
-.fcl{font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px}
-input[type=text],input[type=number],input[type=email],textarea,select{width:100%;background:rgba(0,0,0,.48);border:1px solid var(--bdr);padding:9px 11px;border-radius:10px;font-size:.82rem;outline:none}
-input:focus,textarea:focus,select:focus{border-color:var(--gbdr)}
-textarea{resize:none;line-height:1.5}
-.ar-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.ar-btn{padding:5px 10px;border-radius:8px;font-size:.64rem;font-weight:600;border:1px solid var(--bdr);background:rgba(255,255,255,.03);color:var(--t2)}
-.ar-btn.on,.ar-btn:hover{background:var(--g-soft);border-color:var(--gbdr);color:var(--g2)}
-.row{display:flex;gap:8px;align-items:flex-end;margin-bottom:8px}
-.row .fc{flex:1;margin:0}
+/* Form Styles */
+.f-label{display:block;font-size:.58rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.ta-input{width:100%;padding:10px 12px;background:rgba(0,0,0,.5);border:1px solid var(--bdr);border-radius:var(--r10);color:var(--t1);font-family:var(--fb);font-size:.85rem;resize:none;min-height:64px;line-height:1.55;transition:.18s}
+.ta-input:focus{border-color:var(--gbdr)}
+.ar-selector{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.ar-chip{padding:5px 9px;border-radius:8px;font-size:.64rem;font-weight:700;cursor:pointer;border:1px solid var(--bdr);background:rgba(255,255,255,.02);color:var(--t2)}
+.ar-chip.on,.ar-chip:hover{background:var(--g-subtle);border-color:var(--gbdr);color:var(--g1)}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:var(--r10);margin-bottom:8px;cursor:pointer}
+.switch-row.on{background:var(--g-subtle);border-color:var(--gbdr)}
+.switch-btn{width:30px;height:17px;border-radius:10px;background:var(--bdr);position:relative;flex-shrink:0}
+.switch-row.on .switch-btn{background:var(--g1)}
+.switch-dot{width:13px;height:13px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:.18s}
+.switch-row.on .switch-dot{left:15px}
 
-.tog-row{display:flex;align-items:center;gap:10px;padding:8px 11px;background:rgba(255,255,255,.025);border:1px solid var(--bdr);border-radius:10px;cursor:pointer;margin-bottom:7px}
-.tog-row.on{background:var(--g-soft);border-color:var(--gbdr)}
-.tog{width:32px;height:18px;background:rgba(255,255,255,.15);border-radius:10px;position:relative;margin-left:auto;flex-shrink:0}
-.tog.on{background:var(--g1)}
-.tok{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:.2s}
-.tog.on .tok{left:16px}
+.submit-btn{width:100%;padding:13px;border-radius:var(--r12);background:linear-gradient(135deg,var(--g1),#d4a860);border:none;color:#000;font-family:var(--ft);font-size:.82rem;font-weight:900;letter-spacing:1.8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;box-shadow:0 4px 18px var(--g-glow)}
+.submit-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-.gen-btn{width:100%;padding:12px;border-radius:12px;background:linear-gradient(135deg,#c9a96e,#e2c178);color:#000;border:none;font-family:var(--ft);font-size:.82rem;font-weight:700;letter-spacing:1.5px;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
-.gen-btn:disabled{opacity:.4;cursor:not-allowed}
-.tb-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
-.tb{padding:10px 6px;border-radius:10px;border:1px solid var(--bdr);background:rgba(255,255,255,.03);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.6rem;color:var(--t2);font-weight:600}
-.tb i{font-size:.95rem;color:var(--g1)}
-.tb:hover,.tb.on{background:var(--g-soft);border-color:var(--gbdr);color:var(--g2)}
-.file-drop{width:100%;padding:14px;border:1.5px dashed var(--gbdr);border-radius:12px;text-align:center;cursor:pointer;margin-bottom:9px;font-size:.74rem;color:var(--t2)}
+.tb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.tb-card{padding:10px 4px;border-radius:var(--r10);background:rgba(255,255,255,.02);border:1px solid var(--bdr);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.62rem;color:var(--t2);font-weight:700}
+.tb-card i{font-size:.9rem;color:var(--g1)}
+.tb-card:hover{background:var(--g-subtle);border-color:var(--gbdr);color:var(--t1)}
 
-.fs-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.fs-lbl{font-size:.6rem;color:var(--t2);width:64px}.fs-row input{flex:1;accent-color:var(--g1)}.fs-val{font-family:var(--fc);font-size:.6rem;color:var(--g1);width:36px;text-align:right}
-.pp-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.pp{padding:5px 10px;border-radius:8px;font-size:.62rem;font-weight:600;border:1px solid var(--bdr);background:rgba(255,255,255,.03);color:var(--t2)}
-.pp:hover{border-color:var(--g1);color:var(--g2)}
-.pal-row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
-.pal-sw{width:30px;height:30px;border-radius:7px;cursor:pointer;border:1.5px solid rgba(255,255,255,.2)}
-
-/* DRAW & TEXT STUDIO OVERLAY */
-#draw-ov{position:fixed;inset:0;z-index:950;display:none;background:rgba(2,3,10,.95);backdrop-filter:blur(12px);flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
+/* Draw Overlay */
+#draw-ov{position:fixed;inset:0;z-index:920;display:none;background:rgba(2,3,10,.94);backdrop-filter:blur(14px);flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
 #draw-ov.on{display:flex}
-#draw-cv{border-radius:8px;touch-action:none;box-shadow:0 0 0 2px var(--g1);background:#000;cursor:crosshair;max-width:92vw;max-height:55vh}
-.draw-bar{background:var(--card);border:1px solid var(--gbdr);border-radius:14px;padding:8px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:96vw}
-.dt-btn{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);font-size:.65rem;display:flex;align-items:center;gap:5px}
-.dt-btn.on,.dt-btn:hover{background:var(--g-soft);border-color:var(--g1);color:var(--g2)}
-.text-stamp-bar{background:var(--card);border:1px solid var(--gbdr);border-radius:12px;padding:8px 12px;display:none;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:96vw}
-.text-stamp-bar.on{display:flex}
+#draw-cv{border-radius:var(--r10);touch-action:none;box-shadow:0 0 0 2px var(--g1),0 20px 50px rgba(0,0,0,.9);background:#000;cursor:crosshair;max-width:92vw;max-height:58vh}
+.draw-dock{background:rgba(12,13,28,.98);border:1px solid var(--gbdr);border-radius:var(--r16);padding:8px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:96vw}
+.draw-tool{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);font-size:.65rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.draw-tool.on,.draw-tool:hover{background:var(--g-subtle);border-color:var(--g1);color:var(--g2)}
+#text-stamp-wrap{display:none;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;background:rgba(12,13,28,.98);border:1px solid var(--gbdr);border-radius:var(--r12);padding:7px 12px;max-width:96vw}
+#text-stamp-wrap.on{display:flex}
 
-/* GALLERY, PROFILE & MODALS */
+/* Agent Chat Modal */
+#agent-m .modal-sheet{height:82vh;display:flex;flex-direction:column;padding:0;max-width:480px}
+.agent-header{padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;background:var(--card2)}
+.agent-header img{width:32px;height:32px;border-radius:8px;border:1px solid var(--g1);object-fit:cover}
+#agent-feed{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.agent-bubble{max-width:88%;padding:10px 13px;border-radius:14px;font-size:.78rem;line-height:1.55}
+.agent-bubble.ai{background:var(--g-subtle);border:1px solid var(--gbdr);color:var(--t1);align-self:flex-start}
+.agent-bubble.usr{background:linear-gradient(135deg,var(--g1),#d4a860);color:#000;font-weight:600;align-self:flex-end}
+.agent-status{font-size:.66rem;color:var(--g2);font-family:var(--fc);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:8px;align-self:flex-start}
+
+/* Gallery Screen */
 #scr-gallery,#scr-pro{top:var(--nh);bottom:var(--bnh);overflow-y:auto}
-.wrap-inner{padding:14px;max-width:860px;margin:0 auto;width:100%}
-.gal-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.gi{aspect-ratio:.85/1;border-radius:10px;overflow:hidden;position:relative;border:1px solid var(--bdr);cursor:pointer;background:var(--card)}
-.gi img{width:100%;height:100%;object-fit:cover;display:block}
-.gi-del{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.8);border:none;color:var(--red);font-size:.65rem;display:flex;align-items:center;justify-content:center}
+.view-wrap{padding:14px;max-width:860px;margin:0 auto;width:100%}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.gal-card{aspect-ratio:1;border-radius:8px;overflow:hidden;border:1.5px solid var(--bdr);background:var(--card);cursor:pointer;position:relative}
+.gal-card:hover{border-color:var(--g1)}
+.gal-card img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-card .g-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.8);border:none;color:var(--red);font-size:.65rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+.gal-card:hover .g-del{display:flex}
 
-.pro-card{background:var(--card);border:1px solid var(--bdr);border-radius:18px;padding:20px;text-align:center;margin-bottom:12px}
-.pro-av{width:64px;height:64px;border-radius:50%;margin:0 auto 10px;overflow:hidden;border:2px solid var(--gbdr)}
-.pro-av img{width:100%;height:100%;object-fit:cover}
-.pro-link{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;color:var(--t2);width:100%;margin-bottom:6px;font-size:.78rem;text-align:left}
+/* Modal Bottom Sheets */
+.modal-cover{position:fixed;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(12px);z-index:800;display:none;align-items:flex-end;justify-content:center}
+.modal-cover.on{display:flex}
+.modal-sheet{background:linear-gradient(180deg,var(--card),var(--bg));border:1px solid var(--gbdr);border-radius:var(--r20) var(--r20) 0 0;padding:18px 16px 32px;width:100%;max-width:440px;position:relative;max-height:88vh;overflow-y:auto}
+.m-pill{width:34px;height:4px;background:var(--bdr);border-radius:2px;margin:0 auto 12px}
+.m-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--t2);cursor:pointer;font-size:.9rem}
 
-/* FLOATING AGENT */
-#agent-fab{position:fixed;bottom:74px;right:14px;width:52px;height:52px;border-radius:50%;border:2px solid var(--g1);box-shadow:var(--glow);z-index:450;display:none;overflow:hidden;background:var(--card)}
+/* Floating Agent FAB */
+#agent-fab{position:fixed;bottom:72px;right:14px;width:52px;height:52px;border-radius:50%;background:var(--card);border:2px solid var(--g1);box-shadow:0 0 24px var(--g-glow);z-index:450;display:none;align-items:center;justify-content:center;cursor:pointer;overflow:hidden}
 #agent-fab img{width:100%;height:100%;object-fit:cover}
-.agent-msg{max-width:88%;padding:10px 13px;border-radius:14px;font-size:.78rem;line-height:1.5}
-.agent-msg.ai{background:var(--g-soft);border:1px solid var(--gbdr);color:var(--t1);align-self:flex-start}
-.agent-msg.user{background:linear-gradient(135deg,var(--g1),#e2c178);color:#000;font-weight:600;align-self:flex-end}
-.agent-step{font-size:.66rem;color:var(--g2);font-family:var(--fc);padding:4px 9px;background:rgba(255,255,255,.05);border-radius:8px;align-self:flex-start}
 
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:800;display:none;align-items:flex-end;justify-content:center}
-.mbg.on{display:flex}
-.modal{background:var(--card);border:1px solid var(--gbdr);border-radius:20px 20px 0 0;padding:18px 16px 32px;width:100%;max-width:460px;position:relative;max-height:88vh;overflow-y:auto}
-.mx{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--t2);font-size:1rem}
-.m-ttl{font-family:var(--ft);font-size:.9rem;color:var(--g1);letter-spacing:2px;text-align:center;margin-bottom:6px}
-.mbtn{padding:11px;border:none;border-radius:10px;font-weight:600;font-size:.82rem;width:100%;display:flex;align-items:center;justify-content:center;gap:7px}
-.mbtn.p{background:linear-gradient(135deg,var(--g1),#e2c178);color:#000}
-.mbtn.s{background:rgba(255,255,255,.06);border:1px solid var(--bdr);color:var(--t1)}
-.mbtn.wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);color:#25d366}
-
-#lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.96);align-items:center;justify-content:center}
-#lightbox.on{display:flex}
-#lb-img{max-width:95vw;max-height:86vh;object-fit:contain;border-radius:10px}
-.lb-close{position:fixed;top:16px;right:16px;background:rgba(255,255,255,.12);border:none;color:#fff;width:38px;height:38px;border-radius:50%}
-
+/* Toast */
 #toasts{position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
-.toast{padding:8px 16px;border-radius:16px;font-size:.74rem;font-weight:600;backdrop-filter:blur(10px);animation:pop .25s ease}
-.toast.s{background:rgba(16,185,129,.92);color:#000}.toast.e{background:rgba(239,68,68,.92);color:#fff}.toast.i{background:rgba(59,130,246,.92);color:#fff}
+.toast{padding:8px 16px;border-radius:20px;font-size:.76rem;font-weight:700;white-space:nowrap;backdrop-filter:blur(10px);animation:pop .25s ease}
+.toast.s{background:rgba(0,212,144,.95);color:#000}
+.toast.e{background:rgba(224,90,122,.95);color:#fff}
+.toast.i{background:rgba(201,169,110,.95);color:#000}
+@keyframes pop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<div class="bg-fx"></div>
-
-<!-- SPLASH -->
-<div id="splash">
-  <div class="sp-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Elvion AI Logo"></div>
-  <div style="font-family:var(--ft);font-size:1.35rem;font-weight:900;color:var(--g1);letter-spacing:5px;margin-top:16px;">IMAGE STUDIO</div>
-  <div style="font-family:var(--fi);font-style:italic;color:var(--t2);font-size:.9rem;margin-top:4px;">Philadelphia Pro · Elvion AI</div>
+<div class="bg-wrap">
+  <canvas id="aurora-cv"></canvas>
+  <div class="bg-vign"></div>
 </div>
 
 <div id="toasts"></div>
 
-<!-- HEADER -->
+<!-- Top Navigation Bar -->
 <header id="hdr">
-  <div class="hdr-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Elvion AI Logo"></div>
-  <div class="hdr-brand">IMAGE STUDIO<small>Philadelphia Pro · Elvion AI</small></div>
+  <a href="index.html" class="hdr-brand">
+    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="hdr-logo">
+    <div class="hdr-title">PHILADELPHIA PRO<small>Image Studio · Elvion AI</small></div>
+  </a>
   <div class="hsp"></div>
-  <div class="bal-tag" onclick="authA(()=>openM('fund-m'))"><i class="fas fa-coins"></i><span id="bal-v">--</span></div>
-  <button class="hbtn" onclick="authA(()=>openM('fund-m'))" title="Fund Wallet"><i class="fas fa-plus"></i></button>
-  <div class="hav" id="hav" onclick="goScr('pro')"><i class="fas fa-user" style="font-size:.6rem"></i></div>
+  <div class="bal-chip" onclick="openM('wallet-m')">
+    <i class="fa-solid fa-coins"></i>
+    <span id="hdr-bal">--</span>
+  </div>
+  <div class="hav" onclick="goScr('pro')">
+    <img id="user-avatar" src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Avatar">
+  </div>
 </header>
 
-<!-- AUTH -->
+<!-- Auth Screen -->
 <div class="scr on" id="scr-auth">
   <div class="auth-box">
-    <div class="auth-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Elvion AI Logo"></div>
+    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="auth-logo">
     <div class="auth-title">IMAGE STUDIO</div>
-    <div class="auth-sub">Create, edit, draw, write text, and direct visuals with Philadelphia Pro.</div>
-    <button class="g-btn" onclick="login()">
+    <div class="auth-sub">Philadelphia Pro · Elvion AI</div>
+    <div class="auth-desc">High-fidelity visual synthesis across 8 aspect ratios, on-canvas typography, photo remixing, and agentic workflows.</div>
+    <button class="g-btn" onclick="signIn()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      <span>Continue with Google</span>
+      <span>Sign In with Google</span>
     </button>
   </div>
 </div>
 
-<!-- DRAW, PAINT & TEXT STUDIO OVERLAY -->
-<div id="draw-ov">
-  <div style="font-family:var(--ft);font-size:.8rem;color:var(--g1);letter-spacing:2px;">DRAW, PAINT & TYPOGRAPHY STUDIO</div>
-  <canvas id="draw-cv" width="600" height="600"></canvas>
-  <div class="draw-bar">
-    <button class="dt-btn on" id="dt-brush" onclick="setDrawTool('brush')"><i class="fas fa-paintbrush"></i> Brush</button>
-    <button class="dt-btn" id="dt-foil" onclick="setDrawTool('foil')"><i class="fas fa-sparkles"></i> Gold Foil</button>
-    <button class="dt-btn" id="dt-glow" onclick="setDrawTool('glow')"><i class="fas fa-sun"></i> Glow</button>
-    <button class="dt-btn" id="dt-line" onclick="setDrawTool('line')"><i class="fas fa-slash"></i> Line</button>
-    <button class="dt-btn" id="dt-rect" onclick="setDrawTool('rect')"><i class="far fa-square"></i> Box</button>
-    <button class="dt-btn" id="dt-circle" onclick="setDrawTool('circle')"><i class="far fa-circle"></i> Circle</button>
-    <button class="dt-btn" id="dt-text" onclick="setDrawTool('text')"><i class="fas fa-font"></i> Write Text</button>
-    <button class="dt-btn" id="dt-erase" onclick="setDrawTool('erase')"><i class="fas fa-eraser"></i> Erase</button>
-    <input type="color" id="draw-col" value="#f0c878" style="width:28px;height:28px;border:none;background:none;cursor:pointer;">
-    <input type="range" id="draw-sz" min="2" max="50" value="10" style="width:65px;">
-    <button class="dt-btn" onclick="undoDraw()"><i class="fas fa-rotate-left"></i> Undo</button>
-    <button class="dt-btn" style="background:var(--g1);color:#000;font-weight:700;" onclick="applyDraw()"><i class="fas fa-check"></i> Apply</button>
-    <button class="dt-btn" style="color:var(--red);" onclick="closeDraw()"><i class="fas fa-times"></i></button>
+<!-- Studio Screen -->
+<div class="scr" id="scr-studio">
+  <div class="stage-zone" id="stage-zone">
+    <!-- Generation Overlay -->
+    <div id="gen-ov">
+      <div class="ring-spin"></div>
+      <div class="gen-title" id="gen-label">Philadelphia Pro is rendering…</div>
+      <div class="gen-sub" id="gen-sub">Generating master resolution image</div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-stage" id="empty-stage">
+      <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="empty-logo">
+      <div class="empty-title">PHILADELPHIA PRO</div>
+      <div class="empty-desc">Describe your vision below, pick an aspect ratio, or command the AI Agent to design on the canvas.</div>
+      <div class="empty-tags">
+        <span class="et-pill" onclick="qp('Futuristic Lagos skyline at sunset, golden glass towers, aerial cinema shot')">Lagos Skyline</span>
+        <span class="et-pill" onclick="qp('Editorial fashion portrait in dramatic chiaroscuro lighting, 85mm lens, sharp detail')">Editorial Portrait</span>
+        <span class="et-pill" onclick="qp('Luxury obsidian and gold perfume bottle on wet basalt rock, water droplets')">Product Shot</span>
+        <span class="et-pill" onclick="authA(openAgent)">Open AI Agent</span>
+      </div>
+    </div>
+
+    <!-- Single Active Image Stage -->
+    <div id="stage-display">
+      <img id="stage-img" src="" alt="Active Artwork">
+      <div class="stage-actions">
+        <button class="sa-btn sa-agent" onclick="authA(openAgent)"><i class="fa-solid fa-robot"></i> AI Agent</button>
+        <button class="sa-btn sa-draw" onclick="authA(startDraw)"><i class="fa-solid fa-paintbrush"></i> Draw & Text</button>
+        <button class="sa-btn sa-save" onclick="authA(saveToGallery)"><i class="fa-solid fa-bookmark"></i> Save</button>
+        <button class="sa-btn sa-dl" onclick="downloadImage()"><i class="fa-solid fa-download"></i></button>
+      </div>
+    </div>
+
+    <!-- Quad Grid (4 Variations) -->
+    <div id="quad-grid"></div>
+
+    <!-- Before/After Compare Slider -->
+    <div id="compare-wrap">
+      <img id="compare-before" src="" alt="Before">
+      <div id="compare-after-wrap"><img id="compare-after" src="" alt="After"></div>
+      <div class="cmp-divider" id="cmp-divider"><div class="cmp-thumb"><i class="fa-solid fa-arrows-left-right"></i></div></div>
+    </div>
   </div>
-  <div class="text-stamp-bar" id="text-stamp-bar">
-    <input type="text" id="draw-txt-inp" placeholder="Type text, then tap on the image to place it…" style="width:210px;padding:6px 10px;font-size:.76rem;">
-    <select id="draw-txt-font" style="width:120px;padding:6px 8px;font-size:.72rem;">
+
+  <!-- Dock Control Panel -->
+  <div class="dock-panel">
+    <div class="dock-tabs">
+      <div class="dtab on" onclick="setPane('gen',this)"><i class="fa-solid fa-sparkles"></i> Create</div>
+      <div class="dtab" onclick="setPane('remix',this)"><i class="fa-solid fa-wand-magic-sparkles"></i> Remix & Edit</div>
+      <div class="dtab" onclick="setPane('canvas-tools',this)"><i class="fa-solid fa-crop-simple"></i> Canvas & Inspect</div>
+      <div class="dtab" onclick="setPane('presets',this)"><i class="fa-solid fa-palette"></i> Aesthetics</div>
+    </div>
+    <div class="dock-body">
+      <!-- 1. CREATE PANE (PHILADELPHIA PRO) -->
+      <div class="dpane on" id="pane-gen">
+        <label class="f-label">Prompt (Philadelphia Pro)</label>
+        <textarea class="ta-input" id="prompt-in" placeholder="Describe your image in detail (subject, lighting, composition, mood)…" rows="2"></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px;">
+          <button type="button" class="et-pill" onclick="authA(enhancePrompt)"><i class="fa-solid fa-wand-sparkles"></i> AI Enhance Prompt (2 cr)</button>
+          <span style="font-size:.65rem;color:var(--t2);">Engine: <strong style="color:var(--g1);">Philadelphia Pro</strong></span>
+        </div>
+
+        <label class="f-label">Aspect Ratio</label>
+        <div class="ar-selector">
+          <button class="ar-chip on" data-ar="1:1" onclick="setAR(this)">1:1 Square</button>
+          <button class="ar-chip" data-ar="16:9" onclick="setAR(this)">16:9 Wide</button>
+          <button class="ar-chip" data-ar="9:16" onclick="setAR(this)">9:16 Story</button>
+          <button class="ar-chip" data-ar="4:3" onclick="setAR(this)">4:3</button>
+          <button class="ar-chip" data-ar="3:4" onclick="setAR(this)">3:4</button>
+          <button class="ar-chip" data-ar="3:2" onclick="setAR(this)">3:2</button>
+          <button class="ar-chip" data-ar="2:3" onclick="setAR(this)">2:3</button>
+          <button class="ar-chip" data-ar="21:9" onclick="setAR(this)">21:9 Ultra</button>
+        </div>
+
+        <div class="switch-row" id="popt-row" onclick="toggleOptimizer()">
+          <div><div style="font-size:.76rem;color:#fff;">Prompt Optimizer</div><div style="font-size:.6rem;color:var(--t2);">Automatically enrich lighting, textures, and composition</div></div>
+          <div class="switch-btn"><div class="switch-dot"></div></div>
+        </div>
+
+        <div class="switch-row" id="quad-row" onclick="toggleQuad()">
+          <div><div style="font-size:.76rem;color:#fff;">Quad Generate (4 Variations)</div><div style="font-size:.6rem;color:var(--t2);">Generate 4 distinct variations in parallel · 60 credits</div></div>
+          <div class="switch-btn"><div class="switch-dot"></div></div>
+        </div>
+
+        <button class="submit-btn" id="gen-btn" onclick="authA(generateImage)">
+          <i class="fa-solid fa-bolt"></i>
+          <span id="gen-btn-label">Generate with Philadelphia Pro (15 cr)</span>
+        </button>
+      </div>
+
+      <!-- 2. REMIX & EDIT PANE -->
+      <div class="dpane" id="pane-remix">
+        <label class="f-label">Upload Photo Reference / Image to Transform</label>
+        <input type="file" id="remix-file-in" accept="image/*" style="display:none" onchange="onRemixFile(this)">
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <button class="et-pill" onclick="$id('remix-file-in').click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Photo</button>
+          <button class="et-pill" onclick="useCanvasForRemix()"><i class="fa-solid fa-image"></i> Use Current Canvas Image</button>
+        </div>
+        <div id="remix-preview-box" style="display:none;margin-bottom:10px;">
+          <img id="remix-preview-img" src="" alt="Preview" style="max-height:100px;border-radius:8px;border:1px solid var(--gbdr);">
+        </div>
+        <label class="f-label">Instruction / Transformation Prompt</label>
+        <textarea class="ta-input" id="remix-prompt" placeholder="e.g. Turn this photo into a cinematic cyberpunk warrior with glowing neon armor in rain…" rows="2"></textarea>
+        <button class="submit-btn" style="margin-top:10px;" onclick="authA(runRemix)"><i class="fa-solid fa-wand-magic-sparkles"></i> Transform with Philadelphia Pro (15 cr)</button>
+      </div>
+
+      <!-- 3. CANVAS & INSPECT PANE -->
+      <div class="dpane" id="pane-canvas-tools">
+        <div class="tb-grid">
+          <button class="tb-card" onclick="authA(startDraw)"><i class="fa-solid fa-paintbrush"></i>Draw & Paint</button>
+          <button class="tb-card" onclick="rotateCanvas(90)"><i class="fa-solid fa-rotate-right"></i>Rotate 90°</button>
+          <button class="tb-card" onclick="flipCanvas('h')"><i class="fa-solid fa-arrows-left-right"></i>Flip H</button>
+          <button class="tb-card" onclick="flipCanvas('v')"><i class="fa-solid fa-arrows-up-down"></i>Flip V</button>
+        </div>
+        <div class="tb-grid">
+          <button class="tb-card" onclick="authA(inspectImage)"><i class="fa-solid fa-eye"></i>AI Inspect</button>
+          <button class="tb-card" onclick="authA(toggleCompare)"><i class="fa-solid fa-columns"></i>Compare</button>
+          <button class="tb-card" onclick="extractPalette()"><i class="fa-solid fa-droplet"></i>Palette</button>
+          <button class="tb-card" onclick="authA(openAgent)"><i class="fa-solid fa-robot"></i>Agentic Edit</button>
+        </div>
+        <div id="inspect-output" style="display:none;padding:12px;background:rgba(0,0,0,.5);border:1px solid var(--gbdr);border-radius:10px;font-size:.76rem;line-height:1.6;margin-top:8px;"></div>
+        <div id="palette-output" style="display:none;margin-top:8px;"></div>
+      </div>
+
+      <!-- 4. AESTHETICS & PRESETS -->
+      <div class="dpane" id="pane-presets">
+        <label class="f-label">Curated Aesthetics (Click to apply)</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="et-pill" onclick="applyPreset('Photorealistic Cinema, 8k, volumetric lighting, Arri Alexa 85mm')">Cinematic 8K</button>
+          <button class="et-pill" onclick="applyPreset('Cyberpunk aesthetic, neon reflections in rain, dark futuristic atmosphere')">Cyberpunk</button>
+          <button class="et-pill" onclick="applyPreset('Afrofuturism fantasy, ornate gold tribal details, glowing celestial lighting')">Afrofuturism</button>
+          <button class="et-pill" onclick="applyPreset('Anime masterpiece style, Makoto Shinkai vibrant skies, clean cel-shading')">Anime Vibrant</button>
+          <button class="et-pill" onclick="applyPreset('Dramatic chiaroscuro studio portrait, high contrast, deep shadows, Rembrandt light')">Chiaroscuro</button>
+          <button class="et-pill" onclick="applyPreset('Luxury editorial product photography, minimalist beige podium, soft rim light')">Luxury Product</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Draw & Text Studio Overlay -->
+<div id="draw-ov">
+  <div style="font-family:var(--ft);font-size:.82rem;color:var(--g1);letter-spacing:2px;">DRAW, PAINT & TEXT OVERLAY</div>
+  <canvas id="draw-cv" width="600" height="600"></canvas>
+  <div class="draw-dock">
+    <button class="draw-tool on" id="dt-brush" onclick="setDrawTool('brush')"><i class="fa-solid fa-paintbrush"></i> Brush</button>
+    <button class="draw-tool" id="dt-foil" onclick="setDrawTool('foil')"><i class="fa-solid fa-sparkles"></i> Gold Foil</button>
+    <button class="draw-tool" id="dt-glow" onclick="setDrawTool('glow')"><i class="fa-solid fa-sun"></i> Glow</button>
+    <button class="draw-tool" id="dt-line" onclick="setDrawTool('line')"><i class="fa-solid fa-slash"></i> Line</button>
+    <button class="draw-tool" id="dt-rect" onclick="setDrawTool('rect')"><i class="fa-regular fa-square"></i> Box</button>
+    <button class="draw-tool" id="dt-text" onclick="setDrawTool('text')"><i class="fa-solid fa-font"></i> Write Text</button>
+    <button class="draw-tool" id="dt-erase" onclick="setDrawTool('erase')"><i class="fa-solid fa-eraser"></i> Erase</button>
+    <input type="color" id="draw-col" value="#f0c878" style="width:28px;height:28px;border:none;background:none;cursor:pointer;">
+    <input type="range" id="draw-sz" min="2" max="60" value="10" style="width:68px;accent-color:var(--g1);">
+    <button class="draw-tool" onclick="undoDraw()"><i class="fa-solid fa-rotate-left"></i></button>
+    <button class="draw-tool" style="background:var(--g1);color:#000;font-weight:700;" onclick="applyDraw()"><i class="fa-solid fa-check"></i> Apply</button>
+    <button class="draw-tool" style="color:var(--red);" onclick="closeDraw()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div id="text-stamp-wrap">
+    <input type="text" id="draw-txt-val" placeholder="Type text, then click on the canvas to stamp…" style="background:rgba(0,0,0,.6);border:1px solid var(--gbdr);color:#fff;padding:6px 10px;border-radius:8px;font-size:.78rem;width:220px;">
+    <select id="draw-txt-font" style="background:#111;color:#fff;border:1px solid var(--bdr);padding:6px;border-radius:8px;font-size:.74rem;">
       <option value="Cinzel">Cinzel</option>
       <option value="Playfair Display">Playfair</option>
       <option value="DM Sans">DM Sans</option>
       <option value="JetBrains Mono">Mono</option>
     </select>
-    <input type="number" id="draw-txt-sz" value="44" min="14" max="140" style="width:62px;padding:6px;" title="Font size">
+    <input type="number" id="draw-txt-sz" value="48" min="12" max="180" style="width:60px;background:#111;color:#fff;border:1px solid var(--bdr);padding:6px;border-radius:8px;font-size:.74rem;">
   </div>
 </div>
 
-<!-- STUDIO SCREEN -->
-<div class="scr" id="scr-studio">
-  <div class="canvas-zone" id="canvas-zone">
-    <div id="gen-ov">
-      <div class="gen-ring"></div>
-      <div id="gen-label" style="font-family:var(--ft);font-size:.82rem;color:var(--g2);letter-spacing:1.5px;">Philadelphia Pro is creating…</div>
-    </div>
-
-    <div class="empty-state" id="empty-state">
-      <div class="es-orb"><i class="fas fa-wand-magic-sparkles"></i></div>
-      <div style="font-family:var(--ft);font-size:.9rem;font-weight:700;letter-spacing:2px;">PHILADELPHIA PRO STUDIO</div>
-      <div style="font-family:var(--fi);font-style:italic;font-size:.84rem;color:var(--t2);">Generate artwork, edit photos, draw & write text, or let our AI Agent design for you.</div>
-      <div class="es-pills">
-        <span class="es-pill" onclick="qp('Afrofuturist solar metropolis at golden hour, dramatic volumetric rays, 8k')">Futuristic Skyline</span>
-        <span class="es-pill" onclick="qp('Luxury fashion editorial portrait in warm studio chiaroscuro light, 85mm lens')">Editorial Portrait</span>
-        <span class="es-pill" onclick="qp('Minimalist obsidian and gold perfume bottle on wet basalt stone, studio macro')">Product Shoot</span>
-        <span class="es-pill" onclick="authA(openAgent)">Ask AI Agent</span>
-      </div>
-    </div>
-
-    <div id="img-display">
-      <img id="cur-img" src="" alt="" onclick="openLightbox()">
-      <div class="img-bar">
-        <button class="ia pri" onclick="authA(startDraw)"><i class="fas fa-paintbrush"></i> Draw & Text</button>
-        <button class="ia pri" onclick="authA(openAgent)"><i class="fas fa-robot"></i> AI Agent</button>
-        <button class="ia fav" id="fav-btn" onclick="toggleFav()"><i class="fas fa-heart"></i></button>
-        <button class="ia" onclick="authA(()=>saveToGallery(false))"><i class="fas fa-bookmark"></i> Save</button>
-        <button class="ia" onclick="openM('export-m')"><i class="fas fa-download"></i> Export</button>
-      </div>
-    </div>
-
-    <div id="quad-grid"></div>
-
-    <div id="compare-wrap">
-      <img id="compare-before" src="" alt="">
-      <div id="compare-after-wrap"><img id="compare-after" src="" alt=""></div>
-      <div class="cmp-line" id="cmp-line"><div class="cmp-handle"><i class="fas fa-arrows-left-right"></i></div></div>
-    </div>
-  </div>
-
-  <!-- CONTROL PANEL -->
-  <div class="ctrl-panel">
-    <div class="cp-tabs">
-      <div class="cpt on" onclick="cpTab('gen',this)"><i class="fas fa-sparkles"></i> Create</div>
-      <div class="cpt" onclick="cpTab('transform',this)"><i class="fas fa-wand-magic-sparkles"></i> AI Edit & Vision</div>
-      <div class="cpt" onclick="cpTab('filters',this)"><i class="fas fa-sliders"></i> Crop & FX</div>
-      <div class="cpt" onclick="cpTab('animate',this)"><i class="fas fa-film"></i> Motion</div>
-      <div class="cpt" onclick="cpTab('styles',this)"><i class="fas fa-palette"></i> Presets</div>
-    </div>
-    <div class="cpb">
-
-      <!-- 1. CREATE (PHILADELPHIA PRO) -->
-      <div class="cpsec on" id="sec-gen">
-        <div class="prompt-wrap">
-          <textarea class="prompt-ta" id="prompt-ta" placeholder="Describe your image for Philadelphia Pro…" oninput="$('char-count').textContent=this.value.length"></textarea>
-          <div class="prompt-tools">
-            <span class="char-count" id="char-count">0</span>
-            <div class="prompt-btns">
-              <button class="pbi pbi-rand" onclick="randomPrompt()"><i class="fas fa-shuffle"></i> Idea</button>
-              <button class="pbi pbi-enhance" onclick="authA(enhancePrompt)"><i class="fas fa-wand-magic-sparkles"></i> AI Enhance</button>
-            </div>
-          </div>
-        </div>
-        <textarea class="neg-ta" id="neg-ta" placeholder="Exclude (optional): blurry, distorted, text, watermark…"></textarea>
-
-        <div class="sh"><i class="fas fa-expand-arrows-alt"></i><span>Aspect Ratio</span></div>
-        <div class="ar-row">
-          <button class="ar-btn on" data-ar="1:1" onclick="setAR(this)">1:1</button>
-          <button class="ar-btn" data-ar="3:4" onclick="setAR(this)">3:4</button>
-          <button class="ar-btn" data-ar="4:3" onclick="setAR(this)">4:3</button>
-          <button class="ar-btn" data-ar="2:3" onclick="setAR(this)">2:3</button>
-          <button class="ar-btn" data-ar="3:2" onclick="setAR(this)">3:2</button>
-          <button class="ar-btn" data-ar="9:16" onclick="setAR(this)">9:16</button>
-          <button class="ar-btn" data-ar="16:9" onclick="setAR(this)">16:9</button>
-          <button class="ar-btn" data-ar="21:9" onclick="setAR(this)">21:9</button>
-        </div>
-
-        <div class="row">
-          <div class="fc">
-            <label class="fcl">Seed (Optional)</label>
-            <div style="display:flex;gap:5px;">
-              <input type="number" id="seed-val" placeholder="Random" min="0">
-              <button class="hbtn" type="button" onclick="reuseLastSeed()" title="Reuse last seed"><i class="fas fa-rotate-right"></i></button>
-            </div>
-          </div>
-          <div class="fc">
-            <label class="fcl">Engine</label>
-            <div style="padding:8px 10px;background:var(--g-soft);border:1px solid var(--gbdr);border-radius:10px;font-size:.76rem;color:var(--g2);font-weight:700;display:flex;align-items:center;gap:6px;">
-              <i class="fas fa-crown" style="color:var(--g1)"></i> Philadelphia Pro
-            </div>
-          </div>
-        </div>
-
-        <div class="tog-row" id="popt-tog" onclick="togglePromptOptimizer()">
-          <div><div style="font-size:.74rem;">Smart Prompt Optimizer</div><div style="font-size:.58rem;color:var(--t2);">Refines lighting, composition & texture</div></div>
-          <div class="tog" id="popt-t"><div class="tok"></div></div>
-        </div>
-        <div class="tog-row" id="quad-tog" onclick="toggleQuad()">
-          <div><div style="font-size:.74rem;">Quad Generate (4 Variations)</div><div style="font-size:.58rem;color:var(--t2);">Generate 4 options at once · 60 credits</div></div>
-          <div class="tog" id="quad-t"><div class="tok"></div></div>
-        </div>
-
-        <button class="gen-btn" id="gen-btn" onclick="authA(handleGenerate)">
-          <i class="fas fa-bolt"></i>
-          <span id="gen-btn-txt">Generate with Philadelphia Pro</span>
-          <span id="gen-cost" style="font-size:.62rem;opacity:.7;font-family:var(--fb)">(15 credits)</span>
-        </button>
-      </div>
-
-      <!-- 2. AI EDIT, VISION & AGENTIC TOOLS -->
-      <div class="cpsec" id="sec-transform">
-        <div class="sh"><i class="fas fa-wand-magic-sparkles"></i><span>AI Image Tools & Agentic Director</span></div>
-        <div class="tb-g">
-          <button class="tb" onclick="authA(()=>openTx('edit'))"><i class="fas fa-pen-nib"></i>Edit Image (15cr)</button>
-          <button class="tb" onclick="authA(()=>openTx('analyze'))"><i class="fas fa-eye"></i>Inspect / Prompt (2cr)</button>
-          <button class="tb" onclick="authA(startDraw)"><i class="fas fa-paintbrush"></i>Draw & Write Text</button>
-          <button class="tb" onclick="authA(openAgent)"><i class="fas fa-robot"></i>AI Agent Director</button>
-          <button class="tb" onclick="$('tx-file').click()"><i class="fas fa-upload"></i>Upload Image</button>
-          <button class="tb" onclick="authA(startCompare)"><i class="fas fa-columns"></i>Before / After</button>
-        </div>
-
-        <div class="file-drop" id="tx-drop" onclick="$('tx-file').click()">
-          <i class="fas fa-cloud-arrow-up" style="font-size:1.3rem;color:var(--g1);display:block;margin-bottom:4px;"></i>
-          Tap to upload an image onto the canvas (or edit the current image)
-        </div>
-        <input type="file" id="tx-file" accept="image/*" style="display:none" onchange="onTxFile(this)">
-
-        <div id="edit-prompt-wrap" style="display:none;margin-bottom:8px;">
-          <div class="fc"><label class="fcl">Edit Instruction</label>
-            <textarea id="edit-prompt" placeholder="e.g. Change outfit to royal gold silk, change lighting to sunset, add dramatic clouds…" style="min-height:54px;"></textarea>
-          </div>
-          <button class="gen-btn" id="tx-btn" onclick="authA(runTx)"><i class="fas fa-bolt"></i><span id="tx-btn-txt">Apply AI Edit</span></button>
-        </div>
-
-        <div id="analyze-result" style="display:none;padding:10px;background:rgba(201,169,110,.07);border:1px solid var(--gbdr);border-radius:10px;font-size:.75rem;line-height:1.55;margin-top:8px;white-space:pre-wrap;"></div>
-      </div>
-
-      <!-- 3. CROP, TRANSFORM & COLOR GRADING -->
-      <div class="cpsec" id="sec-filters">
-        <div class="sh"><i class="fas fa-crop-simple"></i><span>Crop, Rotate & Flip (Instant)</span></div>
-        <div class="pp-row">
-          <button class="pp" onclick="cropCanvas(1,1)">Crop 1:1</button>
-          <button class="pp" onclick="cropCanvas(4,5)">Crop 4:5</button>
-          <button class="pp" onclick="cropCanvas(16,9)">Crop 16:9</button>
-          <button class="pp" onclick="cropCanvas(9,16)">Crop 9:16</button>
-          <button class="pp" onclick="rotateCanvas()"><i class="fas fa-rotate-right"></i> 90°</button>
-          <button class="pp" onclick="flipCanvas('h')"><i class="fas fa-arrows-left-right"></i> Flip H</button>
-          <button class="pp" onclick="flipCanvas('v')"><i class="fas fa-arrows-up-down"></i> Flip V</button>
-        </div>
-
-        <div class="sh"><i class="fas fa-sliders"></i><span>Color Grading</span></div>
-        <div class="fs-row"><span class="fs-lbl">Brightness</span><input type="range" id="f-bright" min="0" max="200" value="100" oninput="applyFilters();$('v-bright').textContent=this.value+'%'"><span class="fs-val" id="v-bright">100%</span></div>
-        <div class="fs-row"><span class="fs-lbl">Contrast</span><input type="range" id="f-contrast" min="0" max="200" value="100" oninput="applyFilters();$('v-contrast').textContent=this.value+'%'"><span class="fs-val" id="v-contrast">100%</span></div>
-        <div class="fs-row"><span class="fs-lbl">Saturation</span><input type="range" id="f-sat" min="0" max="300" value="100" oninput="applyFilters();$('v-sat').textContent=this.value+'%'"><span class="fs-val" id="v-sat">100%</span></div>
-        <div class="fs-row"><span class="fs-lbl">Hue Shift</span><input type="range" id="f-hue" min="0" max="360" value="0" oninput="applyFilters();$('v-hue').textContent=this.value+'°'"><span class="fs-val" id="v-hue">0°</span></div>
-        <div class="fs-row"><span class="fs-lbl">Blur</span><input type="range" id="f-blur" min="0" max="20" value="0" oninput="applyFilters();$('v-blur').textContent=this.value+'px'"><span class="fs-val" id="v-blur">0px</span></div>
-        <div class="fs-row"><span class="fs-lbl">Sepia</span><input type="range" id="f-sepia" min="0" max="100" value="0" oninput="applyFilters();$('v-sepia').textContent=this.value+'%'"><span class="fs-val" id="v-sepia">0%</span></div>
-        <div class="fs-row"><span class="fs-lbl">Vignette</span><input type="range" id="f-vign" min="0" max="100" value="0" oninput="applyVignette();$('v-vign').textContent=this.value+'%'"><span class="fs-val" id="v-vign">0%</span></div>
-
-        <div class="pp-row" style="margin-top:6px;">
-          <button class="pp" onclick="applyPreset('cinematic')">Cinematic</button>
-          <button class="pp" onclick="applyPreset('vivid')">Vivid</button>
-          <button class="pp" onclick="applyPreset('noir')">Noir</button>
-          <button class="pp" onclick="applyPreset('warm')">Warm</button>
-          <button class="pp" onclick="applyPreset('golden')">Golden</button>
-          <button class="pp" onclick="resetFilters()">Reset</button>
-        </div>
-
-        <div class="sh"><i class="fas fa-eye-dropper"></i><span>Palette (Tap to Copy HEX)</span></div>
-        <div id="pal-row" class="pal-row"><span style="font-size:.64rem;color:var(--t3)">Load an image to extract colors</span></div>
-        <button class="gen-btn" onclick="openM('export-m')"><i class="fas fa-download"></i> Export Graded Image</button>
-      </div>
-
-      <!-- 4. MOTION -->
-      <div class="cpsec" id="sec-animate">
-        <div class="sh"><i class="fas fa-film"></i><span>Live Canvas Motion</span></div>
-        <div class="pp-row">
-          <button class="pp" onclick="curAnim='kenburns';startAnim()">Ken Burns</button>
-          <button class="pp" onclick="curAnim='glitch';startAnim()">Glitch</button>
-          <button class="pp" onclick="curAnim='dreamy';startAnim()">Dreamy Glow</button>
-          <button class="pp" onclick="curAnim='particles';startAnim()">Gold Dust</button>
-          <button class="pp" onclick="curAnim='filmburn';startAnim()">Light Leak</button>
-        </div>
-        <div id="anim-cv-wrap" style="display:none;margin-bottom:8px;border-radius:10px;overflow:hidden;"><canvas id="anim-cv" style="width:100%;display:block;"></canvas></div>
-        <div style="display:flex;gap:6px;">
-          <button class="pp" style="flex:1;padding:9px;" onclick="authA(startAnim)"><i class="fas fa-play"></i> Play</button>
-          <button class="pp" style="flex:1;padding:9px;" onclick="captureFrame()"><i class="fas fa-camera"></i> Capture Frame</button>
-          <button class="pp" style="flex:1;padding:9px;" onclick="stopAnim()"><i class="fas fa-stop"></i> Stop</button>
-        </div>
-      </div>
-
-      <!-- 5. PRESETS -->
-      <div class="cpsec" id="sec-styles">
-        <div class="sh"><i class="fas fa-palette"></i><span>One-Tap Style Modifiers</span></div>
-        <div id="style-g" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;"></div>
-        <div class="sh"><i class="fas fa-fire"></i><span>Curated Prompts</span></div>
-        <div id="trending-prompts"></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- GALLERY SCREEN -->
+<!-- Gallery Screen -->
 <div class="scr" id="scr-gallery">
-  <div class="wrap-inner">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div style="font-family:var(--ft);font-size:.86rem;color:var(--g1);letter-spacing:2px;">SAVED GALLERY</div>
-      <div style="display:flex;gap:6px;">
-        <button class="pp" onclick="galFilter='all';renderGallery()">All</button>
-        <button class="pp" onclick="galFilter='fav';renderGallery()">Favorites</button>
-        <button class="pp" onclick="authA(()=>saveToGallery(false))">+ Save Current</button>
-      </div>
+  <div class="view-wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span style="font-family:var(--ft);font-size:.9rem;color:var(--g1);letter-spacing:2px;">SAVED CREATIONS</span>
+      <button class="et-pill" onclick="authA(saveToGallery)"><i class="fa-solid fa-plus"></i> Save Active Canvas</button>
     </div>
-    <div class="gal-g" id="gal-g"></div>
+    <div class="gal-grid" id="gal-grid"></div>
   </div>
 </div>
 
-<!-- PROFILE SCREEN -->
+<!-- Profile Screen -->
 <div class="scr" id="scr-pro">
-  <div class="wrap-inner">
-    <div class="pro-card">
-      <div class="pro-av" id="pro-av"><i class="fas fa-user"></i></div>
-      <div style="font-family:var(--ft);font-size:1rem;letter-spacing:2px;" id="pro-nm">Creator</div>
-      <div style="font-size:.72rem;color:var(--t2);margin-bottom:12px;" id="pro-em">—</div>
-      <div style="padding:12px;background:var(--g-soft);border:1px solid var(--gbdr);border-radius:12px;cursor:pointer;" onclick="openM('fund-m')">
-        <div style="font-size:.58rem;color:var(--t2);text-transform:uppercase;">Available Balance</div>
-        <div style="font-family:var(--ft);font-size:1.5rem;color:var(--g2);font-weight:900;" id="pro-bal">--</div>
+  <div class="view-wrap">
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:20px;text-align:center;margin-bottom:12px;">
+      <img id="pro-img" src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Profile" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--g1);margin-bottom:8px;">
+      <div id="pro-name" style="font-family:var(--ft);font-size:1rem;font-weight:700;color:#fff;">Creator</div>
+      <div id="pro-email" style="font-size:.72rem;color:var(--t2);margin-bottom:12px;">--</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--g-subtle);border:1px solid var(--gbdr);border-radius:var(--r12);margin-bottom:10px;">
+        <i class="fa-solid fa-coins" style="color:var(--g1);"></i>
+        <span style="font-family:var(--ft);font-size:1.35rem;color:var(--g2);font-weight:700;" id="pro-bal">--</span>
+        <span style="font-size:.65rem;color:var(--t2);text-transform:uppercase;">Credits</span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="submit-btn" style="flex:1;padding:10px;font-size:.74rem;" onclick="authA(claimDaily)"><i class="fa-solid fa-gift"></i> Claim Daily</button>
+        <button class="submit-btn" style="flex:1;padding:10px;font-size:.74rem;background:var(--green);" onclick="openM('wallet-m')"><i class="fa-solid fa-wallet"></i> Fund</button>
       </div>
     </div>
-    <button class="pro-link" onclick="authA(claimDaily)" style="color:var(--grn);border-color:rgba(16,185,129,.3);"><i class="fas fa-gift"></i> Claim Daily Free Credits</button>
-    <button class="pro-link" onclick="openM('fund-m')"><i class="fas fa-wallet"></i> Fund Wallet ($1 = 220+ cr · ₦5 = 1 cr)</button>
-    <button class="pro-link" onclick="openM('req-m')"><i class="fas fa-headset"></i> Concierge Support (hello@elvionai.com.ng)</button>
-    <button class="pro-link" onclick="logoutUser()" style="color:var(--red);"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+    <button class="submit-btn" style="background:rgba(255,255,255,.05);color:var(--red);border:1px solid rgba(224,90,122,.3);box-shadow:none;margin-top:12px;" onclick="signOut()"><i class="fa-solid fa-power-off"></i> Sign Out</button>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- Bottom Navigation Bar -->
 <nav id="bnav">
-  <button class="ni on" id="ni-studio" onclick="goScr('studio')"><i class="fas fa-bolt"></i>Studio</button>
-  <button class="ni" id="ni-gallery" onclick="goScr('gallery')"><i class="fas fa-images"></i>Gallery</button>
-  <button class="ni" id="ni-pro" onclick="goScr('pro')"><i class="fas fa-user"></i>Profile</button>
+  <button class="ni on" id="ni-studio" onclick="goScr('studio')"><i class="fa-solid fa-wand-magic-sparkles"></i>Studio</button>
+  <button class="ni" id="ni-gallery" onclick="goScr('gallery')"><i class="fa-solid fa-images"></i>Gallery</button>
+  <button class="ni" id="ni-pro" onclick="goScr('pro')"><i class="fa-solid fa-user"></i>Account</button>
 </nav>
 
-<!-- FLOATING PHILADELPHIA AGENT -->
-<div id="agent-fab" onclick="authA(openAgent)" title="Philadelphia AI Image Agent">
-  <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Philadelphia Agent">
+<!-- Floating Agent Button -->
+<div id="agent-fab" onclick="authA(openAgent)">
+  <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="AI Agent">
 </div>
 
-<!-- AGENTIC AI MODAL -->
-<div class="mbg" id="agent-m"><div class="modal" style="height:82vh;display:flex;flex-direction:column;padding:0;max-width:480px;">
-  <div style="padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;background:var(--card2);">
-    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--g1);">
+<!-- Agentic AI Assistant Sheet -->
+<div class="modal-cover" id="agent-m"><div class="modal-sheet">
+  <div class="agent-header">
+    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Philadelphia AI">
     <div>
-      <div style="font-family:var(--ft);font-size:.86rem;color:var(--g1);font-weight:700;">PHILADELPHIA AI AGENT</div>
-      <div style="font-size:.58rem;color:var(--t2);">Generate, edit, draw, add text & design layouts autonomously</div>
+      <div style="font-family:var(--ft);font-size:.84rem;color:var(--g1);font-weight:700;">PHILADELPHIA AI AGENT</div>
+      <div style="font-size:.58rem;color:var(--t2);">Direct Autonomous Image Orchestrator</div>
     </div>
-    <button class="mx" onclick="closeM('agent-m')"><i class="fas fa-times"></i></button>
+    <button class="m-close" onclick="closeM('agent-m')"><i class="fa-solid fa-xmark"></i></button>
   </div>
-  <div id="agent-chat" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;">
-    <div class="agent-msg ai">Tell me what to create, write, draw, or edit. If you have an image open on the canvas, I will work directly on it!</div>
+  <div id="agent-feed">
+    <div class="agent-bubble ai">Hello. Tell me what to build, modify, or paint onto your canvas. I execute tools autonomously and drop the result directly onto your active stage.</div>
   </div>
-  <div style="padding:6px 12px;display:flex;gap:5px;overflow-x:auto;border-top:1px solid var(--bdr);">
-    <span class="es-pill" onclick="sendAgent('Add bold gold headline text at the top of this image')">Add Gold Text</span>
-    <span class="es-pill" onclick="sendAgent('Draw a glowing golden frame border around this image')">Draw Frame</span>
-    <span class="es-pill" onclick="sendAgent('Design a luxury event flyer from this aesthetic')">Design Flyer</span>
-  </div>
-  <div style="padding:10px 12px;background:var(--card2);border-top:1px solid var(--bdr);display:flex;gap:8px;align-items:center;">
-    <input type="text" id="agent-inp" placeholder="Tell Philadelphia AI what to do…" style="flex:1;" onkeypress="if(event.key==='Enter')sendAgent()">
-    <button onclick="sendAgent()" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g1),#e2c178);border:none;color:#000;"><i class="fas fa-arrow-up"></i></button>
+  <div style="padding:10px 14px;background:var(--card);border-top:1px solid var(--bdr);display:flex;gap:8px;">
+    <input type="text" id="agent-in" placeholder="Tell Philadelphia what to design or edit…" style="flex:1;background:rgba(0,0,0,.5);border:1px solid var(--gbdr);color:#fff;padding:10px 12px;border-radius:var(--r10);font-size:.82rem;" onkeypress="if(event.key==='Enter')sendAgent()">
+    <button onclick="sendAgent()" style="width:40px;height:40px;border-radius:50%;background:var(--g1);border:none;color:#000;cursor:pointer;"><i class="fa-solid fa-arrow-up"></i></button>
   </div>
 </div></div>
 
-<!-- MODALS -->
-<div class="mbg" id="fund-m"><div class="modal">
-  <button class="mx" onclick="closeM('fund-m')"><i class="fas fa-times"></i></button>
-  <div class="m-ttl">FUND WALLET</div>
-  <div style="font-size:.74rem;color:var(--t2);text-align:center;margin-bottom:12px;">$1 = 220+ Credits · ₦5 = 1 Credit</div>
-  <div class="fc"><label class="fcl">Amount (NGN)</label><input type="number" id="fund-amt" value="1000" min="100"></div>
-  <div id="pvn" style="display:none;font-size:.7rem;color:var(--g1);text-align:center;margin:6px 0;"><i class="fas fa-spinner fa-spin"></i> Verifying payment…</div>
-  <button class="mbtn p" onclick="initPay()" style="margin-bottom:6px;"><i class="fas fa-lock"></i> Pay Securely</button>
-  <button class="mbtn s" onclick="closeM('fund-m')">Cancel</button>
+<!-- Wallet Funding Modal -->
+<div class="modal-cover" id="wallet-m"><div class="modal-sheet">
+  <div class="m-pill"></div>
+  <button class="m-close" onclick="closeM('wallet-m')"><i class="fa-solid fa-xmark"></i></button>
+  <div style="font-family:var(--ft);font-size:.92rem;color:var(--g1);margin-bottom:6px;text-align:center;">FUND WALLET</div>
+  <div style="font-size:.76rem;color:var(--t2);text-align:center;margin-bottom:14px;">Pay As You Go: $1 = 220+ Credits · ₦5 = 1 Credit</div>
+  <label class="f-label">Amount (NGN)</label>
+  <input type="number" id="fund-amt" value="1000" min="100" style="margin-bottom:14px;background:rgba(0,0,0,.6);border:1px solid var(--gbdr);color:#fff;padding:10px;border-radius:8px;width:100%;">
+  <button class="submit-btn" onclick="initPay()"><i class="fa-solid fa-lock"></i> Pay with Korapay</button>
 </div></div>
-
-<div class="mbg" id="req-m"><div class="modal">
-  <button class="mx" onclick="closeM('req-m')"><i class="fas fa-times"></i></button>
-  <div class="m-ttl">CONCIERGE SUPPORT</div>
-  <button class="mbtn wa" style="margin:10px 0 6px;" onclick="window.open('https://wa.me/2348159983206','_blank')"><i class="fab fa-whatsapp"></i> WhatsApp Support</button>
-  <button class="mbtn s" onclick="window.open('mailto:hello@elvionai.com.ng','_blank')"><i class="fas fa-envelope"></i> hello@elvionai.com.ng</button>
-</div></div>
-
-<div class="mbg" id="export-m"><div class="modal">
-  <button class="mx" onclick="closeM('export-m')"><i class="fas fa-times"></i></button>
-  <div class="m-ttl">EXPORT IMAGE</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:10px 0;">
-    <button class="pp" id="eo-png" style="padding:10px;border-color:var(--g1);" onclick="setExpFmt('png',this)">PNG</button>
-    <button class="pp" id="eo-jpeg" style="padding:10px;" onclick="setExpFmt('jpeg',this)">JPEG</button>
-    <button class="pp" id="eo-webp" style="padding:10px;" onclick="setExpFmt('webp',this)">WebP</button>
-  </div>
-  <div class="fc"><label class="fcl">Quality</label><input type="range" id="exp-quality" min="50" max="100" value="94"></div>
-  <button class="mbtn p" onclick="downloadImage()" style="margin-bottom:6px;"><i class="fas fa-download"></i> Download Graded Image</button>
-  <button class="mbtn s" onclick="copyToClipboard()"><i class="fas fa-copy"></i> Copy to Clipboard</button>
-</div></div>
-
-<div class="mbg" id="enhance-m"><div class="modal">
-  <button class="mx" onclick="closeM('enhance-m')"><i class="fas fa-times"></i></button>
-  <div class="m-ttl">ENHANCED PROMPT</div>
-  <div id="enhanced-result" style="padding:12px;background:var(--g-soft);border:1px solid var(--gbdr);border-radius:10px;font-size:.78rem;line-height:1.6;margin:10px 0;"></div>
-  <button class="mbtn p" onclick="useEnhanced()"><i class="fas fa-check"></i> Use This Prompt</button>
-</div></div>
-
-<div id="lightbox">
-  <button class="lb-close" onclick="$('lightbox').classList.remove('on')"><i class="fas fa-times"></i></button>
-  <img id="lb-img" src="" alt="">
-</div>
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import{getAuth,signInWithPopup,signInWithRedirect,getRedirectResult,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
-const API="https://web-production-9a18.up.railway.app";
-const auth=getAuth(initializeApp({apiKey:"AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",authDomain:"elvionai.firebaseapp.com",projectId:"elvionai",storageBucket:"elvionai.appspot.com",messagingSenderId:"161078300830",appId:"1:161078300830:web:f460df8591704eb0e96b8f"}));
-const gProv=new GoogleAuthProvider();
-window.$=id=>document.getElementById(id);
+const API = "https://web-production-9a18.up.railway.app";
+const auth = getAuth(initializeApp({
+  apiKey: "AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
+  authDomain: "elvionai.firebaseapp.com",
+  projectId: "elvionai",
+  storageBucket: "elvionai.appspot.com",
+  messagingSenderId: "161078300830",
+  appId: "1:161078300830:web:f460df8591704eb0e96b8f"
+}));
+const gProv = new GoogleAuthProvider();
 
-function b64toBlob(b64,type="image/png"){const bs=atob(b64),ab=new ArrayBuffer(bs.length),ua=new Uint8Array(ab);for(let i=0;i<bs.length;i++)ua[i]=bs.charCodeAt(i);return new Blob([ab],{type})}
-function blobToB64(blob){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(",")[1]);fr.readAsDataURL(blob)})}
+const $id = id => document.getElementById(id);
+const toast = (msg, type = 's') => {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = msg;
+  $id('toasts').appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+};
 
-window.cu=null;let tok=null,bal=0,curImg=null,curImgB64=null,prevImgB64=null;
-let curAR='1:1',quadMode=false,promptOptimizerOn=false,lastSeedUsed=null;
-let curAnim='kenburns',animRAF=null,animFr=0,txMode='edit',txFile=null,expFmtSel='png',isFav=false,galFilter='all',gallery=[];
-let filterState={bright:100,contrast:100,sat:100,hue:0,blur:0,sepia:0,vign:0};
-let db=null;
+// State
+let user = null, tok = null, bal = 0;
+let curImgB64 = null, prevImgB64 = null;
+let curAR = '1:1', quadOn = false, optOn = false;
+let txBlob = null, compareMode = false;
 
-async function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('phl_img_pro_v5',1);r.onupgradeneeded=e=>{e.target.result.createObjectStore('gallery',{keyPath:'id'})};r.onsuccess=e=>res(e.target.result);r.onerror=()=>rej(r.error);})}
-async function dbPut(st,v){if(!db)return;return new Promise(r=>{const tx=db.transaction(st,'readwrite');tx.objectStore(st).put(v).onsuccess=()=>r()})}
-async function dbGetAll(st){if(!db)return[];return new Promise(r=>{const tx=db.transaction(st,'readonly');const rq=tx.objectStore(st).getAll();rq.onsuccess=()=>r(rq.result||[]);rq.onerror=()=>r([])})}
-async function dbDel(st,k){if(!db)return;return new Promise(r=>{const tx=db.transaction(st,'readwrite');tx.objectStore(st).delete(k).onsuccess=()=>r()})}
+// IndexedDB Gallery Storage
+const idbP = new Promise(res => {
+  const req = indexedDB.open('ph_img_studio_v2', 1);
+  req.onupgradeneeded = e => e.target.result.createObjectStore('gallery', { keyPath: 'id' });
+  req.onsuccess = e => res(e.target.result);
+});
+async function idbPut(item) { const db = await idbP; return new Promise(r => db.transaction('gallery','readwrite').objectStore('gallery').put(item).onsuccess = r); }
+async function idbAll() { const db = await idbP; return new Promise(r => { const q = db.transaction('gallery','readonly').objectStore('gallery').getAll(); q.onsuccess = () => r(q.result || []); }); }
+async function idbDel(id) { const db = await idbP; return new Promise(r => db.transaction('gallery','readwrite').objectStore('gallery').delete(id).onsuccess = r); }
 
-window.login=async()=>{try{await signInWithPopup(auth,gProv)}catch(e){if(e.code==='auth/popup-blocked')await signInWithRedirect(auth,gProv);else toast("Sign-in error","e")}};
-window.authA=fn=>{if(!cu)return toast("Sign in first","i");fn()};
-window.logoutUser=async()=>{await signOut(auth);window.location.reload()};
-getRedirectResult(auth).catch(()=>{});
+// Auth Flow
+window.signIn = async () => {
+  try { await signInWithPopup(auth, gProv); }
+  catch(e) { if (e.code === 'auth/popup-blocked') await signInWithRedirect(auth, gProv); else toast(e.message, 'e'); }
+};
+window.signOut = () => fbSignOut(auth).then(() => location.reload());
+window.authA = fn => { if (!user) { toast('Please sign in first', 'e'); return; } fn(); };
+getRedirectResult(auth).catch(() => {});
 
-onAuthStateChanged(auth,async u=>{
-  if(!u){$('scr-auth').classList.add('on');$('hdr').classList.remove('on');$('bnav').classList.remove('on');$('agent-fab').style.display='none';return;}
-  window.cu=u;$('scr-auth').classList.remove('on');$('hdr').classList.add('on');$('bnav').classList.add('on');$('agent-fab').style.display='flex';
-  const fn=u.displayName?.split(' ')[0]||u.email?.split('@')[0]||'Creator';
-  $('pro-nm').textContent=u.displayName||fn;$('pro-em').textContent=u.email||'—';
-  if(u.photoURL){$('hav').innerHTML=`<img src="${u.photoURL}">`;$('pro-av').innerHTML=`<img src="${u.photoURL}">`;}
-  try{db=await openDB()}catch(e){}
-  tok=await u.getIdToken(true);
-  await loadUser();buildStyleGrid();buildTrending();
-  gallery=(await dbGetAll('gallery')).sort((a,b)=>b.id-a.id);
-  renderGallery();checkPayReturn();goScr('studio');
+onAuthStateChanged(auth, async u => {
+  if (!u) {
+    $id('scr-auth').classList.add('on');
+    $id('hdr').classList.remove('on');
+    $id('bnav').classList.remove('on');
+    $id('agent-fab').style.display = 'none';
+    return;
+  }
+  user = u;
+  tok = await u.getIdToken();
+  $id('scr-auth').classList.remove('on');
+  $id('hdr').classList.add('on');
+  $id('bnav').classList.add('on');
+  $id('agent-fab').style.display = 'flex';
+  if (u.photoURL) {
+    $id('user-avatar').src = u.photoURL;
+    $id('pro-img').src = u.photoURL;
+  }
+  $id('pro-name').textContent = u.displayName || 'Creator';
+  $id('pro-email').textContent = u.email || '';
+  await loadBal();
+  await renderGallery();
+  goScr('studio');
 });
 
-async function loadUser(){try{const r=await fetch(`${API}/api/user/keys-and-balance`,{headers:{'X-Firebase-Token':tok}});if(r.ok){const d=await r.json();bal=d.balance||0;updBal();}}catch(e){}}
-function updBal(){['bal-v','pro-bal'].forEach(id=>{if($(id))$(id).textContent=bal.toLocaleString()})}
-
-window.goScr=s=>{
-  document.querySelectorAll('.scr').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
-  $('scr-'+s)?.classList.add('on');$('ni-'+s)?.classList.add('on');
-  if(s==='gallery')renderGallery();
-};
-window.cpTab=(s,el)=>{
-  document.querySelectorAll('.cpsec').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.cpt').forEach(x=>x.classList.remove('on'));
-  $('sec-'+s).classList.add('on');if(el)el.classList.add('on');
-};
-
-window.qp=p=>{$('prompt-ta').value=p;$('char-count').textContent=p.length;cpTab('gen',document.querySelectorAll('.cpt')[0])};
-const RANDOM_PROMPTS=[
-  'Cyberpunk market street at midnight, glowing rain reflections, volumetric lighting, 8k',
-  'Regal African queen wearing golden geometric crown in sunlit palace, editorial portrait',
-  'Futuristic coastal metropolis at golden sunset, solar glass towers, cinematic aerial shot',
-  'Ancient library filled with floating glowing books and warm candlelight, ultra-detailed'
-];
-window.randomPrompt=()=>{const p=RANDOM_PROMPTS[Math.floor(Math.random()*RANDOM_PROMPTS.length)];qp(p);toast("Prompt loaded!","i")};
-window.setAR=el=>{document.querySelectorAll('.ar-btn').forEach(x=>x.classList.remove('on'));el.classList.add('on');curAR=el.dataset.ar;};
-window.togglePromptOptimizer=()=>{promptOptimizerOn=!promptOptimizerOn;$('popt-t').classList.toggle('on',promptOptimizerOn);$('popt-tog').classList.toggle('on',promptOptimizerOn);};
-window.toggleQuad=()=>{quadMode=!quadMode;$('quad-t').classList.toggle('on',quadMode);$('quad-tog').classList.toggle('on',quadMode);$('gen-cost').textContent=quadMode?'(60 credits)':'(15 credits)';$('gen-btn-txt').textContent=quadMode?'Generate 4 Variations':'Generate with Philadelphia Pro';};
-window.reuseLastSeed=()=>{if(lastSeedUsed==null)return toast("Generate with a seed first","i");$('seed-val').value=lastSeedUsed;};
-
-function showGL(t='Philadelphia Pro is creating…'){$('gen-ov').classList.add('on');$('gen-label').textContent=t;$('gen-btn').disabled=true;}
-function hideGL(){$('gen-ov').classList.remove('on');$('gen-btn').disabled=false;}
-
-window.handleGenerate=async()=>{
-  const prompt=$('prompt-ta').value.trim();if(!prompt)return toast("Enter a prompt first","e");
-  const cost=quadMode?60:15;if(bal<cost){toast(`Need ${cost} credits`,"e");return openM('fund-m');}
-  const neg=$('neg-ta').value.trim(),finalPrompt=neg?`${prompt}. Avoid: ${neg}`:prompt;
-  const body={prompt:finalPrompt,use_minimax:true,aspect_ratio:curAR,n:quadMode?4:1,prompt_optimizer:promptOptimizerOn};
-  const sv=parseInt($('seed-val').value);if(!isNaN(sv)){body.seed=sv;lastSeedUsed=sv;}
-  showGL(quadMode?'Generating 4 Philadelphia Pro variations…':'Philadelphia Pro is rendering…');
-  try{
-    tok=await cu.getIdToken();
-    const r=await fetch(`${API}/api/studio/generate-image`,{method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},body:JSON.stringify(body)});
-    const d=await r.json();if(!r.ok)throw new Error(d.detail||'Generation failed');
-    const imgs=d.images_b64||(d.image_b64?[d.image_b64]:[]);if(!imgs.length)throw new Error('No image returned');
-    hideGL();
-    if(imgs.length>1){
-      const qg=$('quad-grid');qg.innerHTML='';$('img-display').classList.remove('on');$('empty-state').style.display='none';qg.classList.add('on');
-      imgs.forEach((b64,i)=>{
-        const div=document.createElement('div');div.className='qi';
-        div.innerHTML=`<img src="data:image/png;base64,${b64}"><span>Use V${i+1}</span>`;
-        div.onclick=()=>{prevImgB64=curImgB64;curImgB64=b64;curImg=`data:image/png;base64,${b64}`;qg.classList.remove('on');showImage(curImg);extractPalette(b64);saveToGallery(true);};
-        qg.appendChild(div);
-      });
-    }else{
-      prevImgB64=curImgB64;curImgB64=imgs[0];curImg=`data:image/png;base64,${imgs[0]}`;
-      showImage(curImg);extractPalette(imgs[0]);saveToGallery(true);
+async function loadBal() {
+  try {
+    tok = await user.getIdToken();
+    const r = await fetch(`${API}/api/user/keys-and-balance`, { headers: { 'X-Firebase-Token': tok } });
+    if (r.ok) {
+      const d = await r.json();
+      bal = d.balance || 0;
+      $id('hdr-bal').textContent = bal;
+      $id('pro-bal').textContent = bal;
     }
-    bal-=(d.credits_charged||cost);updBal();toast("Created with Philadelphia Pro!","s");
-  }catch(e){hideGL();toast(e.message,"e");}
-};
-
-function showImage(src){
-  $('empty-state').style.display='none';$('compare-wrap').classList.remove('on');$('quad-grid').classList.remove('on');
-  $('cur-img').src=src;$('img-display').classList.add('on');$('lb-img').src=src;isFav=false;updateFavBtn();applyFilters();
+  } catch(e) {}
 }
 
-/* ── AI EDIT & VISION INSPECTOR ── */
-window.openTx=mode=>{
-  txMode=mode;$('analyze-result').style.display='none';
-  $('edit-prompt-wrap').style.display=mode==='edit'?'block':'none';
-  if(mode==='analyze')runTx();
-};
-window.onTxFile=async inp=>{
-  const f=inp.files[0];inp.value='';if(!f)return;
-  const b64=await blobToB64(f);prevImgB64=curImgB64;curImgB64=b64;curImg=`data:image/png;base64,${b64}`;
-  showImage(curImg);extractPalette(b64);toast("Image loaded onto canvas!","s");
-};
-window.runTx=async()=>{
-  if(!curImgB64)return toast("Generate or upload an image first","e");
-  const mode=txMode,cost=mode==='analyze'?2:15;if(bal<cost){toast(`Need ${cost} credits`,"e");return openM('fund-m');}
-  showGL(mode==='analyze'?'Inspecting image…':'Editing image with Philadelphia Pro…');
-  try{
-    tok=await cu.getIdToken();
-    const fd=new FormData();fd.append('file',b64toBlob(curImgB64,'image/png'),'canvas.png');
-    if(mode==='analyze'){
-      fd.append('prompt','Describe this image in detail and provide an exact image-generation prompt that recreates its visual style, lighting, and composition.');
-      let r=await fetch(`${API}/api/studio/understand`,{method:'POST',headers:{'X-Firebase-Token':tok},body:fd});
-      let out='';
-      if(r.ok)out=(await r.json()).analysis;
-      else{
-        const fd2=new FormData();fd2.append('file',b64toBlob(curImgB64,'image/png'),'canvas.png');fd2.append('prompt','Describe this image and write a recreation prompt.');
-        r=await fetch(`${API}/understand-image`,{method:'POST',headers:{'X-Firebase-Token':tok},body:fd2});
-        if(r.ok)out=(await r.json()).response;
-      }
-      hideGL();if(!out)throw new Error('Inspection failed');
-      $('analyze-result').textContent=out;$('analyze-result').style.display='block';bal-=2;updBal();return;
-    }
-    const p=$('edit-prompt').value.trim();if(!p){hideGL();return toast("Enter edit instruction","e");}
-    fd.append('prompt',p);fd.append('aspect_ratio',curAR);
-    const r=await fetch(`${API}/api/tools/edit-photo`,{method:'POST',headers:{'X-Firebase-Token':tok},body:fd});
-    if(!r.ok)throw new Error('Photo edit failed');
-    const b64=await blobToB64(await r.blob());hideGL();
-    prevImgB64=curImgB64;curImgB64=b64;curImg=`data:image/png;base64,${b64}`;
-    showImage(curImg);extractPalette(b64);bal-=15;updBal();toast("Photo edited!","s");
-  }catch(e){hideGL();toast(e.message,"e");}
+window.goScr = scr => {
+  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+  $id(`scr-${scr}`)?.classList.add('on');
+  $id(`ni-${scr}`)?.classList.add('on');
+  if (scr === 'gallery') renderGallery();
 };
 
-/* ── INTERACTIVE DRAW, SHAPES & TEXT STUDIO ── */
-let drawTool='brush',drawHist=[],isDrawing=false,dStartX=0,dStartY=0,drawSnap=null;
-window.setDrawTool=t=>{
-  drawTool=t;['brush','foil','glow','line','rect','circle','text','erase'].forEach(k=>$('dt-'+k)?.classList.toggle('on',k===t));
-  $('text-stamp-bar').classList.toggle('on',t==='text');
+window.setPane = (pane, el) => {
+  document.querySelectorAll('.dpane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('on'));
+  $id(`pane-${pane}`)?.classList.add('on');
+  el?.classList.add('on');
 };
-window.startDraw=()=>{
-  if(!curImgB64)return toast("Generate or upload an image first","e");
-  const ov=$('draw-ov'),cv=$('draw-cv'),ctx=cv.getContext('2d');
-  ov.classList.add('on');drawHist=[];
-  const img=new Image();img.crossOrigin='anonymous';
-  img.onload=()=>{
-    const sc=Math.min(1,760/Math.max(img.naturalWidth,img.naturalHeight));
-    cv.width=Math.round(img.naturalWidth*sc);cv.height=Math.round(img.naturalHeight*sc);
-    ctx.drawImage(img,0,0,cv.width,cv.height);drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));
-  };
-  img.src=curImg;
-  const pos=e=>{const r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*(cv.width/r.width),y:(t.clientY-r.top)*(cv.height/r.height)}};
-  const down=e=>{
-    e.preventDefault();const p=pos(e),col=$('draw-col').value;
-    if(drawTool==='text'){
-      const txt=$('draw-txt-inp').value.trim();if(!txt)return toast("Type text below first","i");
-      ctx.save();ctx.font=`700 ${+$('draw-txt-sz').value||44}px '${$('draw-txt-font').value}',sans-serif`;
-      ctx.fillStyle=col;ctx.textAlign='center';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=12;
-      ctx.fillText(txt,p.x,p.y);ctx.restore();drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));toast("Text stamped!","s");return;
-    }
-    isDrawing=true;dStartX=p.x;dStartY=p.y;drawSnap=ctx.getImageData(0,0,cv.width,cv.height);ctx.beginPath();ctx.moveTo(p.x,p.y);
-  };
-  const move=e=>{
-    if(!isDrawing)return;e.preventDefault();
-    const p=pos(e),sz=+$('draw-sz').value,col=$('draw-col').value;
-    ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=sz;
-    if(drawTool==='erase'){ctx.globalCompositeOperation='destination-out';ctx.strokeStyle='rgba(0,0,0,1)';ctx.shadowBlur=0;ctx.lineTo(p.x,p.y);ctx.stroke();}
-    else if(['line','rect','circle'].includes(drawTool)){
-      ctx.putImageData(drawSnap,0,0);ctx.globalCompositeOperation='source-over';ctx.strokeStyle=col;ctx.shadowBlur=0;ctx.beginPath();
-      if(drawTool==='line'){ctx.moveTo(dStartX,dStartY);ctx.lineTo(p.x,p.y);}
-      else if(drawTool==='rect'){ctx.strokeRect(dStartX,dStartY,p.x-dStartX,p.y-dStartY);}
-      else{const rad=Math.hypot(p.x-dStartX,p.y-dStartY);ctx.arc(dStartX,dStartY,rad,0,Math.PI*2);}
-      ctx.stroke();
-    }else{
-      ctx.globalCompositeOperation='source-over';
-      if(drawTool==='foil'){const g=ctx.createLinearGradient(p.x-20,p.y-20,p.x+20,p.y+20);g.addColorStop(0,'#9f7e43');g.addColorStop(.5,'#fff2be');g.addColorStop(1,'#c9a96e');ctx.strokeStyle=g;ctx.shadowColor='rgba(201,169,110,.6)';ctx.shadowBlur=6;}
-      else if(drawTool==='glow'){ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=sz*1.8;}
-      else{ctx.strokeStyle=col;ctx.shadowBlur=0;}
-      ctx.lineTo(p.x,p.y);ctx.stroke();
-    }
-  };
-  const up=()=>{if(!isDrawing)return;isDrawing=false;ctx.globalCompositeOperation='source-over';ctx.shadowBlur=0;drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));if(drawHist.length>20)drawHist.shift();};
-  cv.onmousedown=down;cv.onmousemove=move;window.addEventListener('mouseup',up);
-  cv.ontouchstart=down;cv.ontouchmove=move;cv.ontouchend=up;
-};
-window.undoDraw=()=>{const cv=$('draw-cv'),ctx=cv.getContext('2d');if(drawHist.length>1){drawHist.pop();ctx.putImageData(drawHist[drawHist.length-1],0,0);}};
-window.applyDraw=()=>{const data=$('draw-cv').toDataURL('image/png');prevImgB64=curImgB64;curImgB64=data.split(',')[1];curImg=data;showImage(curImg);closeDraw();toast("Applied to canvas!","s");};
-window.closeDraw=()=>$('draw-ov').classList.remove('on');
 
-/* ── CROP, ROTATE & FLIP ── */
-async function xform(fn){
-  if(!curImgB64)return toast("Load an image first","e");
-  const img=new Image();await new Promise(r=>{img.onload=r;img.src=curImg;});
-  const cv=document.createElement('canvas'),ctx=cv.getContext('2d');fn(cv,ctx,img);
-  prevImgB64=curImgB64;curImg=cv.toDataURL('image/png');curImgB64=curImg.split(',')[1];showImage(curImg);
+window.openM = m => $id(m)?.classList.add('on');
+window.closeM = m => $id(m)?.classList.remove('on');
+window.qp = p => { $id('prompt-in').value = p; setPane('gen', document.querySelectorAll('.dtab')[0]); };
+
+window.setAR = el => {
+  document.querySelectorAll('.ar-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  curAR = el.dataset.ar;
+};
+
+window.toggleOptimizer = () => {
+  optOn = !optOn;
+  $id('popt-row').classList.toggle('on', optOn);
+};
+
+window.toggleQuad = () => {
+  quadOn = !quadOn;
+  $id('quad-row').classList.toggle('on', quadOn);
+  $id('gen-btn-label').textContent = quadOn ? 'Generate 4 Variations with Philadelphia Pro (60 cr)' : 'Generate with Philadelphia Pro (15 cr)';
+};
+
+// ── Image Display Helpers ──
+function showStage(b64) {
+  prevImgB64 = curImgB64;
+  curImgB64 = b64;
+  $id('empty-stage').style.display = 'none';
+  $id('quad-grid').classList.remove('on');
+  $id('compare-wrap').classList.remove('on');
+  $id('stage-display').classList.add('on');
+  $id('stage-img').src = `data:image/png;base64,${b64}`;
 }
-window.rotateCanvas=()=>xform((cv,ctx,img)=>{cv.width=img.height;cv.height=img.width;ctx.translate(cv.width/2,cv.height/2);ctx.rotate(Math.PI/2);ctx.drawImage(img,-img.width/2,-img.height/2);});
-window.flipCanvas=d=>xform((cv,ctx,img)=>{cv.width=img.width;cv.height=img.height;ctx.translate(d==='h'?cv.width:0,d==='v'?cv.height:0);ctx.scale(d==='h'?-1:1,d==='v'?-1:1);ctx.drawImage(img,0,0);});
-window.cropCanvas=(rw,rh)=>xform((cv,ctx,img)=>{
-  const iw=img.naturalWidth,ih=img.naturalHeight,targetR=rw/rh,imgR=iw/ih;
-  let sx=0,sy=0,sw=iw,sh=ih;
-  if(imgR>targetR){sw=ih*targetR;sx=(iw-sw)/2;}else{sh=iw/targetR;sy=(ih-sh)/2;}
-  cv.width=Math.round(sw);cv.height=Math.round(sh);ctx.drawImage(img,sx,sy,sw,sh,0,0,cv.width,cv.height);
-});
 
-/* ── AGENTIC AI DIRECTOR (/api/agent/run) ── */
-window.openAgent=()=>openM('agent-m');
-window.sendAgent=async(over)=>{
-  const inp=$('agent-inp'),msg=(over||inp.value).trim();if(!msg)return;
-  if(!over)inp.value='';
-  const chat=$('agent-chat');chat.insertAdjacentHTML('beforeend',`<div class="agent-msg user">${msg.replace(/</g,'&lt;')}</div>`);
-  const stEl=document.createElement('div');stEl.className='agent-step';stEl.textContent='Starting Philadelphia AI Agent…';
-  chat.appendChild(stEl);chat.scrollTop=chat.scrollHeight;
-  try{
-    tok=await cu.getIdToken();const aids=[];
-    if(curImgB64){
-      stEl.textContent='Sending canvas image to agent…';
-      const fd=new FormData();fd.append('file',b64toBlob(curImgB64,'image/png'),'canvas.png');
-      const ur=await fetch(`${API}/api/agent/upload`,{method:'POST',headers:{'X-Firebase-Token':tok},body:fd});
-      if(ur.ok)aids.push((await ur.json()).id);
-    }
-    const r=await fetch(`${API}/api/agent/run`,{
-      method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},
-      body:JSON.stringify({message:aids.length?`(Work on attached image ${aids[0]}.) ${msg}`:msg,persona:'You are Philadelphia AI Image Director. Perform the requested image generation, edit, drawing, text overlay, or design cleanly once.',artifact_ids:aids})
+// ── 1. GENERATE IMAGE (Philadelphia Pro Only) ──
+window.generateImage = async () => {
+  const prompt = $id('prompt-in').value.trim();
+  if (!prompt) return toast('Please enter a prompt', 'e');
+  const cost = quadOn ? 60 : 15;
+  if (bal < cost) { toast(`Need ${cost} credits`, 'e'); return openM('wallet-m'); }
+
+  $id('gen-ov').classList.add('on');
+  $id('gen-btn').disabled = true;
+  try {
+    tok = await user.getIdToken();
+    const r = await fetch(`${API}/api/studio/generate-image`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({
+        prompt,
+        use_minimax: true,
+        aspect_ratio: curAR,
+        n: quadOn ? 4 : 1,
+        prompt_optimizer: optOn
+      })
     });
-    const j=await r.json();if(!r.ok)throw new Error(j.detail||'Agent error');
-    const rid=j.run_id;let after=0;
-    for(let i=0;i<70;i++){
-      await new Promise(res=>setTimeout(res,1400));
-      const sr=await fetch(`${API}/api/agent/runs/${rid}?after=${after}`,{headers:{'X-Firebase-Token':tok}});
-      if(!sr.ok)break;const sd=await sr.json();
-      for(const ev of (sd.events||[])){
-        after=ev.seq;
-        if(ev.type==='tool_start')stEl.textContent=`Running: ${ev.data?.label||ev.data?.tool}…`;
-        if(ev.type==='artifact'&&ev.data?.kind==='image'&&ev.data?.url){
-          const ir=await fetch(API+ev.data.url);const b64=await blobToB64(await ir.blob());
-          prevImgB64=curImgB64;curImgB64=b64;curImg=`data:image/png;base64,${b64}`;
-          showImage(curImg);extractPalette(b64);saveToGallery(true);
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail || 'Generation failed');
+    const imgs = d.images_b64 || (d.image_b64 ? [d.image_b64] : []);
+    if (!imgs.length) throw new Error('No image returned');
+
+    if (imgs.length > 1) {
+      $id('stage-display').classList.remove('on');
+      $id('empty-stage').style.display = 'none';
+      const qg = $id('quad-grid');
+      qg.innerHTML = '';
+      qg.classList.add('on');
+      imgs.forEach(b64 => {
+        const c = document.createElement('div');
+        c.className = 'quad-card';
+        c.innerHTML = `<img src="data:image/png;base64,${b64}"><button class="q-btn">Select</button>`;
+        c.onclick = () => { showStage(b64); saveToGallery(); };
+        qg.appendChild(c);
+      });
+    } else {
+      showStage(imgs[0]);
+      saveToGallery();
+    }
+    await loadBal();
+    toast('Image rendered with Philadelphia Pro!', 's');
+  } catch(e) {
+    toast(e.message, 'e');
+  } finally {
+    $id('gen-ov').classList.remove('on');
+    $id('gen-btn').disabled = false;
+  }
+};
+
+// ── 2. AI ENHANCE PROMPT ──
+window.enhancePrompt = async () => {
+  const p = $id('prompt-in').value.trim();
+  if (!p) return toast('Type an idea first', 'e');
+  toast('Philadelphia AI is refining your prompt…', 'i');
+  try {
+    tok = await user.getIdToken();
+    const r = await fetch(`${API}/api/minimax/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({
+        message: `Rewrite this image prompt into a detailed, photorealistic visual prompt with lighting, framing, texture, and mood. Keep it under 50 words: "${p}"`,
+        history: [],
+        system_prompt: 'You are an expert prompt engineer. Return only the enhanced prompt text.'
+      })
+    });
+    const reader = r.body.getReader(), dec = new TextDecoder();
+    let text = '';
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const lines = dec.decode(value).split('\n\n');
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const ds = line.slice(6).trim();
+        if (ds === '[DONE]') continue;
+        try {
+          const ev = JSON.parse(ds);
+          if (ev.type === 'content') text += ev.content;
+        } catch(err) {}
+      }
+    }
+    const clean = text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+    if (clean) {
+      $id('prompt-in').value = clean;
+      toast('Prompt refined!', 's');
+    }
+  } catch(e) { toast(e.message, 'e'); }
+};
+
+// ── 3. REMIX & PHOTO TRANSFORM ──
+window.onRemixFile = inp => {
+  const f = inp.files[0];
+  if (!f) return;
+  txBlob = f;
+  $id('remix-preview-img').src = URL.createObjectURL(f);
+  $id('remix-preview-box').style.display = 'block';
+};
+window.useCanvasForRemix = async () => {
+  if (!curImgB64) return toast('Generate or load an image first', 'e');
+  const res = await fetch(`data:image/png;base64,${curImgB64}`);
+  txBlob = await res.blob();
+  $id('remix-preview-img').src = `data:image/png;base64,${curImgB64}`;
+  $id('remix-preview-box').style.display = 'block';
+  toast('Active canvas loaded for remixing!', 's');
+};
+
+window.runRemix = async () => {
+  if (!txBlob) return toast('Upload or choose an image first', 'e');
+  const p = $id('remix-prompt').value.trim();
+  if (!p) return toast('Enter what to change or transform', 'e');
+  if (bal < 15) return openM('wallet-m');
+
+  $id('gen-ov').classList.add('on');
+  $id('gen-label').textContent = 'Transforming photo…';
+  try {
+    tok = await user.getIdToken();
+    const fd = new FormData();
+    fd.append('file', txBlob, 'photo.png');
+    fd.append('prompt', p);
+    fd.append('aspect_ratio', curAR);
+
+    const r = await fetch(`${API}/api/tools/edit-photo`, {
+      method: 'POST',
+      headers: { 'X-Firebase-Token': tok },
+      body: fd
+    });
+    if (!r.ok) throw new Error('Transformation failed');
+    const blob = await r.blob();
+    const b64 = await new Promise(res => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result.split(',')[1]);
+      fr.readAsDataURL(blob);
+    });
+    showStage(b64);
+    await saveToGallery();
+    await loadBal();
+    toast('Transformation complete!', 's');
+  } catch(e) {
+    toast(e.message, 'e');
+  } finally {
+    $id('gen-ov').classList.remove('on');
+  }
+};
+
+// ── 4. INSPECT IMAGE / REVERSE ENGINEER ──
+window.inspectImage = async () => {
+  if (!curImgB64) return toast('No image on canvas', 'e');
+  toast('Philadelphia Vision is inspecting your image…', 'i');
+  try {
+    tok = await user.getIdToken();
+    const res = await fetch(`data:image/png;base64,${curImgB64}`);
+    const blob = await res.blob();
+    const fd = new FormData();
+    fd.append('file', blob, 'image.png');
+    fd.append('prompt', 'Describe this image in detail. Extract the subject, lighting, mood, color palette, and write a prompt to recreate it.');
+
+    const r = await fetch(`${API}/api/studio/understand`, {
+      method: 'POST',
+      headers: { 'X-Firebase-Token': tok },
+      body: fd
+    });
+    const d = await r.json();
+    const out = $id('inspect-output');
+    out.textContent = d.analysis || 'Analysis complete.';
+    out.style.display = 'block';
+    await loadBal();
+  } catch(e) { toast(e.message, 'e'); }
+};
+
+// ── 5. CANVAS OPS (Rotate, Flip, Palette, Compare) ──
+function modCanvas(fn) {
+  if (!curImgB64) return toast('No image on canvas', 'e');
+  const img = new Image();
+  img.onload = () => {
+    const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+    fn(cv, ctx, img);
+    const data = cv.toDataURL('image/png');
+    showStage(data.split(',')[1]);
+  };
+  img.src = `data:image/png;base64,${curImgB64}`;
+}
+window.rotateCanvas = deg => modCanvas((cv, ctx, img) => {
+  cv.width = img.height; cv.height = img.width;
+  ctx.translate(cv.width/2, cv.height/2);
+  ctx.rotate(deg * Math.PI / 180);
+  ctx.drawImage(img, -img.width/2, -img.height/2);
+});
+window.flipCanvas = dir => modCanvas((cv, ctx, img) => {
+  cv.width = img.width; cv.height = img.height;
+  ctx.translate(dir === 'h' ? cv.width : 0, dir === 'v' ? cv.height : 0);
+  ctx.scale(dir === 'h' ? -1 : 1, dir === 'v' ? -1 : 1);
+  ctx.drawImage(img, 0, 0);
+});
+
+window.toggleCompare = () => {
+  if (!curImgB64 || !prevImgB64) return toast('Generate or edit an image first to compare', 'i');
+  compareMode = !compareMode;
+  if (!compareMode) {
+    $id('compare-wrap').classList.remove('on');
+    $id('stage-display').classList.add('on');
+    return;
+  }
+  $id('stage-display').classList.remove('on');
+  $id('compare-before').src = `data:image/png;base64,${prevImgB64}`;
+  $id('compare-after').src = `data:image/png;base64,${curImgB64}`;
+  $id('compare-wrap').classList.add('on');
+  const cw = $id('compare-wrap'), aw = $id('compare-after-wrap'), div = $id('cmp-divider');
+  cw.onmousemove = cw.ontouchmove = e => {
+    const r = cw.getBoundingClientRect(), cl = e.touches ? e.touches[0] : e;
+    const pct = Math.max(0, Math.min(100, ((cl.clientX - r.left) / r.width) * 100));
+    aw.style.width = pct + '%';
+    div.style.left = pct + '%';
+  };
+};
+
+window.extractPalette = () => {
+  if (!curImgB64) return toast('No image on canvas', 'e');
+  const img = new Image();
+  img.onload = () => {
+    const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+    cv.width = 60; cv.height = 60;
+    ctx.drawImage(img, 0, 0, 60, 60);
+    const d = ctx.getImageData(0, 0, 60, 60).data;
+    const colors = [];
+    for (let i = 0; i < d.length; i += 720) {
+      const hex = '#' + ((1 << 24) + (d[i] << 16) + (d[i+1] << 8) + d[i+2]).toString(16).slice(1);
+      if (!colors.includes(hex)) colors.push(hex);
+    }
+    const out = $id('palette-output');
+    out.innerHTML = `<span class="f-label" style="margin-bottom:6px;">Color Palette (Click to Copy Hex)</span><div style="display:flex;gap:6px;flex-wrap:wrap;">`
+      + colors.slice(0, 8).map(c => `<div style="width:34px;height:34px;border-radius:8px;background:${c};cursor:pointer;border:1px solid #fff;" onclick="navigator.clipboard.writeText('${c}');toast('Copied ${c}')"></div>`).join('')
+      + `</div>`;
+    out.style.display = 'block';
+  };
+  img.src = `data:image/png;base64,${curImgB64}`;
+};
+
+window.applyPreset = p => {
+  $id('prompt-in').value = ($id('prompt-in').value.trim() ? `${$id('prompt-in').value.trim()}, ${p}` : p);
+  setPane('gen', document.querySelectorAll('.dtab')[0]);
+  toast('Aesthetic preset added!', 's');
+};
+
+// ── 6. DRAW, PAINT & TEXT OVERLAY ──
+let drawTool = 'brush', isDrawing = false, dSnap = null, dStartX = 0, dStartY = 0;
+window.setDrawTool = t => {
+  drawTool = t;
+  document.querySelectorAll('.draw-tool').forEach(b => b.classList.toggle('on', b.id === 'dt-' + t));
+  $id('text-stamp-wrap').classList.toggle('on', t === 'text');
+};
+window.startDraw = () => {
+  if (!curImgB64) return toast('Load an image first', 'e');
+  const ov = $id('draw-ov'), cv = $id('draw-cv'), ctx = cv.getContext('2d');
+  ov.classList.add('on');
+  const img = new Image();
+  img.onload = () => {
+    cv.width = img.naturalWidth > 1200 ? 1200 : img.naturalWidth;
+    cv.height = Math.round(cv.width * (img.naturalHeight / img.naturalWidth));
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+  };
+  img.src = `data:image/png;base64,${curImgB64}`;
+
+  const pos = e => {
+    const r = cv.getBoundingClientRect(), t = e.touches ? e.touches[0] : e;
+    return { x: (t.clientX - r.left) * (cv.width / r.width), y: (t.clientY - r.top) * (cv.height / r.height) };
+  };
+  cv.onmousedown = cv.ontouchstart = e => {
+    e.preventDefault();
+    const p = pos(e);
+    if (drawTool === 'text') {
+      const val = $id('draw-txt-val').value.trim();
+      if (!val) return toast('Type your text in the bar below first', 'i');
+      ctx.save();
+      ctx.font = `bold ${$id('draw-txt-sz').value}px '${$id('draw-txt-font').value}', sans-serif`;
+      ctx.fillStyle = $id('draw-col').value;
+      ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 10;
+      ctx.fillText(val, p.x, p.y);
+      ctx.restore();
+      return;
+    }
+    isDrawing = true; dStartX = p.x; dStartY = p.y;
+    dSnap = ctx.getImageData(0, 0, cv.width, cv.height);
+    ctx.beginPath(); ctx.moveTo(p.x, p.y);
+  };
+  cv.onmousemove = cv.ontouchmove = e => {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const p = pos(e), col = $id('draw-col').value, sz = +$id('draw-sz').value;
+    ctx.lineWidth = sz; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    if (drawTool === 'erase') {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineTo(p.x, p.y); ctx.stroke();
+    } else if (drawTool === 'line' || drawTool === 'rect') {
+      ctx.putImageData(dSnap, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = col;
+      ctx.beginPath();
+      if (drawTool === 'line') { ctx.moveTo(dStartX, dStartY); ctx.lineTo(p.x, p.y); }
+      else { ctx.strokeRect(dStartX, dStartY, p.x - dStartX, p.y - dStartY); }
+      ctx.stroke();
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      if (drawTool === 'foil') {
+        const g = ctx.createLinearGradient(p.x-15, p.y-15, p.x+15, p.y+15);
+        g.addColorStop(0, '#a27e36'); g.addColorStop(0.5, '#fff2c2'); g.addColorStop(1, '#c9a96e');
+        ctx.strokeStyle = g;
+      } else if (drawTool === 'glow') {
+        ctx.strokeStyle = col; ctx.shadowColor = col; ctx.shadowBlur = sz * 2;
+      } else {
+        ctx.strokeStyle = col; ctx.shadowBlur = 0;
+      }
+      ctx.lineTo(p.x, p.y); ctx.stroke();
+    }
+  };
+  window.onmouseup = window.ontouchend = () => isDrawing = false;
+};
+window.applyDraw = () => {
+  const data = $id('draw-cv').toDataURL('image/png');
+  showStage(data.split(',')[1]);
+  closeDraw();
+  toast('Canvas applied!', 's');
+};
+window.closeDraw = () => $id('draw-ov').classList.remove('on');
+
+// ── 7. AGENTIC AI ASSISTANT (/api/agent/run) ──
+window.openAgent = () => openM('agent-m');
+window.sendAgent = async () => {
+  const inp = $id('agent-in'), msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  const feed = $id('agent-feed');
+  feed.insertAdjacentHTML('beforeend', `<div class="agent-bubble usr">${msg.replace(/</g,'&lt;')}</div>`);
+  const status = document.createElement('div');
+  status.className = 'agent-status';
+  status.textContent = 'Agent running…';
+  feed.appendChild(status);
+  feed.scrollTop = feed.scrollHeight;
+
+  try {
+    tok = await user.getIdToken();
+    const aids = [];
+    if (curImgB64) {
+      status.textContent = 'Uploading canvas to agent…';
+      const res = await fetch(`data:image/png;base64,${curImgB64}`);
+      const blob = await res.blob();
+      const fd = new FormData();
+      fd.append('file', blob, 'canvas.png');
+      const ur = await fetch(`${API}/api/agent/upload`, { method: 'POST', headers: { 'X-Firebase-Token': tok }, body: fd });
+      if (ur.ok) aids.push((await ur.json()).id);
+    }
+    const r = await fetch(`${API}/api/agent/run`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({
+        message: aids.length ? `(Work on image ${aids[0]}.) ${msg}` : msg,
+        persona: 'You are Philadelphia AI Image Director. Build or edit the artwork and apply changes cleanly.'
+      })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || 'Agent failed to start');
+    const rid = j.run_id;
+    let seq = 0;
+    for (let i = 0; i < 60; i++) {
+      await new Promise(res => setTimeout(res, 1500));
+      const sr = await fetch(`${API}/api/agent/runs/${rid}?after=${seq}`, { headers: { 'X-Firebase-Token': tok } });
+      if (!sr.ok) break;
+      const sd = await sr.json();
+      for (const ev of (sd.events || [])) {
+        seq = ev.seq;
+        if (ev.type === 'tool_start') status.textContent = `Running ${ev.data?.label || ev.data?.tool}…`;
+        if (ev.type === 'artifact' && ev.data?.kind === 'image' && ev.data?.url) {
+          const imgR = await fetch(API + ev.data.url);
+          const b = await imgR.blob();
+          const b64 = await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result.split(',')[1]); fr.readAsDataURL(b); });
+          showStage(b64);
+          saveToGallery();
         }
       }
-      if(['done','error','cancelled'].includes(sd.status)){
-        stEl.remove();chat.insertAdjacentHTML('beforeend',`<div class="agent-msg ai">${(sd.final_text||'Done! Canvas updated.').replace(/</g,'&lt;')}</div>`);
-        chat.scrollTop=chat.scrollHeight;loadUser();break;
+      if (['done','error','cancelled'].includes(sd.status)) {
+        status.remove();
+        feed.insertAdjacentHTML('beforeend', `<div class="agent-bubble ai">${(sd.final_text || 'Done. Updated canvas!').replace(/</g,'&lt;')}</div>`);
+        feed.scrollTop = feed.scrollHeight;
+        await loadBal();
+        break;
       }
     }
-  }catch(e){stEl.textContent='Error: '+e.message;}
+  } catch(e) { status.textContent = 'Error: ' + e.message; }
 };
 
-/* ── PROMPT ENHANCE (/api/minimax/chat) ── */
-window.enhancePrompt=async()=>{
-  const prompt=$('prompt-ta').value.trim();if(!prompt)return toast("Enter a prompt first","e");
-  showGL('Philadelphia AI is enhancing your prompt…');
-  try{
-    tok=await cu.getIdToken();
-    const r=await fetch(`${API}/api/minimax/chat`,{
-      method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},
-      body:JSON.stringify({message:prompt,history:[],system_prompt:"Rewrite the user's image prompt into a vivid, detailed 50-word photography/illustration prompt with lighting, mood, lens, and color details. Return ONLY the rewritten prompt."})
-    });
-    const reader=r.body.getReader(),dec=new TextDecoder();let buf='',out='';
-    for(;;){
-      const{value,done}=await reader.read();if(done)break;
-      buf+=dec.decode(value,{stream:true});let nl;
-      while((nl=buf.indexOf('\n\n'))!==-1){
-        const ln=buf.slice(0,nl);buf=buf.slice(nl+2);if(!ln.startsWith('data: '))continue;
-        const ds=ln.slice(6).trim();if(ds==='[DONE]')continue;
-        try{const ev=JSON.parse(ds);if(ev.type==='content')out+=ev.content;}catch(e){}
-      }
-    }
-    hideGL();const clean=out.replace(/<think>[\s\S]*?<\/think>/gi,'').trim();
-    $('enhanced-result').textContent=clean;window._enh=clean;openM('enhance-m');loadUser();
-  }catch(e){hideGL();toast("Enhance failed","e");}
+// ── 8. GALLERY & DOWNLOAD ──
+window.saveToGallery = async (silent = false) => {
+  if (!curImgB64) return;
+  const item = { id: Date.now(), b64: curImgB64, prompt: $id('prompt-in').value.slice(0, 100) };
+  await idbPut(item);
+  if (!silent) toast('Saved to gallery!', 's');
 };
-window.useEnhanced=()=>{if(window._enh){$('prompt-ta').value=window._enh;$('char-count').textContent=window._enh.length;}closeM('enhance-m');};
-
-/* ── COMPARE, FILTERS, PALETTE, MOTION & EXPORT ── */
-window.startCompare=()=>{
-  if(!curImgB64||!prevImgB64)return toast("Generate or edit twice to compare","i");
-  $('img-display').classList.remove('on');$('compare-before').src=`data:image/png;base64,${prevImgB64}`;$('compare-after').src=curImg;$('compare-wrap').classList.add('on');
-  const cw=$('compare-wrap'),aw=$('compare-after-wrap'),cl=$('cmp-line');let drag=false;
-  const setPos=x=>{const r=cw.getBoundingClientRect(),pct=Math.max(5,Math.min(95,((x-r.left)/r.width)*100));aw.style.width=pct+'%';cl.style.left=pct+'%';};
-  cl.onmousedown=cl.ontouchstart=e=>{drag=true;e.preventDefault();};
-  document.onmousemove=document.ontouchmove=e=>{if(drag)setPos(e.touches?e.touches[0].clientX:e.clientX);};
-  document.onmouseup=document.ontouchend=()=>drag=false;
-};
-
-window.applyFilters=()=>{
-  const img=$('cur-img');if(!img.src)return;
-  const b=$('f-bright').value,c=$('f-contrast').value,s=$('f-sat').value,h=$('f-hue').value,bl=$('f-blur').value,se=$('f-sepia').value;
-  img.style.filter=`brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) blur(${bl}px) sepia(${se}%)`;
-  filterState={bright:+b,contrast:+c,sat:+s,hue:+h,blur:+bl,sepia:+se,vign:filterState.vign};
-};
-window.applyVignette=()=>{const v=$('f-vign').value/100;$('img-display').style.boxShadow=v>0?`inset 0 0 ${v*120}px rgba(0,0,0,${v*.85})`:'none';filterState.vign=+$('f-vign').value;};
-const PRESETS={cinematic:{bright:95,contrast:116,sat:86,hue:0,blur:0,sepia:6,vign:30},vivid:{bright:106,contrast:122,sat:165,hue:0,blur:0,sepia:0,vign:0},noir:{bright:86,contrast:140,sat:0,hue:0,blur:0,sepia:0,vign:40},warm:{bright:105,contrast:108,sat:115,hue:12,blur:0,sepia:18,vign:15},golden:{bright:104,contrast:112,sat:125,hue:8,blur:0,sepia:28,vign:20}};
-window.applyPreset=k=>{const p=PRESETS[k];if(!p)return;Object.entries(p).forEach(([id,v])=>{const map={bright:'f-bright',contrast:'f-contrast',sat:'f-sat',hue:'f-hue',blur:'f-blur',sepia:'f-sepia',vign:'f-vign'};if($(map[id]))$(map[id]).value=v;});applyFilters();applyVignette();};
-window.resetFilters=()=>{['f-bright','f-contrast','f-sat'].forEach(i=>$(i).value=100);['f-hue','f-blur','f-sepia','f-vign'].forEach(i=>$(i).value=0);applyFilters();applyVignette();};
-
-function extractPalette(b64){
-  const img=new Image();
-  img.onload=()=>{
-    const cv=document.createElement('canvas');cv.width=40;cv.height=40;const ctx=cv.getContext('2d');ctx.drawImage(img,0,0,40,40);
-    const d=ctx.getImageData(0,0,40,40).data,cols=[];
-    for(let i=0;i<d.length;i+=240){cols.push('#'+[d[i],d[i+1],d[i+2]].map(x=>x.toString(16).padStart(2,'0')).join(''));}
-    const uniq=[...new Set(cols)].slice(0,8);
-    $('pal-row').innerHTML=uniq.map(hex=>`<div class="pal-sw" style="background:${hex}" title="${hex}" onclick="navigator.clipboard.writeText('${hex}');toast('Copied ${hex}','i')"></div>`).join('');
-  };
-  img.src=`data:image/png;base64,${b64}`;
-}
-
-window.startAnim=()=>{
-  if(!curImgB64)return toast("Generate an image first","e");
-  stopAnim();const wrap=$('anim-cv-wrap'),cv=$('anim-cv'),ctx=cv.getContext('2d');wrap.style.display='block';
-  const img=new Image();
-  img.onload=()=>{
-    cv.width=360;cv.height=Math.round(360*(img.naturalHeight/img.naturalWidth));animFr=0;
-    (function loop(){
-      animRAF=requestAnimationFrame(loop);const t=animFr*0.03;ctx.clearRect(0,0,cv.width,cv.height);
-      if(curAnim==='kenburns'){const sc=1+Math.sin(t*0.5)*0.08,dx=Math.cos(t*0.4)*10;ctx.save();ctx.translate(cv.width/2+dx,cv.height/2);ctx.scale(sc,sc);ctx.drawImage(img,-cv.width/2,-cv.height/2,cv.width,cv.height);ctx.restore();}
-      else if(curAnim==='glitch'){ctx.drawImage(img,0,0,cv.width,cv.height);if(animFr%6===0){const y=Math.random()*cv.height,h=10+Math.random()*25;ctx.drawImage(img,0,y,img.width,h,Math.random()*16-8,y,cv.width,h);}}
-      else{ctx.drawImage(img,0,0,cv.width,cv.height);ctx.fillStyle=`rgba(201,169,110,${0.08+Math.sin(t)*0.06})`;ctx.fillRect(0,0,cv.width,cv.height);}
-      animFr++;
-    })();
-  };
-  img.src=curImg;
-};
-window.stopAnim=()=>{if(animRAF)cancelAnimationFrame(animRAF);animRAF=null;$('anim-cv-wrap').style.display='none';};
-window.captureFrame=()=>{const a=document.createElement('a');a.href=$('anim-cv').toDataURL('image/png');a.download=`motion-frame-${Date.now()}.png`;a.click();};
-
-window.setExpFmt=(f,el)=>{expFmtSel=f;['png','jpeg','webp'].forEach(k=>$('eo-'+k).style.borderColor=k===f?'var(--g1)':'var(--bdr)');};
-async function renderFilteredBlob(){
-  const img=new Image();await new Promise(r=>{img.onload=r;img.src=curImg;});
-  const cv=document.createElement('canvas');cv.width=img.naturalWidth;cv.height=img.naturalHeight;const ctx=cv.getContext('2d');
-  ctx.filter=`brightness(${filterState.bright}%) contrast(${filterState.contrast}%) saturate(${filterState.sat}%) hue-rotate(${filterState.hue}deg) blur(${filterState.blur}px) sepia(${filterState.sepia}%)`;
-  ctx.drawImage(img,0,0);ctx.filter='none';
-  if(filterState.vign>0){
-    const v=filterState.vign/100,g=ctx.createRadialGradient(cv.width/2,cv.height/2,cv.width*0.25,cv.width/2,cv.height/2,cv.width*0.7);
-    g.addColorStop(0,'transparent');g.addColorStop(1,`rgba(0,0,0,${v*0.85})`);ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
-  }
-  return new Promise(res=>cv.toBlob(res,`image/${expFmtSel}`,+$('exp-quality').value/100));
-}
-window.downloadImage=async()=>{
-  if(!curImg)return;const blob=await renderFilteredBlob(),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download=`philadelphia-${Date.now()}.${expFmtSel}`;a.click();closeM('export-m');toast("Exported!","s");
-};
-window.copyToClipboard=async()=>{
-  if(!curImg)return;try{const b=await renderFilteredBlob();await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);toast("Copied to clipboard!","s");}catch(e){toast("Copy failed","e");}
-};
-
-/* ── PRESETS & GALLERY ── */
-const STYLES=[['Photoreal','cinematic photorealistic, 85mm lens'],['Editorial','high fashion Vogue editorial lighting'],['Cyberpunk','neon rain, cybernetic reflections'],['Oil Paint','classic museum oil painting texture'],['Anime','vibrant modern anime key visual'],['Noir','dramatic black and white chiaroscuro'],['3D Render','octane 3D render, subsurface scattering'],['Minimal','clean luxury minimalist studio']];
-function buildStyleGrid(){
-  $('style-g').innerHTML=STYLES.map(([n,mod])=>`<div class="sg" onclick="qp(($('prompt-ta').value.trim()||'Portrait')+', ${mod}')"><div class="sg-bg" style="background:linear-gradient(135deg,#181a30,#090a14);"></div><div class="sg-lbl">${n}</div></div>`).join('');
-}
-function buildTrending(){
-  const TR=['Golden hour portrait of a jazz musician in a dimly lit lounge','Bioluminescent waterfall inside a crystal cavern, ultra-wide','Sleek futuristic electric hypercar parked on wet obsidian asphalt'];
-  $('trending-prompts').innerHTML=TR.map(p=>`<div style="padding:8px 10px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:9px;margin-bottom:5px;font-size:.72rem;cursor:pointer;" onclick="qp('${p}')">${p}</div>`).join('');
-}
-
-window.toggleFav=()=>{isFav=!isFav;updateFavBtn();};
-function updateFavBtn(){$('fav-btn').classList.toggle('on',isFav);}
-window.saveToGallery=async(silent=false)=>{
-  if(!curImgB64)return;const item={id:Date.now(),b64:curImgB64,prompt:$('prompt-ta').value.trim()||'Artwork',fav:isFav};
-  gallery.unshift(item);await dbPut('gallery',item);if(!silent)toast("Saved to Gallery!","s");renderGallery();
-};
-window.renderGallery=()=>{
-  const g=$('gal-g');if(!g)return;
-  const list=galFilter==='fav'?gallery.filter(x=>x.fav):gallery;
-  if(!list.length){g.innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--t3);padding:30px;font-size:.78rem;">No saved images yet.</div>`;return;}
-  g.innerHTML='';
-  list.forEach(it=>{
-    const d=document.createElement('div');d.className='gi';
-    d.innerHTML=`<img src="data:image/png;base64,${it.b64}"><button class="gi-del"><i class="fas fa-times"></i></button>`;
-    d.onclick=()=>{prevImgB64=curImgB64;curImgB64=it.b64;curImg=`data:image/png;base64,${it.b64}`;showImage(curImg);goScr('studio');};
-    d.querySelector('.gi-del').onclick=async e=>{e.stopPropagation();gallery=gallery.filter(x=>x.id!==it.id);await dbDel('gallery',it.id);renderGallery();};
+window.renderGallery = async () => {
+  const items = await idbAll();
+  const g = $id('gal-grid');
+  g.innerHTML = items.length ? '' : '<div style="grid-column:1/-1;text-align:center;color:var(--t2);padding:40px;font-size:.8rem;">No saved images yet.</div>';
+  items.reverse().forEach(it => {
+    const d = document.createElement('div');
+    d.className = 'gal-card';
+    d.innerHTML = `<img src="data:image/png;base64,${it.b64}"><button class="g-del" onclick="event.stopPropagation();delGalItem(${it.id})"><i class="fa-solid fa-xmark"></i></button>`;
+    d.onclick = () => { showStage(it.b64); goScr('studio'); toast('Loaded to canvas', 's'); };
     g.appendChild(d);
   });
 };
-
-/* ── WALLET & HELPERS ── */
-window.claimDaily=async()=>{
-  try{const r=await fetch(`${API}/api/user/claim-daily`,{method:'POST',headers:{'X-Firebase-Token':tok}});const d=await r.json();if(r.ok){toast(d.message,"s");loadUser();}else toast(d.detail,"e");}catch(e){}
+window.delGalItem = async id => { await idbDel(id); renderGallery(); toast('Removed', 'i'); };
+window.downloadImage = () => {
+  if (!curImgB64) return toast('No image to download', 'e');
+  const a = document.createElement('a');
+  a.href = `data:image/png;base64,${curImgB64}`;
+  a.download = `philadelphia_pro_${Date.now()}.png`;
+  a.click();
 };
-window.initPay=async()=>{
-  const amt=parseInt($('fund-amt').value);if(amt<100)return toast("Minimum ₦100","e");
-  try{const r=await fetch(`${API}/api/payments/initiate`,{method:'POST',headers:{'Content-Type':'application/json','X-Firebase-Token':tok},body:JSON.stringify({amount:amt,redirect_url:window.location.href.split('?')[0]})});const d=await r.json();if(r.ok)window.location.href=d.checkout_url;else toast(d.detail,"e");}catch(e){}
+
+// ── 9. WALLET & DAILY REWARDS ──
+window.claimDaily = async () => {
+  try {
+    tok = await user.getIdToken();
+    const r = await fetch(`${API}/api/user/claim-daily`, { method: 'POST', headers: { 'X-Firebase-Token': tok } });
+    const d = await r.json();
+    if (r.ok) { toast(d.message || 'Daily credits claimed!', 's'); loadBal(); }
+    else toast(d.detail || 'Already claimed today', 'i');
+  } catch(e) { toast('Could not claim daily credits', 'e'); }
 };
-function checkPayReturn(){
-  const p=new URLSearchParams(location.search),ref=p.get('reference')||p.get('trxref');if(!ref||!tok)return;
-  history.replaceState({},document.title,location.pathname);$('pvn').style.display='block';openM('fund-m');
-  (async function v(n){if(n<=0)return;const d=await(await fetch(`${API}/api/payments/verify?transaction_ref=${ref}`,{headers:{'X-Firebase-Token':tok}})).json();if(d.status==='success'||d.status==='already_credited'){$('pvn').style.display='none';closeM('fund-m');loadUser();toast(`+${d.credits_added} credits added!`,"s");}else if(d.status==='pending')setTimeout(()=>v(n-1),4000);})(15);
-}
+window.initPay = async () => {
+  const amt = parseInt($id('fund-amt').value) || 1000;
+  try {
+    tok = await user.getIdToken();
+    const r = await fetch(`${API}/api/payments/initiate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
+      body: JSON.stringify({ amount: amt, redirect_url: location.href.split('?')[0] })
+    });
+    const d = await r.json();
+    if (d.checkout_url) location.href = d.checkout_url;
+    else toast(d.detail || 'Could not initiate payment', 'e');
+  } catch(e) { toast('Payment error', 'e'); }
+};
 
-window.openM=id=>$(id)?.classList.add('on');
-window.closeM=id=>$(id)?.classList.remove('on');
-window.openLightbox=()=>{$('lb-img').src=$('cur-img').src;$('lightbox').classList.add('on')};
-document.querySelectorAll('.mbg').forEach(b=>b.addEventListener('click',e=>{if(e.target===b)b.classList.remove('on')}));
-window.toast=(msg,t='i')=>{const d=document.createElement('div');d.className=`toast ${t}`;d.textContent=msg;$('toasts').appendChild(d);setTimeout(()=>d.remove(),3000)};
-
-const tw="Generate, edit, draw, write text, and direct visuals with Philadelphia Pro.";let twi=0;
-setTimeout(function tloop(){if($('tw-text')&&twi<tw.length){$('tw-text').textContent+=tw[twi++];setTimeout(tloop,35);}},600);
+// Subtle Aurora Canvas
+(function() {
+  const cv = $id('aurora-cv');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let w = cv.width = innerWidth, h = cv.height = innerHeight;
+  window.onresize = () => { w = cv.width = innerWidth; h = cv.height = innerHeight; };
+  let t = 0;
+  function loop() {
+    t += 0.006;
+    ctx.clearRect(0,0,w,h);
+    const grad = ctx.createRadialGradient(w/2 + Math.sin(t)*120, h/3 + Math.cos(t)*80, 50, w/2, h/2, w*0.7);
+    grad.addColorStop(0, 'rgba(201,169,110,0.14)');
+    grad.addColorStop(0.5, 'rgba(139,92,246,0.08)');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
 </script>
 </body>
 </html>
