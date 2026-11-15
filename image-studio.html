@@ -2,1089 +2,1746 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-<title>Philadelphia Image Studio || Elvion AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,900;1,400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Philadelphia Image Studio Pro | Elvion AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Bebas+Neue&family=Great+Vibes&family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J1YTKP10ZX');</script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-J1YTKP10ZX');
+</script>
 <style>
 :root{
-  --void:#020207;--bg:#050510;--bg2:#080816;
-  --card:#0c0d1e;--card2:#111328;
+  --void:#020209;--bg:#050512;--bg2:#08081a;--bg3:#0c0d22;
+  --card:#0d0e22;--card2:#12142e;--card3:#171a3a;
   --g1:#c9a96e;--g2:#e8c97e;--g3:#f5e0a0;
-  --g-glow:rgba(201,169,110,.25);--g-subtle:rgba(201,169,110,.08);
-  --gbdr:rgba(201,169,110,.28);--gbdr-high:rgba(201,169,110,.6);
-  --pur:#8b5cf6;--cyan:#00d4b8;--green:#00d490;--red:#e05a7a;
-  --t1:#f4f2ea;--t2:#999285;--t3:#544e43;
-  --bdr:rgba(255,255,255,.07);--bdr2:rgba(201,169,110,.18);
-  --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;
-  --nh:56px;--bnh:60px;
-  --r8:8px;--r12:12px;--r16:16px;--r20:20px;
-  --shadow:0 12px 40px rgba(0,0,0,.75);
+  --g4:rgba(201,169,110,.2);--g5:rgba(201,169,110,.09);--g6:rgba(201,169,110,.04);
+  --gbdr:rgba(201,169,110,.26);--gbdr2:rgba(201,169,110,.48);
+  --blue:#4a7cdc;--cyan:#00d4b8;--red:#e05a7a;--green:#00d490;--pur:#8b5cf6;
+  --t1:#f2ede0;--t2:#8e8676;--t3:#4a4438;
+  --bdr:rgba(201,169,110,.11);--bdr2:rgba(201,169,110,.22);
+  --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;--fi:'Cormorant Garamond',serif;
+  --nh:56px;--bnh:62px;
+  --r6:6px;--r10:10px;--r14:14px;--r18:18px;--r24:24px;
+  --shadow:0 12px 48px rgba(0,0,0,.9);
+  --glow:0 0 32px rgba(201,169,110,.26);--glow2:0 0 64px rgba(201,169,110,.12);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;width:100%;background:var(--void);color:var(--t1);font-family:var(--fb);overflow:hidden}
 
-/* Background Aurora */
+/* ── AMBIENT BACKGROUND ── */
 .bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none}
-#aurora-cv{position:absolute;inset:0;opacity:.7}
-.bg-vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(2,2,7,.92) 100%)}
+#aurora-cv{position:absolute;inset:0;opacity:.72}
+.bg-particles{position:absolute;inset:0}
+.pt{position:absolute;border-radius:50%;animation:ptrise var(--d,12s) ease-in-out infinite var(--dl,0s)}
+@keyframes ptrise{0%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:.8}70%{opacity:.2}100%{opacity:0;transform:translateY(-120px) scale(.2)}}
+.bg-grid{position:absolute;inset:0;opacity:.022;background-image:linear-gradient(rgba(201,169,110,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,.6) 1px,transparent 1px);background-size:52px 52px}
+.bg-vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(2,2,9,.88) 100%)}
 
-/* Top Header */
-#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:500;display:none;align-items:center;gap:10px;padding:0 14px;background:rgba(5,5,16,.94);border-bottom:1px solid var(--bdr);backdrop-filter:blur(20px)}
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--void);animation:splashFade .55s ease 1.9s forwards;pointer-events:none}
+@keyframes splashFade{to{opacity:0;pointer-events:none}}
+.splash-logo{width:86px;height:86px;border-radius:22px;overflow:hidden;border:1.5px solid var(--g1);box-shadow:var(--glow),var(--glow2);animation:splashLogoIn .7s cubic-bezier(.34,1.56,.64,1)}
+@keyframes splashLogoIn{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}
+.splash-logo img{width:100%;height:100%;object-fit:cover}
+.splash-name{font-family:var(--ft);font-size:1.45rem;font-weight:900;color:var(--g1);letter-spacing:7px;margin-top:18px;text-shadow:0 0 50px rgba(201,169,110,.4)}
+.splash-sub{font-family:var(--fi);font-style:italic;font-size:.92rem;color:var(--t2);margin-top:4px;letter-spacing:2.5px}
+.splash-bar{width:120px;height:2px;background:var(--bdr);border-radius:2px;margin-top:22px;overflow:hidden}
+.splash-fill{height:100%;background:linear-gradient(90deg,transparent,var(--g1),transparent);animation:splashBarFill 1.5s ease .2s both}
+@keyframes splashBarFill{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* ── SCREENS ── */
+.scr{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;overflow:hidden}
+.scr.on{display:flex;animation:scrIn .3s ease}
+@keyframes scrIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* ── HEADER ── */
+#hdr{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:500;display:none;align-items:center;gap:9px;padding:0 14px;background:rgba(5,5,18,.96);border-bottom:1px solid var(--bdr);backdrop-filter:blur(28px)}
 #hdr.on{display:flex}
-.hdr-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.hdr-logo{width:32px;height:32px;border-radius:9px;border:1px solid var(--g1);object-fit:cover;box-shadow:0 0 14px var(--g-glow)}
-.hdr-title{font-family:var(--ft);font-size:.76rem;font-weight:900;color:var(--g1);letter-spacing:2px;line-height:1.1}
-.hdr-title small{display:block;font-size:.46rem;color:var(--t2);letter-spacing:1.8px;font-family:var(--fb);text-transform:uppercase}
+.hdr-logomark{width:32px;height:32px;border-radius:9px;overflow:hidden;flex-shrink:0;border:1px solid var(--g1);box-shadow:var(--glow)}
+.hdr-logomark img{width:100%;height:100%;object-fit:cover}
+.hdr-brand{font-family:var(--ft);font-size:.7rem;font-weight:900;color:var(--g1);letter-spacing:2.4px;line-height:1.15}
+.hdr-brand small{display:block;font-size:.44rem;color:var(--t2);letter-spacing:1.8px;font-family:var(--fb);text-transform:uppercase}
 .hsp{flex:1}
-.bal-chip{display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--g-subtle);border:1px solid var(--gbdr);border-radius:20px;cursor:pointer;transition:.2s}
-.bal-chip:hover{background:rgba(201,169,110,.16);border-color:var(--g1)}
-.bal-chip i{color:var(--g1);font-size:.72rem}
-.bal-chip span{font-family:var(--ft);font-size:.74rem;color:var(--g2);font-weight:700}
-.hav{width:32px;height:32px;border-radius:50%;overflow:hidden;border:1.5px solid var(--gbdr);cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--card)}
+.pro-pill{padding:3px 8px;border-radius:10px;background:linear-gradient(135deg,rgba(201,169,110,.2),rgba(139,92,246,.15));border:1px solid var(--gbdr);font-family:var(--ft);font-size:.52rem;color:var(--g2);letter-spacing:1.2px}
+.bal-tag{display:flex;align-items:center;gap:6px;padding:5px 11px;background:var(--g5);border:1px solid var(--gbdr);border-radius:20px;cursor:pointer;transition:.2s}
+.bal-tag:hover{background:var(--g4)}
+.bal-tag i{color:var(--g1);font-size:.72rem}
+.bal-tag span{font-family:var(--ft);font-size:.72rem;color:var(--g2);font-weight:600}
+.hbtn{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:.18s;flex-shrink:0}
+.hbtn:hover{background:var(--g5);color:var(--g1);border-color:var(--gbdr)}
+.hav{width:30px;height:30px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--pur),var(--g1));display:flex;align-items:center;justify-content:center;font-size:.6rem;cursor:pointer;border:1.5px solid var(--gbdr);flex-shrink:0}
 .hav img{width:100%;height:100%;object-fit:cover}
 
-/* Bottom Nav */
-#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:500;display:none;background:rgba(5,5,16,.96);border-top:1px solid var(--bdr);backdrop-filter:blur(24px)}
+/* ── BOTTOM NAV ── */
+#bnav{position:fixed;bottom:0;left:0;right:0;height:var(--bnh);z-index:500;display:none;background:rgba(5,5,18,.98);border-top:1px solid var(--bdr);backdrop-filter:blur(28px)}
 #bnav.on{display:flex}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--t3);font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;border:none;background:none;font-family:var(--fb);transition:.2s;position:relative}
-.ni i{font-size:1.05rem}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--t3);font-size:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;border:none;background:none;font-family:var(--fb);padding:6px 0;position:relative;transition:.2s}
+.ni i{font-size:1.05rem;transition:.2s}
 .ni.on{color:var(--g1)}
-.ni.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--g1);border-radius:0 0 3px 3px;box-shadow:0 0 10px var(--g1)}
+.ni.on i{filter:drop-shadow(0 0 6px rgba(201,169,110,.5))}
+.ni.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:linear-gradient(90deg,var(--g1),var(--g2));border-radius:0 0 4px 4px;box-shadow:0 0 12px var(--g1)}
 
-/* Screen Container */
-.scr{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;overflow:hidden}
-.scr.on{display:flex}
+/* ── AUTH SCREEN ── */
+#scr-auth{align-items:center;justify-content:center;padding:28px;background:radial-gradient(ellipse 80% 60% at 40% 30%,rgba(14,10,34,.98),var(--void) 80%)}
+.auth-wrap{text-align:center;max-width:345px;width:100%}
+.auth-crown{width:86px;height:86px;border-radius:22px;margin:0 auto 20px;border:1.5px solid var(--g1);overflow:hidden;box-shadow:var(--glow),var(--glow2)}
+.auth-crown img{width:100%;height:100%;object-fit:cover}
+.auth-name{font-family:var(--ft);font-size:1.95rem;font-weight:900;color:var(--g1);letter-spacing:5px;margin-bottom:3px}
+.auth-studio{font-family:var(--fi);font-style:italic;font-size:1.05rem;color:var(--g2);letter-spacing:3px;margin-bottom:5px}
+.auth-sub{font-size:.54rem;color:var(--t2);letter-spacing:2.8px;text-transform:uppercase;margin-bottom:14px}
+.auth-tagline{font-family:var(--fi);font-style:italic;font-size:.9rem;color:var(--t2);line-height:1.65;margin-bottom:26px;min-height:2.6em}
+.g-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;border-radius:var(--r14);background:rgba(255,255,255,.05);border:1px solid var(--gbdr);color:var(--t1);font-size:.88rem;font-weight:600;cursor:pointer;font-family:var(--fb);transition:.25s}
+.g-btn:hover{background:var(--g5);border-color:var(--g1);transform:translateY(-2px);box-shadow:var(--glow)}
 
-/* Auth Screen */
-#scr-auth{align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at center,rgba(16,12,38,.98),var(--void) 80%)}
-.auth-box{max-width:340px;width:100%;text-align:center}
-.auth-box .auth-logo{width:86px;height:86px;border-radius:24px;border:2px solid var(--g1);box-shadow:0 0 35px var(--g-glow);margin:0 auto 16px;object-fit:cover}
-.auth-title{font-family:var(--ft);font-size:2rem;font-weight:900;color:var(--g1);letter-spacing:3px;margin-bottom:4px}
-.auth-sub{font-size:.65rem;color:var(--t2);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-.auth-desc{font-size:.86rem;color:var(--t2);line-height:1.6;margin-bottom:24px}
-.g-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:13px 20px;border-radius:var(--r12);background:rgba(255,255,255,.05);border:1px solid var(--gbdr);color:var(--t1);font-size:.88rem;font-weight:600;cursor:pointer;transition:.22s}
-.g-btn:hover{background:var(--g-subtle);border-color:var(--g1);transform:translateY(-2px)}
-
-/* Studio Viewport (Canvas Zone) */
+/* ── STUDIO CANVAS ZONE ── */
 #scr-studio{top:var(--nh);bottom:var(--bnh)}
-.stage-zone{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse at center,rgba(18,15,40,.7),rgba(3,3,10,.98));overflow:hidden;padding:12px}
-.empty-stage{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:320px;z-index:2}
-.empty-logo{width:68px;height:68px;border-radius:20px;border:1.5px solid var(--gbdr);box-shadow:0 0 24px var(--g-glow);object-fit:cover;margin-bottom:4px}
-.empty-title{font-family:var(--ft);font-size:.88rem;color:var(--g1);letter-spacing:2px}
-.empty-desc{font-size:.78rem;color:var(--t2);line-height:1.5}
-.empty-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.et-pill{padding:5px 11px;border-radius:12px;font-size:.62rem;font-weight:600;background:var(--g-subtle);border:1px solid var(--gbdr);color:var(--g2);cursor:pointer;transition:.18s}
-.et-pill:hover{background:rgba(201,169,110,.18);border-color:var(--g1);transform:translateY(-1px)}
+.canvas-zone{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(20,16,44,.85),rgba(5,5,16,.97))}
 
-/* Active Canvas Stage */
-#stage-display{position:relative;max-width:100%;max-height:100%;display:none;z-index:2}
-#stage-display.on{display:block}
-#stage-img{max-width:min(90vw,500px);max-height:min(45vh,480px);object-fit:contain;border-radius:var(--r12);display:block;box-shadow:0 24px 60px rgba(0,0,0,.85),0 0 0 1px var(--gbdr);cursor:zoom-in;transition:filter .2s}
-.stage-actions{position:absolute;top:-12px;right:0;transform:translateY(-100%);display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.sa-btn{padding:5px 10px;border-radius:8px;font-size:.62rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;border:1px solid;font-family:var(--fb);transition:.16s}
-.sa-btn:hover{transform:translateY(-1px)}
-.sa-agent{background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.45);color:#d8b4fe}
-.sa-draw{background:rgba(0,212,184,.14);border-color:rgba(0,212,184,.4);color:var(--cyan)}
-.sa-save{background:rgba(0,212,144,.12);border-color:rgba(0,212,144,.35);color:var(--green)}
-.sa-dl{background:var(--g-subtle);border-color:var(--gbdr);color:var(--g1)}
+/* EMPTY STATE */
+.empty-state{display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;padding:18px;z-index:2}
+.es-orb{width:78px;height:78px;border-radius:50%;border:1px solid rgba(201,169,110,.25);display:flex;align-items:center;justify-content:center;position:relative;color:var(--g1);font-size:1.7rem;background:rgba(201,169,110,.05)}
+.es-orb::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid transparent;border-top-color:rgba(201,169,110,.45);animation:orbSpin 3.2s linear infinite}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+.es-title{font-family:var(--ft);font-size:.86rem;font-weight:700;color:var(--g2);letter-spacing:2.5px}
+.es-hint{font-family:var(--fi);font-style:italic;font-size:.82rem;color:var(--t2);line-height:1.45;max-width:300px}
+.es-pills{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:340px}
+.es-pill{padding:5px 11px;border-radius:12px;font-size:.6rem;cursor:pointer;transition:.2s;font-weight:600;background:var(--g5);border:1px solid var(--gbdr);color:var(--g1)}
+.es-pill:hover{background:var(--g4);transform:translateY(-1px)}
 
-/* Quad Mode Grid */
-#quad-grid{display:none;gap:8px;padding:8px;max-width:min(90vw,480px);z-index:2}
+/* IMAGE DISPLAY */
+#img-display{position:relative;max-width:100%;max-height:100%;display:none;z-index:2}
+#img-display.on{display:block;animation:scrIn .35s ease}
+#cur-img{max-width:min(86vw,500px);max-height:min(45vh,460px);object-fit:contain;border-radius:var(--r10);display:block;box-shadow:0 24px 70px rgba(0,0,0,.85),0 0 0 1px rgba(201,169,110,.22);cursor:zoom-in;transition:filter .25s}
+.img-actions{position:absolute;top:-10px;right:0;transform:translateY(-100%);display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ia{padding:5px 9px;border-radius:7px;font-size:.6rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;border:1px solid;transition:.2s;font-family:var(--fb);background:rgba(10,10,24,.88);backdrop-filter:blur(8px)}
+.ia:hover{transform:translateY(-1px)}
+.ia-draw{border-color:var(--gbdr);color:var(--g2)}
+.ia-fav{border-color:rgba(224,90,122,.35);color:var(--red)}
+.ia-save{border-color:rgba(0,212,144,.3);color:var(--green)}
+.ia-dl{border-color:var(--gbdr);color:var(--g1)}
+.ia-full{border-color:rgba(139,92,246,.35);color:var(--pur)}
+.tag-badge{display:inline-flex;align-items:center;gap:4px;font-size:.54rem;font-weight:700;padding:4px 8px;border-radius:7px;background:var(--g5);color:var(--g1);border:1px solid var(--gbdr)}
+
+/* QUAD GRID */
+#quad-grid{display:none;gap:6px;padding:10px;max-width:min(90vw,500px);max-height:46vh;z-index:2}
 #quad-grid.on{display:grid;grid-template-columns:1fr 1fr}
-.quad-card{border-radius:var(--r10);overflow:hidden;cursor:pointer;border:2px solid transparent;position:relative;box-shadow:var(--shadow);transition:.18s}
-.quad-card:hover{border-color:var(--g1);transform:scale(1.02)}
-.quad-card img{width:100%;height:100%;object-fit:cover;display:block}
-.quad-card .q-btn{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:var(--g1);color:#000;padding:3px 10px;border-radius:10px;font-size:.6rem;font-weight:700;white-space:nowrap;font-family:var(--ft)}
+.qi{border-radius:var(--r10);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.qi:hover{border-color:var(--g1);transform:scale(1.02)}
+.qi img{width:100%;height:100%;object-fit:cover;display:block;max-height:20vh}
+.qi-lbl{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);background:rgba(201,169,110,.95);color:#000;padding:2px 9px;border-radius:8px;font-size:.56rem;font-weight:700;font-family:var(--ft)}
+.qi-x{position:absolute;top:6px;right:6px;width:24px;height:24px;background:rgba(0,0,0,.82);border:1px solid var(--bdr);border-radius:50%;color:#fff;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-/* Compare Mode Slider */
-#compare-wrap{position:relative;max-width:min(90vw,480px);display:none;border-radius:var(--r12);overflow:hidden;box-shadow:var(--shadow);z-index:2}
+/* COMPARE SLIDER */
+#compare-wrap{position:relative;max-width:min(84vw,460px);display:none;box-shadow:0 20px 60px rgba(0,0,0,.8);border-radius:var(--r10);overflow:hidden;z-index:3}
 #compare-wrap.on{display:block}
-#compare-before,#compare-after{width:100%;height:auto;display:block}
+#compare-before,#compare-after{width:100%;height:auto;display:block;max-height:44vh;object-fit:contain}
 #compare-after-wrap{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden}
-#compare-after-wrap img{width:min(90vw,480px);max-width:none}
-.cmp-divider{position:absolute;top:0;bottom:0;width:3px;background:var(--g1);cursor:col-resize;left:50%;transform:translateX(-50%);z-index:5}
-.cmp-thumb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--g1);color:#000;display:flex;align-items:center;justify-content:center;font-size:.65rem;border:2px solid #000}
+#compare-after-wrap img{width:min(84vw,460px);max-width:none}
+.cmp-line{position:absolute;top:0;bottom:0;width:3px;background:var(--g1);cursor:col-resize;transform:translateX(-50%);z-index:5;left:50%;box-shadow:0 0 14px var(--g1)}
+.cmp-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--g1);border:2px solid #000;display:flex;align-items:center;justify-content:center;color:#000;font-size:.6rem}
 
-/* Loading Overlay */
-#gen-ov{position:absolute;inset:0;z-index:60;display:none;background:rgba(4,4,14,.92);backdrop-filter:blur(12px);flex-direction:column;align-items:center;justify-content:center;gap:12px}
+/* GENERATION OVERLAY */
+#gen-ov{position:absolute;inset:0;z-index:50;display:none;background:rgba(5,5,18,.93);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
 #gen-ov.on{display:flex}
-.ring-spin{width:56px;height:56px;border-radius:50%;border:2px solid transparent;border-top-color:var(--g1);border-right-color:var(--g2);animation:spin .85s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.gen-title{font-family:var(--ft);font-size:.84rem;color:var(--g1);letter-spacing:2px}
-.gen-sub{font-size:.64rem;color:var(--t2);font-family:var(--fc)}
+.gen-orb-wrap{position:relative;width:68px;height:68px}
+.gen-ring{position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.gr1{border-top-color:var(--g1);border-right-color:rgba(201,169,110,.2);animation:orbSpin .9s linear infinite}
+.gr2{inset:9px;border-bottom-color:var(--g2);animation:orbSpin .65s linear infinite reverse}
+.gen-letter{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--ft);font-size:1.3rem;font-weight:900;color:var(--g1)}
+.gen-label{font-family:var(--ft);font-size:.82rem;color:var(--g2);letter-spacing:2px;text-align:center}
+.gen-prog-wrap{width:160px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.gen-prog{height:100%;background:linear-gradient(90deg,var(--g1),var(--g3));animation:progFlow 1.8s ease-in-out infinite}
+@keyframes progFlow{0%{width:0;margin-left:0}50%{width:80%;margin-left:0}100%{width:0;margin-left:100%}}
+.gen-step{font-size:.62rem;color:var(--t2);letter-spacing:.8px;text-align:center;max-width:290px}
 
-/* Studio Control Panel */
-.dock-panel{flex-shrink:0;background:var(--bg2);border-top:1px solid var(--bdr);display:flex;flex-direction:column;max-height:50vh}
-.dock-tabs{display:flex;background:rgba(0,0,0,.4);border-bottom:1px solid var(--bdr);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
-.dock-tabs::-webkit-scrollbar{display:none}
-.dtab{flex:1;min-width:64px;padding:10px 4px 8px;font-size:.56rem;font-weight:700;color:var(--t3);cursor:pointer;text-align:center;letter-spacing:.6px;text-transform:uppercase;border-bottom:2px solid transparent;transition:.16s;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:5px}
-.dtab.on{color:var(--g1);border-color:var(--g1)}
-.dock-body{flex:1;overflow-y:auto;scrollbar-width:thin;padding:12px;max-width:880px;margin:0 auto;width:100%}
-.dpane{display:none}
-.dpane.on{display:block}
-
-/* Form Styles */
-.f-label{display:block;font-size:.58rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.ta-input{width:100%;padding:10px 12px;background:rgba(0,0,0,.5);border:1px solid var(--bdr);border-radius:var(--r10);color:var(--t1);font-family:var(--fb);font-size:.85rem;resize:none;min-height:64px;line-height:1.55;transition:.18s}
-.ta-input:focus{border-color:var(--gbdr)}
-.ar-selector{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.ar-chip{padding:5px 9px;border-radius:8px;font-size:.64rem;font-weight:700;cursor:pointer;border:1px solid var(--bdr);background:rgba(255,255,255,.02);color:var(--t2)}
-.ar-chip.on,.ar-chip:hover{background:var(--g-subtle);border-color:var(--gbdr);color:var(--g1)}
-.switch-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:var(--r10);margin-bottom:8px;cursor:pointer}
-.switch-row.on{background:var(--g-subtle);border-color:var(--gbdr)}
-.switch-btn{width:30px;height:17px;border-radius:10px;background:var(--bdr);position:relative;flex-shrink:0}
-.switch-row.on .switch-btn{background:var(--g1)}
-.switch-dot{width:13px;height:13px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:.18s}
-.switch-row.on .switch-dot{left:15px}
-
-.submit-btn{width:100%;padding:13px;border-radius:var(--r12);background:linear-gradient(135deg,var(--g1),#d4a860);border:none;color:#000;font-family:var(--ft);font-size:.82rem;font-weight:900;letter-spacing:1.8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;box-shadow:0 4px 18px var(--g-glow)}
-.submit-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.submit-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-
-.tb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
-.tb-card{padding:10px 4px;border-radius:var(--r10);background:rgba(255,255,255,.02);border:1px solid var(--bdr);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.62rem;color:var(--t2);font-weight:700}
-.tb-card i{font-size:.9rem;color:var(--g1)}
-.tb-card:hover{background:var(--g-subtle);border-color:var(--gbdr);color:var(--t1)}
-
-/* Draw Overlay */
-#draw-ov{position:fixed;inset:0;z-index:920;display:none;background:rgba(2,3,10,.94);backdrop-filter:blur(14px);flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
+/* ── INTERACTIVE WRITE & DRAW CANVAS OVERLAY ── */
+#draw-ov{position:fixed;inset:0;z-index:950;display:none;background:rgba(3,3,12,.96);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:space-between;padding:10px 12px 14px}
 #draw-ov.on{display:flex}
-#draw-cv{border-radius:var(--r10);touch-action:none;box-shadow:0 0 0 2px var(--g1),0 20px 50px rgba(0,0,0,.9);background:#000;cursor:crosshair;max-width:92vw;max-height:58vh}
-.draw-dock{background:rgba(12,13,28,.98);border:1px solid var(--gbdr);border-radius:var(--r16);padding:8px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;max-width:96vw}
-.draw-tool{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);font-size:.65rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.draw-tool.on,.draw-tool:hover{background:var(--g-subtle);border-color:var(--g1);color:var(--g2)}
-#text-stamp-wrap{display:none;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;background:rgba(12,13,28,.98);border:1px solid var(--gbdr);border-radius:var(--r12);padding:7px 12px;max-width:96vw}
-#text-stamp-wrap.on{display:flex}
+.draw-top{width:100%;max-width:760px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 6px}
+.draw-title{font-family:var(--ft);font-size:.76rem;color:var(--g1);letter-spacing:2px}
+#draw-cv-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;width:100%;position:relative;margin:6px 0}
+#draw-cv{max-width:94vw;max-height:56vh;border-radius:8px;box-shadow:0 0 0 1.5px var(--g1),0 18px 50px rgba(0,0,0,.9);touch-action:none;cursor:crosshair;background:#080814}
+.draw-dock{width:100%;max-width:760px;background:var(--card);border:1px solid var(--gbdr);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.draw-tools-row{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.draw-tools-row::-webkit-scrollbar{display:none}
+.dt-btn{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2);font-size:.64rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0}
+.dt-btn.on,.dt-btn:hover{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+.draw-text-bar{display:none;gap:6px;align-items:center;flex-wrap:wrap;padding-top:6px;border-top:1px solid var(--bdr)}
+.draw-text-bar.on{display:flex}
 
-/* Agent Chat Modal */
-#agent-m .modal-sheet{height:82vh;display:flex;flex-direction:column;padding:0;max-width:480px}
-.agent-header{padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;background:var(--card2)}
-.agent-header img{width:32px;height:32px;border-radius:8px;border:1px solid var(--g1);object-fit:cover}
-#agent-feed{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
-.agent-bubble{max-width:88%;padding:10px 13px;border-radius:14px;font-size:.78rem;line-height:1.55}
-.agent-bubble.ai{background:var(--g-subtle);border:1px solid var(--gbdr);color:var(--t1);align-self:flex-start}
-.agent-bubble.usr{background:linear-gradient(135deg,var(--g1),#d4a860);color:#000;font-weight:600;align-self:flex-end}
-.agent-status{font-size:.66rem;color:var(--g2);font-family:var(--fc);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:8px;align-self:flex-start}
+/* ── CONTROL PANEL ── */
+.ctrl-panel{flex-shrink:0;background:var(--bg2);border-top:1px solid var(--bdr);display:flex;flex-direction:column;max-height:53vh}
+.cp-tabs{display:flex;background:rgba(0,0,0,.4);border-bottom:1px solid var(--bdr);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.cp-tabs::-webkit-scrollbar{display:none}
+.cpt{flex:1;min-width:68px;padding:10px 6px 8px;font-size:.54rem;font-weight:600;color:var(--t2);cursor:pointer;text-align:center;letter-spacing:.7px;text-transform:uppercase;border-bottom:2px solid transparent;transition:.18s;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:4px}
+.cpt i{font-size:.78rem}
+.cpt.on{color:var(--g1);border-color:var(--g1);background:rgba(201,169,110,.04)}
+.cpb{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bdr) transparent;max-width:860px;margin:0 auto;width:100%}
+.cpsec{display:none;padding:12px 14px 18px}
+.cpsec.on{display:block;animation:scrIn .22s ease}
 
-/* Gallery Screen */
+/* INPUTS & CONTROLS */
+.fc{display:flex;flex-direction:column;gap:4px;margin-bottom:9px}
+.fcl{font-size:.56rem;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;display:flex;justify-content:space-between;align-items:baseline}
+input[type=text],input[type=number],input[type=email],textarea,select{width:100%;background:rgba(0,0,0,.5);border:1px solid var(--bdr);color:var(--t1);padding:9px 11px;border-radius:var(--r10);font-family:var(--fb);font-size:.82rem;transition:.18s;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--gbdr);box-shadow:0 0 0 3px rgba(201,169,110,.06)}
+textarea{resize:none;line-height:1.5}
+input[type=range]{width:100%;accent-color:var(--g1);height:3px;cursor:pointer}
+.sh{display:flex;align-items:center;gap:6px;margin-bottom:8px;margin-top:4px}
+.sh i{color:var(--g1);font-size:.72rem}
+.sh span{font-size:.58rem;font-weight:700;color:var(--g1);text-transform:uppercase;letter-spacing:1.5px}
+
+/* PROMPT AREA */
+.prompt-wrap{position:relative;margin-bottom:8px}
+.prompt-ta{width:100%;padding:10px 12px 30px;background:rgba(0,0,0,.55);border:1px solid var(--gbdr);border-radius:var(--r10);color:var(--t1);font-family:var(--fb);font-size:.84rem;resize:none;min-height:68px;max-height:110px;outline:none;line-height:1.5}
+.prompt-tools{position:absolute;bottom:6px;left:10px;right:8px;display:flex;align-items:center;justify-content:space-between}
+.char-count{font-size:.54rem;color:var(--t2);font-family:var(--fc)}
+.prompt-btns{display:flex;gap:5px}
+.pbi{padding:3px 8px;border-radius:6px;font-size:.58rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;border:1px solid;font-family:var(--fb)}
+.pbi-enhance{background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.3);color:#c4b5fd}
+.pbi-rand{background:var(--g5);border-color:var(--gbdr);color:var(--g1)}
+
+/* ASPECT RATIO & STYLE CHIPS */
+.ar-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.ar-btn{padding:6px 11px;border-radius:8px;font-size:.62rem;font-weight:600;cursor:pointer;transition:.18s;border:1px solid var(--bdr);background:rgba(255,255,255,.02);color:var(--t2)}
+.ar-btn.on,.ar-btn:hover{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+.style-strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:9px}
+.style-strip::-webkit-scrollbar{display:none}
+.st-chip{padding:6px 11px;border-radius:14px;background:var(--card);border:1px solid var(--bdr);font-size:.62rem;color:var(--t2);white-space:nowrap;cursor:pointer;transition:.18s;flex-shrink:0;display:flex;align-items:center;gap:5px}
+.st-chip.on,.st-chip:hover{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+
+/* TOGGLE & GEN BTN */
+.tog-row{display:flex;align-items:center;gap:9px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:var(--r10);cursor:pointer;margin-bottom:7px;transition:.18s}
+.tog-row.on{background:var(--g6);border-color:var(--gbdr)}
+.tog-lbl{flex:1;font-size:.75rem;color:var(--t1);font-weight:500}
+.tog-sub{font-size:.58rem;color:var(--t2);margin-top:1px}
+.tog{width:32px;height:18px;background:var(--bdr);border-radius:10px;position:relative;transition:.24s;flex-shrink:0}
+.tog.on{background:var(--g1)}
+.tok{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:.24s}
+.tog.on .tok{left:16px}
+
+.gen-btn{width:100%;padding:13px;border-radius:var(--r14);background:linear-gradient(135deg,rgba(201,169,110,.24),rgba(201,169,110,.08));border:1px solid var(--g1);font-family:var(--ft);font-size:.84rem;font-weight:700;color:var(--g2);letter-spacing:1.8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.25s;margin-top:6px;box-shadow:var(--glow)}
+.gen-btn:hover{background:linear-gradient(135deg,rgba(201,169,110,.34),rgba(201,169,110,.15));transform:translateY(-1px)}
+.gen-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.gen-btn .cost{font-size:.6rem;opacity:.75;font-family:var(--fb);font-weight:500}
+
+/* TOOLS & AGENT CARDS */
+.tb-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.tb{padding:10px 6px;border-radius:var(--r10);cursor:pointer;border:1px solid var(--bdr);background:var(--card);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.6rem;color:var(--t2);transition:.2s;font-weight:600;text-align:center}
+.tb i{font-size:.95rem;color:var(--g1)}
+.tb:hover,.tb.on{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+.agent-box{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(139,92,246,.06));border:1px solid var(--gbdr);border-radius:var(--r14);padding:11px;margin-bottom:10px}
+
+/* FILTERS & ANIMATE */
+.filter-sliders{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+.fs-row{display:flex;align-items:center;gap:8px}
+.fs-lbl{font-size:.6rem;color:var(--t2);width:66px;flex-shrink:0;font-weight:600}
+.fs-val{font-size:.6rem;color:var(--g1);width:34px;text-align:right;font-family:var(--fc)}
+.preset-pills{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.pp{padding:5px 10px;border-radius:8px;font-size:.6rem;font-weight:600;cursor:pointer;border:1px solid var(--bdr);background:var(--card);color:var(--t2)}
+.pp:hover{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+.pal-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.pal-sw{width:32px;height:32px;border-radius:7px;cursor:pointer;border:1.5px solid rgba(255,255,255,.18);transition:.2s}
+.pal-sw:hover{transform:scale(1.12);border-color:#fff}
+
+/* GALLERY & PROFILE */
 #scr-gallery,#scr-pro{top:var(--nh);bottom:var(--bnh);overflow-y:auto}
-.view-wrap{padding:14px;max-width:860px;margin:0 auto;width:100%}
-.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.gal-card{aspect-ratio:1;border-radius:8px;overflow:hidden;border:1.5px solid var(--bdr);background:var(--card);cursor:pointer;position:relative}
-.gal-card:hover{border-color:var(--g1)}
-.gal-card img{width:100%;height:100%;object-fit:cover;display:block}
-.gal-card .g-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.8);border:none;color:var(--red);font-size:.65rem;cursor:pointer;display:none;align-items:center;justify-content:center}
-.gal-card:hover .g-del{display:flex}
+.gallery-inner,.pro-inner{padding:12px;max-width:860px;margin:0 auto;width:100%}
+.gal-filters{display:flex;gap:5px;overflow-x:auto;margin-bottom:11px}
+.gf{padding:5px 12px;border-radius:13px;font-size:.62rem;font-weight:600;cursor:pointer;border:1px solid var(--bdr);background:var(--card);color:var(--t2)}
+.gf.on,.gf:hover{background:var(--g5);border-color:var(--g1);color:var(--g2)}
+.gal-g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.gi{aspect-ratio:.8/1;border-radius:9px;overflow:hidden;cursor:pointer;border:2px solid transparent;background:var(--card);transition:.2s;position:relative}
+.gi:hover{border-color:var(--g1);transform:translateY(-2px)}
+.gi img{width:100%;height:100%;object-fit:cover;display:block}
+.gi-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.86));padding:14px 6px 5px}
+.gi-style{font-size:.5rem;color:rgba(255,255,255,.75);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gi-del,.gi-fav-btn{position:absolute;top:5px;width:22px;height:22px;background:rgba(0,0,0,.8);border:none;border-radius:50%;font-size:.58rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+.gi-del{right:5px;color:var(--red)}
+.gi-fav-btn{left:5px;color:var(--t2)}
+.gi-fav-btn.on{color:var(--red);display:flex}
+.gi:hover .gi-del,.gi:hover .gi-fav-btn{display:flex}
 
-/* Modal Bottom Sheets */
-.modal-cover{position:fixed;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(12px);z-index:800;display:none;align-items:flex-end;justify-content:center}
-.modal-cover.on{display:flex}
-.modal-sheet{background:linear-gradient(180deg,var(--card),var(--bg));border:1px solid var(--gbdr);border-radius:var(--r20) var(--r20) 0 0;padding:18px 16px 32px;width:100%;max-width:440px;position:relative;max-height:88vh;overflow-y:auto}
-.m-pill{width:34px;height:4px;background:var(--bdr);border-radius:2px;margin:0 auto 12px}
-.m-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--t2);cursor:pointer;font-size:.9rem}
+.pro-card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r18);padding:20px;text-align:center;margin-bottom:10px}
+.pro-av{width:64px;height:64px;border-radius:50%;margin:0 auto 11px;overflow:hidden;background:linear-gradient(135deg,var(--pur),var(--g1));display:flex;align-items:center;justify-content:center;font-size:1.4rem;border:1.5px solid var(--g1)}
+.pro-av img{width:100%;height:100%;object-fit:cover}
+.pro-nm{font-family:var(--ft);font-size:.96rem;font-weight:700;letter-spacing:2px;margin-bottom:2px}
+.pro-em{font-size:.7rem;color:var(--t2);margin-bottom:14px}
+.stat-row{display:flex;gap:7px;margin-bottom:10px}
+.stat-c{flex:1;background:var(--card2);border:1px solid var(--bdr);border-radius:var(--r14);padding:11px;text-align:center}
+.stat-v{font-family:var(--ft);font-size:1.2rem;font-weight:700;color:var(--g2)}
+.stat-l{font-size:.52rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.pro-link{display:flex;align-items:center;gap:9px;padding:11px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r10);color:var(--t2);cursor:pointer;width:100%;margin-bottom:6px;font-family:var(--fb);font-size:.78rem;text-decoration:none}
+.pro-link:hover{background:var(--g5);color:var(--t1);border-color:var(--gbdr)}
+.pro-link i{color:var(--g1);width:16px;text-align:center}
 
-/* Floating Agent FAB */
-#agent-fab{position:fixed;bottom:72px;right:14px;width:52px;height:52px;border-radius:50%;background:var(--card);border:2px solid var(--g1);box-shadow:0 0 24px var(--g-glow);z-index:450;display:none;align-items:center;justify-content:center;cursor:pointer;overflow:hidden}
-#agent-fab img{width:100%;height:100%;object-fit:cover}
+/* FLOATING PHILADELPHIA AI DIRECTOR */
+#philly-float{position:fixed;bottom:74px;right:14px;width:50px;height:50px;border-radius:50%;background:var(--card);border:2px solid var(--g1);box-shadow:0 6px 24px rgba(0,0,0,.8),var(--glow);z-index:450;cursor:pointer;overflow:hidden;display:none;transition:.22s}
+#philly-float.on{display:block}
+#philly-float:hover{transform:scale(1.08)}
+#philly-float img{width:100%;height:100%;object-fit:cover}
+.bmsg{max-width:88%;padding:10px 13px;border-radius:14px;font-size:.8rem;line-height:1.55;word-break:break-word}
+.bmsg.ai{background:var(--g5);border:1px solid var(--gbdr);color:var(--t1);align-self:flex-start;border-bottom-left-radius:4px}
+.bmsg.user{background:linear-gradient(135deg,var(--g1),#e0bc72);color:#000;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
 
-/* Toast */
-#toasts{position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
-.toast{padding:8px 16px;border-radius:20px;font-size:.76rem;font-weight:700;white-space:nowrap;backdrop-filter:blur(10px);animation:pop .25s ease}
-.toast.s{background:rgba(0,212,144,.95);color:#000}
-.toast.e{background:rgba(224,90,122,.95);color:#fff}
-.toast.i{background:rgba(201,169,110,.95);color:#000}
-@keyframes pop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+/* MODALS & LIGHTBOX */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);z-index:800;display:none;align-items:flex-end;justify-content:center}
+.mbg.on{display:flex}
+.modal{background:linear-gradient(180deg,var(--card),var(--bg));border:1px solid var(--gbdr);border-radius:var(--r24) var(--r24) 0 0;padding:18px 16px 32px;width:100%;max-width:440px;position:relative;max-height:88vh;overflow-y:auto}
+.m-hnd{width:32px;height:4px;background:var(--bdr);border-radius:2px;margin:0 auto 14px}
+.mx{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--t2);cursor:pointer;font-size:.9rem}
+.m-ico{font-size:1.8rem;text-align:center;margin-bottom:8px;color:var(--g1)}
+.m-ttl{font-family:var(--ft);font-size:.9rem;font-weight:700;letter-spacing:2px;text-align:center;margin-bottom:4px;color:var(--g1)}
+.m-sub{font-size:.74rem;color:var(--t2);text-align:center;margin-bottom:13px;font-family:var(--fi);font-style:italic}
+.mbtns{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.mbtn{padding:12px;border:none;border-radius:var(--r10);font-weight:600;font-size:.82rem;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;font-family:var(--fb)}
+.mbtn.p{background:linear-gradient(135deg,var(--g1),#d4a860);color:#000}
+.mbtn.s{background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--t2)}
+.export-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:9px 0}
+.eo{padding:11px 5px;border-radius:var(--r10);border:1.5px solid var(--bdr);cursor:pointer;text-align:center;background:rgba(255,255,255,.02)}
+.eo.on{border-color:var(--g1);background:var(--g5)}
+
+#lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.96);flex-direction:column;align-items:center;justify-content:center}
+#lightbox.on{display:flex}
+#lb-img{max-width:95vw;max-height:84vh;object-fit:contain;border-radius:var(--r10)}
+.lb-close{position:fixed;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:.95rem}
+.lb-btns{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.lb-btn{padding:8px 15px;border-radius:var(--r10);border:1px solid var(--gbdr);background:var(--card);color:var(--g1);cursor:pointer;font-size:.74rem;font-weight:600}
+
+#toasts{position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:3500;display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none}
+.toast{padding:7px 16px;border-radius:18px;font-size:.73rem;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px;backdrop-filter:blur(12px);animation:tIn .28s ease}
+@keyframes tIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+.toast.s{background:rgba(0,212,144,.94);color:#000}
+.toast.e{background:rgba(224,90,122,.94);color:#fff}
+.toast.i{background:rgba(74,124,220,.94);color:#fff}
+.toast.g{background:rgba(201,169,110,.96);color:#000}
 </style>
 </head>
 <body>
 
 <div class="bg-wrap">
   <canvas id="aurora-cv"></canvas>
+  <div class="bg-particles" id="particles"></div>
+  <div class="bg-grid"></div>
   <div class="bg-vign"></div>
+</div>
+
+<!-- ══ SPLASH ══ -->
+<div id="splash">
+  <div class="splash-logo"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
+  <div class="splash-name">PHILADELPHIA</div>
+  <div class="splash-sub">Image Studio Pro · Elvion AI</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
 </div>
 
 <div id="toasts"></div>
 
-<!-- Top Navigation Bar -->
+<!-- ══ INTERACTIVE WRITE, DRAW & PAINT STUDIO OVERLAY ══ -->
+<div id="draw-ov">
+  <div class="draw-top">
+    <div class="draw-title"><i class="fas fa-paintbrush"></i> WRITE, DRAW & PAINT STUDIO</div>
+    <div style="display:flex;gap:6px;">
+      <button class="dt-btn" onclick="undoCanvas()"><i class="fas fa-rotate-left"></i> Undo</button>
+      <button class="dt-btn" style="background:var(--g1);color:#000;font-weight:700;" onclick="applyCanvasToStudio()"><i class="fas fa-check"></i> Apply to Image</button>
+      <button class="dt-btn" style="color:var(--red);" onclick="closeCanvasStudio()"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div id="draw-cv-wrap">
+    <canvas id="draw-cv" width="1024" height="1024"></canvas>
+  </div>
+  <div class="draw-dock">
+    <div class="draw-tools-row">
+      <button class="dt-btn on" id="dt-brush" onclick="setDrawTool('brush')"><i class="fas fa-paintbrush"></i> Brush</button>
+      <button class="dt-btn" id="dt-foil" onclick="setDrawTool('foil')"><i class="fas fa-sparkles"></i> Gold Foil</button>
+      <button class="dt-btn" id="dt-glow" onclick="setDrawTool('glow')"><i class="fas fa-sun"></i> Neon Glow</button>
+      <button class="dt-btn" id="dt-arrow" onclick="setDrawTool('arrow')"><i class="fas fa-arrow-trend-up"></i> Arrow</button>
+      <button class="dt-btn" id="dt-rect" onclick="setDrawTool('rect')"><i class="far fa-square"></i> Box</button>
+      <button class="dt-btn" id="dt-circle" onclick="setDrawTool('circle')"><i class="far fa-circle"></i> Circle</button>
+      <button class="dt-btn" id="dt-text" onclick="setDrawTool('text')"><i class="fas fa-font"></i> Write Text</button>
+      <button class="dt-btn" id="dt-erase" onclick="setDrawTool('erase')"><i class="fas fa-eraser"></i> Eraser</button>
+      <input type="color" id="draw-col" value="#f5e0a0" style="width:32px;height:30px;border:1px solid var(--gbdr);border-radius:6px;background:none;cursor:pointer;flex-shrink:0;">
+      <input type="range" id="draw-sz" min="2" max="64" value="14" style="width:80px;flex-shrink:0;" title="Size">
+    </div>
+    <div class="draw-text-bar" id="draw-text-bar">
+      <input type="text" id="canvas-txt-inp" placeholder="Type text, then tap anywhere on the image to stamp it…" style="flex:1;min-width:160px;padding:7px 10px;font-size:.78rem;">
+      <select id="canvas-txt-font" style="width:130px;padding:7px 8px;font-size:.74rem;">
+        <option value="Cinzel">Cinzel (Epic)</option>
+        <option value="Playfair Display">Playfair (Editorial)</option>
+        <option value="Bebas Neue">Bebas (Bold)</option>
+        <option value="Great Vibes">Great Vibes (Script)</option>
+        <option value="Orbitron">Orbitron (Sci-Fi)</option>
+        <option value="DM Sans">DM Sans (Clean)</option>
+      </select>
+      <select id="canvas-txt-fx" style="width:115px;padding:7px 8px;font-size:.74rem;">
+        <option value="foil">Gold Foil</option>
+        <option value="glow">Neon Glow</option>
+        <option value="shadow">Deep Shadow</option>
+        <option value="box">Dark Pill Box</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
 <header id="hdr">
-  <a href="index.html" class="hdr-brand">
-    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="hdr-logo">
-    <div class="hdr-title">PHILADELPHIA PRO<small>Image Studio · Elvion AI</small></div>
-  </a>
+  <div class="hdr-logomark"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
+  <div class="hdr-brand">PHILADELPHIA<small>Image Studio Pro · Elvion AI</small></div>
+  <span class="pro-pill"><i class="fas fa-crown"></i> PRO ENGINE</span>
   <div class="hsp"></div>
-  <div class="bal-chip" onclick="openM('wallet-m')">
-    <i class="fa-solid fa-coins"></i>
-    <span id="hdr-bal">--</span>
+  <div class="bal-tag" id="bal-tag" onclick="authA(()=>openM('fund-m'))">
+    <i class="fas fa-coins"></i>
+    <span id="bal-v">—</span>
   </div>
-  <div class="hav" onclick="goScr('pro')">
-    <img id="user-avatar" src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Avatar">
-  </div>
+  <button class="hbtn" onclick="authA(()=>openM('fund-m'))" title="Add credits"><i class="fas fa-plus"></i></button>
+  <div class="hav" id="hav" onclick="goScr('pro')"><i class="fas fa-user" style="font-size:.56rem"></i></div>
 </header>
 
-<!-- Auth Screen -->
+<!-- ══ AUTH SCREEN ══ -->
 <div class="scr on" id="scr-auth">
-  <div class="auth-box">
-    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="auth-logo">
-    <div class="auth-title">IMAGE STUDIO</div>
-    <div class="auth-sub">Philadelphia Pro · Elvion AI</div>
-    <div class="auth-desc">High-fidelity visual synthesis across 8 aspect ratios, on-canvas typography, photo remixing, and agentic workflows.</div>
-    <button class="g-btn" onclick="signIn()">
+  <div class="auth-wrap">
+    <div class="auth-crown"><img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo"></div>
+    <div class="auth-name">PHILADELPHIA</div>
+    <div class="auth-studio">Image Studio Pro</div>
+    <div class="auth-sub">Elvion AI · Sovereign Edition</div>
+    <div class="auth-tagline"><span id="tw-text"></span></div>
+    <button class="g-btn" id="login-btn" onclick="login()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      <span>Sign In with Google</span>
+      <span id="login-btn-txt">Continue with Google</span>
     </button>
   </div>
 </div>
 
-<!-- Studio Screen -->
+<!-- ══ STUDIO SCREEN ══ -->
 <div class="scr" id="scr-studio">
-  <div class="stage-zone" id="stage-zone">
-    <!-- Generation Overlay -->
+  <div class="canvas-zone" id="canvas-zone">
+    <!-- GEN OVERLAY -->
     <div id="gen-ov">
-      <div class="ring-spin"></div>
-      <div class="gen-title" id="gen-label">Philadelphia Pro is rendering…</div>
-      <div class="gen-sub" id="gen-sub">Generating master resolution image</div>
+      <div class="gen-orb-wrap">
+        <div class="gen-ring gr1"></div>
+        <div class="gen-ring gr2"></div>
+        <div class="gen-letter">P</div>
+      </div>
+      <div class="gen-label" id="gen-label">Philadelphia Pro is rendering…</div>
+      <div class="gen-prog-wrap"><div class="gen-prog"></div></div>
+      <div class="gen-step" id="gen-step">Crafting high-definition pixels…</div>
     </div>
 
-    <!-- Empty State -->
-    <div class="empty-stage" id="empty-stage">
-      <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Logo" class="empty-logo">
-      <div class="empty-title">PHILADELPHIA PRO</div>
-      <div class="empty-desc">Describe your vision below, pick an aspect ratio, or command the AI Agent to design on the canvas.</div>
-      <div class="empty-tags">
-        <span class="et-pill" onclick="qp('Futuristic Lagos skyline at sunset, golden glass towers, aerial cinema shot')">Lagos Skyline</span>
-        <span class="et-pill" onclick="qp('Editorial fashion portrait in dramatic chiaroscuro lighting, 85mm lens, sharp detail')">Editorial Portrait</span>
-        <span class="et-pill" onclick="qp('Luxury obsidian and gold perfume bottle on wet basalt rock, water droplets')">Product Shot</span>
-        <span class="et-pill" onclick="authA(openAgent)">Open AI Agent</span>
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="empty-state">
+      <div class="es-orb"><i class="fas fa-wand-magic-sparkles"></i></div>
+      <div class="es-title">PHILADELPHIA PRO ENGINE</div>
+      <div class="es-hint">Generate photorealistic art, write & paint on canvas, or let the AI Agent design posters & flyers.</div>
+      <div class="es-pills">
+        <span class="es-pill" onclick="qp('Portrait of an African sovereign queen in intricate 24k gold filigree armor, cinematic studio lighting, 8k')"><i class="fas fa-crown"></i> Sovereign Portrait</span>
+        <span class="es-pill" onclick="qp('Futuristic Lagos Marina at golden hour, sleek glass towers, flying solar pods, cinematic reflection')"><i class="fas fa-city"></i> Lagos 2080</span>
+        <span class="es-pill" onclick="qp('Luxury perfume bottle resting on black volcanic stone with golden water ripples and orchids, commercial photography')"><i class="fas fa-gem"></i> Product Shot</span>
+        <span class="es-pill" onclick="qp('Colossal celestial dragon made of constellations and nebula dust soaring above ancient peaks')"><i class="fas fa-dragon"></i> Celestial Dragon</span>
       </div>
     </div>
 
-    <!-- Single Active Image Stage -->
-    <div id="stage-display">
-      <img id="stage-img" src="" alt="Active Artwork">
-      <div class="stage-actions">
-        <button class="sa-btn sa-agent" onclick="authA(openAgent)"><i class="fa-solid fa-robot"></i> AI Agent</button>
-        <button class="sa-btn sa-draw" onclick="authA(startDraw)"><i class="fa-solid fa-paintbrush"></i> Draw & Text</button>
-        <button class="sa-btn sa-save" onclick="authA(saveToGallery)"><i class="fa-solid fa-bookmark"></i> Save</button>
-        <button class="sa-btn sa-dl" onclick="downloadImage()"><i class="fa-solid fa-download"></i></button>
+    <!-- IMAGE DISPLAY -->
+    <div id="img-display">
+      <img id="cur-img" src="" alt="Generated Artwork" onclick="openLightbox()">
+      <div class="img-actions">
+        <span class="tag-badge" id="img-size-badge" style="display:none"><i class="fas fa-expand"></i><span id="img-size-txt">1:1</span></span>
+        <button class="ia ia-draw" onclick="openCanvasStudio()" title="Write & Draw on Image"><i class="fas fa-paintbrush"></i> Write & Draw</button>
+        <button class="ia ia-fav" id="fav-btn" onclick="toggleFav()"><i class="far fa-heart"></i></button>
+        <button class="ia ia-save" onclick="authA(()=>saveToGallery(false))"><i class="fas fa-bookmark"></i> Save</button>
+        <button class="ia ia-dl" onclick="openM('export-m')"><i class="fas fa-download"></i></button>
+        <button class="ia ia-full" onclick="openLightbox()"><i class="fas fa-expand"></i></button>
       </div>
     </div>
 
-    <!-- Quad Grid (4 Variations) -->
+    <!-- QUAD GRID -->
     <div id="quad-grid"></div>
 
-    <!-- Before/After Compare Slider -->
+    <!-- COMPARE SLIDER -->
     <div id="compare-wrap">
-      <img id="compare-before" src="" alt="Before">
-      <div id="compare-after-wrap"><img id="compare-after" src="" alt="After"></div>
-      <div class="cmp-divider" id="cmp-divider"><div class="cmp-thumb"><i class="fa-solid fa-arrows-left-right"></i></div></div>
+      <img id="compare-before" src="" alt="">
+      <div id="compare-after-wrap"><img id="compare-after" src="" alt=""></div>
+      <div class="cmp-line" id="cmp-line"><div class="cmp-handle"><i class="fas fa-arrows-left-right" style="font-size:.5rem"></i></div></div>
     </div>
   </div>
 
-  <!-- Dock Control Panel -->
-  <div class="dock-panel">
-    <div class="dock-tabs">
-      <div class="dtab on" onclick="setPane('gen',this)"><i class="fa-solid fa-sparkles"></i> Create</div>
-      <div class="dtab" onclick="setPane('remix',this)"><i class="fa-solid fa-wand-magic-sparkles"></i> Remix & Edit</div>
-      <div class="dtab" onclick="setPane('canvas-tools',this)"><i class="fa-solid fa-crop-simple"></i> Canvas & Inspect</div>
-      <div class="dtab" onclick="setPane('presets',this)"><i class="fa-solid fa-palette"></i> Aesthetics</div>
+  <!-- CONTROL PANEL -->
+  <div class="ctrl-panel">
+    <div class="cp-tabs">
+      <div class="cpt on" onclick="cpTab('gen',this)"><i class="fas fa-wand-magic-sparkles"></i> Create</div>
+      <div class="cpt" onclick="cpTab('canvas',this)"><i class="fas fa-paintbrush"></i> Write & Draw</div>
+      <div class="cpt" onclick="cpTab('lab',this)"><i class="fas fa-flask"></i> AI Lab</div>
+      <div class="cpt" onclick="cpTab('filters',this)"><i class="fas fa-sliders"></i> Color & Motion</div>
+      <div class="cpt" onclick="cpTab('history',this)"><i class="fas fa-clock-rotate-left"></i> History</div>
     </div>
-    <div class="dock-body">
-      <!-- 1. CREATE PANE (PHILADELPHIA PRO) -->
-      <div class="dpane on" id="pane-gen">
-        <label class="f-label">Prompt (Philadelphia Pro)</label>
-        <textarea class="ta-input" id="prompt-in" placeholder="Describe your image in detail (subject, lighting, composition, mood)…" rows="2"></textarea>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px;">
-          <button type="button" class="et-pill" onclick="authA(enhancePrompt)"><i class="fa-solid fa-wand-sparkles"></i> AI Enhance Prompt (2 cr)</button>
-          <span style="font-size:.65rem;color:var(--t2);">Engine: <strong style="color:var(--g1);">Philadelphia Pro</strong></span>
+
+    <div class="cpb">
+      <!-- 1. CREATE TAB (PHILADELPHIA PRO EXCLUSIVE) -->
+      <div class="cpsec on" id="sec-gen">
+        <div class="prompt-wrap">
+          <textarea class="prompt-ta" id="prompt-ta" placeholder="Describe your image: subject, setting, lighting, camera lens, mood…" rows="2" oninput="updateCharCount(this)"></textarea>
+          <div class="prompt-tools">
+            <span class="char-count" id="char-count">0 / 1500</span>
+            <div class="prompt-btns">
+              <button class="pbi pbi-rand" onclick="randomPrompt()" title="Inspire me"><i class="fas fa-shuffle"></i> Inspire</button>
+              <button class="pbi pbi-enhance" onclick="authA(enhancePrompt)"><i class="fas fa-wand-magic-sparkles"></i> AI Enhance (2 cr)</button>
+            </div>
+          </div>
         </div>
 
-        <label class="f-label">Aspect Ratio</label>
-        <div class="ar-selector">
-          <button class="ar-chip on" data-ar="1:1" onclick="setAR(this)">1:1 Square</button>
-          <button class="ar-chip" data-ar="16:9" onclick="setAR(this)">16:9 Wide</button>
-          <button class="ar-chip" data-ar="9:16" onclick="setAR(this)">9:16 Story</button>
-          <button class="ar-chip" data-ar="4:3" onclick="setAR(this)">4:3</button>
-          <button class="ar-chip" data-ar="3:4" onclick="setAR(this)">3:4</button>
-          <button class="ar-chip" data-ar="3:2" onclick="setAR(this)">3:2</button>
-          <button class="ar-chip" data-ar="2:3" onclick="setAR(this)">2:3</button>
-          <button class="ar-chip" data-ar="21:9" onclick="setAR(this)">21:9 Ultra</button>
+        <div class="sh"><i class="fas fa-palette"></i><span>One-Tap Visual Style</span></div>
+        <div class="style-strip" id="style-strip"></div>
+
+        <div class="sh"><i class="fas fa-expand-arrows-alt"></i><span>Aspect Ratio (Philadelphia Pro)</span></div>
+        <div class="ar-row" id="ar-row">
+          <button class="ar-btn on" data-ar="1:1" onclick="setAR(this)">1:1 Square</button>
+          <button class="ar-btn" data-ar="3:4" onclick="setAR(this)">3:4 Portrait</button>
+          <button class="ar-btn" data-ar="2:3" onclick="setAR(this)">2:3 Print / Poster</button>
+          <button class="ar-btn" data-ar="9:16" onclick="setAR(this)">9:16 Story / Reel</button>
+          <button class="ar-btn" data-ar="4:3" onclick="setAR(this)">4:3 Classic</button>
+          <button class="ar-btn" data-ar="3:2" onclick="setAR(this)">3:2 Photo</button>
+          <button class="ar-btn" data-ar="16:9" onclick="setAR(this)">16:9 Cinema</button>
+          <button class="ar-btn" data-ar="21:9" onclick="setAR(this)">21:9 Ultrawide</button>
         </div>
 
-        <div class="switch-row" id="popt-row" onclick="toggleOptimizer()">
-          <div><div style="font-size:.76rem;color:#fff;">Prompt Optimizer</div><div style="font-size:.6rem;color:var(--t2);">Automatically enrich lighting, textures, and composition</div></div>
-          <div class="switch-btn"><div class="switch-dot"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px;">
+          <div class="tog-row on" id="popt-tog" onclick="togglePromptOptimizer()" style="margin:0;">
+            <div><div class="tog-lbl">Prompt Optimizer</div><div class="tog-sub">Auto-enrich lighting & detail</div></div>
+            <div class="tog on" id="popt-t"><div class="tok"></div></div>
+          </div>
+          <div class="tog-row" id="quad-tog" onclick="toggleQuad()" style="margin:0;">
+            <div><div class="tog-lbl">Quad Batch (4×)</div><div class="tog-sub">Render 4 variations (60 cr)</div></div>
+            <div class="tog" id="quad-t"><div class="tok"></div></div>
+          </div>
         </div>
 
-        <div class="switch-row" id="quad-row" onclick="toggleQuad()">
-          <div><div style="font-size:.76rem;color:#fff;">Quad Generate (4 Variations)</div><div style="font-size:.6rem;color:var(--t2);">Generate 4 distinct variations in parallel · 60 credits</div></div>
-          <div class="switch-btn"><div class="switch-dot"></div></div>
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+          <input type="text" id="neg-ta" placeholder="Optional negative prompt (e.g. blurry, text, watermark)…" style="flex:1;padding:7px 10px;font-size:.76rem;">
+          <input type="number" id="seed-val" placeholder="Seed (opt)" style="width:105px;padding:7px 9px;font-size:.76rem;">
         </div>
 
-        <button class="submit-btn" id="gen-btn" onclick="authA(generateImage)">
-          <i class="fa-solid fa-bolt"></i>
-          <span id="gen-btn-label">Generate with Philadelphia Pro (15 cr)</span>
+        <button class="gen-btn" id="gen-btn" onclick="authA(handleGenerate)">
+          <i class="fas fa-crown"></i>
+          <span id="gen-btn-txt">Generate with Philadelphia Pro</span>
+          <span class="cost" id="gen-cost">(15 credits)</span>
         </button>
       </div>
 
-      <!-- 2. REMIX & EDIT PANE -->
-      <div class="dpane" id="pane-remix">
-        <label class="f-label">Upload Photo Reference / Image to Transform</label>
-        <input type="file" id="remix-file-in" accept="image/*" style="display:none" onchange="onRemixFile(this)">
-        <div style="display:flex;gap:8px;margin-bottom:10px;">
-          <button class="et-pill" onclick="$id('remix-file-in').click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Photo</button>
-          <button class="et-pill" onclick="useCanvasForRemix()"><i class="fa-solid fa-image"></i> Use Current Canvas Image</button>
+      <!-- 2. WRITE, DRAW & AGENTIC DESIGN TAB -->
+      <div class="cpsec" id="sec-canvas">
+        <div class="sh"><i class="fas fa-paintbrush"></i><span>Interactive Canvas Studio (Free)</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;">
+          <button class="gen-btn" style="margin:0;padding:11px;font-size:.76rem;" onclick="openCanvasStudio('brush')">
+            <i class="fas fa-paintbrush"></i> Paint, Foil & Shapes
+          </button>
+          <button class="gen-btn" style="margin:0;padding:11px;font-size:.76rem;background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.4);color:#ddd6fe;" onclick="openCanvasStudio('text')">
+            <i class="fas fa-font"></i> Write Typography on Image
+          </button>
         </div>
-        <div id="remix-preview-box" style="display:none;margin-bottom:10px;">
-          <img id="remix-preview-img" src="" alt="Preview" style="max-height:100px;border-radius:8px;border:1px solid var(--gbdr);">
+
+        <div class="agent-box">
+          <div class="sh" style="margin-top:0;"><i class="fas fa-robot"></i><span>Agentic Write, Draw & Flyer Designer (Studio Chat Engine)</span></div>
+          <div style="font-size:.7rem;color:var(--t2);margin-bottom:8px;line-height:1.45;">
+            Powered by the same autonomous agent as <b>Philadelphia Studio Chat</b> (`add_text`, `draw_on_image`, `create_design`). Tell Philadelphia what text, arrows, frames, or full poster layout to build:
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;">
+            <span class="es-pill" onclick="$('agent-task-inp').value='Add bold gold Cinzel title text at the top saying SOVEREIGN and smaller subtitle text at the bottom'">+ Add Typography</span>
+            <span class="es-pill" onclick="$('agent-task-inp').value='Draw a glowing golden border frame around the image and an arrow pointing to the center'">+ Draw Frame & Arrow</span>
+            <span class="es-pill" onclick="$('agent-task-inp').value='Turn this image into a luxury event flyer with headline, date, venue, and modern editorial layout'">+ Build Full Poster / Flyer</span>
+          </div>
+          <textarea id="agent-task-inp" rows="2" placeholder="e.g. Write 'LAGOS TECH SUMMIT 2026' in bold Bebas Neue at the top with a subtle shadow, or design a complete music poster…" style="margin-bottom:8px;font-size:.8rem;"></textarea>
+          <button class="gen-btn" style="margin:0;padding:10px;font-size:.76rem;" onclick="authA(runAgentStudioTask)">
+            <i class="fas fa-wand-magic-sparkles"></i> Run Philadelphia Agent (~10-13 cr)
+          </button>
         </div>
-        <label class="f-label">Instruction / Transformation Prompt</label>
-        <textarea class="ta-input" id="remix-prompt" placeholder="e.g. Turn this photo into a cinematic cyberpunk warrior with glowing neon armor in rain…" rows="2"></textarea>
-        <button class="submit-btn" style="margin-top:10px;" onclick="authA(runRemix)"><i class="fa-solid fa-wand-magic-sparkles"></i> Transform with Philadelphia Pro (15 cr)</button>
       </div>
 
-      <!-- 3. CANVAS & INSPECT PANE -->
-      <div class="dpane" id="pane-canvas-tools">
-        <div class="tb-grid">
-          <button class="tb-card" onclick="authA(startDraw)"><i class="fa-solid fa-paintbrush"></i>Draw & Paint</button>
-          <button class="tb-card" onclick="rotateCanvas(90)"><i class="fa-solid fa-rotate-right"></i>Rotate 90°</button>
-          <button class="tb-card" onclick="flipCanvas('h')"><i class="fa-solid fa-arrows-left-right"></i>Flip H</button>
-          <button class="tb-card" onclick="flipCanvas('v')"><i class="fa-solid fa-arrows-up-down"></i>Flip V</button>
+      <!-- 3. AI LAB (EDIT, REMOVE BG, VISION CRITIQUE) -->
+      <div class="cpsec" id="sec-lab">
+        <div class="sh"><i class="fas fa-flask"></i><span>AI Photo Transformation & Vision</span></div>
+        <div class="tb-g">
+          <button class="tb on" id="tb-edit" onclick="openTx('edit')"><i class="fas fa-user-astronaut"></i>Restyle Subject (15cr)</button>
+          <button class="tb" id="tb-bg" onclick="openTx('bg')"><i class="fas fa-scissors"></i>Remove BG (2cr)</button>
+          <button class="tb" id="tb-bgreplace" onclick="openTx('bgreplace')"><i class="fas fa-mountain-sun"></i>Replace Scene (15cr)</button>
+          <button class="tb" id="tb-critique" onclick="openTx('critique')"><i class="fas fa-award"></i>Art Critique (2cr)</button>
+          <button class="tb" id="tb-analyze" onclick="openTx('analyze')"><i class="fas fa-eye"></i>Extract Prompt / OCR</button>
+          <button class="tb" onclick="startCompare()"><i class="fas fa-arrows-left-right"></i>Compare Split</button>
         </div>
-        <div class="tb-grid">
-          <button class="tb-card" onclick="authA(inspectImage)"><i class="fa-solid fa-eye"></i>AI Inspect</button>
-          <button class="tb-card" onclick="authA(toggleCompare)"><i class="fa-solid fa-columns"></i>Compare</button>
-          <button class="tb-card" onclick="extractPalette()"><i class="fa-solid fa-droplet"></i>Palette</button>
-          <button class="tb-card" onclick="authA(openAgent)"><i class="fa-solid fa-robot"></i>Agentic Edit</button>
+
+        <div style="display:flex;gap:7px;align-items:center;margin-bottom:8px;">
+          <button class="dt-btn" style="flex:1;justify-content:center;padding:9px;" onclick="$('tx-file').click()">
+            <i class="fas fa-cloud-arrow-up" style="color:var(--g1)"></i> <span id="tx-file-lbl">Upload Reference Photo (or use current canvas)</span>
+          </button>
+          <button class="dt-btn" id="tx-clear-btn" style="display:none;color:var(--red);padding:9px;" onclick="clearTxFile()"><i class="fas fa-times"></i></button>
         </div>
-        <div id="inspect-output" style="display:none;padding:12px;background:rgba(0,0,0,.5);border:1px solid var(--gbdr);border-radius:10px;font-size:.76rem;line-height:1.6;margin-top:8px;"></div>
-        <div id="palette-output" style="display:none;margin-top:8px;"></div>
+        <input type="file" id="tx-file" accept="image/*" style="display:none" onchange="onTxFile(this)">
+
+        <div id="edit-prompt-wrap" style="margin-bottom:8px">
+          <textarea id="edit-prompt" rows="2" placeholder="Describe how to transform the subject or scene (e.g. Place this character in a neon cyberpunk street at night)…"></textarea>
+        </div>
+
+        <div id="analyze-result" style="display:none;padding:10px;background:rgba(0,212,184,.06);border:1px solid rgba(0,212,184,.22);border-radius:10px;font-size:.76rem;color:var(--t1);line-height:1.55;margin-bottom:8px;white-space:pre-wrap;max-height:160px;overflow-y:auto"></div>
+
+        <button class="gen-btn" id="tx-btn" onclick="authA(runTx)" style="margin-top:4px;padding:11px;">
+          <i class="fas fa-bolt"></i><span id="tx-btn-txt">Restyle with Philadelphia Pro (15 cr)</span>
+        </button>
       </div>
 
-      <!-- 4. AESTHETICS & PRESETS -->
-      <div class="dpane" id="pane-presets">
-        <label class="f-label">Curated Aesthetics (Click to apply)</label>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button class="et-pill" onclick="applyPreset('Photorealistic Cinema, 8k, volumetric lighting, Arri Alexa 85mm')">Cinematic 8K</button>
-          <button class="et-pill" onclick="applyPreset('Cyberpunk aesthetic, neon reflections in rain, dark futuristic atmosphere')">Cyberpunk</button>
-          <button class="et-pill" onclick="applyPreset('Afrofuturism fantasy, ornate gold tribal details, glowing celestial lighting')">Afrofuturism</button>
-          <button class="et-pill" onclick="applyPreset('Anime masterpiece style, Makoto Shinkai vibrant skies, clean cel-shading')">Anime Vibrant</button>
-          <button class="et-pill" onclick="applyPreset('Dramatic chiaroscuro studio portrait, high contrast, deep shadows, Rembrandt light')">Chiaroscuro</button>
-          <button class="et-pill" onclick="applyPreset('Luxury editorial product photography, minimalist beige podium, soft rim light')">Luxury Product</button>
+      <!-- 4. COLOR GRADING & MOTION TAB -->
+      <div class="cpsec" id="sec-filters">
+        <div class="sh"><i class="fas fa-wand-sparkles"></i><span>One-Tap Cinema LUTs</span></div>
+        <div class="preset-pills">
+          <button class="pp" onclick="applyPreset('cinematic')">Cinematic</button>
+          <button class="pp" onclick="applyPreset('golden')" style="border-color:var(--gbdr);color:var(--g1)">Golden Hour</button>
+          <button class="pp" onclick="applyPreset('vivid')">Vivid Pop</button>
+          <button class="pp" onclick="applyPreset('noir')">Film Noir</button>
+          <button class="pp" onclick="applyPreset('warm')">Warm Editorial</button>
+          <button class="pp" onclick="applyPreset('cool')">Cyber Cool</button>
+          <button class="pp" onclick="applyPreset('vintage')">Vintage 35mm</button>
+          <button class="pp" onclick="resetFilters()">Reset</button>
         </div>
+
+        <div class="filter-sliders">
+          <div class="fs-row"><span class="fs-lbl">Brightness</span><input type="range" id="f-bright" min="40" max="160" value="100" oninput="applyFilters()"><span class="fs-val" id="v-bright">100%</span></div>
+          <div class="fs-row"><span class="fs-lbl">Contrast</span><input type="range" id="f-contrast" min="40" max="180" value="100" oninput="applyFilters()"><span class="fs-val" id="v-contrast">100%</span></div>
+          <div class="fs-row"><span class="fs-lbl">Saturation</span><input type="range" id="f-sat" min="0" max="220" value="100" oninput="applyFilters()"><span class="fs-val" id="v-sat">100%</span></div>
+          <div class="fs-row"><span class="fs-lbl">Vignette</span><input type="range" id="f-vign" min="0" max="100" value="0" oninput="applyVignette()"><span class="fs-val" id="v-vign">0%</span></div>
+        </div>
+
+        <div class="sh" style="margin-top:10px"><i class="fas fa-film"></i><span>Live Motion Showcase</span></div>
+        <div class="preset-pills">
+          <button class="pp" onclick="playMotion('kenburns')">Ken Burns Zoom</button>
+          <button class="pp" onclick="playMotion('goldleaf')">Gold Leaf Shimmer</button>
+          <button class="pp" onclick="playMotion('particles')">Stardust Particles</button>
+          <button class="pp" onclick="playMotion('dreamy')">Dreamy Breathe</button>
+          <button class="pp" onclick="playMotion('filmburn')">Film Burn</button>
+          <button class="pp" onclick="playMotion('glitch')">Cyber Glitch</button>
+        </div>
+
+        <div class="sh" style="margin-top:8px"><i class="fas fa-eye-dropper"></i><span>Extracted Palette (Tap to Copy Hex)</span></div>
+        <div id="pal-row" class="pal-row"><span style="font-size:.64rem;color:var(--t3)">Generate an image to extract its color palette</span></div>
+      </div>
+
+      <!-- 5. PROMPT HISTORY TAB -->
+      <div class="cpsec" id="sec-history">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div class="sh" style="margin:0;"><i class="fas fa-clock-rotate-left"></i><span>Recent Prompts</span></div>
+          <button class="dt-btn" onclick="clearHistory()" style="color:var(--red);"><i class="fas fa-trash"></i> Clear</button>
+        </div>
+        <div id="ph-list"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Draw & Text Studio Overlay -->
-<div id="draw-ov">
-  <div style="font-family:var(--ft);font-size:.82rem;color:var(--g1);letter-spacing:2px;">DRAW, PAINT & TEXT OVERLAY</div>
-  <canvas id="draw-cv" width="600" height="600"></canvas>
-  <div class="draw-dock">
-    <button class="draw-tool on" id="dt-brush" onclick="setDrawTool('brush')"><i class="fa-solid fa-paintbrush"></i> Brush</button>
-    <button class="draw-tool" id="dt-foil" onclick="setDrawTool('foil')"><i class="fa-solid fa-sparkles"></i> Gold Foil</button>
-    <button class="draw-tool" id="dt-glow" onclick="setDrawTool('glow')"><i class="fa-solid fa-sun"></i> Glow</button>
-    <button class="draw-tool" id="dt-line" onclick="setDrawTool('line')"><i class="fa-solid fa-slash"></i> Line</button>
-    <button class="draw-tool" id="dt-rect" onclick="setDrawTool('rect')"><i class="fa-regular fa-square"></i> Box</button>
-    <button class="draw-tool" id="dt-text" onclick="setDrawTool('text')"><i class="fa-solid fa-font"></i> Write Text</button>
-    <button class="draw-tool" id="dt-erase" onclick="setDrawTool('erase')"><i class="fa-solid fa-eraser"></i> Erase</button>
-    <input type="color" id="draw-col" value="#f0c878" style="width:28px;height:28px;border:none;background:none;cursor:pointer;">
-    <input type="range" id="draw-sz" min="2" max="60" value="10" style="width:68px;accent-color:var(--g1);">
-    <button class="draw-tool" onclick="undoDraw()"><i class="fa-solid fa-rotate-left"></i></button>
-    <button class="draw-tool" style="background:var(--g1);color:#000;font-weight:700;" onclick="applyDraw()"><i class="fa-solid fa-check"></i> Apply</button>
-    <button class="draw-tool" style="color:var(--red);" onclick="closeDraw()"><i class="fa-solid fa-xmark"></i></button>
-  </div>
-  <div id="text-stamp-wrap">
-    <input type="text" id="draw-txt-val" placeholder="Type text, then click on the canvas to stamp…" style="background:rgba(0,0,0,.6);border:1px solid var(--gbdr);color:#fff;padding:6px 10px;border-radius:8px;font-size:.78rem;width:220px;">
-    <select id="draw-txt-font" style="background:#111;color:#fff;border:1px solid var(--bdr);padding:6px;border-radius:8px;font-size:.74rem;">
-      <option value="Cinzel">Cinzel</option>
-      <option value="Playfair Display">Playfair</option>
-      <option value="DM Sans">DM Sans</option>
-      <option value="JetBrains Mono">Mono</option>
-    </select>
-    <input type="number" id="draw-txt-sz" value="48" min="12" max="180" style="width:60px;background:#111;color:#fff;border:1px solid var(--bdr);padding:6px;border-radius:8px;font-size:.74rem;">
-  </div>
-</div>
-
-<!-- Gallery Screen -->
+<!-- ══ GALLERY SCREEN ══ -->
 <div class="scr" id="scr-gallery">
-  <div class="view-wrap">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <span style="font-family:var(--ft);font-size:.9rem;color:var(--g1);letter-spacing:2px;">SAVED CREATIONS</span>
-      <button class="et-pill" onclick="authA(saveToGallery)"><i class="fa-solid fa-plus"></i> Save Active Canvas</button>
+  <div class="gallery-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-family:var(--ft);font-size:.82rem;font-weight:700;color:var(--g1);letter-spacing:2px">MY STUDIO GALLERY</div>
+      <button onclick="authA(()=>saveToGallery(false))" style="padding:5px 11px;border-radius:8px;font-size:.6rem;font-weight:600;background:var(--g5);border:1px solid var(--gbdr);color:var(--g1);cursor:pointer"><i class="fas fa-bookmark"></i> Save Active</button>
     </div>
-    <div class="gal-grid" id="gal-grid"></div>
+    <div class="gal-filters">
+      <span class="gf on" onclick="filterGal('all',this)">All Creations</span>
+      <span class="gf" onclick="filterGal('fav',this)"><i class="fas fa-heart" style="color:var(--red)"></i> Favorites</span>
+    </div>
+    <div class="gal-g" id="gal-g"></div>
   </div>
 </div>
 
-<!-- Profile Screen -->
+<!-- ══ PROFILE SCREEN ══ -->
 <div class="scr" id="scr-pro">
-  <div class="view-wrap">
-    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r16);padding:20px;text-align:center;margin-bottom:12px;">
-      <img id="pro-img" src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Profile" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--g1);margin-bottom:8px;">
-      <div id="pro-name" style="font-family:var(--ft);font-size:1rem;font-weight:700;color:#fff;">Creator</div>
-      <div id="pro-email" style="font-size:.72rem;color:var(--t2);margin-bottom:12px;">--</div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;background:var(--g-subtle);border:1px solid var(--gbdr);border-radius:var(--r12);margin-bottom:10px;">
-        <i class="fa-solid fa-coins" style="color:var(--g1);"></i>
-        <span style="font-family:var(--ft);font-size:1.35rem;color:var(--g2);font-weight:700;" id="pro-bal">--</span>
-        <span style="font-size:.65rem;color:var(--t2);text-transform:uppercase;">Credits</span>
+  <div class="pro-inner">
+    <div class="pro-card">
+      <div class="pro-av" id="pro-av"><i class="fas fa-user"></i></div>
+      <div class="pro-nm" id="pro-nm">Creator</div>
+      <div class="pro-em" id="pro-em">—</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--g5);border:1px solid var(--gbdr);border-radius:var(--r14);cursor:pointer;margin-bottom:12px" onclick="openM('fund-m')">
+        <i class="fas fa-coins" style="color:var(--g1)"></i>
+        <span style="font-family:var(--ft);font-size:1.45rem;color:var(--g2);font-weight:700" id="pro-bal">—</span>
+        <span style="font-size:.58rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px">Credits</span>
       </div>
-      <div style="display:flex;gap:8px;">
-        <button class="submit-btn" style="flex:1;padding:10px;font-size:.74rem;" onclick="authA(claimDaily)"><i class="fa-solid fa-gift"></i> Claim Daily</button>
-        <button class="submit-btn" style="flex:1;padding:10px;font-size:.74rem;background:var(--green);" onclick="openM('wallet-m')"><i class="fa-solid fa-wallet"></i> Fund</button>
+      <div class="stat-row">
+        <div class="stat-c"><div class="stat-v" id="st-gen">0</div><div class="stat-l">Generated</div></div>
+        <div class="stat-c"><div class="stat-v" id="st-save">0</div><div class="stat-l">Saved</div></div>
+        <div class="stat-c"><div class="stat-v" id="st-fav">0</div><div class="stat-l">Favorites</div></div>
       </div>
     </div>
-    <button class="submit-btn" style="background:rgba(255,255,255,.05);color:var(--red);border:1px solid rgba(224,90,122,.3);box-shadow:none;margin-top:12px;" onclick="signOut()"><i class="fa-solid fa-power-off"></i> Sign Out</button>
+    <button class="pro-link" onclick="authA(claimDaily)" style="border-color:rgba(0,212,144,.3);color:var(--green)"><i class="fas fa-gift" style="color:var(--green)"></i> Claim Daily Free Credits</button>
+    <button class="pro-link" onclick="openM('fund-m')"><i class="fas fa-wallet"></i> Fund Wallet (Pay-As-You-Go)</button>
+    <a class="pro-link" href="philadelphia.html"><i class="fas fa-comments"></i> Open Philadelphia Studio Chat</a>
+    <button class="pro-link" onclick="exportAllGallery()"><i class="fas fa-download"></i> Export All Gallery Images</button>
+    <button class="pro-link" onclick="logoutUser()" style="color:var(--red)"><i class="fas fa-sign-out-alt" style="color:var(--red)"></i> Sign Out</button>
   </div>
 </div>
 
-<!-- Bottom Navigation Bar -->
+<!-- ══ BOTTOM NAV ══ -->
 <nav id="bnav">
-  <button class="ni on" id="ni-studio" onclick="goScr('studio')"><i class="fa-solid fa-wand-magic-sparkles"></i>Studio</button>
-  <button class="ni" id="ni-gallery" onclick="goScr('gallery')"><i class="fa-solid fa-images"></i>Gallery</button>
-  <button class="ni" id="ni-pro" onclick="goScr('pro')"><i class="fa-solid fa-user"></i>Account</button>
+  <button class="ni on" id="ni-studio" onclick="goScr('studio')"><i class="fas fa-wand-magic-sparkles"></i>Studio</button>
+  <button class="ni" id="ni-gallery" onclick="goScr('gallery')"><i class="fas fa-images"></i>Gallery</button>
+  <button class="ni" id="ni-pro" onclick="goScr('pro')"><i class="fas fa-user"></i>Wallet</button>
 </nav>
 
-<!-- Floating Agent Button -->
-<div id="agent-fab" onclick="authA(openAgent)">
-  <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="AI Agent">
+<!-- ══ FLOATING PHILADELPHIA AI ART DIRECTOR ══ -->
+<div id="philly-float" onclick="openM('philly-m')" title="Ask Philadelphia AI Art Director">
+  <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Philadelphia AI">
 </div>
 
-<!-- Agentic AI Assistant Sheet -->
-<div class="modal-cover" id="agent-m"><div class="modal-sheet">
-  <div class="agent-header">
-    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" alt="Philadelphia AI">
-    <div>
-      <div style="font-family:var(--ft);font-size:.84rem;color:var(--g1);font-weight:700;">PHILADELPHIA AI AGENT</div>
-      <div style="font-size:.58rem;color:var(--t2);">Direct Autonomous Image Orchestrator</div>
+<div class="mbg" id="philly-m"><div class="modal" style="height:80vh;max-height:720px;display:flex;flex-direction:column;padding:0;overflow:hidden;">
+  <div style="padding:13px 16px;background:var(--card2);border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;">
+    <img src="https://i.postimg.cc/8cNLwzjz/IMG-20251229-124110-433.png" style="width:34px;height:34px;border-radius:50%;border:1px solid var(--g1);object-fit:cover;" alt="">
+    <div style="flex:1">
+      <div style="font-family:var(--ft);font-size:.86rem;color:var(--g1);font-weight:700;letter-spacing:1.2px;">PHILADELPHIA AI</div>
+      <div style="font-size:.58rem;color:var(--t2);letter-spacing:1px;text-transform:uppercase;">Agentic Art Director · Auto-Prompts & Designs</div>
     </div>
-    <button class="m-close" onclick="closeM('agent-m')"><i class="fa-solid fa-xmark"></i></button>
+    <button class="mx" style="position:static;" onclick="closeM('philly-m')"><i class="fas fa-times"></i></button>
   </div>
-  <div id="agent-feed">
-    <div class="agent-bubble ai">Hello. Tell me what to build, modify, or paint onto your canvas. I execute tools autonomously and drop the result directly onto your active stage.</div>
+  <div id="philly-msgs" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;"></div>
+  <div style="padding:7px 12px;display:flex;gap:5px;overflow-x:auto;border-top:1px solid var(--bdr);background:rgba(0,0,0,.35);">
+    <span class="es-pill" onclick="sendPhillyQuick('Generate a cinematic 16:9 portrait of a cyberpunk samurai in Neo-Lagos')">Generate Samurai</span>
+    <span class="es-pill" onclick="sendPhillyQuick('Design a luxury gold & black event poster using my current image')">Design Event Poster</span>
+    <span class="es-pill" onclick="sendPhillyQuick('Critique my current image and tell me how to improve it')">Critique My Art</span>
   </div>
-  <div style="padding:10px 14px;background:var(--card);border-top:1px solid var(--bdr);display:flex;gap:8px;">
-    <input type="text" id="agent-in" placeholder="Tell Philadelphia what to design or edit…" style="flex:1;background:rgba(0,0,0,.5);border:1px solid var(--gbdr);color:#fff;padding:10px 12px;border-radius:var(--r10);font-size:.82rem;" onkeypress="if(event.key==='Enter')sendAgent()">
-    <button onclick="sendAgent()" style="width:40px;height:40px;border-radius:50%;background:var(--g1);border:none;color:#000;cursor:pointer;"><i class="fa-solid fa-arrow-up"></i></button>
+  <div style="padding:10px 12px;background:var(--card2);border-top:1px solid var(--bdr);display:flex;gap:7px;">
+    <input type="text" id="philly-inp" placeholder="Ask Philadelphia to generate, write text, or design a flyer…" onkeydown="if(event.key==='Enter')sendPhillyChat()">
+    <button class="mbtn p" style="width:44px;padding:0;border-radius:10px;flex-shrink:0;" onclick="sendPhillyChat()"><i class="fas fa-arrow-up"></i></button>
   </div>
 </div></div>
 
-<!-- Wallet Funding Modal -->
-<div class="modal-cover" id="wallet-m"><div class="modal-sheet">
-  <div class="m-pill"></div>
-  <button class="m-close" onclick="closeM('wallet-m')"><i class="fa-solid fa-xmark"></i></button>
-  <div style="font-family:var(--ft);font-size:.92rem;color:var(--g1);margin-bottom:6px;text-align:center;">FUND WALLET</div>
-  <div style="font-size:.76rem;color:var(--t2);text-align:center;margin-bottom:14px;">Pay As You Go: $1 = 220+ Credits · ₦5 = 1 Credit</div>
-  <label class="f-label">Amount (NGN)</label>
-  <input type="number" id="fund-amt" value="1000" min="100" style="margin-bottom:14px;background:rgba(0,0,0,.6);border:1px solid var(--gbdr);color:#fff;padding:10px;border-radius:8px;width:100%;">
-  <button class="submit-btn" onclick="initPay()"><i class="fa-solid fa-lock"></i> Pay with Korapay</button>
+<!-- ══ MOTION OVERLAY ══ -->
+<div id="anim-overlay" style="position:fixed;inset:0;z-index:1200;background:rgba(3,3,12,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px">
+  <div style="font-family:var(--ft);font-size:.82rem;color:var(--g1);letter-spacing:2px;">LIVE MOTION SHOWCASE</div>
+  <canvas id="anim-cv" style="max-width:90vw;max-height:66vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.9)"></canvas>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+    <button class="dt-btn" style="background:var(--g1);color:#000;font-weight:700;padding:8px 14px;" onclick="downloadAnimWebM()"><i class="fas fa-video"></i> Download 3s Video (WebM)</button>
+    <button class="dt-btn" style="padding:8px 14px;" onclick="captureAnimFrame()"><i class="fas fa-camera"></i> Save HD Frame</button>
+    <button class="dt-btn" style="color:var(--red);padding:8px 14px;" onclick="stopMotion()"><i class="fas fa-times"></i> Close</button>
+  </div>
+  <div id="anim-rec-status" style="font-size:.7rem;color:var(--g2);"></div>
+</div>
+
+<!-- ══ FUND MODAL ══ -->
+<div class="mbg" id="fund-m"><div class="modal">
+  <div class="m-hnd"></div><button class="mx" onclick="closeM('fund-m')"><i class="fas fa-times"></i></button>
+  <div class="m-ico"><i class="fas fa-wallet"></i></div>
+  <div class="m-ttl">Fund Studio Wallet</div>
+  <div class="m-sub">Pay-As-You-Go · ₦1,000 = 200 Credits (15 cr per Pro image)</div>
+  <div class="fc"><label class="fcl">Amount (NGN)</label><input type="number" id="fund-amt" value="1000" min="100"></div>
+  <div id="pvn" style="display:none;padding:8px;text-align:center;color:var(--g1);font-size:.74rem"><i class="fas fa-spinner fa-spin"></i> Verifying payment…</div>
+  <div class="mbtns">
+    <button class="mbtn p" onclick="initPay()"><i class="fas fa-lock"></i> Pay Securely with Korapay</button>
+    <button class="mbtn s" onclick="closeM('fund-m')">Cancel</button>
+  </div>
 </div></div>
 
+<!-- ══ EXPORT MODAL ══ -->
+<div class="mbg" id="export-m"><div class="modal">
+  <div class="m-hnd"></div><button class="mx" onclick="closeM('export-m')"><i class="fas fa-times"></i></button>
+  <div class="m-ico"><i class="fas fa-download"></i></div>
+  <div class="m-ttl">Export Artwork</div>
+  <div class="m-sub">Includes any active LUT color grading and vignette</div>
+  <div class="export-opts">
+    <div class="eo on" onclick="setExpFmt('png',this)"><div style="font-size:.74rem;font-weight:700;color:var(--t1)">PNG</div><div style="font-size:.55rem;color:var(--t2)">Lossless Master</div></div>
+    <div class="eo" onclick="setExpFmt('jpeg',this)"><div style="font-size:.74rem;font-weight:700;color:var(--t1)">JPEG</div><div style="font-size:.55rem;color:var(--t2)">Compact</div></div>
+    <div class="eo" onclick="setExpFmt('webp',this)"><div style="font-size:.74rem;font-weight:700;color:var(--t1)">WebP</div><div style="font-size:.55rem;color:var(--t2)">Web Ready</div></div>
+  </div>
+  <div class="mbtns">
+    <button class="mbtn p" onclick="downloadImage()"><i class="fas fa-download"></i> Download File</button>
+    <button class="mbtn s" onclick="copyToClipboard()"><i class="fas fa-copy"></i> Copy to Clipboard</button>
+    <button class="mbtn s" onclick="shareImage()"><i class="fas fa-share-nodes"></i> Share</button>
+  </div>
+</div></div>
+
+<!-- ══ LIGHTBOX ══ -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-btns">
+    <button class="lb-btn" onclick="closeLightbox();openCanvasStudio()"><i class="fas fa-paintbrush"></i> Write & Draw</button>
+    <button class="lb-btn" onclick="closeLightbox();openM('export-m')"><i class="fas fa-download"></i> Export</button>
+  </div>
+</div>
+
+<!-- ══ SCRIPT ══ -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import{getAuth,signInWithPopup,signInWithRedirect,getRedirectResult,GoogleAuthProvider,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import{getFirestore,collection,doc,setDoc,deleteDoc,onSnapshot,query,orderBy,limit,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-const API = "https://web-production-9a18.up.railway.app";
-const auth = getAuth(initializeApp({
-  apiKey: "AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
-  authDomain: "elvionai.firebaseapp.com",
-  projectId: "elvionai",
-  storageBucket: "elvionai.appspot.com",
-  messagingSenderId: "161078300830",
-  appId: "1:161078300830:web:f460df8591704eb0e96b8f"
-}));
-const gProv = new GoogleAuthProvider();
-
-const $id = id => document.getElementById(id);
-const toast = (msg, type = 's') => {
-  const t = document.createElement('div');
-  t.className = `toast ${type}`;
-  t.textContent = msg;
-  $id('toasts').appendChild(t);
-  setTimeout(() => t.remove(), 2800);
-};
-
-// State
-let user = null, tok = null, bal = 0;
-let curImgB64 = null, prevImgB64 = null;
-let curAR = '1:1', quadOn = false, optOn = false;
-let txBlob = null, compareMode = false;
-
-// IndexedDB Gallery Storage
-const idbP = new Promise(res => {
-  const req = indexedDB.open('ph_img_studio_v2', 1);
-  req.onupgradeneeded = e => e.target.result.createObjectStore('gallery', { keyPath: 'id' });
-  req.onsuccess = e => res(e.target.result);
+const API="https://web-production-9a18.up.railway.app";
+const fbApp=initializeApp({
+  apiKey:"AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
+  authDomain:"elvionai.firebaseapp.com",
+  projectId:"elvionai",
+  storageBucket:"elvionai.appspot.com",
+  messagingSenderId:"161078300830",
+  appId:"1:161078300830:web:f460df8591704eb0e96b8f"
 });
-async function idbPut(item) { const db = await idbP; return new Promise(r => db.transaction('gallery','readwrite').objectStore('gallery').put(item).onsuccess = r); }
-async function idbAll() { const db = await idbP; return new Promise(r => { const q = db.transaction('gallery','readonly').objectStore('gallery').getAll(); q.onsuccess = () => r(q.result || []); }); }
-async function idbDel(id) { const db = await idbP; return new Promise(r => db.transaction('gallery','readwrite').objectStore('gallery').delete(id).onsuccess = r); }
+const auth=getAuth(fbApp),fsDB=getFirestore(fbApp),gProv=new GoogleAuthProvider();
 
-// Auth Flow
-window.signIn = async () => {
-  try { await signInWithPopup(auth, gProv); }
-  catch(e) { if (e.code === 'auth/popup-blocked') await signInWithRedirect(auth, gProv); else toast(e.message, 'e'); }
+window.$=id=>document.getElementById(id);
+function b64toBlob(b64,type="image/png"){const clean=b64.includes(',')?b64.split(',')[1]:b64;const bs=atob(clean),ab=new ArrayBuffer(bs.length),ua=new Uint8Array(ab);for(let i=0;i<bs.length;i++)ua[i]=bs.charCodeAt(i);return new Blob([ab],{type})}
+function blobToB64(blob){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(",")[1]);fr.readAsDataURL(blob)})}
+
+/* ── STATE (Exclusively Philadelphia Pro / MiniMax) ── */
+window.cu=null;let tok=null,bal=0;
+let curImg=null,curImgB64=null,prevImgB64=null;
+let curAR='1:1',quadMode=false,promptOptimizerOn=true,activeStyle='';
+let txMode='edit',txFile=null,expFmtSel='png',isFav=false;
+let gallery=[],promptHistory=[];
+let filterState={bright:100,contrast:100,sat:100,vign:0};
+let genCount=0,idb=null,animRAF=null;
+
+const STYLES=[
+  {n:'None',p:'',ic:'fa-ban'},
+  {n:'Photoreal 8K',p:'ultra photorealistic, DSLR 85mm f/1.4 lens, natural skin texture, hyperdetailed 8k',ic:'fa-camera'},
+  {n:'Cinema Anamorphic',p:'cinematic film still, anamorphic lens flare, dramatic rim lighting, color graded',ic:'fa-film'},
+  {n:'Afrofuturism',p:'regal Afrofuturism aesthetic, intricate 24k gold motifs, obsidian and warm amber lighting',ic:'fa-crown'},
+  {n:'Luxury Editorial',p:'Vogue high-fashion editorial photography, studio softbox lighting, crisp shadows',ic:'fa-gem'},
+  {n:'Anime Masterpiece',p:'makoto shinkai anime illustration, luminous sky, vibrant cel shading, emotional lighting',ic:'fa-wand-sparkles'},
+  {n:'Cyberpunk Neon',p:'rain-slicked cyberpunk metropolis, neon magenta and cyan reflections, volumetric fog',ic:'fa-bolt'},
+  {n:'Dark Fantasy',p:'dark epic fantasy concept art, obsidian armor, glowing runes, moody atmospheric lighting',ic:'fa-dragon'},
+  {n:'3D Octane',p:'3D Octane render, subsurface scattering, physically based materials, studio rim light',ic:'fa-cube'},
+  {n:'Oil Masterpiece',p:'classical oil painting on canvas, rich impasto brushwork, Chiaroscuro lighting',ic:'fa-palette'},
+  {n:'Comic / Graphic Ink',p:'bold graphic novel cover art, crisp black ink linework, dynamic cel shading',ic:'fa-book-open'}
+];
+
+/* ── INDEXEDDB ── */
+async function openIDB(){
+  return new Promise(res=>{
+    const req=indexedDB.open('phl_img_pro_v4',1);
+    req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('gallery'))d.createObjectStore('gallery',{keyPath:'id'});};
+    req.onsuccess=e=>res(e.target.result);req.onerror=()=>res(null);
+  });
+}
+async function dbPut(val){if(!idb)return;return new Promise(r=>{const tx=idb.transaction('gallery','readwrite');tx.objectStore('gallery').put(val).onsuccess=()=>r();tx.onerror=()=>r();})}
+async function dbAll(){if(!idb)return[];return new Promise(r=>{const rq=idb.transaction('gallery','readonly').objectStore('gallery').getAll();rq.onsuccess=()=>r(rq.result||[]);rq.onerror=()=>r([]);})}
+async function dbDel(id){if(!idb)return;return new Promise(r=>{const tx=idb.transaction('gallery','readwrite');tx.objectStore('gallery').delete(id).onsuccess=()=>r();tx.onerror=()=>r();})}
+
+/* ── AUTH ── */
+window.login=async()=>{
+  try{await signInWithPopup(auth,gProv);}
+  catch(e){if(e.code==='auth/popup-blocked')await signInWithRedirect(auth,gProv);else toast("Sign-in error: "+e.message,"e");}
 };
-window.signOut = () => fbSignOut(auth).then(() => location.reload());
-window.authA = fn => { if (!user) { toast('Please sign in first', 'e'); return; } fn(); };
-getRedirectResult(auth).catch(() => {});
+window.authA=fn=>{if(!window.cu){toast("Please sign in first","i");return;}fn();};
+window.logoutUser=async()=>{await signOut(auth);location.reload();};
+getRedirectResult(auth).catch(()=>{});
 
-onAuthStateChanged(auth, async u => {
-  if (!u) {
-    $id('scr-auth').classList.add('on');
-    $id('hdr').classList.remove('on');
-    $id('bnav').classList.remove('on');
-    $id('agent-fab').style.display = 'none';
-    return;
-  }
-  user = u;
-  tok = await u.getIdToken();
-  $id('scr-auth').classList.remove('on');
-  $id('hdr').classList.add('on');
-  $id('bnav').classList.add('on');
-  $id('agent-fab').style.display = 'flex';
-  if (u.photoURL) {
-    $id('user-avatar').src = u.photoURL;
-    $id('pro-img').src = u.photoURL;
-  }
-  $id('pro-name').textContent = u.displayName || 'Creator';
-  $id('pro-email').textContent = u.email || '';
-  await loadBal();
-  await renderGallery();
+onAuthStateChanged(auth,async u=>{
+  if(!u){$('scr-auth').classList.add('on');$('hdr').classList.remove('on');$('bnav').classList.remove('on');$('philly-float').classList.remove('on');return;}
+  window.cu=u;
+  $('scr-auth').classList.remove('on');$('hdr').classList.add('on');$('bnav').classList.add('on');$('philly-float').classList.add('on');
+  const fn=u.displayName?.split(' ')[0]||u.email?.split('@')[0]||'Creator';
+  $('pro-nm').textContent=u.displayName||fn;$('pro-em').textContent=u.email||'';
+  if(u.photoURL){$('hav').innerHTML=`<img src="${u.photoURL}" alt="">`;$('pro-av').innerHTML=`<img src="${u.photoURL}" alt="">`;}
+  idb=await openIDB();
+  tok=await u.getIdToken(true);
+  await loadUser();
+  buildStyleStrip();
+  await loadGallery();
+  renderPH();
+  initPhillyGreeting(fn);
+  checkPayReturn();
   goScr('studio');
 });
 
-async function loadBal() {
-  try {
-    tok = await user.getIdToken();
-    const r = await fetch(`${API}/api/user/keys-and-balance`, { headers: { 'X-Firebase-Token': tok } });
-    if (r.ok) {
-      const d = await r.json();
-      bal = d.balance || 0;
-      $id('hdr-bal').textContent = bal;
-      $id('pro-bal').textContent = bal;
-    }
-  } catch(e) {}
+async function apiCall(path,opts={}){
+  if(auth.currentUser)tok=await auth.currentUser.getIdToken(false);
+  const headers={'X-Firebase-Token':tok,...(opts.headers||{})};
+  let r=await fetch(path.startsWith('http')?path:API+path,{...opts,headers});
+  if(r.status===401&&auth.currentUser){
+    tok=await auth.currentUser.getIdToken(true);
+    headers['X-Firebase-Token']=tok;
+    r=await fetch(path.startsWith('http')?path:API+path,{...opts,headers});
+  }
+  return r;
 }
 
-window.goScr = scr => {
-  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
-  $id(`scr-${scr}`)?.classList.add('on');
-  $id(`ni-${scr}`)?.classList.add('on');
-  if (scr === 'gallery') renderGallery();
-};
-
-window.setPane = (pane, el) => {
-  document.querySelectorAll('.dpane').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('on'));
-  $id(`pane-${pane}`)?.classList.add('on');
-  el?.classList.add('on');
-};
-
-window.openM = m => $id(m)?.classList.add('on');
-window.closeM = m => $id(m)?.classList.remove('on');
-window.qp = p => { $id('prompt-in').value = p; setPane('gen', document.querySelectorAll('.dtab')[0]); };
-
-window.setAR = el => {
-  document.querySelectorAll('.ar-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  curAR = el.dataset.ar;
-};
-
-window.toggleOptimizer = () => {
-  optOn = !optOn;
-  $id('popt-row').classList.toggle('on', optOn);
-};
-
-window.toggleQuad = () => {
-  quadOn = !quadOn;
-  $id('quad-row').classList.toggle('on', quadOn);
-  $id('gen-btn-label').textContent = quadOn ? 'Generate 4 Variations with Philadelphia Pro (60 cr)' : 'Generate with Philadelphia Pro (15 cr)';
-};
-
-// ── Image Display Helpers ──
-function showStage(b64) {
-  prevImgB64 = curImgB64;
-  curImgB64 = b64;
-  $id('empty-stage').style.display = 'none';
-  $id('quad-grid').classList.remove('on');
-  $id('compare-wrap').classList.remove('on');
-  $id('stage-display').classList.add('on');
-  $id('stage-img').src = `data:image/png;base64,${b64}`;
+async function loadUser(){
+  try{const r=await apiCall('/api/user/keys-and-balance');if(r.ok){const d=await r.json();bal=d.balance||0;updBal();}}catch(e){}
+}
+function updBal(){
+  const v=bal.toLocaleString();
+  ['bal-v','pro-bal'].forEach(id=>{const el=$(id);if(el)el.textContent=v;});
 }
 
-// ── 1. GENERATE IMAGE (Philadelphia Pro Only) ──
-window.generateImage = async () => {
-  const prompt = $id('prompt-in').value.trim();
-  if (!prompt) return toast('Please enter a prompt', 'e');
-  const cost = quadOn ? 60 : 15;
-  if (bal < cost) { toast(`Need ${cost} credits`, 'e'); return openM('wallet-m'); }
+/* ── NAVIGATION ── */
+window.goScr=s=>{
+  document.querySelectorAll('.scr').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
+  $('scr-'+s)?.classList.add('on');$('ni-'+s)?.classList.add('on');
+  if(s==='gallery')renderGallery();
+};
+window.cpTab=(s,el)=>{
+  document.querySelectorAll('.cpsec').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.cpt').forEach(x=>x.classList.remove('on'));
+  $('sec-'+s)?.classList.add('on');if(el)el.classList.add('on');
+};
 
-  $id('gen-ov').classList.add('on');
-  $id('gen-btn').disabled = true;
-  try {
-    tok = await user.getIdToken();
-    const r = await fetch(`${API}/api/studio/generate-image`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
-      body: JSON.stringify({
-        prompt,
-        use_minimax: true,
-        aspect_ratio: curAR,
-        n: quadOn ? 4 : 1,
-        prompt_optimizer: optOn
-      })
-    });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.detail || 'Generation failed');
-    const imgs = d.images_b64 || (d.image_b64 ? [d.image_b64] : []);
-    if (!imgs.length) throw new Error('No image returned');
+/* ── CREATE TAB (PHILADELPHIA PRO) ── */
+function buildStyleStrip(){
+  const s=$('style-strip');if(!s)return;
+  s.innerHTML=STYLES.map((st,i)=>`<button type="button" class="st-chip${i===0?' on':''}" onclick="selectStyle(${i},this)"><i class="fas ${st.ic}"></i>${st.n}</button>`).join('');
+}
+window.selectStyle=(i,el)=>{
+  document.querySelectorAll('.st-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');activeStyle=STYLES[i].p;
+};
+window.setAR=el=>{
+  document.querySelectorAll('.ar-btn').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');curAR=el.dataset.ar;
+};
+window.togglePromptOptimizer=()=>{
+  promptOptimizerOn=!promptOptimizerOn;
+  $('popt-t').classList.toggle('on',promptOptimizerOn);
+  $('popt-tog').classList.toggle('on',promptOptimizerOn);
+};
+window.toggleQuad=()=>{
+  quadMode=!quadMode;
+  $('quad-t').classList.toggle('on',quadMode);
+  $('quad-tog').classList.toggle('on',quadMode);
+  $('gen-cost').textContent=quadMode?'(60 credits)':'(15 credits)';
+  $('gen-btn-txt').textContent=quadMode?'Generate 4 Pro Variations':'Generate with Philadelphia Pro';
+};
+window.updateCharCount=el=>{$('char-count').textContent=`${el.value.length} / 1500`;};
+window.qp=p=>{$('prompt-ta').value=p;updateCharCount($('prompt-ta'));cpTab('gen',document.querySelectorAll('.cpt')[0]);};
 
-    if (imgs.length > 1) {
-      $id('stage-display').classList.remove('on');
-      $id('empty-stage').style.display = 'none';
-      const qg = $id('quad-grid');
-      qg.innerHTML = '';
-      qg.classList.add('on');
-      imgs.forEach(b64 => {
-        const c = document.createElement('div');
-        c.className = 'quad-card';
-        c.innerHTML = `<img src="data:image/png;base64,${b64}"><button class="q-btn">Select</button>`;
-        c.onclick = () => { showStage(b64); saveToGallery(); };
-        qg.appendChild(c);
+const RANDOM_PROMPTS=[
+  'Portrait of an African cyber-empress in sculpted liquid gold armor, dramatic chiaroscuro lighting, 8k',
+  'Floating glass library above a misty emerald canyon at sunrise, warm volumetric god rays, architectural photography',
+  'Futuristic Lagos lagoon at twilight, glowing autonomous yachts, bioluminescent water, anamorphic cinema shot',
+  'Macro photograph of a mechanical hummingbird crafted from brass, ruby gemstones and carbon fiber, bokeh garden',
+  'Minimalist luxury skincare bottle on wet black slate surroundedBy golden desert sand ripples, studio lighting'
+];
+window.randomPrompt=()=>{
+  const p=RANDOM_PROMPTS[Math.floor(Math.random()*RANDOM_PROMPTS.length)];
+  $('prompt-ta').value=p;updateCharCount($('prompt-ta'));toast("Inspiration loaded!","i");
+};
+
+function showGL(lbl='Philadelphia Pro is rendering…',step='Crafting high-definition pixels…'){
+  $('gen-ov').classList.add('on');$('gen-label').textContent=lbl;$('gen-step').textContent=step;$('gen-btn').disabled=true;
+}
+function hideGL(){$('gen-ov').classList.remove('on');$('gen-btn').disabled=false;}
+
+window.handleGenerate=async()=>{
+  const rawPrompt=$('prompt-ta').value.trim();
+  if(!rawPrompt){toast("Describe what you want to create first","e");return;}
+  const n=quadMode?4:1,cost=15*n;
+  if(bal<cost){toast(`Need ${cost} credits`,"e");openM('fund-m');return;}
+  const neg=$('neg-ta').value.trim();
+  let fullPrompt=activeStyle?`${rawPrompt}, ${activeStyle}`:rawPrompt;
+  if(neg)fullPrompt+=`. Avoid: ${neg}`;
+
+  const body={prompt:fullPrompt,use_minimax:true,aspect_ratio:curAR,n,prompt_optimizer:promptOptimizerOn};
+  const seedVal=parseInt($('seed-val').value);
+  if(!isNaN(seedVal))body.seed=seedVal;
+
+  showGL(quadMode?'Rendering 4 Philadelphia Pro Variations…':'Philadelphia Pro is rendering…',`Aspect Ratio ${curAR} · High-Fidelity Engine`);
+  try{
+    const r=await apiCall('/api/studio/generate-image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.detail||'Generation failed');
+    const imgs=d.images_b64||[];
+    if(!imgs.length)throw new Error('No image returned');
+    hideGL();
+    bal-=(d.credits_charged||cost);updBal();
+    genCount+=imgs.length;
+    addPH(rawPrompt);
+
+    if(imgs.length===1){
+      setMainImage(imgs[0],curAR);
+      toast("Masterpiece created!","s");
+      await saveToGallery(true);
+    }else{
+      const qg=$('quad-grid');qg.innerHTML='';$('img-display').classList.remove('on');$('empty-state').style.display='none';qg.classList.add('on');
+      imgs.forEach((b64,i)=>{
+        const div=document.createElement('div');div.className='qi';
+        div.innerHTML=`<img src="data:image/png;base64,${b64}" alt="V${i+1}"><div class="qi-lbl">Select #${i+1}</div>`;
+        div.onclick=async()=>{qg.classList.remove('on');qg.innerHTML='';setMainImage(b64,curAR);await saveToGallery(true);toast(`Variation #${i+1} selected!`,"s");};
+        qg.appendChild(div);
       });
-    } else {
-      showStage(imgs[0]);
-      saveToGallery();
+      const xb=document.createElement('button');xb.className='qi-x';xb.innerHTML="<i class='fas fa-times'></i>";
+      xb.onclick=()=>{qg.classList.remove('on');setMainImage(imgs[0],curAR);};qg.appendChild(xb);
+      toast("4 variations ready — tap one to open!","g");
     }
-    await loadBal();
-    toast('Image rendered with Philadelphia Pro!', 's');
-  } catch(e) {
-    toast(e.message, 'e');
-  } finally {
-    $id('gen-ov').classList.remove('on');
-    $id('gen-btn').disabled = false;
-  }
+  }catch(e){hideGL();toast(e.message,"e");}
 };
 
-// ── 2. AI ENHANCE PROMPT ──
-window.enhancePrompt = async () => {
-  const p = $id('prompt-in').value.trim();
-  if (!p) return toast('Type an idea first', 'e');
-  toast('Philadelphia AI is refining your prompt…', 'i');
-  try {
-    tok = await user.getIdToken();
-    const r = await fetch(`${API}/api/minimax/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
-      body: JSON.stringify({
-        message: `Rewrite this image prompt into a detailed, photorealistic visual prompt with lighting, framing, texture, and mood. Keep it under 50 words: "${p}"`,
-        history: [],
-        system_prompt: 'You are an expert prompt engineer. Return only the enhanced prompt text.'
-      })
-    });
-    const reader = r.body.getReader(), dec = new TextDecoder();
-    let text = '';
-    for (;;) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      const lines = dec.decode(value).split('\n\n');
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const ds = line.slice(6).trim();
-        if (ds === '[DONE]') continue;
-        try {
-          const ev = JSON.parse(ds);
-          if (ev.type === 'content') text += ev.content;
-        } catch(err) {}
-      }
-    }
-    const clean = text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-    if (clean) {
-      $id('prompt-in').value = clean;
-      toast('Prompt refined!', 's');
-    }
-  } catch(e) { toast(e.message, 'e'); }
-};
-
-// ── 3. REMIX & PHOTO TRANSFORM ──
-window.onRemixFile = inp => {
-  const f = inp.files[0];
-  if (!f) return;
-  txBlob = f;
-  $id('remix-preview-img').src = URL.createObjectURL(f);
-  $id('remix-preview-box').style.display = 'block';
-};
-window.useCanvasForRemix = async () => {
-  if (!curImgB64) return toast('Generate or load an image first', 'e');
-  const res = await fetch(`data:image/png;base64,${curImgB64}`);
-  txBlob = await res.blob();
-  $id('remix-preview-img').src = `data:image/png;base64,${curImgB64}`;
-  $id('remix-preview-box').style.display = 'block';
-  toast('Active canvas loaded for remixing!', 's');
-};
-
-window.runRemix = async () => {
-  if (!txBlob) return toast('Upload or choose an image first', 'e');
-  const p = $id('remix-prompt').value.trim();
-  if (!p) return toast('Enter what to change or transform', 'e');
-  if (bal < 15) return openM('wallet-m');
-
-  $id('gen-ov').classList.add('on');
-  $id('gen-label').textContent = 'Transforming photo…';
-  try {
-    tok = await user.getIdToken();
-    const fd = new FormData();
-    fd.append('file', txBlob, 'photo.png');
-    fd.append('prompt', p);
-    fd.append('aspect_ratio', curAR);
-
-    const r = await fetch(`${API}/api/tools/edit-photo`, {
-      method: 'POST',
-      headers: { 'X-Firebase-Token': tok },
-      body: fd
-    });
-    if (!r.ok) throw new Error('Transformation failed');
-    const blob = await r.blob();
-    const b64 = await new Promise(res => {
-      const fr = new FileReader();
-      fr.onload = () => res(fr.result.split(',')[1]);
-      fr.readAsDataURL(blob);
-    });
-    showStage(b64);
-    await saveToGallery();
-    await loadBal();
-    toast('Transformation complete!', 's');
-  } catch(e) {
-    toast(e.message, 'e');
-  } finally {
-    $id('gen-ov').classList.remove('on');
-  }
-};
-
-// ── 4. INSPECT IMAGE / REVERSE ENGINEER ──
-window.inspectImage = async () => {
-  if (!curImgB64) return toast('No image on canvas', 'e');
-  toast('Philadelphia Vision is inspecting your image…', 'i');
-  try {
-    tok = await user.getIdToken();
-    const res = await fetch(`data:image/png;base64,${curImgB64}`);
-    const blob = await res.blob();
-    const fd = new FormData();
-    fd.append('file', blob, 'image.png');
-    fd.append('prompt', 'Describe this image in detail. Extract the subject, lighting, mood, color palette, and write a prompt to recreate it.');
-
-    const r = await fetch(`${API}/api/studio/understand`, {
-      method: 'POST',
-      headers: { 'X-Firebase-Token': tok },
-      body: fd
-    });
-    const d = await r.json();
-    const out = $id('inspect-output');
-    out.textContent = d.analysis || 'Analysis complete.';
-    out.style.display = 'block';
-    await loadBal();
-  } catch(e) { toast(e.message, 'e'); }
-};
-
-// ── 5. CANVAS OPS (Rotate, Flip, Palette, Compare) ──
-function modCanvas(fn) {
-  if (!curImgB64) return toast('No image on canvas', 'e');
-  const img = new Image();
-  img.onload = () => {
-    const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
-    fn(cv, ctx, img);
-    const data = cv.toDataURL('image/png');
-    showStage(data.split(',')[1]);
-  };
-  img.src = `data:image/png;base64,${curImgB64}`;
+function setMainImage(b64,arLabel='1:1'){
+  const clean=b64.includes('base64,')?b64.split('base64,')[1]:b64;
+  prevImgB64=curImgB64;curImgB64=clean;curImg=`data:image/png;base64,${clean}`;
+  $('empty-state').style.display='none';$('compare-wrap').classList.remove('on');$('quad-grid').classList.remove('on');
+  $('cur-img').src=curImg;$('img-display').classList.add('on');
+  $('lb-img').src=curImg;
+  $('img-size-txt').textContent=arLabel;$('img-size-badge').style.display='inline-flex';
+  extractPalette(clean);
 }
-window.rotateCanvas = deg => modCanvas((cv, ctx, img) => {
-  cv.width = img.height; cv.height = img.width;
-  ctx.translate(cv.width/2, cv.height/2);
-  ctx.rotate(deg * Math.PI / 180);
-  ctx.drawImage(img, -img.width/2, -img.height/2);
-});
-window.flipCanvas = dir => modCanvas((cv, ctx, img) => {
-  cv.width = img.width; cv.height = img.height;
-  ctx.translate(dir === 'h' ? cv.width : 0, dir === 'v' ? cv.height : 0);
-  ctx.scale(dir === 'h' ? -1 : 1, dir === 'v' ? -1 : 1);
-  ctx.drawImage(img, 0, 0);
-});
 
-window.toggleCompare = () => {
-  if (!curImgB64 || !prevImgB64) return toast('Generate or edit an image first to compare', 'i');
-  compareMode = !compareMode;
-  if (!compareMode) {
-    $id('compare-wrap').classList.remove('on');
-    $id('stage-display').classList.add('on');
-    return;
-  }
-  $id('stage-display').classList.remove('on');
-  $id('compare-before').src = `data:image/png;base64,${prevImgB64}`;
-  $id('compare-after').src = `data:image/png;base64,${curImgB64}`;
-  $id('compare-wrap').classList.add('on');
-  const cw = $id('compare-wrap'), aw = $id('compare-after-wrap'), div = $id('cmp-divider');
-  cw.onmousemove = cw.ontouchmove = e => {
-    const r = cw.getBoundingClientRect(), cl = e.touches ? e.touches[0] : e;
-    const pct = Math.max(0, Math.min(100, ((cl.clientX - r.left) / r.width) * 100));
-    aw.style.width = pct + '%';
-    div.style.left = pct + '%';
-  };
-};
-
-window.extractPalette = () => {
-  if (!curImgB64) return toast('No image on canvas', 'e');
-  const img = new Image();
-  img.onload = () => {
-    const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
-    cv.width = 60; cv.height = 60;
-    ctx.drawImage(img, 0, 0, 60, 60);
-    const d = ctx.getImageData(0, 0, 60, 60).data;
-    const colors = [];
-    for (let i = 0; i < d.length; i += 720) {
-      const hex = '#' + ((1 << 24) + (d[i] << 16) + (d[i+1] << 8) + d[i+2]).toString(16).slice(1);
-      if (!colors.includes(hex)) colors.push(hex);
+/* ── AI PROMPT ENHANCER (/api/minimax/chat) ── */
+async function askMiniMax(promptText,sysPrompt){
+  const r=await apiCall('/api/minimax/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:promptText,history:[],system_prompt:sysPrompt})});
+  if(!r.ok)throw new Error('AI request failed');
+  const reader=r.body.getReader(),dec=new TextDecoder();let buf='',out='';
+  for(;;){
+    const{value,done}=await reader.read();if(done)break;
+    buf+=dec.decode(value,{stream:true});let nl;
+    while((nl=buf.indexOf('\n\n'))!==-1){
+      const ln=buf.slice(0,nl);buf=buf.slice(nl+2);
+      if(!ln.startsWith('data: '))continue;
+      const ds=ln.slice(6).trim();if(ds==='[DONE]')continue;
+      try{const ev=JSON.parse(ds);if(ev.type==='content')out+=ev.content;}catch(e){}
     }
-    const out = $id('palette-output');
-    out.innerHTML = `<span class="f-label" style="margin-bottom:6px;">Color Palette (Click to Copy Hex)</span><div style="display:flex;gap:6px;flex-wrap:wrap;">`
-      + colors.slice(0, 8).map(c => `<div style="width:34px;height:34px;border-radius:8px;background:${c};cursor:pointer;border:1px solid #fff;" onclick="navigator.clipboard.writeText('${c}');toast('Copied ${c}')"></div>`).join('')
-      + `</div>`;
-    out.style.display = 'block';
-  };
-  img.src = `data:image/png;base64,${curImgB64}`;
+  }
+  return out.replace(/<think>[\s\S]*?<\/think>/gi,'').trim();
+}
+
+window.enhancePrompt=async()=>{
+  const p=$('prompt-ta').value.trim();if(!p){toast("Type a rough idea first","e");return;}
+  showGL('Enhancing prompt with Philadelphia AI…','Adding lighting, lens & composition details…');
+  try{
+    const out=await askMiniMax(
+      `Expand this image concept into a vivid, 55-word master prompt for Philadelphia Pro image generation (specify lighting, lens, mood, texture, and composition). Output ONLY the prompt text, no quotes:\n\n${p}`,
+      'You are an elite AI visual prompt director. Output only the enhanced prompt.'
+    );
+    hideGL();
+    if(out){$('prompt-ta').value=out;updateCharCount($('prompt-ta'));loadUser();toast("Prompt enhanced!","s");}
+  }catch(e){hideGL();toast("Enhance failed: "+e.message,"e");}
 };
 
-window.applyPreset = p => {
-  $id('prompt-in').value = ($id('prompt-in').value.trim() ? `${$id('prompt-in').value.trim()}, ${p}` : p);
-  setPane('gen', document.querySelectorAll('.dtab')[0]);
-  toast('Aesthetic preset added!', 's');
+/* ══════════════════════════════════════════════════
+   INTERACTIVE WRITE, DRAW & PAINT STUDIO
+══════════════════════════════════════════════════ */
+let drawTool='brush',drawHist=[],isDrawing=false,dStartX=0,dStartY=0,drawSnap=null;
+
+window.setDrawTool=t=>{
+  drawTool=t;
+  ['brush','foil','glow','arrow','rect','circle','text','erase'].forEach(k=>$('dt-'+k)?.classList.toggle('on',k===t));
+  $('draw-text-bar').classList.toggle('on',t==='text');
 };
 
-// ── 6. DRAW, PAINT & TEXT OVERLAY ──
-let drawTool = 'brush', isDrawing = false, dSnap = null, dStartX = 0, dStartY = 0;
-window.setDrawTool = t => {
-  drawTool = t;
-  document.querySelectorAll('.draw-tool').forEach(b => b.classList.toggle('on', b.id === 'dt-' + t));
-  $id('text-stamp-wrap').classList.toggle('on', t === 'text');
-};
-window.startDraw = () => {
-  if (!curImgB64) return toast('Load an image first', 'e');
-  const ov = $id('draw-ov'), cv = $id('draw-cv'), ctx = cv.getContext('2d');
-  ov.classList.add('on');
-  const img = new Image();
-  img.onload = () => {
-    cv.width = img.naturalWidth > 1200 ? 1200 : img.naturalWidth;
-    cv.height = Math.round(cv.width * (img.naturalHeight / img.naturalWidth));
-    ctx.drawImage(img, 0, 0, cv.width, cv.height);
-  };
-  img.src = `data:image/png;base64,${curImgB64}`;
+window.openCanvasStudio=async(defaultTool='brush')=>{
+  await document.fonts.ready;
+  const ov=$('draw-ov'),cv=$('draw-cv'),ctx=cv.getContext('2d');
+  ov.classList.add('on');setDrawTool(defaultTool);drawHist=[];
+  if(curImg){
+    const im=new Image();im.crossOrigin='anonymous';
+    await new Promise(r=>{im.onload=r;im.src=curImg;});
+    cv.width=im.naturalWidth||1024;cv.height=im.naturalHeight||1024;
+    ctx.drawImage(im,0,0,cv.width,cv.height);
+  }else{
+    cv.width=1024;cv.height=1024;
+    ctx.fillStyle='#0b0c1e';ctx.fillRect(0,0,cv.width,cv.height);
+  }
+  drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));
 
-  const pos = e => {
-    const r = cv.getBoundingClientRect(), t = e.touches ? e.touches[0] : e;
-    return { x: (t.clientX - r.left) * (cv.width / r.width), y: (t.clientY - r.top) * (cv.height / r.height) };
+  const getPos=e=>{
+    const r=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;
+    return{x:(t.clientX-r.left)*(cv.width/r.width),y:(t.clientY-r.top)*(cv.height/r.height)};
   };
-  cv.onmousedown = cv.ontouchstart = e => {
+
+  cv.onpointerdown=e=>{
     e.preventDefault();
-    const p = pos(e);
-    if (drawTool === 'text') {
-      const val = $id('draw-txt-val').value.trim();
-      if (!val) return toast('Type your text in the bar below first', 'i');
+    const p=getPos(e),sz=+$('draw-sz').value*(cv.width/500),col=$('draw-col').value;
+    if(drawTool==='text'){
+      const txt=($('canvas-txt-inp').value||'').trim()||prompt('Enter text to stamp on image:');
+      if(!txt)return;
+      const font=$('canvas-txt-font').value,fx=$('canvas-txt-fx').value,fSize=Math.max(24,Math.round(sz*2.2));
       ctx.save();
-      ctx.font = `bold ${$id('draw-txt-sz').value}px '${$id('draw-txt-font').value}', sans-serif`;
-      ctx.fillStyle = $id('draw-col').value;
-      ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 10;
-      ctx.fillText(val, p.x, p.y);
+      ctx.font=`700 ${fSize}px '${font}', serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+      if(fx==='box'){
+        const mw=ctx.measureText(txt).width+fSize*1.2,mh=fSize*1.45;
+        ctx.fillStyle='rgba(0,0,0,0.72)';ctx.beginPath();ctx.roundRect(p.x-mw/2,p.y-mh/2,mw,mh,14);ctx.fill();
+        ctx.fillStyle=col;ctx.fillText(txt,p.x,p.y);
+      }else if(fx==='foil'){
+        const g=ctx.createLinearGradient(p.x-150,p.y-fSize/2,p.x+150,p.y+fSize/2);
+        g.addColorStop(0,'#9c7328');g.addColorStop(0.5,'#fff4c8');g.addColorStop(1,'#c9a96e');
+        ctx.shadowColor='rgba(0,0,0,0.9)';ctx.shadowBlur=12;ctx.shadowOffsetY=4;
+        ctx.fillStyle=g;ctx.fillText(txt,p.x,p.y);
+      }else if(fx==='glow'){
+        ctx.shadowColor=col;ctx.shadowBlur=28;ctx.fillStyle='#ffffff';ctx.fillText(txt,p.x,p.y);
+      }else{
+        ctx.shadowColor='rgba(0,0,0,0.95)';ctx.shadowBlur=14;ctx.shadowOffsetY=4;ctx.fillStyle=col;ctx.fillText(txt,p.x,p.y);
+      }
       ctx.restore();
+      drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));
+      toast("Text stamped! Tap anywhere else or click Apply.","s");
       return;
     }
-    isDrawing = true; dStartX = p.x; dStartY = p.y;
-    dSnap = ctx.getImageData(0, 0, cv.width, cv.height);
-    ctx.beginPath(); ctx.moveTo(p.x, p.y);
+    isDrawing=true;dStartX=p.x;dStartY=p.y;
+    drawSnap=ctx.getImageData(0,0,cv.width,cv.height);
+    ctx.beginPath();ctx.moveTo(p.x,p.y);
   };
-  cv.onmousemove = cv.ontouchmove = e => {
-    if (!isDrawing) return;
-    e.preventDefault();
-    const p = pos(e), col = $id('draw-col').value, sz = +$id('draw-sz').value;
-    ctx.lineWidth = sz; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    if (drawTool === 'erase') {
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.lineTo(p.x, p.y); ctx.stroke();
-    } else if (drawTool === 'line' || drawTool === 'rect') {
-      ctx.putImageData(dSnap, 0, 0);
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.strokeStyle = col;
+
+  cv.onpointermove=e=>{
+    if(!isDrawing)return;e.preventDefault();
+    const p=getPos(e),sz=+$('draw-sz').value*(cv.width/500),col=$('draw-col').value;
+    ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=sz;
+    if(drawTool==='erase'){
+      ctx.lineTo(p.x,p.y);ctx.strokeStyle='#0b0c1e';ctx.shadowBlur=0;ctx.stroke();
+    }else if(['rect','circle','arrow'].includes(drawTool)){
+      ctx.putImageData(drawSnap,0,0);ctx.strokeStyle=col;ctx.fillStyle=col;ctx.shadowBlur=0;
       ctx.beginPath();
-      if (drawTool === 'line') { ctx.moveTo(dStartX, dStartY); ctx.lineTo(p.x, p.y); }
-      else { ctx.strokeRect(dStartX, dStartY, p.x - dStartX, p.y - dStartY); }
-      ctx.stroke();
-    } else {
-      ctx.globalCompositeOperation = 'source-over';
-      if (drawTool === 'foil') {
-        const g = ctx.createLinearGradient(p.x-15, p.y-15, p.x+15, p.y+15);
-        g.addColorStop(0, '#a27e36'); g.addColorStop(0.5, '#fff2c2'); g.addColorStop(1, '#c9a96e');
-        ctx.strokeStyle = g;
-      } else if (drawTool === 'glow') {
-        ctx.strokeStyle = col; ctx.shadowColor = col; ctx.shadowBlur = sz * 2;
-      } else {
-        ctx.strokeStyle = col; ctx.shadowBlur = 0;
+      if(drawTool==='rect')ctx.strokeRect(dStartX,dStartY,p.x-dStartX,p.y-dStartY);
+      else if(drawTool==='circle'){const rx=Math.hypot(p.x-dStartX,p.y-dStartY);ctx.arc(dStartX,dStartY,rx,0,Math.PI*2);ctx.stroke();}
+      else if(drawTool==='arrow'){
+        const ang=Math.atan2(p.y-dStartY,p.x-dStartX),hl=sz*3.5;
+        ctx.moveTo(dStartX,dStartY);ctx.lineTo(p.x,p.y);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(p.x,p.y);
+        ctx.lineTo(p.x-hl*Math.cos(ang-0.45),p.y-hl*Math.sin(ang-0.45));
+        ctx.lineTo(p.x-hl*Math.cos(ang+0.45),p.y-hl*Math.sin(ang+0.45));
+        ctx.closePath();ctx.fill();
       }
-      ctx.lineTo(p.x, p.y); ctx.stroke();
+    }else{
+      if(drawTool==='foil'){
+        const g=ctx.createLinearGradient(p.x-30,p.y-30,p.x+30,p.y+30);
+        g.addColorStop(0,'#9e7427');g.addColorStop(0.5,'#fff3c4');g.addColorStop(1,'#c9a96e');
+        ctx.strokeStyle=g;ctx.shadowColor='rgba(201,169,110,0.6)';ctx.shadowBlur=8;
+      }else if(drawTool==='glow'){
+        ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=sz*1.8;
+      }else{ctx.strokeStyle=col;ctx.shadowBlur=0;}
+      ctx.lineTo(p.x,p.y);ctx.stroke();
     }
   };
-  window.onmouseup = window.ontouchend = () => isDrawing = false;
-};
-window.applyDraw = () => {
-  const data = $id('draw-cv').toDataURL('image/png');
-  showStage(data.split(',')[1]);
-  closeDraw();
-  toast('Canvas applied!', 's');
-};
-window.closeDraw = () => $id('draw-ov').classList.remove('on');
 
-// ── 7. AGENTIC AI ASSISTANT (/api/agent/run) ──
-window.openAgent = () => openM('agent-m');
-window.sendAgent = async () => {
-  const inp = $id('agent-in'), msg = inp.value.trim();
-  if (!msg) return;
-  inp.value = '';
-  const feed = $id('agent-feed');
-  feed.insertAdjacentHTML('beforeend', `<div class="agent-bubble usr">${msg.replace(/</g,'&lt;')}</div>`);
-  const status = document.createElement('div');
-  status.className = 'agent-status';
-  status.textContent = 'Agent running…';
-  feed.appendChild(status);
-  feed.scrollTop = feed.scrollHeight;
+  window.onpointerup=()=>{
+    if(!isDrawing)return;isDrawing=false;ctx.shadowBlur=0;
+    drawHist.push(ctx.getImageData(0,0,cv.width,cv.height));if(drawHist.length>20)drawHist.shift();
+  };
+};
 
-  try {
-    tok = await user.getIdToken();
-    const aids = [];
-    if (curImgB64) {
-      status.textContent = 'Uploading canvas to agent…';
-      const res = await fetch(`data:image/png;base64,${curImgB64}`);
-      const blob = await res.blob();
-      const fd = new FormData();
-      fd.append('file', blob, 'canvas.png');
-      const ur = await fetch(`${API}/api/agent/upload`, { method: 'POST', headers: { 'X-Firebase-Token': tok }, body: fd });
-      if (ur.ok) aids.push((await ur.json()).id);
+window.undoCanvas=()=>{
+  const cv=$('draw-cv'),ctx=cv.getContext('2d');
+  if(drawHist.length>1){drawHist.pop();ctx.putImageData(drawHist[drawHist.length-1],0,0);}
+};
+window.applyCanvasToStudio=async()=>{
+  const cv=$('draw-cv'),b64=cv.toDataURL('image/png').split(',')[1];
+  setMainImage(b64,`${cv.width}×${cv.height}`);
+  closeCanvasStudio();
+  await saveToGallery(true);
+  toast("Canvas artwork applied & saved!","s");
+};
+window.closeCanvasStudio=()=>$('draw-ov').classList.remove('on');
+
+/* ══════════════════════════════════════════════════
+   AGENTIC STUDIO ENGINE (/api/agent/run)
+   Uses add_text, draw_on_image, create_design, etc.
+══════════════════════════════════════════════════ */
+window.runAgentStudioTask=async()=>{
+  const taskText=$('agent-task-inp').value.trim();
+  if(!taskText){toast("Tell Philadelphia Agent what to write, draw, or design","e");return;}
+  showGL('Philadelphia Agent is working…','Uploading active canvas to Agent workspace…');
+  try{
+    const ids=[];
+    if(curImgB64){
+      const fd=new FormData();
+      fd.append('file',b64toBlob(curImgB64,'image/png'),'canvas.png');
+      const ur=await apiCall('/api/agent/upload',{method:'POST',body:fd});
+      if(ur.ok){const uj=await ur.json();if(uj.id)ids.push(uj.id);}
     }
-    const r = await fetch(`${API}/api/agent/run`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
-      body: JSON.stringify({
-        message: aids.length ? `(Work on image ${aids[0]}.) ${msg}` : msg,
-        persona: 'You are Philadelphia AI Image Director. Build or edit the artwork and apply changes cleanly.'
-      })
+    const promptMsg=ids.length
+      ?`(Work on uploaded image ${ids[0]}.) ${taskText}. Use add_text, draw_on_image, or create_design as needed. Create 1 final image and stop.`
+      :`${taskText}. Use generate_image (engine v2) or create_design once and stop.`;
+
+    const rr=await apiCall('/api/agent/run',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:promptMsg,artifact_ids:ids,persona:'You are Philadelphia Image Studio Agent. Execute the visual edit or design in one clean pass.'})
     });
-    const j = await r.json();
-    if (!r.ok) throw new Error(j.detail || 'Agent failed to start');
-    const rid = j.run_id;
-    let seq = 0;
-    for (let i = 0; i < 60; i++) {
-      await new Promise(res => setTimeout(res, 1500));
-      const sr = await fetch(`${API}/api/agent/runs/${rid}?after=${seq}`, { headers: { 'X-Firebase-Token': tok } });
-      if (!sr.ok) break;
-      const sd = await sr.json();
-      for (const ev of (sd.events || [])) {
-        seq = ev.seq;
-        if (ev.type === 'tool_start') status.textContent = `Running ${ev.data?.label || ev.data?.tool}…`;
-        if (ev.type === 'artifact' && ev.data?.kind === 'image' && ev.data?.url) {
-          const imgR = await fetch(API + ev.data.url);
-          const b = await imgR.blob();
-          const b64 = await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result.split(',')[1]); fr.readAsDataURL(b); });
-          showStage(b64);
-          saveToGallery();
-        }
+    const rj=await rr.json();
+    if(!rr.ok)throw new Error(rj.detail||'Could not start agent task');
+    const rid=rj.run_id;let after=0,latestArtUrl=null;
+
+    for(let i=0;i<75;i++){
+      await new Promise(r=>setTimeout(r,1500));
+      const pr=await apiCall(`/api/agent/runs/${rid}?after=${after}`);
+      if(!pr.ok)break;
+      const pd=await pr.json();
+      for(const ev of (pd.events||[])){
+        after=ev.seq;
+        if(ev.type==='status'||ev.type==='tool_start')$('gen-step').textContent=ev.data?.label||ev.data?.text||'Working…';
+        if(ev.type==='artifact'&&ev.data?.kind==='image'&&ev.data?.url)latestArtUrl=ev.data.url;
       }
-      if (['done','error','cancelled'].includes(sd.status)) {
-        status.remove();
-        feed.insertAdjacentHTML('beforeend', `<div class="agent-bubble ai">${(sd.final_text || 'Done. Updated canvas!').replace(/</g,'&lt;')}</div>`);
-        feed.scrollTop = feed.scrollHeight;
-        await loadBal();
+      if(['done','error','cancelled'].includes(pd.status)){
+        if(pd.status==='error')throw new Error(pd.final_text||'Agent task failed');
         break;
       }
     }
-  } catch(e) { status.textContent = 'Error: ' + e.message; }
+    if(!latestArtUrl)throw new Error('Agent finished without producing an image');
+    const imgRes=await fetch(latestArtUrl.startsWith('http')?latestArtUrl:API+latestArtUrl);
+    const b64=await blobToB64(await imgRes.blob());
+    hideGL();
+    setMainImage(b64,curAR);
+    await loadUser();
+    await saveToGallery(true);
+    toast("Philadelphia Agent finished your design!","s");
+  }catch(e){hideGL();toast("Agent error: "+e.message,"e");}
 };
 
-// ── 8. GALLERY & DOWNLOAD ──
-window.saveToGallery = async (silent = false) => {
-  if (!curImgB64) return;
-  const item = { id: Date.now(), b64: curImgB64, prompt: $id('prompt-in').value.slice(0, 100) };
-  await idbPut(item);
-  if (!silent) toast('Saved to gallery!', 's');
-};
-window.renderGallery = async () => {
-  const items = await idbAll();
-  const g = $id('gal-grid');
-  g.innerHTML = items.length ? '' : '<div style="grid-column:1/-1;text-align:center;color:var(--t2);padding:40px;font-size:.8rem;">No saved images yet.</div>';
-  items.reverse().forEach(it => {
-    const d = document.createElement('div');
-    d.className = 'gal-card';
-    d.innerHTML = `<img src="data:image/png;base64,${it.b64}"><button class="g-del" onclick="event.stopPropagation();delGalItem(${it.id})"><i class="fa-solid fa-xmark"></i></button>`;
-    d.onclick = () => { showStage(it.b64); goScr('studio'); toast('Loaded to canvas', 's'); };
-    g.appendChild(d);
-  });
-};
-window.delGalItem = async id => { await idbDel(id); renderGallery(); toast('Removed', 'i'); };
-window.downloadImage = () => {
-  if (!curImgB64) return toast('No image to download', 'e');
-  const a = document.createElement('a');
-  a.href = `data:image/png;base64,${curImgB64}`;
-  a.download = `philadelphia_pro_${Date.now()}.png`;
-  a.click();
+/* ══════════════════════════════════════════════════
+   AI LAB (EDIT PHOTO, REMOVE BG, M3 VISION CRITIQUE)
+══════════════════════════════════════════════════ */
+window.openTx=mode=>{
+  txMode=mode;
+  ['edit','bg','bgreplace','critique','analyze'].forEach(k=>$('tb-'+k)?.classList.toggle('on',k===mode));
+  const ew=$('edit-prompt-wrap'),tbt=$('tx-btn-txt');
+  $('analyze-result').style.display='none';
+  if(mode==='edit'){ew.style.display='block';$('edit-prompt').placeholder='Describe how to restyle the subject or character…';tbt.textContent='Restyle Subject (15 cr)';}
+  else if(mode==='bg'){ew.style.display='none';tbt.textContent='Remove Background (2 cr)';}
+  else if(mode==='bgreplace'){ew.style.display='block';$('edit-prompt').placeholder='Describe the new background scene…';tbt.textContent='Replace Scene (15 cr)';}
+  else if(mode==='critique'){ew.style.display='none';tbt.textContent='Run Senior Art Director Critique (2 cr)';}
+  else if(mode==='analyze'){ew.style.display='none';tbt.textContent='Extract Prompt & Text OCR (2 cr)';}
 };
 
-// ── 9. WALLET & DAILY REWARDS ──
-window.claimDaily = async () => {
-  try {
-    tok = await user.getIdToken();
-    const r = await fetch(`${API}/api/user/claim-daily`, { method: 'POST', headers: { 'X-Firebase-Token': tok } });
-    const d = await r.json();
-    if (r.ok) { toast(d.message || 'Daily credits claimed!', 's'); loadBal(); }
-    else toast(d.detail || 'Already claimed today', 'i');
-  } catch(e) { toast('Could not claim daily credits', 'e'); }
+window.onTxFile=inp=>{
+  const f=inp.files[0];if(!f)return;txFile=f;
+  $('tx-file-lbl').textContent=f.name;$('tx-clear-btn').style.display='inline-flex';
 };
-window.initPay = async () => {
-  const amt = parseInt($id('fund-amt').value) || 1000;
-  try {
-    tok = await user.getIdToken();
-    const r = await fetch(`${API}/api/payments/initiate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': tok },
-      body: JSON.stringify({ amount: amt, redirect_url: location.href.split('?')[0] })
-    });
-    const d = await r.json();
-    if (d.checkout_url) location.href = d.checkout_url;
-    else toast(d.detail || 'Could not initiate payment', 'e');
-  } catch(e) { toast('Payment error', 'e'); }
+window.clearTxFile=()=>{
+  txFile=null;$('tx-file').value='';$('tx-file-lbl').textContent='Upload Reference Photo (or use current canvas)';$('tx-clear-btn').style.display='none';
 };
 
-// Subtle Aurora Canvas
-(function() {
-  const cv = $id('aurora-cv');
-  if (!cv) return;
-  const ctx = cv.getContext('2d');
-  let w = cv.width = innerWidth, h = cv.height = innerHeight;
-  window.onresize = () => { w = cv.width = innerWidth; h = cv.height = innerHeight; };
-  let t = 0;
-  function loop() {
-    t += 0.006;
-    ctx.clearRect(0,0,w,h);
-    const grad = ctx.createRadialGradient(w/2 + Math.sin(t)*120, h/3 + Math.cos(t)*80, 50, w/2, h/2, w*0.7);
-    grad.addColorStop(0, 'rgba(201,169,110,0.14)');
-    grad.addColorStop(0.5, 'rgba(139,92,246,0.08)');
-    grad.addColorStop(1, 'transparent');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,w,h);
-    requestAnimationFrame(loop);
+window.runTx=async()=>{
+  const fileBlob=txFile||(curImgB64?b64toBlob(curImgB64,'image/png'):null);
+  if(!fileBlob){toast("Generate an image or upload a photo first","e");return;}
+
+  if(txMode==='critique'||txMode==='analyze'){
+    showGL(txMode==='critique'?'Reviewing composition & lighting…':'Analyzing image with Philadelphia M3 Vision…');
+    try{
+      const fd=new FormData();
+      fd.append('file',fileBlob,'image.png');
+      fd.append('prompt',txMode==='critique'
+        ?'Act as a Senior Art Director. Score this image out of 10 on Composition, Lighting, Color Harmony, and Impact. Then list 3 specific improvements.'
+        :'1) Write a detailed recreation prompt for this image. 2) Transcribe any visible text verbatim.');
+      const r=await apiCall('/api/studio/understand',{method:'POST',body:fd});
+      const d=await r.json();hideGL();
+      if(!r.ok)throw new Error(d.detail||'Vision analysis failed');
+      const box=$('analyze-result');box.textContent=d.analysis||d.thinking||'No output';box.style.display='block';
+      await loadUser();toast("Vision analysis complete!","s");
+    }catch(e){hideGL();toast(e.message,"e");}
+    return;
   }
-  loop();
-})();
+
+  if(txMode==='bg'){
+    showGL('Removing background…','Cutting out subject with precision alpha channel…');
+    try{
+      const fd=new FormData();fd.append('file',fileBlob,'image.png');
+      const r=await apiCall('/api/tools/remove-background',{method:'POST',body:fd});
+      if(!r.ok)throw new Error('Background removal failed');
+      const b64=await blobToB64(await r.blob());
+      hideGL();setMainImage(b64,curAR);await loadUser();await saveToGallery(true);toast("Background removed!","s");
+    }catch(e){hideGL();toast(e.message,"e");}
+    return;
+  }
+
+  const instr=$('edit-prompt').value.trim();
+  if(!instr){toast("Enter an instruction first","e");return;}
+  showGL('Transforming with Philadelphia Pro…','Applying character & scene reference…');
+  try{
+    const fd=new FormData();
+    fd.append('file',fileBlob,'image.png');
+    fd.append('prompt',txMode==='bgreplace'?`Keep subject and place in new scene: ${instr}`:instr);
+    fd.append('aspect_ratio',curAR);
+    const r=await apiCall('/api/tools/edit-photo',{method:'POST',body:fd});
+    if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.detail||'Transform failed');}
+    const b64=await blobToB64(await r.blob());
+    hideGL();setMainImage(b64,curAR);await loadUser();await saveToGallery(true);toast("Transformation complete!","s");
+  }catch(e){hideGL();toast(e.message,"e");}
+};
+
+window.startCompare=()=>{
+  if(!curImgB64||!prevImgB64){toast("Create or edit a second image first to compare before & after","i");return;}
+  $('img-display').classList.remove('on');
+  $('compare-before').src=`data:image/png;base64,${prevImgB64}`;
+  $('compare-after').src=curImg;
+  $('compare-wrap').classList.add('on');
+  const cw=$('compare-wrap'),aw=$('compare-after-wrap'),cl=$('cmp-line');
+  let drag=false;
+  const setPos=x=>{const r=cw.getBoundingClientRect(),pct=Math.max(5,Math.min(95,((x-r.left)/r.width)*100));aw.style.width=pct+'%';cl.style.left=pct+'%';};
+  cl.onpointerdown=e=>{drag=true;e.preventDefault();};
+  window.onpointermove=e=>{if(drag){const x=e.touches?e.touches[0].clientX:e.clientX;setPos(x);}};
+  window.onpointerup=()=>{drag=false;};
+  toast("Drag the gold divider to compare before & after","i");
+};
+
+/* ══════════════════════════════════════════════════
+   COLOR GRADING, LUT PRESETS & MOTION SHOWCASE
+══════════════════════════════════════════════════ */
+window.applyFilters=()=>{
+  const img=$('cur-img');if(!img||!curImg)return;
+  const b=$('f-bright').value,c=$('f-contrast').value,s=$('f-sat').value;
+  $('v-bright').textContent=b+'%';$('v-contrast').textContent=c+'%';$('v-sat').textContent=s+'%';
+  img.style.filter=`brightness(${b}%) contrast(${c}%) saturate(${s}%)`;
+  filterState.bright=+b;filterState.contrast=+c;filterState.sat=+s;
+};
+window.applyVignette=()=>{
+  const v=+$('f-vign').value;$('v-vign').textContent=v+'%';
+  const wrap=$('img-display');
+  wrap.style.boxShadow=v>0?`inset 0 0 ${v*1.4}px rgba(0,0,0,${v/100*0.85})`:'none';
+  filterState.vign=v;
+};
+
+const LUT_PRESETS={
+  cinematic:{bright:96,contrast:118,sat:88,vign:32},
+  golden:{bright:104,contrast:112,sat:126,vign:20},
+  vivid:{bright:106,contrast:122,sat:155,vign:0},
+  noir:{bright:88,contrast:145,sat:0,vign:45},
+  warm:{bright:104,contrast:108,sat:120,vign:14},
+  cool:{bright:98,contrast:112,sat:92,vign:15},
+  vintage:{bright:94,contrast:92,sat:70,vign:40}
+};
+window.applyPreset=name=>{
+  const p=LUT_PRESETS[name];if(!p)return;
+  $('f-bright').value=p.bright;$('f-contrast').value=p.contrast;$('f-sat').value=p.sat;$('f-vign').value=p.vign;
+  applyFilters();applyVignette();
+  toast(`${name.toUpperCase()} LUT applied!`,"i");
+};
+window.resetFilters=()=>{
+  $('f-bright').value=100;$('f-contrast').value=100;$('f-sat').value=100;$('f-vign').value=0;
+  applyFilters();applyVignette();
+  toast("Color grading reset","i");
+};
+
+function extractPalette(b64){
+  const cv=document.createElement('canvas'),ctx=cv.getContext('2d'),img=new Image();
+  img.onload=()=>{
+    cv.width=48;cv.height=48;ctx.drawImage(img,0,0,48,48);
+    const data=ctx.getImageData(0,0,48,48).data,colors={};
+    for(let i=0;i<data.length;i+=20){
+      const r=Math.min(255,Math.round(data[i]/32)*32),g=Math.min(255,Math.round(data[i+1]/32)*32),b=Math.min(255,Math.round(data[i+2]/32)*32);
+      const k=`${r},${g},${b}`;colors[k]=(colors[k]||0)+1;
+    }
+    const sorted=Object.entries(colors).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    const row=$('pal-row');if(!row)return;
+    row.innerHTML=sorted.map(([rgb])=>{
+      const[r,g,b]=rgb.split(',').map(Number);
+      const hex='#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+      return `<div class="pal-sw" style="background:${hex}" title="Copy ${hex}" onclick="navigator.clipboard.writeText('${hex}').then(()=>toast('${hex} copied!','s'))"></div>`;
+    }).join('');
+  };
+  img.src=`data:image/png;base64,${b64}`;
+}
+
+/* ── LIVE MOTION ENGINE ── */
+let curMotion='kenburns';
+window.playMotion=mode=>{
+  if(!curImg){toast("Generate an image first","e");return;}
+  curMotion=mode;
+  stopMotion();
+  const ov=$('anim-overlay'),cv=$('anim-cv'),ctx=cv.getContext('2d');
+  ov.style.display='flex';
+  const img=new Image();img.crossOrigin='anonymous';
+  img.onload=()=>{
+    const maxW=Math.min(window.innerWidth*0.88,520);
+    cv.width=maxW;cv.height=Math.round(maxW*(img.height/img.width));
+    const W=cv.width,H=cv.height;
+    let fr=0;
+    const pts=Array.from({length:65},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+0.6,vx:(Math.random()-0.5)*0.9,vy:-Math.random()*1.1-0.3,a:Math.random()*0.75+0.2}));
+    function loop(){
+      animRAF=requestAnimationFrame(loop);
+      ctx.clearRect(0,0,W,H);
+      const t=fr*0.022;
+      if(mode==='kenburns'){
+        const z=1+Math.sin(t*0.5)*0.09,ox=Math.sin(t*0.35)*W*0.035,oy=Math.cos(t*0.4)*H*0.03;
+        ctx.save();ctx.translate(W/2+ox,H/2+oy);ctx.scale(z,z);ctx.drawImage(img,-W/2,-H/2,W,H);ctx.restore();
+      }else if(mode==='goldleaf'){
+        ctx.drawImage(img,0,0,W,H);
+        const scan=(t*110)%(W+120)-60;
+        const g=ctx.createLinearGradient(scan-50,0,scan+50,H);
+        g.addColorStop(0,'transparent');g.addColorStop(0.5,'rgba(245,224,160,0.22)');g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      }else if(mode==='particles'){
+        ctx.drawImage(img,0,0,W,H);
+        pts.forEach(p=>{
+          p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;
+          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=`rgba(245,224,160,${p.a})`;ctx.fill();
+        });
+      }else if(mode==='dreamy'){
+        const s=1+Math.sin(t)*0.04;
+        ctx.save();ctx.translate(W/2,H/2);ctx.scale(s,s);ctx.drawImage(img,-W/2,-H/2,W,H);ctx.restore();
+        const g=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.6);
+        g.addColorStop(0,`rgba(255,245,220,${Math.abs(Math.sin(t*0.8))*0.14})`);g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      }else if(mode==='filmburn'){
+        ctx.drawImage(img,0,0,W,H);
+        const sx=(t*95)%W;
+        const g=ctx.createLinearGradient(sx-45,0,sx+45,0);
+        g.addColorStop(0,'transparent');g.addColorStop(0.5,'rgba(255,140,30,0.28)');g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      }else if(mode==='glitch'){
+        ctx.drawImage(img,0,0,W,H);
+        if(fr%7<2){
+          for(let i=0;i<6;i++){
+            const sy=Math.random()*H,sh=Math.random()*18+4,off=(Math.random()-0.5)*26;
+            ctx.drawImage(img,0,sy,W,sh,off,sy,W,sh);
+          }
+        }
+      }
+      fr++;
+    }
+    loop();
+  };
+  img.src=curImg;
+};
+
+window.stopMotion=()=>{
+  if(animRAF){cancelAnimationFrame(animRAF);animRAF=null;}
+  $('anim-overlay').style.display='none';
+};
+window.captureAnimFrame=()=>{
+  const cv=$('anim-cv');if(!cv.width)return;
+  const a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download=`philadelphia_motion_${Date.now()}.png`;a.click();
+  toast("Motion frame saved!","s");
+};
+window.downloadAnimWebM=()=>{
+  const cv=$('anim-cv');if(!cv.width)return;
+  const st=$('anim-rec-status');
+  try{
+    const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
+    const rec=new MediaRecorder(cv.captureStream(30),{mimeType:mime});
+    const chunks=[];
+    rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+    rec.onstop=()=>{
+      const url=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
+      const a=document.createElement('a');a.href=url;a.download=`philadelphia_${curMotion}_${Date.now()}.webm`;a.click();
+      st.textContent='';toast("3s WebM video downloaded!","s");
+    };
+    st.textContent='Recording 3 seconds…';
+    rec.start();
+    setTimeout(()=>rec.stop(),3000);
+  }catch(e){toast("Video capture is not supported on this browser","e");}
+};
+
+/* ══════════════════════════════════════════════════
+   PHILADELPHIA AI ART DIRECTOR (AGENTIC CHAT)
+══════════════════════════════════════════════════ */
+let phillyHistory=[];
+function initPhillyGreeting(name){
+  phillyHistory=[{role:'ai',text:`Welcome to Philadelphia Image Studio Pro, ${name}! Tell me what you want to create, restyle, or turn into a poster—I can set your prompt, aspect ratio, and trigger Philadelphia Pro or the Design Agent automatically.`}];
+  renderPhillyMsgs();
+}
+function renderPhillyMsgs(){
+  const box=$('philly-msgs');if(!box)return;
+  box.innerHTML=phillyHistory.map(m=>`<div class="bmsg ${m.role}">${m.text}</div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+window.sendPhillyQuick=t=>{$('philly-inp').value=t;sendPhillyChat();};
+
+window.sendPhillyChat=async()=>{
+  const inp=$('philly-inp'),text=inp.value.trim();
+  if(!text)return;
+  inp.value='';
+  phillyHistory.push({role:'user',text});renderPhillyMsgs();
+  const box=$('philly-msgs'),aiEl=document.createElement('div');
+  aiEl.className='bmsg ai';aiEl.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Thinking…';
+  box.appendChild(aiEl);box.scrollTop=box.scrollHeight;
+
+  const sysPrompt=`You are Philadelphia AI, the flagship Agentic Art Director inside Elvion AI's Image Studio Pro.
+You exclusively use the Philadelphia Pro image engine.
+You can control the studio directly by placing these command tags anywhere in your response:
+<<SET_PROMPT: "Detailed visual prompt">>
+<<SET_AR: "1:1|3:4|2:3|9:16|4:3|3:2|16:9|21:9">>
+<<GENERATE>> - Immediately triggers Philadelphia Pro image generation.
+<<AGENT_DESIGN: "Instruction for add_text, draw_on_image, or create_design flyer/poster">> - Runs the autonomous Studio Agent on the current canvas.
+When the user asks you to generate an image, include <<SET_PROMPT: "...">> and <<GENERATE>> so it renders right away! Keep your reply concise and inspiring.`;
+
+  try{
+    const raw=await askMiniMax(text,sysPrompt);
+    const rx=/<<([^:>]+)(?::\s*"([^"]+)")?>>/g;
+    let clean=raw;const cmds=[];let m;
+    while((m=rx.exec(raw))!==null){cmds.push({cmd:m[1].trim(),arg:m[2]?m[2].trim():''});clean=clean.replace(m[0],'');}
+    clean=clean.trim()||'Done! Applying that in your studio now.';
+    aiEl.textContent=clean;
+    phillyHistory.push({role:'ai',text:clean});
+
+    for(const c of cmds){
+      if(c.cmd==='SET_PROMPT'&&c.arg){$('prompt-ta').value=c.arg;updateCharCount($('prompt-ta'));}
+      if(c.cmd==='SET_AR'&&c.arg){
+        curAR=c.arg;
+        document.querySelectorAll('.ar-btn').forEach(b=>b.classList.toggle('on',b.dataset.ar===c.arg));
+      }
+      if(c.cmd==='GENERATE'){closeM('philly-m');goScr('studio');setTimeout(()=>handleGenerate(),350);}
+      if(c.cmd==='AGENT_DESIGN'&&c.arg){
+        $('agent-task-inp').value=c.arg;
+        closeM('philly-m');goScr('studio');cpTab('canvas',document.querySelectorAll('.cpt')[1]);
+        setTimeout(()=>runAgentStudioTask(),350);
+      }
+    }
+    await loadUser();
+  }catch(e){aiEl.textContent='Error: '+e.message;}
+};
+
+/* ══════════════════════════════════════════════════
+   GALLERY (INDEXEDDB + FIRESTORE CLOUD SYNC)
+══════════════════════════════════════════════════ */
+async function loadGallery(){
+  const localItems=await dbAll();
+  const map=new Map();
+  localItems.forEach(i=>i?.id&&map.set(String(i.id),i));
+  if(window.cu){
+    onSnapshot(query(collection(fsDB,'users',window.cu.uid,'gallery'),orderBy('createdAt','desc'),limit(80)),snap=>{
+      snap.docs.forEach(d=>{
+        const data=d.data();
+        if(data.kind&&data.kind!=='image')return;
+        const id=String(data.id||d.id);
+        const b64=data.b64||(data.dataUrl?data.dataUrl.split(',')[1]:'');
+        if(b64||data.url)map.set(id,{id,b64,url:data.url,prompt:data.desc||data.prompt||'Artwork',ar:data.ar||'1:1',fav:!!data.star||!!data.fav,date:data.date||''});
+      });
+      gallery=[...map.values()].sort((a,b)=>Number(b.id)-Number(a.id));
+      renderGallery();updateStats();
+    },()=>{});
+  }
+  gallery=[...map.values()].sort((a,b)=>Number(b.id)-Number(a.id));
+  renderGallery();updateStats();
+}
+
+window.saveToGallery=async(silent=false)=>{
+  if(!curImgB64){if(!silent)toast("Generate an image first","e");return;}
+  const id=String(Date.now());
+  const item={id,b64:curImgB64,prompt:$('prompt-ta').value.trim().slice(0,140)||'Philadelphia Pro Artwork',ar:curAR,fav:isFav,date:new Date().toLocaleDateString()};
+  gallery.unshift(item);
+  await dbPut(item);
+  if(window.cu){
+    const fbItem={id,kind:'image',desc:item.prompt,ar:curAR,star:isFav,date:item.date,createdAt:serverTimestamp()};
+    if(curImgB64.length<450000)fbItem.dataUrl=`data:image/png;base64,${curImgB64}`;
+    setDoc(doc(fsDB,'users',window.cu.uid,'gallery',id),fbItem,{merge:true}).catch(()=>{});
+  }
+  updateStats();renderGallery();
+  if(!silent)toast("Saved to Gallery!","s");
+};
+
+window.filterGal=(f,el)=>{
+  document.querySelectorAll('.gf').forEach(x=>x.classList.remove('on'));
+  if(el)el.classList.add('on');
+  renderGallery(f);
+};
+
+function renderGallery(filter='all'){
+  const grid=$('gal-g');if(!grid)return;
+  const items=filter==='fav'?gallery.filter(x=>x.fav):gallery;
+  if(!items.length){grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--t2);font-size:.76rem;padding:26px">No saved creations yet. Generate an image to populate your gallery.</div>`;return;}
+  grid.innerHTML=items.map(it=>{
+    const src=it.b64?`data:image/png;base64,${it.b64}`:(it.url?(it.url.startsWith('http')?it.url:API+it.url):'');
+    return `<div class="gi" onclick="loadGalItem('${it.id}')">
+      ${src?`<img src="${src}" alt="" loading="lazy">`:`<div style="padding:10px;font-size:.6rem;color:var(--t2)">${it.prompt}</div>`}
+      <div class="gi-info"><span class="gi-style">Pro · ${it.ar||'1:1'} · ${it.prompt||''}</span></div>
+      <button class="gi-fav-btn ${it.fav?'on':''}" onclick="event.stopPropagation();toggleGalFav('${it.id}',this)"><i class="fas fa-heart"></i></button>
+      <button class="gi-del" onclick="event.stopPropagation();delGalItem('${it.id}')"><i class="fas fa-times"></i></button>
+    </div>`;
+  }).join('');
+}
+
+window.loadGalItem=id=>{
+  const it=gallery.find(x=>String(x.id)===String(id));if(!it)return;
+  if(it.b64){
+    setMainImage(it.b64,it.ar||'1:1');
+  }else if(it.url){
+    curImg=it.url.startsWith('http')?it.url:API+it.url;
+    $('empty-state').style.display='none';$('cur-img').src=curImg;$('img-display').classList.add('on');
+  }
+  $('prompt-ta').value=it.prompt||'';updateCharCount($('prompt-ta'));
+  isFav=!!it.fav;updateFavBtn();
+  goScr('studio');toast("Loaded into Studio!","s");
+};
+
+window.delGalItem=async id=>{
+  gallery=gallery.filter(x=>String(x.id)!==String(id));
+  await dbDel(String(id));
+  if(window.cu)deleteDoc(doc(fsDB,'users',window.cu.uid,'gallery',String(id))).catch(()=>{});
+  renderGallery();updateStats();toast("Removed from gallery","i");
+};
+
+window.toggleGalFav=async(id,el)=>{
+  const it=gallery.find(x=>String(x.id)===String(id));if(!it)return;
+  it.fav=!it.fav;el.classList.toggle('on',it.fav);
+  await dbPut(it);
+  if(window.cu)setDoc(doc(fsDB,'users',window.cu.uid,'gallery',String(id)),{star:it.fav},{merge:true}).catch(()=>{});
+  updateStats();
+};
+
+window.toggleFav=()=>{isFav=!isFav;updateFavBtn();toast(isFav?'Favorited!':'Removed from favorites',"i");};
+function updateFavBtn(){const b=$('fav-btn');if(b)b.innerHTML=`<i class="${isFav?'fas':'far'} fa-heart"></i>`;}
+
+function updateStats(){
+  if($('st-gen'))$('st-gen').textContent=genCount||gallery.length;
+  if($('st-save'))$('st-save').textContent=gallery.length;
+  if($('st-fav'))$('st-fav').textContent=gallery.filter(x=>x.fav).length;
+}
+
+/* ── PROMPT HISTORY ── */
+function addPH(prompt){
+  promptHistory.unshift({prompt,ar:curAR,ts:Date.now()});
+  if(promptHistory.length>25)promptHistory.pop();
+  localStorage.setItem('phl_pro_ph',JSON.stringify(promptHistory));
+  renderPH();
+}
+function renderPH(){
+  try{promptHistory=JSON.parse(localStorage.getItem('phl_pro_ph')||'[]');}catch(e){promptHistory=[];}
+  const el=$('ph-list');if(!el)return;
+  if(!promptHistory.length){el.innerHTML=`<div style="font-size:.7rem;color:var(--t2)">Your recent prompts will appear here.</div>`;return;}
+  el.innerHTML=promptHistory.slice(0,12).map((h,idx)=>`
+    <div style="padding:8px 10px;border-radius:10px;background:var(--card);border:1px solid var(--bdr);margin-bottom:5px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="reusePH(${idx})">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:.74rem;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.prompt.replace(/</g,'&lt;')}</div>
+        <div style="font-size:.55rem;color:var(--t2);margin-top:2px">Philadelphia Pro · ${h.ar||'1:1'} · ${new Date(h.ts).toLocaleDateString()}</div>
+      </div>
+      <i class="fas fa-rotate-right" style="color:var(--g1);font-size:.72rem"></i>
+    </div>`).join('');
+}
+window.reusePH=idx=>{const h=promptHistory[idx];if(h)qp(h.prompt);};
+window.clearHistory=()=>{promptHistory=[];localStorage.removeItem('phl_pro_ph');renderPH();toast("Prompt history cleared","i");};
+
+/* ── EXPORT (WITH LUT FILTERS & VIGNETTE BAKED IN) ── */
+window.setExpFmt=(f,el)=>{expFmtSel=f;document.querySelectorAll('.eo').forEach(x=>x.classList.remove('on'));if(el)el.classList.add('on');};
+
+async function renderFinalCanvas(){
+  const cv=document.createElement('canvas'),img=new Image();img.crossOrigin='anonymous';
+  await new Promise(r=>{img.onload=r;img.src=curImg;});
+  cv.width=img.naturalWidth||1024;cv.height=img.naturalHeight||1024;
+  const ctx=cv.getContext('2d');
+  ctx.filter=`brightness(${filterState.bright}%) contrast(${filterState.contrast}%) saturate(${filterState.sat}%)`;
+  ctx.drawImage(img,0,0,cv.width,cv.height);
+  ctx.filter='none';
+  if(filterState.vign>0){
+    const g=ctx.createRadialGradient(cv.width/2,cv.height/2,cv.width*0.28,cv.width/2,cv.height/2,cv.width*0.72);
+    g.addColorStop(0,'transparent');g.addColorStop(1,`rgba(0,0,0,${filterState.vign/100*0.85})`);
+    ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+  }
+  return cv;
+}
+
+window.downloadImage=async()=>{
+  if(!curImg){toast("No image to download","e");return;}
+  const cv=await renderFinalCanvas();
+  const mime=expFmtSel==='png'?'image/png':expFmtSel==='webp'?'image/webp':'image/jpeg';
+  const a=document.createElement('a');
+  a.href=cv.toDataURL(mime,0.94);
+  a.download=`philadelphia_pro_${Date.now()}.${expFmtSel}`;
+  a.click();
+  closeM('export-m');toast("Downloaded!","s");
+};
+
+window.copyToClipboard=async()=>{
+  if(!curImg){toast("No image","e");return;}
+  try{
+    const cv=await renderFinalCanvas();
+    const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+    await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+    closeM('export-m');toast("Copied to clipboard!","s");
+  }catch(e){toast("Clipboard copy not supported on this browser","e");}
+};
+
+window.shareImage=async()=>{
+  if(!curImg)return;
+  if(navigator.share){
+    try{
+      const cv=await renderFinalCanvas();
+      const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+      const file=new File([blob],'philadelphia-pro.png',{type:'image/png'});
+      await navigator.share({title:'Philadelphia Image Studio Pro',files:[file]});
+    }catch(e){}
+  }else{toast("Use Download or Copy to share","i");}
+};
+
+window.exportAllGallery=()=>{
+  if(!gallery.length){toast("Gallery is empty","e");return;}
+  gallery.forEach((it,i)=>{
+    if(!it.b64)return;
+    setTimeout(()=>{const a=document.createElement('a');a.href=`data:image/png;base64,${it.b64}`;a.download=`philadelphia_${i+1}.png`;a.click();},i*450);
+  });
+  toast(`Exporting ${gallery.length} images…`,"g");
+};
+
+/* ── LIGHTBOX, DAILY & PAYMENTS ── */
+window.openLightbox=()=>{if(!curImg)return;$('lb-img').src=curImg;$('lightbox').classList.add('on');};
+window.closeLightbox=()=>$('lightbox').classList.remove('on');
+$('lightbox').onclick=e=>{if(e.target.id==='lightbox')closeLightbox();};
+
+window.claimDaily=async()=>{
+  try{
+    const r=await apiCall('/api/user/claim-daily',{method:'POST'});
+    const d=await r.json();if(!r.ok)throw new Error(d.detail||d.message||'Already claimed today');
+    toast(d.message||'Daily credits claimed!',"g");await loadUser();
+  }catch(e){toast(e.message,"e");}
+};
+
+window.initPay=async()=>{
+  const amt=parseInt($('fund-amt').value);if(!amt||amt<100){toast("Minimum ₦100","e");return;}
+  try{
+    const r=await apiCall('/api/payments/initiate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:amt,redirect_url:location.href.split('?')[0]})});
+    const d=await r.json();if(!r.ok)throw new Error(d.detail||'Payment error');
+    location.href=d.checkout_url;
+  }catch(e){toast(e.message,"e");}
+};
+
+function checkPayReturn(){
+  const p=new URLSearchParams(location.search),ref=p.get('reference')||p.get('trxref');
+  if(!ref||!tok)return;
+  history.replaceState({},document.title,location.pathname);
+  $('pvn').style.display='block';openM('fund-m');
+  (async function verify(tries){
+    if(tries<=0){$('pvn').style.display='none';return;}
+    try{
+      const r=await apiCall(`/api/payments/verify?transaction_ref=${encodeURIComponent(ref)}`);
+      const d=await r.json();
+      if(d.status==='success'||d.status==='already_credited'){
+        $('pvn').style.display='none';closeM('fund-m');await loadUser();toast(`+${d.credits_added} credits added!`,"g");
+      }else if(d.status==='pending')setTimeout(()=>verify(tries-1),4000);
+      else $('pvn').style.display='none';
+    }catch{setTimeout(()=>verify(tries-1),4000);}
+  })(15);
+}
+
+window.openM=id=>$(id)?.classList.add('on');
+window.closeM=id=>$(id)?.classList.remove('on');
+document.querySelectorAll('.mbg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('on');}));
+
+window.toast=(msg,type='s')=>{
+  const w=$('toasts'),d=document.createElement('div');d.className=`toast ${type}`;
+  const ic={s:'fa-circle-check',e:'fa-circle-xmark',i:'fa-circle-info',g:'fa-star'};
+  d.innerHTML=`<i class="fas ${ic[type]||'fa-circle-check'}"></i> ${msg}`;
+  w.appendChild(d);setTimeout(()=>d.remove(),3200);
+};
+
+/* ── AMBIENT AURORA & PARTICLES ── */
+function startAurora(){
+  const cv=$('aurora-cv');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const rs=()=>{cv.width=innerWidth;cv.height=innerHeight;};
+  rs();addEventListener('resize',rs);
+  let t=0;
+  (function draw(){
+    requestAnimationFrame(draw);ctx.clearRect(0,0,cv.width,cv.height);t+=0.0028;
+    const g1=ctx.createRadialGradient(cv.width*(0.24+Math.sin(t*0.6)*0.12),cv.height*(0.2+Math.cos(t*0.5)*0.1),0,cv.width*0.3,cv.height*0.2,cv.width*0.52);
+    g1.addColorStop(0,'rgba(201,169,110,0.065)');g1.addColorStop(1,'transparent');
+    ctx.fillStyle=g1;ctx.fillRect(0,0,cv.width,cv.height);
+    const g2=ctx.createRadialGradient(cv.width*(0.8+Math.cos(t*0.5)*0.1),cv.height*(0.78+Math.sin(t*0.4)*0.08),0,cv.width*0.8,cv.height*0.8,cv.width*0.42);
+    g2.addColorStop(0,'rgba(139,92,246,0.045)');g2.addColorStop(1,'transparent');
+    ctx.fillStyle=g2;ctx.fillRect(0,0,cv.width,cv.height);
+  })();
+}
+function spawnParticles(){
+  const c=$('particles');if(!c)return;
+  for(let i=0;i<26;i++){
+    const p=document.createElement('div');p.className='pt';
+    const sz=Math.random()*2.2+0.6;
+    p.style.cssText=`width:${sz}px;height:${sz}px;background:rgba(201,169,110,${Math.random()*0.3+0.05});left:${Math.random()*100}%;top:${Math.random()*100}%;`;
+    p.style.setProperty('--d',(7+Math.random()*14)+'s');p.style.setProperty('--dl',(-Math.random()*14)+'s');
+    c.appendChild(p);
+  }
+}
+const TW_TEXT='Generate, write, paint & design extraordinary visuals — powered by Philadelphia Pro.';
+function startTypewriter(){
+  const el=$('tw-text');if(!el)return;
+  let i=0;const iv=setInterval(()=>{if(i<TW_TEXT.length){el.textContent+=TW_TEXT[i++];}else clearInterval(iv);},32);
+}
+
+startAurora();
+spawnParticles();
+setTimeout(()=>{const s=$('splash');if(s)s.style.display='none';},2400);
+setTimeout(startTypewriter,2000);
 </script>
 </body>
 </html>
