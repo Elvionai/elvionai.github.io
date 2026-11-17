@@ -536,15 +536,12 @@ input[type=range]{width:100%;accent-color:var(--g1);height:3px;cursor:pointer}
           <button class="gen-btn" style="margin:0;padding:11px;font-size:.76rem;" onclick="openCanvasStudio('brush')">
             <i class="fas fa-paintbrush"></i> Paint, Foil & Shapes
           </button>
-          <button class="gen-btn" style="margin:0;padding:11px;font-size:.76rem;background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.4);color:#ddd6fe;" onclick="openCanvasStudio('text')">
-            <i class="fas fa-font"></i> Write Typography on Image
-          </button>
         </div>
 
         <div class="agent-box">
           <div class="sh" style="margin-top:0;"><i class="fas fa-robot"></i><span>Agentic Write, Draw & Flyer Designer (Studio Chat Engine)</span></div>
           <div style="font-size:.7rem;color:var(--t2);margin-bottom:8px;line-height:1.45;">
-            Powered by the same autonomous agent as <b>Philadelphia Studio Chat</b> (`add_text`, `draw_on_image`, `create_design`). Tell Philadelphia what text, arrows, frames, or full poster layout to build:
+            Powered by the same autonomous agent as <b>Philadelphia Studio Chat</b> Tell Philadelphia what text, arrows, frames, or full poster layout to build:
           </div>
           <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;">
             <span class="es-pill" onclick="$('agent-task-inp').value='Add bold gold Cinzel title text at the top saying SOVEREIGN and smaller subtitle text at the bottom'">+ Add Typography</span>
@@ -563,7 +560,6 @@ input[type=range]{width:100%;accent-color:var(--g1);height:3px;cursor:pointer}
         <div class="sh"><i class="fas fa-flask"></i><span>AI Photo Transformation & Vision</span></div>
         <div class="tb-g">
           <button class="tb on" id="tb-edit" onclick="openTx('edit')"><i class="fas fa-user-astronaut"></i>Restyle Subject (15cr)</button>
-          <button class="tb" id="tb-bg" onclick="openTx('bg')"><i class="fas fa-scissors"></i>Remove BG (2cr)</button>
           <button class="tb" id="tb-bgreplace" onclick="openTx('bgreplace')"><i class="fas fa-mountain-sun"></i>Replace Scene (15cr)</button>
           <button class="tb" id="tb-critique" onclick="openTx('critique')"><i class="fas fa-award"></i>Art Critique (2cr)</button>
           <button class="tb" id="tb-analyze" onclick="openTx('analyze')"><i class="fas fa-eye"></i>Extract Prompt / OCR</button>
