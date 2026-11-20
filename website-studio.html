@@ -434,7 +434,7 @@ textarea.inp{resize:none;line-height:1.55}
       <b>Instant Studio Link (Fastest):</b> Hosts directly on your Philadelphia Studio server (<code>/api/agent/s/…</code>) in seconds and updates the exact same URL on future edits.
     </div>
     <input type="text" id="pub-url-inp" class="inp" readonly placeholder="Not hosted yet — click Instant Host below">
-    <button class="btn-gold" id="pub-studio-btn" onclick="hostOnStudioLink()"><i class="fas fa-bolt"></i> Host Instantly on Studio Link (~6-8 cr)</button>
+    <button class="btn-gold" id="pub-studio-btn" onclick="hostOnStudioLink()"><i class="fas fa-bolt"></i> Host Instantly on Studio Link (Free · <1s)</button>
     <div style="display:flex;gap:7px;">
       <button class="btn-ghost" style="flex:1" onclick="copyLiveUrl()"><i class="fas fa-copy"></i> Copy Link</button>
       <button class="btn-ghost" style="flex:1" onclick="openLiveUrl()"><i class="fas fa-arrow-up-right-from-square"></i> Visit Site</button>
@@ -1029,49 +1029,28 @@ window.hostOnStudioLink = async () => {
   const html = $('code-editor').value.trim();
   if (!html) return toast('Write or generate some HTML first', 'e');
   const btn = $('pub-studio-btn'), orig = btn.innerHTML;
-  btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Hosting on Studio Link…';
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Publishing…';
 
   try {
-    // Upload current HTML as a .txt document artifact so the Agent can host it verbatim on /api/agent/s/{id}/
-    const fd = new FormData();
-    fd.append('file', new File([html], 'index.txt', { type: 'text/plain' }));
-    const ur = await apiCall('/api/agent/upload', { method: 'POST', body: fd });
-    const uj = await ur.json();
-    if (!ur.ok || !uj.id) throw new Error('Could not upload site source');
-
-    const promptMsg = p.site_id
-      ? `Read document ${uj.id} with read_document (all characters) and publish its exact HTML using build_website with site_id "${p.site_id}" and title "${p.name}". Do not alter the HTML. Return the built-in link.`
-      : `Read document ${uj.id} with read_document (all characters) and publish its exact HTML using build_website with title "${p.name}". Do not alter the HTML. Return the built-in link.`;
-
-    const rr = await apiCall('/api/agent/run', {
+    const r = await apiCall('/api/agent/s/direct-publish', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: promptMsg, artifact_ids: [uj.id], persona: 'Publish the uploaded HTML cleanly via build_website and return the link.' })
+      body: JSON.stringify({
+        html,
+        title: p.name || 'Website',
+        site_id: p.site_id || ''
+      })
     });
-    const rj = await rr.json();
-    if (!rr.ok) throw new Error(rj.detail || 'Hosting failed');
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.link) throw new Error(d.detail || 'Instant hosting failed');
 
-    let finalText = '';
-    for (let i = 0; i < 60; i++) {
-      await new Promise(r => setTimeout(r, 1400));
-      const pr = await apiCall(`/api/agent/runs/${rj.run_id}?after=0`);
-      const pd = await pr.json();
-      if (['done', 'error', 'cancelled'].includes(pd.status)) {
-        if (pd.status === 'error') throw new Error(pd.final_text || 'Host failed');
-        finalText = pd.final_text || '';
-        break;
-      }
-    }
-    const m = finalText.match(/https?:\/\/[^\s"'<>]+\/api\/agent\/s\/([a-z0-9]+)\/?/i);
-    if (!m) throw new Error('Could not retrieve instant link');
-    p.url = m[0].endsWith('/') ? m[0] : m[0] + '/';
-    p.site_id = m[1];
+    p.url = d.link;
+    p.site_id = d.site_id;
     p.html = html;
     await saveSite(p);
     syncLivePill(p);
     syncPubModal();
-    await loadBalance();
-    toast('Hosted live on your Philadelphia Studio link!', 's');
+    toast('Published live in <1 second!', 's');
   } catch (e) {
     toast(e.message, 'e');
   } finally {
