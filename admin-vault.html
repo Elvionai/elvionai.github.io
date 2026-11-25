@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Elvion AI — Sovereign Command & Analytics Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --bg:#06060c;--panel:#0d0e1a;--card:#131526;--raise:#1a1d33;
+  --bdr:rgba(201,169,110,.16);--bdr2:rgba(201,169,110,.38);
+  --gold:#c9a96e;--gold2:#f3d79b;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--pur:#8b5cf6;
+  --t1:#f4f1ea;--t2:#949086;--t3:#565248;
+  --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);min-height:100vh;overflow-x:hidden}
+button,input,textarea,select{font-family:inherit;color:inherit}
+button{cursor:pointer}
+
+/* LOCK SCREEN */
+#lock-screen{position:fixed;inset:0;z-index:1000;background:radial-gradient(circle at 50% 30%,#151226,#05050a 75%);display:flex;align-items:center;justify-content:center;padding:20px}
+.lock-box{background:var(--panel);border:1px solid var(--bdr2);border-radius:22px;padding:32px 26px;width:100%;max-width:400px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.9)}
+.lock-ico{width:64px;height:64px;border-radius:18px;background:rgba(201,169,110,.12);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--gold);font-size:1.6rem}
+.lock-ttl{font-family:var(--ft);font-size:1.25rem;color:var(--gold);letter-spacing:3px;margin-bottom:6px}
+.lock-sub{font-size:.78rem;color:var(--t2);margin-bottom:20px;line-height:1.5}
+.inp{width:100%;padding:12px 14px;background:#070810;border:1px solid var(--bdr);border-radius:12px;font-size:.86rem;outline:none;margin-bottom:10px}
+.inp:focus{border-color:var(--gold)}
+.btn{padding:11px 18px;border-radius:12px;border:1px solid var(--bdr2);background:rgba(201,169,110,.14);color:var(--gold2);font-weight:700;font-size:.82rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+.btn:hover{background:var(--gold);color:#000}
+.btn.prim{background:linear-gradient(135deg,var(--gold),#d8b36a);color:#000;border:none}
+.btn.danger{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.4);color:#fca5a5}
+.btn.danger:hover{background:var(--red);color:#fff}
+.btn.green{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.4);color:#6ee7b7}
+
+/* DASHBOARD SHELL */
+#app{display:none;max-width:1440px;margin:0 auto;padding:18px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:var(--panel);border:1px solid var(--bdr);border-radius:16px;margin-bottom:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand i{color:var(--gold);font-size:1.3rem}
+.brand h1{font-family:var(--ft);font-size:1.05rem;color:var(--gold);letter-spacing:2.5px}
+.brand small{display:block;font-size:.65rem;color:var(--t2);font-family:var(--fb);letter-spacing:1px}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:20px}
+.scard{background:var(--panel);border:1px solid var(--bdr);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.scard i{position:absolute;right:14px;top:14px;font-size:1.3rem;color:rgba(201,169,110,.22)}
+.scard .sv{font-family:var(--ft);font-size:1.65rem;font-weight:900;color:var(--gold2);margin-bottom:4px}
+.scard .sl{font-size:.66rem;color:var(--t2);text-transform:uppercase;letter-spacing:1.2px}
+
+/* MAIN 2-COLUMN LAYOUT */
+.main-grid{display:grid;grid-template-columns:1.15fr 1.85fr;gap:18px;align-items:start}
+@media(max-width:1024px){.main-grid{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--bdr);border-radius:18px;padding:18px;overflow:hidden}
+.box-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr);flex-wrap:wrap}
+.box-ttl{font-family:var(--ft);font-size:.86rem;color:var(--gold);letter-spacing:1.8px;display:flex;align-items:center;gap:8px}
+
+/* USER DIRECTORY LIST */
+.u-list{max-height:72vh;overflow-y:auto;display:flex;flex-direction:column;gap:7px;padding-right:4px}
+.u-row{padding:12px 14px;background:var(--card);border:1px solid transparent;border-radius:12px;cursor:pointer;transition:.18s;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.u-row:hover,.u-row.on{border-color:var(--gold);background:var(--raise)}
+.u-row.banned{opacity:.55;border-color:var(--red)}
+.u-em{font-size:.84rem;font-weight:600;color:var(--t1);word-break:break-all}
+.u-meta{font-size:.66rem;color:var(--t2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.u-cr{font-family:var(--ft);font-size:.92rem;color:var(--gold2);font-weight:700;text-align:right;white-space:nowrap}
+
+/* INSPECTOR TABS */
+.itabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
+.itab{padding:8px 14px;border-radius:10px;background:var(--card);border:1px solid var(--bdr);font-size:.74rem;font-weight:600;color:var(--t2);white-space:nowrap}
+.itab.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.ipane{display:none}
+.ipane.on{display:block}
+
+/* CHATS & TRANSCRIPT */
+.chat-split{display:grid;grid-template-columns:230px 1fr;gap:12px;min-height:420px}
+@media(max-width:700px){.chat-split{grid-template-columns:1fr}}
+.c-list{border-right:1px solid var(--bdr);padding-right:10px;max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+.c-item{padding:9px 11px;border-radius:10px;background:var(--card);font-size:.78rem;cursor:pointer;border:1px solid transparent}
+.c-item:hover,.c-item.on{border-color:var(--gold);color:var(--gold2)}
+.c-msgs{max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:6px}
+.m-bub{padding:11px 14px;border-radius:12px;font-size:.82rem;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.m-bub.user{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);align-self:flex-end;max-width:85%}
+.m-bub.ai{background:rgba(201,169,110,.08);border:1px solid var(--bdr);align-self:flex-start;max-width:92%}
+.m-head{font-size:.64rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700}
+
+/* CREATIONS GALLERY */
+.art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-height:520px;overflow-y:auto}
+.art-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.art-card img,.art-card video{width:100%;height:130px;object-fit:cover;background:#000}
+.art-card .a-inf{padding:8px;font-size:.68rem;color:var(--t2)}
+
+/* LOGS TABLE */
+.log-tbl{width:100%;border-collapse:collapse;font-size:.76rem}
+.log-tbl th,.log-tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+.log-tbl th{color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<!-- 1. DUAL-LOCK LOGIN SCREEN -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <div class="lock-ico"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="lock-ttl">SOVEREIGN VAULT</div>
+    <div class="lock-sub">Elvion AI Executive Command, User Audit & Broadcast Center. Requires Super-Admin Firebase Auth + Vault Passcode.</div>
+    <div id="auth-status" style="font-size:.76rem;color:var(--gold);margin-bottom:12px">Checking Firebase session…</div>
+    <button class="btn" id="google-btn" style="width:100%;margin-bottom:12px;display:none" onclick="adminGoogleLogin()"><i class="fa-brands fa-google"></i> Sign in with Admin Google</button>
+    <input type="password" class="inp" id="vault-pass" placeholder="Enter Admin Vault Passcode…" onkeydown="if(event.key==='Enter')unlockVault()">
+    <button class="btn prim" style="width:100%" onclick="unlockVault()"><i class="fa-solid fa-key"></i> Unlock Command Vault</button>
+    <div id="lock-err" style="color:var(--red);font-size:.75rem;margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- 2. MAIN COMMAND CENTER -->
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <i class="fa-solid fa-crown"></i>
+      <div>
+        <h1>ELVION SOVEREIGN VAULT</h1>
+        <small id="admin-who">Authenticated Super-Admin</small>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="openBroadcastModal('ALL')"><i class="fa-solid fa-bullhorn"></i> Global HTML Pop-Up / Credit Drop</button>
+      <button class="btn" onclick="loadVaultOverview()"><i class="fa-solid fa-rotate"></i> Refresh Data</button>
+    </div>
+  </header>
+
+  <!-- PLATFORM METRICS -->
+  <div class="stats-grid" id="stats-grid"></div>
+
+  <div class="main-grid">
+    <!-- LEFT: USER DIRECTORY -->
+    <div class="box">
+      <div class="box-hdr">
+        <div class="box-ttl"><i class="fa-solid fa-users"></i> Users (<span id="u-count">0</span>)</div>
+        <input type="text" class="inp" id="u-search" placeholder="Search email or UID…" style="margin:0;max-width:190px;padding:7px 11px;font-size:.76rem" oninput="renderUsers()">
+      </div>
+      <div class="u-list" id="u-list"></div>
+    </div>
+
+    <!-- RIGHT: SELECTED USER DEEP INSPECTOR -->
+    <div class="box" id="inspector-box">
+      <div id="insp-empty" style="text-align:center;padding:70px 20px;color:var(--t2)">
+        <i class="fa-solid fa-magnifying-glass-chart" style="font-size:2.4rem;color:var(--gold);margin-bottom:12px;display:block"></i>
+        Select any user on the left to inspect their chats, generated images/documents/websites, usage logs, or adjust their credits.
+      </div>
+
+      <div id="insp-content" style="display:none">
+        <div class="box-hdr">
+          <div>
+            <div class="box-ttl" id="ins-email">user@example.com</div>
+            <div style="font-size:.68rem;color:var(--t2);font-family:var(--fc);margin-top:2px" id="ins-uid">UID: --</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn green" onclick="openBroadcastModal(activeUid)"><i class="fa-solid fa-gift"></i> Send Pop-Up / Claimable Credits</button>
+            <button class="btn danger" onclick="wipeUserCredits()"><i class="fa-solid fa-eraser"></i> Reset Credits to 0</button>
+            <button class="btn danger" id="ban-btn" onclick="toggleBanUser()"><i class="fa-solid fa-ban"></i> Disable Account</button>
+          </div>
+        </div>
+
+        <!-- Quick Credit Control Bar -->
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:14px">
+          <div style="margin-right:auto">
+            <span style="font-size:.68rem;color:var(--t2);text-transform:uppercase">Current Balance:</span>
+            <strong style="font-family:var(--ft);font-size:1.2rem;color:var(--gold2);margin-left:6px" id="ins-bal">0</strong>
+            <span style="font-size:.68rem;color:var(--t2)" id="ins-daily"></span>
+          </div>
+          <input type="number" class="inp" id="set-cr-inp" placeholder="Exact credits…" style="margin:0;width:130px;padding:8px 10px">
+          <button class="btn" onclick="setExactCredits()">Set Exact Balance</button>
+        </div>
+
+        <div class="itabs">
+          <button class="itab on" onclick="switchItab('chats',this)"><i class="fa-solid fa-comments"></i> Chats & Transcripts (<span id="cnt-chats">0</span>)</button>
+          <button class="itab" onclick="switchItab('creations',this)"><i class="fa-solid fa-images"></i> Images, Docs & Sites (<span id="cnt-creations">0</span>)</button>
+          <button class="itab" onclick="switchItab('logs',this)"><i class="fa-solid fa-receipt"></i> Usage & Ledger (<span id="cnt-logs">0</span>)</button>
+          <button class="itab" onclick="switchItab('popups',this)"><i class="fa-solid fa-bullhorn"></i> Active Pop-Ups (<span id="cnt-popups">0</span>)</button>
+        </div>
+
+        <!-- TAB 1: CHATS -->
+        <div class="ipane on" id="ipane-chats">
+          <div class="chat-split">
+            <div class="c-list" id="ins-chat-list"></div>
+            <div class="c-msgs" id="ins-chat-msgs"><div style="color:var(--t2);font-size:.8rem;padding:20px">Click a conversation on the left to read the full transcript.</div></div>
+          </div>
+        </div>
+
+        <!-- TAB 2: CREATIONS & WEBSITES -->
+        <div class="ipane" id="ipane-creations">
+          <div id="ins-sites-list" style="margin-bottom:12px"></div>
+          <div class="art-grid" id="ins-art-grid"></div>
+        </div>
+
+        <!-- TAB 3: USAGE LOGS -->
+        <div class="ipane" id="ipane-logs">
+          <div style="max-height:480px;overflow-y:auto">
+            <table class="log-tbl">
+              <thead><tr><th>Time</th><th>Service / Endpoint</th><th>Type</th><th>Credits</th></tr></thead>
+              <tbody id="ins-logs-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 4: SENT POPUPS -->
+        <div class="ipane" id="ipane-popups">
+          <div id="ins-popups-list" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BROADCAST / CUSTOM HTML POPUP / CLAIMABLE CREDIT DROP MODAL -->
+<div id="bcast-modal" style="display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.84);align-items:center;justify-content:center;padding:18px">
+  <div class="box" style="width:100%;max-width:540px;border-color:var(--gold)">
+    <div class="box-hdr">
+      <div class="box-ttl"><i class="fa-solid fa-bullhorn"></i> Dispatch Dashboard Pop-Up / Credit Drop</div>
+      <button class="btn" style="padding:4px 10px" onclick="document.getElementById('bcast-modal').style.display='none'">✕</button>
+    </div>
+    <label style="font-size:.7rem;color:var(--t2)">Target User ID, Email, or "ALL" (Everyone)</label>
+    <input type="text" class="inp" id="bc-target" value="ALL">
+    <label style="font-size:.7rem;color:var(--t2)">Pop-Up Headline / Title</label>
+    <input type="text" class="inp" id="bc-title" placeholder="e.g. Special Creator Reward from Elvion AI!">
+    <label style="font-size:.7rem;color:var(--t2)">Message Text (Optional)</label>
+    <textarea class="inp" id="bc-msg" rows="2" placeholder="Thank you for building with Philadelphia Studio…"></textarea>
+    <label style="font-size:.7rem;color:var(--gold)">Custom HTML to Render Inside Their Dashboard Pop-Up (Optional)</label>
+    <textarea class="inp" id="bc-html" rows="4" style="font-family:var(--fc);font-size:.76rem" placeholder="<div style='padding:12px;background:rgba(201,169,110,0.12);border-radius:10px;text-align:center'><h4 style='color:#f3d79b'>🔥 50% Weekend Discount!</h4></div>"></textarea>
+    <label style="font-size:.7rem;color:var(--green)">Claimable Bonus Credits (If > 0, shows a 'Claim X Credits' button in their pop-up)</label>
+    <input type="number" class="inp" id="bc-credits" value="0" min="0">
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn prim" style="flex:1" onclick="sendBroadcast()"><i class="fa-solid fa-paper-plane"></i> Dispatch to Dashboard Now</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+const API = "https://web-production-9a18.up.railway.app";
+const fbApp = initializeApp({
+  apiKey:"AIzaSyAyROm0aBGjry6NUfhNM3e0qwPcCDoIqSk",
+  authDomain:"elvionai.firebaseapp.com",
+  projectId:"elvionai",
+  storageBucket:"elvionai.appspot.com",
+  messagingSenderId:"161078300830",
+  appId:"1:161078300830:web:f460df8591704eb0e96b8f"
+});
+const auth = getAuth(fbApp), provider = new GoogleAuthProvider();
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+let adminUser = null, vaultKey = sessionStorage.getItem('elv_vault_key') || '', allUsers = [];
+window.activeUid = null;
+let activeUserDisabled = false;
+
+onAuthStateChanged(auth, u => {
+  adminUser = u;
+  if (u) {
+    $('auth-status').textContent = `Signed in as ${u.email}`;
+    $('google-btn').style.display = 'none';
+    if (vaultKey) { $('vault-pass').value = vaultKey; unlockVault(); }
+  } else {
+    $('auth-status').textContent = 'Sign in with your Super-Admin Google account first.';
+    $('google-btn').style.display = 'inline-flex';
+  }
+});
+
+window.adminGoogleLogin = async () => {
+  try { await signInWithPopup(auth, provider); }
+  catch(e) { $('lock-err').textContent = e.message; }
+};
+
+async function vCall(path, opts = {}) {
+  if (!adminUser) throw new Error('Sign in with Google first.');
+  const tok = await adminUser.getIdToken();
+  const sep = path.includes('?') ? '&' : '?';
+  const url = `${API}${path}${sep}vault_key=${encodeURIComponent(vaultKey)}`;
+  const headers = {'X-Firebase-Token': tok, ...(opts.headers || {})};
+  if (opts.json) { headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(opts.json); }
+  const r = await fetch(url, {...opts, headers});
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.detail || 'Request failed');
+  return d;
+}
+
+window.unlockVault = async () => {
+  $('lock-err').textContent = '';
+  vaultKey = $('vault-pass').value.trim();
+  if (!vaultKey) { $('lock-err').textContent = 'Enter your Vault Passcode.'; return; }
+  try {
+    await loadVaultOverview();
+    sessionStorage.setItem('elv_vault_key', vaultKey);
+    $('lock-screen').style.display = 'none';
+    $('app').style.display = 'block';
+    $('admin-who').textContent = `Super-Admin: ${adminUser.email}`;
+  } catch(e) {
+    $('lock-err').textContent = e.message;
+  }
+};
+
+window.loadVaultOverview = async () => {
+  const d = await vCall('/api/admin/vault/overview');
+  const t = d.totals;
+  allUsers = d.users || [];
+  $('u-count').textContent = allUsers.length;
+  $('stats-grid').innerHTML = [
+    ['fa-users', t.users, 'Total Users'],
+    ['fa-naira-sign', '₦' + (t.revenue_ngn || 0).toLocaleString(), `Revenue (${t.funded_transactions} tx)`],
+    ['fa-coins', (t.credits_in_circulation || 0).toLocaleString(), 'Credits in Wallets'],
+    ['fa-fire', (t.credits_spent || 0).toLocaleString(), 'Credits Spent (Recent)'],
+    ['fa-image', t.images, 'Images & Flyers'],
+    ['fa-film', t.videos, 'Videos Rendered'],
+    ['fa-file-pdf', t.docs, 'PDFs & Documents'],
+    ['fa-globe', t.websites, 'Hosted Websites'],
+    ['fa-comments', t.chats, 'AI Chat & Vision'],
+    ['fa-microphone-lines', t.voice, 'Voice & Calls']
+  ].map(([ic, v, l]) => `<div class="scard"><i class="fa-solid ${ic}"></i><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('');
+  renderUsers();
+};
+
+window.renderUsers = () => {
+  const q = ($('u-search').value || '').toLowerCase();
+  const list = allUsers.filter(u => (u.email || '').toLowerCase().includes(q) || (u.user_id || '').toLowerCase().includes(q));
+  $('u-list').innerHTML = list.map(u => {
+    const st = u.stats || {};
+    return `<div class="u-row${u.user_id===window.activeUid?' on':''}${u.disabled?' banned':''}" onclick="inspectUser('${u.user_id}')">
+      <div>
+        <div class="u-em">${esc(u.email || u.user_id)} ${u.disabled?'<span style="color:var(--red);font-size:.65rem">[DISABLED]</span>':''}</div>
+        <div class="u-meta">
+          <span>🖼 ${st.images||0}</span>
+          <span>🎬 ${st.videos||0}</span>
+          <span>📄 ${st.docs||0}</span>
+          <span>🌐 ${st.websites||0}</span>
+          <span>💬 ${st.chats||0}</span>
+          <span>Spent: ${st.spent||0} cr</span>
+        </div>
+      </div>
+      <div class="u-cr">${u.credits + (u.daily_credits||0)} cr</div>
+    </div>`;
+  }).join('');
+};
+
+window.inspectUser = async (uid) => {
+  window.activeUid = uid;
+  renderUsers();
+  $('insp-empty').style.display = 'none';
+  $('insp-content').style.display = 'block';
+  $('ins-email').textContent = 'Loading user data…';
+  const d = await vCall(`/api/admin/vault/user/${uid}`);
+  const p = d.profile || {};
+  activeUserDisabled = !!p.disabled;
+  $('ins-email').textContent = p.email || uid;
+  $('ins-uid').textContent = `UID: ${uid} · Created: ${p.created_at || 'N/A'}`;
+  $('ins-bal').textContent = `${p.credits || 0} permanent cr`;
+  $('ins-daily').textContent = `(+${p.daily_credits || 0} daily cr)`;
+  $('set-cr-inp').value = p.credits || 0;
+  $('ban-btn').innerHTML = activeUserDisabled ? '<i class="fa-solid fa-check"></i> Re-Enable Account' : '<i class="fa-solid fa-ban"></i> Disable Account';
+
+  // 1. Chats
+  $('cnt-chats').textContent = (d.chats || []).length;
+  $('ins-chat-list').innerHTML = (d.chats || []).map(c => `<div class="c-item" onclick="readUserChat('${uid}','${c.chat_id}',this)"><b>${esc(c.name)}</b></div>`).join('') || '<div style="color:var(--t2);font-size:.75rem">No chats found.</div>';
+  $('ins-chat-msgs').innerHTML = '<div style="color:var(--t2);font-size:.8rem;padding:20px">Select a conversation on the left to inspect messages.</div>';
+
+  // 2. Creations & Websites
+  $('cnt-creations').textContent = (d.creations || []).length + (d.websites || []).length;
+  $('ins-sites-list').innerHTML = (d.websites || []).map(s => `<div style="padding:8px 12px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem"><span>🌐 <b>${esc(s.title)}</b></span><a href="${s.link}" target="_blank" style="color:var(--gold)">${s.link} ↗</a></div>`).join('');
+  $('ins-art-grid').innerHTML = (d.creations || []).map(a => {
+    const src = a.url ? (a.url.startsWith('http') || a.url.startsWith('data:') ? a.url : API + a.url) : '';
+    const media = a.kind === 'image' && src ? `<img src="${src}" loading="lazy">` : a.kind === 'video' && src ? `<video src="${src}" controls preload="metadata"></video>` : `<div style="height:130px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--gold)"><i class="fa-solid fa-file-lines"></i></div>`;
+    return `<div class="art-card">${media}<div class="a-inf"><b>${esc(a.kind.toUpperCase())}</b> · ${esc((a.desc||a.name||'').slice(0,55))}${src?`<br><a href="${src}" target="_blank" style="color:var(--gold)">Open / Download ↗</a>`:''}</div></div>`;
+  }).join('') || '<div style="color:var(--t2);font-size:.78rem">No saved artifacts.</div>';
+
+  // 3. Usage Logs
+  $('cnt-logs').textContent = (d.logs || []).length;
+  $('ins-logs-body').innerHTML = (d.logs || []).map(l => `<tr><td style="color:var(--t2)">${esc((l.timestamp||'').slice(0,19).replace('T',' '))}</td><td>${esc(l.endpoint)}</td><td>${esc(l.type)}</td><td style="color:var(--gold2);font-weight:700">${l.cost} cr</td></tr>`).join('');
+
+  // 4. Sent Popups
+  $('cnt-popups').textContent = (d.popups || []).length;
+  $('ins-popups-list').innerHTML = (d.popups || []).map(pop => `<div style="padding:10px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;display:flex;justify-content:space-between;align-items:center"><div><b style="color:var(--gold)">${esc(pop.title)}</b> (${pop.target_uid}) · Bonus: ${pop.claimable_credits} cr<div style="font-size:.72rem;color:var(--t2)">${esc(pop.message)}</div></div><button class="btn danger" style="padding:5px 10px" onclick="deletePopup('${pop.id}')">Delete</button></div>`).join('');
+};
+
+window.readUserChat = async (uid, cid, el) => {
+  document.querySelectorAll('.c-item').forEach(x => x.classList.remove('on'));
+  el?.classList.add('on');
+  $('ins-chat-msgs').innerHTML = '<div style="color:var(--gold);padding:20px">Loading transcript…</div>';
+  const d = await vCall(`/api/admin/vault/user/${uid}/chat/${cid}`);
+  $('ins-chat-msgs').innerHTML = (d.messages || []).map(m => {
+    const clean = String(m.text || '').split('\u0000THINK\u0000').pop();
+    const arts = (m.arts || []).map(a => `<div style="margin-top:6px"><a href="${a.url?.startsWith('http')?a.url:API+(a.url||'')}" target="_blank" style="color:var(--gold);font-size:.74rem">[Artifact: ${esc(a.kind)} - ${esc(a.name||a.desc||a.id)}] ↗</a></div>`).join('');
+    return `<div class="m-bub ${m.role==='user'?'user':'ai'}"><div class="m-head">${m.role==='user'?'USER':esc(m.persona||'AI')}</div>${esc(clean)}${arts}</div>`;
+  }).join('') || '<div style="color:var(--t2);padding:20px">Empty conversation.</div>';
+};
+
+window.switchItab = (name, btn) => {
+  document.querySelectorAll('.itab').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.ipane').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  $('ipane-' + name).classList.add('on');
+};
+
+window.wipeUserCredits = async () => {
+  if (!window.activeUid) return;
+  if (!confirm('Reset this user’s permanent and daily credits to 0?')) return;
+  await vCall('/api/admin/vault/set-credits', {method:'POST', json:{user_id:window.activeUid, credits:0, clear_daily:true, reason:'Admin zero reset'}});
+  await loadVaultOverview();
+  await inspectUser(window.activeUid);
+  alert('User credits reset to 0.');
+};
+
+window.setExactCredits = async () => {
+  if (!window.activeUid) return;
+  const val = parseInt($('set-cr-inp').value);
+  if (isNaN(val) || val < 0) return alert('Enter a valid non-negative number.');
+  await vCall('/api/admin/vault/set-credits', {method:'POST', json:{user_id:window.activeUid, credits:val, clear_daily:false, reason:'Admin manual set'}});
+  await loadVaultOverview();
+  await inspectUser(window.activeUid);
+  alert(`Balance updated to ${val} credits.`);
+};
+
+window.toggleBanUser = async () => {
+  if (!window.activeUid) return;
+  const nextState = !activeUserDisabled;
+  const reason = nextState ? prompt('Reason for disabling this account:', 'Terms of Service / AI Misuse Violation') : 'Re-enabled';
+  if (nextState && reason === null) return;
+  await vCall('/api/admin/vault/ban-user', {method:'POST', json:{user_id:window.activeUid, disabled:nextState, reason:reason||''}});
+  await loadVaultOverview();
+  await inspectUser(window.activeUid);
+};
+
+window.openBroadcastModal = (target) => {
+  $('bc-target').value = target || 'ALL';
+  $('bcast-modal').style.display = 'flex';
+};
+
+window.sendBroadcast = async () => {
+  const target = $('bc-target').value.trim() || 'ALL';
+  const title = $('bc-title').value.trim() || 'Announcement from Elvion AI';
+  const message = $('bc-msg').value.trim();
+  const custom_html = $('bc-html').value.trim();
+  const claimable_credits = parseInt($('bc-credits').value) || 0;
+  await vCall('/api/admin/vault/send-popup', {method:'POST', json:{target_user_id:target, title, message, custom_html, claimable_credits}});
+  $('bcast-modal').style.display = 'none';
+  if (window.activeUid) inspectUser(window.activeUid);
+  alert('Dispatched! Users will see this pop up in their dashboard.');
+};
+
+window.deletePopup = async (pid) => {
+  await vCall(`/api/admin/vault/popup/${pid}`, {method:'DELETE'});
+  if (window.activeUid) inspectUser(window.activeUid);
+};
+</script>
+</body>
+  </html>
+
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); 
+
+  gtag('config', 'G-J1YTKP10ZX');
+</script>
