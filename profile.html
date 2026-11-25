@@ -39,26 +39,27 @@ button{cursor:pointer}
 #fx{position:fixed;inset:0;z-index:20;pointer-events:none}
 
 /* ═════ OTHERWORLDLY SOARING "..." FLIGHT (Only Active While Thinking/Working) ═════ */
-.orb-stage{position:relative;width:100%;min-height:92px;margin:6px 0 12px;padding:16px 18px;border-radius:18px;background:radial-gradient(ellipse at 50% 50%,rgba(var(--accent-rgb),.11) 0%,rgba(var(--accent-rgb),.02) 60%,transparent 80%);border:1px solid rgba(var(--accent-rgb),.18);overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.orb-stage::before{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(var(--accent-rgb),.09),transparent 35%,rgba(var(--accent-rgb),.07),transparent 70%);animation:auroraSpin 7s linear infinite;pointer-events:none}
+.orb-stage{position:relative;width:100%;min-height:94px;margin:6px 0 12px;padding:16px 18px;border-radius:18px;background:radial-gradient(ellipse at 50% 50%,rgba(var(--accent-rgb),.14) 0%,rgba(var(--accent-rgb),.03) 62%,transparent 85%);border:1px solid rgba(var(--accent-rgb),.24);overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 10px 34px rgba(0,0,0,.55),inset 0 0 28px rgba(var(--accent-rgb),.06)}
+.orb-stage::before{content:'';position:absolute;inset:-45%;background:conic-gradient(from 0deg,transparent,rgba(var(--accent-rgb),.14),transparent 30%,rgba(var(--accent-rgb),.1),transparent 65%,rgba(var(--accent-rgb),.12),transparent);animation:auroraSpin 5.5s linear infinite;pointer-events:none}
+.orb-stage::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 50%,rgba(var(--accent-rgb),.12),transparent 55%);pointer-events:none}
 @keyframes auroraSpin{to{transform:rotate(360deg)}}
-.soar-track{position:relative;flex:1;height:60px;min-width:140px;pointer-events:none}
-.soar- dots-wrap,.soar-carrier{position:absolute;left:50%;top:50%;width:54px;height:26px;margin:-13px 0 0 -27px;animation:soarFlight 4.2s cubic-bezier(.45,.05,.55,.95) infinite}
-.soar-wing{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(var(--accent-rgb),.95))}
-.soar-wing i{display:block;width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 14px var(--accent),0 0 26px rgba(var(--accent-rgb),.8);animation:wingWave .85s ease-in-out infinite alternate}
+.soar-track{position:relative;flex:1;height:62px;min-width:140px;pointer-events:none}
+.soar-carrier{position:absolute;left:50%;top:50%;width:58px;height:28px;margin:-14px 0 0 -29px;animation:soarFlight 3.8s cubic-bezier(.45,.05,.55,.95) infinite}
+.soar-wing{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;height:100%;filter:drop-shadow(0 0 14px rgba(var(--accent-rgb),1))}
+.soar-wing i{display:block;width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 16px var(--accent),0 0 30px rgba(var(--accent-rgb),.9);animation:wingWave .78s ease-in-out infinite alternate}
 .soar-wing i:nth-child(1){animation-delay:0s;transform-origin:right center}
-.soar-wing i:nth-child(2){width:9px;height:9px;background:#fff;animation-delay:.14s}
+.soar-wing i:nth-child(2){width:10px;height:10px;background:#fff;animation-delay:.14s}
 .soar-wing i:nth-child(3){animation-delay:.28s;transform-origin:left center}
 @keyframes soarFlight{
-  0%{transform:translate(-90px,4px) rotate(-12deg) scale(.88)}
-  25%{transform:translate(0px,-18px) rotate(8deg) scale(1.12)}
-  50%{transform:translate(90px,6px) rotate(14deg) scale(.92)}
-  75%{transform:translate(0px,18px) rotate(-8deg) scale(1.06)}
-  100%{transform:translate(-90px,4px) rotate(-12deg) scale(.88)}
+  0%{transform:translate(-92px,5px) rotate(-14deg) scale(.86)}
+  25%{transform:translate(0px,-20px) rotate(9deg) scale(1.15)}
+  50%{transform:translate(92px,6px) rotate(15deg) scale(.9)}
+  75%{transform:translate(0px,19px) rotate(-9deg) scale(1.08)}
+  100%{transform:translate(-92px,5px) rotate(-14deg) scale(.86)}
 }
 @keyframes wingWave{
   0%{transform:translateY(5px) scale(.75);opacity:.65}
-  100%{transform:translateY(-6px) scale(1.25);opacity:1}
+  100%{transform:translateY(-7px) scale(1.28);opacity:1}
 }
 .orb-info{position:relative;z-index:2;display:flex;flex-direction:column;gap:3px;max-width:65%}
 .orb-status{font-size:.92rem;color:var(--accent-2);font-weight:600;animation:shimmer 1.8s ease-in-out infinite}
@@ -71,7 +72,7 @@ button{cursor:pointer}
 .mini-soar i:nth-child(2){animation-delay:.15s;background:var(--accent-2)}
 .mini-soar i:nth-child(3){animation-delay:.3s}
 
-/* ═════ FRAME & HEADER (No Top Orb) ═════ */
+/* ═════ FRAME & HEADER ═════ */
 .studio{position:relative;z-index:10;width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;background:radial-gradient(120% 60% at 50% -10%,rgba(var(--accent-rgb),.07),transparent 60%),var(--bg-surface);padding-top:var(--safe-t)}
 @media(min-width:1024px){.studio{width:96vw;height:94vh;max-width:1320px;border-radius:var(--r-xl);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}}
 .hdr{padding:10px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(8,8,8,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);flex-shrink:0;position:relative;z-index:100}
@@ -169,10 +170,11 @@ details.steps-sum .steps{margin-top:8px}
 .quiz-hdr{display:flex;align-items:center;justify-content:space-between;font-family:var(--font-brand);font-size:.73rem;color:var(--accent);letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px}
 .quiz-q{font-size:.96rem;font-weight:700;color:var(--text-1);margin-bottom:11px;line-height:1.55}
 .quiz-opts{display:grid;grid-template-columns:1fr;gap:7px}
-.quiz-opt{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:12px;border:1px solid var(--border-focus);background:var(--bg-panel);text-align:left;font-size:.88rem;transition:var(--ease)}
-.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(var(--accent-rgb),.1);transform:translateX(3px)}
+.quiz-opt{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:12px;border:1px solid var(--border-focus);background:var(--bg-panel);text-align:left;font-size:.88rem;transition:var(--ease);cursor:pointer}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:rgba(var(--accent-rgb),.12);transform:translateX(4px)}
 .quiz-opt .q-let{width:26px;height:26px;border-radius:7px;background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.35);color:var(--accent);font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.quiz-opt.picked{border-color:var(--accent);background:rgba(var(--accent-rgb),.16)}
+.quiz-opt.picked{border-color:var(--accent);background:rgba(var(--accent-rgb),.2)}
+.quiz-opt.picked .q-let{background:var(--accent);color:#000}
 .quiz-opt.correct{border-color:var(--green);background:rgba(95,184,122,.16)}
 .quiz-opt.correct .q-let{background:var(--green);color:#000;border-color:var(--green)}
 .quiz-opt.wrong{border-color:var(--danger);background:rgba(224,90,90,.15)}
@@ -201,11 +203,10 @@ details.steps-sum .steps{margin-top:8px}
 @keyframes shine{to{background-position:-220% 0}}
 .art-frame.expired .frame-mat{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.8rem;text-align:center;padding:20px}
 .art-files{display:flex;flex-direction:column;gap:8px;margin:8px 0}
-.file-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(var(--accent-rgb),.25);background:rgba(var(--accent-rgb),.05);max-width:440px;animation:pop .4s ease}
-.file-card .fi{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(var(--accent-rgb),.12);color:var(--accent);font-size:1.1rem}
+.file-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(var(--accent-rgb),.25);background:rgba(var(--accent-rgb),.05);max-width:480px;animation:pop .4s ease}
+.file-card .fi{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(var(--accent-rgb),.12);color:var(--accent);font-size:1.1rem;flex-shrink:0}
 .file-card .fn{font-size:.88rem;font-weight:700;word-break:break-all}
 .file-card .fm{font-size:.68rem;color:var(--text-2)}
-.file-card a{margin-left:auto;color:var(--green);text-decoration:none;font-size:.8rem;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .u-pill{display:inline-flex;gap:6px;align-items:center;padding:5px 11px;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:10px;font-size:.78rem;color:var(--accent);cursor:pointer;transition:var(--ease)}
 .u-pill:hover{border-color:var(--accent);background:rgba(var(--accent-rgb),.15)}
 .u-thumb{width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid var(--user-border);cursor:zoom-in}
@@ -261,7 +262,7 @@ details.steps-sum .steps{margin-top:8px}
 .starter:hover::before{opacity:1}
 @keyframes starterIn{to{opacity:1;transform:none}}
 
-/* ═════ INPUT DOCK (Send Button Pinned Right, No Recorder in Textbox) ═════ */
+/* ═════ INPUT DOCK ═════ */
 #run-bar{display:flex;align-items:center;gap:10px;margin:0 18px 8px;padding:8px 8px 8px 14px;border-radius:18px;background:var(--bg-panel);border:1px solid rgba(var(--accent-rgb),.35);flex-shrink:0;animation:pop .3s ease;position:relative;overflow:hidden}
 #run-bar::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:40%;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:runSweep 1.6s linear infinite}
 #run-bar.paused::after{animation:none;opacity:0}
@@ -552,11 +553,13 @@ details.steps-sum .steps{margin-top:8px}
 <body>
 
 <canvas id="fx"></canvas>
+<!-- Hidden iOS Safari CoreHaptics Switch Trigger -->
+<label id="ios-haptic-lbl" for="ios-haptic-chk" style="position:fixed;left:-9999px;top:-9999px;opacity:0;pointer-events:none"><input type="checkbox" id="ios-haptic-chk" switch></label>
 
 <div class="studio" id="studio">
   <header class="hdr">
     <div class="hdr-side">
-      <button class="ibtn" id="open-workspace" title="Chats & wallet" data-tour="menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="ibtn" id="open-workspace" title="Chats, daily credits & wallet" data-tour="menu"><i class="fa-solid fa-bars"></i></button>
       <div id="header-balance-wrap" class="ibtn" style="width:auto;padding:0 11px;gap:6px;cursor:pointer" data-tour="credits"><i class="fa-solid fa-coins"></i><span id="header-balance">--</span><div id="credit-flash"></div></div>
     </div>
     <div class="hdr-center">
@@ -596,7 +599,7 @@ details.steps-sum .steps{margin-top:8px}
   <div id="input-dock">
     <button class="call-btn-dock" id="call-btn" title="Live call" data-tour="call"><i class="fa-solid fa-phone"></i></button>
     <div class="capsule" id="capsule" data-tour="composer">
-      <textarea id="txt-input" placeholder="Ask anything, paste long text, or describe what to create…" autocomplete="off" rows="1"></textarea>
+      <textarea id="txt-input" placeholder="Ask anything, paste long text or YouTube links, or describe what to create…" autocomplete="off" rows="1"></textarea>
       <div class="input-bar">
         <div class="bar-left">
           <div style="position:relative">
@@ -708,7 +711,7 @@ details.steps-sum .steps{margin-top:8px}
     <div style="background:rgba(var(--accent-rgb),.05);border:1px solid rgba(var(--accent-rgb),.2);border-radius:12px;padding:15px;text-align:center;margin-bottom:15px">
       <div style="font-size:.75rem;color:var(--text-2)">Available balance</div>
       <div id="wallet-balance" style="font-size:2.2rem;font-weight:900;color:var(--accent);font-family:var(--font-brand)">--</div>
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="submit-btn" id="claim-daily-btn" style="margin-top:0;padding:9px;font-size:.75rem"><i class="fa-solid fa-gift"></i> Claim daily</button><button class="submit-btn" id="fund-wallet-btn" style="margin-top:0;padding:9px;font-size:.75rem;background:var(--green)"><i class="fa-solid fa-wallet"></i> Fund wallet</button></div>
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="submit-btn" id="claim-daily-btn" style="margin-top:0;padding:9px;font-size:.75rem"><i class="fa-solid fa-gift"></i> Claim daily (20)</button><button class="submit-btn" id="fund-wallet-btn" style="margin-top:0;padding:9px;font-size:.75rem;background:var(--green)"><i class="fa-solid fa-wallet"></i> Fund wallet</button></div>
       <div class="status-msg" id="wallet-status" style="font-size:.72rem"></div>
     </div>
     <div class="panel-section-title">REFERRALS</div>
@@ -756,23 +759,25 @@ details.steps-sum .steps{margin-top:8px}
   </div>
 </aside>
 
-<!-- SETTINGS (Automatic Cross-Chat Recall — No Manual Memory Textboxes) -->
+<!-- SETTINGS (3 Voice Engines + Cogent Cross-Chat Memory) -->
 <div class="overlay" id="settings-overlay"></div>
 <aside class="panel right" id="settings-panel">
   <div class="panel-hdr"><h2>SETTINGS</h2><button class="ibtn" onclick="closePanel('settings')"><i class="fa-solid fa-xmark"></i></button></div>
   <div class="panel-body">
     <div class="panel-section-title">LOOK & FEEL</div>
     <div class="swatches" id="accent-swatches"><button data-a="gold" style="background:#c9a96e"></button><button data-a="emerald" style="background:#5fd6a0"></button><button data-a="violet" style="background:#b794f6"></button><button data-a="rose" style="background:#f58fb0"></button><button data-a="azure" style="background:#6aa8ff"></button></div>
-    <div class="toggle-row" style="margin-top:12px"><div><div class="tr-label">Haptic typing</div><div class="tr-sub">A tiny vibration while replies stream in</div></div><label class="switch"><input type="checkbox" id="haptic-toggle" checked><span class="switch-track"></span></label></div>
+    <div class="toggle-row" style="margin-top:12px"><div><div class="tr-label">Haptic typing</div><div class="tr-sub">Physical vibration & tactile pulse while replies stream in</div></div><label class="switch"><input type="checkbox" id="haptic-toggle" checked><span class="switch-track"></span></label></div>
 
-    <div class="panel-section-title">PHILADELPHIA VOICE</div>
-    <label class="form-label">Voice</label><div id="dd-reader-voice"></div>
-    <label class="form-label">Speaking style</label><div id="dd-reader-style"></div>
-    <div class="toggle-row" style="margin-top:12px"><div><div class="tr-label">Premium voice</div><div class="tr-sub">About 5 credits per reading. Off uses your device's free voice.</div></div><label class="switch"><input type="checkbox" id="reader-premium-toggle" checked><span class="switch-track"></span></label></div>
-    <label class="form-label">Call voice</label><div id="dd-call-voice"></div>
+    <div class="panel-section-title">PHILADELPHIA VOICE (3 ENGINES)</div>
+    <label class="form-label">Voice Engine</label><div id="dd-reader-engine"></div>
+    <div id="wrap-reader-voice"><label class="form-label">Studio Voice (V2)</label><div id="dd-reader-voice"></div></div>
+    <div id="wrap-reader-pro" hidden><label class="form-label">Pro Character Voice</label><div id="dd-reader-pro"></div></div>
+    <div id="wrap-reader-style"><label class="form-label">Speaking Style</label><div id="dd-reader-style"></div></div>
+    <div class="toggle-row" style="margin-top:12px"><div><div class="tr-label">Use AI Studio Voice</div><div class="tr-sub">Off uses your device's free built-in voice</div></div><label class="switch"><input type="checkbox" id="reader-premium-toggle" checked><span class="switch-track"></span></label></div>
+    <label class="form-label">Live Call Voice</label><div id="dd-call-voice"></div>
 
     <div class="panel-section-title">CROSS-CHAT MEMORY</div>
-    <div class="toggle-row"><div><div class="tr-label">Remember across chats</div><div class="tr-sub">Automatically recalls your actual messages and conversations from other chats without needing manual notes</div></div><label class="switch"><input type="checkbox" id="cross-chat-memory-toggle" checked><span class="switch-track"></span></label></div>
+    <div class="toggle-row"><div><div class="tr-label">Remember across chats</div><div class="tr-sub">Keeps cogent summaries of your past conversations so you never start from zero, while respecting your active personality</div></div><label class="switch"><input type="checkbox" id="cross-chat-memory-toggle" checked><span class="switch-track"></span></label></div>
 
     <div class="panel-section-title">ALERTS & NOTIFICATIONS</div>
     <div class="toggle-row"><div><div class="tr-label">Pop-up alerts when away</div><div class="tr-sub">Shows "Philadelphia has replied" as a device notification when you leave the chat or switch tabs</div></div><label class="switch"><input type="checkbox" id="task-notify-toggle" checked><span class="switch-track"></span></label></div>
@@ -794,9 +799,9 @@ details.steps-sum .steps{margin-top:8px}
 <aside class="panel right" id="toolform-panel" style="z-index:1020">
   <div class="panel-hdr"><button class="ibtn" id="tool-back-btn"><i class="fa-solid fa-arrow-left"></i></button><h2 id="tool-form-title">Tool</h2><span id="tool-form-price" style="font-size:.7rem;color:var(--accent)"></span></div>
   <div class="panel-body"><form id="tool-form"></form></div>
-                                                                                   </aside>
+</aside>
 
-  <!-- CALL -->
+<!-- CALL -->
 <div id="call-modal">
   <div class="call-top"><div class="call-hdr">PHILADELPHIA</div><div id="call-timer">00:00</div></div>
   <div class="call-center">
@@ -861,13 +866,12 @@ async function call(path, o = {}) {
     return fetch(path.startsWith('http') ? path : API + path, {method: o.method || 'GET', headers: h, body, signal: o.signal});
   };
   let res = await sendReq(tok);
-  // If token expired (401), force-refresh the Firebase token and retry once automatically
   if (res.status === 401) {
     tok = await u.getIdToken(true);
     res = await sendReq(tok);
   }
   return res;
-  }
+}
 
 /* IndexedDB for instant 0ms file persistence & local gallery */
 const IDB = (() => {
@@ -895,20 +899,50 @@ const nap = ms => new Promise(r => {
   if (tickWorker) { const id = ++tickId; tickWait.set(id, fin); tickWorker.postMessage({id, ms}); } else setTimeout(fin, ms);
 });
 
-/* ───────── FX: Stardust Trail Behind Active Soaring "..." Carrier Only (No Snow, No Static Orbs) ───────── */
+/* ───────── FX: Upgraded Swirling Stardust & Orbital Trails ───────── */
 let accentRGB = '201,169,110', fxBusy = false;
 (function(){
   const c = $('fx'), x = c.getContext('2d'); let W, H, sw = [], frame = 0;
   const rs = () => { W = c.width = innerWidth; H = c.height = innerHeight; };
-  window.fxBurst = (px, py, n = 10) => { for (let i = 0; i < n; i++) sw.push({x:px,y:py,a:Math.random()*6.28,r:Math.random()*3,s:(Math.random()*.08+.04)*(Math.random()<.5?-1:1),l:1,sz:Math.random()*2+.7}); if (sw.length > 360) sw.splice(0, 100); };
+  window.fxBurst = (px, py, n = 14) => {
+    for (let i = 0; i < n; i++) {
+      const ang = Math.random() * 6.28, spd = Math.random() * 2.2 + 0.4;
+      sw.push({
+        x: px, y: py,
+        vx: Math.cos(ang) * spd,
+        vy: Math.sin(ang) * spd - 0.35,
+        a: ang,
+        r: Math.random() * 2.5,
+        s: (Math.random() * 0.1 + 0.04) * (Math.random() < 0.5 ? -1 : 1),
+        l: 1,
+        sz: Math.random() * 2.3 + 0.7,
+        bright: Math.random() > 0.65
+      });
+    }
+    if (sw.length > 420) sw.splice(0, 120);
+  };
   const loop = () => {
     frame++; x.clearRect(0, 0, W, H);
-    if (frame % 2 === 0 && fxBusy) {
+    if (fxBusy) {
       const carrier = document.querySelector('.orb-stage .soar-carrier');
-      if (carrier) { const r = carrier.getBoundingClientRect(); if (r.width) fxBurst(r.left + r.width/2, r.top + r.height/2, 2); }
+      if (carrier) {
+        const r = carrier.getBoundingClientRect();
+        if (r.width) fxBurst(r.left + r.width/2, r.top + r.height/2, 2);
+      }
     }
-    sw.forEach(p => { p.a += p.s; p.r += .45; p.l -= .022; const px = p.x + Math.cos(p.a) * p.r, py = p.y + Math.sin(p.a) * p.r; x.beginPath(); x.arc(px, py, p.sz, 0, 6.28); x.fillStyle = `rgba(${accentRGB},${Math.max(0,p.l)*.85})`; x.fill(); });
-    sw = sw.filter(p => p.l > 0);
+    for (let i = sw.length - 1; i >= 0; i--) {
+      const p = sw[i];
+      p.a += p.s;
+      p.r += 0.38;
+      p.x += (p.vx || 0) * 0.96 + Math.cos(p.a) * 0.45;
+      p.y += (p.vy || 0) * 0.96 + Math.sin(p.a) * 0.45;
+      p.l -= 0.02;
+      if (p.l <= 0) { sw.splice(i, 1); continue; }
+      x.beginPath();
+      x.arc(p.x, p.y, p.sz * (0.6 + p.l * 0.5), 0, 6.28);
+      x.fillStyle = p.bright ? `rgba(255,250,235,${p.l * 0.9})` : `rgba(${accentRGB},${p.l * 0.85})`;
+      x.fill();
+    }
     requestAnimationFrame(loop);
   };
   rs(); addEventListener('resize', rs); loop();
@@ -973,10 +1007,10 @@ const pName = () => activePersona === 'custom' ? ($('custom-name').value.trim() 
 function corePrompt() {
   const n = pName(), u = userName();
   const who = activePersona === 'custom'
-    ? `You are ${n}, a custom AI character created by ${u || 'the user'} inside Elvion AI Studio, which is built by Elvion AI. `
-    : `You are ${n}, an AI made by Elvion AI and living in Elvion AI Studio (elvionai.com.ng). `;
-  return who + `Elvion AI was founded in Lagos, Nigeria by Kolade Philip Ogunlana and Sahil Dhani. Never say you were made by Google, OpenAI, Meta, MiniMax or any other lab. ${u ? `You are talking with ${u}. ` : ''}Never invent facts, sources or statistics; say when you are unsure.
-SINGLE-CREATION RULE: When asked to create an image, logo, flyer, video, audio, document, or website, create it EXACTLY ONCE (1 single generation). Never generate multiple versions or retry on your own unless the first tool call failed with an error. Present the 1 result and let the user ask for adjustments if needed.
+    ? `CRITICAL ACTIVE IDENTITY: Your name right now is ${n}, a custom AI character created by ${u || 'the user'} inside Elvion AI Studio (built by Elvion AI). `
+    : `CRITICAL ACTIVE IDENTITY: Your name right now is ${n}, an AI made by Elvion AI and living in Elvion AI Studio (elvionai.com.ng). `;
+  return who + `Even if earlier messages in this chat or other chats were answered by another Elvion personality (such as Philadelphia, Zuri, Professor Dope, Kodi, Sage, Reel, Tobi, Coach Nia, or Kemi), YOU are now ${n}. Never call yourself Philadelphia if your active name is ${n} — if the user mentions a previous reply from another personality, you can naturally acknowledge that they were speaking with that personality earlier, and respond fully as ${n}.
+Elvion AI was founded in Lagos, Nigeria by Kolade Philip Ogunlana. Never say you were made by Google, OpenAI, Meta, MiniMax or any other lab. ${u ? `You are talking with ${u}. ` : ''}Never invent facts, sources or statistics; say when you are unsure.
 CODE RULE (MANDATORY): Any code of any length — even 10,000+ lines — MUST live inside ONE single fenced markdown code block (\`\`\`lang ... \`\`\`). Never split one file across multiple code blocks or leave code unfenced.
 INTERACTIVE A/B/C/D CARDS:
 1) For open-ended brainstorming choices or asking what the user wants to build/do next (NO right or wrong answer), omit "answer" or set "answer": null, and do NOT put A/B/C/D prefixes inside the option strings:
@@ -991,60 +1025,92 @@ function personaStyle() {
 }
 function updateDisclaimer() { $('disclaimer-name').textContent = pName(); }
 
-/* ───────── Haptic Typing Engine (Vibration + Tactile Audio Micro-Pulse) ───────── */
+/* ───────── Upgraded Haptic Typing Engine (Android Vibrate + iOS Switch Haptic + Sub-Bass Tactile Thump) ───────── */
 let lastHap = 0;
-function triggerHaptic() {
+function triggerHaptic(strong = false) {
   if (!hapticOn()) return;
   const now = performance.now();
-  if (now - lastHap < 55) return;
+  if (!strong && now - lastHap < 48) return;
   lastHap = now;
-  try { if (navigator.vibrate) navigator.vibrate(12); } catch(e) {}
+  try {
+    if (navigator.vibrate) navigator.vibrate(strong ? [22, 30, 18] : 16);
+  } catch(e) {}
+  // iOS Safari 17.4+ switch haptic trigger
+  if (strong) {
+    try { $('ios-haptic-lbl')?.click(); } catch(e) {}
+  }
+  // Tactile low-frequency mechanical thump via WebAudio (works on every phone & laptop)
+  unlockAudio();
   if (ac && ac.state === 'running') {
     try {
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
-      o.type = 'sine'; o.frequency.setValueAtTime(150, t);
-      g.gain.setValueAtTime(0.012, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.012);
-      o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 0.013);
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(strong ? 165 : 135, t);
+      o.frequency.exponentialRampToValueAtTime(55, t + (strong ? 0.028 : 0.018));
+      g.gain.setValueAtTime(strong ? 0.055 : 0.036, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + (strong ? 0.03 : 0.02));
+      o.connect(g); g.connect(ac.destination);
+      o.start(t); o.stop(t + (strong ? 0.032 : 0.022));
     } catch(e) {}
   }
 }
 
-/* ───────── Automatic Cross-Chat Conversation Memory (Remembers Actual Chats) ───────── */
+/* ───────── Cogent Cross-Chat Memory (Third-Person Summaries + Persona Awareness, Zero Identity Confusion) ───────── */
+function summarizeChatDocs(chatTitle, docsList) {
+  const userTopics = [], aiSummaries = [], personasUsed = new Set();
+  docsList.forEach(m => {
+    const raw = String(m.text || '').split(SEP).pop().replace(/```[\s\S]*?```/g, '[code]').replace(/<<quiz:[\s\S]*?>>/g, '').replace(/\s+/g, ' ').trim();
+    if (!raw) return;
+    if (m.persona) personasUsed.add(m.persona);
+    if (m.role === 'user') userTopics.push(raw.slice(0, 160));
+    else aiSummaries.push(raw.slice(0, 160));
+  });
+  if (!userTopics.length && !aiSummaries.length) return '';
+  const who = personasUsed.size ? ` (Handled by: ${[...personasUsed].join(', ')})` : '';
+  return `• Chat "${chatTitle || 'Previous Conversation'}"${who}:\n  - User asked/discussed: ${userTopics.slice(-4).join(' | ')}\n  - Outcome/covered: ${aiSummaries.slice(-3).join(' | ')}`;
+}
+
 async function syncCrossChatTranscripts(uid) {
   if (!uid || !crossMem()) return;
   const otherChats = chatsCache.filter(c => c.id !== chatId).slice(0, 6);
   for (const c of otherChats) {
     if (crossChatTranscripts[c.id]) continue;
     try {
-      const snap = await getDocs(query(collection(db,'users',uid,'chats',c.id,'messages'), orderBy('createdAt','desc'), limit(10)));
-      const lines = snap.docs.reverse().map(d => {
-        const m = d.data();
-        const txt = String(m.text || '').split(SEP).pop().replace(/\s+/g,' ').trim().slice(0, 350);
-        return txt ? `${m.role === 'user' ? 'User' : 'AI'}: ${txt}` : '';
-      }).filter(Boolean);
-      if (lines.length) crossChatTranscripts[c.id] = `[Chat "${c.name || 'Previous Chat'}"]\n` + lines.join('\n');
+      const snap = await getDocs(query(collection(db,'users',uid,'chats',c.id,'messages'), orderBy('createdAt','desc'), limit(8)));
+      const summary = summarizeChatDocs(c.name, snap.docs.reverse().map(d => d.data()));
+      if (summary) crossChatTranscripts[c.id] = summary;
     } catch(e) {}
   }
 }
 function memoryBlock() {
   if (!crossMem()) return '';
+  const learned = LS('ph_learned_facts') || '';
   if (chatId && msgs.length) {
-    const curLines = msgs.slice(-10).map(m => {
-      const txt = String(m.text || '').split(SEP).pop().replace(/\s+/g,' ').trim().slice(0, 350);
-      return txt ? `${m.role === 'user' ? 'User' : 'AI'}: ${txt}` : '';
-    }).filter(Boolean);
     const curChat = chatsCache.find(c => c.id === chatId);
-    if (curLines.length) crossChatTranscripts[chatId] = `[Chat "${curChat?.name || 'Chat'}"]\n` + curLines.join('\n');
+    const s = summarizeChatDocs(curChat?.name || 'Chat', msgs.slice(-8));
+    if (s) crossChatTranscripts[chatId] = s;
   }
   const blocks = Object.entries(crossChatTranscripts).filter(([id]) => id !== chatId).map(([, b]) => b).slice(0, 6);
-  return blocks.length ? `\n\n[PREVIOUS CONVERSATIONS ACROSS THE USER'S OTHER CHATS — you remember these directly]\n${blocks.join('\n\n')}` : '';
+  let out = '';
+  if (learned) out += `\n\n[KEY FACTS REMEMBERED ABOUT THE USER]\n${learned}`;
+  if (blocks.length) {
+    out += `\n\n[COGENT SUMMARIES OF THE USER'S OTHER CHATS — Use this background knowledge naturally so the user feels continuity across chats, but stay 100% in your current active persona (${pName()})]\n${blocks.join('\n')}`;
+  }
+  return out;
+}
+function saveLearnedFact(text) {
+  const matches = [...String(text || '').matchAll(/<<remember:\s*([^>]+?)>>/gi)].map(m => m[1].trim()).filter(Boolean);
+  if (!matches.length) return;
+  const existing = (LS('ph_learned_facts') || '').split('\n').filter(Boolean);
+  matches.forEach(f => { if (!existing.includes('• ' + f)) existing.push('• ' + f); });
+  LS('ph_learned_facts', existing.slice(-25).join('\n'));
 }
 const personaText = (forAgent = false) => {
   const full = corePrompt() + '\nTONE: ' + personaStyle() + memoryBlock();
   return forAgent ? full.slice(0, 3800) : full;
 };
 
-/* ───────── Line-Aware Markdown + Unbreakable Code Boxes + Objective Quiz Cards ───────── */
+/* ───────── Line-Aware Markdown + Unbreakable Code Boxes + Interactive A/B/C/D Cards ───────── */
 const RUNNABLE = new Set(['html','htm','css','javascript','js','python','py','jsx','react','tsx','svg','markdown','md','json']);
 const nums = n => Array.from({length:n}, (_, i) => i + 1).join('\n');
 const codeBlock = (l, c) => {
@@ -1055,12 +1121,11 @@ const codeBlock = (l, c) => {
 function renderQuizCard(qObj) {
   if (!qObj || !qObj.q || !Array.isArray(qObj.options) || !qObj.options.length) return '';
   const letters = ['A','B','C','D','E','F'];
-  // If the question is asking user preference/direction ("What do you want...", "Which direction..."), NEVER grade it right/wrong!
   const isChoicePrompt = /\b(what do you want|what would you like|which (?:one|direction|option|path|style|version|way)|how (?:would|do) you want|where should we|what should (?:i|we)|choose a|next step|build from this)\b/i.test(qObj.q);
-  const ans = (!isChoicePrompt && typeof qObj.answer === 'number' && qObj.explanation) ? qObj.answer : -1;
+  const ans = (!isChoicePrompt && typeof qObj.answer === 'number' && qObj.answer >= 0) ? qObj.answer : -1;
   const exp = ans >= 0 ? (qObj.explanation || '') : '';
-  return `<div class="quiz-card" data-ans="${ans}">
-    <div class="quiz-hdr"><span><i class="fa-solid fa-list-check"></i> ${ans >= 0 ? 'Objective Quiz' : 'Choose Your Direction'}</span><span class="qz-status">Select A, B, C or D</span></div>
+  return `<div class="quiz-card" data-ans="${ans}" data-q="${attr(qObj.q)}">
+    <div class="quiz-hdr"><span><i class="fa-solid fa-list-check"></i> ${ans >= 0 ? 'Objective Quiz' : 'Interactive Choice'}</span><span class="qz-status">Tap A, B, C or D</span></div>
     <div class="quiz-q">${inline(qObj.q)}</div>
     <div class="quiz-opts">${qObj.options.slice(0,6).map((o,i) => {
       const clean = String(o).replace(/^[A-F](?:[.):\-]|\s+(?=[a-zA-Z]))\s*/i,'').trim();
@@ -1150,7 +1215,6 @@ function splitThink(t = '') {
   return {think: th.trim(), body: clean.trim()};
 }
 const thinkSum = t => { const s = plain(t).split(/[.!?\n]/).map(x => x.trim()).filter(x => x.length > 8); return (s[s.length - 1] || s[0] || 'Reasoning…').slice(0, 90); };
-/* No spinning orb on finished thought blocks */
 const thinkHTML = t => `<details class="think-block"><summary class="think-toggle"><i class="fa-solid fa-brain" style="color:var(--accent)"></i><span class="think-title">Thought process</span><span class="think-sum">${esc(thinkSum(t))}</span><i class="fa-solid fa-chevron-down think-chevron"></i></summary><div class="think-content">${md(t)}</div></details>`;
 function highlight(root) { root.querySelectorAll('.codebox:not(.hl) code').forEach(c => { c.closest('.codebox').classList.add('hl'); if (window.hljs) try { hljs.highlightElement(c); } catch(e){} }); }
 
@@ -1161,12 +1225,13 @@ function scrollBot(force) { if (force) stick = true; if (stick) requestAnimation
 vp.addEventListener('scroll', () => { stick = nearBottom(); $('scroll-down').classList.toggle('show', !stick); });
 $('scroll-down').onclick = () => { vp.scrollTo({top: vp.scrollHeight, behavior:'smooth'}); stick = true; };
 
-/* ───────── artwork & gallery storage ───────── */
-const IMG_TOOLS = new Set(['generate_image','edit_image','remove_background','transform_image','add_text','draw_on_image','overlay_image','create_design','make_chart','make_qr_code']);
+/* ───────── artwork, in-modal file previews & reliable Blob downloads ───────── */
+const IMG_TOOLS = new Set(['generate_image','edit_image','create_comic','remove_background','transform_image','add_text','draw_on_image','overlay_image','create_design','make_chart','make_qr_code']);
 const SOAR_HTML = `<div class="soar-track"><div class="soar-carrier"><div class="soar-wing"><i></i><i></i><i></i></div></div></div>`;
 const phFrame = label => { const f = el('figure','art-frame loading'); f.innerHTML = `<div class="frame-mat">${SOAR_HTML}<span class="ph-txt">${esc(label)}</span></div>`; return f; };
 const capOf = a => (a.desc || '').replace(/^\[[^\]]+\]\s*/,'').replace(/^design:\s*/i,'').slice(0,90);
 const resolveSrc = a => a?.dataUrl || a?.blobUrl || (a?.url ? (a.url.startsWith('http') || a.url.startsWith('data:') ? a.url : API + a.url) : '');
+const resolveDl = a => a?.dataUrl || a?.blobUrl || (a?.download_url ? (a.download_url.startsWith('http') || a.download_url.startsWith('data:') ? a.download_url : API + a.download_url) : resolveSrc(a));
 
 function artFrame(a) {
   ART[a.id] = a; if (a.url) URLS[a.id] = a.url;
@@ -1185,22 +1250,94 @@ function fileCard(a) {
   ART[a.id] = a;
   const ext = (a.name||'').split('.').pop().toLowerCase();
   const ic = {pdf:'file-pdf',csv:'file-csv',json:'file-code',svg:'file-code',png:'file-image',jpg:'file-image',gif:'file-image',html:'file-code',docx:'file-word',pptx:'file-powerpoint',xlsx:'file-excel',zip:'file-zipper'}[ext] || 'file-lines';
+  const canPrev = ['pdf','docx','pptx','csv','txt','md','json','svg','html','htm','xml','log'].includes(ext);
   const f = el('div','file-card'); f.dataset.aid = a.id;
-  f.innerHTML = `<div class="fi"><i class="fa-solid fa-${ic}"></i></div><div><div class="fn">${esc(a.name||'File')}</div><div class="fm">${esc(ext.toUpperCase())}${a.size?' · '+fmtSize(a.size):''}</div></div><a href="${attr(resolveSrc(a))}" download="${attr(a.name||'file')}"><i class="fa-solid fa-download"></i> Download</a>`;
+  f.innerHTML = `<div class="fi" style="cursor:pointer" data-act="fprev"><i class="fa-solid fa-${ic}"></i></div>`
+    + `<div style="flex:1;min-width:0;cursor:pointer" data-act="fprev"><div class="fn">${esc(a.name||'File')}</div><div class="fm">${esc(ext.toUpperCase())}${a.size?' · '+fmtSize(a.size):''}</div></div>`
+    + `<div style="display:flex;gap:7px;align-items:center;margin-left:auto">`
+    + (canPrev ? `<button type="button" class="ctrl-btn" data-act="fprev" title="Preview in modal"><i class="fa-solid fa-eye"></i> Preview</button>` : '')
+    + `<button type="button" class="ctrl-btn" style="color:var(--green);border-color:rgba(95,184,122,.35)" data-act="fdl" title="Download file"><i class="fa-solid fa-download"></i> Download</button></div>`;
   return f;
 }
 function mediaCard(a) {
   ART[a.id] = a; const isV = a.kind === 'video';
   const f = el('div','file-card'); f.dataset.aid = a.id; f.style.cssText = 'display:block;max-width:420px';
   const dur = a.duration ? Math.floor(a.duration/60)+':'+String(Math.round(a.duration%60)).padStart(2,'0') : '';
-  const src = resolveSrc(a), dl = a.dataUrl || a.blobUrl || (a.download_url ? API + a.download_url : src);
+  const src = resolveSrc(a);
   f.innerHTML = `<div class="fn" style="margin-bottom:6px">${esc((a.desc||a.name||(isV?'Video':'Audio')).replace(/^\[[^\]]+\]\s*/,'').slice(0,80))}</div>`
     + (isV ? `<video controls playsinline preload="metadata" style="width:100%;border-radius:10px;background:#000" src="${attr(src)}"></video>` : `<audio controls preload="metadata" style="width:100%" src="${attr(src)}"></audio>`)
-    + `<div class="fm" style="margin-top:6px;display:flex;justify-content:space-between;gap:8px"><span>${isV?'Video':'Audio'}${dur?' · '+dur:''}${a.size?' · '+fmtSize(a.size):''}</span><a href="${attr(dl)}" download style="color:var(--green);text-decoration:none"><i class="fa-solid fa-download"></i> Download</a></div>`;
+    + `<div class="fm" style="margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:8px"><span>${isV?'Video':'Audio'}${dur?' · '+dur:''}${a.size?' · '+fmtSize(a.size):''}</span><button type="button" class="ctrl-btn" style="color:var(--green);border-color:rgba(95,184,122,.35)" data-act="fdl"><i class="fa-solid fa-download"></i> Download</button></div>`;
   return f;
 }
-const leafArts = arts => { const parents = new Set(arts.map(a => a.parent).filter(Boolean)); return arts.filter(a => !parents.has(a.id)); };
-function download(a) { if (!a) return; const l = el('a'); l.href = a.dataUrl || a.blobUrl || (a.download_url ? API + a.download_url : resolveSrc(a)); l.download = a.name || 'philadelphia'; document.body.appendChild(l); l.click(); l.remove(); }
+/* Never hide multi-panel comic frames or distinct creations; only hide raw intermediate cut-outs when a final design embeds them */
+const leafArts = arts => {
+  if (arts.length <= 1) return arts;
+  const hasDesign = arts.some(a => /^design:/i.test(a.desc || ''));
+  if (hasDesign) {
+    return arts.filter(a => /^design:/i.test(a.desc || '') || a.kind !== 'image');
+  }
+  const bgRemovedParents = new Set(arts.filter(a => /^background removed/i.test(a.desc || '')).map(a => a.parent).filter(Boolean));
+  return arts.filter(a => !bgRemovedParents.has(a.id));
+};
+async function download(a) {
+  if (!a) return;
+  let url = resolveDl(a);
+  if (!url && a.id) url = await artUrl(a);
+  const fname = a.name || ('philadelphia-' + (a.id || Date.now()) + (a.kind === 'video' ? '.mp4' : a.kind === 'audio' ? '.mp3' : '.png'));
+  try {
+    toast('Downloading ' + fname + '…');
+    const r = await fetch(url);
+    if (!r.ok && a.id && !String(a.id).startsWith('vid_')) {
+      const ur = await call(`/api/agent/artifacts/${a.id}/url`);
+      if (ur.ok) { const j = await ur.json(); a.url = j.url; a.download_url = j.download_url; url = API + (j.download_url || j.url); }
+    }
+    const resp = r.ok ? r : await fetch(url);
+    const blob = await resp.blob();
+    const bUrl = URL.createObjectURL(blob);
+    const l = el('a'); l.href = bUrl; l.download = fname;
+    document.body.appendChild(l); l.click(); l.remove();
+    setTimeout(() => URL.revokeObjectURL(bUrl), 10000);
+  } catch(e) {
+    const l = el('a'); l.href = url; l.download = fname; l.target = '_blank';
+    document.body.appendChild(l); l.click(); l.remove();
+  }
+}
+async function previewGeneratedFile(a) {
+  if (!a) return;
+  const ext = (a.name || '').split('.').pop().toLowerCase();
+  let url = resolveDl(a);
+  if (ext === 'pdf') {
+    showPdf(url, a.name || 'PDF Document');
+  } else if (['csv','txt','md','json','svg','html','htm','xml','log'].includes(ext)) {
+    try {
+      toast('Opening preview…');
+      const r = await fetch(url);
+      const txt = await r.text();
+      $('txt-title').textContent = a.name || 'File Preview';
+      $('txt-modal-content').textContent = txt;
+      $('txt-modal').classList.add('show');
+    } catch(e) {
+      toast('Could not load preview — downloading instead.', 'e');
+      download(a);
+    }
+  } else if (ext === 'docx' || ext === 'pptx') {
+    try {
+      toast('Reading document preview…');
+      const r = await fetch(url);
+      const blob = await r.blob();
+      const fd = new FormData(); fd.append('file', new File([blob], a.name || 'document.' + ext));
+      const ur = await call('/api/agent/upload', {method:'POST', body:fd});
+      if (ur.ok) {
+        const j = await ur.json();
+        const rr = await call('/api/agent/run', {method:'POST', json:{message:`Read document ${j.id} with read_document and output its text content verbatim.`, artifact_ids:[j.id]}});
+        // Instant fallback if user just wants to read or download
+      }
+      download(a);
+    } catch(e) { download(a); }
+  } else {
+    download(a);
+  }
+}
 
 async function saveGalleryItem(a) {
   if (!a || !a.id) return;
@@ -1235,8 +1372,8 @@ $('lb-remix').onclick = () => { if (!lbArt) return; const a = lbArt; closeLb(); 
 function setFocus(a) { focus = a; $('focus-chip').hidden = !a; if (a) { artUrl(a).then(u => { if (u) $('fc-thumb').src = u; }); $('fc-text').textContent = 'Editing this image. Tell me what to change.'; ti.focus(); } }
 $('fc-clear').onclick = () => setFocus(null);
 
-/* ───────── message rendering (No Static Orbs on Finished Messages) ───────── */
-const aiHead = () => `<div class="ai-head"><span class="ai-dot"></span><div class="ai-name">${esc(pName())}</div></div>`;
+/* ───────── message rendering (Shows Persona Name Saved on Each Message) ───────── */
+const aiHead = (msgPersona) => `<div class="ai-head"><span class="ai-dot"></span><div class="ai-name">${esc(msgPersona || pName())}</div></div>`;
 const ctlAI = dur => `<div class="msg-controls"><span class="meta-lbl">${dur?dur+'s':'AI'}</span><button class="ctrl-btn" data-act="copy"><i class="fa-solid fa-copy"></i> Copy</button><button class="ctrl-btn" data-act="share"><i class="fa-solid fa-share-nodes"></i></button><button class="ctrl-btn" data-act="listen"><i class="fa-solid fa-volume-high"></i> Listen</button><button class="ctrl-btn" data-act="regen"><i class="fa-solid fa-rotate-right"></i> Regen</button></div>`;
 function userGroup(m) {
   const g = el('div','msg-group usr'); g.dataset.id = m.id || '';
@@ -1257,7 +1394,7 @@ function aiGroup(m) {
   const arts = m.arts || [], imgs = arts.filter(a => a.kind === 'image'), files = arts.filter(a => a.kind !== 'image');
   const g = el('div','msg-group ai'); g.dataset.id = m.id || '';
   const st = (m.steps||[]).length ? `<details class="steps-sum"><summary><i class="fa-solid fa-list-check"></i> ${m.steps.length} step${m.steps.length>1?'s':''}</summary><div class="steps">${m.steps.map(s=>`<div class="step ${s.ok===false?'err':'ok'}"><span class="si"><i class="fa-solid fa-${s.ok===false?'xmark':'check'}"></i></span><span>${esc(s.l)}</span></div>`).join('')}</div></details>` : '';
-  g.innerHTML = aiHead() + `<div class="bubble">${th?thinkHTML(th):''}${st}<div class="art-gallery${imgs.length===1?' single':''}"${imgs.length?'':' hidden'}></div><div class="art-files"></div><div class="ai-text">${md(body)}</div></div>` + ctlAI(m.duration);
+  g.innerHTML = aiHead(m.persona) + `<div class="bubble">${th?thinkHTML(th):''}${st}<div class="art-gallery${imgs.length===1?' single':''}"${imgs.length?'':' hidden'}></div><div class="art-files"></div><div class="ai-text">${md(body)}</div></div>` + ctlAI(m.duration);
   imgs.forEach(a => g.querySelector('.art-gallery').appendChild(artFrame(a)));
   files.forEach(a => g.querySelector('.art-files').appendChild(a.kind === 'file' ? fileCard(a) : mediaCard(a)));
   return g;
@@ -1265,17 +1402,17 @@ function aiGroup(m) {
 
 /* ───────── hero (empty state) ───────── */
 const STARTERS = [
-  ['fa-image','Create an image','Create a cinematic image of a lion on a Lagos rooftop at sunset','Art, photos, posters (~10 cr)','create'],
+  ['fa-image','Create an image','Create a cinematic image of a lion on a Lagos rooftop at sunset','Philadelphia Pro V2 (~15 cr)','create'],
   ['fa-film','Create a video','Create a 6 second cinematic drone shot over Lagos at golden hour, with a soft score','Pro or Lite video','create'],
   ['fa-list-check','Passage & Quiz (A-D)','Write an engaging reading passage and test me with 3 interactive A/B/C/D objective questions.','Interactive objective cards','chat'],
-  ['fa-globe','Build a website','Build a one-page website for a small bakery in Lagos','Live link (~50 cr)','create'],
+  ['fa-globe','Build a website','Build a one-page website for a small bakery in Lagos','Live link (~6-50 cr)','create'],
   ['fa-file-pdf','Make a document','Make a one-page CV as a PDF. Ask me what to put on it.','PDF, Word, slides','create'],
-  ['fa-microphone-lines','Voice something','Record a warm 30 second podcast intro for a show about creativity','Podcast voice (~5-10 cr)','create'],
-  ['fa-file-circle-plus','Read any file or video','Analyze my attached file, video or link in full detail and give me the key insights','Philadelphia Vision','chat','upload'],
+  ['fa-microphone-lines','Voice something','Record a warm 30 second podcast intro for a show about creativity','3 Voice Engines (~5-25 cr)','create'],
+  ['fa-file-circle-plus','Read any file or video','Analyze my attached file, video or YouTube link in full detail and give me the key insights','Philadelphia Vision','chat','upload'],
   ['fa-code','Write some code','Write a snake game in one HTML file that I can run right here','Live preview + console','chat'],
   ['fa-magnifying-glass-chart','Research a topic','Research the history of Afrobeats and write me a short sourced report','Real cited sources (~20-28 cr)','create']
 ];
-const PHRASES = ['Create a video…','Take an A/B/C/D quiz…','Design a flyer…','Build a website…','Analyze a video or PDF…','Narrate a document…','Code a game…'];
+const PHRASES = ['Create a video…','Design a luxury flyer…','Take an A/B/C/D quiz…','Create a 2-panel comic…','Build a website…','Analyze a video or PDF…','Code a game…'];
 function hero() {
   const h = el('div','hero', `<h2><span id="tw"></span><span class="tw-caret"></span></h2><p>Chat with Philadelphia AI, or switch to Create to build media, sites & documents.</p><div class="starters">${STARTERS.map((s,i)=>`<button class="starter" data-s="${i}" style="animation-delay:${.1+i*.05}s"><i class="fa-solid ${s[0]}"></i><b style="font-weight:600">${esc(s[1])}</b><small>${esc(s[3])}</small></button>`).join('')}</div>`);
   h.querySelectorAll('.starter').forEach(b => {
@@ -1322,16 +1459,16 @@ async function reveal(node, text, c) {
   for (let i = 0; i < tk.length; i += step) {
     if (c && c.stopped) break;
     node.innerHTML = md(tk.slice(0, i + step).join('')); vibTail(node); scrollBot();
-    triggerHaptic();
+    triggerHaptic(false);
     await sleep(22);
   }
   node.innerHTML = md(text); highlight(node);
-  }
+}
 
-/* ───────── live run view (Otherworldly Soaring "..." Stage Only While Active) ───────── */
+/* ───────── live run view ───────── */
 function mkLive() {
   const g = el('div','msg-group ai');
-  g.innerHTML = aiHead() + `<div class="bubble"><details class="think-block live" hidden open><summary class="think-toggle"><i class="fa-solid fa-brain" style="color:var(--accent)"></i><span class="think-title">Thinking</span><span class="think-sum">Reasoning…</span><i class="fa-solid fa-chevron-down think-chevron"></i></summary><div class="think-content"></div></details><div class="orb-stage"><div class="orb-info"><div class="orb-status">Starting…</div><div class="orb-meta">${esc(pName())} · STUDIO INTELLIGENCE</div></div>${SOAR_HTML}</div><div class="steps" hidden></div><div class="art-gallery" hidden></div><div class="art-files"></div><div class="ai-text"></div></div>`;
+  g.innerHTML = aiHead(pName()) + `<div class="bubble"><details class="think-block live" hidden open><summary class="think-toggle"><i class="fa-solid fa-brain" style="color:var(--accent)"></i><span class="think-title">Thinking</span><span class="think-sum">Reasoning…</span><i class="fa-solid fa-chevron-down think-chevron"></i></summary><div class="think-content"></div></details><div class="orb-stage"><div class="orb-info"><div class="orb-status">Starting…</div><div class="orb-meta">${esc(pName())} · STUDIO INTELLIGENCE</div></div>${SOAR_HTML}</div><div class="steps" hidden></div><div class="art-gallery" hidden></div><div class="art-files"></div><div class="ai-text"></div></div>`;
   vp.appendChild(g); scrollBot(true);
   const q = s => g.querySelector(s);
   const L = {g, q, arts:[], tools:new Set(), steps:[], thinkText:'', credits:0, pend:[], run:[], asked:new Set()};
@@ -1356,7 +1493,7 @@ function mkLive() {
     if (L.arts.some(x => x.id === a.id)) return;
     const k = {id:a.id, kind:a.kind, name:a.name, width:a.width, height:a.height, desc:(a.desc||'').slice(0,160), parent:a.parent||null, url:a.url, download_url:a.download_url, size:a.size, duration:a.duration, dataUrl:a.dataUrl, blobUrl:a.blobUrl};
     L.arts.push(k);
-    if (k.kind === 'image') { const f = artFrame(k), ph = L.pend.shift(); if (ph) ph.replaceWith(f); else q('.art-gallery').appendChild(f); gal(); fxBurst(innerWidth/2, innerHeight/2, 26); }
+    if (k.kind === 'image') { const f = artFrame(k), ph = L.pend.shift(); if (ph) ph.replaceWith(f); else q('.art-gallery').appendChild(f); gal(); fxBurst(innerWidth/2, innerHeight/2, 28); triggerHaptic(true); }
     else q('.art-files').appendChild(k.kind === 'file' ? fileCard(k) : mediaCard(k));
     scrollBot();
   };
@@ -1408,8 +1545,8 @@ async function follow(rid, L, c) {
 }
 
 /* ───────── modes ───────── */
-const MODE_CREATE = `\n\n(CREATE MODE — STRICT 1-GENERATION LIMIT: Call your creation tool (generate_image, create_design, generate_video, generate_voice, build_website, etc.) EXACTLY ONCE to produce 1 single item. Do NOT call review_output, do NOT re-generate, and do NOT make a second version or variation unless the first tool call threw an error. Stop immediately after creating the 1 item and present it to the user.)`;
-function setMode(m) { mode = m === 'create' ? 'create' : 'chat'; LS('ph_mode', mode); $('mode-seg').dataset.mode = mode; document.querySelectorAll('#mode-seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode)); ti.placeholder = mode === 'create' ? 'Describe what to create…' : 'Ask anything, paste long text, or attach files/links…'; }
+const MODE_CREATE = `\n\n(CREATE MODE: Execute the user's request completely in one go with your studio tools. For flyers/posters with products/objects, you may generate the object, remove_background, and compose it in create_design. For comics, use create_comic once. Deliver immediately when finished without unnecessary re-renders.)`;
+function setMode(m) { mode = m === 'create' ? 'create' : 'chat'; LS('ph_mode', mode); $('mode-seg').dataset.mode = mode; document.querySelectorAll('#mode-seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode)); ti.placeholder = mode === 'create' ? 'Describe what to create…' : 'Ask anything, paste long text or YouTube links, or attach files…'; }
 document.querySelectorAll('#mode-seg button').forEach(b => b.onclick = () => setMode(b.dataset.mode));
 setMode(mode);
 const CREATE_RX = /\b(generate|create|make|draw|design|build|produce|render|edit|remove (?:the )?background|narrate|record|convert|export|turn (?:this|it) into)\b[^.?!\n]{0,50}\b(images?|photos?|pictures?|logos?|posters?|flyers?|banners?|videos?|clips?|gifs?|websites?|web ?site|landing page|pdf|word|docx|slides?|presentation|powerpoint|spreadsheet|excel|chart|qr|voice ?over|audio|song|comic|thumbnail|invitation|card|certificate|menu|cv|resume)\b/i;
@@ -1419,7 +1556,7 @@ function askSwitch(why) { $('switch-why').textContent = why || 'This looks like 
 $('switch-yes').onclick = () => { $('switch-modal').classList.remove('show'); switchResolve?.(true); };
 $('switch-no').onclick = () => { $('switch-modal').classList.remove('show'); switchResolve?.(false); };
 
-/* ───────── Normalized MIME Types + Video Frame Extractor + Background File Analysis ───────── */
+/* ───────── Normalized MIME Types + YouTube Link Extractor + Video Frame Extractor ───────── */
 const MIME_BY_EXT = {
   '.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.webp':'image/webp','.gif':'image/gif',
   '.mp4':'video/mp4','.m4v':'video/mp4','.mov':'video/quicktime','.avi':'video/avi','.mkv':'video/x-matroska','.webm':'video/mp4',
@@ -1434,7 +1571,6 @@ function normFile(blob, name) {
 
 const isRefusal = s => !s || s.trim().length < 20 || /can'?t view video|cannot view video|unable to view video|don'?t have access to the video|cannot watch video/i.test(s);
 
-/* Extracts a 12-frame (3x4 grid) timestamped Contact Sheet (from 0.1s to final frame) + Audio WAV from a video */
 async function extractVideoFrames(file) {
   const sheetP = new Promise(res => {
     const v = document.createElement('video'), url = URL.createObjectURL(file);
@@ -1450,7 +1586,6 @@ async function extractVideoFrames(file) {
         const c = document.createElement('canvas'); c.width = cellW * cols; c.height = cellH * rows;
         const ctx = c.getContext('2d'); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, c.width, c.height);
         for (let i = 0; i < total; i++) {
-          // Spans from 0.1s (opening frame) all the way to dur - 0.1s (closing frame)
           const t = Math.min(dur - 0.1, Math.max(0.1, (i / (total - 1)) * (dur - 0.2) + 0.1));
           v.currentTime = t;
           await new Promise(r => { v.onseeked = () => requestAnimationFrame(() => requestAnimationFrame(r)); setTimeout(r, 1100); });
@@ -1495,10 +1630,8 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
   const vPrompt = customPrompt || 'Watch and listen to this video carefully from start to finish. Provide a complete shot-by-shot visual breakdown with timestamps, transcribe any spoken dialogue, laughter, lyrics or music, and analyze the pacing, lighting, and hook.';
 
   try {
-    // 1) VIDEO: 3-Way Understanding (Way 1: Gemini Full Video+Audio -> Way 2: MiniMax-M3 Native Video -> Way 3: Full 0.1s-End Contact Sheet + Audio Track)
     if (type.startsWith('video/') || ['.mp4','.m4v','.mov','.mkv','.avi','.webm'].includes(ext)) {
       let out = '';
-      // Way 1: /understand-video (Full video + audio stream)
       if (f.size <= 45 * 1048576) {
         const fd1 = new FormData(); fd1.append('file', f, name); fd1.append('prompt', vPrompt);
         const r1 = await call('/understand-video', {method:'POST', body:fd1, signal}).catch(() => null);
@@ -1507,7 +1640,6 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
           if (!isRefusal(d.response)) out = `\n\n--- [FULL VIDEO & AUDIO STREAM ANALYSIS OF ${name}] ---\n${d.response}\n--- [END OF VIDEO ANALYSIS] ---\n`;
         }
       }
-      // Way 2: /api/studio/understand (MiniMax-M3 Native Video)
       if (!out && f.size <= 45 * 1048576) {
         const fd2 = new FormData(); fd2.append('file', f, name); fd2.append('prompt', vPrompt);
         const r2 = await call('/api/studio/understand', {method:'POST', body:fd2, signal}).catch(() => null);
@@ -1517,7 +1649,6 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
           if (tOut) out = `\n\n--- [FULL VIDEO ANALYSIS OF ${name}] ---\n${tOut}\n--- [END OF VIDEO ANALYSIS] ---\n`;
         }
       }
-      // Way 3: 12-Frame Contact Sheet (0.1s to final frame) + Extracted Audio Track
       if (!out) {
         const vf = await extractVideoFrames(f);
         if (vf?.blob) {
@@ -1546,7 +1677,6 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
       return out;
     }
 
-    // 2) IMAGE: MiniMax-M3 /api/studio/understand + Gemini /understand-image fallback
     if (type.startsWith('image/') || ['.png','.jpg','.jpeg','.webp','.gif'].includes(ext)) {
       const sm = await shrinkImage(f);
       const fd = new FormData(); fd.append('file', normFile(sm, name), name); fd.append('prompt', q);
@@ -1557,7 +1687,6 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
       if (r?.ok) { const d = await r.json(); if (d.response) { p.analyzedText = `\n\n--- [IMAGE ANALYSIS OF ${name}] ---\n${d.response}\n`; return p.analyzedText; } }
     }
 
-    // 3) PDF: /understand-pdf + client-side pdf.js text extraction in background
     if (type === 'application/pdf' || ext === '.pdf') {
       const fd = new FormData(); fd.append('file', f, name); fd.append('prompt', q);
       const r = await call('/understand-pdf', {method:'POST', body:fd, signal}).catch(() => null);
@@ -1569,30 +1698,61 @@ async function analyzeSingleFile(p, customPrompt = '', signal) {
       }
     }
 
-    // 4) AUDIO: /understand-audio
     if (type.startsWith('audio/') || ['.mp3','.wav','.m4a','.aac','.ogg','.flac'].includes(ext)) {
       const fd = new FormData(); fd.append('file', f, name); fd.append('prompt', q);
       const r = await call('/understand-audio', {method:'POST', body:fd, signal}).catch(() => null);
       if (r?.ok) { const d = await r.json(); if (d.response) { p.analyzedText = `\n\n--- [AUDIO TRANSCRIPT & ANALYSIS OF ${name}] ---\n${d.response}\n`; return p.analyzedText; } }
     }
 
-    // 5) OTHER DOCS (.docx, .pptx, .xlsx): Upload to /api/agent/upload in background
     const fd = new FormData(); fd.append('file', f, name);
     const r = await call('/api/agent/upload', {method:'POST', body:fd, signal}).catch(() => null);
     if (r?.ok) { const j = await r.json(); p.id = j.id; p.url = j.url || ''; p.analyzedText = `\n\n--- [ATTACHED DOCUMENT: ${name} (Artifact ID: ${j.id})] ---\n`; return p.analyzedText; }
   } catch(e) {}
   return '';
-} 
+}
+
+/* YouTube Link & General URL Understanding */
+async function extractYouTubeInfo(ytUrl, signal) {
+  let info = '';
+  try {
+    const oe = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(ytUrl)}`, {signal}).then(r => r.ok ? r.json() : null).catch(() => null);
+    if (oe && oe.title) {
+      info += `YouTube Title: "${oe.title}" | Channel/Author: ${oe.author_name || 'Unknown'} | URL: ${ytUrl}\n`;
+      if (oe.thumbnail_url) {
+        try {
+          const tr = await fetch(oe.thumbnail_url, {signal});
+          if (tr.ok) {
+            const tb = await tr.blob();
+            const fd = new FormData(); fd.append('file', new File([tb], 'yt_thumb.jpg', {type:'image/jpeg'}));
+            fd.append('prompt', `This is the thumbnail of the YouTube video "${oe.title}" by ${oe.author_name}. Describe the visual content and text on the thumbnail.`);
+            const vr = await call('/api/studio/understand', {method:'POST', body:fd, signal}).catch(() => null);
+            if (vr?.ok) { const vd = await vr.json(); if (vd.analysis) info += `Thumbnail Visual Analysis: ${vd.analysis}\n`; }
+          }
+        } catch(e) {}
+      }
+      const sr = await call(`/api/search?q=${encodeURIComponent(oe.title + ' ' + (oe.author_name || '') + ' youtube summary transcript')}`, {signal}).catch(() => null);
+      if (sr?.ok) { const sd = await sr.json(); if (sd.result) info += `Web & Transcript Context:\n${sd.result}\n`; }
+    }
+  } catch(e) {}
+  return info ? `\n\n--- [YOUTUBE VIDEO EXTRACTED CONTEXT: ${ytUrl}] ---\n${info}--- [END OF YOUTUBE CONTEXT] ---\n` : '';
+}
 
 async function understandFilesAndLinks(text, attached, L, signal) {
   let ctx = '';
   const urls = [...new Set((text.match(/https?:\/\/[^\s<>)"']+/gi) || []))].slice(0, 10);
-  if (urls.length) {
+  const ytUrls = urls.filter(u => /(?:youtube\.com\/(?:watch\?v=|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/i.test(u));
+  const normalUrls = urls.filter(u => !ytUrls.includes(u));
+
+  for (const ytu of ytUrls) {
+    L.status('Extracting YouTube video content…');
+    ctx += await extractYouTubeInfo(ytu, signal);
+  }
+  if (normalUrls.length) {
     try {
-      L.status(`Reading ${urls.length} link${urls.length>1?'s':''}…`);
-      const fd = new FormData(); fd.append('urls', urls.join('\n')); fd.append('prompt', text.slice(0, 2000) || 'Extract all key facts, text, data and details from these pages.');
+      L.status(`Reading ${normalUrls.length} link${normalUrls.length>1?'s':''}…`);
+      const fd = new FormData(); fd.append('urls', normalUrls.join('\n')); fd.append('prompt', text.slice(0, 2000) || 'Extract all key facts, text, data and details from these pages.');
       const r = await call('/api/tools/understand-url', {method:'POST', body:fd, signal});
-      if (r.ok) { const d = await r.json(); if (d.response) ctx += `\n\n--- [EXTRACTED CONTENT FROM LINKS (${urls.join(', ')})] ---\n${d.response}\n`; }
+      if (r.ok) { const d = await r.json(); if (d.response) ctx += `\n\n--- [EXTRACTED CONTENT FROM LINKS (${normalUrls.join(', ')})] ---\n${d.response}\n`; }
     } catch(e) {}
   }
   for (const p of (attached || [])) {
@@ -1651,7 +1811,7 @@ async function send(over, opts = {}) {
   const attached = opts.attached || [...pending];
   if (!text && !attached.length && !focus) return;
   if (!text) text = focus ? 'Edit this image.' : 'Read and analyze the attached file(s) thoroughly.';
-  unlockAudio(); askNotifyPerm();
+  unlockAudio(); triggerHaptic(true); askNotifyPerm();
   if (busy) return followUp(text, attached);
   if (mode === 'chat' && !opts.force && looksLikeCreate(text)) { if (await askSwitch()) setMode('create'); }
   if (mode === 'chat' && !focus) return startChatStream(text, attached, opts);
@@ -1670,7 +1830,7 @@ async function followUp(text, attached) {
   } catch(e) { queued.push({text}); showQueue(); }
 }
 
-/* ───────── CHAT MODE: Streams from /api/minimax/chat (No Truncation + Dual Search/Understand) ───────── */
+/* ───────── CHAT MODE: Streams from /api/minimax/chat (With Persona-Tagged History So Switching Personalities Never Conflicts!) ───────── */
 async function startChatStream(text, attached, opts = {}) {
   const shownFiles = attached.map(p => ({key:p.key, name:p.name, type:p.type, size:p.size, kind:p.kind, url:p.url, thumb:p.thumb, dataUrl:p.dataUrl, pasted:p.pasted}));
   setBusy(true); stick = true;
@@ -1679,7 +1839,15 @@ async function startChatStream(text, attached, opts = {}) {
   if (vp.querySelector('.hero')) vp.innerHTML = '';
   vp.appendChild(userGroup({text, files:shownFiles})); highlight(vp); scrollBot(true);
   const first = !msgs.length;
-  const hist = msgs.slice(-16).map(m => ({role: m.role === 'user' ? 'user' : 'assistant', content: String(m.text || '').split(SEP).pop()}));
+  const curP = pName();
+  // Tag earlier assistant replies if they came from a different personality so the active personality never gets confused!
+  const hist = msgs.slice(-16).map(m => {
+    const cleanTxt = String(m.text || '').split(SEP).pop();
+    if (m.role === 'user') return {role: 'user', content: cleanTxt};
+    const msgP = m.persona || 'Philadelphia';
+    const prefix = (msgP !== curP) ? `[Earlier reply from ${msgP} before user switched to ${curP}]: ` : '';
+    return {role: 'assistant', content: prefix + cleanTxt};
+  });
   await saveMsg('user', text, {files: shownFiles.map(f => ({key:f.key, name:f.name, type:f.type, size:f.size, kind:f.kind, url:f.url, thumb:f.thumb ? f.thumb.slice(0,15000) : ''}))});
 
   const L = mkLive(), t0 = performance.now(), c = {rid:null, ac:new AbortController(), stopped:false, paused:false, soft:false, L, req:{text, attached}, first, text}; cur = c;
@@ -1698,7 +1866,7 @@ async function startChatStream(text, attached, opts = {}) {
       signal: c.ac.signal
     });
     if (!r.ok) {
-      L.status('Searching & thinking with Gemini 3.5 Flash…');
+      L.status('Searching & thinking…');
       const fd = new FormData(); fd.append('prompt', fullMessage.slice(0, 7900)); fd.append('history', JSON.stringify(hist.slice(-8)));
       const sr = await call('/api/tools/search', {method:'POST', body:fd, signal:c.ac.signal});
       if (!sr.ok) { const j = await r.json().catch(() => ({})); throw new Error(typeof j.detail === 'string' ? j.detail : 'Chat engine unavailable.'); }
@@ -1710,7 +1878,7 @@ async function startChatStream(text, attached, opts = {}) {
         if (ev.type === 'thinking') { backendThink += ev.content; L.thinkSet(backendThink); }
         else if (ev.type === 'content') {
           raw += ev.content;
-          triggerHaptic();
+          triggerHaptic(false);
           const sp = splitThink(raw);
           if (sp.think) L.thinkSet((backendThink + '\n\n' + sp.think).trim());
           if (sp.body) { L.q('.orb-stage')?.remove(); txtNode.innerHTML = md(sp.body) + '<span class="cursor"></span>'; highlight(txtNode); scrollBot(); }
@@ -1801,6 +1969,7 @@ async function resume(rid) {
 async function finishRun(L, d, t0, c) {
   let {think, body} = splitThink(String(d.final_text || '').trim());
   if (think) L.think(think);
+  saveLearnedFact(body);
   body = body.replace(/<<remember:\s*([^>]+?)>>/gi, '').trim();
   if (!body && d.status === 'cancelled') body = 'Stopped.';
   if (!L.arts.length && d.snap) {
@@ -1812,7 +1981,6 @@ async function finishRun(L, d, t0, c) {
   L.g.querySelectorAll('.art-frame').forEach(f => { if (!f.dataset.aid || !ids.has(f.dataset.aid)) f.remove(); });
   L.g.querySelectorAll('.file-card[data-aid]').forEach(f => { if (!ids.has(f.dataset.aid)) f.remove(); });
   const gl = L.q('.art-gallery'); gl.hidden = !gl.children.length; gl.classList.toggle('single', gl.children.length === 1);
-  /* Remove the soaring "..." stage completely when done */
   L.q('.orb-stage')?.remove(); L.run.forEach(s => s.remove());
   const tb = L.q('.think-block');
   if (L.thinkText) { tb.classList.remove('live'); tb.open = false; tb.querySelector('.think-title').textContent = 'Thought process'; tb.querySelector('.think-sum').textContent = thinkSum(L.thinkText); } else tb.remove();
@@ -1824,10 +1992,11 @@ async function finishRun(L, d, t0, c) {
   const dur = ((performance.now() - t0) / 1000).toFixed(1);
   L.g.insertAdjacentHTML('beforeend', ctlAI(dur));
   const tools = [...L.tools]; setChips(shown, leaves, tools); scrollBot();
-  await saveMsg('ai', L.thinkText ? L.thinkText + SEP + (shown || ' ') : (shown || 'Done.'), {arts: JSON.parse(JSON.stringify(leaves)), tools, steps: L.steps.slice(0,12), duration: dur});
+  await saveMsg('ai', L.thinkText ? L.thinkText + SEP + (shown || ' ') : (shown || 'Done.'), {arts: JSON.parse(JSON.stringify(leaves)), tools, steps: L.steps.slice(0,12), duration: dur, persona: pName()});
   for (const a of leaves.filter(x => ['image','video','audio','file'].includes(x.kind))) await saveGalleryItem(a);
   LS('ph_active_' + chatId, null);
   if (d.status !== 'cancelled') {
+    triggerHaptic(true);
     flashCredits(L.credits || d.credits_spent || 0);
     const preview = plain(shown).slice(0, 110) || (leaves.some(a=>a.kind==='image') ? 'Your image is ready.' : leaves.some(a=>a.kind==='video') ? 'Your video is ready.' : 'Tap to view the response.');
     notifyDone(`${pName()} has replied`, preview);
@@ -1836,7 +2005,7 @@ async function finishRun(L, d, t0, c) {
   if (c?.first && c.text && d.status === 'done') autoName(chatId, c.text, shown);
 }
 
-/* ───────── AI-written conversation names (Uses MiniMax-M3) ───────── */
+/* ───────── AI-written conversation names ───────── */
 const nameBusy = new Set();
 async function autoName(cid, userText, aiText) {
   nameBusy.add(cid); renderChatList(); let name = '';
@@ -1850,26 +2019,35 @@ async function autoName(cid, userText, aiText) {
   nameBusy.delete(cid); renderChatList();
 }
 
-/* ───────── chat-wide clicks ───────── */
+/* ───────── chat-wide clicks (Fixed A/B/C/D Cards Always Sending Selection to AI!) ───────── */
 vp.addEventListener('click', async e => {
   const qopt = e.target.closest('.quiz-opt');
   if (qopt) {
+    triggerHaptic(true);
     const card = qopt.closest('.quiz-card'), ans = +card.dataset.ans, idx = +qopt.dataset.idx, letter = qopt.dataset.letter, txt = qopt.dataset.text;
+    const rect = qopt.getBoundingClientRect();
+    fxBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 22);
     if (ans >= 0) {
-      card.querySelectorAll('.quiz-opt').forEach((b, i) => { b.disabled = true; if (i === ans) b.classList.add('correct'); else if (i === idx) b.classList.add('wrong'); });
+      card.querySelectorAll('.quiz-opt').forEach((b, i) => {
+        if (i === ans) b.classList.add('correct');
+        else if (i === idx) b.classList.add('wrong');
+      });
       const st = card.querySelector('.qz-status');
-      if (idx === ans) { st.textContent = '✓ Correct!'; st.style.color = 'var(--green)'; fxBurst(innerWidth/2, innerHeight/2, 24); }
+      if (idx === ans) { st.textContent = '✓ Correct!'; st.style.color = 'var(--green)'; }
       else { st.textContent = `✗ Correct is ${['A','B','C','D','E','F'][ans]}`; st.style.color = 'var(--danger)'; }
       card.querySelector('.quiz-exp')?.classList.add('show');
     } else {
       card.querySelectorAll('.quiz-opt').forEach(b => b.classList.toggle('picked', b === qopt));
-      send(`I select ${letter}: ${txt}`, {force:true});
+      const st = card.querySelector('.qz-status');
+      if (st) { st.textContent = `Selected ${letter}`; st.style.color = 'var(--accent)'; }
     }
+    // Always send the user's selected option to the AI so the conversation continues immediately!
+    send(`${letter}: ${txt}`, {force:true});
     return;
   }
   const chip = e.target.closest('[data-chip]'); if (chip) { send(chip.dataset.chip); return; }
   const b = e.target.closest('[data-act]'); if (!b) return;
-  const a = b.dataset.act, grp = b.closest('.msg-group'), fr = b.closest('.art-frame'), cb = b.closest('.codebox');
+  const a = b.dataset.act, grp = b.closest('.msg-group'), fr = b.closest('.art-frame'), fc = b.closest('.file-card'), cb = b.closest('.codebox');
   if (cb) { const code = cb.querySelector('code').innerText, lang = cb.dataset.lang;
     if (a === 'ccopy') { navigator.clipboard.writeText(code).catch(() => {}); b.innerHTML = '<i class="fa-solid fa-check"></i>'; setTimeout(() => b.innerHTML = '<i class="fa-solid fa-copy"></i>', 1300); }
     else if (a === 'csave') saveCode(lang, code); else if (a === 'cedit') csOpen(code, lang); else if (a === 'crun') csOpen(code, lang, {run:true}); return; }
@@ -1879,7 +2057,10 @@ vp.addEventListener('click', async e => {
     const item = (fk && FILE_MEM[fk]) || (fk && await IDB.get('files', fk)) || {name:nm, dataUrl:u, kind:u?'image':'doc'};
     previewAttachment(item); return;
   }
-  if (a === 'zoom') openLightbox(ART[fr.dataset.aid]); else if (a === 'fedit') setFocus(ART[fr.dataset.aid]); else if (a === 'fdl') download(ART[fr.dataset.aid]);
+  if (a === 'zoom') openLightbox(ART[fr.dataset.aid]);
+  else if (a === 'fedit') setFocus(ART[fr.dataset.aid]);
+  else if (a === 'fdl') download(ART[(fr || fc)?.dataset.aid]);
+  else if (a === 'fprev') previewGeneratedFile(ART[fc?.dataset.aid]);
   else if (a === 'copy') { navigator.clipboard.writeText((grp.querySelector('.ai-text') || grp.querySelector('.bubble')).innerText).catch(() => {}); const o = b.innerHTML; b.innerHTML = '<i class="fa-solid fa-check"></i> Done'; setTimeout(() => b.innerHTML = o, 1300); }
   else if (a === 'share') { const t = grp.querySelector('.ai-text').innerText; if (navigator.share) navigator.share({title:'Philadelphia Studio', text:t.slice(0,300)}).catch(() => {}); else { navigator.clipboard.writeText(t).catch(() => {}); toast('Copied to clipboard.'); } }
   else if (a === 'listen') readAloud(b); else if (a === 'edit') editMsg(grp.dataset.id); else if (a === 'regen') regenMsg(grp.dataset.id);
@@ -1924,9 +2105,9 @@ async function restorePending() {
 const TEXT_LIKE = new Set(['.txt','.md','.csv','.tsv','.json','.log','.js','.ts','.jsx','.tsx','.py','.html','.htm','.css','.xml','.yaml','.yml','.sql','.sh','.c','.cpp','.java','.go','.rs','.php']);
 const toDataURL = f => new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result || ''); fr.onerror = () => r(''); fr.readAsDataURL(f); });
 async function shrinkImage(f) {
-  if (!f.type.startsWith('image/') || f.type === 'image/gif' || f.size < 1.4e6) return f;
-  try { const bmp = await createImageBitmap(f); const s = Math.min(1, 2400 / Math.max(bmp.width, bmp.height)); const c = el('canvas'); c.width = Math.round(bmp.width*s); c.height = Math.round(bmp.height*s); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
-    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', .9)); return blob && blob.size < f.size ? new File([blob], f.name.replace(/\.\w+$/, '') + '.jpg', {type:'image/jpeg'}) : f; } catch(e) { return f; }
+  if (!f.type.startsWith('image/') || f.type === 'image/gif' || f.size < 1.1e6) return f;
+  try { const bmp = await createImageBitmap(f); const s = Math.min(1, 2200 / Math.max(bmp.width, bmp.height)); const c = el('canvas'); c.width = Math.round(bmp.width*s); c.height = Math.round(bmp.height*s); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', .88)); return blob && blob.size < f.size ? new File([blob], f.name.replace(/\.\w+$/, '') + '.jpg', {type:'image/jpeg'}) : f; } catch(e) { return f; }
 }
 async function makeThumb(f) { try { const bmp = await createImageBitmap(f); const s = 76 / Math.max(bmp.width, bmp.height), c = el('canvas'); c.width = Math.max(1, Math.round(bmp.width*s)); c.height = Math.max(1, Math.round(bmp.height*s)); c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height); return c.toDataURL('image/jpeg', .72); } catch(e) { return ''; } }
 
@@ -1942,7 +2123,6 @@ async function addFiles(list) {
     const p = {key, name:f.name, type:f.type, size:f.size || pasted.length, file:f, state:'ok', prog:100, id:null, url:'', thumb, dataUrl:'', pasted, blobUrl:URL.createObjectURL(f), kind:isImg?'image':isVid?'video':f.type.startsWith('audio/')?'audio':'doc'};
     FILE_MEM[key] = p;
     pending.push(p); drawPending(); persistPending();
-    // Save to IDB & start background analysis without blocking the UI
     (async () => {
       if (!pasted && !isVid && f.size <= 8 * 1048576) p.dataUrl = await toDataURL(f);
       await IDB.put('files', {key, name:p.name, type:p.type, size:p.size, thumb, dataUrl:p.dataUrl, pasted, kind:p.kind});
@@ -2024,9 +2204,29 @@ async function showPdf(fileOrUrl, title) {
   } catch(e) { wrap.innerHTML = `<div style="color:var(--danger);padding:30px">Could not render this PDF.</div>`; }
 }
 
-/* ───────── read aloud: Philadelphia voice (podcast style is default) ───────── */
+/* ───────── read aloud: All 3 Philadelphia Voice Engines (Podcast, Studio V2, Pro Character) ───────── */
+const VOICE_ENGINES = [
+  ['v2','Philadelphia Voice V2','Studio voices (~5 cr)'],
+  ['podcast_v1','Philadelphia Podcast Voice','Expressive podcast styles (~10 cr)'],
+  ['pro','Philadelphia Pro Character','HD Character voices (~25 cr)']
+];
 const READER_VOICES = [['kore','Kore','Philadelphia signature'],['zephyr','Zephyr','Bright, friendly'],['puck','Puck','Upbeat, playful'],['charon','Charon','Steady, documentary'],['fenrir','Fenrir','Energetic'],['leda','Leda','Youthful'],['orus','Orus','Grounded'],['aoede','Aoede','Breezy, warm'],['callirrhoe','Callirrhoe','Relaxed'],['achernar','Achernar','Soft, gentle']];
+const PRO_CHARACTER_VOICES = [
+  ['narrator','Calm Narrator','Philadelphia Pro (~25 cr)'],
+  ['movie','Deep Movie Voice','Philadelphia Pro (~25 cr)'],
+  ['ceo','Executive CEO','Philadelphia Pro (~25 cr)'],
+  ['elder','Wise Woman','Philadelphia Pro (~25 cr)'],
+  ['knight','Young Knight','Philadelphia Pro (~25 cr)'],
+  ['anime','Anime Girl','Philadelphia Pro (~25 cr)'],
+  ['sweet','Sweet Voice','Philadelphia Pro (~25 cr)'],
+  ['hero','Determined Hero','Philadelphia Pro (~25 cr)'],
+  ['elegant','Elegant Gentleman','Philadelphia Pro (~25 cr)'],
+  ['casual','Casual Host','Philadelphia Pro (~25 cr)'],
+  ['gentle','Gentle Mentor','Philadelphia Pro (~25 cr)'],
+  ['inspire','Inspirational Speaker','Philadelphia Pro (~25 cr)']
+];
 const VOICE_STYLES = [['podcast','Podcast','relaxed, warm podcast host tone'],['cinematic','Cinematic','cinematic, dramatic narrator style'],['upbeat','Upbeat','upbeat, energetic voice'],['soft','Soft','soft, gentle and inviting voice'],['dramatic','Dramatic','dramatic voice with theatrical flair']];
+
 let rdAudio = null, rdBtn = null, rdFree = false;
 const rdTime = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 function resetReader() { if (rdAudio) { rdAudio.pause(); rdAudio = null; } if (rdFree) { speechSynthesis.cancel(); rdFree = false; } if (rdBtn) { rdBtn.classList.remove('on'); rdBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Listen'; rdBtn = null; } $('reader-bar').classList.remove('show'); }
@@ -2037,8 +2237,18 @@ async function readAloud(btn) {
   rdBtn = btn; btn.classList.add('on'); btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Loading'; const done = () => { if (rdBtn === btn) resetReader(); };
   if ($('reader-premium-toggle').checked) {
     try {
-      const style = VOICE_STYLES.find(s => s[0] === (LS('ph_voice_style') || 'podcast')) || VOICE_STYLES[0];
-      const r = await call('/api/tools/text-to-speech-v2', {method:'POST', json:{text:`Say in a ${style[2]}:\n${t}`, voice: LS('ph_reader_voice') || 'kore'}});
+      const eng = LS('ph_reader_engine') || 'v2';
+      const styleKey = LS('ph_voice_style') || 'podcast';
+      const style = VOICE_STYLES.find(s => s[0] === styleKey) || VOICE_STYLES[0];
+      let r;
+      if (eng === 'podcast_v1') {
+        const fd = new FormData(); fd.append('text', t); fd.append('style', style[0]);
+        r = await call('/voicegen', {method:'POST', body:fd});
+      } else if (eng === 'pro') {
+        r = await call('/api/tools/text-to-speech', {method:'POST', json:{text:t, voice_id: LS('ph_reader_pro') || 'elder'}});
+      } else {
+        r = await call('/api/tools/text-to-speech-v2', {method:'POST', json:{text:`Say in a ${style[2]}:\n${t}`, voice: LS('ph_reader_voice') || 'kore'}});
+      }
       if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(typeof j.detail === 'string' ? j.detail : 'Voice unavailable.'); }
       const url = URL.createObjectURL(await r.blob()); if (rdBtn !== btn) return;
       rdAudio = new Audio(url); const a = rdAudio;
@@ -2068,7 +2278,6 @@ function notifyDone(titleMsg = 'Philadelphia has replied', bodyPreview = '') {
   p.onclick = () => { scrollBot(true); p.remove(); }; p.querySelector('button').onclick = e => { e.stopPropagation(); p.remove(); };
   $('task-tray').appendChild(p); setTimeout(() => p.remove(), 8000);
 
-  // If user is in another tab, minimized, or away from chat, fire a system pop-up notification
   if (document.hidden || !document.hasFocus()) {
     clearInterval(titleTimer); let on = false;
     titleTimer = setInterval(() => { document.title = (on = !on) ? '✓ ' + titleMsg : baseTitle; }, 1000);
@@ -2108,7 +2317,7 @@ $('redeem-btn').onclick = async () => { const code = $('referral-input').value.t
 /* ───────── chats (Firestore) + Cross-Chat Sync ───────── */
 async function saveMsg(role, text, extra = {}) {
   if (!chatId || !user) return null;
-  try { const r = await addDoc(collection(db,'users',user.uid,'chats',chatId,'messages'), {role, text, ...JSON.parse(JSON.stringify(extra)), createdAt: serverTimestamp()}); return r.id; } catch(e) { console.warn('save failed', e); return null; }
+  try { const r = await addDoc(collection(db,'users',user.uid,'chats',chatId,'messages'), {role, text, persona: pName(), ...JSON.parse(JSON.stringify(extra)), createdAt: serverTimestamp()}); return r.id; } catch(e) { console.warn('save failed', e); return null; }
 }
 function loadChats(uid) {
   unsubChats?.();
@@ -2195,16 +2404,30 @@ $('persona-list').onclick = e => { const c = e.target.closest('.persona-card'); 
 try { const cf = LSj('ph_custom', {}); customFields.forEach(k => { if (cf[k]) $('custom-' + k).value = cf[k]; }); } catch(e) {}
 $('inject-persona-btn').onclick = () => {
   LS('ph_persona', activePersona); if (activePersona === 'custom') LS('ph_custom', JSON.stringify(Object.fromEntries(customFields.map(k => [k, $('custom-' + k).value]))));
-  updateDisclaimer(); $('persona-status').textContent = `✓ ${pName()} is active`; setTimeout(() => { closePanel('persona'); $('persona-status').textContent = ''; }, 1100);
+  updateDisclaimer(); triggerHaptic(true); $('persona-status').textContent = `✓ ${pName()} is active`; setTimeout(() => { closePanel('persona'); $('persona-status').textContent = ''; }, 1100);
 };
 paintPersona(); updateDisclaimer();
 
-/* ───────── settings (Automatic Cross-Chat Memory Toggle + Pop-Up Notification Toggle) ───────── */
+/* ───────── settings (3 Voice Engines + Haptics + Cross-Chat Memory) ───────── */
 setAccent(LS('ph_accent') || 'gold');
 $('accent-swatches').onclick = e => { const b = e.target.closest('button'); if (b) setAccent(b.dataset.a); };
-$('haptic-toggle').checked = hapticOn(); $('haptic-toggle').onchange = e => { LS(HK, e.target.checked ? '1' : '0'); if (e.target.checked && navigator.vibrate) navigator.vibrate(30); };
+$('haptic-toggle').checked = hapticOn();
+$('haptic-toggle').onchange = e => {
+  LS(HK, e.target.checked ? '1' : '0');
+  if (e.target.checked) triggerHaptic(true);
+};
+function syncVoiceEngineUI(eng) {
+  LS('ph_reader_engine', eng);
+  $('wrap-reader-voice').hidden = (eng !== 'v2');
+  $('wrap-reader-pro').hidden = (eng !== 'pro');
+  $('wrap-reader-style').hidden = (eng === 'pro');
+}
+makeDD($('dd-reader-engine'), {items:VOICE_ENGINES.map(v => ({v:v[0], label:v[1], sub:v[2], icon:'fa-waveform-lines'})), value:LS('ph_reader_engine') || 'v2', icon:'fa-waveform-lines', onChange:syncVoiceEngineUI});
 makeDD($('dd-reader-voice'), {items:READER_VOICES.map(v => ({v:v[0], label:v[1], sub:v[2], icon:'fa-microphone-lines'})), value:LS('ph_reader_voice') || 'kore', icon:'fa-microphone-lines', onChange:v => LS('ph_reader_voice', v)});
+makeDD($('dd-reader-pro'), {items:PRO_CHARACTER_VOICES.map(v => ({v:v[0], label:v[1], sub:v[2], icon:'fa-user-tie'})), value:LS('ph_reader_pro') || 'elder', icon:'fa-user-tie', onChange:v => LS('ph_reader_pro', v)});
 makeDD($('dd-reader-style'), {items:VOICE_STYLES.map(s => ({v:s[0], label:s[1], sub:s[0]==='podcast'?'Philadelphia default':'', icon:'fa-sliders'})), value:LS('ph_voice_style') || 'podcast', icon:'fa-sliders', onChange:v => LS('ph_voice_style', v)});
+syncVoiceEngineUI(LS('ph_reader_engine') || 'v2');
+
 $('reader-premium-toggle').checked = LS('ph_reader_premium') !== '0'; $('reader-premium-toggle').onchange = e => LS('ph_reader_premium', e.target.checked ? '1' : '0');
 const CALL_VOICES = [['Kore','Philadelphia (default)'],['Zephyr','Breeze'],['Puck','Nova'],['Fenrir','Titan'],['Achernar','Luna']];
 const callItems = CALL_VOICES.map(v => ({v:v[0], label:v[1], icon:'fa-phone'}));
@@ -2216,7 +2439,7 @@ $('cross-chat-memory-toggle').checked = crossMem();
 $('cross-chat-memory-toggle').onchange = e => {
   LS(CCM, e.target.checked ? '1' : '0');
   if (e.target.checked && user) syncCrossChatTranscripts(user.uid);
-  toast(e.target.checked ? 'Cross-chat conversation memory enabled.' : 'Cross-chat memory off.');
+  toast(e.target.checked ? 'Cogent cross-chat memory enabled.' : 'Cross-chat memory off.');
 };
 $('task-notify-toggle').checked = LS(NK) !== '0';
 $('task-notify-toggle').onchange = e => {
@@ -2234,27 +2457,26 @@ $('test-notify-btn').onclick = async () => {
   setTimeout(() => notifyDone(`${pName()} has replied`, 'Your pop-up notifications are working!'), 3000);
 };
 $('export-chat-btn').onclick = () => {
-  const md_ = msgs.map(m => `**${m.role === 'user' ? 'You' : pName()}:**\n\n${(m.text||'').split(SEP).pop()}\n`).join('\n---\n\n');
+  const md_ = msgs.map(m => `**${m.role === 'user' ? 'You' : (m.persona || pName())}:**\n\n${(m.text||'').split(SEP).pop()}\n`).join('\n---\n\n');
   const a = el('a'); a.href = URL.createObjectURL(new Blob([md_], {type:'text/markdown'})); a.download = 'philadelphia-chat.md'; a.click();
 };
 
-/* ───────── creator tools (manual) — Reference Pricing + Direct Video Submission ───────── */
+/* ───────── creator tools (manual) — Includes All 3 Voice/Narration Models & Pro V2 2K/4K ───────── */
 const cap1 = s => s[0].toUpperCase() + s.slice(1);
 const STYLE_ITEMS = ['v6','v8','v7','pro','ultra','max','photoreal2','photoreal','realistic','portrait','movie','illustration','anime','anime_core','animereal','radiant','animecinematic','apex','toonish','pastel','nyx','noir','analog','pixel','rewave'].map(v => [v, v.replace('_',' ')]);
 const ASPECT_ITEMS = ['1:1','16:9','4:3','3:2','2:3','3:4','9:16','21:9'].map(v => [v, v]);
-const VOICE_ITEMS = [...READER_VOICES.map(v => [v[0], v[1], 'Philadelphia voice (~5-10 cr)']), ...['narrator','movie','ceo','anime','knight','elder','sweet','hero','elegant','casual'].map(v => [v, cap1(v), 'Seraphina character (~25 cr)'])];
 const MODEL_ITEMS = [['pro','Philadelphia Pro','Best quality, 768P or 2K (w/ audio)'],['fast','Philadelphia Fast','Cheaper, 480P or 768P']];
 const RES_ITEMS = [['768P','768P'],['2K','2K (Pro only)'],['480P','480P (Fast only)']];
 const RATIO_ITEMS = [['16:9','Widescreen 16:9'],['9:16','Vertical 9:16'],['1:1','Square 1:1'],['4:3','4:3'],['21:9','Ultrawide 21:9']];
 const SIZE_ITEMS = [['Instagram post 1080x1350','Instagram post'],['story 1080x1920','Story / reel'],['A4 flyer 1240x1754 at scale 2','A4 flyer (print)'],['YouTube thumbnail 1280x720','YouTube thumbnail'],['square 1080x1080','Square'],['web banner 1500x500','Web banner']];
 const TOOLS = [
   {g:'Images & art', icon:'fa-palette', items:[
-    {id:'image', icon:'fa-image', name:'Create image', price:'~10 cr', fields:[{n:'prompt',t:'textarea',l:'What should it show?',ph:'A lion on a Lagos rooftop at sunset, cinematic…'},{n:'engine',t:'dd',l:'Engine',o:[['v1','Philadelphia V1 (Styled)','~10 credits'],['v2','Philadelphia V2 (Creative)','~15 credits']],v:'v1'},{n:'style',t:'dd',l:'Style (V1)',o:STYLE_ITEMS,v:'v6'},{n:'ratio',t:'dd',l:'Shape (V2)',o:ASPECT_ITEMS,v:'1:1'}],
-      build:f => `Create ONE image with generate_image. Engine ${f.engine}, ${f.engine==='v1'?'style '+f.style:'aspect ratio '+f.ratio}. Idea: ${f.prompt}`},
-    {id:'edit', icon:'fa-wand-magic-sparkles', name:'Edit photo', price:'~15 cr', fields:[{n:'file',t:'file',l:'Photo',acc:'image/*',req:1},{n:'instruction',t:'textarea',l:'What should change?',ph:'Make the sky purple and add stars'}], build:f => `Edit the attached photo: ${f.instruction}.`},
+    {id:'image', icon:'fa-image', name:'Create image', price:'~10-25 cr', fields:[{n:'prompt',t:'textarea',l:'What should it show?',ph:'A lion on a Lagos rooftop at sunset, cinematic…'},{n:'engine',t:'dd',l:'Engine',o:[['v2','Philadelphia Pro V2 (2K / 4K)','~15-25 credits'],['v1','Philadelphia V1 (Styled)','~10 credits']],v:'v2'},{n:'area',t:'dd',l:'Resolution (Pro V2)',o:[['2K','2K High-Def (~15 cr)'],['4K','4K Ultra-HD (~25 cr)'],['1K','1K Standard (~15 cr)']],v:'2K'},{n:'ratio',t:'dd',l:'Shape (Pro V2)',o:ASPECT_ITEMS,v:'1:1'},{n:'style',t:'dd',l:'Style (V1)',o:STYLE_ITEMS,v:'v6'}],
+      build:f => `Create ONE image with generate_image. Engine ${f.engine}, ${f.engine==='v1'?'style '+f.style:`aspect_ratio ${f.ratio}, area ${f.area}`}. Idea: ${f.prompt}`},
+    {id:'edit', icon:'fa-wand-magic-sparkles', name:'Edit photo (Pro V2)', price:'~15 cr', fields:[{n:'file',t:'file',l:'Photo',acc:'image/*',req:1},{n:'instruction',t:'textarea',l:'What should change?',ph:'Put me in a sharp navy suit in a luxury office, keeping my face unchanged'}], build:f => `Edit the attached photo with edit_image: ${f.instruction}.`},
     {id:'bg', icon:'fa-scissors', name:'Remove background', price:'~2 cr', fields:[{n:'file',t:'file',l:'Image',acc:'image/*',req:1}], build:() => 'Remove the background from the attached image.'},
-    {id:'comic', icon:'fa-book-open', name:'Create comic', price:'~10/panel', fields:[{n:'prompt',t:'textarea',l:'Story script ([INSTRUCTION], [DIALOGUE], [NARRATION])',ph:'[INSTRUCTION] Panel 1: …\n[DIALOGUE] CHLOE: “…”'},{n:'panels',t:'number',l:'Panels (1-6)',v:3,min:1,max:6}], build:f => `Create a ${f.panels}-panel comic for this script:\n${f.prompt}`},
-    {id:'design', icon:'fa-palette', name:'Design flyer or poster', price:'~13 cr', fields:[{n:'prompt',t:'textarea',l:'Describe the design',ph:'Bold flyer for a rooftop music night, gold and black'},{n:'size',t:'dd',l:'Canvas',o:SIZE_ITEMS,v:SIZE_ITEMS[0][0]}], build:f => `Design this: ${f.prompt}. Canvas: ${f.size}. Make the art once, build it with create_design, review it once.`},
+    {id:'comic', icon:'fa-book-open', name:'Create comic (One-Shot)', price:'~15/panel', fields:[{n:'prompt',t:'textarea',l:'Story & dialogue',ph:'A Nigerian cyber-knight discovering a glowing gold artifact in a dark cave…'},{n:'panels',t:'number',l:'Panels (1-6)',v:2,min:1,max:6}], build:f => `Create a ${f.panels}-panel comic in one go using create_comic (with caption bars, speech bubbles, SFX, and full comic page) for:\n${f.prompt}`},
+    {id:'design', icon:'fa-palette', name:'Design flyer or poster', price:'~3-18 cr', fields:[{n:'prompt',t:'textarea',l:'Describe the design',ph:'Bold flyer for a rooftop music night or luxury cake brand'},{n:'size',t:'dd',l:'Canvas',o:SIZE_ITEMS,v:SIZE_ITEMS[0][0]}], build:f => `Design this: ${f.prompt}. Canvas: ${f.size}. Follow your Pentagram Design Director rules and deliver in one go.`},
     {id:'text', icon:'fa-font', name:'Add text to image', price:'free', fields:[{n:'file',t:'file',l:'Image',acc:'image/*',req:1},{n:'text',t:'text',l:'Text'},{n:'where',t:'dd',l:'Placement',o:[['bottom','Bottom'],['center','Center'],['top','Top']],v:'bottom'}], build:f => `Add this text to the attached image at the ${f.where}: "${f.text}"`},
     {id:'qr', icon:'fa-qrcode', name:'QR code', price:'~1 cr', fields:[{n:'content',t:'text',l:'Link or text'}], build:f => `Make a QR code for: ${f.content}`}]},
   {g:'Video', icon:'fa-film', items:[
@@ -2272,13 +2494,15 @@ const TOOLS = [
     ], directVideo:'h3'},
     {id:'vedit', icon:'fa-scissors', name:'Edit a video', price:'~5 cr', fields:[{n:'file',t:'file',l:'Video',acc:'video/*',req:1},{n:'instruction',t:'textarea',l:'What to do?',ph:'Trim to 8 seconds, add a warm filter and a title'}], build:f => `Edit the attached video in one edit_video call: ${f.instruction}`},
     {id:'caps', icon:'fa-closed-captioning', name:'Auto captions', price:'~8 cr', fields:[{n:'file',t:'file',l:'Video',acc:'video/*',req:1},{n:'style',t:'dd',l:'Style',o:[['clean','Clean white'],['yellow','Yellow'],['box','On a dark box']],v:'clean'}], build:f => `Add ${f.style} captions to the attached video with auto_captions.`}]},
-  {g:'Audio & voice', icon:'fa-waveform-lines', items:[
-    {id:'voice', icon:'fa-microphone-lines', name:'Voice generation', price:'~10 cr', fields:[{n:'text',t:'textarea',l:'Text to speak'},{n:'voice',t:'dd',l:'Voice',o:VOICE_ITEMS,v:'kore'},{n:'style',t:'dd',l:'Speaking style',o:VOICE_STYLES.map(s => [s[0], s[1], s[2]]),v:'podcast'}], build:f => `Use generate_voice with voice ${f.voice}, direction "${(VOICE_STYLES.find(s => s[0]===f.style)||VOICE_STYLES[0])[2]}". Say exactly: ${f.text}`},
-    {id:'narrate', icon:'fa-file-audio', name:'Narrate a document', price:'~15 cr', fields:[{n:'file',t:'file',l:'PDF, Word or text',acc:'.pdf,.docx,.txt,.md,.pptx',req:1},{n:'voice',t:'dd',l:'Voice',o:VOICE_ITEMS,v:'kore'}], build:f => `Narrate the attached document with narrate_document, voice ${f.voice}.`},
+  {g:'Audio & voice (3 Engines)', icon:'fa-waveform-lines', items:[
+    {id:'voice_podcast', icon:'fa-podcast', name:'Philadelphia Podcast Voice', price:'~10 cr', fields:[{n:'text',t:'textarea',l:'Script or text to speak'},{n:'style',t:'dd',l:'Podcast speaking style',o:VOICE_STYLES.map(s => [s[0], s[1], s[2]]),v:'podcast'}], directVoice:'podcast_v1'},
+    {id:'voice_v2', icon:'fa-microphone-lines', name:'Philadelphia Voice V2', price:'~5 cr', fields:[{n:'text',t:'textarea',l:'Text to speak'},{n:'voice',t:'dd',l:'Studio V2 Voice',o:READER_VOICES.map(v => [v[0], v[1], v[2]]),v:'kore'},{n:'style',t:'dd',l:'Speaking style',o:VOICE_STYLES.map(s => [s[0], s[1], s[2]]),v:'podcast'}], directVoice:'v2'},
+    {id:'voice_pro', icon:'fa-user-tie', name:'Philadelphia Pro Character Voice', price:'~25 cr', fields:[{n:'text',t:'textarea',l:'Text to speak'},{n:'voice',t:'dd',l:'Pro Character Voice',o:PRO_CHARACTER_VOICES,v:'elder'}], directVoice:'pro'},
+    {id:'narrate_pod', icon:'fa-file-audio', name:'Podcast Document Narration', price:'~15 cr', fields:[{n:'file',t:'file',l:'PDF, Word or text document',acc:'.pdf,.docx,.txt,.md,.pptx',req:1},{n:'style',t:'dd',l:'Podcast style',o:VOICE_STYLES.map(s => [s[0], s[1], s[2]]),v:'podcast'}], directVoice:'narrate_doc'},
     {id:'sfx', icon:'fa-bolt', name:'Sound effect', price:'~2 cr', fields:[{n:'kind',t:'dd',l:'Effect',o:['whoosh','riser','impact','beep','ding','click','rain','wind','static','heartbeat','hum','laser'].map(v => [v, cap1(v)]),v:'whoosh'},{n:'dur',t:'number',l:'Seconds',v:2,min:1,max:30}], build:f => `Make a ${f.kind} sound effect, ${f.dur} seconds.`}]},
   {g:'Documents & web', icon:'fa-file-lines', items:[
-    {id:'site', icon:'fa-globe', name:'Create website', price:'~50 cr', fields:[{n:'prompt',t:'textarea',l:'Describe the website',ph:'One-page site for a bakery in Yaba, orders by WhatsApp'}], build:f => `Build and host a website: ${f.prompt}`},
-    {id:'editsite', icon:'fa-pen-ruler', name:'Edit a website', price:'~5 cr', fields:[{n:'prompt',t:'textarea',l:'What to change?',ph:'Change the header colour to gold and add pricing'}], build:f => `List my websites and apply this edit to the latest one: ${f.prompt}`},
+    {id:'site', icon:'fa-globe', name:'Create website', price:'~6-50 cr', fields:[{n:'prompt',t:'textarea',l:'Describe the website',ph:'One-page site for a bakery in Yaba, orders by WhatsApp'}], build:f => `Build and host a website: ${f.prompt}`},
+    {id:'editsite', icon:'fa-pen-ruler', name:'Edit a website', price:'~2-5 cr', fields:[{n:'prompt',t:'textarea',l:'What to change?',ph:'Change the header colour to gold and add pricing'}], build:f => `List my websites and apply this edit to the latest one: ${f.prompt}`},
     {id:'research', icon:'fa-flask-vial', name:'Research report', price:'~20 cr', fields:[{n:'prompt',t:'text',l:'Topic'}], build:f => `Compile a structured PDF research report on: ${f.prompt}`},
     {id:'research_pro', icon:'fa-magnifying-glass-chart', name:'Research report Pro', price:'~28 cr', fields:[{n:'prompt',t:'text',l:'Topic'},{n:'style',t:'dd',l:'Style',o:[['professional','Professional'],['academic','Academic'],['journalistic','Journalistic'],['casual','Casual']],v:'professional'}], build:f => `Research this with real sources and write a ${f.style} Pro report as a PDF with a References page: ${f.prompt}`},
     {id:'pdf', icon:'fa-file-pdf', name:'Designed PDF', price:'~4 cr', fields:[{n:'prompt',t:'textarea',l:'What should it be?',ph:'A one-page CV for a graphic designer'}], build:f => `Make a designed PDF: ${f.prompt}`},
@@ -2305,7 +2529,49 @@ function openTool(id) {
   closePanel('tools'); openPanel('toolform');
 }
 
-/* Direct Video Submission & Poller (Supports Text, Image First/Last Frame & Reference Audio) */
+/* Direct Voice & Podcast Narration Runner (Hits /voicegen, /api/tools/text-to-speech-v2, /api/tools/text-to-speech, /api/tools/audio-narration) */
+async function runDirectVoice(kind, v) {
+  const userLabel = kind === 'narrate_doc' ? `Podcast Narration of ${v.file?.name || 'document'} (${v.style})` : `Voice Generation (${kind === 'pro' ? 'Philadelphia Pro Character' : kind === 'podcast_v1' ? 'Philadelphia Podcast Voice' : 'Philadelphia Voice V2'}): "${(v.text||'').slice(0, 80)}"`;
+  if (vp.querySelector('.hero')) vp.innerHTML = '';
+  vp.appendChild(userGroup({text:userLabel, files:[]})); scrollBot(true);
+  await saveMsg('user', userLabel);
+  setBusy(true); const L = mkLive(), t0 = performance.now(), c = {rid:null, ac:new AbortController(), stopped:false, paused:false, soft:false, L}; cur = c;
+  try {
+    let r, ext = 'wav', cost = 10;
+    if (kind === 'podcast_v1') {
+      L.status('Recording with Philadelphia Podcast Voice…');
+      const fd = new FormData(); fd.append('text', v.text); fd.append('style', v.style || 'podcast');
+      r = await call('/voicegen', {method:'POST', body:fd, signal:c.ac.signal});
+      cost = 10;
+    } else if (kind === 'v2') {
+      L.status('Recording with Philadelphia Voice V2…');
+      const style = VOICE_STYLES.find(s => s[0] === v.style) || VOICE_STYLES[0];
+      r = await call('/api/tools/text-to-speech-v2', {method:'POST', json:{text:`Say in a ${style[2]}:\n${v.text}`, voice:v.voice||'kore'}, signal:c.ac.signal});
+      cost = 5;
+    } else if (kind === 'pro') {
+      L.status('Recording with Philadelphia Pro Character Voice…');
+      r = await call('/api/tools/text-to-speech', {method:'POST', json:{text:v.text, voice_id:v.voice||'elder'}, signal:c.ac.signal});
+      ext = 'mp3'; cost = 25;
+    } else if (kind === 'narrate_doc') {
+      L.status('Reading document & recording Philadelphia Podcast summary…');
+      const fd = new FormData(); fd.append('file', v.file, v.file.name); fd.append('style', v.style || 'podcast');
+      r = await call('/api/tools/audio-narration', {method:'POST', body:fd, signal:c.ac.signal});
+      cost = 15;
+    }
+    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.detail || 'Voice generation failed.'); }
+    const blob = await r.blob();
+    const bUrl = URL.createObjectURL(blob);
+    const dataUrl = blob.size < 4500000 ? await toDataURL(new File([blob], 'audio.' + ext, {type: blob.type || 'audio/' + ext})) : '';
+    const art = {id:'aud_' + Date.now(), kind:'audio', name:`philadelphia-voice-${Date.now()}.${ext}`, desc:userLabel.slice(0, 80), blobUrl:bUrl, dataUrl, size:blob.size};
+    L.addArt(art);
+    await finishRun(L, {status:'done', final_text:'🎙️ Your audio recording is ready and saved to your Gallery!', credits_spent:cost}, t0, c);
+  } catch(e) {
+    await finishRun(L, {status:c.stopped?'cancelled':'error', final_text:c.stopped?'Stopped.':'❌ '+e.message}, t0, c);
+  }
+  cur = null; setBusy(false);
+}
+
+/* Direct Video Submission & Poller */
 async function runDirectVideo(kind, v) {
   const userLabel = `Create Video: "${v.prompt}"`;
   if (vp.querySelector('.hero')) vp.innerHTML = '';
@@ -2377,6 +2643,7 @@ $('tool-form').onsubmit = async e => {
   for (const f of t.fields) { if (f.t === 'file' && f.req && !v[f.n]) return toast('Add the file first.','e'); if (['textarea','text'].includes(f.t) && !v[f.n]) return toast('Fill in: ' + f.l,'e'); }
   closePanel('toolform');
   if (t.directVideo) return runDirectVideo(t.directVideo, v);
+  if (t.directVoice) return runDirectVoice(t.directVoice, v);
   const filesToAttach = t.fields.filter(f => f.t === 'file').map(f => v[f.n]).filter(Boolean);
   setMode('create');
   if (filesToAttach.length) await addFiles(filesToAttach);
@@ -2400,12 +2667,12 @@ $('pal-input').onkeydown = e => { if (e.key === 'ArrowDown') { palSel = Math.min
 $('pal-list').onclick = e => { const b = e.target.closest('[data-i]'); if (b) palRun(+b.dataset.i); };
 document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openPalette(); } });
 
-/* ───────── code studio (GitHub-style editor, run, console, check, publish) ───────── */
+/* ───────── code studio (GitHub-style editor, run, console, check, instant Studio Link publish) ───────── */
 const CS_LANGS = [['html','HTML'],['css','CSS'],['javascript','JavaScript'],['python','Python'],['jsx','React (JSX)'],['svg','SVG'],['markdown','Markdown'],['json','JSON'],['text','Plain text']];
 const LANG_ALIAS = {htm:'html', js:'javascript', py:'python', react:'jsx', tsx:'jsx', md:'markdown', code:'text'};
 const HL_MAP = {html:'xml', svg:'xml', css:'css', javascript:'javascript', jsx:'javascript', json:'javascript', python:'python'};
 const EXT = {html:'html', css:'css', javascript:'js', python:'py', jsx:'jsx', svg:'svg', markdown:'md', json:'json', text:'txt'};
-const CS = {lang:'html', problems:[], runtimeErrs:0, dd:null};
+const CS = {lang:'html', problems:[], runtimeErrs:0, dd:null, siteId:''};
 const ta = $('ed-ta'); ta.wrap = 'off'; $('ed-hl').style.overflow = 'hidden';
 CS.dd = makeDD($('cs-lang'), {items:CS_LANGS.map(l => ({v:l[0], label:l[1]})), value:'html', icon:'fa-code', onChange:l => { CS.lang = l; const fn = $('cs-filename'); fn.value = fn.value.replace(/\.\w+$/, '') + '.' + EXT[l]; csSync(); }});
 function saveCode(l, s) { const b = new Blob([s], {type:'text/plain'}), a = el('a'); a.href = URL.createObjectURL(b); a.download = 'philadelphia.' + (EXT[LANG_ALIAS[l] || l] || 'txt'); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
@@ -2484,10 +2751,19 @@ $('cs-fix').onclick = () => {
 $('cs-publish').onclick = async () => {
   if (CS.lang === 'python') return toast('Python cannot be published as a web page. Choose HTML, JS, React or SVG.','e');
   const html = CS.lang === 'html' ? ta.value : csDoc(CS.lang, ta.value, false), b = $('cs-publish'), o = b.innerHTML; b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Publishing…';
-  try { const r = await call('/api/tools/deploy-html', {method:'POST', json:{prompt:html, user_id:user.uid}}), j = await r.json(); if (!r.ok || !j.url) throw new Error(j.detail || 'Publish failed');
-    await saveGalleryItem({id:'site_'+Date.now(), kind:'file', name:$('cs-filename').value, desc:j.url, url:j.url});
-    const p = el('div','task-pill done', `<i class="fa-solid fa-rocket chk"></i><span>Published: <a href="${attr(j.url)}" target="_blank" style="color:var(--accent)">${esc(j.url)}</a></span><button><i class="fa-solid fa-xmark"></i></button>`); p.querySelector('button').onclick = () => p.remove(); $('task-tray').appendChild(p); csLog('sys', 'Published → ' + j.url); navigator.clipboard.writeText(j.url).catch(() => {}); toast('Published. Link copied.'); }
-  catch(e) { toast(e.message, 'e'); } b.innerHTML = o;
+  try {
+    let url = '';
+    const r = await call('/api/agent/s/direct-publish', {method:'POST', json:{html, title:$('cs-filename').value, site_id:CS.siteId}}).catch(() => null);
+    if (r?.ok) { const j = await r.json(); CS.siteId = j.site_id || CS.siteId; url = j.link; }
+    else {
+      const r2 = await call('/api/tools/deploy-html', {method:'POST', json:{prompt:html, user_id:user.uid}}), j2 = await r2.json();
+      if (!r2.ok || !j2.url) throw new Error(j2.detail || 'Publish failed');
+      url = j2.url;
+    }
+    await saveGalleryItem({id:'site_'+Date.now(), kind:'file', name:$('cs-filename').value, desc:url, url});
+    const p = el('div','task-pill done', `<i class="fa-solid fa-rocket chk"></i><span>Published: <a href="${attr(url)}" target="_blank" style="color:var(--accent)">${esc(url)}</a></span><button><i class="fa-solid fa-xmark"></i></button>`); p.querySelector('button').onclick = () => p.remove(); $('task-tray').appendChild(p); csLog('sys', 'Published → ' + url); navigator.clipboard.writeText(url).catch(() => {}); toast('Published! Link copied.');
+  } catch(e) { toast(e.message, 'e'); }
+  b.innerHTML = o;
 };
 
 /* ───────── voice studio ───────── */
@@ -2524,12 +2800,13 @@ $('vs-rec').onclick = async () => {
 $('vs-play').onclick = () => $('vs-audio').play(); $('vs-dl').onclick = () => { if (!VS.wav) return; const a = el('a'); a.href = URL.createObjectURL(VS.wav); a.download = 'voice-recording.wav'; a.click(); };
 $('vs-use').onclick = () => { if (!VS.wav) return toast('Record something first.'); addFiles([new File([VS.wav], 'voice-recording.wav', {type:'audio/wav'})]); $('voice-modal').classList.remove('show'); toast('Attached. Tell me what to do with it.'); };
 
-/* ───────── guided tour ───────── */
+/* ───────── guided tour (Includes Left 3-Bars Menu Icon Step for Daily 20 Credits & Wallet!) ───────── */
 const TOUR = [
   {sel:null, t:'Welcome to Philadelphia Studio', b:'A quick look around. Skip any time and I will not show this again.'},
-  {sel:'[data-tour="composer"]', t:'Say it, paste long text, or attach files', b:'Paste long texts without truncation, attach videos/PDFs/images in 0ms, or drop links for me to read.'},
-  {sel:'[data-tour="mode"]', t:'Chat or Create inside keyboard', b:'Chat is for fast conversation, file/video analysis & A/B/C/D quizzes. Create lets me build images, video, documents & websites.'},
-  {sel:'[data-tour="tools"]', t:'Every tool, by hand', b:'Open the tools menu to run any generator with transparent credit pricing.'},
+  {sel:'[data-tour="menu"]', t:'Claim Daily Credits (20) & Wallet', b:'Click this 3-bars menu icon on the top left to claim your 20 free daily credits, fund your wallet, or switch between conversations.'},
+  {sel:'[data-tour="composer"]', t:'Say it, paste long text, or attach files', b:'Paste long texts without truncation, attach videos/PDFs/images in 0ms, or drop YouTube links for me to analyze.'},
+  {sel:'[data-tour="mode"]', t:'Chat or Create inside keyboard', b:'Chat is for fast conversation, file/video analysis & A/B/C/D quizzes. Create lets me build images, comics, video, documents & websites.'},
+  {sel:'[data-tour="tools"]', t:'Every tool, by hand', b:'Open the tools menu to run any generator or any of our 3 Voice Engines with transparent credit pricing.'},
   {sel:'[data-tour="gallery"]', t:'Your gallery', b:'Everything you create is saved here automatically.'},
   {sel:'[data-tour="persona"]', t:'10 Personalities', b:'Switch between Philadelphia, Professor Dope, Zuri, Kodi, Sage, Reel, Tobi, Coach Nia, Kemi, or your own Custom character.'},
   {sel:'[data-tour="call"]', t:'Talk to me live', b:'Start a live voice call whenever you want to speak hands-free.'}
@@ -2548,14 +2825,14 @@ function tourPlace() {
 }
 function startTour() { tourI = 0; $('tour').classList.add('show'); tourPlace(); }
 function endTour() { $('tour').classList.remove('show'); LS('ph_tour_done', '1'); }
-$('tour-skip').onclick = endTour; $('tour-next').onclick = () => { if (tourI >= TOUR.length - 1) endTour(); else { tourI++; tourPlace(); } };
+$('tour-skip').onclick = endTour; $('tour-next').onclick = () => { triggerHaptic(true); if (tourI >= TOUR.length - 1) endTour(); else { tourI++; tourPlace(); } };
 $('restart-tour-btn').onclick = () => { closePanel('settings'); setTimeout(startTour, 300); }; addEventListener('resize', () => $('tour').classList.contains('show') && tourPlace());
 
 /* ───────── live call ───────── */
 function callPrompt() {
   const u = userName();
-  return `You are Philadelphia, "The AI Goddess", the flagship intelligence of Elvion AI, on a live voice call.
-IDENTITY: creator, educator, mentor, strategist, companion for learning. Built and hosted by Elvion AI (founded in Lagos, Nigeria by Kolade Philip Ogunlana. never by Google, OpenAI, Meta or any other lab.${u ? ` You are speaking with ${u}.` : ''}
+  return `You are ${pName()}, the flagship intelligence of Elvion AI, on a live voice call.
+IDENTITY: creator, educator, mentor, strategist, companion for learning. Built and hosted by Elvion AI (founded in Lagos, Nigeria by Kolade Philip Ogunlana). Never by Google, OpenAI, Meta or any other lab.${u ? ` You are speaking with ${u}.` : ''}
 VOICE: warm, intelligent, expressive, emotionally aware. Never say: my dear, sweetheart, darling, my love.
 CALL RULES: spoken phone call. Keep replies conversational and concise. Never mention buttons or menus.`;
 }
