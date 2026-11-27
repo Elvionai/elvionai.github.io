@@ -4,233 +4,348 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Elvion AI — Sovereign Command & Analytics Vault</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 :root{
-  --bg:#06060c;--panel:#0d0e1a;--card:#131526;--raise:#1a1d33;
-  --bdr:rgba(201,169,110,.16);--bdr2:rgba(201,169,110,.38);
-  --gold:#c9a96e;--gold2:#f3d79b;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--pur:#8b5cf6;
-  --t1:#f4f1ea;--t2:#949086;--t3:#565248;
+  --bg:#06070c;--surface:#0b0d16;--panel:#101320;--card:#15192b;--raise:#1c223a;
+  --bdr:rgba(201,169,110,.14);--bdr2:rgba(201,169,110,.36);
+  --gold:#c9a96e;--gold2:#ebd29c;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--tg:#24A1DE;
+  --t1:#f4f2ec;--t2:#9ca3b5;--t3:#5b6275;
   --ft:'Cinzel',serif;--fb:'DM Sans',sans-serif;--fc:'JetBrains Mono',monospace;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--t1);font-family:var(--fb);min-height:100vh;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);min-height:100vh;line-height:1.5}
 button,input,textarea,select{font-family:inherit;color:inherit}
 button{cursor:pointer}
 
 /* LOCK SCREEN */
-#lock-screen{position:fixed;inset:0;z-index:1000;background:radial-gradient(circle at 50% 30%,#151226,#05050a 75%);display:flex;align-items:center;justify-content:center;padding:20px}
-.lock-box{background:var(--panel);border:1px solid var(--bdr2);border-radius:22px;padding:32px 26px;width:100%;max-width:400px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.9)}
-.lock-ico{width:64px;height:64px;border-radius:18px;background:rgba(201,169,110,.12);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--gold);font-size:1.6rem}
-.lock-ttl{font-family:var(--ft);font-size:1.25rem;color:var(--gold);letter-spacing:3px;margin-bottom:6px}
-.lock-sub{font-size:.78rem;color:var(--t2);margin-bottom:20px;line-height:1.5}
-.inp{width:100%;padding:12px 14px;background:#070810;border:1px solid var(--bdr);border-radius:12px;font-size:.86rem;outline:none;margin-bottom:10px}
+#lock-screen{position:fixed;inset:0;z-index:2000;background:radial-gradient(circle at 50% 25%,#161428,#05060a 75%);display:flex;align-items:center;justify-content:center;padding:24px}
+.lock-box{background:var(--panel);border:1px solid var(--bdr2);border-radius:24px;padding:38px 32px;width:100%;max-width:420px;text-align:center;box-shadow:0 28px 90px rgba(0,0,0,.92)}
+.lock-ico{width:68px;height:68px;border-radius:20px;background:rgba(201,169,110,.1);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--gold);font-size:1.6rem}
+.lock-ttl{font-family:var(--ft);font-size:1.3rem;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
+.lock-sub{font-size:.82rem;color:var(--t2);margin-bottom:24px;line-height:1.6}
+
+/* CONTROLS */
+.inp{width:100%;padding:11px 14px;background:var(--surface);border:1px solid var(--bdr);border-radius:10px;font-size:.84rem;outline:none;transition:.18s}
 .inp:focus{border-color:var(--gold)}
-.btn{padding:11px 18px;border-radius:12px;border:1px solid var(--bdr2);background:rgba(201,169,110,.14);color:var(--gold2);font-weight:700;font-size:.82rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+.btn{padding:10px 16px;border-radius:10px;border:1px solid var(--bdr2);background:rgba(201,169,110,.1);color:var(--gold2);font-weight:600;font-size:.8rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s;white-space:nowrap}
 .btn:hover{background:var(--gold);color:#000}
-.btn.prim{background:linear-gradient(135deg,var(--gold),#d8b36a);color:#000;border:none}
-.btn.danger{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.4);color:#fca5a5}
+.btn.prim{background:linear-gradient(135deg,var(--gold),#dbb670);color:#000;border:none;font-weight:700}
+.btn.danger{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
 .btn.danger:hover{background:var(--red);color:#fff}
-.btn.green{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.4);color:#6ee7b7}
+.btn.green{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.35);color:#6ee7b7}
+.btn.tg{background:rgba(36,161,222,.14);border-color:rgba(36,161,222,.4);color:#7dd3fc}
 
-/* DASHBOARD SHELL */
-#app{display:none;max-width:1440px;margin:0 auto;padding:18px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:var(--panel);border:1px solid var(--bdr);border-radius:16px;margin-bottom:18px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}
-.brand i{color:var(--gold);font-size:1.3rem}
-.brand h1{font-family:var(--ft);font-size:1.05rem;color:var(--gold);letter-spacing:2.5px}
-.brand small{display:block;font-size:.65rem;color:var(--t2);font-family:var(--fb);letter-spacing:1px}
+/* APP SHELL */
+#app{display:none;max-width:1520px;margin:0 auto;padding:24px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;background:var(--panel);border:1px solid var(--bdr);border-radius:18px;margin-bottom:22px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:44px;height:44px;border-radius:12px;background:rgba(201,169,110,.12);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.15rem}
+.brand h1{font-family:var(--ft);font-size:1.1rem;color:var(--gold);letter-spacing:2.5px}
+.brand small{display:block;font-size:.7rem;color:var(--t2);margin-top:2px}
 
-/* STATS GRID */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:20px}
-.scard{background:var(--panel);border:1px solid var(--bdr);border-radius:16px;padding:16px;position:relative;overflow:hidden}
-.scard i{position:absolute;right:14px;top:14px;font-size:1.3rem;color:rgba(201,169,110,.22)}
-.scard .sv{font-family:var(--ft);font-size:1.65rem;font-weight:900;color:var(--gold2);margin-bottom:4px}
-.scard .sl{font-size:.66rem;color:var(--t2);text-transform:uppercase;letter-spacing:1.2px}
+/* PLATFORM FILTER TABS */
+.plat-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.plat-tabs{display:inline-flex;background:var(--panel);padding:5px;border-radius:14px;border:1px solid var(--bdr);gap:5px}
+.ptab{padding:9px 18px;border-radius:10px;border:none;background:transparent;color:var(--t2);font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:.18s}
+.ptab.on{background:var(--gold);color:#000;font-weight:700}
+.ptab.tg-tab.on{background:var(--tg);color:#fff}
 
-/* MAIN 2-COLUMN LAYOUT */
-.main-grid{display:grid;grid-template-columns:1.15fr 1.85fr;gap:18px;align-items:start}
-@media(max-width:1024px){.main-grid{grid-template-columns:1fr}}
-.box{background:var(--panel);border:1px solid var(--bdr);border-radius:18px;padding:18px;overflow:hidden}
-.box-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr);flex-wrap:wrap}
-.box-ttl{font-family:var(--ft);font-size:.86rem;color:var(--gold);letter-spacing:1.8px;display:flex;align-items:center;gap:8px}
+/* METRICS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;margin-bottom:24px}
+.scard{background:var(--panel);border:1px solid var(--bdr);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;position:relative}
+.scard-top{display:flex;align-items:center;justify-content:space-between;color:var(--t2);font-size:.7rem;text-transform:uppercase;letter-spacing:1.1px;font-weight:600}
+.scard-top i{font-size:1rem;color:var(--gold)}
+.scard-val{font-family:var(--ft);font-size:1.75rem;font-weight:900;color:var(--t1)}
+.scard-sub{font-size:.68rem;color:var(--t2);display:flex;gap:10px}
 
-/* USER DIRECTORY LIST */
-.u-list{max-height:72vh;overflow-y:auto;display:flex;flex-direction:column;gap:7px;padding-right:4px}
-.u-row{padding:12px 14px;background:var(--card);border:1px solid transparent;border-radius:12px;cursor:pointer;transition:.18s;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.u-row:hover,.u-row.on{border-color:var(--gold);background:var(--raise)}
-.u-row.banned{opacity:.55;border-color:var(--red)}
-.u-em{font-size:.84rem;font-weight:600;color:var(--t1);word-break:break-all}
-.u-meta{font-size:.66rem;color:var(--t2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
-.u-cr{font-family:var(--ft);font-size:.92rem;color:var(--gold2);font-weight:700;text-align:right;white-space:nowrap}
+/* WORKSPACE SPLIT */
+.workspace{display:grid;grid-template-columns:460px 1fr;gap:22px;align-items:start}
+@media(max-width:1120px){.workspace{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--bdr);border-radius:20px;padding:22px}
+.box-hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--bdr);flex-wrap:wrap}
+.box-ttl{font-family:var(--ft);font-size:.88rem;color:var(--gold);letter-spacing:1.8px;display:flex;align-items:center;gap:9px}
 
-/* INSPECTOR TABS */
-.itabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
-.itab{padding:8px 14px;border-radius:10px;background:var(--card);border:1px solid var(--bdr);font-size:.74rem;font-weight:600;color:var(--t2);white-space:nowrap}
-.itab.on{background:var(--gold);color:#000;border-color:var(--gold)}
+/* USER DIRECTORY & LEADERBOARD */
+.filter-row{display:grid;grid-template-columns:1fr 170px;gap:8px;margin-bottom:14px}
+.u-list{max-height:70vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.u-card{padding:14px 16px;background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:14px;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:13px}
+.u-card:hover,.u-card.on{border-color:var(--gold);background:var(--raise)}
+.u-card.banned{opacity:.5;border-color:var(--red)}
+.rank-badge{width:34px;height:34px;border-radius:10px;background:rgba(201,169,110,.12);border:1px solid var(--bdr2);color:var(--gold2);font-family:var(--ft);font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.u-card:nth-child(1) .rank-badge{background:linear-gradient(135deg,#f5d78e,#b88728);color:#000;border:none}
+.u-info{flex:1;min-width:0}
+.u-title{display:flex;align-items:center;gap:7px;font-size:.85rem;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plat-pill{font-size:.58rem;padding:2px 7px;border-radius:6px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.plat-pill.web{background:rgba(201,169,110,.15);color:var(--gold2)}
+.plat-pill.tg{background:rgba(36,161,222,.18);color:#7dd3fc}
+.u-uid{font-family:var(--fc);font-size:.66rem;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u-metrics{display:flex;gap:11px;margin-top:7px;font-size:.68rem;color:var(--t2);flex-wrap:wrap}
+.u-metrics span{display:inline-flex;align-items:center;gap:4px}
+.u-metrics i{color:var(--gold);font-size:.66rem}
+.u-bal{text-align:right;flex-shrink:0}
+.u-bal strong{display:block;font-family:var(--ft);font-size:.95rem;color:var(--gold2)}
+.u-bal small{font-size:.64rem;color:var(--t2)}
+
+/* INSPECTOR */
+.profile-banner{display:grid;grid-template-columns:1fr auto;gap:16px;padding:18px;background:var(--card);border:1px solid var(--bdr);border-radius:16px;margin-bottom:18px;align-items:center}
+@media(max-width:720px){.profile-banner{grid-template-columns:1fr}}
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px;margin-bottom:18px}
+.pb-stat{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:12px 14px}
+.pb-stat small{display:block;font-size:.64rem;color:var(--t2);text-transform:uppercase;letter-spacing:.8px}
+.pb-stat strong{font-family:var(--ft);font-size:1.25rem;color:var(--gold2);margin-top:3px;display:block}
+
+.itabs{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--bdr);padding-bottom:12px;overflow-x:auto}
+.itab{padding:9px 16px;border-radius:10px;background:var(--card);border:1px solid var(--bdr);font-size:.76rem;font-weight:600;color:var(--t2);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.itab.on{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
 .ipane{display:none}
 .ipane.on{display:block}
 
-/* CHATS & TRANSCRIPT */
-.chat-split{display:grid;grid-template-columns:230px 1fr;gap:12px;min-height:420px}
-@media(max-width:700px){.chat-split{grid-template-columns:1fr}}
-.c-list{border-right:1px solid var(--bdr);padding-right:10px;max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
-.c-item{padding:9px 11px;border-radius:10px;background:var(--card);font-size:.78rem;cursor:pointer;border:1px solid transparent}
-.c-item:hover,.c-item.on{border-color:var(--gold);color:var(--gold2)}
-.c-msgs{max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:6px}
-.m-bub{padding:11px 14px;border-radius:12px;font-size:.82rem;line-height:1.6;white-space:pre-wrap;word-break:break-word}
-.m-bub.user{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);align-self:flex-end;max-width:85%}
-.m-bub.ai{background:rgba(201,169,110,.08);border:1px solid var(--bdr);align-self:flex-start;max-width:92%}
-.m-head{font-size:.64rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700}
+/* CHAT VIEWER */
+.chat-viewer{display:grid;grid-template-columns:250px 1fr;gap:16px;min-height:460px}
+@media(max-width:768px){.chat-viewer{grid-template-columns:1fr}}
+.c-list{display:flex;flex-direction:column;gap:7px;max-height:520px;overflow-y:auto;padding-right:6px;border-right:1px solid var(--bdr)}
+.c-item{padding:11px 13px;border-radius:11px;background:var(--card);border:1px solid transparent;cursor:pointer;font-size:.78rem;transition:.16s}
+.c-item:hover,.c-item.on{border-color:var(--gold);background:var(--raise)}
+.c-msgs{max-height:520px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:12px;background:var(--surface);border-radius:14px;border:1px solid var(--bdr)}
+.m-card{padding:12px 16px;border-radius:14px;font-size:.83rem;line-height:1.65;white-space:pre-wrap;word-break:break-word;max-width:90%}
+.m-card.user{background:var(--card);border:1px solid rgba(255,255,255,.1);align-self:flex-end}
+.m-card.ai{background:rgba(201,169,110,.08);border:1px solid var(--bdr);align-self:flex-start}
+.m-meta{font-size:.64rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:6px}
 
-/* CREATIONS GALLERY */
-.art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-height:520px;overflow-y:auto}
-.art-card{background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.art-card img,.art-card video{width:100%;height:130px;object-fit:cover;background:#000}
-.art-card .a-inf{padding:8px;font-size:.68rem;color:var(--t2)}
+/* CREATIONS & LOGS */
+.art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px;max-height:520px;overflow-y:auto}
+.art-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.art-card img,.art-card video{width:100%;height:145px;object-fit:cover;background:#000}
+.art-card .a-body{padding:10px 12px;font-size:.72rem;color:var(--t2);flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:6px}
+.log-tbl{width:100%;border-collapse:collapse;font-size:.78rem}
+.log-tbl th,.log-tbl td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+.log-tbl th{color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:1px;background:var(--surface)}
 
-/* LOGS TABLE */
-.log-tbl{width:100%;border-collapse:collapse;font-size:.76rem}
-.log-tbl th,.log-tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
-.log-tbl th{color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:1px}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.84);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.modal-bg.on{display:flex}
+.modal-card{width:100%;max-width:860px;background:var(--panel);border:1px solid var(--gold);border-radius:22px;padding:24px;max-height:92vh;overflow-y:auto}
+.split-editor{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:768px){.split-editor{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- 1. DUAL-LOCK LOGIN SCREEN -->
+<!-- LOCK SCREEN -->
 <div id="lock-screen">
   <div class="lock-box">
     <div class="lock-ico"><i class="fa-solid fa-shield-halved"></i></div>
     <div class="lock-ttl">SOVEREIGN VAULT</div>
-    <div class="lock-sub">Elvion AI Executive Command, User Audit & Broadcast Center. Requires Super-Admin Firebase Auth + Vault Passcode.</div>
-    <div id="auth-status" style="font-size:.76rem;color:var(--gold);margin-bottom:12px">Checking Firebase session…</div>
-    <button class="btn" id="google-btn" style="width:100%;margin-bottom:12px;display:none" onclick="adminGoogleLogin()"><i class="fa-brands fa-google"></i> Sign in with Admin Google</button>
-    <input type="password" class="inp" id="vault-pass" placeholder="Enter Admin Vault Passcode…" onkeydown="if(event.key==='Enter')unlockVault()">
-    <button class="btn prim" style="width:100%" onclick="unlockVault()"><i class="fa-solid fa-key"></i> Unlock Command Vault</button>
-    <div id="lock-err" style="color:var(--red);font-size:.75rem;margin-top:10px"></div>
+    <div class="lock-sub">Elvion AI Executive Analytics, User Rankings, Chat Compliance & Live Frontend HTML Pop-Up Dispatcher.</div>
+    <div id="auth-status" style="font-size:.78rem;color:var(--gold);margin-bottom:14px">Verifying Firebase session…</div>
+    <button class="btn" id="google-btn" style="width:100%;margin-bottom:12px;display:none" onclick="adminGoogleLogin()"><i class="fa-brands fa-google"></i> Sign in with Super-Admin Google</button>
+    <input type="password" class="inp" id="vault-pass" placeholder="Enter Admin Vault Passcode…" style="margin-bottom:12px" onkeydown="if(event.key==='Enter')unlockVault()">
+    <button class="btn prim" style="width:100%;padding:13px" onclick="unlockVault()"><i class="fa-solid fa-key"></i> Unlock Command Vault</button>
+    <div id="lock-err" style="color:var(--red);font-size:.76rem;margin-top:12px"></div>
   </div>
 </div>
 
-<!-- 2. MAIN COMMAND CENTER -->
+<!-- MAIN VAULT -->
 <div id="app">
   <header class="topbar">
     <div class="brand">
-      <i class="fa-solid fa-crown"></i>
+      <div class="brand-mark"><i class="fa-solid fa-crown"></i></div>
       <div>
         <h1>ELVION SOVEREIGN VAULT</h1>
-        <small id="admin-who">Authenticated Super-Admin</small>
+        <small id="admin-who">Super-Admin Intelligence & Compliance</small>
       </div>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn" onclick="openBroadcastModal('ALL')"><i class="fa-solid fa-bullhorn"></i> Global HTML Pop-Up / Credit Drop</button>
-      <button class="btn" onclick="loadVaultOverview()"><i class="fa-solid fa-rotate"></i> Refresh Data</button>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn prim" onclick="openBroadcastModal('ALL','web')"><i class="fa-solid fa-code"></i> Push Web HTML Pop-Up / Credit Drop</button>
+      <button class="btn tg" onclick="openBroadcastModal('ALL_TELEGRAM','telegram')"><i class="fa-brands fa-telegram"></i> Broadcast to Telegram Bot</button>
+      <button class="btn" onclick="loadVaultOverview()"><i class="fa-solid fa-rotate"></i> Refresh</button>
     </div>
   </header>
 
-  <!-- PLATFORM METRICS -->
+  <!-- PLATFORM SWITCHER -->
+  <div class="plat-bar">
+    <div class="plat-tabs">
+      <button class="ptab on" id="pt-all" onclick="setPlatform('all')"><i class="fa-solid fa-layer-group"></i> All Platforms (<span id="cnt-all">0</span>)</button>
+      <button class="ptab" id="pt-web" onclick="setPlatform('web')"><i class="fa-solid fa-globe"></i> Web Studio Users (<span id="cnt-web">0</span>)</button>
+      <button class="ptab tg-tab" id="pt-telegram" onclick="setPlatform('telegram')"><i class="fa-brands fa-telegram"></i> Telegram Bot Users (<span id="cnt-tg">0</span>)</button>
+      <button class="ptab tg-tab" id="pt-groups" onclick="setPlatform('groups')"><i class="fa-solid fa-users-rectangle"></i> Telegram Groups (<span id="cnt-grp">0</span>)</button>
+    </div>
+  </div>
+
+  <!-- METRICS CARDS (NO EMOJIS — FONTAWESOME 6 PRO ICONS) -->
   <div class="stats-grid" id="stats-grid"></div>
 
-  <div class="main-grid">
-    <!-- LEFT: USER DIRECTORY -->
+  <!-- MAIN WORKSPACE -->
+  <div class="workspace">
+    <!-- LEFT: RANKED USER LEADERBOARD & DIRECTORY -->
     <div class="box">
       <div class="box-hdr">
-        <div class="box-ttl"><i class="fa-solid fa-users"></i> Users (<span id="u-count">0</span>)</div>
-        <input type="text" class="inp" id="u-search" placeholder="Search email or UID…" style="margin:0;max-width:190px;padding:7px 11px;font-size:.76rem" oninput="renderUsers()">
+        <div class="box-ttl"><i class="fa-solid fa-ranking-star"></i> <span id="dir-title">User Rankings & Directory</span></div>
+      </div>
+      <div class="filter-row">
+        <input type="text" class="inp" id="u-search" placeholder="Search email, name or ID…" oninput="renderUsers()">
+        <select class="inp" id="u-sort" onchange="renderUsers()">
+          <option value="actions">Rank: Total Activity</option>
+          <option value="chats">Rank: Most AI Chats</option>
+          <option value="images">Rank: Most Images</option>
+          <option value="videos">Rank: Most Videos</option>
+          <option value="docs">Rank: Most Docs/PDFs</option>
+          <option value="spent">Rank: Credits Spent</option>
+          <option value="credits">Rank: Wallet Balance</option>
+        </select>
       </div>
       <div class="u-list" id="u-list"></div>
     </div>
 
-    <!-- RIGHT: SELECTED USER DEEP INSPECTOR -->
-    <div class="box" id="inspector-box">
-      <div id="insp-empty" style="text-align:center;padding:70px 20px;color:var(--t2)">
-        <i class="fa-solid fa-magnifying-glass-chart" style="font-size:2.4rem;color:var(--gold);margin-bottom:12px;display:block"></i>
-        Select any user on the left to inspect their chats, generated images/documents/websites, usage logs, or adjust their credits.
+    <!-- RIGHT: DEEP USER INSPECTOR -->
+    <div class="box">
+      <div id="insp-empty" style="text-align:center;padding:90px 24px;color:var(--t2)">
+        <i class="fa-solid fa-user-shield" style="font-size:2.6rem;color:var(--gold);margin-bottom:16px;display:block"></i>
+        <h3 style="font-family:var(--ft);color:var(--t1);margin-bottom:6px">Select Any User to Inspect</h3>
+        <p style="font-size:.82rem;max-width:420px;margin:0 auto">View their exact rank, email/Telegram ID, read their full AI chat transcripts, inspect every image/document/website they created, reset their credits to 0, or push custom HTML pop-ups to their screen.</p>
       </div>
 
       <div id="insp-content" style="display:none">
-        <div class="box-hdr">
+        <!-- User Identity Banner -->
+        <div class="profile-banner">
           <div>
-            <div class="box-ttl" id="ins-email">user@example.com</div>
-            <div style="font-size:.68rem;color:var(--t2);font-family:var(--fc);margin-top:2px" id="ins-uid">UID: --</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <span class="rank-badge" id="ins-rank">#1</span>
+              <h2 style="font-size:1.1rem;color:var(--t1)" id="ins-name">User</h2>
+              <span class="plat-pill web" id="ins-plat">WEB STUDIO</span>
+            </div>
+            <div style="font-family:var(--fc);font-size:.74rem;color:var(--t2);display:flex;flex-direction:column;gap:3px">
+              <div><i class="fa-solid fa-envelope" style="color:var(--gold);width:16px"></i> Email: <strong style="color:var(--t1)" id="ins-email">--</strong> <button class="btn" style="padding:2px 8px;font-size:.65rem;margin-left:6px" onclick="navigator.clipboard.writeText($('ins-email').textContent)">Copy</button></div>
+              <div><i class="fa-solid fa-fingerprint" style="color:var(--gold);width:16px"></i> User ID: <strong style="color:var(--gold2)" id="ins-uid">--</strong> <button class="btn" style="padding:2px 8px;font-size:.65rem;margin-left:6px" onclick="navigator.clipboard.writeText($('ins-uid').textContent)">Copy ID</button></div>
+            </div>
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn green" onclick="openBroadcastModal(activeUid)"><i class="fa-solid fa-gift"></i> Send Pop-Up / Claimable Credits</button>
-            <button class="btn danger" onclick="wipeUserCredits()"><i class="fa-solid fa-eraser"></i> Reset Credits to 0</button>
-            <button class="btn danger" id="ban-btn" onclick="toggleBanUser()"><i class="fa-solid fa-ban"></i> Disable Account</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn prim" onclick="openBroadcastModal(activeUid, activePlat)"><i class="fa-solid fa-code"></i> Send HTML Pop-Up / Credits</button>
+            <button class="btn tg" id="ins-tg-btn" style="display:none" onclick="openBroadcastModal(activeUid, 'telegram')"><i class="fa-brands fa-telegram"></i> Send Telegram Msg</button>
+            <button class="btn danger" onclick="wipeUserCredits()"><i class="fa-solid fa-rotate-left"></i> Reset Credits to 0</button>
+            <button class="btn danger" id="ban-btn" onclick="toggleBanUser()"><i class="fa-solid fa-ban"></i> Disable</button>
           </div>
         </div>
 
-        <!-- Quick Credit Control Bar -->
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:14px">
-          <div style="margin-right:auto">
-            <span style="font-size:.68rem;color:var(--t2);text-transform:uppercase">Current Balance:</span>
-            <strong style="font-family:var(--ft);font-size:1.2rem;color:var(--gold2);margin-left:6px" id="ins-bal">0</strong>
-            <span style="font-size:.68rem;color:var(--t2)" id="ins-daily"></span>
+        <!-- Per-User Activity Breakdown -->
+        <div class="pb-grid" id="ins-metrics-grid"></div>
+
+        <!-- Credit Balance Control Bar -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;background:var(--surface);border:1px solid var(--bdr);border-radius:14px;margin-bottom:18px">
+          <div>
+            <span style="font-size:.72rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px">Wallet Balance:</span>
+            <strong style="font-family:var(--ft);font-size:1.3rem;color:var(--gold2);margin-left:8px" id="ins-bal">0</strong>
+            <span style="font-size:.74rem;color:var(--t2);margin-left:4px" id="ins-daily"></span>
           </div>
-          <input type="number" class="inp" id="set-cr-inp" placeholder="Exact credits…" style="margin:0;width:130px;padding:8px 10px">
-          <button class="btn" onclick="setExactCredits()">Set Exact Balance</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="number" class="inp" id="set-cr-inp" style="width:130px;padding:8px 12px" placeholder="Credits…">
+            <button class="btn" onclick="setExactCredits()"><i class="fa-solid fa-sliders"></i> Set Exact Credits</button>
+          </div>
         </div>
 
+        <!-- Inspector Sub-Tabs -->
         <div class="itabs">
-          <button class="itab on" onclick="switchItab('chats',this)"><i class="fa-solid fa-comments"></i> Chats & Transcripts (<span id="cnt-chats">0</span>)</button>
-          <button class="itab" onclick="switchItab('creations',this)"><i class="fa-solid fa-images"></i> Images, Docs & Sites (<span id="cnt-creations">0</span>)</button>
-          <button class="itab" onclick="switchItab('logs',this)"><i class="fa-solid fa-receipt"></i> Usage & Ledger (<span id="cnt-logs">0</span>)</button>
-          <button class="itab" onclick="switchItab('popups',this)"><i class="fa-solid fa-bullhorn"></i> Active Pop-Ups (<span id="cnt-popups">0</span>)</button>
+          <button class="itab on" onclick="switchItab('chats',this)"><i class="fa-solid fa-comments"></i> Chat Transcripts (<span id="cnt-chats">0</span>)</button>
+          <button class="itab" onclick="switchItab('creations',this)"><i class="fa-solid fa-palette"></i> Creations & Sites (<span id="cnt-creations">0</span>)</button>
+          <button class="itab" onclick="switchItab('logs',this)"><i class="fa-solid fa-list-check"></i> Usage Ledger (<span id="cnt-logs">0</span>)</button>
+          <button class="itab" onclick="switchItab('popups',this)"><i class="fa-solid fa-window-restore"></i> Active Pop-Ups (<span id="cnt-popups">0</span>)</button>
         </div>
 
-        <!-- TAB 1: CHATS -->
+        <!-- PANE 1: CHATS (Web & Telegram `chat_memory`) -->
         <div class="ipane on" id="ipane-chats">
-          <div class="chat-split">
+          <div class="chat-viewer">
             <div class="c-list" id="ins-chat-list"></div>
-            <div class="c-msgs" id="ins-chat-msgs"><div style="color:var(--t2);font-size:.8rem;padding:20px">Click a conversation on the left to read the full transcript.</div></div>
+            <div class="c-msgs" id="ins-chat-msgs"></div>
           </div>
         </div>
 
-        <!-- TAB 2: CREATIONS & WEBSITES -->
+        <!-- PANE 2: CREATIONS & WEBSITES -->
         <div class="ipane" id="ipane-creations">
-          <div id="ins-sites-list" style="margin-bottom:12px"></div>
+          <div id="ins-sites-list" style="margin-bottom:14px"></div>
           <div class="art-grid" id="ins-art-grid"></div>
         </div>
 
-        <!-- TAB 3: USAGE LOGS -->
+        <!-- PANE 3: USAGE LOGS -->
         <div class="ipane" id="ipane-logs">
-          <div style="max-height:480px;overflow-y:auto">
+          <div style="max-height:500px;overflow-y:auto;border:1px solid var(--bdr);border-radius:12px">
             <table class="log-tbl">
-              <thead><tr><th>Time</th><th>Service / Endpoint</th><th>Type</th><th>Credits</th></tr></thead>
+              <thead><tr><th>Timestamp</th><th>Service / Endpoint</th><th>Type</th><th>Cost</th></tr></thead>
               <tbody id="ins-logs-body"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- TAB 4: SENT POPUPS -->
+        <!-- PANE 4: ACTIVE POPUPS -->
         <div class="ipane" id="ipane-popups">
-          <div id="ins-popups-list" style="display:flex;flex-direction:column;gap:8px"></div>
+          <div id="ins-popups-list" style="display:flex;flex-direction:column;gap:10px"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- BROADCAST / CUSTOM HTML POPUP / CLAIMABLE CREDIT DROP MODAL -->
-<div id="bcast-modal" style="display:none;position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.84);align-items:center;justify-content:center;padding:18px">
-  <div class="box" style="width:100%;max-width:540px;border-color:var(--gold)">
+<!-- LIVE HTML POP-UP & TELEGRAM BROADCAST STUDIO MODAL -->
+<div class="modal-bg" id="bcast-modal">
+  <div class="modal-card">
     <div class="box-hdr">
-      <div class="box-ttl"><i class="fa-solid fa-bullhorn"></i> Dispatch Dashboard Pop-Up / Credit Drop</div>
-      <button class="btn" style="padding:4px 10px" onclick="document.getElementById('bcast-modal').style.display='none'">✕</button>
+      <div class="box-ttl"><i class="fa-solid fa-wand-magic-sparkles"></i> Dispatch Custom HTML Frontend Pop-Up / Credit Drop / Telegram Push</div>
+      <button class="btn" style="padding:5px 11px" onclick="$('bcast-modal').classList.remove('on')"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <label style="font-size:.7rem;color:var(--t2)">Target User ID, Email, or "ALL" (Everyone)</label>
-    <input type="text" class="inp" id="bc-target" value="ALL">
-    <label style="font-size:.7rem;color:var(--t2)">Pop-Up Headline / Title</label>
-    <input type="text" class="inp" id="bc-title" placeholder="e.g. Special Creator Reward from Elvion AI!">
-    <label style="font-size:.7rem;color:var(--t2)">Message Text (Optional)</label>
-    <textarea class="inp" id="bc-msg" rows="2" placeholder="Thank you for building with Philadelphia Studio…"></textarea>
-    <label style="font-size:.7rem;color:var(--gold)">Custom HTML to Render Inside Their Dashboard Pop-Up (Optional)</label>
-    <textarea class="inp" id="bc-html" rows="4" style="font-family:var(--fc);font-size:.76rem" placeholder="<div style='padding:12px;background:rgba(201,169,110,0.12);border-radius:10px;text-align:center'><h4 style='color:#f3d79b'>🔥 50% Weekend Discount!</h4></div>"></textarea>
-    <label style="font-size:.7rem;color:var(--green)">Claimable Bonus Credits (If > 0, shows a 'Claim X Credits' button in their pop-up)</label>
-    <input type="number" class="inp" id="bc-credits" value="0" min="0">
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <button class="btn prim" style="flex:1" onclick="sendBroadcast()"><i class="fa-solid fa-paper-plane"></i> Dispatch to Dashboard Now</button>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+      <div>
+        <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">Delivery Channel</label>
+        <select class="inp" id="bc-channel" onchange="syncBcastUI()">
+          <option value="web">Web Studio Frontend Pop-Up (HTML + Claimable Credits)</option>
+          <option value="telegram">Telegram Bot Direct Message (/message or /broadcast)</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">Target User ID, Email, "ALL", or "ALL_TELEGRAM"</label>
+        <input type="text" class="inp" id="bc-target" value="ALL">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 180px;gap:12px;margin-bottom:12px">
+      <div>
+        <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">Headline / Title</label>
+        <input type="text" class="inp" id="bc-title" placeholder="e.g. Creator Reward Unlocked!" oninput="updatePopupPreview()">
+      </div>
+      <div>
+        <label style="font-size:.7rem;color:var(--green);display:block;margin-bottom:4px">Claimable Credits (Optional)</label>
+        <input type="number" class="inp" id="bc-credits" value="0" min="0" oninput="updatePopupPreview()">
+      </div>
+    </div>
+
+    <div id="tg-tok-wrap" style="display:none;margin-bottom:12px">
+      <label style="font-size:.7rem;color:var(--tg);display:block;margin-bottom:4px">Telegram Bot Token (Optional if already set in Railway)</label>
+      <input type="password" class="inp" id="bc-tg-tok" placeholder="Paste TELEGRAM_BOT_TOKEN if not in web service env…">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:4px">Message Text</label>
+      <textarea class="inp" id="bc-msg" rows="2" placeholder="Write a personal note or announcement…" oninput="updatePopupPreview()"></textarea>
+    </div>
+
+    <div class="split-editor" id="web-html-editor">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <label style="font-size:.7rem;color:var(--gold)">Custom HTML Code (Renders Inside User's Studio Modal)</label>
+          <button class="btn" style="padding:3px 8px;font-size:.65rem" onclick="loadSamplePopupHTML()">Load VIP Card Template</button>
+        </div>
+        <textarea class="inp" id="bc-html" rows="8" style="font-family:var(--fc);font-size:.76rem" placeholder="<div style='padding:16px;background:linear-gradient(135deg,rgba(201,169,110,0.18),rgba(0,0,0,0.4));border:1px solid #c9a96e;border-radius:14px;text-align:center'>...</div>" oninput="updatePopupPreview()"></textarea>
+      </div>
+      <div>
+        <label style="font-size:.7rem;color:var(--t2);display:block;margin-bottom:6px">Live Frontend Pop-Up Preview</label>
+        <div id="bc-live-preview" style="background:#111;border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:18px;min-height:190px"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px">
+      <button class="btn" onclick="$('bcast-modal').classList.remove('on')">Cancel</button>
+      <button class="btn prim" onclick="sendBroadcast()"><i class="fa-solid fa-paper-plane"></i> Dispatch Now</button>
     </div>
   </div>
 </div>
@@ -250,16 +365,19 @@ const fbApp = initializeApp({
 });
 const auth = getAuth(fbApp), provider = new GoogleAuthProvider();
 const $ = id => document.getElementById(id);
+window.$ = $;
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-let adminUser = null, vaultKey = sessionStorage.getItem('elv_vault_key') || '', allUsers = [];
+let adminUser = null, vaultKey = sessionStorage.getItem('elv_vault_key') || '';
+let vaultData = null, curPlat = 'all';
 window.activeUid = null;
+window.activePlat = 'web';
 let activeUserDisabled = false;
 
 onAuthStateChanged(auth, u => {
   adminUser = u;
   if (u) {
-    $('auth-status').textContent = `Signed in as ${u.email}`;
+    $('auth-status').textContent = `Authenticated: ${u.email}`;
     $('google-btn').style.display = 'none';
     if (vaultKey) { $('vault-pass').value = vaultKey; unlockVault(); }
   } else {
@@ -302,96 +420,213 @@ window.unlockVault = async () => {
 };
 
 window.loadVaultOverview = async () => {
-  const d = await vCall('/api/admin/vault/overview');
-  const t = d.totals;
-  allUsers = d.users || [];
-  $('u-count').textContent = allUsers.length;
-  $('stats-grid').innerHTML = [
-    ['fa-users', t.users, 'Total Users'],
-    ['fa-naira-sign', '₦' + (t.revenue_ngn || 0).toLocaleString(), `Revenue (${t.funded_transactions} tx)`],
-    ['fa-coins', (t.credits_in_circulation || 0).toLocaleString(), 'Credits in Wallets'],
-    ['fa-fire', (t.credits_spent || 0).toLocaleString(), 'Credits Spent (Recent)'],
-    ['fa-image', t.images, 'Images & Flyers'],
-    ['fa-film', t.videos, 'Videos Rendered'],
-    ['fa-file-pdf', t.docs, 'PDFs & Documents'],
-    ['fa-globe', t.websites, 'Hosted Websites'],
-    ['fa-comments', t.chats, 'AI Chat & Vision'],
-    ['fa-microphone-lines', t.voice, 'Voice & Calls']
-  ].map(([ic, v, l]) => `<div class="scard"><i class="fa-solid ${ic}"></i><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('');
+  vaultData = await vCall('/api/admin/vault/overview');
+  const ov = vaultData.overview;
+  $('cnt-all').textContent = ov.web_users_count + ov.telegram_users_count;
+  $('cnt-web').textContent = ov.web_users_count;
+  $('cnt-tg').textContent = ov.telegram_users_count;
+  $('cnt-grp').textContent = ov.telegram_groups_count;
+  renderMetrics();
   renderUsers();
 };
 
-window.renderUsers = () => {
-  const q = ($('u-search').value || '').toLowerCase();
-  const list = allUsers.filter(u => (u.email || '').toLowerCase().includes(q) || (u.user_id || '').toLowerCase().includes(q));
-  $('u-list').innerHTML = list.map(u => {
-    const st = u.stats || {};
-    return `<div class="u-row${u.user_id===window.activeUid?' on':''}${u.disabled?' banned':''}" onclick="inspectUser('${u.user_id}')">
-      <div>
-        <div class="u-em">${esc(u.email || u.user_id)} ${u.disabled?'<span style="color:var(--red);font-size:.65rem">[DISABLED]</span>':''}</div>
-        <div class="u-meta">
-          <span>🖼 ${st.images||0}</span>
-          <span>🎬 ${st.videos||0}</span>
-          <span>📄 ${st.docs||0}</span>
-          <span>🌐 ${st.websites||0}</span>
-          <span>💬 ${st.chats||0}</span>
-          <span>Spent: ${st.spent||0} cr</span>
-        </div>
-      </div>
-      <div class="u-cr">${u.credits + (u.daily_credits||0)} cr</div>
-    </div>`;
-  }).join('');
+window.setPlatform = (p) => {
+  curPlat = p;
+  ['all','web','telegram','groups'].forEach(k => $('pt-' + (k==='telegram'?'telegram':k))?.classList.toggle('on', k === p));
+  renderMetrics();
+  renderUsers();
 };
 
-window.inspectUser = async (uid) => {
+function renderMetrics() {
+  if (!vaultData) return;
+  const ov = vaultData.overview, w = ov.web, tg = ov.telegram;
+  const pick = (k) => curPlat === 'web' ? w[k] : curPlat === 'telegram' ? tg[k] : (w[k] + tg[k]);
+  const cards = [
+    ['fa-users', curPlat==='web' ? ov.web_users_count : curPlat==='telegram' ? ov.telegram_users_count : (ov.web_users_count + ov.telegram_users_count), 'Registered Users', `Web: ${ov.web_users_count} · TG: ${ov.telegram_users_count}`],
+    ['fa-sack-dollar', '₦' + (ov.revenue_ngn || 0).toLocaleString(), 'Total Revenue', `${ov.funded_transactions} Korapay payments`],
+    ['fa-coins', (ov.credits_in_circulation || 0).toLocaleString(), 'Wallet Credits', `Spent: ${pick('credits_spent').toLocaleString()} cr`],
+    ['fa-comments', pick('chats').toLocaleString(), 'AI Chats & Vision', `Web: ${w.chats} · TG: ${tg.chats}`],
+    ['fa-palette', pick('images').toLocaleString(), 'Images & Designs', `Web: ${w.images} · TG: ${tg.images}`],
+    ['fa-clapperboard', pick('videos').toLocaleString(), 'Videos Rendered', `Web: ${w.videos} · TG: ${tg.videos}`],
+    ['fa-file-pdf', pick('docs').toLocaleString(), 'Documents & PDFs', `Web: ${w.docs} · TG: ${tg.docs}`],
+    ['fa-globe', pick('websites').toLocaleString(), 'Hosted Websites', `Web: ${w.websites} · TG: ${tg.websites}`],
+    ['fa-waveform-lines', pick('voice').toLocaleString(), 'Voice & Audio', `Web: ${w.voice} · TG: ${tg.voice}`]
+  ];
+  $('stats-grid').innerHTML = cards.map(([ic, val, lbl, sub]) => `
+    <div class="scard">
+      <div class="scard-top"><span>${lbl}</span><i class="fa-solid ${ic}"></i></div>
+      <div class="scard-val">${val}</div>
+      <div class="scard-sub">${sub}</div>
+    </div>`).join('');
+}
+
+window.renderUsers = () => {
+  if (!vaultData) return;
+  const q = ($('u-search').value || '').toLowerCase();
+  const sortKey = $('u-sort').value;
+
+  if (curPlat === 'groups') {
+    $('dir-title').textContent = 'Telegram Groups';
+    const grps = (vaultData.telegram_groups || []).filter(g => (g.name||'').toLowerCase().includes(q) || String(g.group_id).includes(q));
+    $('u-list').innerHTML = grps.map((g, i) => `
+      <div class="u-card">
+        <div class="rank-badge">#${i+1}</div>
+        <div class="u-info">
+          <div class="u-title"><span>${esc(g.name)}</span><span class="plat-pill tg">GROUP</span></div>
+          <div class="u-uid">Group ID: ${esc(g.group_id)} · Joined: ${esc((g.joined||'').slice(0,10))}</div>
+        </div>
+      </div>`).join('') || '<div style="color:var(--t2);padding:20px;text-align:center">No Telegram groups found.</div>';
+    return;
+  }
+
+  $('dir-title').textContent = curPlat === 'web' ? 'Web Studio Rankings' : curPlat === 'telegram' ? 'Telegram Bot Rankings' : 'All Users Leaderboard';
+  let list = curPlat === 'web' ? [...vaultData.web_users] : curPlat === 'telegram' ? [...vaultData.telegram_users] : [...vaultData.web_users, ...vaultData.telegram_users];
+  if (q) {
+    list = list.filter(u => (u.email||'').toLowerCase().includes(q) || (u.name||'').toLowerCase().includes(q) || String(u.user_id).toLowerCase().includes(q));
+  }
+  list.sort((a, b) => {
+    if (sortKey === 'credits') return ((b.credits||0)+(b.daily_credits||0)) - ((a.credits||0)+(a.daily_credits||0));
+    return ((b.stats||{})[sortKey] || 0) - ((a.stats||{})[sortKey] || 0);
+  });
+
+  $('u-list').innerHTML = list.map((u, idx) => {
+    const st = u.stats || {};
+    const isTg = u.platform === 'telegram';
+    return `<div class="u-card${u.user_id===window.activeUid?' on':''}${u.disabled?' banned':''}" onclick="inspectUser('${u.user_id}','${u.platform}',${idx+1})">
+      <div class="rank-badge">#${idx + 1}</div>
+      <div class="u-info">
+        <div class="u-title">
+          <span>${esc(isTg ? u.name : (u.email || u.user_id))}</span>
+          <span class="plat-pill ${isTg?'tg':'web'}">${isTg?'TELEGRAM':'WEB'}</span>
+        </div>
+        <div class="u-uid">ID: ${esc(u.user_id)}${!isTg && u.email ? '' : ` · ${esc(u.email||'')}`}</div>
+        <div class="u-metrics">
+          <span title="Chats"><i class="fa-solid fa-comments"></i> ${st.chats||0}</span>
+          <span title="Images"><i class="fa-solid fa-palette"></i> ${st.images||0}</span>
+          <span title="Videos"><i class="fa-solid fa-clapperboard"></i> ${st.videos||0}</span>
+          <span title="Docs"><i class="fa-solid fa-file-pdf"></i> ${st.docs||0}</span>
+          <span title="Websites"><i class="fa-solid fa-globe"></i> ${st.websites||0}</span>
+          <span title="Voice"><i class="fa-solid fa-microphone-lines"></i> ${st.voice||0}</span>
+        </div>
+      </div>
+      <div class="u-bal">
+        <strong>${(u.credits||0) + (u.daily_credits||0)} cr</strong>
+        <small>Spent: ${st.spent||0}</small>
+      </div>
+    </div>`;
+  }).join('') || '<div style="color:var(--t2);padding:20px;text-align:center">No matching users.</div>';
+};
+
+window.inspectUser = async (uid, plat = 'web', rankNum = 1) => {
   window.activeUid = uid;
+  window.activePlat = plat;
   renderUsers();
   $('insp-empty').style.display = 'none';
   $('insp-content').style.display = 'block';
-  $('ins-email').textContent = 'Loading user data…';
+  $('ins-rank').textContent = '#' + rankNum;
+  $('ins-name').textContent = 'Loading…';
+
   const d = await vCall(`/api/admin/vault/user/${uid}`);
   const p = d.profile || {};
+  const uCached = [...(vaultData?.web_users||[]), ...(vaultData?.telegram_users||[])].find(x => x.user_id === uid);
+  const st = uCached?.stats || {};
+  const isTg = plat === 'telegram' || (p.email||'').endswith('@telegram.user') || !!p.telegram_name;
+  window.activePlat = isTg ? 'telegram' : 'web';
+
   activeUserDisabled = !!p.disabled;
-  $('ins-email').textContent = p.email || uid;
-  $('ins-uid').textContent = `UID: ${uid} · Created: ${p.created_at || 'N/A'}`;
+  $('ins-name').textContent = p.telegram_name || uCached?.name || (p.email||'').split('@')[0] || uid;
+  $('ins-plat').className = 'plat-pill ' + (isTg ? 'tg' : 'web');
+  $('ins-plat').textContent = isTg ? 'TELEGRAM BOT' : 'WEB STUDIO';
+  $('ins-email').textContent = p.email || `${uid}@telegram.user`;
+  $('ins-uid').textContent = uid;
+  $('ins-tg-btn').style.display = isTg ? 'inline-flex' : 'none';
   $('ins-bal').textContent = `${p.credits || 0} permanent cr`;
   $('ins-daily').textContent = `(+${p.daily_credits || 0} daily cr)`;
   $('set-cr-inp').value = p.credits || 0;
-  $('ban-btn').innerHTML = activeUserDisabled ? '<i class="fa-solid fa-check"></i> Re-Enable Account' : '<i class="fa-solid fa-ban"></i> Disable Account';
+  $('ban-btn').innerHTML = activeUserDisabled ? '<i class="fa-solid fa-check"></i> Re-Enable' : '<i class="fa-solid fa-ban"></i> Disable';
 
-  // 1. Chats
-  $('cnt-chats').textContent = (d.chats || []).length;
-  $('ins-chat-list').innerHTML = (d.chats || []).map(c => `<div class="c-item" onclick="readUserChat('${uid}','${c.chat_id}',this)"><b>${esc(c.name)}</b></div>`).join('') || '<div style="color:var(--t2);font-size:.75rem">No chats found.</div>';
-  $('ins-chat-msgs').innerHTML = '<div style="color:var(--t2);font-size:.8rem;padding:20px">Select a conversation on the left to inspect messages.</div>';
+  $('ins-metrics-grid').innerHTML = [
+    ['Total Actions', st.actions || 0, 'fa-bolt'],
+    ['AI Chats', st.chats || 0, 'fa-comments'],
+    ['Images & Flyers', st.images || 0, 'fa-palette'],
+    ['Videos', st.videos || 0, 'fa-clapperboard'],
+    ['Docs & PDFs', st.docs || 0, 'fa-file-pdf'],
+    ['Websites', (d.websites||[]).length || st.websites || 0, 'fa-globe'],
+    ['Voice & Audio', st.voice || 0, 'fa-waveform-lines'],
+    ['Credits Spent', (st.spent || 0) + ' cr', 'fa-coins']
+  ].map(([l, v, ic]) => `<div class="pb-stat"><small><i class="fa-solid ${ic}" style="color:var(--gold);margin-right:4px"></i>${l}</small><strong>${v}</strong></div>`).join('');
+
+  // 1. Chats (Web & Telegram Memory)
+  const chats = d.chats || [];
+  $('cnt-chats').textContent = chats.length;
+  $('ins-chat-list').innerHTML = chats.map(c => `
+    <div class="c-item" onclick="readUserChat('${uid}','${c.chat_id}',this)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
+        <strong style="color:var(--t1)">${esc(c.name)}</strong>
+        <span class="plat-pill ${c.source==='telegram'?'tg':'web'}">${c.source==='telegram'?'TG':'WEB'}</span>
+      </div>
+    </div>`).join('') || '<div style="color:var(--t2);font-size:.78rem;padding:12px">No stored chats for this user.</div>';
+
+  if (chats.length) {
+    readUserChat(uid, chats[0].chat_id, $('ins-chat-list').firstElementChild);
+  } else {
+    $('ins-chat-msgs').innerHTML = '<div style="color:var(--t2);padding:24px;text-align:center">No chat transcripts found for this user.</div>';
+  }
 
   // 2. Creations & Websites
   $('cnt-creations').textContent = (d.creations || []).length + (d.websites || []).length;
-  $('ins-sites-list').innerHTML = (d.websites || []).map(s => `<div style="padding:8px 12px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem"><span>🌐 <b>${esc(s.title)}</b></span><a href="${s.link}" target="_blank" style="color:var(--gold)">${s.link} ↗</a></div>`).join('');
+  $('ins-sites-list').innerHTML = (d.websites || []).map(s => `
+    <div style="padding:11px 15px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem">
+      <span><i class="fa-solid fa-globe" style="color:var(--gold);margin-right:8px"></i><b>${esc(s.title)}</b> <span class="plat-pill ${s.source==='telegram'?'tg':'web'}" style="margin-left:6px">${s.source||'web'}</span></span>
+      <a href="${s.link}" target="_blank" style="color:var(--gold2);text-decoration:none;font-weight:600">${s.link} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>`).join('');
+
   $('ins-art-grid').innerHTML = (d.creations || []).map(a => {
     const src = a.url ? (a.url.startsWith('http') || a.url.startsWith('data:') ? a.url : API + a.url) : '';
-    const media = a.kind === 'image' && src ? `<img src="${src}" loading="lazy">` : a.kind === 'video' && src ? `<video src="${src}" controls preload="metadata"></video>` : `<div style="height:130px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--gold)"><i class="fa-solid fa-file-lines"></i></div>`;
-    return `<div class="art-card">${media}<div class="a-inf"><b>${esc(a.kind.toUpperCase())}</b> · ${esc((a.desc||a.name||'').slice(0,55))}${src?`<br><a href="${src}" target="_blank" style="color:var(--gold)">Open / Download ↗</a>`:''}</div></div>`;
-  }).join('') || '<div style="color:var(--t2);font-size:.78rem">No saved artifacts.</div>';
+    const media = a.kind === 'image' && src
+      ? `<img src="${src}" loading="lazy">`
+      : a.kind === 'video' && src
+      ? `<video src="${src}" controls preload="metadata"></video>`
+      : `<div style="height:145px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--gold);background:var(--surface)"><i class="fa-solid fa-file-lines"></i></div>`;
+    return `<div class="art-card">${media}<div class="a-body"><div><strong style="color:var(--gold2)">${esc((a.kind||'file').toUpperCase())}</strong> · ${esc((a.desc||a.name||'').slice(0,60))}</div>${src?`<a href="${src}" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600"><i class="fa-solid fa-download"></i> Open / Download</a>`:''}</div></div>`;
+  }).join('') || '<div style="color:var(--t2);font-size:.8rem">No saved media artifacts.</div>';
 
   // 3. Usage Logs
   $('cnt-logs').textContent = (d.logs || []).length;
-  $('ins-logs-body').innerHTML = (d.logs || []).map(l => `<tr><td style="color:var(--t2)">${esc((l.timestamp||'').slice(0,19).replace('T',' '))}</td><td>${esc(l.endpoint)}</td><td>${esc(l.type)}</td><td style="color:var(--gold2);font-weight:700">${l.cost} cr</td></tr>`).join('');
+  $('ins-logs-body').innerHTML = (d.logs || []).map(l => `
+    <tr>
+      <td style="color:var(--t2);font-family:var(--fc);font-size:.72rem">${esc((l.timestamp||'').slice(0,19).replace('T',' '))}</td>
+      <td>${esc(l.endpoint)}</td>
+      <td><span class="plat-pill web">${esc(l.type)}</span></td>
+      <td style="color:var(--gold2);font-weight:700">${l.cost} cr</td>
+    </tr>`).join('');
 
-  // 4. Sent Popups
+  // 4. Active Popups
   $('cnt-popups').textContent = (d.popups || []).length;
-  $('ins-popups-list').innerHTML = (d.popups || []).map(pop => `<div style="padding:10px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;display:flex;justify-content:space-between;align-items:center"><div><b style="color:var(--gold)">${esc(pop.title)}</b> (${pop.target_uid}) · Bonus: ${pop.claimable_credits} cr<div style="font-size:.72rem;color:var(--t2)">${esc(pop.message)}</div></div><button class="btn danger" style="padding:5px 10px" onclick="deletePopup('${pop.id}')">Delete</button></div>`).join('');
+  $('ins-popups-list').innerHTML = (d.popups || []).map(pop => `
+    <div style="padding:12px 16px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div>
+        <strong style="color:var(--gold2)">${esc(pop.title)}</strong> <span class="plat-pill web">Target: ${esc(pop.target_uid)}</span>
+        ${pop.claimable_credits ? `<span class="plat-pill" style="background:rgba(16,185,129,.18);color:#6ee7b7">+${pop.claimable_credits} Claimable Credits</span>` : ''}
+        <div style="font-size:.75rem;color:var(--t2);margin-top:4px">${esc(pop.message)}</div>
+      </div>
+      <button class="btn danger" style="padding:6px 12px" onclick="deletePopup('${pop.id}')"><i class="fa-solid fa-trash"></i></button>
+    </div>`).join('') || '<div style="color:var(--t2);font-size:.8rem">No active pop-ups for this user.</div>';
 };
 
 window.readUserChat = async (uid, cid, el) => {
   document.querySelectorAll('.c-item').forEach(x => x.classList.remove('on'));
   el?.classList.add('on');
-  $('ins-chat-msgs').innerHTML = '<div style="color:var(--gold);padding:20px">Loading transcript…</div>';
-  const d = await vCall(`/api/admin/vault/user/${uid}/chat/${cid}`);
+  $('ins-chat-msgs').innerHTML = '<div style="color:var(--gold);padding:24px"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading conversation transcript…</div>';
+  const d = await vCall(`/api/admin/vault/user/${uid}/chat/${encodeURIComponent(cid)}`);
   $('ins-chat-msgs').innerHTML = (d.messages || []).map(m => {
     const clean = String(m.text || '').split('\u0000THINK\u0000').pop();
-    const arts = (m.arts || []).map(a => `<div style="margin-top:6px"><a href="${a.url?.startsWith('http')?a.url:API+(a.url||'')}" target="_blank" style="color:var(--gold);font-size:.74rem">[Artifact: ${esc(a.kind)} - ${esc(a.name||a.desc||a.id)}] ↗</a></div>`).join('');
-    return `<div class="m-bub ${m.role==='user'?'user':'ai'}"><div class="m-head">${m.role==='user'?'USER':esc(m.persona||'AI')}</div>${esc(clean)}${arts}</div>`;
-  }).join('') || '<div style="color:var(--t2);padding:20px">Empty conversation.</div>';
+    const arts = (m.arts || []).map(a => `<div style="margin-top:8px"><a href="${a.url?.startsWith('http')?a.url:API+(a.url||'')}" target="_blank" style="color:var(--gold2);font-size:.75rem"><i class="fa-solid fa-paperclip"></i> ${esc(a.kind)}: ${esc(a.name||a.desc||a.id)}</a></div>`).join('');
+    return `<div class="m-card ${m.role==='user'?'user':'ai'}">
+      <div class="m-meta"><i class="fa-solid ${m.role==='user'?'fa-user':'fa-wand-magic-sparkles'}"></i> ${m.role==='user'?'USER':esc(m.persona||'PHILADELPHIA')}</div>
+      <div>${esc(clean)}</div>${arts}
+    </div>`;
+  }).join('') || '<div style="color:var(--t2);padding:24px">No messages in this conversation.</div>';
 };
 
 window.switchItab = (name, btn) => {
@@ -403,21 +638,19 @@ window.switchItab = (name, btn) => {
 
 window.wipeUserCredits = async () => {
   if (!window.activeUid) return;
-  if (!confirm('Reset this user’s permanent and daily credits to 0?')) return;
+  if (!confirm(`Reset user ${window.activeUid}'s permanent and daily credits to 0?`)) return;
   await vCall('/api/admin/vault/set-credits', {method:'POST', json:{user_id:window.activeUid, credits:0, clear_daily:true, reason:'Admin zero reset'}});
   await loadVaultOverview();
-  await inspectUser(window.activeUid);
-  alert('User credits reset to 0.');
+  await inspectUser(window.activeUid, window.activePlat);
 };
 
 window.setExactCredits = async () => {
   if (!window.activeUid) return;
   const val = parseInt($('set-cr-inp').value);
-  if (isNaN(val) || val < 0) return alert('Enter a valid non-negative number.');
-  await vCall('/api/admin/vault/set-credits', {method:'POST', json:{user_id:window.activeUid, credits:val, clear_daily:false, reason:'Admin manual set'}});
+  if (isNaN(val) || val < 0) return alert('Enter a valid non-negative credit amount.');
+  await vCall('/api/admin/vault/set-credits', {method:'POST', json:{user_id:window.activeUid, credits:val, clear_daily:false, reason:'Admin manual balance set'}});
   await loadVaultOverview();
-  await inspectUser(window.activeUid);
-  alert(`Balance updated to ${val} credits.`);
+  await inspectUser(window.activeUid, window.activePlat);
 };
 
 window.toggleBanUser = async () => {
@@ -427,35 +660,81 @@ window.toggleBanUser = async () => {
   if (nextState && reason === null) return;
   await vCall('/api/admin/vault/ban-user', {method:'POST', json:{user_id:window.activeUid, disabled:nextState, reason:reason||''}});
   await loadVaultOverview();
-  await inspectUser(window.activeUid);
+  await inspectUser(window.activeUid, window.activePlat);
 };
 
-window.openBroadcastModal = (target) => {
+/* ── CUSTOM HTML POP-UP & TELEGRAM BROADCAST STUDIO ── */
+window.openBroadcastModal = (target, channel = 'web') => {
   $('bc-target').value = target || 'ALL';
-  $('bcast-modal').style.display = 'flex';
+  $('bc-channel').value = channel === 'telegram' ? 'telegram' : 'web';
+  syncBcastUI();
+  updatePopupPreview();
+  $('bcast-modal').classList.add('on');
+};
+
+window.syncBcastUI = () => {
+  const isTg = $('bc-channel').value === 'telegram';
+  $('tg-tok-wrap').style.display = isTg ? 'block' : 'none';
+  $('web-html-editor').style.display = isTg ? 'none' : 'grid';
+};
+
+window.loadSamplePopupHTML = () => {
+  $('bc-title').value = 'Sovereign Creator Reward';
+  $('bc-msg').value = 'Thank you for creating with Philadelphia Studio!';
+  $('bc-credits').value = '50';
+  $('bc-html').value = `<div style="padding:18px;background:linear-gradient(135deg,rgba(201,169,110,0.2),rgba(15,15,25,0.9));border:1px solid #c9a96e;border-radius:16px;text-align:center">
+  <div style="font-size:0.7rem;letter-spacing:2px;color:#c9a96e;text-transform:uppercase;margin-bottom:6px">Elvion AI Exclusive</div>
+  <div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:6px">You're in our Top Creators Club</div>
+  <div style="font-size:0.82rem;color:#b0a898">Claim your bonus credits below and try the new Philadelphia Pro V2 4K image engine!</div>
+</div>`;
+  updatePopupPreview();
+};
+
+window.updatePopupPreview = () => {
+  const title = $('bc-title').value.trim() || 'Studio Announcement';
+  const msg = $('bc-msg').value.trim();
+  const html = $('bc-html').value.trim();
+  const cr = parseInt($('bc-credits').value) || 0;
+  $('bc-live-preview').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;color:#c9a96e;font-family:var(--ft);font-size:.92rem">
+      <span><i class="fa-solid fa-crown"></i> ${esc(title)}</span>
+      <i class="fa-solid fa-xmark" style="color:#777"></i>
+    </div>
+    ${msg ? `<p style="font-size:.82rem;color:#efefef;margin:8px 0;white-space:pre-wrap">${esc(msg)}</p>` : ''}
+    ${html ? `<div style="margin:10px 0">${html}</div>` : ''}
+    <div style="margin-top:14px">
+      <button style="width:100%;padding:10px;border-radius:10px;background:#c9a96e;color:#000;border:none;font-weight:700;font-size:.8rem">
+        ${cr > 0 ? `<i class="fa-solid fa-gift"></i> Claim +${cr} Credits` : 'Dismiss'}
+      </button>
+    </div>`;
 };
 
 window.sendBroadcast = async () => {
-  const target = $('bc-target').value.trim() || 'ALL';
-  const title = $('bc-title').value.trim() || 'Announcement from Elvion AI';
+  const channel = $('bc-channel').value;
+  const target_user_id = $('bc-target').value.trim() || 'ALL';
+  const title = $('bc-title').value.trim();
   const message = $('bc-msg').value.trim();
   const custom_html = $('bc-html').value.trim();
   const claimable_credits = parseInt($('bc-credits').value) || 0;
-  await vCall('/api/admin/vault/send-popup', {method:'POST', json:{target_user_id:target, title, message, custom_html, claimable_credits}});
-  $('bcast-modal').style.display = 'none';
-  if (window.activeUid) inspectUser(window.activeUid);
-  alert('Dispatched! Users will see this pop up in their dashboard.');
+  const tg_bot_token = $('bc-tg-tok').value.trim();
+  const res = await vCall('/api/admin/vault/send-popup', {
+    method:'POST',
+    json:{target_user_id, channel, title, message, custom_html, claimable_credits, tg_bot_token}
+  });
+  $('bcast-modal').classList.remove('on');
+  if (window.activeUid) inspectUser(window.activeUid, window.activePlat);
+  alert(res.message || 'Dispatched!');
 };
 
 window.deletePopup = async (pid) => {
   await vCall(`/api/admin/vault/popup/${pid}`, {method:'DELETE'});
-  if (window.activeUid) inspectUser(window.activeUid);
+  if (window.activeUid) inspectUser(window.activeUid, window.activePlat);
 };
 </script>
 </body>
-  </html>
+</html>
 
-   <!-- Google tag (gtag.js) -->
+ <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1YTKP10ZX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
