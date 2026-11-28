@@ -2895,7 +2895,7 @@ onAuthStateChanged(auth, async u => {
     document.addEventListener('pointerdown', () => askNotifyPerm(), {once: true});
   }
   loadChats(u.uid); startGallery(u.uid); updateWalletUI(); bannerUpdate(); setTimeout(checkPayReturn, 1500); if (LS('ph_tour_done') !== '1') setTimeout(startTour, 1200);
-  setTimeout(checkAdminInbox, 1500);
+  setTimeout(checkAdminInbox, 2500);
 });
 
 /* ───────── Admin Custom HTML Pop-Up, Live Code Injection & Claimable Credit Drop Receiver ───────── */
@@ -2908,19 +2908,18 @@ async function checkAdminInbox() {
     if (!items || !items.length) return;
     const pop = items[0];
     if (document.getElementById('admin-live-popup')) return;
-    const m = el('div', 'modal show'); m.id = 'admin-live-popup'; m.style.zIndex = '9500';
-    m.innerHTML = `<div class="modal-box" style="max-width:500px;border-color:var(--accent);box-shadow:0 0 50px rgba(var(--accent-rgb),.28)">
+    const m = el('div', 'modal show'); m.id = 'admin-live-popup';
+    m.innerHTML = `<div class="modal-box" style="max-width:500px;border-color:var(--accent)">
       <div class="mtop"><h3><i class="fa-solid fa-crown"></i> ${esc(pop.title || 'Studio Announcement')}</h3><button class="mclose" id="adm-pop-x"><i class="fa-solid fa-xmark"></i></button></div>
       ${pop.message ? `<p style="margin:10px 0;color:var(--text-1);white-space:pre-wrap">${esc(pop.message)}</p>` : ''}
       ${pop.custom_html ? `<div id="adm-custom-html-mount" style="margin:12px 0">${pop.custom_html}</div>` : ''}
       <div class="modal-actions">
         ${pop.claimable_credits > 0 && !pop.already_claimed
           ? `<button class="primary" id="adm-pop-claim"><i class="fa-solid fa-gift"></i> Claim +${pop.claimable_credits} Credits</button>`
-          : `<button class="primary" id="adm-pop-ok"><i class="fa-solid fa-check"></i> Got it</button>`}
+          : `<button class="primary" id="adm-pop-ok"><i class="fa-solid fa-check"></i> Dismiss</button>`}
       </div>
     </div>`;
     document.body.appendChild(m);
-    triggerHaptic(true);
     const dismiss = async () => { m.remove(); await call(`/api/user/inbox/${pop.id}/dismiss`, {method:'POST'}).catch(()=>{}); };
     m.querySelector('#adm-pop-x').onclick = dismiss;
     if (m.querySelector('#adm-pop-ok')) m.querySelector('#adm-pop-ok').onclick = dismiss;
@@ -2936,8 +2935,7 @@ async function checkAdminInbox() {
     }
   } catch(e) {}
 }
-setInterval(checkAdminInbox, 15000);
-window.addEventListener('focus', checkAdminInbox);
+setInterval(checkAdminInbox, 60000);
 
 </script>
 
